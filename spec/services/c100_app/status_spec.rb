@@ -33,6 +33,14 @@ RSpec.describe C100App::Status do
   end
 
   describe '#check' do
+    context 'database available' do
+      before do
+        expect(ActiveRecord::Base).to receive(:connection).and_call_original
+      end
+
+      specify { expect(described_class.check).to eq(status) }
+    end
+
     context 'database unavailable' do
       let(:service_status) { 'failed' }
       let(:database_status) { 'failed' }
