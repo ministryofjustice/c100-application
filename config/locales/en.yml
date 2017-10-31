@@ -25,6 +25,10 @@ en:
         edit:
           page_title: Who is applying
           heading: Are you the person making this application?
+      number_of_children:
+        edit:
+          page_title: Number of children
+          heading: How many children is the application for?
 
   home:
     index:
@@ -48,6 +52,12 @@ en:
     error_summary:
       heading: There's a problem. You need to fix this error.
       text: ''
+    invalid_session:
+      heading: Sorry, you'll have to start again
+      <<: *START_FINISH
+      lead_text: Your session automatically ends if you don't use the service for %{session_timeout} minutes or after you submit your case.
+      more_text: We do this for your security. Any unsaved details will be deleted.
+      page_title: Invalid session
     unhandled:
       heading: Sorry, something went wrong
       <<: *START_FINISH
