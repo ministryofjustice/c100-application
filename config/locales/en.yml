@@ -114,7 +114,7 @@ en:
       steps_help_with_fees_help_paying_form:
         help_paying:
           yes_with_ref_number: Yes, I have a Help with Fees reference number
-          yes_without_ref_number: Yes, I don’t have a Help with Fees reference number
+          yes_without_ref_number: Yes, but I don’t have a Help with Fees reference number
           not_needed: 'No'
         hwf_reference_number: Enter your reference number
       steps_nature_of_application_case_type_form:
