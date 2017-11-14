@@ -8,7 +8,11 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
     behaviour_description: behaviour_description,
     behaviour_start: behaviour_start,
     behaviour_ongoing: behaviour_ongoing,
-    behaviour_stop: behaviour_stop
+    behaviour_stop: behaviour_stop,
+    asked_for_help: asked_for_help,
+    help_party: help_party,
+    help_provided: help_provided,
+    help_description: help_description
   } }
 
   let(:c100_application) { instance_double(C100Application, abuse_concerns: concerns_collection) }
@@ -21,14 +25,12 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
   let(:behaviour_start) { '1 year ago' }
   let(:behaviour_ongoing) { 'no' }
   let(:behaviour_stop) { 'last monday' }
+  let(:asked_for_help) { 'no' }
+  let(:help_party) { nil }
+  let(:help_provided) { nil }
+  let(:help_description) { nil }
 
   subject { described_class.new(arguments) }
-
-  describe '.behaviour_ongoing_choices' do
-    it 'returns the relevant choices' do
-      expect(described_class.behaviour_ongoing_choices).to eq(%w(yes no))
-    end
-  end
 
   describe '.i18n_key' do
     context 'for an applicant subject' do
@@ -52,11 +54,14 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
     end
 
     context 'validations on field presence' do
+      it { should validate_presence_of(:subject, :inclusion) }
+      it { should validate_presence_of(:kind, :inclusion) }
+
       it { should validate_presence_of(:behaviour_description) }
       it { should validate_presence_of(:behaviour_start) }
       it { should validate_presence_of(:behaviour_ongoing, :inclusion) }
       it { should validate_presence_of(:behaviour_description) }
-      it { should validate_presence_of(:kind, :inclusion) }
+      it { should validate_presence_of(:asked_for_help, :inclusion) }
     end
 
     context 'validation on field `behaviour_stop`' do
@@ -67,6 +72,27 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
       context 'when abuse has stopped' do
         let(:behaviour_ongoing) { 'no' }
         it { should validate_presence_of(:behaviour_stop) }
+      end
+    end
+
+    # TODO: revisit this once we fix the gem to support multiple fields inside a revealing div
+    context 'validation on help fields' do
+      context 'when `asked_for_help` is yes' do
+        let(:asked_for_help) { 'yes' }
+
+        # it { should validate_presence_of(:help_provided, :inclusion) }
+        it { should validate_presence_of(:help_party) }
+        # it { should validate_presence_of(:help_provided, :inclusion) }
+        # it { should validate_presence_of(:help_description) }
+      end
+
+      context 'when `asked_for_help` is no' do
+        let(:asked_for_help) { 'no' }
+
+        it { should_not validate_presence_of(:help_provided, :inclusion) }
+        it { should_not validate_presence_of(:help_party) }
+        it { should_not validate_presence_of(:help_provided, :inclusion) }
+        it { should_not validate_presence_of(:help_description) }
       end
     end
 
@@ -81,7 +107,11 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
           behaviour_description: 'a description',
           behaviour_start: '1 year ago',
           behaviour_ongoing: GenericYesNo::NO,
-          behaviour_stop: 'last monday'
+          behaviour_stop: 'last monday',
+          asked_for_help: GenericYesNo::NO,
+          help_party: nil,
+          help_provided: nil,
+          help_description: nil
         ).and_return(true)
 
         expect(subject.save).to be(true)
