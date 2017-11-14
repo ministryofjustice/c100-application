@@ -160,6 +160,11 @@ en:
               <<: *ABUSE_CONCERNS
             children:
               <<: *ABUSE_CONCERNS
+      details:
+        edit:
+          page_title: "Title"
+          heading: "Heading"
+          lead_text_html: "Text"
 
   home:
     index:
