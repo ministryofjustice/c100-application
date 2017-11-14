@@ -80,7 +80,6 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
       context 'when `asked_for_help` is yes' do
         let(:asked_for_help) { 'yes' }
 
-        # it { should validate_presence_of(:help_provided, :inclusion) }
         it { should validate_presence_of(:help_party) }
         # it { should validate_presence_of(:help_provided, :inclusion) }
         # it { should validate_presence_of(:help_description) }
@@ -91,7 +90,6 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
 
         it { should_not validate_presence_of(:help_provided, :inclusion) }
         it { should_not validate_presence_of(:help_party) }
-        it { should_not validate_presence_of(:help_provided, :inclusion) }
         it { should_not validate_presence_of(:help_description) }
       end
     end
