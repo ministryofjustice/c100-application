@@ -11,8 +11,8 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
     behaviour_stop: behaviour_stop,
     asked_for_help: asked_for_help,
     help_party: help_party,
-    help_provided: help_provided,
-    help_description: help_description
+    # help_provided: help_provided,
+    # help_description: help_description
   } }
 
   let(:c100_application) { instance_double(C100Application, abuse_concerns: concerns_collection) }
@@ -25,8 +25,8 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
   let(:behaviour_start) { '1 year ago' }
   let(:behaviour_ongoing) { 'no' }
   let(:behaviour_stop) { 'last monday' }
-  let(:asked_for_help) { 'no' }
-  let(:help_party) { nil }
+  let(:asked_for_help) { 'yes' }
+  let(:help_party) { 'doctor' }
   let(:help_provided) { nil }
   let(:help_description) { nil }
 
@@ -88,9 +88,9 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
       context 'when `asked_for_help` is no' do
         let(:asked_for_help) { 'no' }
 
-        it { should_not validate_presence_of(:help_provided, :inclusion) }
         it { should_not validate_presence_of(:help_party) }
-        it { should_not validate_presence_of(:help_description) }
+        # it { should_not validate_presence_of(:help_provided, :inclusion) }
+        # it { should_not validate_presence_of(:help_description) }
       end
     end
 
@@ -106,10 +106,10 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
           behaviour_start: '1 year ago',
           behaviour_ongoing: GenericYesNo::NO,
           behaviour_stop: 'last monday',
-          asked_for_help: GenericYesNo::NO,
-          help_party: nil,
-          help_provided: nil,
-          help_description: nil
+          asked_for_help: GenericYesNo::YES,
+          help_party: 'doctor',
+          # help_provided: nil,
+          # help_description: nil
         ).and_return(true)
 
         expect(subject.save).to be(true)

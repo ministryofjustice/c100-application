@@ -7,8 +7,8 @@ module Steps
       attribute :behaviour_stop, String
       attribute :asked_for_help, String
       attribute :help_party, String
-      attribute :help_provided, String
-      attribute :help_description, String
+      # attribute :help_provided, String
+      # attribute :help_description, String
 
       validates_inclusion_of :behaviour_ongoing, in: GenericYesNo.values.map(&:to_s)
       validates_inclusion_of :asked_for_help,    in: GenericYesNo.values.map(&:to_s)
@@ -32,9 +32,9 @@ module Steps
       end
 
       # This is an optional reveal question so we can't assume we always get a value
-      def help_provided_value
-        help_provided ? GenericYesNo.new(help_provided) : nil
-      end
+      # def help_provided_value
+      #   help_provided ? GenericYesNo.new(help_provided) : nil
+      # end
 
       def persist!
         super(
@@ -44,8 +44,8 @@ module Steps
           behaviour_stop: behaviour_stop,
           asked_for_help: GenericYesNo.new(asked_for_help),
           help_party: help_party,
-          help_provided: help_provided_value,
-          help_description: help_description
+          # help_provided: help_provided_value,
+          # help_description: help_description
         )
       end
     end
