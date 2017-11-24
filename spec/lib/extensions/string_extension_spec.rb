@@ -28,32 +28,4 @@ describe String do
       end
     end
   end
-
-  context '#false?' do
-    context 'for blank values' do
-      it 'should be true for empty string' do
-        expect(''.false?).to eq(true)
-      end
-
-      it 'should be true for only spaces string' do
-        expect(' '.false?).to eq(true)
-      end
-    end
-
-    context 'for truthy values' do
-      %w(true t yes y 1).each do |value|
-        it "should be false for '#{value}'" do
-          expect(value.false?).to eq(false)
-        end
-      end
-    end
-
-    context 'for falsey values' do
-      %W(false f no n 0).each do |value|
-        it "should be true for '#{value}'" do
-          expect(value.false?).to eq(true)
-        end
-      end
-    end
-  end
 end
