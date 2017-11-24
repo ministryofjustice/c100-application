@@ -11,8 +11,6 @@ class CreateAskingOrdersTable < ActiveRecord::Migration[5.0]
       t.boolean :child_specific_issue_name
       t.boolean :child_specific_issue_medical
       t.boolean :child_specific_issue_abroad
-      t.boolean :child_specific_issue_other
-      t.text    :child_specific_issue_other_details
 
       t.boolean :consent_order
       t.boolean :child_return

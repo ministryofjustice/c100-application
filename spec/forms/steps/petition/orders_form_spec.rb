@@ -12,8 +12,6 @@ RSpec.describe Steps::Petition::OrdersForm do
     child_specific_issue_name: '0',
     child_specific_issue_medical: '0',
     child_specific_issue_abroad: '0',
-    child_specific_issue_other: child_specific_issue_other,
-    child_specific_issue_other_details: nil,
     consent_order: '0',
     child_return: '0',
     child_abduction: '0',
@@ -23,7 +21,6 @@ RSpec.describe Steps::Petition::OrdersForm do
 
   let(:c100_application) { instance_double(C100Application, asking_order: asking_order) }
   let(:asking_order) { double('asking_order') }
-  let(:child_specific_issue_other) { '0' }
 
   subject { described_class.new(arguments) }
 
@@ -33,20 +30,6 @@ RSpec.describe Steps::Petition::OrdersForm do
 
       it 'raises an error' do
         expect { subject.save }.to raise_error(BaseForm::C100ApplicationNotFound)
-      end
-    end
-
-    context 'validations' do
-      context '`child_specific_issue_other_details`' do
-        context 'when `child_specific_issue_other` is true' do
-          let(:child_specific_issue_other) { '1' }
-          it { should validate_presence_of(:child_specific_issue_other_details) }
-        end
-
-        context 'when `child_specific_issue_other` is false' do
-          let(:child_specific_issue_other) { '0' }
-          it { should_not validate_presence_of(:child_specific_issue_other_details) }
-        end
       end
     end
 
@@ -62,8 +45,6 @@ RSpec.describe Steps::Petition::OrdersForm do
           child_specific_issue_name: false,
           child_specific_issue_medical: false,
           child_specific_issue_abroad: false,
-          child_specific_issue_other: false,
-          child_specific_issue_other_details: nil,
           consent_order: false,
           child_return: false,
           child_abduction: false,

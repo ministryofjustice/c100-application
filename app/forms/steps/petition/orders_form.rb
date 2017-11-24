@@ -11,8 +11,6 @@ module Steps
       attribute :child_specific_issue_name, Boolean
       attribute :child_specific_issue_medical, Boolean
       attribute :child_specific_issue_abroad, Boolean
-      attribute :child_specific_issue_other, Boolean
-      attribute :child_specific_issue_other_details, String
 
       attribute :consent_order, Boolean
       attribute :child_return, Boolean
@@ -20,8 +18,6 @@ module Steps
       attribute :child_flight, Boolean
 
       attribute :other, Boolean
-
-      validates_presence_of :child_specific_issue_other_details, if: :child_specific_issue_other?
 
       private
 

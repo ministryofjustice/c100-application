@@ -60,8 +60,6 @@ ActiveRecord::Schema.define(version: 20171123125740) do
     t.boolean "child_specific_issue_name"
     t.boolean "child_specific_issue_medical"
     t.boolean "child_specific_issue_abroad"
-    t.boolean "child_specific_issue_other"
-    t.text    "child_specific_issue_other_details"
     t.boolean "consent_order"
     t.boolean "child_return"
     t.boolean "child_abduction"

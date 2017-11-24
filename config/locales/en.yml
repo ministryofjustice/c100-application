@@ -436,8 +436,6 @@ en:
         child_specific_issue_name: Changing their names
         child_specific_issue_medical: Medical treatment
         child_specific_issue_abroad: Moving location (including moving abroad)
-        child_specific_issue_other: Another issue
-        child_specific_issue_other_details: Please give details
         consent_order: Make an agreement with the other parent legally binding (also known as a consent order)
         child_return: Return them to your care
         child_abduction: Stop the other parent abducting them
