@@ -1,11 +1,13 @@
-# Family Justice C100 Service
+# Family Justice C100 Service - Copy for training purposes
 
 [![Build
 Status](https://travis-ci.org/ministryofjustice/c100-application.svg?branch=master)](https://travis-ci.org/ministryofjustice/c100-application)
 
+This is a fork of the live project, used to demonstrate and refine collaboration within the development team. All informational content should be considered fake.
+
 Work in progress: This is a Rails application to enable citizens
 to complete the C100 form. It is based on software patterns developed for the
-[Appeal to the Tax Tribunal][taxtribs] application.
+[Appeal to the Tax Tribunal][taxtribs] application. This iteration of the app has been created as a learning project to be considered independently of the original app.
 
 ## Heroku demo.
 
