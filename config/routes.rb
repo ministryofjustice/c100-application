@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       edit_step :litigation_capacity_details
       edit_step :special_assistance
       edit_step :special_arrangements
+      edit_step :details
     end
     namespace :petition do
       edit_step :orders
@@ -63,15 +64,19 @@ Rails.application.routes.draw do
       edit_step :attended
       show_step :not_attended_info
       edit_step :certification
-      show_step :no_certification_info
       edit_step :certification_date
       show_step :certification_expired_info
       edit_step :certification_number
       show_step :certification_confirmation
     end
+    namespace :miam_exemptions do
+      edit_step :safety
+      edit_step :urgency
+    end
     namespace :abduction do
-      edit_step :children_have_passport
       edit_step :international
+      edit_step :children_have_passport
+      edit_step :passport_details
       edit_step :previous_attempt
       edit_step :previous_attempt_details
       edit_step :risk_details
@@ -88,6 +93,8 @@ Rails.application.routes.draw do
     end
     namespace :abuse_concerns do
       show_step :start
+      show_step :children_info
+      show_step :applicant_info
       edit_step :question do
         get '/:subject/:kind', action: :edit
       end
