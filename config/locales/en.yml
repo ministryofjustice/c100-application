@@ -379,7 +379,7 @@ en:
           page_title: Risk of abduction
           heading: Are your children at risk of being abducted?
           lead_text: For example, by someone who is connected to the child such as the other parent or grandparent.
-          info_notice: Child abduction is when a person takes or sends a child under 16 out of the UK without permission.
+          info_notice: Child abduction is when a person takes or sends a child under 16 away from the care of the person they normally live with. A child can be abducted both in the UK and abroad.
       substance_abuse:
         edit:
           page_title: Substance abuse
@@ -519,15 +519,26 @@ en:
       previous_attempt:
         edit:
           page_title: Previous abduction attempts
-          heading: Have your children been abducted before or have there been any previous attempts or threats to abduct them?
+          heading: Have your children been abducted before?
       previous_attempt_details:
         edit:
           page_title: Previous abduction details
-          heading: Provide more details of the previous attempts or threats to abduct your children
+          heading: Provide details of the previous abductions
+          lead_text: Include any previous attempts or threats to abduct them
       risk_details:
         edit:
           page_title: Abduction risk details
-          heading: Provide details of why you think your children may be abducted
+          heading: Why do you think your children may be abducted?
+          info_html: |
+            <p>Briefly explain your concerns, including:</p>
+            <ul class="list list-bullet">
+              <li>who might take them</li>
+              <li>where they might be taken</li>
+            </ul>
+      passport_details:
+        edit:
+          page_title: Children’s passports
+          heading: Provide details of the children’s passports
     application:
       without_notice:
         edit:
@@ -566,6 +577,17 @@ en:
           page_title: Special Arrangements
           heading: Do you or your children need specific arrangements when you attend court?
           lead_text: For example you need a separate waiting room to the other person due to safety concerns
+      details:
+        edit:
+          page_title: Application details
+          heading: Why are you making this application?
+          info_html: |
+            <p>You should include details of any of the following (if they apply):</p>
+            <ul class="list list-bullet">
+              <li>your reasons for bringing this application to court</li>
+              <li>any previous parenting plans or agreements (formal or informal), and why they broke down</li>
+            </ul>
+            <p>You don’t have to give a full statement although you may be asked to provide one later.</p>
     international:
       resident:
         edit:
@@ -580,6 +602,17 @@ en:
         edit:
           page_title: International request
           heading: Has a court case about your children already started in another country?
+    miam_exemptions:
+      safety:
+        edit:
+          page_title: Evidence of safety concerns
+          heading: Can you provide evidence of any safety concerns?
+          lead_text: You will need to provide evidence to support your claim
+      urgency:
+        edit:
+          page_title: Evidence that your application is urgent
+          heading: Can you provide evidence that your application is urgent?
+          lead_text: You will need to provide evidence to support your claim
 
   home:
     index:
@@ -686,6 +719,10 @@ en:
         miam_attended_html: ""
       steps_miam_certification_form:
         miam_certification_html: ""
+      steps_miam_exemptions_safety_form:
+        exemptions_group_html: ""
+      steps_miam_exemptions_urgency_form:
+        exemptions_group_html: ""
       steps_petition_orders_form:
         orders_html: ""
       steps_help_with_fees_help_paying_form:
@@ -704,6 +741,9 @@ en:
         other_abuse_html: ""
       steps_abduction_children_have_passport_form:
         children_have_passport_html: ""
+      steps_abduction_passport_details_form:
+        children_multiple_passports_html: "Do the children have more than one passport?"
+        passport_possesion_html: "Who is in possession of the children’s passports?"
       steps_abduction_international_form:
         international_risk_html: ""
         passport_office_notified_html: "Has the passport office been notified?"
@@ -811,6 +851,8 @@ en:
         special_assistance_details: *provide_details
       steps_application_special_arrangements_form:
         special_arrangements_details: *provide_details
+      steps_application_details_form:
+        application_details: *provide_details
       steps_applicant_user_type_form:
         user_type:
           themself: Yes, I am the person making the application
@@ -821,6 +863,23 @@ en:
         miam_acknowledgement: I understand that I have to attend a MIAM or provide a valid reason for not attending.
       steps_miam_certification_number_form:
         miam_certification_number: FMC registration number
+      steps_miam_exemptions_safety_form:
+        group_police_html: |
+          <span class="heading-small gv-u-heading-small">The police have been involved</span><br/>
+          <span class="form-hint">For example, you or the other person (the respondent) has been arrested or cautioned for domestic or child abuse offences.</span>
+        police_arrested: Evidence that a prospective party has been arrested for a relevant domestic violence offence
+        police_caution: Evidence of a relevant police caution for a domestic violence offence
+        police_ongoing_proceedings: Evidence of relevant criminal proceedings for a domestic violence offence which have not concluded
+        police_conviction: Evidence of a relevant conviction for a domestic violence offence
+        police_dvpn: A domestic violence protection notice issued under section 24 of the Crime and Security Act 2010 against a prospective party
+      steps_miam_exemptions_urgency_form:
+        group_risk_html: |
+          <span class="heading-small gv-u-heading-small">There’s an immediate risk of harm</span><br/>
+          <span class="form-hint">This includes if you, your children or home are at immediate risk of harm</span>
+        risk_applicant: There is risk to the life, liberty or physical safety of the prospective applicant or his or her family or his or her home
+        risk_unreasonable_hardship: Any delay caused by attending a MIAM would cause unreasonable hardship to the prospective applicant
+        risk_children: Any delay caused by attending a MIAM would cause a risk of harm to a child
+        risk_unlawful_removal_retention: Any delay caused by attending a MIAM would cause a risk of unlawful removal of a child from the United Kingdom, or a risk of unlawful retention of a child who is currently outside England and Wales
       steps_help_with_fees_help_paying_form:
         help_paying:
           yes_with_ref_number: Yes, I have a Help with Fees reference number
@@ -831,7 +890,7 @@ en:
         <<: *PETITION_ORDERS
         child_contact: Confirm when and what other types of contact will take place with them (for example, phone calls)
         child_specific_issue_abroad: Moving location (including moving abroad)
-      steps_abduction_international_form:
+      steps_abduction_passport_details_form:
         passport_possession_mother: Mother
         passport_possession_father: Father
         passport_possession_other: Other
@@ -841,6 +900,7 @@ en:
         previous_attempt_agency_details: Provide more details
       steps_abduction_risk_details_form:
         risk_details: Give a short description
+        current_location: Where are the children now?
       steps_children_names_form[names_attributes]:
         full_name: Full name of child
       steps_children_names_form:
@@ -946,7 +1006,7 @@ en:
         without_notice_details: A court will only accept an order without notice if you give a full account of the evidence
       steps_miam_certification_number_form:
         miam_certification_number: You can find this number at the bottom of the certificate your mediator signed
-      steps_abduction_international_form:
+      steps_abduction_passport_details_form:
         passport_possesion: Select all that apply
       steps_abduction_previous_attempt_details_form:
         previous_attempt_agency_involved: Including in the UK or abroad

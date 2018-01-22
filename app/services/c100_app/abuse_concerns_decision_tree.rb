@@ -7,7 +7,7 @@ module C100App
       when :details
         after_details_step
       when :contact
-        edit('/steps/petition/orders')
+        edit('/steps/miam_exemptions/safety')
       when :previous_proceedings
         after_previous_proceedings
       when :emergency_proceedings
@@ -88,7 +88,7 @@ module C100App
     def children_details_destination
       case abuse_kind
       when AbuseType::OTHER
-        edit(:question, subject: AbuseSubject::APPLICANT)
+        show(:applicant_info)
       else
         questions_destination(AbuseSubject::CHILDREN)
       end
