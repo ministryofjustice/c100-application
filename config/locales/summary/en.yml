@@ -1,13 +1,58 @@
 en:
+  dictionary:
+    YESNO: &YESNO
+      'yes': 'Yes'
+      'no': 'No'
+      unknown: "Don't know"
+
+    SEX_OPTIONS: &SEX_OPTIONS
+      female: Female
+      male: Male
+
+    RELATIONS: &RELATIONS
+      mother: Mother
+      father: Father
+      legal_guardian: Legal guardian
+      grandparent: Grandparent
+      relative: Relative
+      family_friend: Family friend
+      social_worker: Social worker
+      other: Other
+
+    ARRANGEMENT_ORDERS: &ARRANGEMENT_ORDERS
+      child_home: Arrange where they live
+      child_times: Arrange how much time they spend with each parent
+      child_contact: Confirm when and what other types of contact will take place with them
+      child_return: Return them to your care
+    SPECIFIC_ISSUE_ORDERS: &SPECIFIC_ISSUE_ORDERS
+      child_specific_issue_school: Which school they go to
+      child_specific_issue_religion: A religious issue
+      child_specific_issue_name: Changing their names
+      child_specific_issue_medical: Medical treatment
+      child_specific_issue_abroad: Moving location
+    PROHIBITED_STEPS_ORDERS: &PROHIBITED_STEPS_ORDERS
+      child_abduction: Stop the other parent abducting them
+      child_flight: Stop the other parent taking them abroad or moving location without your permission
+    OTHER_ORDER: &OTHER_ORDER
+      other: Other
+
   check_answers:
     headers:
       c100_form:
         title: C100
         details: Application under section 8 of the Children Act 1989 for a child arrangements, prohibited steps, specific issue order or to vary or discharge or ask permission to make a section 8 order.
+    section_headers:
+      children: 1. The Child(ren)
     sections:
       help_with_fees: Help with fees
       applicant_respondent: Applicant and respondent
       nature_of_application: Nature of application
+      risk_concerns: Concerns about risk of harm
+      additional_information: Additional information
+      children: Summary of children’s details
+    descriptions:
+      risk_concerns: Are you alleging that the child(ren) named in Section 1 of this form have experienced, or are at risk of experiencing, harm from any of the following by any person who has had contact with the child?
+      c1a_attached_html: <strong>C1A is attached at the end of this form</strong>
     hwf_reference_number:
       question: Reference number
       absence_answer: Not applicable
@@ -18,22 +63,83 @@ en:
     child_arrangements_orders:
       question: 'Child arrangement order(s):'
       answers:
-        child_home: Arrange where they live
-        child_times: Arrange how much time they spend with each parent
-        child_contact: Confirm when and what other types of contact will take place with them
-        child_return: Return them to your care
+        <<: *ARRANGEMENT_ORDERS
     specific_issues_orders:
       question: 'Specific issue order(s):'
       answers:
-        child_specific_issue_school: Which school they go to
-        child_specific_issue_religion: A religious issue
-        child_specific_issue_name: Changing their names
-        child_specific_issue_medical: Medical treatment
-        child_specific_issue_abroad: Moving location
+        <<: *SPECIFIC_ISSUE_ORDERS
     prohibited_steps_orders:
       question: 'Prohibited steps order(s):'
       answers:
-        child_abduction: Stop the other parent abducting them
-        child_flight: Stop the other parent taking them abroad or moving location without your permission
+        <<: *PROHIBITED_STEPS_ORDERS
     other_details:
       question: 'Other:'
+    domestic_abuse:
+      question: Any form of domestic abuse?
+      answers:
+        <<: *YESNO
+    children_abduction:
+      question: Child abduction?
+      answers:
+        <<: *YESNO
+    children_abuse:
+      question: Child abuse?
+      answers:
+        <<: *YESNO
+    substance_abuse:
+      question: Drugs, alcohol or substance abuse?
+      answers:
+        <<: *YESNO
+    other_concerns:
+      question: Other safety or welfare concerns?
+      answers:
+        <<: *YESNO
+    asking_for_permission:
+      question: Asking for permission to make this application, where that is required
+      answers:
+        <<: *YESNO
+    urgent_or_without_notice:
+      question: An urgent hearing or without notice hearing required
+      answers:
+        <<: *YESNO
+    children_previous_proceedings:
+      question: Previous or ongoing proceedings for the child(ren)
+      answers:
+        <<: *YESNO
+    consent_order:
+      question: Applying for an order to formalise an agreement (consent order)
+      answers:
+        <<: *YESNO
+    international_or_capacity:
+      question: Case with an international element or factors affecting litigation capacity
+      answers:
+        <<: *YESNO
+    language_assistance:
+      question: Child or people involved need language assistance during the course of the proceedings
+      answers:
+        <<: *YESNO
+    child_full_name:
+      question: Child full name
+    child_dob:
+      question: Date of birth
+    child_age_estimate:
+      question: Approximate age or year born
+    child_sex:
+      question: Sex
+      answers:
+        <<: *SEX_OPTIONS
+    child_applicants_relationship:
+      question: Applicant(s) relationship to child
+      answers:
+        <<: *RELATIONS
+    child_respondents_relationship:
+      question: Respondent(s) relationship to child
+      answers:
+        <<: *RELATIONS
+    child_orders:
+      question: Order(s) applied for
+      answers:
+        <<: *ARRANGEMENT_ORDERS
+        <<: *SPECIFIC_ISSUE_ORDERS
+        <<: *PROHIBITED_STEPS_ORDERS
+        <<: *OTHER_ORDER
