@@ -31,6 +31,22 @@ module Summary
           Sections::MiamRequirement,
           Sections::SectionHeader,
           Sections::MediatorCertification,
+          Sections::SectionHeader,
+          Sections::ApplicationReasons,
+          Sections::SectionHeader,
+          Sections::UrgentHearing,
+          Sections::WithoutNoticeHearing,
+          Sections::SectionHeader,
+          Sections::InternationalElement,
+          Sections::SectionHeader,
+          Sections::LitigationCapacity,
+          Sections::SectionHeader,
+          Sections::ApplicantsDetails,
+          Sections::SectionHeader,
+          Sections::RespondentsDetails,
+          Sections::SectionHeader,
+          Sections::OtherPartiesDetails,
+          Sections::OtherChildrenDetails,
         ])
       end
     end

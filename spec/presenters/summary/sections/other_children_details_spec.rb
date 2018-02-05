@@ -1,32 +1,27 @@
 require 'spec_helper'
 
 module Summary
-  describe Sections::ChildrenDetails do
+  describe Sections::OtherChildrenDetails do
     let(:c100_application) {
       instance_double(C100Application,
-        children: [child],
+        other_children: [other_child],
         applicants: [],
         respondents: [],
-        children_known_to_authorities: 'yes',
-        children_known_to_authorities_details: 'details',
-        children_protection_plan: 'no',
       )
     }
 
-    let(:child) {
-      instance_double(Child,
+    let(:other_child) {
+      instance_double(OtherChild,
         full_name: 'name',
         dob: dob,
         age_estimate: age_estimate,
         gender: 'female',
-        child_order: child_order,
         relationships: relationships,
       )
     }
 
     let(:dob) { Date.new(2018, 1, 20) }
     let(:age_estimate) { nil }
-    let(:child_order) { instance_double(ChildOrder, orders: ['an_order']) }
     let(:relationships) { double('relationships') }
 
     subject { described_class.new(c100_application) }
@@ -35,7 +30,7 @@ module Summary
 
     describe '#name' do
       it 'is expected to be correct' do
-        expect(subject.name).to eq(:children_details)
+        expect(subject.name).to eq(:other_children_details)
       end
     end
 
@@ -45,7 +40,7 @@ module Summary
       end
 
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(10)
+        expect(answers.count).to eq(6)
       end
 
       it 'has the correct rows in the right order' do
@@ -74,22 +69,6 @@ module Summary
         expect(answers[5].question).to eq(:child_respondents_relationship)
         expect(answers[5].value).to eq(['mother'])
         expect(c100_application).to have_received(:respondents)
-
-        expect(answers[6]).to be_an_instance_of(MultiAnswer)
-        expect(answers[6].question).to eq(:child_orders)
-        expect(answers[6].value).to eq(['an_order'])
-
-        expect(answers[7]).to be_an_instance_of(Answer)
-        expect(answers[7].question).to eq(:children_known_to_authorities)
-        expect(c100_application).to have_received(:children_known_to_authorities)
-
-        expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[8].question).to eq(:children_known_to_authorities_details)
-        expect(c100_application).to have_received(:children_known_to_authorities_details)
-
-        expect(answers[9]).to be_an_instance_of(Answer)
-        expect(answers[9].question).to eq(:children_protection_plan)
-        expect(c100_application).to have_received(:children_protection_plan)
       end
 
       context 'when `dob` is nil' do

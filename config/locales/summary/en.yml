@@ -1,9 +1,12 @@
 en:
   dictionary:
+    not_applicable: &not_applicable "Not applicable"
+    unknown: &unknown "Don't know"
+
     YESNO: &YESNO
       'yes': 'Yes'
       'no': 'No'
-      unknown: "Don't know"
+      unknown: *unknown
 
     SEX_OPTIONS: &SEX_OPTIONS
       female: Female
@@ -45,6 +48,13 @@ en:
       children: 1. The Child(ren)
       miam_requirement: 2. Requirement to attend a Mediation, Information and Assessment Meeting (MIAM)
       mediator_certification: 4. Mediator certifies that the prospective applicant is exempt from attendance at Mediation Information and Assessment Meeting (MIAM) or confirms MIAM attendance
+      application_reasons: 5. Why are you making this application?
+      urgent_and_without_notice: 6. Urgent and without notice hearings
+      international_element: 8. Cases with an international element
+      litigation_capacity: 9. Factors affecting ability to participate in proceedings
+      applicants_details: 11. About you (the applicant(s))
+      respondents_details: 12. The respondent(s)
+      other_parties_details: 13. Others who should be given notice
     sections:
       help_with_fees: Help with fees
       applicant_respondent: Applicant and respondent
@@ -53,12 +63,21 @@ en:
       additional_information: Additional information
       children_details: Summary of children’s details
       children_relationships: Children’s relationship with parties
+      urgent_hearing: Urgent hearing
+      without_notice_hearing: Without notice hearing
+      other_children_details: Other children not part of the application
     descriptions:
       risk_concerns: Are you alleging that the child(ren) named in Section 1 of this form have experienced, or are at risk of experiencing, harm from any of the following by any person who has had contact with the child?
       c1a_attached_html: <strong>C1A is attached at the end of this form</strong>
+    separators:
+      not_applicable: Not applicable
+      child_index_title: Child %{index}
+      applicants_details_index_title: Applicant %{index}
+      respondents_details_index_title: Respondent %{index}
+      other_parties_details_index_title: Person %{index}
     hwf_reference_number:
       question: Reference number
-      absence_answer: Not applicable
+      absence_answer: *not_applicable
     applicants_full_name:
       question: Full name of applicant(s)
     respondents_full_name:
@@ -117,12 +136,31 @@ en:
       question: Case with an international element or factors affecting litigation capacity
       answers:
         <<: *YESNO
+    international_resident:
+      question: Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another state?
+      answers:
+        <<: *YESNO
+    international_resident_details:
+      question: ''
+    international_jurisdiction:
+      question: Do you have any reason to believe that there may be an issue as to jurisdiction in this case (for example under Brussels 2 revised)? 
+      answers:
+        <<: *YESNO
+    international_jurisdiction_details:
+      question: ''
+    international_request:
+      question: Has a request been made or should a request be made to a Central Authority or other competent authority in a foreign state or a consular authority in England and Wales?
+      answers:
+        <<: *YESNO
+    international_request_details:
+      question: ''
+
     language_assistance:
       question: Child or people involved need language assistance during the course of the proceedings
       answers:
         <<: *YESNO
     child_full_name:
-      question: Child full name
+      question: Full name
     child_dob:
       question: Date of birth
     child_age_estimate:
@@ -132,11 +170,11 @@ en:
       answers:
         <<: *SEX_OPTIONS
     child_applicants_relationship:
-      question: Applicant(s) relationship to child
+      question: Relationship to applicant(s)
       answers:
         <<: *RELATIONS
     child_respondents_relationship:
-      question: Respondent(s) relationship to child
+      question: Relationship to respondent(s)
       answers:
         <<: *RELATIONS
     child_orders:
@@ -181,11 +219,87 @@ en:
       answers:
         <<: *YESNO
     miam_certification_details:
-      question: 'Mediator details:'
+      question: 'Details:'
       answers:
         'yes': ''
-        'no': Not applicable
+        'no': *not_applicable
     miam_certification_number:
       question: FMC registration no
     miam_certification_date:
       question: Date
+    applied_for_permission:
+      question: Have you applied to the court for permission to make this application?
+      answers:
+        <<: *YESNO
+    application_details:
+      question: Why are you making this application?
+    urgent_hearing_details:
+      question: 'Details:'
+      answers:
+        'yes': ''
+        'no': *not_applicable
+    without_notice_hearing_details:
+      question: 'Details:'
+      answers:
+        'yes': ''
+        'no': *not_applicable
+    without_notice_details:
+      question: Reasons for the application to be considered without notice
+    without_notice_impossible:
+      question: Do you require a without notice hearing because it is not possible to give notice including abridged or informal notice?
+      answers:
+        <<: *YESNO
+    without_notice_impossible_details:
+      question: ''
+    without_notice_frustrate:
+      question: Do you require a without notice hearing because notice to a respondent will frustrate the order that is being applied for?
+      answers:
+        <<: *YESNO
+    without_notice_frustrate_details:
+      question: ''
+
+    reduced_litigation_capacity:
+      question: 'Details:'
+      answers:
+        'yes': ''
+        'no': *not_applicable
+    participation_capacity_details:
+      question: Details of any factors affecting litigation capacity
+    participation_referral_or_assessment_details:
+      question: Details of any referral to or assessment by the Adult Learning Disability team, and/or any adult health service, where known, together with the outcome
+    participation_other_factors_details:
+      question: Other factors which may affect the ability of the person concerned to take part in the proceedings?
+
+    person_full_name:
+      question: Full name
+    person_previous_name:
+      question: Previous name
+      answers:
+        <<: *YESNO
+    person_sex:
+      question: Sex
+      answers:
+        <<: *SEX_OPTIONS
+    person_dob:
+      question: Date of birth
+    person_age_estimate:
+      question: Approximate age or year born
+    person_birthplace:
+      question: Place of birth
+    person_address:
+      question: Address
+      absence_answer: *unknown
+    person_residence_requirement_met:
+      question: Lived at this address for more than 5 years?
+      answers:
+        <<: *YESNO
+    person_residence_history:
+      question: Previous addresses
+    person_home_phone:
+      question: Home telephone number
+    person_mobile_phone:
+      question: Mobile telephone number
+    person_email:
+      question: Email address
+    person_relationship_to_children:
+      question: Relationship to children listed in this application
