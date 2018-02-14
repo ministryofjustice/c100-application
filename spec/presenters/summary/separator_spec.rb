@@ -14,7 +14,7 @@ describe Summary::Separator do
   end
 
   describe '.not_applicable' do
-    it 'instantiate a specific Separator object' do
+    it 'instantiates a specific Separator object' do
       separator = described_class.not_applicable
       expect(separator.title).to eq(:not_applicable)
     end
