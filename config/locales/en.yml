@@ -408,16 +408,18 @@ en:
             <p>Domestic abuse is any type of controlling, threatening or violent behaviour between people in a relationship.</p>
             <p>Examples include:</p>
             <ul class="list list-bullet">
-              <li>financial abuse</li>
+              <li>financial abuse (withholding child maintenance payments isn't considered financial abuse)</li>
               <li>emotional or psychological abuse</li>
               <li>physical abuse</li>
               <li>sexual abuse</li>
             </ul>
+          info_note_html: |
+            <p>Only include abuse by the other person (the respondent) or someone connected to the other person.</p>
       other_abuse:
         edit:
           page_title: Other concerns
           section: Safety concerns
-          heading: Any other concerns?
+          heading: Do you have any other safety concerns about you or your children?
       address_confidentiality:
         edit:
           page_title: Address confidentiality
@@ -598,8 +600,8 @@ en:
           lead_text: For example dyslexia or Attention deficit hyperactivity disorder (ADHD)
       litigation_capacity_details:
         edit:
-          page_title: Factors affecting ability to participate in proceedings
-          heading: Factors affecting ability to participate in proceedings
+          page_title: Conditions affecting ability to participate in proceedings
+          heading: Conditions affecting ability to participate in proceedings
       special_assistance:
         edit:
           page_title: Special Assistance
