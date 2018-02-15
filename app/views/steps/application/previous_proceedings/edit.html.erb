@@ -7,11 +7,21 @@
 
     <h1 class="heading-xlarge gv-u-heading-xxlarge"><%=t '.heading' %></h1>
 
-    <p class="lede gv-u-text-lede"><%=t '.lead_text' %></p>
-
     <%= step_form @form_object do |f| %>
       <%= f.radio_button_fieldset :children_previous_proceedings, inline: true, choices: GenericYesNo.values %>
       <%= f.submit class: 'button' %>
     <% end %>
+  </div>
+</div>
+<div class="extraBlocks  govuk-govspeak gv-s-prose">
+  <div>
+    <details role="group" data-block-name="children-explanation">
+      <summary role="button">
+        <span class="summary">Why we use the term ‘children’</span>
+      </summary>
+      <div class=" panel panel-border-narrow undefined">
+        <p>We use ‘children’ as a general term to mean whether you have a child or children. We do this to avoid repetition.</p>
+      </div>
+    </details>
   </div>
 </div>

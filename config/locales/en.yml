@@ -567,8 +567,7 @@ en:
         edit:
           page_title: Previous proceedings
           section: Previous proceedings
-          heading: Have any of the children in this application been involved in another family court case?
-          lead_text: For example an emergency protection order or supervision order. Include any ongoing cases.
+          heading: Have your children ever been involved in any court cases about an emergency protection, care or supervision order?
       court_proceedings:
         edit:
           page_title: Previous court cases
