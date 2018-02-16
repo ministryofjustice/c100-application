@@ -396,10 +396,11 @@ en:
             <p>Examples include:</p>
             <ul class="list list-bullet">
               <li>emotional or psychological abuse</li>
-              <li>a lack of love, care and attention</li>
               <li>physical abuse</li>
               <li>sexual abuse</li>
             </ul>
+          info_note_html: |
+            <p>Only include abuse by the other person (the respondent) or someone connected to the other person.</p>
       domestic_abuse:
         edit:
           page_title: Domestic abuse
@@ -568,6 +569,7 @@ en:
           page_title: Previous proceedings
           section: Previous proceedings
           heading: Have your children ever been involved in any court cases about an emergency protection, care or supervision order?
+          lead_text: For example an emergency protection order or supervision order. Include any ongoing cases.
       court_proceedings:
         edit:
           page_title: Previous court cases
