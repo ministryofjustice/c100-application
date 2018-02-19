@@ -487,7 +487,7 @@ en:
       child_protection_cases:
         edit:
           page_title: Child protection cases
-          heading: Have the children ever been involved in any court cases about an emergency protection, care or supervision order?
+          heading: Have your children ever been involved in any court cases about an emergency protection, care or supervision order?
     petition:
       orders:
         edit:
@@ -568,7 +568,7 @@ en:
         edit:
           page_title: Previous proceedings
           section: Previous proceedings
-          heading: Have your children ever been involved in any court cases about an emergency protection, care or supervision order?
+          heading: Have any of the children in this application been involved in another family court case?
           lead_text: For example an emergency protection order or supervision order. Include any ongoing cases.
       court_proceedings:
         edit:
@@ -639,6 +639,15 @@ en:
           page_title: International resident
           heading: Does anyone significant to your children live in another country?
           lead_text: For example, a grandparent or other close relatives
+          why_we_ask_this_html: |
+            <details>
+              <summary>
+                <span class="summary">Why do we ask this?</span>
+              </summary>
+              <div class="panel panel-border-narrow">
+                <p>We need to know if your children have any close family who live in another country so we can assess whether there are grounds to start a court case there.</p>
+              </div>
+            </details>
       jurisdiction:
         edit:
           page_title: International jurisdiction
@@ -1200,6 +1209,16 @@ en:
       dob: Date of birth
       dob_hint_html: 'If party under 18 read section R of <a href="http://formfinder.hmctsformfinder.justice.gov.uk/cb1-eng.pdf">leaflet CB1</a>'
       order_issue: What date was it issued?
+    why_we_use_children_html: |
+      <details>
+        <summary>
+          <span class="summary">Why we use the term ‘children’</span>
+        </summary>
+        <div class="panel panel-border-narrow">
+          <p>We use ‘children’ as a general term to mean whether you have a child or children. We do this to avoid repetition.</p>
+        </div>
+      </details>
+
   session:
     note:
       heading: Security time-out
