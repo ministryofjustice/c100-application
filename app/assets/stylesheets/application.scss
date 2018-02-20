@@ -172,8 +172,13 @@ label[for="steps_abduction_risk_details_form_risk_details"]
   display: none;
 }
 
-form > .form-group > fieldset > legend {
-  margin-bottom: 2rem;
+form > .form-group > fieldset {
+  & > legend {
+    margin-bottom: 2rem;
+  }
+  & > .multiple-choice {
+    min-height: 5rem;
+  }
 }
 
 [class^="edit_steps_miam_exemptions_"] {
