@@ -171,6 +171,11 @@ label[for="steps_abduction_risk_details_form_risk_details"]
 {
   display: none;
 }
+@media (min-width: 641px) {
+  input[type=text].form-control.form-control__narrow {
+    width: 50%;
+  }
+}
 
 .miam_exemptions form {
   & > .form-group > fieldset {

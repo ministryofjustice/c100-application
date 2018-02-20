@@ -48,6 +48,10 @@ Rails.application.routes.draw do
       show_step :no_court_found
       edit_step :urgency
       show_step :urgent_exit
+      edit_step :parent
+      show_step :parent_exit
+      edit_step :over18
+      show_step :over18_exit
     end
     namespace :application do
       edit_step :previous_proceedings
@@ -61,6 +65,7 @@ Rails.application.routes.draw do
       edit_step :details
       edit_step :language
       edit_step :intermediary
+      edit_step :help_paying
     end
     namespace :petition do
       edit_step :orders
@@ -176,9 +181,6 @@ Rails.application.routes.draw do
       edit_step :resident
       edit_step :jurisdiction
       edit_step :request
-    end
-    namespace :help_with_fees do
-      edit_step :help_paying
     end
     namespace :completion do
       show_step :summary

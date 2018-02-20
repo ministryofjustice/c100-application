@@ -6,14 +6,10 @@
 
     <h1 class="heading-xlarge gv-u-heading-xxlarge"><%=t '.heading' %></h1>
 
-    <div class="govuk-govspeak gv-s-prose">
-      <p><%=t '.lead_text' %></p>
-    </div>
+    <p class="lede gv-u-text-lede"><%=t '.lead_text' %></p>
 
     <%= step_form @form_object do |f| %>
-      <%= f.text_field :miam_certification_number, class: 'form-control__narrow' %>
-      <%= f.text_field :miam_certification_service_name %>
-      <%= f.text_field :miam_certification_sole_trader_name %>
+      <%= f.radio_button_fieldset :over18, inline: true, choices: GenericYesNo.values %>
 
       <%= f.submit class: 'button' %>
     <% end %>

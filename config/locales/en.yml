@@ -56,6 +56,7 @@ en:
       gender:
         female: Female
         male: Male
+        intersex: Intersex
       dob_unknown: *dont_know
       age_estimate: Approximate age or year born
       birthplace: Place of birth
@@ -122,6 +123,11 @@ en:
       kickout_feedback: Give your feedback. Help improve this service
       relationship_step:
         heading: "How is %{person_name} related to %{child_name}?"
+      screener_exit_actions:
+        what_to_do_now:
+          heading: What to do now
+          copy: To submit your application, you should download the C100 form, print it, complete it, and submit it by post.
+        download_c100_link: Download the form (PDF)
     applicant:
       user_type:
         edit:
@@ -152,15 +158,6 @@ en:
           heading: The applicant is (or may be) less than 18 years old
           lead_text: CB1 text to go here
           continue: Continue
-    help_with_fees:
-      help_paying:
-        edit:
-          page_title: Help paying
-          heading: Help with fees
-          body_html: |
-            <p>You may be able to <a href="https://www.gov.uk/get-help-with-court-fees">get help paying</a> the £215 fee if you’re on a low income, receive certain benefits or have little or no savings.</p>
-            <p>If you do qualify, you’ll need to provide the reference number you were given.</p>
-          hwf_reference_number_help_html: '<p>You’ll need to get a <a href="https://www.gov.uk/get-help-with-court-fees">reference number</a> before you can continue with this service.</p>'
     respondent:
       names:
         edit:
@@ -648,6 +645,13 @@ en:
           page_title: Intermediary help
           heading: Does anyone in this application need a person to help them in court?
           lead_text: You may need a person (also known as an intermediary) to help if you have condition that affects your ability to participate in the court process.
+      help_paying:
+        edit:
+          page_title: Help paying
+          heading: Help with fees
+          body_html: |
+            <p>You may be able to <a href="https://www.gov.uk/get-help-with-court-fees" target="_blank">get help paying</a> the £215 fee if you’re on a low income, receive certain benefits or have little or no savings.</p>
+            <p>If you do qualify, you’ll need to provide the reference number you were given.</p>
     international:
       resident:
         edit:
@@ -747,10 +751,6 @@ en:
           page_title: Sorry, you're not eligible for this service
           heading: Sorry, you're not eligible for this service
           lead_text: This is a new service we are trying out at a limited number of courts. Unfortunately the appropriate court for your request is not yet taking part in this trial.
-          what_to_do_now:
-            heading: What to do now
-            copy: To submit your application, you should download the C100 form, print it, complete it, and submit it by post.
-          download_c100_link: Download the form (PDF)
       urgency:
         edit:
           page_title: Urgent hearing
@@ -769,6 +769,26 @@ en:
           heading: Sorry, you're not eligible for this service
           lead_text: If your application is urgent, you should contact your local court directly
           warning: Call 999 if you or your children are in immediate danger
+      parent:
+        edit:
+          page_title: Are you a parent of the child?
+          heading: Are you a parent of the child?
+          lead_text: You can only use this service if you a parent of the children you’re making this application for
+      parent_exit:
+        show:
+          page_title: Sorry, you're not eligible for this service
+          heading: Sorry, you're not eligible for this service
+          lead_text: You can only use this service if you a parent of the children you’re making this application for
+      over18:
+        edit:
+          page_title: Are you and the respondent both over 18?
+          heading: Are you and the respondent both over 18?
+          lead_text: The other person who will receive this application is known as the respondent. You can only use this service if you and the respondent are both over 18.
+      over18_exit:
+        show:
+          page_title: Sorry, you're not eligible for this service
+          heading: Sorry, you're not eligible for this service
+          lead_text: You can only use this service if you and the respondent are both over 18
     completion:
       summary:
         show:
@@ -824,12 +844,6 @@ en:
           attributes:
             user_type:
               inclusion: Select who is making this application
-        steps/help_with_fees/help_paying_form:
-          attributes:
-            help_paying:
-              inclusion: Select if you need help paying the court fee
-            hwf_reference_number:
-              blank: Please enter your reference number
         steps/applicant/personal_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS
@@ -876,6 +890,8 @@ en:
         language_help_html: ""
       steps_application_intermediary_form:
         intermediary_help_html: ""
+      steps_application_help_paying_form:
+        help_paying_html: "Do you have a ‘Help with fees’ reference number?"
       steps_applicant_user_type_form:
         user_type_html: ""
       steps_miam_consent_order_form:
@@ -907,8 +923,6 @@ en:
         exemptions_group_html: ""
       steps_petition_orders_form:
         orders_html: ""
-      steps_help_with_fees_help_paying_form:
-        help_paying_html: ""
       steps_safety_questions_address_confidentiality_form:
         address_confidentiality_html: "Do you want to keep your contact details private from the other person?"
       steps_safety_questions_risk_of_abduction_form:
@@ -956,7 +970,7 @@ en:
         undertaking: Undertaking in place of an order
         undertaking_is_current: *order_current
       steps_abuse_concerns_details_form:
-        behaviour_ongoing_html: Are you concerned the issue is still affecting your children?
+        behaviour_ongoing_html: Are you concerned the issue is still ongoing?
         asked_for_help_html: Have you ever asked for help?
         help_provided_html: Did they help you?
       steps_alternatives_negotiation_tools_form:
@@ -1046,6 +1060,8 @@ en:
         language_help_details: *provide_details
       steps_application_intermediary_form:
         intermediary_help_details: *provide_details
+      steps_application_help_paying_form:
+        hwf_reference_number: Enter your reference number
       steps_applicant_user_type_form:
         user_type:
           themself: Yes, I am the person making the application
@@ -1058,12 +1074,6 @@ en:
         miam_certification_number: FMC registration number
         miam_certification_service_name: Family mediation service name
         miam_certification_sole_trader_name: Sole trader name
-      steps_help_with_fees_help_paying_form:
-        help_paying:
-          yes_with_ref_number: Yes, I have a Help with Fees reference number
-          yes_without_ref_number: Yes, but I don’t have a Help with Fees reference number
-          not_needed: 'No'
-        hwf_reference_number: Enter your reference number
       steps_petition_orders_form:
         <<: *PETITION_ORDERS
         child_contact: Confirm when and what other types of contact will take place with them (for example, phone calls)
@@ -1123,8 +1133,8 @@ en:
         substance_abuse_details:
       steps_abuse_concerns_details_form:
         behaviour_description: Give a short description
-        behaviour_start: When did your concerns about your children start?
-        behaviour_stop: When did you stop being concerned about the issue affecting your children?
+        behaviour_start: When did your concerns start?
+        behaviour_stop: When did you stop being concerned about the issue?
         help_party: Who did you ask for help?
         help_description: What did they do?
         behaviour_ongoing:
