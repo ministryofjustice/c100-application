@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20180219161527) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -151,8 +150,6 @@ ActiveRecord::Schema.define(version: 20180219161527) do
   create_table "child_residences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "child_id"
     t.string "person_ids", default: [], array: true
-    t.boolean "other"
-    t.string "other_full_name"
     t.index ["child_id"], name: "index_child_residences_on_child_id"
   end
 
