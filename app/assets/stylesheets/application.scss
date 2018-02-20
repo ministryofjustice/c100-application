@@ -172,16 +172,17 @@ label[for="steps_abduction_risk_details_form_risk_details"]
   display: none;
 }
 
-form > .form-group > fieldset {
-  & > legend {
-    margin-bottom: 2rem;
-  }
-  & > .multiple-choice {
-    min-height: 5rem;
-  }
-}
+.miam_exemptions form {
+  & > .form-group > fieldset {
+    & > legend {
+      margin-bottom: 2rem;
+    }
 
-[class^="edit_steps_miam_exemptions_"] {
+    & > .multiple-choice {
+      min-height: 5rem;
+    }
+  }
+
   & label .heading-small {
     font-weight: normal;
   }
@@ -191,8 +192,7 @@ form > .form-group > fieldset {
   float: none;
   margin: -3rem 0 -1rem;
 
-  .edit_steps_miam_exemptions_domestic_form &,
-  .edit_steps_miam_exemptions_adr_form & {
+  .or-block__shift & {
     margin-top: -5rem;
   }
 }
