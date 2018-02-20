@@ -176,6 +176,12 @@ form > .form-group > fieldset > legend {
   margin-bottom: 2rem;
 }
 
+[class^="edit_steps_miam_exemptions_"] {
+  & label .heading-small {
+    font-weight: normal;
+  }
+}
+
 .form-block.or-block {
   float: none;
   margin: -3rem 0 -1rem;
