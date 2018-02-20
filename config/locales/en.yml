@@ -121,7 +121,7 @@ en:
     shared:
       kickout_feedback: Give your feedback. Help improve this service
       relationship_step:
-        heading: "How is %{person_name} related to %{child_name}"
+        heading: "How is %{person_name} related to %{child_name}?"
     applicant:
       user_type:
         edit:
