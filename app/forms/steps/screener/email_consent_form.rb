@@ -5,9 +5,9 @@ module Steps
       include HasOneAssociationForm
 
       has_one_association   :screener_answers
-      yes_no_attribute      :email_consent
-      attribute             :email_address, String, reset_when_no: [:email_consent]
-      validates_presence_of :email_address, if: -> { email_consent&.yes? }
+      yes_no_attribute      :email_consent, reset_when_no: [:email_address]
+      attribute             :email_address, String
+      validates             :email_address, email: true, if: -> { email_consent&.yes? }
 
       private
 
