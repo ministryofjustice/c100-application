@@ -41,6 +41,17 @@ en:
     OTHER_ORDER: &OTHER_ORDER
       other: Other
 
+    # Note: this is duplicated in `locales/en.yml`, due to the way locales work
+    # (they don't see each other when they are in different files). If you change copy here,
+    # remember to also update it in `locales/en.yml`
+    COURT_ORDER_TYPES: &COURT_ORDER_TYPES
+      non_molestation: Non-molestation order
+      occupation: Occupation order
+      forced_marriage_protection: Forced marriage protection order
+      restraining: Restraining order
+      injunctive: Other injunctive order
+      undertaking: Undertaking in place of an order
+
   shared:
     admin_family_court: The family court sitting at
     admin_case_number: Case number
@@ -82,6 +93,7 @@ en:
       statement_of_truth: 16. Statement of truth
       ### C1A ###
       c1a_applicants_details: Section 1 - About you (the person completing this form)
+      c1a_abuse_details: Section 2 - Details of domestic violence / abuse
     sections:
       ### C100 ###
       c100_court_details: *to_be_completed
@@ -99,6 +111,9 @@ en:
       c1a_court_details: *to_be_completed
       c1a_children_details: Summary of children’s details
       c1a_solicitor_details: Your solicitor’s details
+      c1a_applicant_abuse_details: Abuse experienced by applicant
+      c1a_children_abuse_details: Abuse experienced by children
+      c1a_court_orders: Previous or current orders
       ### C8 ###
       c8_court_details: *to_be_completed
       c8_applicants_details: Applicant contact details to be kept private
@@ -419,6 +434,40 @@ en:
       question: Is a solicitor acting for you?
       answers:
         <<: *YESNO
+    c1a_abuse_physical:
+      question: Physical
+      answers:
+        <<: *YESNO
+    c1a_abuse_emotional:
+      question: Emotional
+      answers:
+        <<: *YESNO
+    c1a_abuse_psychological:
+      question: Psychological
+      answers:
+        <<: *YESNO
+    c1a_abuse_sexual:
+      question: Sexual
+      answers:
+        <<: *YESNO
+    c1a_abuse_financial:
+      question: Financial
+      answers:
+        <<: *YESNO
+    c1a_order_name:
+      question: Order
+      answers:
+        <<: *COURT_ORDER_TYPES
+    c1a_order_issue_date:
+      question: Date issued
+    c1a_order_length:
+      question: Length of order
+    c1a_order_is_current:
+      question: Current
+      answers:
+        <<: *YESNO
+    c1a_order_court_name:
+      question: Name of court
 
     ### C8 questions/answers ###
     #
