@@ -44,6 +44,14 @@ module C100App
       URI.join(API_ROOT, '/courts/', slug).to_s
     end
 
+    def status
+      uri = URI.parse(API_ROOT)
+      http = Net::HTTP.new(uri.host, uri.port)
+      request = Net::HTTP::Get.new('/healthcheck.json')
+      response = http.request(request)
+      response.code
+    end
+
     private
 
     def construct_url(endpoint, area_of_law, postcode)
