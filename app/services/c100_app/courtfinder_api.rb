@@ -45,14 +45,22 @@ module C100App
     end
 
     def status
-      uri = URI.parse(API_ROOT)
-      http = Net::HTTP.new(uri.host, uri.port)
       request = Net::HTTP::Get.new('/healthcheck.json')
-      response = http.request(request)
-      response.code
+      http_object.request(request).code
     end
 
     private
+
+    def http_object
+      uri = api_root_uri
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = (http.port == 443)
+      http
+    end
+
+    def api_root_uri
+      URI.parse(API_ROOT)
+    end
 
     def construct_url(endpoint, area_of_law, postcode)
       format(API_URL, endpoint: endpoint, aol: area_of_law, pcd: postcode)

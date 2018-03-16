@@ -16,7 +16,7 @@ RSpec.describe C100App::Status do
   let(:service_status) { 'ok' }
   let(:database_status) { 'ok' }
   let(:courtfinder_status) { 'ok' }
-  let(:courtfinder_api_status_code) { 200 }
+  let(:courtfinder_api_status_code) { "200" }
 
   before do
     allow(ActiveRecord::Base).to receive(:connection).and_return(double)
@@ -58,12 +58,12 @@ RSpec.describe C100App::Status do
 
     describe 'Courtfinder API status' do
       context 'when it is OK' do
-        let(:courtfinder_api_status_code){ 200 }
+        let(:courtfinder_api_status_code){ "200" }
 
         specify { expect(described_class.check).to eq(status) }
       end
       context 'when it is not OK' do
-        let(:courtfinder_api_status_code){ 501 }
+        let(:courtfinder_api_status_code){ "501" }
         let(:service_status) { 'failed' }
         let(:courtfinder_status) { 'failed' }
 

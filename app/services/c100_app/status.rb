@@ -37,7 +37,7 @@ module C100App
     end
 
     def courtfinder_status
-      @courtfinder_status ||= (C100App::CourtfinderAPI.new.status == 200 ? 'ok' : 'failed')
+      @courtfinder_status ||= (C100App::CourtfinderAPI.new.status.to_i == 200 ? 'ok' : 'failed')
     end
 
     def service_status
