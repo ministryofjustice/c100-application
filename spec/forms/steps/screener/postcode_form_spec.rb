@@ -24,12 +24,14 @@ RSpec.describe Steps::Screener::PostcodeForm do
                     }
 
     context 'when the attribute is not given' do
-      it 'does not have a validation error' do
-        expect(subject).to be_valid
+      let(:children_postcodes){ nil }
+      it 'is not valid' do
+        expect(subject).to_not be_valid
       end
-      it 'saves ok' do
-        allow(screener_answers).to receive(:update).and_return(true)
-        expect(subject.save).to eq(true)
+
+      it 'adds an error on the children_postcodes attribute' do
+        subject.valid?
+        expect(subject.errors[:children_postcodes]).to_not be_empty
       end
     end
 
