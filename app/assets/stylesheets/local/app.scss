@@ -179,8 +179,22 @@ section.numbered-list ol > li:nth-child(4){
   margin-left:0;
 }
 
-#new_steps_miam_acknowledgement_form {
+#new_steps_miam_acknowledgement_form,
+#new_steps_alternatives_court_form {
   margin-top: 6rem;
+}
+
+#new_steps_petition_orders_form > .form-group {
+  margin-bottom: 0;
+  & > fieldset {
+    & > .multiple-choice {
+      min-height: 6rem;
+    }
+    & > .panel {
+      margin-top: -2rem;
+      margin-bottom: 3rem;
+    }
+  }
 }
 
 #court-contact-details {

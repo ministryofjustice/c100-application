@@ -127,6 +127,7 @@ h1.gv-u-heading-xxlarge {
   }
 
   a.link-back + &,
+  a.link-back + .grid_content_header > &,
   a.link-back + .app__section_heading + & {
     margin: 0.25rem 0 3rem;
   }
