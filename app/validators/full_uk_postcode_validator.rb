@@ -1,5 +1,5 @@
 class FullUkPostcodeValidator < ActiveModel::EachValidator
-  MAPIT_URI_ROOT = "https://mapit.mysociety.org/postcodes/".freeze
+  MAPIT_URI_ROOT = "https://mapit.mysociety.org/postcode/".freeze
 
   def parsed_postcode(postcode)
     UKPostcode.parse(postcode)
