@@ -121,5 +121,28 @@ h2.notice {
 }
 
 h1.gv-u-heading-xxlarge {
-  font-size: 36px;
+  font-size: 24px;
+  @media (min-width: 641px) {
+    font-size: 36px;
+  }
+
+  a.link-back + & {
+    margin: 0.25rem 0 3rem;
+  }
+}
+
+.gv-s-prose h2 {
+  margin-top: 1.25em;
+  margin-bottom: 0.55556em;
+  @media (min-width: 641px) {
+    font-size: 36px;
+    line-height: 1.11111;
+  }
+}
+
+h1.heading-start {
+  font-size: 32px;
+  @media (min-width: 641px) {
+    font-size: 48px;
+  }
 }
