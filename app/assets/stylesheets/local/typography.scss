@@ -126,12 +126,13 @@ h1.gv-u-heading-xxlarge {
     font-size: 36px;
   }
 
-  a.link-back + & {
+  a.link-back + &,
+  a.link-back + .app__section_heading + & {
     margin: 0.25rem 0 3rem;
   }
 }
 
-.gv-s-prose h2 {
+.start-page h2 {
   margin-top: 1.25em;
   margin-bottom: 0.55556em;
   @media (min-width: 641px) {
