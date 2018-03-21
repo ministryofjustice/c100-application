@@ -17,6 +17,11 @@ RSpec.describe Steps::Screener::PostcodeForm do
   subject { described_class.new(arguments) }
 
   describe '#save' do
+    let(:exists){ true }
+    before do
+      allow_any_instance_of(FullUkPostcodeValidator).to receive(:exists?).and_return(exists)
+    end
+    
     it_behaves_like 'a has-one-association form',
                     association_name: :screener_answers,
                     expected_attributes: {
@@ -48,7 +53,7 @@ RSpec.describe Steps::Screener::PostcodeForm do
           expect(subject.errors[:children_postcodes]).to_not be_empty
         end
       end
-      context 'and is a valid postcode' do
+      context 'and is a well-formed postcode' do
         context 'without a space, upper case' do
           let(:children_postcodes){ 'SW1H9AJ' }
           it 'is valid' do
@@ -71,6 +76,13 @@ RSpec.describe Steps::Screener::PostcodeForm do
           let(:children_postcodes){ 'SW1h 9aj' }
           it 'is valid' do
             expect(subject).to be_valid
+          end
+        end
+        context 'but the postcode does not exist' do
+          let(:exists){ false}
+
+          it 'is not valid' do
+            expect(subject).to_not be_valid
           end
         end
       end
