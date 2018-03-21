@@ -197,6 +197,23 @@ section.numbered-list ol > li:nth-child(4){
   }
 }
 
+.dont-know {
+  margin-top: -5px;
+    @media (min-width: 641px) {
+      margin-top: -20px;
+    }
+}
+
+[data-target="dob_unknown_panel"] {
+  margin-top: -15px;
+    @media (min-width: 641px) {
+      margin-top: -30px;
+    }
+}
+.form-date .form-hint {
+  margin-bottom: 0;
+}
+
 #court-contact-details {
   dt {
     margin-top: 15px;
