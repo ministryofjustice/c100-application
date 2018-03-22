@@ -2,13 +2,18 @@ strong {
   font-weight: bold;
 }
 
-details {
+Xdetails {
   margin-top: $gutter;
   margin-bottom: $gutter;
 }
 
 form {
   padding-bottom: $gutter;
+}
+
+.form-submit + details,
+details + form {
+  margin-top: $gutter;
 }
 
 .step-info {
@@ -125,6 +130,13 @@ h1.gv-u-heading-xxlarge {
   a.link-back + .grid_content_header > &,
   a.link-back + .app__section_heading + & {
     margin: 0.25rem 0 3rem;
+  }
+}
+
+h2.gv-u-heading-large {
+  font-size: 19px;
+  @media (min-width: 641px) {
+    font-size: 28px;
   }
 }
 

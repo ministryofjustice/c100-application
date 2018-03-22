@@ -87,6 +87,10 @@ li.no-js-only {
   margin-bottom: 0.41667em;
 }
 
+section.numbered-list h3 {
+  margin-top: 0;
+}
+
 section.numbered-list ol{
   padding-left:0;
 }
@@ -108,6 +112,9 @@ section.numbered-list ol > li:nth-child(3){
 }
 section.numbered-list ol > li:nth-child(4){
   background-image: image-url('icon-step-4.png');
+}
+section.numbered-list ol > li p:last-child {
+  margin-bottom: 0;
 }
 
 #miam-requirement_acknowledgement{
@@ -232,8 +239,13 @@ section.numbered-list ol > li:nth-child(4){
 .miam_exemptions > form > .form-group > fieldset > .multiple-choice > label > span.form-hint {
   margin-top: 0.5rem;
 }
+
 .miam_exemptions > form p:empty {
   display: none;
+}
+
+.miam_exemptions_list details {
+  margin: -1rem 0 2rem;
 }
 
 @import 'app/pros_cons';
