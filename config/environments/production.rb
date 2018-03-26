@@ -47,4 +47,12 @@ Rails.application.configure do
 
   # Enforce SSl-only
   config.force_ssl = true
+  
+  # Prevent host header poisoning by enforcing absolute redirects
+  if ENV['EXTERNAL_URL'].present?
+    uri = URI.parse(ENV['EXTERNAL_URL'])
+    config.action_controller.default_url_options = {
+      host: uri.host, protocol: uri.scheme, port: uri.port
+    }
+  end
 end
