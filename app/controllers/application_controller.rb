@@ -39,6 +39,8 @@ class ApplicationController < ActionController::Base
 
   def drop_dangerous_headers!
     request.env.except!('HTTP_X_FORWARDED_HOST') # just drop the variable
+  end
+  
   def set_security_headers
     additional_headers_for_all_requests.each do |name, value|
       response.set_header(name, value)
