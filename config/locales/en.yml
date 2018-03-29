@@ -227,7 +227,7 @@ en:
       orders:
         edit:
           page_title: Which orders apply to the child
-          heading: "Which of the orders applied for relate to %{name}?"
+          heading: "Which of the decisions you’re asking the court to resolve relate to %{name}?"
           info_html: Select all that apply
       residence:
         edit:
@@ -759,7 +759,7 @@ en:
         edit:
           page_title: Urgent application
           section: *miam_exemptions
-          heading: Confirming why you’re asking for an urgent hearing
+          heading: Confirming why your application is urgent
           or: or
       adr:
         edit:
