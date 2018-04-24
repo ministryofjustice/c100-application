@@ -25,13 +25,6 @@ module Summary
 
         ].select(&:show?)
       end
-      # rubocop:enable Metrics/MethodLength
-
-      private
-
-      def petition
-        @_petition ||= PetitionPresenter.new(c100)
-      end
     end
   end
 end
