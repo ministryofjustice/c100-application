@@ -23,7 +23,6 @@ module Summary
             personal_details(child),
             relationships(child),
             MultiAnswer.new(:child_orders, order_types(child)),
-            #Partial.row_blank_space,
           ]
         end
       end
