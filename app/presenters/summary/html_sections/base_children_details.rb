@@ -40,7 +40,7 @@ module Summary
       private
 
       def edit_relation_path(child, people)
-        format("/steps/applicant/relationship/%<id>/child/%<child_id>",
+        format("/steps/applicant/relationship/%<id>s/child/%<child_id>s",
                id: relationship(child, people).pluck(:id),
                child_id: child.id)
       end
@@ -48,8 +48,8 @@ module Summary
       def edit_child_details_path(child, field_stub)
         edit_steps_children_personal_details_path(
           child,
-          anchor: format('steps_children_personal_details_form_%<field_stub>',
-                         field_stub)
+          anchor: format('steps_children_personal_details_form_%<field_stub>s',
+                         field_stub: field_stub)
         )
       end
 
