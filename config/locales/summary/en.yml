@@ -715,6 +715,5 @@ en:
         <<: *PROHIBITED_STEPS_ORDERS
     other_issue_details:
       question: 'You told us that you need help with this dispute:'
-
     alternatives:
       question: Alternative ways to reach an agreement
