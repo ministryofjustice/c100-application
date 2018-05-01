@@ -5,11 +5,13 @@ module Summary
     let(:c100_application) {
       instance_double(C100Application,
         children: [child],
+        other_children: [other_child],
         applicants: [],
         respondents: [],
         children_known_to_authorities: 'yes',
         children_known_to_authorities_details: 'details',
         children_protection_plan: 'no',
+        has_other_children: 'yes',
       )
     }
 
@@ -24,6 +26,18 @@ module Summary
         relationships: relationships,
       )
     }
+    let(:other_child) {
+      instance_double(Child,
+        id: '5678',
+        full_name: 'other name',
+        dob: dob,
+        age_estimate: age_estimate,
+        gender: 'male',
+        child_order: child_order,
+        relationships: relationships,
+      )
+    }
+
 
     let(:dob) { Date.new(2018, 1, 20) }
     let(:age_estimate) { nil }
@@ -51,7 +65,7 @@ module Summary
       end
 
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(10)
+        expect(answers.count).to eq(17)
       end
 
       it 'has the correct rows in the right order' do
@@ -79,7 +93,7 @@ module Summary
         expect(answers[5]).to be_an_instance_of(MultiAnswer)
         expect(answers[5].question).to eq(:child_respondents_relationship)
         expect(answers[5].value).to eq(['mother'])
-        expect(c100_application).to have_received(:respondents)
+        expect(c100_application).to have_received(:respondents).at_least(:once)
 
         expect(answers[6]).to be_an_instance_of(MultiAnswer)
         expect(answers[6].question).to eq(:child_orders)
@@ -96,6 +110,37 @@ module Summary
         expect(answers[9]).to be_an_instance_of(Answer)
         expect(answers[9].question).to eq(:children_protection_plan)
         expect(c100_application).to have_received(:children_protection_plan)
+
+        expect(answers[10]).to be_an_instance_of(Answer)
+        expect(answers[10].question).to eq(:has_other_children)
+        expect(c100_application).to have_received(:has_other_children)
+
+        expect(answers[11]).to be_an_instance_of(Separator)
+        expect(answers[11].title).to eq(:other_child_index_title)
+        expect(answers[11].i18n_opts).to eq({index: 1})
+
+        expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[12].question).to eq(:child_full_name)
+        expect(answers[12].value).to eq('other name')
+
+        expect(answers[13]).to be_an_instance_of(DateAnswer)
+        expect(answers[13].question).to eq(:child_dob)
+        expect(answers[13].value).to eq(Date.new(2018, 1, 20))
+
+        expect(answers[14]).to be_an_instance_of(Answer)
+        expect(answers[14].question).to eq(:child_sex)
+        expect(answers[14].value).to eq('male')
+
+        expect(answers[15]).to be_an_instance_of(MultiAnswer)
+        expect(answers[15].question).to eq(:child_applicants_relationship)
+        expect(answers[15].value).to eq(['mother'])
+        expect(c100_application).to have_received(:applicants).at_least(:once)
+
+        expect(answers[16]).to be_an_instance_of(MultiAnswer)
+        expect(answers[16].question).to eq(:child_respondents_relationship)
+        expect(answers[16].value).to eq(['mother'])
+        expect(c100_application).to have_received(:respondents).at_least(:once)
+
       end
 
       context 'when `dob` is nil' do

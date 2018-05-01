@@ -9,7 +9,7 @@ module Summary
           FreeTextAnswer.new(
             :child_full_name,
             child.full_name,
-            change_path: edit_steps_children_names_path(child)
+            change_path: send(child_names_method(child), child)
           ),
           DateAnswer.new(
             :child_dob,
@@ -32,8 +32,14 @@ module Summary
 
       def relationships(child)
         [
-          MultiAnswer.new(:child_applicants_relationship,  relation_to_child(child, c100.applicants), change_path: edit_relation_path(child, c100.applicants)),
-          MultiAnswer.new(:child_respondents_relationship, relation_to_child(child, c100.respondents), change_path: edit_relation_path(child, c100.applicants)),
+          MultiAnswer.new(:child_applicants_relationship,
+                          relation_to_child(child, c100.applicants),
+                          change_path: edit_relation_path(child,
+                                                          c100.applicants)),
+          MultiAnswer.new(:child_respondents_relationship,
+                          relation_to_child(child, c100.respondents),
+                          change_path: edit_relation_path(child,
+                                                          c100.respondents)),
         ]
       end
 
@@ -41,15 +47,46 @@ module Summary
 
       def edit_relation_path(child, people)
         format("/steps/applicant/relationship/%<id>s/child/%<child_id>s",
-               id: relationship(child, people).pluck(:id),
+               id: relationship(child, people).pluck(:person_id).first,
                child_id: child.id)
       end
 
+      def child_names_method(child)
+        if child.is_a?(OtherChild)
+          :edit_steps_other_children_names_path
+        else
+          :edit_steps_children_names_path
+        end
+      end
+
+      def child_personal_details_method(child)
+        if child.is_a?(OtherChild)
+          :edit_steps_other_children_personal_details_path
+        else
+          :edit_steps_children_personal_details_path
+        end
+      end
+
+      def child_personal_details_form_stub(child)
+        if child.is_a?(OtherChild)
+          'steps_other_children_personal_details_form_'
+        else
+          'steps_children_personal_details_form_'
+        end
+      end
+
       def edit_child_details_path(child, field_stub)
-        edit_steps_children_personal_details_path(
+        send(
+          child_personal_details_method(child),
           child,
-          anchor: format('steps_children_personal_details_form_%<field_stub>s',
-                         field_stub: field_stub)
+          anchor: anchor(child, field_stub)
+        )
+      end
+
+      def anchor(child, field_stub)
+        format(
+          "#{child_personal_details_form_stub(child)}%<field_stub>s",
+          field_stub: field_stub
         )
       end
 
