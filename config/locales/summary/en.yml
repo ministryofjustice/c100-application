@@ -69,6 +69,7 @@ en:
     c8_confidential_answer: See C8 attached
     miam_exemptions_info: "The applicant has not attended a MIAM because the following exemption(s) applies:"
     statement_of_truth: "%{applicant_name} believes that the facts stated in this application are true."
+    statement_of_truth_hmcts_instructions: Statement of truth has been completed online - no signature required
     relationship_to_child:
       show_person: "%{person_name} - %{relation} to %{child_name}"
       hide_person: "%{relation} to %{child_name}"
@@ -584,8 +585,11 @@ en:
       miam_requirement: Attending a MIAM
       miam_exemptions: Exemptions from attending a MIAM
       safety_concerns: Safety concerns
-      abduction: 'Safety concerns: abduction'
-      children_abuse_details: Children safety
+      abduction: 'Safety concerns: Abduction'
+      children_abuse_details: 'Safety concerns: Child(ren)'
+      applicant_abuse_details: 'Safety concerns: Applicant(s)'
+      court_orders: 'Safety concerns: Protection orders'
+      safety_contact: 'Safety concerns: contact'
       nature_of_application: What you're asking the court to decide about the children
       alternatives: Alternative ways to reach an agreement
       children_details: About the children
@@ -596,6 +600,7 @@ en:
       abduction_previous_attempt: Details of the previous abductions
       abduction_risk_details: Why do you think the children may be abducted or kept outside the UK without your consent?
       abuse_details: Details
+      court_orders_details: What orders have been made?
       child_details: Child %{index}
     child_protection_cases:
       question: Are the children involved in any emergency protection, care or supervision proceedings (or have they been)?
@@ -841,7 +846,7 @@ en:
         <<: *YESNO
 
     abuse_behaviour_description:
-      question: Nature of behaviour / what happened
+      question: What happened?
     abuse_behaviour_start:
       question: When did behaviour start?
     abuse_behaviour_ongoing:
@@ -855,14 +860,46 @@ en:
       answers:
         <<: *YESNO
     abuse_help_party:
-      question: "Help from:"
+      question: Who did you ask for help?
     abuse_help_provided:
       question: Did they help you?
       answers:
-        'yes': They helped me
-        'no': They did not help
+        <<: *YESNO
     abuse_help_description:
       question: What did they do?
+
+    ### Court orders ###
+    has_court_orders:
+      question: Have you had or do you currently have any court orders made for your protection?
+      answers:
+        <<: *YESNO
+    order_name:
+      question: Order
+      answers:
+        <<: *COURT_ORDER_TYPES
+    order_issue_date:
+      question: Date issued
+    order_length:
+      question: Length of order
+    order_is_current:
+      question: Current
+      answers:
+        <<: *YESNO
+    order_court_name:
+      question: Name of court
+    protection_orders:
+      question: Steps or orders requested to protect child(ren) and/or applicant
+      absence_answer: Not required
+    concerns_contact_type:
+      question: Do you agree to the child(ren) spending time with the other person in this application?
+      answers:
+        unsupervised: 'Yes'
+        supervised: Yes, but it must be supervised
+        none: No, I do not want the other person to spend time with the children
+    concerns_contact_other:
+      question: Do you agree to the other people in this application being in touch with the child(ren) in other ways?
+      answers:
+        <<: *YESNO
 
     child_arrangements_orders:
       question: 'You would like the court to:'
