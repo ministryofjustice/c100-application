@@ -4,63 +4,90 @@ describe Summary::HtmlSections::BaseChildrenDetails do
   let(:c100_application) { instance_double(C100Application, {}) }
   subject { described_class.new(c100_application) }
 
-  describe '#child_names_method' do
+  describe '#edit_relation_path' do
     context 'given a Child' do
-      let(:arg) { Child.new }
-
-      it 'returns :edit_steps_children_names_path' do
-        expect(subject.send(:child_names_method, arg)).to eq(
-          :edit_steps_children_names_path)
+      let(:child) do
+        instance_double(Child, id: 'my_child_id', relationships: relationships)
       end
-    end
 
-    context 'given an OtherChild' do
-      let(:arg) { OtherChild.new }
+      context 'with relationships' do
+        let(:people) { ['person_id'] }
+        let(:relationships) do
+          instance_double('relationships', pluck: ['my_person_id'])
+        end
 
-      it 'returns :edit_steps_other_children_names_path' do
-        expect(subject.send(:child_names_method, arg)).to eq(
-          :edit_steps_other_children_names_path)
+        before do
+          allow(subject).to receive(:relationship).and_return(relationships)
+        end
+
+        it 'gets the relationships between the given child and given people' do
+          expect(subject).to receive(:relationship)
+                             .with(child, people)
+                             .and_return([])
+          subject.send(:edit_relation_path, child, 'type', people)
+        end
+
+        describe 'the return value' do
+          let(:value) { subject.send(:edit_relation_path, child, 'applicant', people) }
+
+          it 'starts with /steps/applicant/relationship/' do
+            expect(value).to start_with('/steps/applicant/relationship/')
+          end
+
+          it 'ends with (first relationship_id)/child/(child_id)' do
+            expect(value).to end_with('my_person_id/child/my_child_id')
+          end
+        end
       end
     end
   end
 
-  describe '#child_personal_details_method' do
-    context 'given a Child' do
-      let(:arg) { Child.new }
+  describe '#relationship' do
+    let(:relationships){ double('relationships') }
+    let(:child){ double('child', relationships: relationships) }
+    let(:people){ double('people') }
 
-      it 'returns :edit_steps_children_personal_details_path' do
-        expect(subject.send(:child_personal_details_method, arg)).to eq(
-          :edit_steps_children_personal_details_path)
-      end
+    before do
+      allow(relationships).to receive(:where)
+                              .with(person: people)
+                              .and_return('foo')
     end
 
-    context 'given an OtherChild' do
-      let(:arg) { OtherChild.new }
+    it 'gets the child relationships to the given people' do
+      expect(relationships).to receive(:where).with(person: people)
+      subject.send(:relationship, child, people)
+    end
 
-      it 'returns :edit_steps_other_children_personal_details_path' do
-        expect(subject.send(:child_personal_details_method, arg)).to eq(
-          :edit_steps_other_children_personal_details_path)
-      end
+    it 'returns the relationships to the given people' do
+      expect(subject.send(:relationship, child, people)).to eq('foo')
     end
   end
 
-  describe '#child_personal_details_form_stub' do
-    context 'given a Child' do
-      let(:arg) { Child.new }
+  describe '#relation_to_child' do
+    let(:relationship){ double('relationship', pluck: 'plucked relation')}
+    let(:child){ double('child') }
+    let(:people){ double('people') }
 
-      it 'returns steps_children_personal_details_form_' do
-        expect(subject.send(:child_personal_details_form_stub, arg)).to eq(
-          'steps_children_personal_details_form_')
-      end
+    before do
+      allow(subject).to receive(:relationship).and_return(relationship)
     end
 
-    context 'given an OtherChild' do
-      let(:arg) { OtherChild.new }
+    it 'calls relationship passing on the child & people' do
+      expect(subject).to receive(:relationship)
+                         .with(child, people)
+                         .and_return(relationship)
+      subject.send(:relation_to_child, child, people)
+    end
 
-      it 'returns steps_other_children_personal_details_form_' do
-        expect(subject.send(:child_personal_details_form_stub, arg)).to eq(
-          'steps_other_children_personal_details_form_')
-      end
+    it 'plucks :relation from the relationship' do
+      expect(relationship).to receive(:pluck)
+                              .with(:relation)
+                              .and_return('plucked relation')
+      subject.send(:relation_to_child, child, people)
+    end
+
+    it 'returns the plucked relation' do
+      expect(subject.send(:relation_to_child, child, people)).to eq('plucked relation')
     end
   end
 end

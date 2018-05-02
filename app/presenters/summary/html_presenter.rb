@@ -17,6 +17,7 @@ module Summary
         HtmlSections::NatureOfApplication.new(c100_application),
         HtmlSections::Alternatives.new(c100_application),
         HtmlSections::ChildrenDetails.new(c100_application),
+        HtmlSections::OtherChildrenDetails.new(c100_application),
       ].flatten.select(&:show?)
     end
   end

@@ -199,7 +199,6 @@ Rails.application.routes.draw do
       crud_step :personal_details, only: [:edit, :update]
       crud_step :contact_details,  only: [:edit, :update]
       edit_step :relationship, only: [] do
-        edit_routes ':id'
         edit_routes ':id/child/:child_id'
       end
     end
