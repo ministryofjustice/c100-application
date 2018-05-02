@@ -5,30 +5,30 @@ module Summary
     let(:c100_application) {
       instance_double(C100Application,
         orders: orders,
-        orders_additional_details: orders_additional_details
+        orders_additional_details: orders_additional_details,
+        protection_orders: protection_orders,
+        protection_orders_details: protection_orders_details,
       )
     }
 
     subject { described_class.new(c100_application) }
 
     let(:orders){
-      [
-        "child_arrangements_home",
-        "child_arrangements_time",
-        "group_prohibited_steps",
-        "prohibited_steps_medical",
-        "prohibited_steps_holiday",
-        "prohibited_steps_moving",
-        "group_specific_issues",
-        "specific_issues_school",
-        "specific_issues_religion",
-        "specific_issues_names",
-        "other_issue"
-      ]
+      %w(
+        child_arrangements_home
+        group_prohibited_steps
+        prohibited_steps_medical
+        prohibited_steps_moving
+        group_specific_issues
+        specific_issues_religion
+        other_issue
+      )
     }
-    let(:orders_additional_details){
-      'orders detail'
-    }
+
+    let(:orders_additional_details) { 'orders detail' }
+    let(:protection_orders) { 'yes' }
+    let(:protection_orders_details) { 'protection orders details' }
+
     let(:answers) { subject.answers }
 
     describe '#name' do
@@ -37,39 +37,53 @@ module Summary
 
     describe '#answers' do
       it 'has the correct rows' do
-        expect(answers.count).to eq(4)
+        expect(answers.count).to eq(3)
 
         expect(answers[0]).to be_an_instance_of(MultiAnswer)
-        expect(answers[0].question).to eq(:child_arrangements_orders)
-        expect(answers[0].value).to eq(
-          ['child_arrangements_home', 'child_arrangements_time']
-        )
-        expect(answers[0].change_path).to eq('/steps/petition/orders#steps_petition_orders_form_group_child_arrangements_home')
+        expect(answers[0].question).to eq(:petition_orders)
+        expect(answers[0].value).to eq(%w(
+          child_arrangements_home
+          prohibited_steps_medical
+          prohibited_steps_moving
+          specific_issues_religion
+          other_issue
+        ))
+        expect(answers[0].change_path).to eq('/steps/petition/orders')
 
-        expect(answers[1]).to be_an_instance_of(MultiAnswer)
-        expect(answers[1].question).to eq(:prohibited_steps_orders)
-        expect(answers[1].value).to eq(
-          [
-            'prohibited_steps_medical',
-            'prohibited_steps_holiday',
-            'prohibited_steps_moving'
-          ]
-        )
-        expect(answers[1].change_path).to eq('/steps/petition/orders#steps_petition_orders_form_group_prohibited_steps')
+        expect(answers[1]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[1].question).to eq(:other_issue_details)
+        expect(answers[1].value).to eq('orders detail')
+        expect(answers[1].change_path).to eq('/steps/petition/orders#steps_petition_orders_form_other_issue')
 
-        expect(answers[2]).to be_an_instance_of(MultiAnswer)
-        expect(answers[2].question).to eq(:specific_issues_orders)
-        expect(answers[2].value).to eq([
-          'specific_issues_school',
-          'specific_issues_religion',
-          'specific_issues_names'
-        ])
-        expect(answers[2].change_path).to eq('/steps/petition/orders#steps_petition_orders_form_group_specific_issues')
+        expect(answers[2]).to be_an_instance_of(AnswersGroup)
+        expect(answers[2].name).to eq(:protection_orders)
+        expect(answers[2].change_path).to eq('/steps/petition/protection')
+        expect(answers[2].answers.count).to eq(2)
 
-        expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[3].question).to eq(:other_issue_details)
-        expect(answers[3].value).to eq('orders detail')
-        expect(answers[3].change_path).to eq('/steps/petition/orders#steps_petition_orders_form_other_issue')
+        ## protection_orders group answers ###
+        protection = answers[2].answers
+
+        expect(protection[0]).to be_an_instance_of(Answer)
+        expect(protection[0].question).to eq(:protection_orders)
+        expect(protection[0].value).to eq('yes')
+
+        expect(protection[1]).to be_an_instance_of(FreeTextAnswer)
+        expect(protection[1].question).to eq(:protection_orders_details)
+        expect(protection[1].value).to eq('protection orders details')
+      end
+
+      context 'when there is no other issue' do
+        let(:orders_additional_details) { nil }
+
+        it 'has the correct rows' do
+          expect(answers.count).to eq(2)
+
+          expect(answers[0]).to be_an_instance_of(MultiAnswer)
+          expect(answers[0].question).to eq(:petition_orders)
+
+          expect(answers[1]).to be_an_instance_of(AnswersGroup)
+          expect(answers[1].name).to eq(:protection_orders)
+        end
       end
     end
   end
