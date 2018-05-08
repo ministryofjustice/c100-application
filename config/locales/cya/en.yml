@@ -80,6 +80,7 @@ en:
       applicants_details: Applicant(s)
       respondents_details: Respondent(s)
       other_parties_details: Other parties
+      other_court_cases: Other court cases
     groups:
       miam_certification_details: Certification details
       abduction_passport_possession: Details of the children’s passports
@@ -457,3 +458,23 @@ en:
       question: Mobile telephone number
     person_email:
       question: Email address
+
+    has_other_court_cases:
+      question: Have any of the children in this application been involved in other family court proceedings?
+      answers:
+        <<: *YESNO
+
+    court_proceeding_children_names:
+      question: Name of child(ren)
+    court_proceeding_court_name:
+      question: Name of court where proceedings were heard
+    court_proceeding_case_number:
+      question: Case number
+    court_proceeding_proceedings_date:
+      question: Date/year
+    court_proceeding_cafcass_details:
+      question: Name and office of Cafcass/Cafcass Cymru officer
+    court_proceeding_order_types:
+      question: Type of proceedings - if known
+    court_proceeding_previous_details:
+      question: Details of any other previous family case
