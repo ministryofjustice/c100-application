@@ -92,6 +92,7 @@ en:
       child_details: Child %{index}
       person_personal_details: Personal details
       person_contact_details: Contact details
+      other_court_cases_details: Other proceedings details
     separators:
       not_applicable: Not applicable
       child_index_title: Child %{index}
