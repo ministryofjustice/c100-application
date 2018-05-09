@@ -81,11 +81,8 @@ en:
       respondents_details: Respondent(s)
       other_parties_details: Other parties
       other_court_cases: Other court cases
-<<<<<<< HEAD
       without_notice_hearing: Without notice hearing
-=======
       international_element: International elements
->>>>>>> c62e421... add CYA international elements section
     groups:
       miam_certification_details: Certification details
       abduction_passport_possession: Details of the children’s passports
@@ -97,12 +94,9 @@ en:
       person_personal_details: Personal details
       person_contact_details: Contact details
       other_court_cases_details: Other proceedings details
-<<<<<<< HEAD
       without_notice_hearing_details: Without notice hearing details
-=======
       international_jurisdiction: Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?
       international_request: Has a request for information or other assistance involving the children been made to or by another country?
->>>>>>> c62e421... add CYA international elements section
     separators:
       not_applicable: Not applicable
       children_details_index_title: Child %{index}
