@@ -15,15 +15,13 @@ module Summary
       private
 
       def without_notice_hearing_details
-        return [] unless c100.without_notice.eql?(GenericYesNo::YES.to_s)
-
         [
           FreeTextAnswer.new(:without_notice_details,            c100.without_notice_details),
           Answer.new(:without_notice_impossible,                 c100.without_notice_impossible),
           FreeTextAnswer.new(:without_notice_impossible_details, c100.without_notice_impossible_details),
           Answer.new(:without_notice_frustrate,                  c100.without_notice_frustrate),
           FreeTextAnswer.new(:without_notice_frustrate_details,  c100.without_notice_frustrate_details),
-        ].select(&:show?)
+        ]
       end
     end
   end

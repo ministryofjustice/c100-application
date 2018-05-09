@@ -4,18 +4,34 @@ module Summary
   describe HtmlSections::WithoutNoticeDetails do
     let(:c100_application) {
       instance_double(C100Application,
-        without_notice: without_notice_yes_no,
-        without_notice_details: 'details',
-        without_notice_impossible: 'yes',
-        without_notice_impossible_details: 'details',
-        without_notice_frustrate: 'yes',
-        without_notice_frustrate_details: 'details'
+        given_answers
     ) }
 
     subject { described_class.new(c100_application) }
 
     let(:answers) { subject.answers }
-    let(:without_notice_yes_no){ 'yes' }
+
+    let(:without_notice_hearing_requested){
+      {
+        without_notice: 'yes',
+        without_notice_details: 'details',
+        without_notice_impossible: 'yes',
+        without_notice_impossible_details: 'details',
+        without_notice_frustrate: 'yes',
+        without_notice_frustrate_details: 'details'
+      }
+    }
+    let(:without_notice_hearing_not_requested){
+      {
+        without_notice: 'no',
+        without_notice_details: nil,
+        without_notice_impossible: nil,
+        without_notice_impossible_details: nil,
+        without_notice_frustrate: nil,
+        without_notice_frustrate_details: nil
+      }
+    }
+    let(:given_answers) { without_notice_hearing_requested }
 
     describe '#name' do
       it { expect(subject.name).to eq(:without_notice_hearing) }
@@ -39,7 +55,7 @@ module Summary
       end
 
       context 'when the user has not asked for a without notice hearing' do
-        let(:without_notice_yes_no){ 'no' }
+        let(:given_answers) { without_notice_hearing_not_requested }
 
         it 'has only one row' do
           expect(answers.count).to eq(1)
@@ -47,7 +63,7 @@ module Summary
       end
 
       context 'when the user has asked for a without notice hearing' do
-        let(:without_notice_yes_no){ 'yes' }
+        let(:given_answers) { without_notice_hearing_requested }
 
         it 'has two rows' do
           expect(answers.count).to eq(2)
