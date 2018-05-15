@@ -12,6 +12,7 @@ if ENV.fetch('TRAVIS', false) == 'true'
   Capybara.run_server = true
   Capybara.app_host = "http://localhost:80123"
   Capybara.server_port = "80123"
+  Capybara.always_include_port = true
 else
   Capybara.run_server = false
   Capybara.app_host = ENV.fetch('EXTERNAL_URL')
