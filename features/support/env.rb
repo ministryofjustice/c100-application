@@ -10,6 +10,8 @@ require 'uri'
 #Capybara.server_port = URI.parse(Capybara.app_host).port
 if ENV.fetch('TRAVIS', false) == 'true'
   Capybara.run_server = true
+  Capybara.app_host = "http://localhost:80123"
+  Capybara.server_port = "80123"
 else
   Capybara.run_server = false
   Capybara.app_host = ENV.fetch('EXTERNAL_URL')
