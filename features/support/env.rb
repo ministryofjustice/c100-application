@@ -6,9 +6,14 @@ require 'capybara/poltergeist'
 require 'dotenv/load'
 require 'uri'
 
-Capybara.app_host = ENV.fetch('EXTERNAL_URL')
-Capybara.server_port = URI.parse(Capybara.app_host).port
-Capybara.run_server = true #false
+#Capybara.app_host = ENV.fetch('EXTERNAL_URL')
+#Capybara.server_port = URI.parse(Capybara.app_host).port
+if ENV.fetch('TRAVIS', false) == 'true'
+  Capybara.run_server = true
+else
+  Capybara.run_server = false
+  Capybara.app_host = ENV.fetch('EXTERNAL_URL')
+end
 Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
 
