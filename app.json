@@ -82,6 +82,8 @@
     {
       "url": "heroku/ruby"
     }
+  ],
+  "scripts": [
+    "release": 'echo "I AM IN THE RELEASE SCRIPT'; echo "HEROKU_APP_NAME=$HEROKU_APP_NAME"; exit 1'
   ]
 }
-
