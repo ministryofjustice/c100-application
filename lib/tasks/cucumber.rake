@@ -9,7 +9,9 @@ task :cucumber => :environment do
 end
 
 task :echo_env_and_exit => :environment do
-  puts "HEROKU_APP_NAME=#{HEROKU_APP_NAME}"
+  puts "HEROKU_APP_NAME=#{ENV['HEROKU_APP_NAME']}"
+  puts "EXTERNAL_URL=#{ENV['EXTERNAL_URL']}"
+
   raise 'deliberate exception to stop the pipeline'
 end
 
