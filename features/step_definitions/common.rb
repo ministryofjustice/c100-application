@@ -15,6 +15,7 @@ When(/^I visit "([^"]*)"$/) do |path|
   puts "---- /page response_parts dump ---"
 
   puts "page.html=#{page.html}"
+  puts "response = #{response.inspect}"
 end
 
 Then(/^I should be on "([^"]*)"$/) do |page_name|
