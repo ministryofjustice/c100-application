@@ -15,7 +15,7 @@ require 'uri'
 #   Capybara.always_include_port = true
 # else
   Capybara.run_server = false
-  Capybara.app_host = ENV.fetch('EXTERNAL_URL')
+  Capybara.app_host = ENV.fetch('EXTERNAL_URL', "http://127.0.0.1:8123")
 # end
 Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
