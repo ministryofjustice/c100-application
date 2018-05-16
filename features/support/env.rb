@@ -10,7 +10,7 @@ require 'uri'
 #Capybara.server_port = URI.parse(Capybara.app_host).port
 if ENV.fetch('TRAVIS', false) == 'true'
   Capybara.run_server = true
-  Capybara.app_host = "http://localhost:80123"
+  Capybara.app_host = "http://127.0.0.1:80123"
   Capybara.server_port = "80123"
   Capybara.always_include_port = true
 else
@@ -20,9 +20,11 @@ end
 Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
 
+puts "Capybara.app_host = #{Capybara.app_host}"
 options = {
   js_errors: false,
-  phantomjs: Phantomjs.path
+  phantomjs_options: ['--disk-cache=true'],
+#  phantomjs: Phantomjs.path
 }
 
 Capybara.register_driver :poltergeist do |app|
