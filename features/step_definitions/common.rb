@@ -5,17 +5,18 @@ end
 
 When(/^I visit "([^"]*)"$/) do |path|
   visit path
-  puts "---- page response_parts dump ---"
-  page.driver.network_traffic.each do |r|
-    r.response_parts.each do |resp|
-      puts resp.inspect
-    end
-  end
-  page.driver.clear_network_traffic
-  puts "---- /page response_parts dump ---"
+  # puts "---- page response_parts dump ---"
+  # page.driver.network_traffic.each do |r|
+  #   r.response_parts.each do |resp|
+  #     puts resp.inspect
+  #   end
+  # end
+  # page.driver.clear_network_traffic
+  # puts "---- /page response_parts dump ---"
 
   puts "page.html=#{page.html}"
-  puts "page = #{page.inspect}"
+  puts "page.status_code = #{page.status_code}"
+  puts "page.response_headers = #{page.response_headers}"
 end
 
 Then(/^I should be on "([^"]*)"$/) do |page_name|
