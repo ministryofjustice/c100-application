@@ -54,6 +54,7 @@ group :test do
   gem 'brakeman'
   gem 'capybara'
   gem 'cucumber'
+  gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'poltergeist'
   gem 'phantomjs'
