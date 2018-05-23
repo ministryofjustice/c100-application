@@ -23,11 +23,11 @@ gem 'virtus'
 # PDF generation
 gem 'combine_pdf'
 gem 'wicked_pdf', '~> 1.1.0'
-gem 'wkhtmltopdf-binary'
 
 group :production do
   gem 'lograge'
   gem 'logstash-event'
+  gem 'wkhtmltopdf-heroku' # in Heroku, we need this version of `wkhtmltopdf`
 end
 
 group :development do
@@ -48,6 +48,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'wkhtmltopdf-binary' # in local, we need this version of `wkhtmltopdf`
 end
 
 group :test do
