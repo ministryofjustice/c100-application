@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180530120103) do
+ActiveRecord::Schema.define(version: 20180605110750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,15 @@ ActiveRecord::Schema.define(version: 20180530120103) do
     t.text "previous_details"
     t.uuid "c100_application_id"
     t.index ["c100_application_id"], name: "index_court_proceedings_on_c100_application_id"
+  end
+
+  create_table "cumulative_data", primary_key: "created_at", id: :datetime, force: :cascade do |t|
+    t.integer "applications_created"
+    t.integer "applications_eligible"
+    t.integer "applications_completed"
+    t.integer "applications_saved"
+    t.integer "applications_online_submission"
+    t.integer "applications_postal_submission"
   end
 
   create_table "email_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
