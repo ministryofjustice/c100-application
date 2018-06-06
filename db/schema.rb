@@ -188,13 +188,16 @@ ActiveRecord::Schema.define(version: 20180605110750) do
     t.index ["c100_application_id"], name: "index_court_proceedings_on_c100_application_id"
   end
 
-  create_table "cumulative_data", primary_key: "created_at", id: :datetime, force: :cascade do |t|
+  create_table "cumulative_data", primary_key: "reading_date", id: :date, force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.integer "applications_created"
     t.integer "applications_eligible"
     t.integer "applications_completed"
     t.integer "applications_saved"
     t.integer "applications_online_submission"
     t.integer "applications_postal_submission"
+    t.integer "miam_kickouts"
+    t.integer "miam_expired"
   end
 
   create_table "email_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

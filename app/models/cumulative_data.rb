@@ -11,29 +11,36 @@ class CumulativeData < ApplicationRecord
     :applications_saved,
     :applications_online_submission,
     :applications_postal_submission,
+    :miam_kickouts,
+    :miam_expired,
   ].freeze
 
-  def self.process!
-    data = {}
+  class << self
+    attr_accessor :reading_date
 
-    DATA_POINTS.each_with_object(data) do |column, hash|
-      hash[column] = public_send(column)
+    def process!(reading_date = Date.yesterday)
+      @reading_date = reading_date
+
+      data_points = {
+        reading_date: @reading_date
+      }
+
+      DATA_POINTS.each_with_object(data_points) do |column, hash|
+        hash[column] = public_send(column)
+      end
+
+      create(data_points)
     end
 
-    create(data)
-  end
+    def finder
+      C100Application.where(
+        created_at: (reading_date.beginning_of_day..reading_date.end_of_day)
+      )
+    end
 
-  # The assumption here is we will be running a daily task to gather data
-  # from the day before. If this assumption ever changes, adapt this method.
-  def self.finder
-    C100Application.where(
-      created_at: [Date.yesterday.beginning_of_day..Date.yesterday.end_of_day]
-    )
-  end
-
-  # Implement new data points below, as class methods
-  #
-  class << self
+    #
+    # Implement new data points below, as class methods
+    #
     def applications_created
       finder.count
     end
@@ -62,6 +69,18 @@ class CumulativeData < ApplicationRecord
     def applications_postal_submission
       finder.where(
         submission_type: SubmissionType::PRINT_AND_POST.to_s
+      ).count
+    end
+
+    def miam_kickouts
+      finder.where(
+        'navigation_stack && ?', '{/steps/miam_exemptions/exit_page}'
+      ).count
+    end
+
+    def miam_expired
+      finder.where(
+        'navigation_stack && ?', '{/steps/miam/certification_expired_info}'
       ).count
     end
   end
