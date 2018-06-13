@@ -10,13 +10,13 @@ module Summary
           Answer.new(:has_solicitor, c100.has_solicitor, change_path: edit_steps_applicant_has_solicitor_path),
           solicitor_personal_details,
           solicitor_contact_details,
-        ].flatten
+        ].flatten.select(&:show?)
       end
 
       private
 
       def solicitor
-        c100_application.solicitor
+        c100_application.solicitor || Solicitor.new
       end
 
       def solicitor_personal_details
