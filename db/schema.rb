@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612135807) do
+ActiveRecord::Schema.define(version: 20180622102800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 20180612135807) do
     t.string "navigation_stack", default: [], array: true
     t.uuid "user_id"
     t.string "user_type"
-    t.string "help_paying"
     t.string "hwf_reference_number"
     t.string "children_known_to_authorities"
     t.text "children_known_to_authorities_details"
@@ -271,6 +270,7 @@ ActiveRecord::Schema.define(version: 20180612135807) do
     t.string "written_agreement"
     t.string "email_consent"
     t.string "email_address"
+    t.string "legal_representation"
     t.index ["c100_application_id"], name: "index_screener_answers_on_c100_application_id"
     t.index ["email_address"], name: "index_screener_answers_on_email_address"
     t.index ["email_consent"], name: "index_screener_answers_on_email_consent"

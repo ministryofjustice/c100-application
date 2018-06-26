@@ -20,6 +20,12 @@ RSpec.describe ReceiptMailer, type: :mailer do
   describe '#copy_to_user' do
     before do
       allow(File).to receive(:read).with(pdf_file).and_return('file content')
+
+      allow(
+        c100_application
+      ).to receive(:screener_answers_court).and_return(
+        double('Court', name: 'Court XYZ', slug: 'court-xyz', present?: true).as_null_object
+      )
     end
 
     context 'given all required arguments' do
@@ -34,6 +40,11 @@ RSpec.describe ReceiptMailer, type: :mailer do
 
         it 'has the right subject' do
           expect(mail.subject).to eq('C100 new application - child arrangements')
+        end
+
+        context 'assigns the court data' do
+          it { expect(mail.body.encoded).to match('Court XYZ') }
+          it { expect(mail.body.encoded).to match('https://courttribunalfinder.service.gov.uk/courts/court-xyz') }
         end
       end
     end

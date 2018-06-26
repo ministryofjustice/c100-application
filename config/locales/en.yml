@@ -723,13 +723,6 @@ en:
           section: *attending_court
           heading: Does anyone in this application need someone to help them communicate in court?
           lead_text: They may need a person (also known as an intermediary) to help them understand and participate in the court process
-      help_paying:
-        edit:
-          page_title: Help paying
-          heading: Help with fees
-          body_html: |
-            <p>You may be able to <a href="https://www.gov.uk/get-help-with-court-fees" target="external_link" rel="external">get help paying</a> the £215 fee if you’re on a low income, receive certain benefits or have little or no savings.</p>
-            <p>If you do qualify, you’ll need to provide the reference number you were given.</p>
       payment:
         edit:
           page_title: Payment type
@@ -739,7 +732,7 @@ en:
         edit:
           page_title: How would you submit your application?
           heading: How would you like to submit your application to court?
-          lead_text: Your completed application can be sent straight to the court online, or you can print it and send it by post if you prefer.
+          lead_text: Your completed application can be sent straight to the court electronically, or you can print it and send it by post if you prefer.
       check_your_answers:
         edit:
           page_title: Check your answers
@@ -907,6 +900,16 @@ en:
           page_title: Sorry, you’re not eligible to apply online
           heading: Sorry, you’re not eligible to apply online
           lead_text: You can only use this online service if both you and the other person (the respondent) are over 18.
+      legal_representation:
+        edit:
+          page_title: Do you have a solicitor?
+          heading: Do you have a solicitor?
+          lead_text: You can only use this online service if you do not have a solicitor representing you in these proceedings.
+      legal_representation_exit:
+        show:
+          page_title: Sorry, you’re not eligible to apply online
+          heading: Sorry, you’re not eligible to apply online
+          lead_text: You can only use this online service if you do not have a solicitor representing you or filling this form on your behalf.
       written_agreement:
         edit:
           page_title: Consent order
@@ -1125,8 +1128,6 @@ en:
         language_help_html: ""
       steps_application_intermediary_form:
         intermediary_help_html: ""
-      steps_application_help_paying_form:
-        help_paying_html: "Do you have a ‘Help with fees’ reference number?"
       steps_application_declaration_form:
         declaration_made_html: ""
       steps_miam_consent_order_form:
@@ -1273,6 +1274,8 @@ en:
         parent_html: ""
       steps_screener_over18_form:
         over18_html: ""
+      steps_screener_legal_representation_form:
+        legal_representation_html: ""
       steps_screener_written_agreement_form:
         written_agreement_html: ""
       steps_screener_email_consent_form:
@@ -1317,10 +1320,6 @@ en:
         language_help_details: *provide_details
       steps_application_intermediary_form:
         intermediary_help_details: *provide_details
-      # TODO: the `help_paying` is to be removed once we introduce
-      # the `payment_form` substitute (only visible in staging for now)
-      steps_application_help_paying_form:
-        hwf_reference_number: Enter your reference number
       steps_application_payment_form:
         payment_type:
           help_with_fees_html: '<strong>Help with fees</strong><br>You may be able to <a href="https://www.gov.uk/get-help-with-court-fees" target="external_link" rel="external">get help paying</a> if you’re on a low income, receive certain benefits or have little or no savings. If you do qualify, you’ll need to provide your reference number.'
@@ -1331,7 +1330,7 @@ en:
         solicitor_account_number: Enter solicitor’s fee account number
       steps_application_submission_form:
         submission_type:
-          online: Submit online
+          online: Submit electronically
           print_and_post: Print and send by post
         receipt_email: Enter an email address if you would like to get a confirmation
       steps_application_declaration_form:
@@ -1797,6 +1796,7 @@ en:
   court_mailer:
     submission_to_court:
       subject: C100 new application - child arrangements
+      urgent_subject: URGENT - C100 new application - child arrangements
   receipt_mailer:
     copy_to_user:
       subject: C100 new application - child arrangements

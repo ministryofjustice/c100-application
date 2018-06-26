@@ -74,6 +74,8 @@ Rails.application.routes.draw do
       show_step :parent_exit
       edit_step :over18
       show_step :over18_exit
+      edit_step :legal_representation
+      show_step :legal_representation_exit
       edit_step :written_agreement
       show_step :written_agreement_exit
       edit_step :email_consent
@@ -93,7 +95,6 @@ Rails.application.routes.draw do
       edit_step :details
       edit_step :language
       edit_step :intermediary
-      edit_step :help_paying
       edit_step :payment
       edit_step :submission
       edit_step :check_your_answers do

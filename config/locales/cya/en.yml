@@ -568,10 +568,6 @@ en:
         <<: *YESNO
     special_arrangements_details:
       question: ''
-    help_paying:
-      question: ''
-      answers:
-        <<: *YESNO
     hwf_reference_number:
       question: Reference number
     solicitor_account_number:
@@ -586,7 +582,7 @@ en:
     submission_type:
       question: ''
       answers:
-        online: Online
+        online: Electronically
         print_and_post: Print and post
     submission_receipt_email:
       question: 'A copy of your application will be sent to:'
