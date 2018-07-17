@@ -3,7 +3,7 @@
 #
 task :mutant => :environment do
   vars = 'RAILS_ENV=test NOCOVERAGE=true'
-  flags = '--use rspec --fail-fast'
+  flags = "#{ENV['MUTANT_EXTRA_FLAGS']} --use rspec --fail-fast"
 
   unless system("#{vars} mutant #{flags} #{classes_to_mutate.join(' ')}")
     raise 'Mutation testing failed'
