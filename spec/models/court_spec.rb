@@ -234,16 +234,30 @@ describe Court do
       }
     }
     before do
+      subject.slug = 'my-slug'
       allow_any_instance_of(C100App::CourtfinderAPI).to receive(:court).and_return(court)
       allow(subject).to receive(:best_enquiries_email).with(emails).and_return( 'test@email' )
     end
 
-    it 'gets the Court' do
-      expect_any_instance_of(C100App::CourtfinderAPI).to receive(:court).and_return(court)
+    it 'gets the Court with the given slug' do
+      expect_any_instance_of(C100App::CourtfinderAPI).to receive(:court).with('my-slug').and_return(court)
       subject.send(:merge_from_json_lookup!)
     end
 
     describe 'the court data' do
+      context 'when it is nil' do
+        before do
+          allow_any_instance_of(C100App::CourtfinderAPI).to receive(:court).and_return(nil)
+        end
+
+        it 'does not change opening_times' do
+          expect{subject.send(:merge_from_json_lookup!)}.to_not change(subject, :opening_times)
+        end
+
+        it 'does not change email' do
+          expect{subject.send(:merge_from_json_lookup!)}.to_not change(subject, :email)
+        end
+      end
       context 'when it includes a Court with a matching slug' do
         before do
           subject.slug = 'my-slug'
