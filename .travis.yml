@@ -8,4 +8,4 @@ before_script:
   - git remote set-branches origin master && git fetch
 
 script:
-  - MUTANT_EXTRA_FLAGS="--since=origin/master" bundle exec rake travis
+  - bundle exec rake travis
