@@ -5,6 +5,7 @@ addons:
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
+  - git remote set-branches origin master && git fetch
 
 script:
-  - MUTANT_EXTRA_FLAGS="--since=master" bundle exec rake travis
+  - MUTANT_EXTRA_FLAGS="--since=origin/master" bundle exec rake travis
