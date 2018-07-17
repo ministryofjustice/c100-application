@@ -279,60 +279,6 @@ describe Court do
         end
       end
 
-
-      # "this would never happen" in real life, but Mutant likes to replace == with .eql?
-      # in mutation testing, so we need to add a test that will fail under that mutation
-      # context 'when it includes a Court with a slug that would match if type-converted' do
-      #   let(:courts){
-      #     [
-      #       { 'slug' => 1.0,
-      #         'emails' => emails,
-      #         'opening_times' => [
-      #           {
-      #             'sort' => 0,
-      #             'opening_time' => '9:00-5pm'
-      #           }
-      #         ]
-      #       }
-      #     ]
-      #   }
-      #   before do
-      #     subject.slug = 1
-      #   end
-      #
-      #   it 'sets opening_times to the opening_time keys from the court data' do
-      #     subject.send(:merge_from_json_lookup!)
-      #     expect(subject.opening_times).to eq(['9:00-5pm'])
-      #   end
-      # end
-      #
-      # # similarly, mutating [] to fetch
-      # context 'when it includes a Court without an "emails" key' do
-      #   let(:court){
-      #     { 'slug' => 'my-slug',
-      #       'opening_times' => [
-      #         {
-      #           'sort' => 0,
-      #           'opening_time' => '9:00-5pm'
-      #         }
-      #       ]
-      #     }
-      #   }
-      #   before do
-      #     subject.email = 'my@email'
-      #     subject.slug = 'my-slug'
-      #     allow(subject).to receive(:best_enquiries_email).with(nil).and_return( nil )
-      #   end
-      #
-      #   it 'sets opening_times to the opening_time keys from the court data' do
-      #     subject.send(:merge_from_json_lookup!)
-      #     expect(subject.opening_times).to eq(['9:00-5pm'])
-      #   end
-      #
-      #   it 'sets the court email to nil' do
-      #     expect{ subject.send(:merge_from_json_lookup!) }.to change(subject, :email).to(nil)
-      #   end
-      # end
       context 'when it includes a Court without an "opening_times" key' do
         let(:court){
           { 'slug' => 'my-slug' }

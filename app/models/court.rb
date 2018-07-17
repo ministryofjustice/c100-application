@@ -49,10 +49,6 @@ class Court
     opening_times.instance_of?(Array) && opening_times.any?
   end
 
-  # def self.all(params = {})
-  #   C100App::CourtfinderAPI.new.all(cache_ttl: params[:cache_ttl] || 86_400)
-  # end
-
   protected
 
   def merge_from_json_lookup!

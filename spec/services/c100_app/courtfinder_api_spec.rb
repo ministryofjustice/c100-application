@@ -203,72 +203,7 @@ describe C100App::CourtfinderAPI do
         end
       end
     end
-
   end
-
-  # describe '#all' do
-  #   let(:courts){ ['court 1', 'court 2'] }
-  #   let(:cache_path){ described_class::LOCAL_JSON_CACHE }
-  #   let(:mock_json_data){ {'courts' => courts} }
-  #   let(:file_contents){ mock_json_data.to_json }
-  #   let(:valid){ false }
-  #
-  #   before do
-  #     allow(subject).to receive(:file_is_valid?).and_return(valid)
-  #     allow(File).to receive(:read).with(cache_path).and_return(file_contents)
-  #     allow(subject).to receive(:download_all_courts_json_to).with(cache_path)
-  #     allow(JSON).to receive(:parse).and_return( mock_json_data )
-  #   end
-  #
-  #   context 'given a :cache_ttl' do
-  #     it 'passes it to file_is_valid?' do
-  #       expect(subject).to receive(:file_is_valid?).with(cache_path, 1234).and_return(true)
-  #       subject.all(cache_ttl: 1234)
-  #     end
-  #   end
-  #   context 'given no :cache_ttl' do
-  #     it 'passes 86400 to file_is_valid?' do
-  #       expect(subject).to receive(:file_is_valid?).with(cache_path, 86400).and_return(true)
-  #       subject.all
-  #     end
-  #   end
-  #
-  #   context 'when there is no valid file in LOCAL_JSON_CACHE' do
-  #     let(:valid){ false }
-  #
-  #     it 'logs a debug message saying it is downloading the file' do
-  #       expect(subject.logger).to receive(:debug).with("downloading courts.json to #{cache_path}")
-  #       subject.all
-  #     end
-  #
-  #     it 'downloads the all-courts json to LOCAL_JSON_CACHE' do
-  #       expect(subject).to receive(:download_all_courts_json_to).with(cache_path)
-  #       subject.all
-  #     end
-  #   end
-  #   context 'when there is a valid file in LOCAL_JSON_CACHE' do
-  #     let(:valid){ true }
-  #
-  #     it 'does not downloads the all-courts json to LOCAL_JSON_CACHE' do
-  #       expect(subject).to_not receive(:download_all_courts_json_to).with(cache_path)
-  #       subject.all
-  #     end
-  #   end
-  #
-  #   it 'reads the file in LOCAL_JSON_CACHE' do
-  #     expect(File).to receive(:read).with(cache_path).and_return(file_contents)
-  #     subject.all
-  #   end
-  #
-  #   it 'parses the file contents as JSON' do
-  #     expect(JSON).to receive(:parse).with(file_contents).and_return(mock_json_data)
-  #     subject.all
-  #   end
-  #
-  #   it 'returns the courts key of the parsed JSON' do
-  #     expect(subject.all).to eq(courts)
-  #   end
-  # end
 
   describe '#court_url' do
     context 'given a slug' do

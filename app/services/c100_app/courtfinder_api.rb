@@ -26,20 +26,6 @@ module C100App
       open(url).read
     end
 
-    # def all(params = {})
-    #   max_age = params[:cache_ttl] || 86_400
-    #   unless  file_is_valid?(LOCAL_JSON_CACHE, max_age)
-    #     logger.debug "downloading courts.json to #{LOCAL_JSON_CACHE}"
-    #     download_all_courts_json_to(LOCAL_JSON_CACHE)
-    #   end
-    #   JSON.parse(File.read(LOCAL_JSON_CACHE)).fetch('courts')
-    # end
-    #
-    # def download_all_courts_json_to(path)
-    #   download = open(ALL_COURTS_JSON_URL)
-    #   IO.copy_stream(download, path)
-    # end
-
     def court_url(slug, extension = :html)
       slug_with_extension = (extension == :html ? slug : [slug, extension].join('.'))
       URI.join(API_ROOT, '/courts/', slug_with_extension).to_s
