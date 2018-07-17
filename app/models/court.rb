@@ -24,7 +24,7 @@ class Court
       parse_given_address!(court_finder_data)
     end
     parse_basic_attributes!(court_finder_data)
-    merge_from_full_json_dump!
+    merge_from_json_lookup!
     self
   end
 
@@ -49,14 +49,14 @@ class Court
     opening_times.instance_of?(Array) && opening_times.any?
   end
 
-  def self.all(params = {})
-    C100App::CourtfinderAPI.new.all(cache_ttl: params[:cache_ttl] || 86_400)
-  end
+  # def self.all(params = {})
+  #   C100App::CourtfinderAPI.new.all(cache_ttl: params[:cache_ttl] || 86_400)
+  # end
 
   protected
 
-  def merge_from_full_json_dump!
-    this_court = Court.all.find { |c| c.respond_to?(:fetch) && c.fetch('slug') == slug }
+  def merge_from_json_lookup!
+    this_court = C100App::CourtfinderAPI.new.court(slug)
     return unless this_court
     self.email = best_enquiries_email(this_court['emails'])
     self.opening_times = this_court['opening_times'].to_a.map { |e| e['opening_time'] }

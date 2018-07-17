@@ -34,7 +34,7 @@ describe Court do
   describe '#from_courtfinder_data!' do
     let(:court){ Court.new }
     before do
-      allow(court).to receive(:merge_from_full_json_dump!)
+      allow(court).to receive(:merge_from_json_lookup!)
     end
     context 'given a hash' do
       let(:args){
@@ -47,8 +47,8 @@ describe Court do
         court.from_courtfinder_data!(args)
       end
 
-      it 'calls merge_from_full_json_dump!' do
-        expect(court).to receive(:merge_from_full_json_dump!)
+      it 'calls merge_from_json_lookup!' do
+        expect(court).to receive(:merge_from_json_lookup!)
         court.from_courtfinder_data!(args)
       end
 
@@ -213,36 +213,7 @@ describe Court do
     end
   end
 
-  describe '.all' do
-    let(:courts){ [] }
-    before do
-      allow_any_instance_of(C100App::CourtfinderAPI).to receive(:all).and_return(courts)
-    end
-
-    it 'calls all on the CourtfinderAPI' do
-      expect_any_instance_of(C100App::CourtfinderAPI).to receive(:all)
-      Court.all
-    end
-
-    it 'returns the CourtfinderAPI result' do
-      expect(Court.all).to eq(courts)
-    end
-
-    context 'given a :cache_ttl' do
-      it 'passes it to the CourtfinderAPI call' do
-        expect_any_instance_of(C100App::CourtfinderAPI).to receive(:all).with(cache_ttl: 1234)
-        Court.all(cache_ttl: 1234)
-      end
-    end
-    context 'given no :cache_ttl' do
-      it 'passes 86400 to the CourtfinderAPI call' do
-        expect_any_instance_of(C100App::CourtfinderAPI).to receive(:all).with(cache_ttl: 86400)
-        Court.all
-      end
-    end
-  end
-
-  describe '#merge_from_full_json_dump!' do
+  describe '#merge_from_json_lookup!' do
     let(:emails){
       [
         {
@@ -251,123 +222,106 @@ describe Court do
         },
       ]
     }
-    let(:courts){
-      [
-        { 'slug' => 'my-slug',
-          'emails' => emails,
-          'opening_times' => [
-            {
-              'sort' => 0,
-              'opening_time' => '9:00-5pm'
-            }
-          ]
-        }
-      ]
+    let(:court){
+      { 'slug' => 'my-slug',
+        'emails' => emails,
+        'opening_times' => [
+          {
+            'sort' => 0,
+            'opening_time' => '9:00-5pm'
+          }
+        ]
+      }
     }
     before do
-      allow(Court).to receive(:all).and_return(courts)
+      allow_any_instance_of(C100App::CourtfinderAPI).to receive(:court).and_return(court)
       allow(subject).to receive(:best_enquiries_email).with(emails).and_return( 'test@email' )
     end
 
-    it 'gets all Courts' do
-      expect(Court).to receive(:all).and_return(courts)
-      subject.send(:merge_from_full_json_dump!)
+    it 'gets the Court' do
+      expect_any_instance_of(C100App::CourtfinderAPI).to receive(:court).and_return(court)
+      subject.send(:merge_from_json_lookup!)
     end
 
-    describe 'the all-courts data' do
+    describe 'the court data' do
       context 'when it includes a Court with a matching slug' do
         before do
           subject.slug = 'my-slug'
         end
 
         it 'sets opening_times to the opening_time keys from the court data' do
-          subject.send(:merge_from_full_json_dump!)
+          subject.send(:merge_from_json_lookup!)
           expect(subject.opening_times).to eq(['9:00-5pm'])
         end
 
         it 'gets the best_enquiries_email' do
           expect(subject).to receive(:best_enquiries_email).with(emails).and_return( 'test@email' )
-          subject.send(:merge_from_full_json_dump!)
+          subject.send(:merge_from_json_lookup!)
         end
 
         it 'sets email to the best_enquiries_email' do
-          subject.send(:merge_from_full_json_dump!)
+          subject.send(:merge_from_json_lookup!)
           expect(subject.email).to eq('test@email')
         end
       end
-      context 'when it does not include a Court with a matching slug' do
-        before do
-          subject.slug = 'non-existent-slug'
-        end
 
-        it 'does not change the email' do
-          expect{ subject.send(:merge_from_full_json_dump!) }.to_not change(subject, :email)
-        end
-        it 'does not change the opening_times' do
-          expect{ subject.send(:merge_from_full_json_dump!) }.to_not change(subject, :opening_times)
-        end
-      end
 
       # "this would never happen" in real life, but Mutant likes to replace == with .eql?
       # in mutation testing, so we need to add a test that will fail under that mutation
-      context 'when it includes a Court with a slug that would match if type-converted' do
-        let(:courts){
-          [
-            { 'slug' => 1.0,
-              'emails' => emails,
-              'opening_times' => [
-                {
-                  'sort' => 0,
-                  'opening_time' => '9:00-5pm'
-                }
-              ]
-            }
-          ]
-        }
-        before do
-          subject.slug = 1
-        end
-
-        it 'sets opening_times to the opening_time keys from the court data' do
-          subject.send(:merge_from_full_json_dump!)
-          expect(subject.opening_times).to eq(['9:00-5pm'])
-        end
-      end
-
-      # similarly, mutating [] to fetch
-      context 'when it includes a Court without an "emails" key' do
-        let(:courts){
-          [
-            { 'slug' => 'my-slug',
-              'opening_times' => [
-                {
-                  'sort' => 0,
-                  'opening_time' => '9:00-5pm'
-                }
-              ]
-            }
-          ]
-        }
-        before do
-          subject.email = 'my@email'
-          subject.slug = 'my-slug'
-          allow(subject).to receive(:best_enquiries_email).with(nil).and_return( nil )
-        end
-
-        it 'sets opening_times to the opening_time keys from the court data' do
-          subject.send(:merge_from_full_json_dump!)
-          expect(subject.opening_times).to eq(['9:00-5pm'])
-        end
-
-        it 'sets the court email to nil' do
-          expect{ subject.send(:merge_from_full_json_dump!) }.to change(subject, :email).to(nil)
-        end
-      end
+      # context 'when it includes a Court with a slug that would match if type-converted' do
+      #   let(:courts){
+      #     [
+      #       { 'slug' => 1.0,
+      #         'emails' => emails,
+      #         'opening_times' => [
+      #           {
+      #             'sort' => 0,
+      #             'opening_time' => '9:00-5pm'
+      #           }
+      #         ]
+      #       }
+      #     ]
+      #   }
+      #   before do
+      #     subject.slug = 1
+      #   end
+      #
+      #   it 'sets opening_times to the opening_time keys from the court data' do
+      #     subject.send(:merge_from_json_lookup!)
+      #     expect(subject.opening_times).to eq(['9:00-5pm'])
+      #   end
+      # end
+      #
+      # # similarly, mutating [] to fetch
+      # context 'when it includes a Court without an "emails" key' do
+      #   let(:court){
+      #     { 'slug' => 'my-slug',
+      #       'opening_times' => [
+      #         {
+      #           'sort' => 0,
+      #           'opening_time' => '9:00-5pm'
+      #         }
+      #       ]
+      #     }
+      #   }
+      #   before do
+      #     subject.email = 'my@email'
+      #     subject.slug = 'my-slug'
+      #     allow(subject).to receive(:best_enquiries_email).with(nil).and_return( nil )
+      #   end
+      #
+      #   it 'sets opening_times to the opening_time keys from the court data' do
+      #     subject.send(:merge_from_json_lookup!)
+      #     expect(subject.opening_times).to eq(['9:00-5pm'])
+      #   end
+      #
+      #   it 'sets the court email to nil' do
+      #     expect{ subject.send(:merge_from_json_lookup!) }.to change(subject, :email).to(nil)
+      #   end
+      # end
       context 'when it includes a Court without an "opening_times" key' do
-        let(:courts){
-          [
-            { 'slug' => 'my-slug' }
-          ]
+        let(:court){
+          { 'slug' => 'my-slug' }
         }
         before do
           subject.slug = 'my-slug'
@@ -375,24 +329,22 @@ describe Court do
         end
 
         it 'sets the court opening_times to []' do
-          expect{ subject.send(:merge_from_full_json_dump!) }.to change(subject, :opening_times).to([])
+          expect{ subject.send(:merge_from_json_lookup!) }.to change(subject, :opening_times).to([])
         end
       end
 
       describe 'the court opening_times array' do
         context 'when it includes an entry without an "opening_time" key' do
-          let(:courts){
-            [
-              { 'slug' => 'my-slug',
-                'emails' => emails,
-                'opening_times' => [
-                  {
-                    'sort' => 0,
-                    'from' => '9:00am'
-                  }
-                ]
-              }
-            ]
+          let(:court){
+            { 'slug' => 'my-slug',
+              'emails' => emails,
+              'opening_times' => [
+                {
+                  'sort' => 0,
+                  'from' => '9:00am'
+                }
+              ]
+            }
           }
           before do
             subject.slug = 'my-slug'
@@ -400,38 +352,8 @@ describe Court do
           end
 
           it 'does not raise an error' do
-            expect{ subject.send(:merge_from_full_json_dump!) }.to_not raise_error
+            expect{ subject.send(:merge_from_json_lookup!) }.to_not raise_error
           end
-        end
-      end
-
-      context 'when it includes a nil value' do
-        let(:courts){
-          [
-            nil,
-            { 'slug' => 'my-slug',
-              'emails' => emails,
-              'opening_times' => [
-                {
-                  'sort' => 0,
-                  'opening_time' => '9:00-5pm'
-                }
-              ]
-            }
-          ]
-        }
-        it 'does not raise an error' do
-          expect{ subject.send(:merge_from_full_json_dump!) }.to_not raise_error
-        end
-      end
-      context 'when it includes a value that is not a hash' do
-        let(:courts){
-          [
-            'foo'
-          ]
-        }
-        it 'does not raise an error' do
-          expect{ subject.send(:merge_from_full_json_dump!) }.to_not raise_error
         end
       end
     end
