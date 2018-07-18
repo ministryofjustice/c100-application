@@ -29,6 +29,7 @@ end
 private
 
 def all_classes_for_mutant
+  Rails.application.eager_load!
   form_objects + decision_trees_and_services + models
 end
 
