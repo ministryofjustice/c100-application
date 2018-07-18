@@ -3,7 +3,7 @@
 #
 vars = 'RAILS_ENV=test NOCOVERAGE=true'
 flags = '--use rspec --fail-fast'
-source_ref = 'master'
+source_ref = 'origin/master'
 current_branch = `git symbolic-ref HEAD 2>/dev/null | cut -d "/" -f 3`
 
 task :mutant => :environment do
