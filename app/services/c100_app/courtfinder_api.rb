@@ -26,8 +26,8 @@ module C100App
       open(url).read
     end
 
-    def court_url(slug, extension = :html)
-      slug_with_extension = (extension == :html ? slug : [slug, extension].join('.'))
+    def court_url(slug, format: nil)
+      slug_with_extension = [slug, format].compact.join('.')
       URI.join(API_ROOT, '/courts/', slug_with_extension).to_s
     end
 
@@ -36,7 +36,7 @@ module C100App
     end
 
     def court_lookup(slug)
-      JSON.parse(open(court_url(slug, :json)).read)
+      JSON.parse(open(court_url(slug, format: :json)).read)
     end
 
     private

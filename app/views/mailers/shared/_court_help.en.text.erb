@@ -15,7 +15,7 @@ Phone number: <%= court.phone_number -%>
 <%- if court.opening_times? %>
 Opening times:
 <%- court.opening_times.each do |opening_time| %>
-  <%= opening_time %>
+  <%= opening_time['description'] %> <%= opening_time['hours'] %>
 <%- end %>
 <%- end %>
 

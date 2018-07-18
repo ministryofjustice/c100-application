@@ -211,16 +211,9 @@ describe C100App::CourtfinderAPI do
         expect(subject.court_url('my-slug')).to eq("#{subject.class::API_ROOT}courts/my-slug")
       end
 
-      context 'and an extension' do
-        context 'of :json' do
-          it 'returns a url ending with .json' do
-            expect(subject.court_url('my-slug', :json)).to end_with('my-slug.json')
-          end
-        end
-        context 'of :html' do
-          it 'returns a url ending with the slug' do
-            expect(subject.court_url('my-slug', :html)).to end_with('my-slug')
-          end
+      context 'with a specific format' do
+        it 'returns a url ending with the format' do
+          expect(subject.court_url('my-slug', format: :json)).to end_with('my-slug.json')
         end
       end
     end
@@ -234,7 +227,7 @@ describe C100App::CourtfinderAPI do
     end
 
     it 'gets the JSON court_url for the given slug' do
-      expect(subject).to receive(:court_url).with('my-slug', :json).and_return('my court url')
+      expect(subject).to receive(:court_url).with('my-slug', format: :json).and_return('my court url')
       subject.court_lookup('my-slug')
     end
 
