@@ -226,8 +226,8 @@ describe C100App::CourtfinderAPI do
     end
   end
 
-  describe '#court' do
-    let(:mock_io_stream) { double('io stream', read: 'read result') }
+  describe '#court_lookup' do
+    let(:mock_io_stream) { double('io stream', read: '{"readresult": "value"}') }
     before do
       allow(subject).to receive(:court_url).and_return('my court url')
       allow(subject).to receive(:open).and_return(mock_io_stream)
@@ -235,16 +235,16 @@ describe C100App::CourtfinderAPI do
 
     it 'gets the JSON court_url for the given slug' do
       expect(subject).to receive(:court_url).with('my-slug', :json).and_return('my court url')
-      subject.court('my-slug')
+      subject.court_lookup('my-slug')
     end
 
     it 'opens the court_url' do
       expect(subject).to receive(:open).with('my court url').and_return(mock_io_stream)
-      subject.court('my-slug')
+      subject.court_lookup('my-slug')
     end
 
-    it 'returns the stream, read' do
-      expect(subject.court('my-slug')).to eq('read result')
+    it 'returns the stream, read, parsed as JSON' do
+      expect(subject.court_lookup('my-slug')).to eq({'readresult'=>'value'})
     end
   end
 

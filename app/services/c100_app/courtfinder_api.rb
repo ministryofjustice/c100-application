@@ -35,8 +35,8 @@ module C100App
       status.eql? '200'
     end
 
-    def court(slug)
-      open(court_url(slug, :json)).read
+    def court_lookup(slug)
+      JSON.parse(open(court_url(slug, :json)).read)
     end
 
     private
