@@ -55,7 +55,7 @@ class Court
     this_court = C100App::CourtfinderAPI.new.court_lookup(slug)
     return unless this_court
     self.email = best_enquiries_email(this_court['emails'])
-    self.opening_times = this_court['opening_times'].to_a.map { |e| e['opening_time'] }
+    self.opening_times = this_court['opening_times'].to_a
   end
 
   def best_enquiries_email(emails)

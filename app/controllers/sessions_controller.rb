@@ -46,7 +46,10 @@ class SessionsController < ApplicationController
 
   def find_or_create_screener_answers
     ScreenerAnswers.find_or_initialize_by(c100_application_id: c100_application.id).tap do |screener|
-      screener.update(children_postcodes: 'MK9 2DT', local_court: local_court_fixture)
+      screener.update(
+        children_postcodes: 'MK9 2DT',
+        local_court: local_court_fixture
+      ) unless screener.local_court?
     end
   end
 
@@ -61,10 +64,10 @@ class SessionsController < ApplicationController
       "email" => "family@miltonkeynes.countycourt.gsi.gov.uk",
       "opening_times" =>
         [
-          "Bailiff telephone service: For payments only Tel: 01865 264200 (option 1 then option 7)",
-          "Court counter open: by prior appointment only",
-          "Court building open: Monday to Friday 8:30am to 4pm",
-          "Telephone Enquiries from: 9am to 5pm"
+          {'description' => "Bailiff telephone service: For payments only", "hours" => "Tel: 01865 264200 (option 1 then option 7)"},
+          {'description' => "Court counter open:", 'hours' => "by prior appointment only"},
+          {'description' => "Court building open", 'hours' => "Monday to Friday 8:30am to 4pm"},
+          {'description' => "Telephone Enquiries", 'hours' => "from: 9am to 5pm"}
         ]
     }
   end

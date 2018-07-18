@@ -222,17 +222,6 @@ describe Court do
         },
       ]
     }
-    let(:court){
-      { 'slug' => 'my-slug',
-        'emails' => emails,
-        'opening_times' => [
-          {
-            'sort' => 0,
-            'opening_time' => '9:00-5pm'
-          }
-        ]
-      }
-    }
     before do
       subject.slug = 'my-slug'
       allow_any_instance_of(C100App::CourtfinderAPI).to receive(:court_lookup).and_return(court)
@@ -279,20 +268,6 @@ describe Court do
         end
       end
 
-      context 'when it includes a Court without an "opening_times" key' do
-        let(:court){
-          { 'slug' => 'my-slug' }
-        }
-        before do
-          subject.slug = 'my-slug'
-          allow(subject).to receive(:best_enquiries_email).with(nil).and_return( nil )
-        end
-
-        it 'sets the court opening_times to []' do
-          expect{ subject.send(:merge_from_json_lookup!) }.to change(subject, :opening_times).to([])
-        end
-      end
-
       describe 'the court opening_times array' do
         context 'when it includes an entry without an "opening_time" key' do
           let(:court){
@@ -300,11 +275,58 @@ describe Court do
               'emails' => emails,
               'opening_times' => [
                 {
-                  'sort' => 0,
-                  'from' => '9:00am'
+                  'description' => 'my description',
+                  'hours' => '9:00-5pm'
                 }
               ]
             }
+          ]
+        }
+        before do
+          subject.email = 'my@email'
+          subject.slug = 'my-slug'
+          allow(subject).to receive(:best_enquiries_email).with(nil).and_return( nil )
+        end
+
+        it 'sets opening_times to the hours keys from the court data' do
+          subject.send(:merge_from_full_json_dump!)
+          expect(subject.opening_times).to eq(['9:00-5pm'])
+        end
+
+        it 'sets the court email to nil' do
+          expect{ subject.send(:merge_from_full_json_dump!) }.to change(subject, :email).to(nil)
+        end
+      end
+      context 'when it includes a Court without an "opening_times" key' do
+        let(:courts){
+          [
+            { 'slug' => 'my-slug' }
+          ]
+        }
+        before do
+          subject.slug = 'my-slug'
+          allow(subject).to receive(:best_enquiries_email).with(nil).and_return( nil )
+        end
+
+        it 'sets the court opening_times to []' do
+          expect{ subject.send(:merge_from_full_json_dump!) }.to change(subject, :opening_times).to([])
+        end
+      end
+
+      describe 'the court opening_times array' do
+        context 'when it includes an entry without an "hours" key' do
+          let(:courts){
+            [
+              { 'slug' => 'my-slug',
+                'emails' => emails,
+                'opening_times' => [
+                  {
+                    'description' => 'blah',
+                    'from' => '9:00am'
+                  }
+                ]
+              }
+            ]
           }
           before do
             subject.slug = 'my-slug'

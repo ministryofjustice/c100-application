@@ -21,7 +21,7 @@
     <%- if court.opening_times? %>
       <dt><strong>Opening times</strong></dt>
       <%- court.opening_times.each do |opening_time| %>
-        <dd><%= opening_time %></dd>
+        <dd><%= opening_time['description'] %> <%= opening_time['hours'] %></dd>
       <%- end %>
     <%- end %>
   </dl>
