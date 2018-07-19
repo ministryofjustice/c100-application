@@ -70,10 +70,10 @@ class Court
 
     emails = Array(emails).compact
 
-    best =  emails.find { |e| e['description'] =~ /children/i }                     || \
-            emails.find { |e| e['description'].to_s.casecmp('applications').zero? } || \
-            emails.find { |e| e['description'] =~ /family/i }                       || \
-            emails.find { |e| e['description'].to_s.casecmp('enquiries').zero? }    || \
+    best =  emails.find { |e| e['description'] =~ /children/i }         || \
+            emails.find { |e| e['description'] =~ /\Aapplications\z/i } || \
+            emails.find { |e| e['description'] =~ /family/i }           || \
+            emails.find { |e| e['description'] =~ /\Aenquiries\z/i }    || \
             emails.first
 
     best.fetch('address') if best.respond_to?(:fetch)
