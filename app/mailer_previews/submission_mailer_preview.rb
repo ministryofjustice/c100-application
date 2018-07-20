@@ -38,21 +38,15 @@ class SubmissionMailerPreview < ActionMailer::Preview
   end
 
   def local_court_fixture
-    Court.new.from_courtfinder_data!(
-      "address_lines" => ["351 Silbury Boulevard", "Witan Gate East"],
-      "town" => "Central Milton Keynes",
-      "postcode" => "MK9 2DT",
+    Court.new(
+      "address" => {
+        "address_lines" => ["351 Silbury Boulevard", "Witan Gate East"],
+        "town" => "Central Milton Keynes",
+        "postcode" => "MK9 2DT",
+      },
       "name" => "Milton Keynes County Court and Family Court",
       "slug" => "milton-keynes-county-court-and-family-court",
-      "phone_number" => 388,
       "email" => "family@miltonkeynes.countycourt.gsi.gov.uk",
-      "opening_times" =>
-        [
-          {'description' => "Bailiff telephone service: For payments only", "hours" => "Tel: 01865 264200 (option 1 then option 7)"},
-          {'description' => "Court counter open:", 'hours' => "by prior appointment only"},
-          {'description' => "Court building open", 'hours' => "Monday to Friday 8:30am to 4pm"},
-          {'description' => "Telephone Enquiries", 'hours' => "from: 9am to 5pm"}
-        ]
     )
   end
 end

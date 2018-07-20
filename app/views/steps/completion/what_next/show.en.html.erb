@@ -49,8 +49,7 @@
             <p>Post all 3 printed copies (and cheque, if that’s how you choose to pay) of your application to:</p>
 
             <div class="panel panel-border-narrow">
-              <%= @court.name %><br/>
-              <%= simple_format(@court.address.join("\n")) %>
+              <%= simple_format(@court.full_address.join("\n")) %>
             </div>
           </li>
 
