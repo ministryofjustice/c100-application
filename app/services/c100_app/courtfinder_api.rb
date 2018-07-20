@@ -4,11 +4,10 @@ require 'open-uri'
 module C100App
   class CourtfinderAPI
     attr_accessor :logger
-    API_ROOT              = "https://courttribunalfinder.service.gov.uk/".freeze
-    API_URL               = "#{API_ROOT}%<endpoint>s.json?aol=%<aol>s&postcode=%<pcd>s".freeze
-    ALL_COURTS_JSON_URL   = "#{API_ROOT}courts.json".freeze
-    LOCAL_JSON_CACHE      = Rails.root.join('tmp/courts.json').freeze
-    COURTFINDER_ERROR_MSG = 'Exception hitting Courtfinder:'.freeze
+
+    API_ROOT              ||= "https://courttribunalfinder.service.gov.uk/".freeze
+    API_URL               ||= "#{API_ROOT}%<endpoint>s.json?aol=%<aol>s&postcode=%<pcd>s".freeze
+    COURTFINDER_ERROR_MSG ||= 'Exception hitting Courtfinder:'.freeze
 
     def initialize(params = {})
       self.logger = params[:logger] || Rails.logger
@@ -59,14 +58,6 @@ module C100App
 
     def construct_url(endpoint, area_of_law, postcode)
       format(API_URL, endpoint: endpoint, aol: area_of_law, pcd: postcode)
-    end
-
-    def age_in_seconds(path)
-      Integer(Time.now - File.stat(path).mtime)
-    end
-
-    def file_is_valid?(path, max_age)
-      File.exist?(path) && age_in_seconds(path) < max_age
     end
 
     # TODO: what's our plan for exception handling?

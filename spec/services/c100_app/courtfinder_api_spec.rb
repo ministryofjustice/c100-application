@@ -144,67 +144,6 @@ describe C100App::CourtfinderAPI do
     end
   end
 
-  describe '#age_in_seconds' do
-    context 'given a path' do
-      let(:path){ '/my/path' }
-
-      context 'that exists' do
-        let(:file_stat){ double('stat', mtime: Time.now - 10.seconds) }
-        before do
-          allow(File).to receive(:stat).with(path).and_return(file_stat)
-        end
-
-        it 'returns the difference between its mtime and now' do
-          expect(subject.send(:age_in_seconds, path)).to eq(10)
-        end
-      end
-      context 'that does not exist' do
-        before do
-          allow(File).to receive(:stat).with(path).and_raise(Errno::ENOENT)
-        end
-
-        it 'raises an ENOENT error' do
-          expect{ subject.send(:age_in_seconds, path) }.to raise_error(Errno::ENOENT)
-        end
-      end
-    end
-  end
-
-  describe '#file_is_valid?' do
-    let(:exists){ false }
-    let(:age){ 10 }
-    let(:path){ '/my/path' }
-
-    before do
-      allow(File).to receive(:exist?).with(path).and_return(exists)
-      allow(subject).to receive(:age_in_seconds).with(path).and_return(age)
-    end
-
-    context 'when there is no file at the given path' do
-      let(:exists){ false }
-      it 'returns false' do
-        expect(subject.send(:file_is_valid?, path, 20)).to eq(false)
-      end
-    end
-
-    context 'when there is a file at the given path' do
-      let(:exists){ true }
-
-      context 'older than the given max age' do
-        let(:max_age){ 10 }
-        it 'returns false' do
-          expect(subject.send(:file_is_valid?, path, max_age)).to eq(false)
-        end
-      end
-      context 'younger than the given max age' do
-        let(:max_age){ 100 }
-        it 'returns true' do
-          expect(subject.send(:file_is_valid?, path, max_age)).to eq(true)
-        end
-      end
-    end
-  end
-
   describe '#court_url' do
     context 'given a slug' do
       it 'returns a string joining the API_ROOT, "/courts/" and the slug' do
@@ -240,26 +179,6 @@ describe C100App::CourtfinderAPI do
       expect(subject.court_lookup('my-slug')).to eq({'readresult'=>'value'})
     end
   end
-
-  # describe '#download_all_courts_json_to' do
-  #   let(:download){ double('download') }
-  #   before do
-  #     allow(subject).to receive(:open).and_return(download)
-  #     allow(IO).to receive(:copy_stream)
-  #   end
-  #
-  #   context 'given a path' do
-  #     it 'opens the all-courts JSON url' do
-  #       expect(subject).to receive(:open).with(subject.class::ALL_COURTS_JSON_URL).and_return(download)
-  #       subject.download_all_courts_json_to('/my/path')
-  #     end
-  #
-  #     it 'copies the download stream to the given path' do
-  #       expect(IO).to receive(:copy_stream).with(download, '/my/path')
-  #       subject.download_all_courts_json_to('/my/path')
-  #     end
-  #   end
-  # end
 
   describe '#is_ok?' do
     context 'when status is "200"' do
