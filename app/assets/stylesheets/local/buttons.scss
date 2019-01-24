@@ -25,6 +25,9 @@
   background:transparent;
   color:#2b8cc4;
 }
+.button.button-secondary:focus{
+  color:#005ea5;
+}
 .button.button-secondary:first-child{
   margin-left:0;
 }
