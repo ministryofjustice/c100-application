@@ -33,14 +33,11 @@ module Summary
           [
             Separator.new("#{name}_index_title", index: index),
             FreeTextAnswer.new(:person_full_name, person.full_name, change_path: names_path),
-            AnswersGroup.new(
-              :person_personal_details,
-              personal_details_questions(person),
-              change_path: personal_details_path(person)
-            ),
-            person_address_contact_details_answers_groups(person),
+            person_personal_details_answers_group(person),
+            person_address_details_answers_group(person),
+            person_contact_details_answers_group(person),
             children_relationships(person),
-          ]
+          ].compact
         end.flatten.select(&:show?)
       end
 
@@ -80,12 +77,12 @@ module Summary
         end
       end
 
-      def person_address_contact_details_answers_groups(person)
-        return person_address_details_answers_group(person) if person.class.name == "OtherParty"
-        [
-          person_address_details_answers_group(person),
-          person_contact_details_answers_group(person)
-        ]
+      def person_personal_details_answers_group(person)
+        AnswersGroup.new(
+          :person_personal_details,
+          personal_details_questions(person),
+          change_path: personal_details_path(person)
+        )
       end
 
       def person_address_details_answers_group(person)
@@ -97,6 +94,8 @@ module Summary
       end
 
       def person_contact_details_answers_group(person)
+        return unless contact_details_path(person)
+
         AnswersGroup.new(
           :person_contact_details,
           contact_details_questions(person),
