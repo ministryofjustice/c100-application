@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 module Summary
   module HtmlSections
     class PeopleDetails < Sections::BaseSectionPresenter
@@ -18,6 +19,10 @@ module Summary
         raise 'must be implemented in subclasses'
       end
 
+      def address_details_path(*)
+        raise 'must be implemented in subclasses'
+      end
+
       def child_relationship_path(*)
         raise 'must be implemented in subclasses'
       end
@@ -33,11 +38,7 @@ module Summary
               personal_details_questions(person),
               change_path: personal_details_path(person)
             ),
-            AnswersGroup.new(
-              :person_contact_details,
-              contact_details_questions(person),
-              change_path: contact_details_path(person)
-            ),
+            person_address_contact_details_answers_groups(person),
             children_relationships(person),
           ]
         end.flatten.select(&:show?)
@@ -57,12 +58,17 @@ module Summary
 
       def contact_details_questions(person)
         [
-          FreeTextAnswer.new(:person_address, person.address, show: true),
-          Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
-          FreeTextAnswer.new(:person_residence_history, person.residence_history),
           FreeTextAnswer.new(:person_home_phone, person.home_phone),
           FreeTextAnswer.new(:person_mobile_phone, person.mobile_phone),
           FreeTextAnswer.new(:person_email, person.email),
+        ]
+      end
+
+      def address_details_questions(person)
+        [
+          FreeTextAnswer.new(:person_address, person.address, show: true),
+          Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
+          FreeTextAnswer.new(:person_residence_history, person.residence_history)
         ]
       end
 
@@ -72,6 +78,30 @@ module Summary
         else
           Answer.new(:person_previous_name, person.has_previous_name)
         end
+      end
+
+      def person_address_contact_details_answers_groups(person)
+        return person_address_details_answers_group(person) if person.class.name == "OtherParty"
+        [
+          person_address_details_answers_group(person),
+          person_contact_details_answers_group(person)
+        ]
+      end
+
+      def person_address_details_answers_group(person)
+        AnswersGroup.new(
+          :person_address_details,
+          address_details_questions(person),
+          change_path: address_details_path(person)
+        )
+      end
+
+      def person_contact_details_answers_group(person)
+        AnswersGroup.new(
+          :person_contact_details,
+          contact_details_questions(person),
+          change_path: contact_details_path(person)
+        )
       end
 
       def children_relationships(person)
@@ -95,3 +125,4 @@ module Summary
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
