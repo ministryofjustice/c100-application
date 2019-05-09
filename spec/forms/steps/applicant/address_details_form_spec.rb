@@ -40,6 +40,48 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
   subject { described_class.new(arguments) }
 
   describe '#save' do
+    context 'when no c100_application is associated with the form' do
+      let(:c100_application) { nil }
+
+      it 'raises an error' do
+        expect { subject.save }.to raise_error(BaseForm::C100ApplicationNotFound)
+      end
+    end
+
+    context 'residence_requirement_met' do
+      context 'when attribute is not given' do
+        let(:residence_requirement_met) { nil }
+
+        it 'returns false' do
+          expect(subject.save).to be(false)
+        end
+
+        it 'has a validation error on the field' do
+          expect(subject).to_not be_valid
+          expect(subject.errors[:residence_requirement_met]).to_not be_empty
+        end
+      end
+
+      context 'when attribute is given and requires residency history' do
+        let(:residence_requirement_met) { 'no' }
+        let(:residence_history) { nil }
+
+        it 'has a validation error on the `residence_history` field' do
+          expect(subject).to_not be_valid
+          expect(subject.errors[:residence_history]).to_not be_empty
+        end
+      end
+
+      context 'when attribute is given and does not requires residency history' do
+        let(:residence_requirement_met) { 'yes' }
+        let(:residence_history) { nil }
+
+        it 'has no validation errors' do
+          expect(subject).to be_valid
+        end
+      end
+    end
+
     context 'for valid details' do
       let(:expected_attributes) {
         {
