@@ -23,7 +23,6 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
   let(:c100_application) { instance_double(C100Application, respondents: respondents_collection) }
   let(:respondents_collection) { double('respondents_collection') }
   let(:respondent) { double('Respondent', id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe9') }
-  let(:respondent_1) { double('Respondent', id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe1') }
 
   let(:record) { nil }
   let(:address) { 'address' }
