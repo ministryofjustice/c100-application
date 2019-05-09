@@ -1,8 +1,6 @@
 class AddressBaseForm < BaseForm
   attribute :address, StrippedString
-  attribute :address_unknown, Boolean, default: GenericYesNo::NO
-  attribute :residence_requirement_met, YesNoUnknown
-  attribute :residence_history, String
+  attribute :address_unknown, Boolean
 
   attribute :address_line_1, String
   attribute :address_line_2, String
@@ -15,8 +13,6 @@ class AddressBaseForm < BaseForm
   # TODO: To confirm the if we want any validation on a split address
   validates_presence_of :address_line_1, if: :validate_split_address?
   validates_presence_of :postcode, if: :validate_split_address?
-
-  validates_presence_of :residence_history, if: -> { residence_requirement_met&.no? }
 
   def validate_address?
     [address_unknown?, split_address?].any?
@@ -37,8 +33,6 @@ class AddressBaseForm < BaseForm
     {
       address: address,
       address_unknown: address_unknown,
-      residence_requirement_met: residence_requirement_met,
-      residence_history: residence_history
     }
   end
 
@@ -46,8 +40,6 @@ class AddressBaseForm < BaseForm
     {
       address_data: address_hash,
       address_unknown: address_unknown,
-      residence_requirement_met: residence_requirement_met,
-      residence_history: residence_history
     }
   end
 

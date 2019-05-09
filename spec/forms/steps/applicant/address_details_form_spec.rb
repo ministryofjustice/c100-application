@@ -44,7 +44,7 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
       let(:expected_attributes) {
         {
           address: 'address',
-          address_unknown: GenericYesNo::NO,
+          address_unknown: nil,
           residence_requirement_met: GenericYesNo::NO,
           residence_history: 'history'
         }
@@ -103,7 +103,7 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
       let(:expected_attributes) {
         {
           address_data: address_data,
-          address_unknown: GenericYesNo::NO,
+          address_unknown: nil,
           residence_requirement_met: GenericYesNo::NO,
           residence_history: 'history'
         }
