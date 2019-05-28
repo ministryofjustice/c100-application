@@ -37,7 +37,6 @@ module C100App
       errors.any?
     end
 
-    # TODO: report to Sentry errors for monitoring purposes
     def perform_lookup
       uri = URI.parse(ORDNANCE_SURVEY_URL)
       uri.query = query_params.to_query
@@ -49,11 +48,11 @@ module C100App
         errors.add(:lookup, :unsuccessful)
         []
       end
-    rescue Faraday::ConnectionFailed
-      errors.add(:lookup, :service_unavailable)
+    rescue Faraday::ConnectionFailed => exception
+      log_error(:service_unavailable, exception)
       []
-    rescue JSON::ParserError, KeyError
-      errors.add(:lookup, :parser_error)
+    rescue JSON::ParserError, KeyError => exception
+      log_error(:parser_error, exception)
       []
     end
 
@@ -65,6 +64,13 @@ module C100App
       else
         []
       end
+    end
+
+    def log_error(error, exception)
+      errors.add(:lookup, error)
+      return unless exception
+      Raven.extra_context(postcode_lookup: error, postcode: postcode)
+      Raven.capture_exception(exception)
     end
   end
 end
