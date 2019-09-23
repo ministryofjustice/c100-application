@@ -43,6 +43,7 @@ module C100App
       bury-st-edmunds-county-court-and-family-court
       southend-magistrates-court-and-family-court
       taunton-crown-county-and-family-court
+      yeovil-county-family-and-magistrates-court
       norwich-combined-court-centre
       luton-county-court-and-family-court
       bedford-county-court-and-family-court
