@@ -39,12 +39,14 @@ module C100App
       harrogate-magistrates-court-and-family-court
       scarborough-justice-centre
       skipton-county-court-and-family-court
+      central-family-court
       clerkenwell-and-shoreditch-county-court-and-family-court
       bury-st-edmunds-county-court-and-family-court
       southend-magistrates-court-and-family-court
       taunton-crown-county-and-family-court
       yeovil-county-family-and-magistrates-court
       norwich-combined-court-centre
+      kings-lynn-magistrates-court-and-family-court
       luton-county-court-and-family-court
       bedford-county-court-and-family-court
       chelmsford-county-and-family-court
