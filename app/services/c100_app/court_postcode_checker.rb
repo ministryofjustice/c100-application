@@ -69,6 +69,43 @@ module C100App
       carmarthen-county-court-and-family-court
       haverfordwest-county-court-and-family-court
       carmarthen-county-court-and-family-court
+      barrow-in-furness-county-court-and-family-court
+      birmingham-civil-and-family-justice-centre
+      basingstoke-county-court-and-family-court
+      aldershot-magistrates-court
+      bournemouth-and-poole-county-court-and-family-court
+      weymouth-magistrates-court
+      brighton-county-court
+      hastings-county-court-and-family-court
+      horsham-county-court-and-family-court
+      worthing-county-court-and-family-court
+      carlisle-combined-court
+      west-cumbria-courthouse
+      coventry-combined-court-centre
+      derby-combined-court-centre
+      chesterfield-county-court
+      gloucester-and-cheltenham-county-and-family-court
+      middlesbrough-county-court-at-teesside-combined-court
+      darlington-county-court-and-family-court
+      newton-aycliffe-magistrates-court
+      manchester-civil-justice-centre-civil-and-family-courts
+      wigan-county-court-and-family-court
+      stockport-county-court-and-family-court
+      northampton-crown-county-and-family-court
+      stoke-on-trent-combined-court
+      stafford-combined-court-centre
+      wolverhampton-combined-court-centre
+      dudley-county-court-and-family-court
+      telford-county-court-and-family-court
+      walsall-county-and-family-court
+      swindon-combined-court
+      salisbury-law-courts
+      thanet-county-court-and-family-court
+      torquay-and-newton-abbot-county-court-and-family-court
+      truro-county-court-and-family-court
+      bodmin-county-court-and-family-court
+      worcester-combined-court
+      hereford-county-court-and-family-court
     ].freeze
 
     # Separate multiple postcodes/postcode areas by "\n"
