@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 require 'c100_app/courtfinder_api'
 
 module C100App
@@ -135,3 +136,4 @@ module C100App
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
