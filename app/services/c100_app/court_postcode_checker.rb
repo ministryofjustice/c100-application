@@ -87,6 +87,7 @@ module C100App
       chesterfield-county-court
       gloucester-and-cheltenham-county-and-family-court
       middlesbrough-county-court-at-teesside-combined-court
+      teesside-combined-court-centre
       darlington-county-court-and-family-court
       newton-aycliffe-magistrates-court
       manchester-civil-justice-centre-civil-and-family-courts
