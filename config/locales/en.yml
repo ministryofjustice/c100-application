@@ -1178,6 +1178,7 @@ en:
         special_arrangements_details: *provide_details
       steps_application_details_form:
         application_details: *provide_details
+        foobar: Virtual attribute used temporarily in tests, to be removed
       steps_application_language_form:
         language_help_details: *provide_details
       steps_application_intermediary_form:

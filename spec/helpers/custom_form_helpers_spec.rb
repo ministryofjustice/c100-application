@@ -7,9 +7,11 @@ class TestHelper < ActionView::Base
 end
 
 # The module `CustomFormHelpers` gets mixed in and extends the helpers already
-# provided by `GovukElementsFormBuilder`. Refer to: `config/initializers/form_builder.rb`
+# provided by `GovukComponents::FormBuilder`. These are app-specific form helpers
+# so can be coupled to application business and logic.
+# Refer to: `config/initializers/form_builder.rb`
 #
-RSpec.describe GovukElementsFormBuilder::FormBuilder do
+RSpec.describe GovukComponents::FormBuilder do
   let(:helper) { TestHelper.new }
 
   describe '#continue_button' do

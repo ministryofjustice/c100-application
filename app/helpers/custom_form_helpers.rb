@@ -1,6 +1,5 @@
 module CustomFormHelpers
-  delegate :t,
-           :current_c100_application,
+  delegate :current_c100_application,
            :user_signed_in?, to: :@template
 
   def continue_button(continue: :continue, save_and_continue: :save_and_continue)
