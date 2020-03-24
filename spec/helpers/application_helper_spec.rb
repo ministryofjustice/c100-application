@@ -44,21 +44,22 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe '#step_header' do
     let(:form_object) { double('Form object') }
 
-    it 'renders the expected content' do
-      expect(helper).to receive(:render).with(partial: 'layouts/step_header', locals: {path: '/foo/bar'}).and_return('foo')
+    # TODO: to be removed once not needed
+    before do
+      allow(helper).to receive(:content_for).with(:old_error_summary, any_args)
+    end
 
+    it 'renders the expected content' do
+      expect(helper).to receive(:render).with(partial: 'layouts/step_header', locals: {path: '/foo/bar'}).and_return('foobar')
       assign(:form_object, form_object)
-      expect(helper).to receive(:error_summary).with(form_object).and_return('bar')
 
       expect(helper.step_header).to eq('foobar')
     end
 
     context 'a specific path is provided' do
       it 'renders the back link with provided path' do
-        expect(helper).to receive(:render).with(partial: 'layouts/step_header', locals: {path: '/another/step'}).and_return('foo')
-
+        expect(helper).to receive(:render).with(partial: 'layouts/step_header', locals: {path: '/another/step'}).and_return('foobar')
         assign(:form_object, form_object)
-        expect(helper).to receive(:error_summary).with(form_object).and_return('bar')
 
         expect(helper.step_header(path: '/another/step')).to eq('foobar')
       end
@@ -93,7 +94,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
 
       it 'delegates to GovukElementsErrorsHelper' do
-        expect(GovukElementsErrorsHelper).to receive(:error_summary).with(form_object, anything, anything).and_return(summary)
+        expect(GovukElementsErrorsHelper).to receive(:error_summary).with(form_object, anything).and_return(summary)
 
         expect(helper.error_summary(form_object)).to eq(summary)
       end
