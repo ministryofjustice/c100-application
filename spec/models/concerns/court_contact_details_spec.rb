@@ -38,6 +38,7 @@ RSpec.describe CourtContactDetails do
         carlisle-combined-court
         barrow-in-furness-county-court-and-family-court
         preston-crown-court-and-family-court-sessions-house
+        central-family-court
       ))
     end
   end
