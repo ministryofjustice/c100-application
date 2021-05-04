@@ -39,6 +39,11 @@ RSpec.describe CourtContactDetails do
         barrow-in-furness-county-court-and-family-court
         preston-crown-court-and-family-court-sessions-house
         central-family-court
+        kingston-upon-hull-combined-court-centre
+        newcastle-civil-family-courts-and-tribunals-centre
+        sheffield-combined-court-centre
+        middlesbrough-county-court-at-teesside-combined-court
+        york-county-court-and-family-court
       ))
     end
   end
