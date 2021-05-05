@@ -42,6 +42,7 @@ RSpec.describe CourtContactDetails do
         kingston-upon-hull-combined-court-centre
         newcastle-civil-family-courts-and-tribunals-centre
         sheffield-combined-court-centre
+        teesside-combined-court-centre
         middlesbrough-county-court-at-teesside-combined-court
         york-county-court-and-family-court
       ))
