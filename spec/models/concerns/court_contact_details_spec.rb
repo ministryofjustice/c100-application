@@ -39,6 +39,25 @@ RSpec.describe CourtContactDetails do
         barrow-in-furness-county-court-and-family-court
         preston-crown-court-and-family-court-sessions-house
         central-family-court
+        kingston-upon-hull-combined-court-centre
+        newcastle-civil-family-courts-and-tribunals-centre
+        sheffield-combined-court-centre
+        teesside-combined-court-centre
+        middlesbrough-county-court-at-teesside-combined-court
+        york-county-court-and-family-court
+        birmingham-civil-and-family-justice-centre
+        coventry-combined-court-centre
+        derby-combined-court-centre
+        dudley-county-court-and-family-court
+        east-london-family-court
+        leicester-county-court-and-family-court
+        lincoln-county-court-and-family-court
+        northampton-crown-county-and-family-court
+        nottingham-county-court-and-family-court
+        stoke-on-trent-combined-court
+        wolverhampton-combined-court-centre
+        worcester-combined-court
+        clerkenwell-and-shoreditch-county-court-and-family-court
       ))
     end
   end
@@ -53,14 +72,6 @@ RSpec.describe CourtContactDetails do
 
       it 'returns true' do
         expect(subject.centralised?).to eq(true)
-      end
-    end
-
-    context 'for a non-centralised court' do
-      let(:slug) { 'derby-combined-court-centre' }
-
-      it 'returns false' do
-        expect(subject.centralised?).to eq(false)
       end
     end
   end
