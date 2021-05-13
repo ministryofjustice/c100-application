@@ -19,7 +19,6 @@ class Court < ApplicationRecord
       name: data.fetch('name'),
       address: data.fetch('address'),
       cci_code: data.fetch('cci_code'),
-      county_location_code: data['county_location_code'],
       # Email and GBS code, if not already present, come from a separate API request
       email: data['email'],
       gbs: data['gbs'],
