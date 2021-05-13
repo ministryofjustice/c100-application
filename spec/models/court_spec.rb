@@ -10,7 +10,6 @@ describe Court do
       "email" => 'family@court',
       "address" => 'address',
       "cci_code" => 123,
-      "county_location_code" => 123,
       "gbs" => 'X123',
     }
   }
@@ -34,10 +33,6 @@ describe Court do
 
     it 'sets the cci_code' do
       expect(subject.cci_code).to eq(123)
-    end
-
-    it 'sets the county_location_code' do
-      expect(subject.county_location_code).to eq(123)
     end
 
     it 'sets the gbs code' do
@@ -193,7 +188,6 @@ describe Court do
         "name" => 'Court Test',
         "address" => {},
         "cci_code" => 123,
-        "county_location_code" => 123,
         "email" => nil,
         "gbs" => nil,
       }
