@@ -58,24 +58,6 @@ RSpec.describe CourtContactDetails do
         wolverhampton-combined-court-centre
         worcester-combined-court
         clerkenwell-and-shoreditch-county-court-and-family-court
-        barnstaple-magistrates-county-and-family-court
-        basingstoke-county-court-and-family-court
-        bournemouth-and-poole-county-court-and-family-court
-        bristol-civil-and-family-justice-centre
-        exeter-combined-court-centre
-        gloucester-and-cheltenham-county-and-family-court
-        plymouth-combined-court
-        portsmouth-combined-court-centre
-        southampton-combined-court-centre
-        swindon-combined-court
-        taunton-crown-county-and-family-court
-        torquay-and-newton-abbot-county-court-and-family-court
-        truro-county-court-and-family-court
-        yeovil-county-family-and-magistrates-court
-        liverpool-civil-and-family-court
-        weymouth-combined-court
-        isle-of-wight-combined-court
-        northampton-magistrates-court
       ))
     end
   end
