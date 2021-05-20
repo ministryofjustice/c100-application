@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_092612) do
+ActiveRecord::Schema.define(version: 2021_05_20_120856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_092612) do
     t.string "research_consent_email"
     t.string "miam_mediator_exemption"
     t.datetime "completed_at"
+    t.string "declaration_confirmation"
     t.index ["court_id"], name: "index_c100_applications_on_court_id"
     t.index ["status"], name: "index_c100_applications_on_status"
     t.index ["user_id"], name: "index_c100_applications_on_user_id"
