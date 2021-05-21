@@ -18,20 +18,13 @@
                   data: { ga_category: 'application completed', ga_label: 'declaration' } do |f| %>
 
       <div id="cya-declaration-box">
-        <h2 class="govuk-heading-l"><%=t '.declaration_heading' %></h2>
+        <h2 class="govuk-heading-l"><%=t '.statement_heading' %></h2>
 
         <% unless current_c100_application.has_solicitor? %>
-          <p class="govuk-body-l"><%= t '.declaration_lead_text' %></p>
+          <p class="govuk-body-l"><%= t '.statement_lead_text' %></p>
         <% end %>
 
-        <div class="govuk-warning-text">
-          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-          <strong class="govuk-warning-text__text">
-            <span class="govuk-warning-text__assistive"><%= t '.warning_title' %></span>
-            <%= t '.false_information_warning' %>
-          </strong>
-        </div>
-
+        <%= f.govuk_collection_radio_buttons :declaration_confirmation, UserType.values, :value, nil, legend: { text: '', tag: 'span', size: 's', hidden: true }  %>
         <%= f.govuk_text_field :declaration_signee, width: 'one-half' %>
 
         <% if current_c100_application.has_solicitor? %>
