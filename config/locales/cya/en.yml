@@ -532,6 +532,10 @@ en:
       question: Home telephone number
     person_mobile_phone:
       question: Mobile telephone number
+    person_email_provided:
+      question: Email provided
+      answers:
+        <<: *YESNO
     person_email:
       question: Email address
     person_voicemail_consent:

@@ -25,6 +25,7 @@ module Summary
         home_phone: 'home_phone',
         mobile_phone: 'mobile_phone',
         voicemail_consent: nil,
+        email_provided: nil,
         email: 'email',
         relationships: [relationship],
       )
