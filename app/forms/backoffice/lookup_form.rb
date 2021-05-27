@@ -18,6 +18,7 @@ module Backoffice
       # instead of returning no results or even worse, an error.
       #
       @reference_code.try(:strip!)
+      @reference_code.try(:upcase!)
       @email_address.try(:strip!)
     end
   end
