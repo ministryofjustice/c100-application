@@ -11,6 +11,7 @@ module Steps
       # That is why we do not perform any further validation, other than presence
       # (do not validate the format of the phone or email, etc.)
       #
+      validates :email, email: true, allow_blank: true
       validates_presence_of :email,
                             :mobile_phone
 

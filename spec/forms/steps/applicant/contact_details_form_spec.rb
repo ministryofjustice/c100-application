@@ -40,12 +40,21 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
     end
 
-    context 'email validation' do
-      let(:email) { nil }
+    describe 'email validation' do
+      context 'when email not present' do
+        let(:email) { nil }
+        before { subject.valid? }
+        specify { expect(subject).to_not be_valid }
+        specify { expect(subject.errors.details.dig(:email, 0, :error)).to eq(:blank) }
+      end
 
-      it 'has a validation error on the field if not present' do
-        expect(subject).to_not be_valid
-        expect(subject.errors.added?(:email, :blank)).to eq(true)
+      %w(bad bad@ bad@domain bad@domain.).each do |malformed_email|
+        context "when email set to '#{malformed_email}'" do
+          let(:email) { malformed_email }
+          before { subject.valid? }
+          specify { expect(subject).to_not be_valid }
+          specify { expect(subject.errors.details.dig(:email, 0, :error)).to eq(:invalid) }
+        end
       end
     end
 

@@ -90,6 +90,11 @@ Feature: Add an applicant to the application
     And I should see a "Enter a mobile number or tell us why the court cannot phone you" link to "#steps-applicant-contact-details-form-mobile-phone-field-error"
     And I should see a "Select yes if the court can leave you a voicemail" link to "#steps-applicant-contact-details-form-voicemail-consent-field-error"
 
+    # Provoke validation error for email format
+    When I fill in "Email address" with "test"
+    When I click the "Continue" button
+    And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-applicant-contact-details-form-email-field-error"
+
     # Fix validation errors and continue
     When I fill in "Email address" with "test@example.com"
     And I fill in "Mobile phone" with "0123456789"
