@@ -1395,6 +1395,9 @@ en:
         previous_name: Enter your previous name
       steps_applicant_contact_details_form:
         <<: *PERSONAL_CONTACT_FIELDS
+        email_provided_options:
+          'yes': Yes, I provide my email address
+          'no': "No"
         voicemail_consent_options:
           'yes': Yes, the court can leave me a voicemail
           'no': No, the court cannot leave me a voicemail
@@ -1726,6 +1729,7 @@ en:
       steps_applicant_address_details_form:
         residence_requirement_met: Have you lived at your current address for more than 5 years?
       steps_applicant_contact_details_form:
+        email_provided: Do you wish to provide an email address?
         voicemail_consent: Can the court leave you a voicemail?
       steps_shared_under_age_form:
         under_age: Litigation friend representation
