@@ -14,22 +14,24 @@ module Steps
       #
       validates_inclusion_of :email_provided, in: GenericYesNo.values
 
-      validates :email, email: true, if: Proc.new { |o| o.email_provided && GenericYesNo.new(o.email_provided).yes? }
+      validates :email, email: true, if: proc { |o| o.email_provided && GenericYesNo.new(o.email_provided).yes? }
       validates_presence_of :mobile_phone
 
       validates_inclusion_of :voicemail_consent, in: GenericYesNo.values
 
       private
 
+      def attributes_map
+        super().tap do |hsh|
+          hsh[:email] = nil unless email_provided.yes?
+        end
+      end
+
       def persist!
         raise C100ApplicationNotFound unless c100_application
 
         applicant = c100_application.applicants.find_or_initialize_by(id: record_id)
-        applicant.update(
-          attributes_map.tap do |hsh|
-            hsh[:email] = nil unless GenericYesNo.new(email_provided).yes?
-          end
-        )
+        applicant.update(attributes_map)
       end
     end
   end

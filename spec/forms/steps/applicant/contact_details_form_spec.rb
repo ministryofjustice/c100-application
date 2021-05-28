@@ -42,6 +42,14 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
     end
 
+    context 'when no email provided' do
+      let(:email_provided) { 'no' }
+
+      it '#attributes_map resets email' do
+        expect(subject.send(:attributes_map)).to include(email: nil)
+      end
+    end
+
     describe 'email validation' do
       context 'when email not provided' do
         let(:email) { nil }
