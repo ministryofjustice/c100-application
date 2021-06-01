@@ -100,7 +100,7 @@ RSpec.describe ValidPaymentsArray do
       let(:has_solicitor) { 'yes' }
 
       it 'has valid payment choices' do
-        expect(subject).to match_array(common_choices + [PaymentType::SOLICITOR, PaymentType::ONLINE])
+        expect(subject).to match_array([PaymentType::HELP_WITH_FEES, PaymentType::SOLICITOR, PaymentType::ONLINE])
       end
     end
 
@@ -108,7 +108,13 @@ RSpec.describe ValidPaymentsArray do
       let(:has_solicitor) { 'no' }
 
       it 'has valid payment choices' do
-        expect(subject).to match_array(common_choices + [PaymentType::ONLINE])
+        expect(subject).to match_array([PaymentType::HELP_WITH_FEES, PaymentType::ONLINE])
+      end
+    end
+
+    context 'unavailable payment type' do
+      it 'cheque' do
+        expect(subject).to_not include(PaymentType::SELF_PAYMENT_CHEQUE)
       end
     end
   end
@@ -133,6 +139,12 @@ RSpec.describe ValidPaymentsArray do
 
       it 'has valid payment choices' do
         expect(subject).to match_array(common_choices)
+      end
+    end
+
+    context 'unavailable payment type' do
+      it 'online' do
+        expect(subject).to_not include(PaymentType::ONLINE)
       end
     end
   end
