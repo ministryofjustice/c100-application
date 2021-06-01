@@ -720,6 +720,10 @@ en:
       question: Address
     solicitor_dx_number:
       question: DX number
+    solicitor_email_provided:
+      question: Email provided
+      answers:
+        <<: *YESNO
     solicitor_email:
       question: Email address
     solicitor_phone_number:
