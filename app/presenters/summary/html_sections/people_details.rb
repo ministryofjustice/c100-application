@@ -55,6 +55,7 @@ module Summary
 
       def contact_details_questions(person)
         [
+          Answer.new(:person_email_provided, person.email_provided),
           FreeTextAnswer.new(:person_email, person.email),
           FreeTextAnswer.new(:person_home_phone, person.home_phone),
           FreeTextAnswer.new(:person_mobile_phone, person.mobile_phone),
