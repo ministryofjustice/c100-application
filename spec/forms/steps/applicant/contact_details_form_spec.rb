@@ -8,6 +8,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
     mobile_phone: mobile_phone,
     email: email,
     voicemail_consent: voicemail_consent,
+    email_provided: email_provided,
   } }
 
   let(:c100_application) { instance_double(C100Application, applicants: applicants_collection) }
@@ -19,6 +20,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
   let(:mobile_phone) { '12345' }
   let(:email) { 'test@example.com' }
   let(:voicemail_consent) { 'yes' }
+  let(:email_provided) { 'yes' }
 
   subject { described_class.new(arguments) }
 
@@ -40,12 +42,28 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
     end
 
+    context 'when no email provided' do
+      let(:email_provided) { 'no' }
+
+      it '#attributes_map resets email' do
+        expect(subject.send(:attributes_map)).to include(email: nil)
+      end
+    end
+
     describe 'email validation' do
-      context 'when email not present' do
+      context 'when email not provided' do
         let(:email) { nil }
+        let(:email_provided) { 'no' }
+        before { subject.valid? }
+        specify { expect(subject).to be_valid }
+      end
+
+      context 'when email provided' do
+        let(:email) { nil }
+        let(:email_provided) { 'yes' }
         before { subject.valid? }
         specify { expect(subject).to_not be_valid }
-        specify { expect(subject.errors.details.dig(:email, 0, :error)).to eq(:blank) }
+        specify { expect(subject.errors.details.dig(:email, 0, :error)).to eq(:invalid) }
       end
 
       %w(bad bad@ bad@domain bad@domain.).each do |malformed_email|
@@ -93,6 +111,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
           home_phone: '',
           mobile_phone: '12345',
           voicemail_consent: GenericYesNo::YES,
+          email_provided: GenericYesNo::YES,
         }
       }
 

@@ -33,6 +33,10 @@ en:
       'no': 'No'
       unknown: *dont_know
 
+    YESPROVIDEEMAIL: &YESPROVIDEEMAIL
+      'yes': Yes, I provide my email address
+      'no': "No"
+
     RELATIONS: &RELATIONS
       mother: Mother
       father: Father
@@ -1395,6 +1399,8 @@ en:
         previous_name: Enter your previous name
       steps_applicant_contact_details_form:
         <<: *PERSONAL_CONTACT_FIELDS
+        email_provided_options:
+          <<: *YESPROVIDEEMAIL
         voicemail_consent_options:
           'yes': Yes, the court can leave me a voicemail
           'no': No, the court cannot leave me a voicemail
@@ -1460,6 +1466,8 @@ en:
         phone_number: Phone number
         fax_number: Fax number
         email: Email address
+        email_provided_options:
+          <<: *YESPROVIDEEMAIL
       user:
         email: Your email address
         password: Create a password
@@ -1726,9 +1734,14 @@ en:
       steps_applicant_address_details_form:
         residence_requirement_met: Have you lived at your current address for more than 5 years?
       steps_applicant_contact_details_form:
+        email_provided: Do you wish to provide an email address?
         voicemail_consent: Can the court leave you a voicemail?
       steps_shared_under_age_form:
         under_age: Litigation friend representation
+
+      # Solicitor
+      steps_solicitor_contact_details_form:
+        email_provided: Do you wish to provide an email address?
 
       # Respondent
       steps_respondent_personal_details_form:
