@@ -48,7 +48,6 @@ module Summary
         AnswersGroup.new(
           :solicitor_contact_details,
           [
-            Answer.new(:solicitor_email_provided, solicitor.email_provided),
             FreeTextAnswer.new(:solicitor_email, solicitor.email),
             FreeTextAnswer.new(:solicitor_phone_number, solicitor.phone_number),
             FreeTextAnswer.new(:solicitor_fax_number, solicitor.fax_number),
