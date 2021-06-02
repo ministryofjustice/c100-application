@@ -34,8 +34,8 @@ en:
       unknown: *dont_know
 
     YESPROVIDEEMAIL: &YESPROVIDEEMAIL
-      'yes': Yes, I provide my email address
-      'no': "No"
+      'yes': I can provide an email address
+      'no': I cannot provide an email address
 
     RELATIONS: &RELATIONS
       mother: Mother
@@ -1734,14 +1734,12 @@ en:
       steps_applicant_address_details_form:
         residence_requirement_met: Have you lived at your current address for more than 5 years?
       steps_applicant_contact_details_form:
-        email_provided: Do you wish to provide an email address?
         voicemail_consent: Can the court leave you a voicemail?
       steps_shared_under_age_form:
         under_age: Litigation friend representation
 
       # Solicitor
       steps_solicitor_contact_details_form:
-        email_provided: Do you wish to provide an email address?
 
       # Respondent
       steps_respondent_personal_details_form:
