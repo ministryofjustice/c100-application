@@ -17,7 +17,6 @@ module Summary
         firm_name: 'firm',
         reference: 'ref',
         full_address: '22 acacia avenue',
-        email_provided: 'yes',
         email: 'solicitor@example.com',
         phone_number: '0123456789',
         fax_number: '0987654321',
@@ -86,30 +85,26 @@ module Summary
         expect(answers[3]).to be_an_instance_of(AnswersGroup)
         expect(answers[3].name).to eq(:solicitor_contact_details)
         expect(answers[3].change_path).to eq('/steps/solicitor/contact_details')
-        expect(answers[3].answers.count).to eq(5)
+        expect(answers[3].answers.count).to eq(4)
 
           # contact_details group answers ###
           details = answers[3].answers
 
-          expect(details[0]).to be_an_instance_of(Answer)
-          expect(details[0].question).to eq(:solicitor_email_provided)
-          expect(details[0].value).to eq('yes')
+          expect(details[0]).to be_an_instance_of(FreeTextAnswer)
+          expect(details[0].question).to eq(:solicitor_email)
+          expect(details[0].value).to eq('solicitor@example.com')
 
           expect(details[1]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[1].question).to eq(:solicitor_email)
-          expect(details[1].value).to eq('solicitor@example.com')
+          expect(details[1].question).to eq(:solicitor_phone_number)
+          expect(details[1].value).to eq('0123456789')
 
           expect(details[2]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[2].question).to eq(:solicitor_phone_number)
-          expect(details[2].value).to eq('0123456789')
+          expect(details[2].question).to eq(:solicitor_fax_number)
+          expect(details[2].value).to eq('0987654321')
 
           expect(details[3]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[3].question).to eq(:solicitor_fax_number)
-          expect(details[3].value).to eq('0987654321')
-
-          expect(details[4]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[4].question).to eq(:solicitor_dx_number)
-          expect(details[4].value).to eq('dx012345')
+          expect(details[3].question).to eq(:solicitor_dx_number)
+          expect(details[3].value).to eq('dx012345')
       end
     end
   end
