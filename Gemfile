@@ -46,7 +46,7 @@ end
 
 group :development, :test do
   gem 'dotenv-rails'
-  gem 'mutant', '< 0.9.0'
+  gem 'mutant', '< 0.10.0'
   gem 'mutant-rspec'
   gem 'pry-byebug'
   gem 'pry-rails'

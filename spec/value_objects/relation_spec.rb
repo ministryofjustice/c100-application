@@ -11,6 +11,7 @@ RSpec.describe Relation do
         father
         guardian
         special_guardian
+        grand_parent
         other
       ))
     end
