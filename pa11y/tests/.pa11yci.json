@@ -1,0 +1,67 @@
+{
+  "defaults": {
+    "timeout": 30000,
+    "standard": "WCAG2AA",
+    "viewport": {
+      "width": 600,
+      "height": 500
+    },
+    "concurrency": 1,
+    "hideElements": ".new_cookie, .cookie_return_path, .cookie_usage, .new_cookie, #new_cookie"
+
+  },
+  
+  "urls":[
+    {
+		"url": "http://localhost:3000/steps/opening/warning"
+    
+    },
+    {
+      "url":"http://localhost:3000/steps/opening/postcode",
+      "actions": [
+        "set field #steps-opening-postcode-form-children-postcode-field to nw101ht",
+        "click element [type=\"submit\"]"
+      ]
+    },
+ 
+    {
+      "url": "http://localhost:3000/steps/opening/child_protection_cases",
+      "actions": [
+        "check field #steps-opening-child-protection-cases-form-child-protection-cases-yes-field",
+        "click element .govuk-button"
+      ]
+    },
+    {
+      "url": "http://localhost:3000/steps/opening/child_protection_info",
+      "actions": [
+        "click element .govuk-button"
+      ]
+    },
+    {
+      "url": "http://localhost:3000/steps/safety_questions/start",
+      "actions": [
+        "click element .govuk-button"
+      ]
+    },
+   
+    {
+      "url": "http://localhost:3000/steps/abuse_concerns/start",
+      "actions": [
+      "click element [data-ga-label=\"safety concerns\"]",
+      "click element .govuk-button"
+      ]
+    },
+    {
+      "url": "http://localhost:3000/steps/abuse_concerns/children_info",
+      "actions": [
+      "click element [data-ga-label=\"children abuse info\"]",
+      "click element .govuk-button"  
+      ]
+    }
+    
+	
+  ]
+
+  }
+
+  
