@@ -24,6 +24,7 @@ RSpec.describe Steps::Shared::RelationshipForm do
         father
         guardian
         special_guardian
+        grand_parent
         other
       ))
     end
