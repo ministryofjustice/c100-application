@@ -42,7 +42,7 @@ en:
       father: Father
       guardian: Guardian
       special_guardian: Special Guardian
-      grand_parent: Grand Parent
+      grand_parent: Grandparent
       other: Other
 
     PETITION_ORDERS: &PETITION_ORDERS
