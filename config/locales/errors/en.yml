@@ -636,5 +636,7 @@ en:
               blank: Enter your full name
             declaration_signee_capacity:
               inclusion: Select who is making this declaration
+            declaration_confirmation:
+              inclusion: Select the statement that applies to confirm the Statement of Truth
             c100_application:
               invalid: Some information is missing # fulfilment validation error

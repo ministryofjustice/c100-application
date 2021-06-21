@@ -7,8 +7,10 @@ RSpec.describe Steps::Solicitor::ContactDetailsForm do
     phone_number: 'phone_number',
     fax_number: 'fax_number',
     dx_number: 'dx_number',
+    email_provided: email_provided,
   } }
 
+  let(:email_provided) { 'yes' }
   let(:email) { 'test@example.com' }
 
   let(:c100_application) { instance_double(C100Application) }
@@ -48,6 +50,7 @@ RSpec.describe Steps::Solicitor::ContactDetailsForm do
                       phone_number: 'phone_number',
                       fax_number: 'fax_number',
                       dx_number: 'dx_number',
+                      email_provided: GenericYesNo.new('yes'),
                     }
   end
 end

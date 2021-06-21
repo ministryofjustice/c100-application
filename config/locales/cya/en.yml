@@ -20,6 +20,7 @@ en:
       father: Father
       guardian: Guardian
       special_guardian: Special Guardian
+      grand_parent: Grandparent
       other: Other
 
     # Important: maintain these orders in sync with the rest of locale files
@@ -532,6 +533,10 @@ en:
       question: Home telephone number
     person_mobile_phone:
       question: Mobile telephone number
+    person_email_provided:
+      question: Email provided
+      answers:
+        <<: *YESNO
     person_email:
       question: Email address
     person_voicemail_consent:
@@ -716,6 +721,10 @@ en:
       question: Address
     solicitor_dx_number:
       question: DX number
+    solicitor_email_provided:
+      question: Email provided
+      answers:
+        <<: *YESNO
     solicitor_email:
       question: Email address
     solicitor_phone_number:
