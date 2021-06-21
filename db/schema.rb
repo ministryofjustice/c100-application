@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_092612) do
+ActiveRecord::Schema.define(version: 2021_06_01_111447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_092612) do
     t.string "research_consent_email"
     t.string "miam_mediator_exemption"
     t.datetime "completed_at"
+    t.string "declaration_confirmation"
     t.index ["court_id"], name: "index_c100_applications_on_court_id"
     t.index ["status"], name: "index_c100_applications_on_status"
     t.index ["user_id"], name: "index_c100_applications_on_user_id"
@@ -326,6 +327,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_092612) do
     t.string "voicemail_consent"
     t.boolean "under_age"
     t.string "special_guardianship_order"
+    t.string "email_provided"
     t.index ["c100_application_id"], name: "index_people_on_c100_application_id"
   end
 
@@ -371,6 +373,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_092612) do
     t.string "email"
     t.uuid "c100_application_id"
     t.json "address_data", default: {}
+    t.string "email_provided"
     t.index ["c100_application_id"], name: "index_solicitors_on_c100_application_id", unique: true
   end
 

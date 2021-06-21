@@ -5,11 +5,13 @@ RSpec.describe Steps::Application::DeclarationForm do
     c100_application: c100_application,
     declaration_signee: declaration_signee,
     declaration_signee_capacity: declaration_signee_capacity,
+    declaration_confirmation: declaration_confirmation,
   } }
 
   let(:c100_application) { instance_double(C100Application) }
   let(:declaration_signee) { 'Full Name' }
   let(:declaration_signee_capacity) { 'applicant' }
+  let(:declaration_confirmation) { 'applicant' }
 
   subject { described_class.new(arguments) }
 
@@ -29,6 +31,7 @@ RSpec.describe Steps::Application::DeclarationForm do
 
       it { should validate_presence_of(:declaration_signee) }
       it { should validate_presence_of(:declaration_signee_capacity, :inclusion) }
+      it { should validate_presence_of(:declaration_confirmation, :inclusion) }
     end
 
     context 'when application fulfilment is successful' do
