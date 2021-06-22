@@ -5,7 +5,7 @@ namespace :test do
     Rake::Task['brakeman'].invoke
     Rake::Task['spec'].invoke
     Rake::Task['cucumber'].invoke
-    Rake::Task['mutant'].invoke
+  #  Rake::Task['mutant'].invoke
   end
 end
 
