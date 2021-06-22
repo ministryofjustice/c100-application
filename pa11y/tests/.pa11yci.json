@@ -19,8 +19,25 @@
     {
       "url":"http://localhost:3000/steps/opening/postcode",
       "actions": [
-        "set field #steps-opening-postcode-form-children-postcode-field to nw101ht",
-        "click element [type=\"submit\"]"
+        "set field #steps-opening-postcode-form-children-postcode-field to nw10 1ht",
+        "click element #new_steps_opening_postcode_form [type=\"submit\"]"
+       
+      ]
+    },
+
+    {
+      "url": "http://localhost:3000/steps/opening/consent_order",
+      "actions":[
+        "check field #steps-opening-consent-order-form-consent-order-yes-field",
+        "click element .govuk-button"
+      ]
+
+    },
+    
+    {
+      "url": "http://localhost:3000/steps/opening/consent_order_sought",
+      "actions":[
+        "click element .govuk-button"
       ]
     },
  
@@ -48,7 +65,15 @@
       "url": "http://localhost:3000/steps/abuse_concerns/start",
       "actions": [
       "click element [data-ga-label=\"safety concerns\"]",
-      "click element .govuk-button"
+      "click element #main-content .govuk-button"
+      
+      ]
+    },
+    {
+      "url": "http://localhost:3000/steps/safety_questions/address_confidentiality",
+      "actions": [ 
+      "check field  #steps-safety-questions-address-confidentiality-form-address-confidentiality-yes-field",
+      "click element .govuk-button" 
       ]
     },
     {
