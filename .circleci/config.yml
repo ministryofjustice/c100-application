@@ -32,7 +32,7 @@ jobs:
     parameters:
       test_command:
         type: string
-        default: 
+        default:
           bundle exec rake test:all_the_things master
           pa11y-ci --config pa11y/tests/.pa11yci.json
     steps:
@@ -50,10 +50,6 @@ jobs:
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             npm install
-            npm i pa11y-ci
-            
-
-
 
       - save_cache:
           paths:
