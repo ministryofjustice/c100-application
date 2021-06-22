@@ -64,6 +64,9 @@ jobs:
       - run:
           name: run tests
           command: << parameters.test_command >>
+      - run:
+          name: Pa11y tests
+          command: pa11y-ci --config pa11y/tests/.pa11yci.json
 
   build_image:
     <<: *cloud_container
