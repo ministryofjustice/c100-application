@@ -54,6 +54,16 @@ GEM
       equalizer (~> 0.0.11)
     arel (9.0.0)
     ast (2.4.2)
+    axe-core-api (4.2.0)
+      capybara
+      dumb_delegator
+      selenium-webdriver
+      virtus
+      watir
+    axe-core-rspec (4.2.0)
+      axe-core-api
+      dumb_delegator
+      virtus
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -132,6 +142,7 @@ GEM
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
+    dumb_delegator (1.0.0)
     equalizer (0.0.11)
     erubi (1.10.0)
     execjs (2.7.0)
@@ -407,6 +418,9 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.9)
       rack (>= 2.0.9)
+    watir (6.19.1)
+      regexp_parser (>= 1.2, < 3)
+      selenium-webdriver (>= 3.142.7)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -433,6 +447,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  axe-core-rspec
   better_errors
   binding_of_caller
   brakeman
