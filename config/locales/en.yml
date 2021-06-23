@@ -290,7 +290,9 @@ en:
         edit:
           page_title: Respondent address details
           heading: "Address details of %{name}"
-          body_info: Include as much detail as you can. If there’s information missing, your application may take longer to process.
+          body_info_html: |
+            Include as much detail as you can. If there’s information missing, your application may take longer to process.<br />
+            It may delay your application if contact details are not provided.
       has_other_parties:
         edit:
           page_title: Other parties who should know about the application
