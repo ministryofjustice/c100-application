@@ -48,7 +48,6 @@ jobs:
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             npm install
-            npm install -g pa11y-ci
 
       - save_cache:
           paths:
