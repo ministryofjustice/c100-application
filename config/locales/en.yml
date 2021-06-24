@@ -1417,7 +1417,8 @@ en:
         <<: *PERSONAL_CONTACT_FIELDS
       steps_respondent_address_details_form:
         <<: *PERSONAL_ADDRESS_FIELDS
-        residence_history: Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent
+        residence_history_no: Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent
+        residence_history_unknown: Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent
       steps_respondent_has_other_parties_form:
         has_other_parties_options:
           <<: *YESNO
@@ -1551,7 +1552,8 @@ en:
         birthplace: *birthplace_hint
       steps_respondent_address_details_form:
         address_line_1: Court documents will be sent here
-        residence_history: *leave_blank_if_unknown
+        residence_history_no: *leave_blank_if_unknown
+        residence_history_unknown: *leave_blank_if_unknown
       steps_other_party_address_details_form:
         address_line_1: Court documents may be sent here
       steps_applicant_names_split_form:
