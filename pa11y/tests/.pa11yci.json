@@ -10,83 +10,81 @@
     "hideElements": ".new_cookie, .cookie_return_path, .cookie_usage, .new_cookie, #new_cookie"
 
   },
-  
+
   "urls":[
     {
-		"url": "http://localhost:3000/steps/opening/warning"
-    
+    "url": "http://0.0.0.0:3000/steps/opening/warning"
+
     },
     {
-      "url":"http://localhost:3000/steps/opening/postcode",
+      "url":"http://0.0.0.0:3000/steps/opening/postcode",
       "actions": [
         "set field #steps-opening-postcode-form-children-postcode-field to nw10 1ht",
         "click element #new_steps_opening_postcode_form [type=\"submit\"]"
-       
+
       ]
     },
 
     {
-      "url": "http://localhost:3000/steps/opening/consent_order",
+      "url": "http://0.0.0.0:3000/steps/opening/consent_order",
       "actions":[
         "check field #steps-opening-consent-order-form-consent-order-yes-field",
         "click element .govuk-button"
       ]
 
     },
-    
+
     {
-      "url": "http://localhost:3000/steps/opening/consent_order_sought",
+      "url": "http://0.0.0.0:3000/steps/opening/consent_order_sought",
       "actions":[
         "click element .govuk-button"
       ]
     },
- 
+
     {
-      "url": "http://localhost:3000/steps/opening/child_protection_cases",
+      "url": "http://0.0.0.0:3000/steps/opening/child_protection_cases",
       "actions": [
         "check field #steps-opening-child-protection-cases-form-child-protection-cases-yes-field",
         "click element .govuk-button"
       ]
     },
     {
-      "url": "http://localhost:3000/steps/opening/child_protection_info",
+      "url": "http://0.0.0.0:3000/steps/opening/child_protection_info",
       "actions": [
         "click element .govuk-button"
       ]
     },
     {
-      "url": "http://localhost:3000/steps/safety_questions/start",
+      "url": "http://0.0.0.0:3000/steps/safety_questions/start",
       "actions": [
         "click element .govuk-button"
       ]
     },
-   
+
     {
-      "url": "http://localhost:3000/steps/abuse_concerns/start",
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/start",
       "actions": [
       "click element [data-ga-label=\"safety concerns\"]",
       "click element #main-content .govuk-button"
-      
+
       ]
     },
     {
-      "url": "http://localhost:3000/steps/safety_questions/address_confidentiality",
-      "actions": [ 
+      "url": "http://0.0.0.0:3000/steps/safety_questions/address_confidentiality",
+      "actions": [
       "check field  #steps-safety-questions-address-confidentiality-form-address-confidentiality-yes-field",
-      "click element .govuk-button" 
+      "click element .govuk-button"
       ]
     },
     {
-      "url": "http://localhost:3000/steps/abuse_concerns/children_info",
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/children_info",
       "actions": [
       "click element [data-ga-label=\"children abuse info\"]",
-      "click element .govuk-button"  
+      "click element .govuk-button"
       ]
     }
-    
-	
+
+
   ]
 
   }
-
-  
