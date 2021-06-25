@@ -27,19 +27,6 @@ references:
 
 
 jobs:
-  pa11yci:
-    docker: buildkite/puppeteer:v1.15.0
-    steps:
-      - checkout
-
-      - run:
-          name: install dependencies
-          command: npm install
-
-      - run:
-          name: run pally tests
-          command: npm run test-pa11y
-
   test:
     <<: *app_containers
     parameters:
