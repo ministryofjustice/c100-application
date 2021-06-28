@@ -66,7 +66,7 @@ jobs:
           command: << parameters.test_command >>
       - run:
           name: Pa11y tests
-          command: pa11y-ci --config pa11y/tests/.pa11yci.json
+          command: bundle exec rails s & sleep 5; npm run test-pa11y
 
   build_image:
     <<: *cloud_container
@@ -212,10 +212,13 @@ workflows:
 #      - test:
 #          name: smoke-tests
 #          test_command: bundle exec cucumber -p smoke
-#    triggers:
-#      - schedule:
-#          cron: "0 6 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master
+  # nightly:
+  #   jobs:
+  #     - pa11yci
+  #   triggers:
+  #     - schedule:
+  #         cron: "0 2 * * *"
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master

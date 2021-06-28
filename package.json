@@ -8,5 +8,8 @@
   },
   "devDependencies": {
     "pa11y-ci": "2.4.1"
+  },
+  "scripts": {
+    "test-pa11y": "./node_modules/.bin/pa11y-ci --config ./pa11y/tests/.pa11yci.json"
   }
 }
