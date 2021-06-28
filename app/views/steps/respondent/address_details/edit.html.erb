@@ -8,7 +8,7 @@
     <h1 class="govuk-heading-xl"><%=t '.heading', name: @form_object.record.full_name %></h1>
 
     <div class="govuk-inset-text">
-      <%=t '.body_info' %>
+      <%=t '.body_info_html' %>
     </div>
 
     <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
