@@ -86,15 +86,24 @@ Feature: Add an applicant to the application
     # Provoke validation errors
     When I click the "Continue" button
     Then Page has title "Error: Applicant contact details - Apply to court about child arrangements - GOV.UK"
-    And I should see a "Enter an email address or tell us why the court cannot email you" link to "#steps-applicant-contact-details-form-email-field-error"
+    And I should see a "Select an option" link to "#steps-applicant-contact-details-form-email-provided-field-error"
     And I should see a "Enter a mobile number or tell us why the court cannot phone you" link to "#steps-applicant-contact-details-form-mobile-phone-field-error"
     And I should see a "Select yes if the court can leave you a voicemail" link to "#steps-applicant-contact-details-form-voicemail-consent-field-error"
 
-    # Fix validation errors and continue
-    When I fill in "Email address" with "test@example.com"
+   # Fix validation errors and provoke email validation error
+    When I choose "I can provide an email address"
     And I fill in "Mobile phone" with "0123456789"
     And I choose "Yes, the court can leave me a voicemail"
     When I click the "Continue" button
+
+    # Check email error
+    Then Page has title "Error: Applicant contact details - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-applicant-contact-details-form-email-field-error"
+
+    # Fix email validation error and continue
+    And I fill in "Email address" with "test@example.com"
+    When I click the "Continue" button
+
 
     Then I should see "Will you be legally represented by a solicitor in these proceedings?"
     And I choose "No"

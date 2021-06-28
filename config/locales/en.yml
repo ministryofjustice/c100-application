@@ -33,11 +33,16 @@ en:
       'no': 'No'
       unknown: *dont_know
 
+    YESPROVIDEEMAIL: &YESPROVIDEEMAIL
+      'yes': I can provide an email address
+      'no': I cannot provide an email address
+
     RELATIONS: &RELATIONS
       mother: Mother
       father: Father
       guardian: Guardian
       special_guardian: Special Guardian
+      grand_parent: Grandparent
       other: Other
 
     PETITION_ORDERS: &PETITION_ORDERS
@@ -285,7 +290,9 @@ en:
         edit:
           page_title: Respondent address details
           heading: "Address details of %{name}"
-          body_info: Include as much detail as you can. If there’s information missing, your application may take longer to process.
+          body_info_html: |
+            Include as much detail as you can. If there’s information missing, your application may take longer to process.<br />
+            It may delay your application if contact details are not provided.
       has_other_parties:
         edit:
           page_title: Other parties who should know about the application
@@ -586,6 +593,8 @@ en:
           lead_text_html: |
             <p class="govuk-body-l">A copy of your court application will be sent to all the other people named in the application (the respondents). This will include your contact details.</p>
             <p class="govuk-body">If you think the other people pose a threat to the safety of you or the children, you can ask the court to keep your contact details private.</p>
+            <p class="govuk-body"><strong>Please note:</strong> you will need to make sure that any form or document, either completed by you now, or at a later date, for use in court <strong>does not</strong> contain the information you wish to keep private. This includes documents received from other people e.g. medical reports or financial statements etc.</p>
+            <p class="govuk-body">The court staff are not able to check the documents you submit to the court for any unintentional disclosure of your contact details.</p>
 
     miam:
       attended:
@@ -779,10 +788,8 @@ en:
           page_title: Check your answers
           heading: Check your answers
           lead_text: Please review your answers before you finish your application.
-          declaration_heading: Declaration
-          declaration_lead_text: By entering your full name, you confirm that the facts stated in this application are true.
-          warning_title: Warning
-          false_information_warning: You could be fined or imprisoned for contempt of court if you deliberately submit false information, or cause false information to be submitted.
+          statement_heading: Statement of Truth
+          statement_lead_text: I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.
           submit_warning:
             online: Once you submit your application, you cannot make any further changes. You can download a copy of your submitted application on the next page.
             online_payment: Once you submit your application, you cannot make any further changes. You will be able to download a copy of your submitted application after you have paid the %{fee} court fee.
@@ -1311,6 +1318,10 @@ en:
         receipt_email: Enter an email address if you would like to get a confirmation
       steps_application_declaration_form:
         declaration_signee: Enter your full name
+        declaration_confirmation_options:
+          applicant: I believe that the facts stated in this from and any continuation sheet are true
+          representative_html: |
+            The applicant believes that the facts stated in this form and any continuation sheets are true. <br />I am authorised by the applicant to sign this statement.<br />This option should only selected if the legal representative is signing the form on behalf of the applicant.
         declaration_signee_capacity_options:
           applicant: I am the applicant and I believe that the facts stated in this application are true.
           representative: I am the solicitor. The applicant believes that the facts stated in this application are true and I have been given the authority to make this declaration.
@@ -1393,6 +1404,8 @@ en:
         previous_name: Enter your previous name
       steps_applicant_contact_details_form:
         <<: *PERSONAL_CONTACT_FIELDS
+        email_provided_options:
+          <<: *YESPROVIDEEMAIL
         voicemail_consent_options:
           'yes': Yes, the court can leave me a voicemail
           'no': No, the court cannot leave me a voicemail
@@ -1408,7 +1421,8 @@ en:
         <<: *PERSONAL_CONTACT_FIELDS
       steps_respondent_address_details_form:
         <<: *PERSONAL_ADDRESS_FIELDS
-        residence_history: Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent
+        residence_history_no: Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent
+        residence_history_unknown: Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent
       steps_respondent_has_other_parties_form:
         has_other_parties_options:
           <<: *YESNO
@@ -1458,6 +1472,8 @@ en:
         phone_number: Phone number
         fax_number: Fax number
         email: Email address
+        email_provided_options:
+          <<: *YESPROVIDEEMAIL
       user:
         email: Your email address
         password: Create a password
@@ -1478,7 +1494,7 @@ en:
       steps_opening_consent_order_form:
         consent_order_options:
           'no': This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter
-          'yes': This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent)
+          'yes_html': This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent).<br />If you select this option, you must have a draft consent order signed by the respondent which you are able to forward to the court immediately after you have submitted this application
       steps_miam_certification_date_form:
         miam_certification_date: For example, 31 3 2020
       steps_application_court_proceedings_form:
@@ -1540,7 +1556,8 @@ en:
         birthplace: *birthplace_hint
       steps_respondent_address_details_form:
         address_line_1: Court documents will be sent here
-        residence_history: *leave_blank_if_unknown
+        residence_history_no: *leave_blank_if_unknown
+        residence_history_unknown: *leave_blank_if_unknown
       steps_other_party_address_details_form:
         address_line_1: Court documents may be sent here
       steps_applicant_names_split_form:
@@ -1727,6 +1744,9 @@ en:
         voicemail_consent: Can the court leave you a voicemail?
       steps_shared_under_age_form:
         under_age: Litigation friend representation
+
+      # Solicitor
+      steps_solicitor_contact_details_form:
 
       # Respondent
       steps_respondent_personal_details_form:

@@ -49,6 +49,10 @@ class ValidPaymentsArray < SimpleDelegator
       choices.append(
         PaymentType::SELF_PAYMENT_CARD
       ) if phone_pay_enabled?
+
+      choices.delete(
+        PaymentType::SELF_PAYMENT_CHEQUE
+      ) if c100_application.online_submission?
     end
   end
 

@@ -32,7 +32,7 @@ jobs:
     parameters:
       test_command:
         type: string
-        default: bundle exec rake test:all_the_things master
+        default: bundle exec rake test:all_the_things
     steps:
       - checkout
 
