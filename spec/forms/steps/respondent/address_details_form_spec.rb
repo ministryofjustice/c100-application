@@ -12,7 +12,9 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
       postcode: postcode,
       address_unknown: address_unknown,
       residence_requirement_met: residence_requirement_met,
-      residence_history: residence_history
+      residence_history: residence_history,
+      residence_history_no: residence_history_no,
+      residence_history_unknown: residence_history_unknown
     }
   end
   let(:c100_application) { instance_double(C100Application, respondents: respondents_collection) }
@@ -23,6 +25,8 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
   let(:address_unknown) { false }
   let(:residence_requirement_met) { 'no' }
   let(:residence_history) { 'history' }
+  let(:residence_history_no) { 'history' }
+  let(:residence_history_unknown) { 'history' }
 
   let(:address_line_1) { 'address_line_1' }
   let(:address_line_2) { 'address_line_2' }
@@ -31,6 +35,72 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
   let(:postcode) { 'postcode' }
 
   subject { described_class.new(arguments) }
+
+  describe '#residence_history_no' do
+    context 'returns initialized value' do
+      let(:residence_history_no) { 'yesterday' }
+      let(:residence_history) { nil }
+
+      specify { expect(subject.residence_history_no).to eq(residence_history_no) }
+    end
+
+    context 'returns residence_history value' do
+      let(:residence_history_no) { nil }
+      let(:residence_requirement_met) { 'no' }
+
+      specify { expect(subject.residence_history_no).to eq(residence_history) }
+    end
+
+    context 'returns nil' do
+      let(:residence_history_no) { nil }
+      let(:residence_requirement_met) { 'yes' }
+
+      specify { expect(subject.residence_history_no).to be_blank }
+    end
+  end
+
+  describe '#residence_history_unknown' do
+    context 'returns initialized value' do
+      let(:residence_history_unknown) { 'yesterday' }
+      let(:residence_history) { nil }
+
+      specify { expect(subject.residence_history_unknown).to eq(residence_history_unknown) }
+    end
+
+    context 'returns residence_history value' do
+      let(:residence_history_unknown) { nil }
+      let(:residence_requirement_met) { 'unknown' }
+
+      specify { expect(subject.residence_history_unknown).to eq(residence_history) }
+    end
+
+    context 'returns nil' do
+      let(:residence_history_unknown) { nil }
+      let(:residence_requirement_met) { 'yes' }
+
+      specify { expect(subject.residence_history_unknown).to be_blank }
+    end
+  end
+
+  describe '#residence_history_value' do
+    context 'when residence_requirement_met is yes' do
+      let(:residence_requirement_met) { 'yes' }
+
+      specify { expect(subject.residence_history_value).to be_blank }
+    end
+
+    context 'when residence_requirement_met is no' do
+      let(:residence_requirement_met) { 'no' }
+
+      specify { expect(subject.residence_history_value).to eq(residence_history_no) }
+    end
+
+    context 'when residence_requirement_met is unknown' do
+      let(:residence_requirement_met) { 'unknown' }
+
+      specify { expect(subject.residence_history_value).to eq(residence_history_unknown) }
+    end
+  end
 
   describe '#save' do
     context 'when no c100_application is associated with the form' do
