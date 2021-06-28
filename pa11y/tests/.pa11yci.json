@@ -21,15 +21,14 @@
       "actions": [
         "set field #steps-opening-postcode-form-children-postcode-field to nw10 1ht",
         "click element #new_steps_opening_postcode_form [type=\"submit\"]"
-
       ]
     },
 
     {
       "url": "http://0.0.0.0:3000/steps/opening/consent_order",
       "actions":[
-        "check field #steps-opening-consent-order-form-consent-order-yes-field",
-        "click element .govuk-button"
+        "check field .govuk-radios #steps-opening-consent-order-form-consent-order-yes-field",
+        "click element #new_steps_opening_consent_order_form .govuk-button"
       ]
 
     },
@@ -37,7 +36,7 @@
     {
       "url": "http://0.0.0.0:3000/steps/opening/consent_order_sought",
       "actions":[
-        "click element .govuk-button"
+        "click element #main-content .govuk-button"
       ]
     },
 
@@ -45,45 +44,141 @@
       "url": "http://0.0.0.0:3000/steps/opening/child_protection_cases",
       "actions": [
         "check field #steps-opening-child-protection-cases-form-child-protection-cases-yes-field",
-        "click element .govuk-button"
+        "click element #main-content .govuk-button"
       ]
     },
     {
       "url": "http://0.0.0.0:3000/steps/opening/child_protection_info",
       "actions": [
-        "click element .govuk-button"
+        "click element div.govuk-grid-column-two-thirds .govuk-button"
       ]
     },
     {
       "url": "http://0.0.0.0:3000/steps/safety_questions/start",
       "actions": [
-        "click element .govuk-button"
+        "click element div.govuk-grid-column-two-thirds .govuk-button"
       ]
     },
 
     {
       "url": "http://0.0.0.0:3000/steps/abuse_concerns/start",
       "actions": [
-      "click element [data-ga-label=\"safety concerns\"]",
-      "click element #main-content .govuk-button"
+        "click element [data-ga-label=\"safety concerns\"]",
+        "click element #main-content .govuk-button"
+      ]
+    },
 
-      ]
-    },
-    {
-      "url": "http://0.0.0.0:3000/steps/safety_questions/address_confidentiality",
-      "actions": [
-      "check field  #steps-safety-questions-address-confidentiality-form-address-confidentiality-yes-field",
-      "click element .govuk-button"
-      ]
-    },
     {
       "url": "http://0.0.0.0:3000/steps/abuse_concerns/children_info",
       "actions": [
-      "click element [data-ga-label=\"children abuse info\"]",
-      "click element .govuk-button"
+        "click element #main-content .govuk-link",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/safety_questions/address_confidentiality",
+      "actions": [ 
+        "check field #main-content #steps-safety-questions-address-confidentiality-form-address-confidentiality-yes-field",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/safety_questions/risk_of_abduction",
+      "actions": [  
+        "check field #main-content #steps-safety-questions-risk-of-abduction-form-risk-of-abduction-yes-field",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/international",
+      "actions": [  
+        "check field #main-content #steps-abduction-international-form-passport-office-notified-yes-field",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/children_have_passport",
+      "actions": [  
+        "check field #main-content #steps-abduction-children-have-passport-form-children-have-passport-yes-field",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/passport_details",
+      "actions": [ 
+        "check field #main-content #steps-abduction-passport-details-form-children-multiple-passports-yes-field",
+        "check field #main-content #steps-abduction-passport-details-form-passport-possession-other-field",
+        "wait for element #steps-abduction-passport-details-form-passport-possession-other-field to be visible",
+        "set field #steps-abduction-passport-details-form-passport-possession-other-field to neighbour",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/previous_attempt",
+      "actions": [  
+        "check field #main-content #steps-abduction-previous-attempt-form-previous-attempt-no-field",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/risk_details",
+      "actions": [  
+        "set field #main-content #steps-abduction-risk-details-form-risk-details-field to they have sent me messages threatening to take the kids somewhere",
+        "set field #steps-abduction-risk-details-form-current-location-field to at my house",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/safety_questions/substance_abuse",
+      "actions": [  
+        "check field #main-content #steps-safety-questions-substance-abuse-form-substance-abuse-yes-field",
+        "set field #steps-safety-questions-substance-abuse-form-substance-abuse-details-field to they drink too all day",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/start",
+      "actions": [ 
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/children_info",
+      "actions": [ 
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/question",
+      "actions": [  
+        "check field #main-content #steps-abuse-concerns-question-form-answer-no-field",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/details/children/physical",
+      "actions": [
+        "click element [data-ga-label=\"abuse details\"]",
+        "set field #steps-abuse-concerns-details-form-behaviour-description-field to something",
+        "set field #steps-abuse-concerns-details-form-behaviour-start-field to hmm",
+        "check field #steps-abuse-concerns-details-form-behaviour-ongoing-no-field",
+        "set field #steps-abuse-concerns-details-form-behaviour-stop-field to recently",
+        "check field #steps-abuse-concerns-details-form-asked-for-help-no-field",
+      "click element #main-content .govuk-button"
       ]
     }
-
 
   ]
 
