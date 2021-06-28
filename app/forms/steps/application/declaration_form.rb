@@ -2,10 +2,12 @@ module Steps
   module Application
     class DeclarationForm < BaseForm
       attribute :declaration_signee, StrippedString
+      attribute :declaration_confirmation, StrippedString
       attribute :declaration_signee_capacity, String
 
       validates_presence_of  :declaration_signee
       validates_inclusion_of :declaration_signee_capacity, in: UserType.string_values
+      validates_inclusion_of :declaration_confirmation, in: UserType.string_values
 
       # This final form object performs a `c100_application` fulfilment validation,
       # essentially a top level sanity check. Refer to `ApplicationFulfilmentValidator`

@@ -4,6 +4,7 @@ class Relation < ValueObject
     FATHER = new(:father),
     GUARDIAN = new(:guardian),
     SPECIAL_GUARDIAN = new(:special_guardian),
+    GRAND_PARENT = new(:grand_parent),
     OTHER = new(:other),
   ].freeze
 

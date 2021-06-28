@@ -24,6 +24,7 @@ en:
       father: Father
       guardian: Guardian
       special_guardian: Special Guardian
+      grand_parent: Grandparent
       other: Other
 
     # Important: maintain these orders in sync with the rest of locale files
