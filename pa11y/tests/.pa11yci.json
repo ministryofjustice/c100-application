@@ -1,6 +1,6 @@
 {
   "defaults": {
-    "timeout": 30000,
+    "timeout": 60000,
     "standard": "WCAG2AA",
     "viewport": {
       "width": 600,
@@ -27,6 +27,7 @@
     {
       "url": "http://0.0.0.0:3000/steps/opening/consent_order",
       "actions":[
+        "wait for url to be http://0.0.0.0:3000/steps/opening/consent_order",
         "check field .govuk-radios #steps-opening-consent-order-form-consent-order-yes-field",
         "click element #new_steps_opening_consent_order_form .govuk-button"
       ]
