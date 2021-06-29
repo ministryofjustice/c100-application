@@ -76,6 +76,17 @@ RSpec.describe CourtContactDetails do
         weymouth-combined-court
         isle-of-wight-combined-court
         northampton-magistrates-court
+        caernarfon-justice-centre
+        cardiff-civil-and-family-justice-centre
+        carmarthen-county-court-and-family-court
+        haverfordwest-county-court-and-family-court
+        newport-south-wales-county-court-and-family-court
+        swansea-civil-justice-centre
+        wrexham-county-and-family-court
+        bedford-county-court-and-family-court
+        canterbury-combined-court-centre
+        hertford-county-court-and-family-court
+        high-wycombe-magistrates-court-and-family-court
       ))
     end
   end
