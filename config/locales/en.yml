@@ -290,7 +290,9 @@ en:
         edit:
           page_title: Respondent address details
           heading: "Address details of %{name}"
-          body_info: Include as much detail as you can. If there’s information missing, your application may take longer to process.
+          body_info_html: |
+            Include as much detail as you can. If there’s information missing, your application may take longer to process.<br />
+            It may delay your application if contact details are not provided.
       has_other_parties:
         edit:
           page_title: Other parties who should know about the application
@@ -591,6 +593,8 @@ en:
           lead_text_html: |
             <p class="govuk-body-l">A copy of your court application will be sent to all the other people named in the application (the respondents). This will include your contact details.</p>
             <p class="govuk-body">If you think the other people pose a threat to the safety of you or the children, you can ask the court to keep your contact details private.</p>
+            <p class="govuk-body"><strong>Please note:</strong> you will need to make sure that any form or document, either completed by you now, or at a later date, for use in court <strong>does not</strong> contain the information you wish to keep private. This includes documents received from other people e.g. medical reports or financial statements etc.</p>
+            <p class="govuk-body">The court staff are not able to check the documents you submit to the court for any unintentional disclosure of your contact details.</p>
 
     miam:
       attended:
@@ -1417,7 +1421,8 @@ en:
         <<: *PERSONAL_CONTACT_FIELDS
       steps_respondent_address_details_form:
         <<: *PERSONAL_ADDRESS_FIELDS
-        residence_history: Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent
+        residence_history_no: Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent
+        residence_history_unknown: Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent
       steps_respondent_has_other_parties_form:
         has_other_parties_options:
           <<: *YESNO
@@ -1551,7 +1556,8 @@ en:
         birthplace: *birthplace_hint
       steps_respondent_address_details_form:
         address_line_1: Court documents will be sent here
-        residence_history: *leave_blank_if_unknown
+        residence_history_no: *leave_blank_if_unknown
+        residence_history_unknown: *leave_blank_if_unknown
       steps_other_party_address_details_form:
         address_line_1: Court documents may be sent here
       steps_applicant_names_split_form:
