@@ -20,18 +20,11 @@
       "url":"http://0.0.0.0:3000/steps/opening/postcode",
       "actions": [
         "set field #steps-opening-postcode-form-children-postcode-field to nw10 1ht",
-        "click element #new_steps_opening_postcode_form [type=\"submit\"]"
-      ]
-    },
-
-    {
-      "url": "http://0.0.0.0:3000/steps/opening/consent_order",
-      "actions":[
-        "wait for url to be http://0.0.0.0:3000/steps/opening/consent_order",
+        "click element #new_steps_opening_postcode_form [type=\"submit\"]",
+        "navigate to http://0.0.0.0:3000/steps/opening/consent_order",
         "check field .govuk-radios #steps-opening-consent-order-form-consent-order-yes-field",
         "click element #new_steps_opening_consent_order_form .govuk-button"
       ]
-
     },
 
     {
@@ -78,8 +71,14 @@
     },
 
     {
-      "url": "http://0.0.0.0:3000/steps/safety_questions/address_confidentiality",
+      "url": "http://0.0.0.0:3000/steps/opening/postcode",
       "actions": [ 
+        "set field #steps-opening-postcode-form-children-postcode-field to nw10 1ht",
+        "click element #new_steps_opening_postcode_form [type=\"submit\"]",
+        "navigate to http://0.0.0.0:3000/steps/opening/consent_order",
+        "check field .govuk-radios #steps-opening-consent-order-form-consent-order-yes-field",
+        "click element #new_steps_opening_consent_order_form .govuk-button",
+        "navigate to http://0.0.0.0:3000/steps/safety_questions/address_confidentiality",
         "check field #main-content #steps-safety-questions-address-confidentiality-form-address-confidentiality-yes-field",
         "click element #main-content .govuk-button"
       ]
