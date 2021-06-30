@@ -61,9 +61,9 @@ jobs:
       # so mutant only runs on modified files; refer to mutant.rake for more details
       - run: git remote set-branches origin master && git fetch
 
-      - run:
-          name: run tests
-          command: << parameters.test_command >>
+      # - run:
+      #     name: run tests
+      #     command: << parameters.test_command >>
       - run:
           name: Pa11y tests
           command: bundle exec rails s & sleep 5; npm run test-pa11y
