@@ -12,6 +12,7 @@ unless ENV['NOCOVERAGE']
     add_filter 'spec/support'
     add_filter 'spec/rails_helper.rb'
     add_filter 'config/initializers'
+    add_filter 'config/environments'
     add_filter 'controllers/backoffice'
     add_filter 'helpers/auth0'
   end
