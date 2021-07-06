@@ -1319,7 +1319,7 @@ en:
       steps_application_declaration_form:
         declaration_signee: Enter your full name
         declaration_confirmation_options:
-          applicant: I believe that the facts stated in this from and any continuation sheet are true
+          applicant: I believe that the facts stated in this form and any continuation sheet are true
           representative_html: |
             The applicant believes that the facts stated in this form and any continuation sheets are true. <br />I am authorised by the applicant to sign this statement.<br />This option should only selected if the legal representative is signing the form on behalf of the applicant.
         declaration_signee_capacity_options:
