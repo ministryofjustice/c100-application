@@ -59,7 +59,7 @@ module Steps
         undertaking_court_name: String
       }.freeze.each { |name, type| attribute(name, type) }
 
-      # rubocop:disable AmbiguousOperator
+      # rubocop:disable Lint/AmbiguousOperator
       validates_inclusion_of *CourtOrderType.sym_values, in: GenericYesNo.values
 
       validates_presence_of(
@@ -100,7 +100,7 @@ module Steps
       validates_inclusion_of :undertaking_is_current, in: GenericYesNo.values, if: -> { undertaking&.yes? }
 
       validates *CourtOrderType.string_values.map { |name| "#{name}_issue_date" }, sensible_date: true
-      # rubocop:enable AmbiguousOperator
+      # rubocop:enable Lint/AmbiguousOperator
 
       private
 
