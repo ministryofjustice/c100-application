@@ -62,7 +62,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
   gem 'rubocop'
-  gem 'rubocop-performance'
+  gem 'rubocop-performance', require: false
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
