@@ -1,5 +1,5 @@
-FROM ruby:2.7.2-alpine
-MAINTAINER UCPD Cross Justice Delivery
+FROM ruby:2.7.4-alpine3.13
+MAINTAINER HMCTS Reform Team
 
 # build dependencies:
 #   - virtual: create virtual package for later deletion
