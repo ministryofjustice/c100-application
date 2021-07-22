@@ -5,7 +5,7 @@ module Summary
     attr_reader :c100_application
     attr_reader :pdf_generator
 
-    delegate :to_pdf, :has_forms_data?, to: :pdf_generator
+    delegate :to_pdf, :has_forms_data?, :to_json, to: :pdf_generator
 
     def initialize(c100_application, generator = C100App::PdfGenerator.new)
       @c100_application = c100_application

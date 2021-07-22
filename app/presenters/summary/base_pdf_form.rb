@@ -30,5 +30,15 @@ module Summary
     def raw_file_path
       nil
     end
+
+    def to_hash
+      sections.map do |section|
+        if section.is_a?(Array)
+          section.map(&:to_hash)
+        else
+          section.to_hash
+        end
+      end
+    end
   end
 end

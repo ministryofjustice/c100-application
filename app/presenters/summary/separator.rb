@@ -1,5 +1,7 @@
 module Summary
   class Separator
+    include Helpers
+
     attr_reader :title, :i18n_opts
 
     def initialize(title, i18n_opts = {})
@@ -19,6 +21,10 @@ module Summary
 
     def to_partial_path
       'steps/completion/shared/separator'
+    end
+
+    def to_hash
+      additional_data({ title: title })
     end
   end
 end

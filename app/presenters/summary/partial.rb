@@ -1,5 +1,7 @@
 module Summary
   class Partial
+    include Helpers
+
     attr_reader :name, :ivar
 
     def initialize(name, ivar = nil)
@@ -31,6 +33,10 @@ module Summary
 
     def to_partial_path
       "steps/completion/shared/#{name}"
+    end
+
+    def to_hash
+      additional_data({ name: name, ivar: (ivar || {}).to_hash })
     end
   end
 end

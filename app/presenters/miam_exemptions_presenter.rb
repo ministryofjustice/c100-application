@@ -12,6 +12,10 @@ class MiamExemptionsPresenter < SimpleDelegator
     def to_partial_path
       'steps/miam_exemptions/shared/exemption'
     end
+
+    def to_hash
+      to_h.merge(type: :miam_exemption)
+    end
   end
 
   def exemptions

@@ -1,6 +1,7 @@
 module Summary
   module Sections
     class BaseSectionPresenter
+      include Helpers
       include Rails.application.routes.url_helpers
 
       attr_reader :c100_application
@@ -28,6 +29,10 @@ module Summary
         true
       end
 
+      def to_hash
+        additional_data({ name: name, answers: safe_answers.map(&:to_hash) })
+      end
+
       protected
 
       # :nocov:
@@ -35,6 +40,12 @@ module Summary
         raise 'must be implemented in subclasses'
       end
       # :nocov:
+
+      def safe_answers
+        answers
+      rescue StandardError
+        []
+      end
     end
   end
 end
