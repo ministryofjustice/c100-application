@@ -80,7 +80,7 @@ RSpec.describe ValidPaymentsArray do
       end
 
       it 'includes the pay by phone option' do
-        expect(subject).to include(PaymentType::SELF_PAYMENT_CARD)
+        expect(subject).to include(PaymentType::HELP_WITH_FEES)
       end
     end
 
@@ -92,7 +92,7 @@ RSpec.describe ValidPaymentsArray do
       end
 
       it 'includes the pay by phone option' do
-        expect(subject).to include(PaymentType::SELF_PAYMENT_CARD)
+        expect(subject).to include(PaymentType::HELP_WITH_FEES)
       end
     end
 
