@@ -9,12 +9,6 @@ module Reports
       def run
         return unless ENV.key?('PAYMENT_TYPE_REPORT_EMAIL')
 
-        report_csv = CSV.generate do |csv|
-          csv << ['Date', Date.today]
-          csv << %(PaymentType Count)
-          report_data.each { |row| csv << row }
-        end
-
         Rails.logger.info "Sending payment types report"
 
         ReportsMailer.payment_types_report(
@@ -30,6 +24,14 @@ module Reports
           .where(completed_at: 1.day.ago...Time.now)
           .group(:payment_type)
           .count
+      end
+
+      def report_csv
+        CSV.generate do |csv|
+          csv << ['Date', Date.today]
+          csv << %w[PaymentType Count]
+          report_data.each { |row| csv << row }
+        end
       end
     end
   end
