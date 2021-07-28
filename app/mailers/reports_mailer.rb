@@ -8,4 +8,16 @@ class ReportsMailer < NotifyMailer
 
     mail to: to_address
   end
+
+  def payment_types_report(report_csv, to_address:, cc_address:)
+    set_template(:payment_types_report)
+    set_personalisation(
+      link_to_report: Notifications.prepare_upload(
+        StringIO.new(report_csv),
+        true
+      )
+    )
+
+    mail(to: to_address, cc: cc_address)
+  end
 end
