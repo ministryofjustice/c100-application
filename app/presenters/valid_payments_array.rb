@@ -66,8 +66,9 @@ class ValidPaymentsArray < SimpleDelegator
   # use online payment, or if it is print&post.
   #
   def phone_pay_enabled?
-    return false unless c100_application.online_submission?
-
-    !govuk_pay_enabled?
+    # RST-3529 disable phone payment
+    # return false unless c100_application.online_submission?
+    # !govuk_pay_enabled?
+    false
   end
 end
