@@ -8,7 +8,7 @@ describe Court do
       "name" => 'Court name',
       "slug" => 'court-slug',
       "email" => 'family@court',
-      "address" => 'address',
+      "addresses" => ['address'],
       "cci_code" => 123,
       "gbs" => 'X123',
     }
@@ -29,6 +29,24 @@ describe Court do
 
     it 'sets the address' do
       expect(subject.address).to eq('address')
+    end
+
+    # Before the FACT release is in place TODO to remove it after
+    context 'single address' do
+      let(:data) {
+        {
+          "name" => 'Court name',
+          "slug" => 'court-slug',
+          "email" => 'family@court',
+          "address" => 'address',
+          "cci_code" => 123,
+          "gbs" => 'X123',
+        }
+      }
+
+      it 'sets the address' do
+        expect(subject.address).to eq('address')
+      end
     end
 
     it 'sets the cci_code' do
@@ -61,12 +79,12 @@ describe Court do
       end
 
       context 'address' do
-        let(:data) { super().except('address') }
+        let(:data) { super().except('addresses') }
 
         it 'sends the exception to Sentry with extra context' do
           expect(Raven).to receive(:extra_context).with(data: data)
           expect(Raven).to receive(:capture_exception).with(an_instance_of(KeyError))
-          expect { subject.name }.to raise_error(KeyError, 'key not found: "address"')
+          expect { subject.name }.to raise_error(KeyError, 'key not found: "addresses"')
         end
       end
 
