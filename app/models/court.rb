@@ -17,7 +17,7 @@ class Court < ApplicationRecord
     new(
       slug: data.fetch('slug'),
       name: data.fetch('name'),
-      address: data.fetch('address'),
+      address: fetch_address(data),
       cci_code: data.fetch('cci_code'),
       # Email and GBS code, if not already present, come from a separate API request
       email: data['email'],
@@ -82,6 +82,14 @@ class Court < ApplicationRecord
 
   def stale?
     updated_at.nil? || updated_at <= REFRESH_DATA_AFTER.ago
+  end
+
+  def self.fetch_address(data)
+    if data.key?('address')
+      data.fetch('address')
+    else
+      data.fetch('addresses').first
+    end
   end
 
   private
