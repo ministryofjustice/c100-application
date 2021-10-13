@@ -1007,7 +1007,8 @@ en:
       privacy: Privacy
       terms_and_conditions: Terms and conditions
     phase_banner:
-      feedback_contact_html: This is a new service. <a href="https://www.smartsurvey.co.uk/s/C100Citizen_feedback/" class="govuk-link govuk-link--no-visited-state" target="_blank">Provide feedback (opens in a new tab)</a> and help improve it for others.
+      feedback_processing_html: This is a new service. <a href="https://www.smartsurvey.co.uk/s/C100Citizen_feedback/" class="govuk-link govuk-link--no-visited-state" target="_blank">Provide feedback (opens in a new tab)</a> and help improve it for others.
+      feedback_completed_html: This is a new service. <a href="https://www.smartsurvey.co.uk/s/C100Citizen_applicant/" class="govuk-link govuk-link--no-visited-state" target="_blank">Provide feedback (opens in a new tab)</a> and help improve it for others.
     current_user_menu:
       logout: Sign out
       change_password: Change password
