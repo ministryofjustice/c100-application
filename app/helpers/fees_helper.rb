@@ -8,9 +8,9 @@ module FeesHelper
   def phase_banner_copy
     page = @c100_application.try(:navigation_stack).try(:last)
     if page == "/steps/completion/what_next"
-      t('.feedback_completed_html')
+      I18n.t('layouts.phase_banner.feedback_completed_html').html_safe
     else
-      t('.feedback_processing_html')
+      I18n.t('layouts.phase_banner.feedback_processing_html').html_safe
     end
   end
 end
