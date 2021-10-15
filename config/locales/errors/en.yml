@@ -136,6 +136,8 @@ en:
           attributes:
             miam_acknowledgement:
               blank: Confirm you understand MIAM attendance requirements
+            mediation_voucher_scheme:
+              inclusion: Select if you have previously been to mediation through the mediation voucher scheme
         steps/miam/exemption_claim_form:
           attributes:
             miam_exemption_claim:
