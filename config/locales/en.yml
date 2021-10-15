@@ -1329,6 +1329,8 @@ en:
       steps_miam_acknowledgement_form:
         miam_acknowledgement_options:
           'true': I understand that I have to attend a MIAM or provide a valid reason for not attending.
+        mediation_voucher_scheme_options:
+          <<: *YESNO
       steps_miam_certification_details_form:
         miam_certification_number: Mediator registration number (URN)
         miam_certification_service_name: Family mediation service name
