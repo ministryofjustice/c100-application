@@ -8,9 +8,10 @@ class SplitAddress < Virtus::Attribute
     {
       address_line_1: tokens[0],
       address_line_2: tokens[1],
-      town: tokens[2],
-      country: tokens[3],
-      postcode: tokens[4],
+      address_line_3: tokens[2],
+      town: tokens[3],
+      country: tokens[4],
+      postcode: tokens[5],
     }
   end
 end

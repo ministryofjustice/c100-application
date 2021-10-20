@@ -4,6 +4,7 @@ module PersonWithAddress
   ADDRESS_DATA_FIELDS = %i[
     address_line_1
     address_line_2
+    address_line_3
     town
     country
     postcode

@@ -16,11 +16,12 @@ RSpec.describe SplitAddress do
   end
 
   describe 'when value has all expected tokens' do
-    let(:value) { 'address_line_1|address_line_2|town|country|postcode' }
+    let(:value) { 'address_line_1|address_line_2|address_line_3|town|country|postcode' }
     it {
       expect(coerced_value).to eq({
         address_line_1: 'address_line_1',
         address_line_2: 'address_line_2',
+        address_line_3: 'address_line_3',
         town: 'town',
         country: 'country',
         postcode: 'postcode'
@@ -29,11 +30,12 @@ RSpec.describe SplitAddress do
   end
 
   describe 'when value is missing some of the tokens' do
-    let(:value) { 'address_line_1|||country|postcode' }
+    let(:value) { 'address_line_1||||country|postcode' }
     it {
       expect(coerced_value).to eq({
         address_line_1: 'address_line_1',
         address_line_2: '',
+        address_line_3: '',
         town: '',
         country: 'country',
         postcode: 'postcode'

@@ -6,6 +6,7 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
     record: record,
     address_line_1: address_line_1,
     address_line_2: address_line_2,
+    address_line_3: address_line_3,
     town: town,
     country: country,
     postcode: postcode,
@@ -23,6 +24,7 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
 
   let(:address_line_1) { 'address_line_1' }
   let(:address_line_2) { 'address_line_2' }
+  let(:address_line_3) { 'address_line_3' }
   let(:town) { 'town' }
   let(:country) { 'country' }
   let(:postcode) { 'postcode' }
@@ -87,6 +89,7 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
           address_data: {
             address_line_1: 'address_line_1',
             address_line_2: 'address_line_2',
+            address_line_3: 'address_line_3',
             town: 'town',
             country: 'country',
             postcode: 'postcode'
