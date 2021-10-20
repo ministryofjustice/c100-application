@@ -6,9 +6,11 @@ module Summary
       @c100_application = c100_application
     end
 
+    # rubocop:disable Metrics/AbcSize
     def sections
       [
         HtmlSections::OpeningQuestions.new(c100_application),
+        HtmlSections::MediationVoucherRequirement.new(c100_application),
         *miam_questions,
         *safety_and_abuse_questions,
         HtmlSections::NatureOfApplication.new(c100_application),
@@ -24,6 +26,7 @@ module Summary
         *submission_and_payment_sections,
       ].flatten.select(&:show?)
     end
+    # rubocop:enable Metrics/AbcSize
 
     def errors
       FulfilmentErrorsPresenter.new(c100_application).errors

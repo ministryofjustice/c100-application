@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_01_111447) do
+ActiveRecord::Schema.define(version: 2021_10_14_100117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_111447) do
     t.string "miam_mediator_exemption"
     t.datetime "completed_at"
     t.string "declaration_confirmation"
+    t.string "mediation_voucher_scheme"
     t.index ["court_id"], name: "index_c100_applications_on_court_id"
     t.index ["status"], name: "index_c100_applications_on_status"
     t.index ["user_id"], name: "index_c100_applications_on_user_id"
