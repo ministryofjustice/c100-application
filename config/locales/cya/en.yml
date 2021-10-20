@@ -64,6 +64,7 @@ en:
     change_link_html: Change <span class="govuk-visually-hidden">your answer to, %{a11y_question}</span>
     sections:
       opening_questions: Opening questions
+      mediation_voucher: Mediation voucher scheme
       miam_requirement: MIAM requirement
       miam_attendance: MIAM attendance
       miam_exemptions: MIAM exemption
@@ -139,6 +140,10 @@ en:
       question: Are the children involved in any emergency protection, care or supervision proceedings (or have they been)?
       answers:
         <<: *YESNO
+    mediation_voucher_scheme:
+      question: Have you previously been to mediation through the mediation voucher scheme?
+      answers:
+         <<: *YESNO
     miam_attended:
       question: Have you attended a Mediation Information and Assessment Meeting (MIAM)?
       answers:
