@@ -2,6 +2,8 @@ Feature: MIAM journey
   Background:
     Given I have started an application
     When I visit "steps/miam/acknowledgement"
+    Then I should see "Have you previously been to mediation through the mediation voucher scheme?"
+    And I choose "Yes"
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I check "I understand that I have to attend a MIAM or provide a valid reason for not attending."
     And I click the "Continue" button
