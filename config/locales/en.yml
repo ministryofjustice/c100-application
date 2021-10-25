@@ -126,6 +126,7 @@ en:
     PERSONAL_ADDRESS_FIELDS: &PERSONAL_ADDRESS_FIELDS
       address_line_1: Building and street
       address_line_2: Building and street line 2
+      address_line_3: Building and street line 3
       town: Town or city
       country: Country
       postcode: Postcode
