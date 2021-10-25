@@ -7,6 +7,7 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
       record: record,
       address_line_1: address_line_1,
       address_line_2: address_line_2,
+      address_line_3: address_line_3,
       town: town,
       country: country,
       postcode: postcode,
@@ -30,6 +31,7 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
 
   let(:address_line_1) { 'address_line_1' }
   let(:address_line_2) { 'address_line_2' }
+  let(:address_line_3) { 'address_line_3' }
   let(:town) { 'town' }
   let(:country) { 'country' }
   let(:postcode) { 'postcode' }
@@ -149,6 +151,7 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
       it { should validate_presence_of(:town) }
 
       it { should_not validate_presence_of(:address_line_2) }
+      it { should_not validate_presence_of(:address_line_3) }
       it { should_not validate_presence_of(:country) }
       it { should_not validate_presence_of(:postcode) }
     end
@@ -158,6 +161,7 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
 
       it { should_not validate_presence_of(:address_line_1) }
       it { should_not validate_presence_of(:address_line_2) }
+      it { should_not validate_presence_of(:address_line_3) }
       it { should_not validate_presence_of(:town) }
       it { should_not validate_presence_of(:country) }
       it { should_not validate_presence_of(:postcode) }
@@ -169,6 +173,7 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
           address_data: {
             address_line_1: 'address_line_1',
             address_line_2: 'address_line_2',
+            address_line_3: 'address_line_3',
             town: 'town',
             country: 'country',
             postcode: 'postcode'
