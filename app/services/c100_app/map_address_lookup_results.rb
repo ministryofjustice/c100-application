@@ -5,7 +5,7 @@ module C100App
     DEFAULT_COUNTRY = 'UNITED KINGDOM'.freeze
     OTHER_COUNTRIES = ['ISLE OF MAN', 'JERSEY', 'GUERNSEY'].freeze
 
-    Address = Struct.new(:address_line_1, :address_line_2, :town, :country, :postcode) do
+    Address = Struct.new(:address_line_1, :address_line_2, :address_line_3, :town, :country, :postcode) do
       def address_lines
         [address_line_1, address_line_2].presence_join(', ')
       end
@@ -25,6 +25,7 @@ module C100App
       Address.new(
         address_line(result.slice(*LINE_ONE_PARTS).values),
         address_line(result.slice(*LINE_TWO_PARTS).values),
+        "",
         postal_town(result),
         country_name(result),
         result.fetch('POSTCODE')
