@@ -126,6 +126,7 @@ en:
     PERSONAL_ADDRESS_FIELDS: &PERSONAL_ADDRESS_FIELDS
       address_line_1: Building and street
       address_line_2: Building and street line 2
+      address_line_3: Building and street line 3
       town: Town or city
       country: Country
       postcode: Postcode
@@ -290,9 +291,7 @@ en:
         edit:
           page_title: Respondent address details
           heading: "Address details of %{name}"
-          body_info_html: |
-            Include as much detail as you can. If there’s information missing, your application may take longer to process.<br />
-            It may delay your application if contact details are not provided.
+          body_info_html: Include as much detail as you can. If there’s information missing, your application may take longer to process.
       has_other_parties:
         edit:
           page_title: Other parties who should know about the application

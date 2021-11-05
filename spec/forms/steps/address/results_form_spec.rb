@@ -10,7 +10,7 @@ RSpec.describe Steps::Address::ResultsForm do
   let(:c100_application) { instance_double(C100Application) }
 
   let(:record) { nil }
-  let(:selected_address) { 'address_line_1|address_line_2|town|country|postcode' }
+  let(:selected_address) { 'address_line_1|address_line_2|address_line_3|town|country|postcode' }
 
   subject { described_class.new(arguments) }
 
@@ -48,6 +48,7 @@ RSpec.describe Steps::Address::ResultsForm do
         expect(record).to receive(:update).with(
           address_line_1: 'address_line_1',
           address_line_2: 'address_line_2',
+          address_line_3: 'address_line_3',
           town: 'town',
           country: 'country',
           postcode: 'postcode'
