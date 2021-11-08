@@ -108,8 +108,6 @@ Rails.application.routes.draw do
   end
 
   namespace :steps do
-    namespace :cache do
-    end
     namespace :opening do
       show_step :start
       show_step :warning
