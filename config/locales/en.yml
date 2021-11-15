@@ -1416,6 +1416,18 @@ en:
         voicemail_consent_options:
           'yes': Yes, the court can leave me a voicemail
           'no': No, the court cannot leave me a voicemail
+        email_keep_private:
+          <<: *YESNO
+        email_keep_private_options:
+          <<: *YESNO
+        phone_keep_private:
+          <<: *YESNO
+        phone_keep_private_options:
+          <<: *YESNO
+        mobile_keep_private:
+          <<: *YESNO
+        mobile_keep_private_options:
+          <<: *YESNO
       steps_applicant_address_details_form:
         <<: *PERSONAL_ADDRESS_FIELDS
         residence_history: Provide details and dates of all previous addresses for the last 5 years
@@ -1750,6 +1762,9 @@ en:
         residence_keep_private: Do you want to keep your address details private from the other people named in the application (the respondents)?
       steps_applicant_contact_details_form:
         voicemail_consent: Can the court leave you a voicemail?
+        email_keep_private: 'Do you want to keep your email private from the other people named in the application (the respondents)?'
+        phone_keep_private: 'Do you want to keep your home phone number private from the other people named in the application (the respondents)?'
+        mobile_keep_private: 'Do you want to keep your mobile phone number private from the other people named in the application (the respondents)?'
       steps_shared_under_age_form:
         under_age: Litigation friend representation
 
