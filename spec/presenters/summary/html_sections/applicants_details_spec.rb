@@ -21,12 +21,16 @@ module Summary
         birthplace: 'birthplace',
         address_unknown: false, # for applicants this can only be `false`
         residence_requirement_met: 'yes',
+        residence_keep_private: 'yes',
         residence_history: 'history',
         home_phone: 'home_phone',
         mobile_phone: 'mobile_phone',
         email_provided: 'yes',
         email: 'email',
         voicemail_consent: 'yes',
+        email_keep_private: 'yes',
+        phone_keep_private: 'yes',
+        mobile_keep_private: 'yes',
         relationships: [relationship],
       )
     }
@@ -112,7 +116,8 @@ module Summary
           expect(answers[3]).to be_an_instance_of(AnswersGroup)
           expect(answers[3].name).to eq(:person_address_details)
           expect(answers[3].change_path).to eq('/steps/applicant/address_details/uuid-123')
-          expect(answers[3].answers.count).to eq(3)
+
+          expect(answers[3].answers.count).to eq(4)
 
           # personal_details group answers ###
           details = answers[3].answers
@@ -125,14 +130,19 @@ module Summary
           expect(details[1].question).to eq(:person_residence_requirement_met)
           expect(details[1].value).to eq('yes')
 
-          expect(details[2]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[2].question).to eq(:person_residence_history)
-          expect(details[2].value).to eq('history')
+          expect(details[2]).to be_an_instance_of(Answer)
+          expect(details[2].question).to eq(:residence_keep_private)
+          expect(details[2].value).to eq('yes')
+
+          expect(details[3]).to be_an_instance_of(FreeTextAnswer)
+          expect(details[3].question).to eq(:person_residence_history)
+          expect(details[3].value).to eq('history')
+
 
         expect(answers[4]).to be_an_instance_of(AnswersGroup)
         expect(answers[4].name).to eq(:person_contact_details)
         expect(answers[4].change_path).to eq('/steps/applicant/contact_details/uuid-123')
-        expect(answers[4].answers.count).to eq(5)
+        expect(answers[4].answers.count).to eq(8)
 
           # contact details group answers ###
           details = answers[4].answers
@@ -145,17 +155,29 @@ module Summary
           expect(details[1].question).to eq(:person_email)
           expect(details[1].value).to eq('email')
 
-          expect(details[2]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[2].question).to eq(:person_home_phone)
-          expect(details[2].value).to eq('home_phone')
+          expect(details[2]).to be_an_instance_of(Answer)
+          expect(details[2].question).to eq(:email_keep_private)
+          expect(details[2].value).to eq('yes')
 
           expect(details[3]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[3].question).to eq(:person_mobile_phone)
-          expect(details[3].value).to eq('mobile_phone')
+          expect(details[3].question).to eq(:person_home_phone)
+          expect(details[3].value).to eq('home_phone')
 
           expect(details[4]).to be_an_instance_of(Answer)
-          expect(details[4].question).to eq(:person_voicemail_consent)
+          expect(details[4].question).to eq(:phone_keep_private)
           expect(details[4].value).to eq('yes')
+
+          expect(details[5]).to be_an_instance_of(FreeTextAnswer)
+          expect(details[5].question).to eq(:person_mobile_phone)
+          expect(details[5].value).to eq('mobile_phone')
+
+          expect(details[6]).to be_an_instance_of(Answer)
+          expect(details[6].question).to eq(:mobile_keep_private)
+          expect(details[6].value).to eq('yes')
+
+          expect(details[7]).to be_an_instance_of(Answer)
+          expect(details[7].question).to eq(:person_voicemail_consent)
+          expect(details[7].value).to eq('yes')
 
         expect(answers[5]).to be_an_instance_of(Answer)
         expect(answers[5].question).to eq(:relationship_to_child)

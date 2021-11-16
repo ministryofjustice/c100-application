@@ -220,4 +220,27 @@ RSpec.describe ApplicationHelper, type: :helper do
       it { expect(helper.dev_tools_enabled?).to eq(true) }
     end
   end
+
+  describe 'display_private_option?' do
+    let(:c100_application) { instance_double(C100Application, address_confidentiality: address_confidentiality)}
+    before {
+      allow(helper).to receive(:current_c100_application).and_return c100_application
+    }
+
+    context 'no' do
+      let(:address_confidentiality) { 'no' }
+      it { expect(helper.display_private_option?).to eq(false) }
+    end
+
+    context 'nil' do
+      let(:address_confidentiality) { nil }
+      it { expect(helper.display_private_option?).to eq(false) }
+    end
+
+    context 'yes' do
+      let(:address_confidentiality) { 'yes' }
+      it { expect(helper.display_private_option?).to eq(true) }
+    end
+  end
+
 end
