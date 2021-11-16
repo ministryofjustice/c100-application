@@ -17,7 +17,7 @@ module Summary
         false
       end
 
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength
       def answers
         record_collection.map.with_index(1) do |person, index|
           [
@@ -49,7 +49,7 @@ module Summary
           ]
         end.flatten.select(&:show?)
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength
 
       private
 
