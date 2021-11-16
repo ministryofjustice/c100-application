@@ -38,22 +38,22 @@ module Summary
       private
 
       def address(person)
-        value = (confidential? && person.residence_keep_private == 'yes') ? person.full_address : nil
+        value = confidential? && person.residence_keep_private == 'yes' ? person.full_address : nil
         FreeTextAnswer.new(:person_address, value)
       end
 
       def person_email(person)
-        value = (confidential? && person.email_keep_private == 'yes') ? person.email : nil
+        value = confidential? && person.email_keep_private == 'yes' ? person.email : nil
         FreeTextAnswer.new(:person_email, value)
       end
 
       def person_home_phone(person)
-        value = (confidential? && person.phone_keep_private == 'yes') ? person.home_phone : nil
+        value = confidential? && person.phone_keep_private == 'yes' ? person.home_phone : nil
         FreeTextAnswer.new(:person_home_phone, value)
       end
 
       def person_mobile_phone(person)
-        value = (confidential? && person.mobile_keep_private == 'yes') ? person.mobile_phone : nil
+        value = confidential? && person.mobile_keep_private == 'yes' ? person.mobile_phone : nil
         FreeTextAnswer.new(:person_mobile_phone, value)
       end
 

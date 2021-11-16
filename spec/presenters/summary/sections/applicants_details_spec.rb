@@ -20,10 +20,14 @@ module Summary
         gender: 'female',
         birthplace: 'birthplace',
         residence_requirement_met: 'yes',
+        residence_keep_private: 'yes',
         residence_history: 'history',
         home_phone: 'home_phone',
         mobile_phone: 'mobile_phone',
         email: 'email',
+        email_keep_private: 'yes',
+        phone_keep_private: 'yes',
+        mobile_keep_private: 'yes',
         voicemail_consent: 'yes',
       )
     }
@@ -77,7 +81,7 @@ module Summary
       end
 
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(15)
+        expect(answers.count).to eq(19)
       end
 
       it 'has the correct rows in the right order' do
@@ -113,32 +117,48 @@ module Summary
         expect(answers[7].question).to eq(:person_residence_requirement_met)
         expect(answers[7].value).to eq('yes')
 
-        expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[8].question).to eq(:person_residence_history)
-        expect(answers[8].value).to eq('history')
+        expect(answers[8]).to be_an_instance_of(Answer)
+        expect(answers[8].question).to eq(:residence_keep_private)
+        expect(answers[8].value).to eq('yes')
 
         expect(answers[9]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[9].question).to eq(:person_email)
-        expect(answers[9].value).to eq('email')
+        expect(answers[9].question).to eq(:person_residence_history)
+        expect(answers[9].value).to eq('history')
 
         expect(answers[10]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[10].question).to eq(:person_home_phone)
-        expect(answers[10].value).to eq('home_phone')
+        expect(answers[10].question).to eq(:person_email)
+        expect(answers[10].value).to eq('email')
 
-        expect(answers[11]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[11].question).to eq(:person_mobile_phone)
-        expect(answers[11].value).to eq('mobile_phone')
+        expect(answers[11]).to be_an_instance_of(Answer)
+        expect(answers[11].question).to eq(:email_keep_private)
+        expect(answers[11].value).to eq('yes')
 
-        expect(answers[12]).to be_an_instance_of(Answer)
-        expect(answers[12].question).to eq(:person_voicemail_consent)
-        expect(answers[12].value).to eq('yes')
+        expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[12].question).to eq(:person_home_phone)
+        expect(answers[12].value).to eq('home_phone')
 
-        expect(answers[13]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[13].question).to eq(:person_relationship_to_children)
-        expect(answers[13].value).to eq('relationships')
+        expect(answers[13]).to be_an_instance_of(Answer)
+        expect(answers[13].question).to eq(:phone_keep_private)
+        expect(answers[13].value).to eq('yes')
 
-        expect(answers[14]).to be_an_instance_of(Partial)
-        expect(answers[14].name).to eq(:row_blank_space)
+        expect(answers[14]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[14].question).to eq(:person_mobile_phone)
+        expect(answers[14].value).to eq('mobile_phone')
+
+        expect(answers[15]).to be_an_instance_of(Answer)
+        expect(answers[15].question).to eq(:mobile_keep_private)
+        expect(answers[15].value).to eq('yes')
+
+        expect(answers[16]).to be_an_instance_of(Answer)
+        expect(answers[16].question).to eq(:person_voicemail_consent)
+        expect(answers[16].value).to eq('yes')
+
+        expect(answers[17]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[17].question).to eq(:person_relationship_to_children)
+        expect(answers[17].value).to eq('relationships')
+
+        expect(answers[18]).to be_an_instance_of(Partial)
+        expect(answers[18].name).to eq(:row_blank_space)
       end
 
       context 'for existing previous name' do
@@ -146,7 +166,7 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(15)
+          expect(answers.count).to eq(19)
         end
 
         it 'renders the previous name' do
