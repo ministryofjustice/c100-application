@@ -57,8 +57,11 @@ module Summary
         [
           Answer.new(:person_email_provided, person.email_provided),
           FreeTextAnswer.new(:person_email, person.email),
+          Answer.new(:email_keep_private, person.email_keep_private),
           FreeTextAnswer.new(:person_home_phone, person.home_phone),
+          Answer.new(:phone_keep_private, person.phone_keep_private),
           FreeTextAnswer.new(:person_mobile_phone, person.mobile_phone),
+          Answer.new(:mobile_keep_private, person.mobile_keep_private),
           Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
         ]
       end
@@ -68,6 +71,7 @@ module Summary
           FreeTextAnswer.new(:person_address, person.full_address),
           Answer.new(:person_address_unknown, person.address_unknown), # This shows only if a value is present
           Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
+          Answer.new(:residence_keep_private, person.residence_keep_private),
           FreeTextAnswer.new(:person_residence_history, person.residence_history)
         ]
       end
