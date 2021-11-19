@@ -7,6 +7,10 @@ module Steps
       attribute :voicemail_consent, YesNo
       attribute :email_provided, YesNo
 
+      attribute :email_keep_private, YesNo
+      attribute :phone_keep_private, YesNo
+      attribute :mobile_keep_private, YesNo
+
       # Note: we validate presence of these fields, but allow the applicant to enter
       # free text in case they do not want to disclose their phone or email address.
       # That is why we do not perform any further validation, other than presence
@@ -14,10 +18,18 @@ module Steps
       #
       validates_inclusion_of :email_provided, in: GenericYesNo.values
 
-      validates :email, email: true, if: proc { |o| o.email_provided && GenericYesNo.new(o.email_provided).yes? }
+      validates :email, email: true, if: proc { |o| validate_email_value?(o) }
       validates_presence_of :mobile_phone
 
       validates_inclusion_of :voicemail_consent, in: GenericYesNo.values
+
+      validates_inclusion_of :email_keep_private, in: GenericYesNo.values, if: proc { |o|
+                                                                                 validate_email_value?(o) && address_confidential?
+                                                                               }
+      validates_inclusion_of :phone_keep_private, in: GenericYesNo.values, if: proc { |o|
+                                                                                 o.home_phone.present? && address_confidential?
+                                                                               }
+      validates_inclusion_of :mobile_keep_private, in: GenericYesNo.values, if: -> { address_confidential? }
 
       private
 
@@ -32,6 +44,15 @@ module Steps
 
         applicant = c100_application.applicants.find_or_initialize_by(id: record_id)
         applicant.update(attributes_map)
+      end
+
+      def address_confidential?
+        raise C100ApplicationNotFound unless c100_application
+        c100_application.address_confidentiality == 'yes'
+      end
+
+      def validate_email_value?(o)
+        o.email_provided && GenericYesNo.new(o.email_provided).yes?
       end
     end
   end
