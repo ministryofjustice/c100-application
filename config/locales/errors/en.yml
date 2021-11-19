@@ -418,6 +418,12 @@ en:
               blank: Enter an email address or tell us why the court cannot email you
             voicemail_consent:
               inclusion: Select yes if the court can leave you a voicemail
+            email_keep_private:
+              inclusion: *yes_no_error
+            phone_keep_private:
+              inclusion: *yes_no_error
+            mobile_keep_private:
+              inclusion: *yes_no_error
         steps/respondent/personal_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS

@@ -532,10 +532,26 @@ en:
       question: Lived at this address for more than 5 years?
       answers:
         <<: *YESNO
+    residence_keep_private:
+      question: Keep the address private?
+      answers:
+        <<: *YESNO
     person_residence_history:
       question: Previous addresses
     person_home_phone:
       question: Home telephone number
+    email_keep_private:
+      question: Keep the email address private
+      answers:
+        <<: *YESNO
+    phone_keep_private:
+      question: Keep the home phone number private
+      answers:
+        <<: *YESNO
+    mobile_keep_private:
+      question: Keep the mobile phone number private
+      answers:
+        <<: *YESNO
     person_mobile_phone:
       question: Mobile telephone number
     person_email_provided:
