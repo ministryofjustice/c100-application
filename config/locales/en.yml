@@ -88,7 +88,6 @@ en:
       address_unknown: Current address unknown
       has_previous_name: Have they changed their name?
       residence_requirement_met: Have they lived at this address for more than 5 years?
-      residence_keep_private: Do you want to keep your address details private from the other people named in the application (the respondents)?
 
     # This is a compilation of all possible fields shared between Applicants, Respondents and Children
     # Please note some locales refer to "you" (applicant) and others to "they" (respondent, etc)
@@ -137,10 +136,6 @@ en:
       residence_requirement_met:
         <<: *YESNO
       residence_requirement_met_options:
-        <<: *YESNO
-      residence_keep_private:
-        <<: *YESNO
-      residence_keep_private_options:
         <<: *YESNO
 
     # Fields shared in all the split first/last name forms
@@ -1416,18 +1411,6 @@ en:
         voicemail_consent_options:
           'yes': Yes, the court can leave me a voicemail
           'no': No, the court cannot leave me a voicemail
-        email_keep_private:
-          <<: *YESNO
-        email_keep_private_options:
-          <<: *YESNO
-        phone_keep_private:
-          <<: *YESNO
-        phone_keep_private_options:
-          <<: *YESNO
-        mobile_keep_private:
-          <<: *YESNO
-        mobile_keep_private_options:
-          <<: *YESNO
       steps_applicant_address_details_form:
         <<: *PERSONAL_ADDRESS_FIELDS
         residence_history: Provide details and dates of all previous addresses for the last 5 years
@@ -1759,12 +1742,8 @@ en:
         has_previous_name: Have you changed your name?
       steps_applicant_address_details_form:
         residence_requirement_met: Have you lived at your current address for more than 5 years?
-        residence_keep_private: Do you want to keep your address details private from the other people named in the application (the respondents)?
       steps_applicant_contact_details_form:
         voicemail_consent: Can the court leave you a voicemail?
-        email_keep_private: 'Do you want to keep your email private from the other people named in the application (the respondents)?'
-        phone_keep_private: 'Do you want to keep your home phone number private from the other people named in the application (the respondents)?'
-        mobile_keep_private: 'Do you want to keep your mobile phone number private from the other people named in the application (the respondents)?'
       steps_shared_under_age_form:
         under_age: Litigation friend representation
 

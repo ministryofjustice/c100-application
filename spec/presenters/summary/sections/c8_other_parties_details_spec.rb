@@ -19,14 +19,10 @@ module Summary
         gender: 'female',
         birthplace: nil,
         residence_requirement_met: nil,
-        residence_keep_private: nil,
         residence_history: nil,
         home_phone: nil,
         mobile_phone: nil,
         email: nil,
-        email_keep_private: nil,
-        phone_keep_private: nil,
-        mobile_keep_private: nil,
         voicemail_consent: nil,
       )
     }
