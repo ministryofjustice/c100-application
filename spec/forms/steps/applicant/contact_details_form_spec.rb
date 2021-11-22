@@ -9,15 +9,11 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
     email: email,
     voicemail_consent: voicemail_consent,
     email_provided: email_provided,
-    email_keep_private: email_keep_private,
-    mobile_keep_private: mobile_keep_private,
-    phone_keep_private: phone_keep_private
   } }
 
-  let(:c100_application) { instance_double(C100Application, applicants: applicants_collection, address_confidentiality: address_confidentiality) }
+  let(:c100_application) { instance_double(C100Application, applicants: applicants_collection) }
   let(:applicants_collection) { double('applicants_collection') }
   let(:applicant) { double('Applicant', id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe6') }
-  let(:address_confidentiality) { 'no' }
 
   let(:record) { nil }
   let(:home_phone) { nil }
@@ -25,9 +21,6 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
   let(:email) { 'test@example.com' }
   let(:voicemail_consent) { 'yes' }
   let(:email_provided) { 'yes' }
-  let(:email_keep_private) { nil }
-  let(:mobile_keep_private) { nil }
-  let(:phone_keep_private) { nil }
 
   subject { described_class.new(arguments) }
 
@@ -111,61 +104,6 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
     end
 
-    context 'keep private validation' do
-      let(:address_confidentiality) { 'yes' }
-      let(:phone_keep_private) { GenericYesNo::YES }
-      let(:email_keep_private) { GenericYesNo::YES }
-      let(:mobile_keep_private) { GenericYesNo::YES }
-
-      before { subject.valid? }
-
-      describe 'email' do
-        context 'provided' do
-          let(:email) { 'test@example.com' }
-          let(:email_provided) { 'yes' }
-          let(:email_keep_private) { nil }
-
-          specify { expect(subject).not_to be_valid }
-        end
-
-        context 'not provided' do
-          let(:email) { nil }
-          let(:email_provided) { 'no' }
-          let(:email_keep_private) { nil }
-
-          specify { expect(subject).to be_valid }
-        end
-      end
-
-      describe 'phone' do
-        context 'provided' do
-          let(:home_phone) { 123456889 }
-          let(:phone_keep_private) { nil }
-
-          specify { expect(subject).not_to be_valid }
-        end
-
-        context 'not provided' do
-          let(:home_phone) { nil }
-          let(:phone_keep_private) { nil }
-
-          specify { expect(subject).to be_valid }
-        end
-
-      end
-
-      describe 'mobile' do
-        context 'provided' do
-          let(:mobile_phone) { 123456889 }
-          let(:mobile_keep_private) { nil }
-
-          specify { expect(subject).not_to be_valid }
-        end
-      end
-    end
-
-
-
     context 'for valid details' do
       let(:expected_attributes) {
         {
@@ -174,9 +112,6 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
           mobile_phone: '12345',
           voicemail_consent: GenericYesNo::YES,
           email_provided: GenericYesNo::YES,
-          email_keep_private: nil,
-          phone_keep_private: nil,
-          mobile_keep_private: nil,
         }
       }
 

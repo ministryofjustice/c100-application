@@ -21,16 +21,12 @@ module Summary
         birthplace: 'birthplace',
         address_unknown: address_unknown,
         residence_requirement_met: 'yes',
-        residence_keep_private: nil,
         residence_history: 'history',
         home_phone: 'home_phone',
         mobile_phone: 'mobile_phone',
         voicemail_consent: nil,
         email_provided: nil,
         email: 'email',
-        email_keep_private: nil,
-        phone_keep_private: nil,
-        mobile_keep_private: nil,
         relationships: [relationship],
       )
     }
