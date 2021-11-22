@@ -5,8 +5,7 @@ module Summary
     let(:c100_application) {
       instance_double(
         C100Application,
-        applicants: [applicant],
-        address_confidentiality: 'yes'
+        applicants: [applicant]
       )
     }
 
@@ -18,10 +17,6 @@ module Summary
         mobile_phone: 'mobile_phone',
         email: 'email',
         voicemail_consent: 'yes',
-        residence_keep_private: 'yes',
-        email_keep_private: 'yes',
-        phone_keep_private: 'yes',
-        mobile_keep_private: 'yes'
       )
     }
 
@@ -95,27 +90,6 @@ module Summary
 
         expect(answers[9]).to be_an_instance_of(Partial)
         expect(answers[9].name).to eq(:row_blank_space)
-      end
-
-      context 'only one marked as private' do
-        let(:applicant) {
-          instance_double(Applicant,
-            full_name: 'fullname',
-            residence_history: 'history',
-            home_phone: 'home_phone',
-            mobile_phone: 'mobile_phone',
-            email: 'email',
-            voicemail_consent: 'yes',
-            residence_keep_private: 'no',
-            email_keep_private: 'no',
-            phone_keep_private: 'no',
-            mobile_keep_private: 'no'
-          )
-        }
-        it 'has the correct number of rows' do
-          expect(answers.count).to eq(6)
-        end
-
       end
     end
   end

@@ -98,8 +98,4 @@ module ApplicationHelper
       uri.scheme = nil
     end.to_s
   end
-
-  def display_private_option?
-    current_c100_application.address_confidentiality == 'yes'
-  end
 end
