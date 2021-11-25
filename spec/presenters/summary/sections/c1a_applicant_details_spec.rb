@@ -102,6 +102,19 @@ module Summary
 
       context 'when address confidentiality is enabled' do
         let(:address_confidentiality) { 'yes' }
+        let(:applicant) {
+          instance_double(Applicant,
+            full_name: 'fullname',
+            gender: 'female',
+            home_phone: 'home_phone',
+            mobile_phone: 'mobile_phone',
+            email: 'email',
+            voicemail_consent: 'yes',
+            email_keep_private: 'yes',
+            phone_keep_private: 'yes',
+            mobile_keep_private: 'yes'
+          )
+        }
 
         before do
           allow(c100_application).to receive(:confidentiality_enabled?).and_return(true)

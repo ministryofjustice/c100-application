@@ -23,20 +23,6 @@ RSpec.describe C8ConfidentialityPresenter do
   
   subject { described_class.new(person) }
 
-  describe 'constants' do
-    it {
-      expect(
-        described_class::DETAILS_UNDER_C8
-      ).to contain_exactly(
-        :full_address,
-        :residence_history,
-        :home_phone,
-        :mobile_phone,
-        :email,
-      )
-    }
-  end
-
   describe '#to_ary' do
     it 'forwards private method' do
       x, y = subject
