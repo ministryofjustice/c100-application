@@ -1,12 +1,4 @@
 class C8ConfidentialityPresenter < SimpleDelegator
-  DETAILS_UNDER_C8 = [
-    :full_address,
-    :residence_history,
-    :home_phone,
-    :mobile_phone,
-    :email,
-  ].freeze
-
   def self.replacement_answer
     I18n.translate!('shared.c8_confidential_answer')
   end
@@ -27,18 +19,17 @@ class C8ConfidentialityPresenter < SimpleDelegator
     return unless value.present?
     case attribute
     when :full_address
-      self.try(:residence_keep_private) == 'yes'
+      try(:residence_keep_private) == 'yes'
     when :home_phone
-      self.try(:phone_keep_private) == 'yes'
+      try(:phone_keep_private) == 'yes'
     when :mobile_phone
-      self.try(:mobile_keep_private) == 'yes'
+      try(:mobile_keep_private) == 'yes'
     when :email
-      self.try(:email_keep_private) == 'yes'
+      try(:email_keep_private) == 'yes'
     end
-    # DETAILS_UNDER_C8.include?(attribute) && 
   end
 
   def replacement_answer
     @_replacement_answer ||= self.class.replacement_answer
-  end  
+  end
 end
