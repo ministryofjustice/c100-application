@@ -36,6 +36,7 @@ module Steps
       def attributes_map
         super().tap do |hsh|
           hsh[:email] = nil unless email_provided.yes?
+          hsh[:email_keep_private] = nil unless email_provided.yes?
         end
       end
 
