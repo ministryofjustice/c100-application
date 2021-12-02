@@ -109,6 +109,8 @@ en:
       # new version
       dob_unknown_options:
         'true': I don’t know their date of birth
+      birthplace_unknown_options:
+        'true': I don’t know their birthplace
       gender_options:
         female: Female
         male: Male
@@ -122,7 +124,8 @@ en:
       mobile_phone: Mobile phone
       mobile_phone_unknown: *dont_know
       email: Email address
-      email_unknown: *dont_know
+      email_unknown_options:
+        'true': *dont_know
 
     PERSONAL_ADDRESS_FIELDS: &PERSONAL_ADDRESS_FIELDS
       address_line_1: Building and street
