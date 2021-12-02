@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_125429) do
+ActiveRecord::Schema.define(version: 2021_12_02_162635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -333,6 +333,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_125429) do
     t.string "email_keep_private"
     t.string "phone_keep_private"
     t.string "mobile_keep_private"
+    t.boolean "birthplace_unknown", default: false
     t.index ["c100_application_id"], name: "index_people_on_c100_application_id"
   end
 
