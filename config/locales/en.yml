@@ -126,6 +126,10 @@ en:
       email: Email address
       email_unknown_options:
         'true': *dont_know
+      home_phone_unknown_options:
+        'true': *dont_know
+      mobile_phone_unknown_options:
+        'true': *dont_know
 
     PERSONAL_ADDRESS_FIELDS: &PERSONAL_ADDRESS_FIELDS
       address_line_1: Building and street
