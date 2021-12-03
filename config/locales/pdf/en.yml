@@ -527,6 +527,7 @@ en:
       question: Approximate age or year born
     person_birthplace:
       question: Place of birth
+      absence_answer: I don't know their place of birth
     person_address:
       question: Address
       absence_answer: *unknown
@@ -542,10 +543,13 @@ en:
       question: Previous addresses
     person_home_phone:
       question: Home telephone number
+      absence_answer: I don't know their home phone number
     person_mobile_phone:
       question: Mobile telephone number
+      absence_answer: I don't know their mobile number
     person_email:
       question: Email address
+      absence_answer: I don't know their email
     email_keep_private:
       question: Keep the email address private
       answers:
