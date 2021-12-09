@@ -7,13 +7,16 @@ RSpec.describe C8ConfidentialityPresenter do
       residence_keep_private: residence_keep_private,
       email_keep_private: email_keep_private,
       phone_keep_private: phone_keep_private,
-      mobile_keep_private: mobile_keep_private
+      mobile_keep_private: mobile_keep_private,
+      c100_application: c100_application_one
       )
   }
+  let(:c100_application_one) { instance_double('C100Application', address_confidentiality: 'yes')}
+  let(:c100_application_two) { instance_double('C100Application', address_confidentiality: 'no')}
   
   let(:person_two) {
     instance_double(Applicant, full_address: 'real full address', residence_history: nil, 
-      email: 'mail', home_phone: '12233445566', mobile_phone: '11335566', gender: 'male')
+      email: 'mail', home_phone: '12233445566', mobile_phone: '11335566', gender: 'male', c100_application: c100_application_two)
   }
 
   let(:residence_keep_private) { 'yes' }
