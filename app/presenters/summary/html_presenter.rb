@@ -33,7 +33,7 @@ module Summary
     end
 
     def before_submit_warning
-      ['.submit_warning', locale_key_for_context].join('.')
+      ['.submit_warning', "#{locale_key_for_context}_html"].join('.')
     end
 
     def submit_button_label
