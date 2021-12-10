@@ -25,7 +25,8 @@ module Summary
             FreeTextAnswer.new(:person_full_name, person.full_name),
             previous_name_answer(person),
             Answer.new(:person_sex, person.gender),
-            DateAnswer.new(:person_dob, person.dob, show: respondents_only),
+            DateAnswer.new(:person_dob, person.dob,
+                           show: respondents_only_estimate_nil(person)),
             FreeTextAnswer.new(:person_age_estimate, person.age_estimate), # This shows only if a value is present
             FreeTextAnswer.new(:person_birthplace, person.birthplace),
             FreeTextAnswer.new(:person_address, person.full_address, show: true),
@@ -61,8 +62,9 @@ module Summary
         end
       end
 
-      def respondents_only
-        instance_of?(Summary::Sections::RespondentsDetails)
+      def respondents_only_estimate_nil(person)
+        instance_of?(Summary::Sections::RespondentsDetails) &&
+          person.age_estimate.blank?
       end
     end
   end
