@@ -184,7 +184,7 @@ module Summary
         end
       end
 
-      context 'when `dob` and `age estimate` are both nil', focus: true do
+      context 'when `dob` and `age estimate` are both nil' do
         let(:dob) { nil }
         let(:age_estimate) { nil }
 
