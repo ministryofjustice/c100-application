@@ -62,7 +62,7 @@ module Summary
       end
 
       def respondents_only
-        self.class == Summary::Sections::RespondentsDetails
+        instance_of?(Summary::Sections::RespondentsDetails)
       end
     end
   end
