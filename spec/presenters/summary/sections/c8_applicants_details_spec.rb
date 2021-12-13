@@ -113,7 +113,7 @@ module Summary
           )
         }
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(6)
+          expect(answers.count).to eq(5)
         end
 
       end

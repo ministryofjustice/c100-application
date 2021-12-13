@@ -183,6 +183,21 @@ module Summary
           expect(answers[4].value).to eq(18)
         end
       end
+
+      context 'when `dob` and `age estimate` are both nil' do
+        let(:dob) { nil }
+        let(:age_estimate) { nil }
+
+        it 'has the correct number of rows' do
+          expect(answers.count).to eq(18)
+        end
+
+        it 'provides a nil dob' do
+          expect(answers[4]).to be_an_instance_of(DateAnswer)
+          expect(answers[4].question).to eq(:person_dob)
+          expect(answers[4].value).to eq(nil)
+        end
+      end
     end
   end
 end
