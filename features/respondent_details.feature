@@ -33,6 +33,7 @@ Feature: Add a respondent to the application
     Then I click "Don't know" for the radio button "Have they changed their name?"
     And I choose "Female"
     And I enter the date 25-05-2012
+    And I fill in "Place of birth" with "London"
     When I click the "Continue" button
     Then I should see "What is Olivia Doe Senior's relationship to John Doe Junior?"
 
@@ -68,10 +69,19 @@ Feature: Add a respondent to the application
     And I click "Don't know" for the radio button "Have they lived at this address for more than 5 years?"
     When I click the "Continue" button
 
-    # Note: respondent contact details are all optional so there are no validation errors
-    Then I should see "Contact details of Olivia Doe Senior"
+    # Provoke validation errors on contact details page
     When I click the "Continue" button
+    Then Page has title "Error: Respondent contact details - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-respondent-contact-details-form-email-field-error"
+    And I should see a "Enter an answer" link to "#steps-respondent-contact-details-form-home-phone-field-error"
+    And I should see a "Enter an answer" link to "#steps-respondent-contact-details-form-mobile-phone-field-error"
 
+    # Fix validation errors and continue    
+    When I fill in "Email address" with "test@example.com"
+    And I fill in "Home phone" with "07777777777"
+    And I fill in "Mobile phone" with "07777777777"
+
+    When I click the "Continue" button
     Then I should see "Is there anyone else who should know about your application?"
     Then I choose "No"
     Then I should see "Who does John Doe Junior currently live with?"
