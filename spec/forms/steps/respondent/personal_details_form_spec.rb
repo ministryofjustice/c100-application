@@ -10,7 +10,8 @@ RSpec.describe Steps::Respondent::PersonalDetailsForm do
     dob: dob,
     dob_unknown: dob_unknown,
     age_estimate: age_estimate,
-    birthplace: birthplace
+    birthplace: birthplace,
+    birthplace_unknown: birthplace_unknown
   } }
 
   let(:c100_application) { instance_double(C100Application, respondents: respondents_collection) }
@@ -25,6 +26,7 @@ RSpec.describe Steps::Respondent::PersonalDetailsForm do
   let(:dob_unknown) { false }
   let(:age_estimate) { nil }
   let(:birthplace) { 'London' }
+  let(:birthplace_unknown) { false }
 
   subject { described_class.new(arguments) }
 
@@ -49,6 +51,10 @@ RSpec.describe Steps::Respondent::PersonalDetailsForm do
       it_behaves_like 'a date of birth validation with unknown checkbox'
     end
 
+    context 'birthplace' do
+      it { should validate_presence_unless_unknown_of(:birthplace) }
+    end
+
     context 'for valid details' do
       let(:expected_attributes) {
         {
@@ -58,7 +64,8 @@ RSpec.describe Steps::Respondent::PersonalDetailsForm do
           dob: Date.today,
           dob_unknown: false,
           age_estimate: '',
-          birthplace: 'London'
+          birthplace: 'London',
+          birthplace_unknown: false
         }
       }
 
