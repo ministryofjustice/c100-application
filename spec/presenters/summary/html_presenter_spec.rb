@@ -14,25 +14,25 @@ describe Summary::HtmlPresenter do
 
       context 'with online payment' do
         let(:payment_type) { PaymentType::ONLINE }
-        it { expect(subject.before_submit_warning).to eq('.submit_warning.online_payment') }
+        it { expect(subject.before_submit_warning).to eq('.submit_warning.online_payment_html') }
       end
 
       context 'without online payment' do
         let(:payment_type) { PaymentType::SELF_PAYMENT_CHEQUE }
-        it { expect(subject.before_submit_warning).to eq('.submit_warning.online') }
+        it { expect(subject.before_submit_warning).to eq('.submit_warning.online_html') }
       end
 
       context 'defaults to `online` if `payment_type` is not present' do
-        it { expect(subject.before_submit_warning).to eq('.submit_warning.online') }
+        it { expect(subject.before_submit_warning).to eq('.submit_warning.online_html') }
       end
     end
 
     context 'for print and post submissions' do
       let(:submission_type) { SubmissionType::PRINT_AND_POST }
-      it { expect(subject.before_submit_warning).to eq('.submit_warning.print_and_post') }
+      it { expect(subject.before_submit_warning).to eq('.submit_warning.print_and_post_html') }
 
       context 'defaults to `print_and_post` if `submission_type` is not present' do
-        it { expect(subject.before_submit_warning).to eq('.submit_warning.print_and_post') }
+        it { expect(subject.before_submit_warning).to eq('.submit_warning.print_and_post_html') }
       end
     end
   end
