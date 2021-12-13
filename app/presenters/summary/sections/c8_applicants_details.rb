@@ -29,7 +29,7 @@ module Summary
             person_mobile_phone(person),
             Answer.new(:person_voicemail_consent, person.voicemail_consent),
             Partial.row_blank_space,
-            FreeTextAnswer.new(:person_residence_history, person.residence_history),
+            residence_history(person),
             Partial.row_blank_space,
           ]
         end.flatten.select(&:show?)
@@ -37,8 +37,13 @@ module Summary
 
       private
 
+      def residence_history(person)
+        value = confidential? && person.residence_keep_private != 'no' ? person.residence_history : nil
+        FreeTextAnswer.new(:person_residence_history, value)
+      end
+
       def address(person)
-        value = confidential? && person.residence_keep_private == 'yes' ? person.full_address : nil
+        value = confidential? && person.residence_keep_private != 'no' ? person.full_address : nil
         FreeTextAnswer.new(:person_address, value)
       end
 
