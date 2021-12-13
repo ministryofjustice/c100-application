@@ -18,8 +18,8 @@ class C8ConfidentialityPresenter < SimpleDelegator
   def confidential_detail?(attribute, value)
     return unless value.present?
     case attribute
-    when :full_address
-      try(:residence_keep_private) == 'yes'
+    when :full_address, :residence_history
+      residence_private?
     when :home_phone
       try(:phone_keep_private) == 'yes'
     when :mobile_phone
@@ -31,5 +31,14 @@ class C8ConfidentialityPresenter < SimpleDelegator
 
   def replacement_answer
     @_replacement_answer ||= self.class.replacement_answer
+  end
+
+  def residence_private?
+    # Temporary fix for old applications
+    try(:residence_keep_private) != 'no' && address_confidential?
+  end
+
+  def address_confidential?
+    c100_application.address_confidentiality == 'yes'
   end
 end
