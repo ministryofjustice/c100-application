@@ -18,16 +18,20 @@ module Summary
         dob: Date.new(2018, 1, 20),
         age_estimate: nil,
         gender: 'female',
-        birthplace: 'birthplace',
+        birthplace: birthplace,
+        birthplace_unknown: birthplace_unknown,
         address_unknown: address_unknown,
         residence_requirement_met: 'yes',
         residence_keep_private: nil,
         residence_history: 'history',
         home_phone: 'home_phone',
+        home_phone_unknown: false,
         mobile_phone: 'mobile_phone',
+        mobile_phone_unknown: false,
         voicemail_consent: nil,
         email_provided: nil,
         email: 'email',
+        email_unknown: false,
         email_keep_private: nil,
         phone_keep_private: nil,
         mobile_keep_private: nil,
@@ -44,6 +48,8 @@ module Summary
     let(:has_previous_name) { 'no' }
     let(:previous_name) { nil }
     let(:address_unknown) { false }
+    let(:birthplace) { 'birthplace' }
+    let(:birthplace_unknown) { false }
 
     let(:relationship) {
       instance_double(

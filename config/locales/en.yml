@@ -109,6 +109,8 @@ en:
       # new version
       dob_unknown_options:
         'true': I don’t know their date of birth
+      birthplace_unknown_options:
+        'true': I don’t know their place of birth
       gender_options:
         female: Female
         male: Male
@@ -122,7 +124,12 @@ en:
       mobile_phone: Mobile phone
       mobile_phone_unknown: *dont_know
       email: Email address
-      email_unknown: *dont_know
+      email_unknown_options:
+        'true': I don't know their email
+      home_phone_unknown_options:
+        'true': I don't know their home phone number
+      mobile_phone_unknown_options:
+        'true': I don't know their mobile number
 
     PERSONAL_ADDRESS_FIELDS: &PERSONAL_ADDRESS_FIELDS
       address_line_1: Building and street
@@ -1513,7 +1520,7 @@ en:
       steps_opening_consent_order_form:
         consent_order_options:
           'no': This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter
-          'yes_html': This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent).<br />If you select this option, you must have a draft consent order signed by the respondent which you are able to forward to the court immediately after you have submitted this application
+          'yes_html': This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter<br /><br />This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent).<br />If you select this option, you must have a draft consent order signed by the respondent which you are able to forward to the court immediately after you have submitted this application
       steps_miam_certification_date_form:
         miam_certification_date: For example, 31 3 2020
       steps_application_court_proceedings_form:

@@ -518,10 +518,12 @@ en:
         <<: *SEX_OPTIONS
     person_dob:
       question: Date of birth
+      absence_answer: *unknown
     person_age_estimate:
       question: Approximate age or year born
     person_birthplace:
       question: Place of birth
+      absence_answer: *unknown
     person_address:
       question: Address
     person_address_unknown:
@@ -540,6 +542,7 @@ en:
       question: Previous addresses
     person_home_phone:
       question: Home telephone number
+      absence_answer: *unknown
     email_keep_private:
       question: Keep the email address private
       answers:
@@ -554,12 +557,14 @@ en:
         <<: *YESNO
     person_mobile_phone:
       question: Mobile telephone number
+      absence_answer: *unknown
     person_email_provided:
       question: Email provided
       answers:
         <<: *YESNO
     person_email:
       question: Email address
+      absence_answer: *unknown
     person_voicemail_consent:
       question: Allow voicemail?
       answers:

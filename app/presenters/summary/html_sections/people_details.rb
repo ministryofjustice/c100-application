@@ -56,11 +56,11 @@ module Summary
       def contact_details_questions(person)
         [
           Answer.new(:person_email_provided, person.email_provided),
-          FreeTextAnswer.new(:person_email, person.email),
+          FreeTextAnswer.new(:person_email, person.email, { show: true }),
           Answer.new(:email_keep_private, person.email_keep_private),
-          FreeTextAnswer.new(:person_home_phone, person.home_phone),
+          FreeTextAnswer.new(:person_home_phone, person.home_phone, { show: true }),
           Answer.new(:phone_keep_private, person.phone_keep_private),
-          FreeTextAnswer.new(:person_mobile_phone, person.mobile_phone),
+          FreeTextAnswer.new(:person_mobile_phone, person.mobile_phone, { show: true }),
           Answer.new(:mobile_keep_private, person.mobile_keep_private),
           Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
         ]
