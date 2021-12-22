@@ -4,10 +4,13 @@
 #
 version: 2.1
 
+orbs: 
+  browser-tools: circleci/browser-tools@1.2.3
+
 references:
   app_containers: &app_containers
     docker:
-      - image: circleci/ruby:2.7.4-node-browsers
+      - image: cimg/ruby:2.7.5-browsers
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -34,6 +37,7 @@ jobs:
         type: string
         default: bundle exec rake test:all_the_things
     steps:
+      - browser-tools/install-browser-tools
       - checkout
 
       # Download and cache dependencies
