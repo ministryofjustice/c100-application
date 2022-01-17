@@ -77,6 +77,91 @@ When(/^I have entered a child with first name "([^"]*)" and last name "([^"]*)"$
   step %[I should see "Provide details for #{first_name} #{last_name}"]
 end
 
+When(/^I enter multiple "([^"]*)" with names "([^"]*)" "([^"]*)" and "([^"]*)" "([^"]*)"$/) do |
+    person_type, first_name, last_name, first_name_2, last_name_2|
+  step %[I visit "steps/#{person_type}/names"]
+  step %[I fill in "First name(s)" with "#{first_name}"]
+  step %[I fill in "Last name(s)" with "#{last_name}"]
+  find("button[value='add_another_name']").click
+  expect(page).to have_content("Enter a new name")
+  find("input[name='steps_#{person_type}_names_split_form[new_first_name]']").set(first_name_2)
+  find("input[name='steps_#{person_type}_names_split_form[new_last_name]']").set(last_name_2)
+  step %[I click the "Continue" button]
+end
+
+# WARNING: Must already have "Decide who they live with and when" set for the case
+# Include "And I have selected orders for the court to decide" previous to this step
+When(/I provide details for the child/) do
+  # Provide details for child
+  step %[I enter the date 25-05-1990]
+  step %[I choose "Male"]
+  step %[I click the "Continue" button]
+
+  # Which of the decisions you’re asking the court to resolve relate to John Doe Junior?
+  step %[I check "Decide who they live with and when"]
+  step %[I click the "Continue" button]
+
+  # Is there a Special Guardianship Order in force in relation to John Doe Junior?
+  step %[I choose "No"]
+  step %[I click the "Continue" button]
+end
+
+When(/^I provide details for the person$/) do
+  step %[I choose "No"]
+  step %[I enter the date 25-05-1980]
+  step %[I choose "Male"]
+  step %[I fill in "Place of birth" with "London"]
+  step %[I click the "Continue" button]
+end
+
+When(/^I provide details for the other party$/) do
+  step %[I choose "No"]
+  step %[I enter the date 25-05-1980]
+  step %[I choose "Male"]
+  step %[I click the "Continue" button]
+end
+
+When(/I provide the person's address/) do
+  # Address of person
+  step %[I fill in "Current postcode" with "cv21 1ab"]
+  step %[I click the "Continue" button]
+
+  # Select address of person - fails to find
+  step %[I click the "Continue" link]
+  
+  # Address details of person
+  step %[I fill in "Building and street" with "1 house road"]
+  step %[I fill in "Town or city" with "Birmingford"]
+  step %[I choose "Yes"]
+  step %[I click the "Continue" button]
+end
+
+When(/^I provide an applicant's address and contact details$/) do
+  step %[I provide the person's address]
+
+  # Contact details of applicant
+  step %[I choose "I cannot provide an email address"]
+  step %[I fill in "Mobile phone" with "0777 222 2222"]
+  step %[I choose "No, the court cannot leave me a voicemail"]
+  step %[I click the "Continue" button]
+end
+
+When(/^I provide a respondent address and contact details$/) do
+  step %[I provide the person's address]
+
+  # Contact details of respondent
+  step %[I check "I don't know their email"]
+  step %[I check "I don't know their home phone number"]
+  step %[I check "I don't know their mobile number"]
+  step %[I click the "Continue" button]
+end
+
+When(/^I provide an other party's address and contact details$/) do
+  step %[I click the "I don’t know their postcode or they live outside the UK" link]
+  step %[I check "I don’t know where they currently live"]
+  step %[I click the "Continue" button]
+end
+
 Then(/^the analytics cookies radio buttons are defaulted to '([^']*)'$/) do |value|
   cookie_management_page.analytics_question.assert_value(value)
 end
