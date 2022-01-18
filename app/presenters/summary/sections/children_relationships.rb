@@ -6,30 +6,29 @@ module Summary
       end
 
       def answers
-        c100.applicants.map.with_index(1) do |applicant, index|
-          FreeTextAnswer.new(
-            :applicants_relationships,
-            RelationshipsPresenter.new(c100_application).relationship_to_children(applicant),
-            i18n_opts: { index: index }
-          )
-        end +
-        c100.respondents.map.with_index(1) do |respondent, index|
-          FreeTextAnswer.new(
-            :respondents_relationships,
-            RelationshipsPresenter.new(c100_application).relationship_to_children(respondent),
-            i18n_opts: { index: index }
-          )
-        end + [
-          FreeTextAnswer.new(
-            :other_parties_relationships,
-            RelationshipsPresenter.new(c100_application).relationship_to_children(c100.other_parties)
-          ),
+        [:applicants, :respondents, :other_parties].map do |person_type|
+          relationships_of_type(person_type)
+        end.sum + [
           Partial.row_blank_space,
         ].select(&:show?)
       end
-    end
 
-
+      private
     
+      def relationships_of_type(person_type)
+        c100.send(person_type).map.with_index(1) do |person, index|
+          relationship_with(person_type, person, index)
+        end
+      end
+
+      def relationship_with(person_type, person, index)
+        FreeTextAnswer.new(
+          "#{person_type}_relationships".to_sym,
+          RelationshipsPresenter.new(c100_application).relationship_to_children(person),
+          i18n_opts: { index: index }
+        )
+      end
+      
+    end
   end
 end
