@@ -14,7 +14,7 @@ module Summary
       end
 
       private
-    
+
       def relationships_of_type(person_type)
         c100.send(person_type).map.with_index(1) do |person, index|
           relationship_with(person_type, person, index)
@@ -28,7 +28,6 @@ module Summary
           i18n_opts: { index: index }
         )
       end
-      
     end
   end
 end
