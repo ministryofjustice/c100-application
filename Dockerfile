@@ -31,7 +31,7 @@ RUN apk --no-cache add \
   libxrender \
   libxext \
   fontconfig \
-  ttf-ubuntu-font-family \
+  ttf-freefont \
 && apk --no-cache add --virtual fonts-deps \
   msttcorefonts-installer \
 && update-ms-fonts && fc-cache -f
