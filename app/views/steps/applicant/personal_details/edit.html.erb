@@ -17,9 +17,9 @@
 
       <%= f.govuk_collection_radio_buttons :gender, Gender.values, :value, nil, legend: { tag: 'span', size: 'm' } %>
 
-      <%= render partial: 'steps/shared/dob_form_element', locals: { form_object: f } %>
+      <%= render partial: 'steps/shared/dob_form_element', locals: { form_object: f, text: "Your date of birth" } %>
 
-      <%= f.govuk_text_field :birthplace, width: 'two-thirds', label: { size: 'm' } %>
+      <%= f.govuk_text_field :birthplace, width: 'two-thirds', label: { text: t('.birthplace'), size: 'm' } %>
 
       <%= f.continue_button %>
     <% end %>
