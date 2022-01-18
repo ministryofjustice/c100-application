@@ -117,6 +117,7 @@ en:
         unspecified: Unspecified
       age_estimate: Approximate age or year born
       birthplace: Place of birth
+      applicant_birthplace: Your place of birth
 
     # This is a compilation of all possible fields shared between Applicants and Respondents (maybe others later)
     PERSONAL_CONTACT_FIELDS: &PERSONAL_CONTACT_FIELDS
@@ -246,7 +247,7 @@ en:
       names:
         edit:
           page_title: Applicant names
-          heading: Enter the applicant’s name
+          heading: Enter your name
           body_info_html: |
             <p class="govuk-body">You and anyone else making this application are known as the applicants.</p>
             <p class="govuk-body">The other people who will receive this application are known as the respondents. We will ask for their details later.</p>
@@ -256,6 +257,9 @@ en:
         edit:
           page_title: Applicant personal details
           heading: "Provide details for %{name}"
+          dob: "Your date of birth"
+          birthplace: "Your place of birth"
+
       contact_details:
         edit:
           page_title: Applicant contact details
@@ -1410,7 +1414,7 @@ en:
         relative_options:
           <<: *YESNO
       steps_address_lookup_form:
-        postcode: Current postcode
+        postcode: Your current postcode
       steps_address_results_form:
         selected_address: Select an address
       steps_applicant_personal_details_form:
@@ -1418,6 +1422,9 @@ en:
         previous_name: Enter your previous name
       steps_applicant_contact_details_form:
         <<: *PERSONAL_CONTACT_FIELDS
+        home_phone: Your home phone
+        mobile_phone: Your mobile phone
+        email: Your email address
         email_provided_options:
           <<: *YESPROVIDEEMAIL
         voicemail_consent_options:

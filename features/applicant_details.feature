@@ -7,7 +7,7 @@ Feature: Add an applicant to the application
 
   @happy_path
   Scenario: Applicant personal details
-    Then I should see "Enter the applicant’s name"
+    Then I should see "Enter your name"
     And I should see "Enter a new name"
 
     # Provoke validation errors
@@ -33,7 +33,7 @@ Feature: Add an applicant to the application
     # Fix validation errors and continue
     Then I click "No" for the radio button "Have you changed your name?"
     And I choose "Male"
-    And I fill in "Place of birth" with "Manchester"
+    And I fill in "Your place of birth" with "Manchester"
 
     # For an under 18 applicant
     Then I enter the date 25-05-2020
@@ -92,7 +92,7 @@ Feature: Add an applicant to the application
 
    # Fix validation errors and provoke email validation error
     When I choose "I can provide an email address"
-    And I fill in "Mobile phone" with "0123456789"
+    And I fill in "Your mobile phone" with "0123456789"
     And I choose "Yes, the court can leave me a voicemail"
     When I click the "Continue" button
 
@@ -101,7 +101,7 @@ Feature: Add an applicant to the application
     And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-applicant-contact-details-form-email-field-error"
 
     # Fix email validation error and continue
-    And I fill in "Email address" with "test@example.com"
+    And I fill in "Your email address" with "test@example.com"
     When I click the "Continue" button
 
 

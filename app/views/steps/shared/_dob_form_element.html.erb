@@ -11,6 +11,10 @@
 
 <% else %>
 
-  <%= form_object.govuk_date_field :dob, legend: { tag: 'span', size: 'm' } %>
+  <!-- Add custom label text if one is provided -->
+  <% legend = { tag: 'span', size: 'm' } %>
+  <% legend[:text] = text if local_assigns[:text] && text.present? %>
+
+  <%= form_object.govuk_date_field :dob, legend: legend %>
 
 <% end %>
