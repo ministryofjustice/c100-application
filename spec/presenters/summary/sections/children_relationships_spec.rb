@@ -10,9 +10,9 @@ module Summary
       )
     }
 
-    let(:applicants) { double('applicants') }
-    let(:respondents) { double('respondents') }
-    let(:other_parties) { double('other_parties') }
+    let(:applicants) { ["applicant"] }
+    let(:respondents) { ["respondent"] }
+    let(:other_parties) { ["other party"] }
 
     subject { described_class.new(c100_application) }
 
@@ -28,15 +28,15 @@ module Summary
       before do
         allow_any_instance_of(
           RelationshipsPresenter
-        ).to receive(:relationship_to_children).with(applicants).and_return('applicants_relationships')
+        ).to receive(:relationship_to_children).with(applicants.first).and_return('applicants_relationships')
 
         allow_any_instance_of(
           RelationshipsPresenter
-        ).to receive(:relationship_to_children).with(respondents).and_return('respondents_relationships')
+        ).to receive(:relationship_to_children).with(respondents.first).and_return('respondents_relationships')
 
         allow_any_instance_of(
           RelationshipsPresenter
-        ).to receive(:relationship_to_children).with(other_parties).and_return('other_parties_relationships')
+        ).to receive(:relationship_to_children).with(other_parties.first).and_return('other_parties_relationships')
       end
 
       it 'has the correct number of rows' do
