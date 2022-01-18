@@ -311,11 +311,11 @@ en:
       answers:
         <<: *YESNO
     applicants_relationships:
-      question: Applicant(s)
+      question: Applicant %{index}
     respondents_relationships:
-      question: Respondent(s)
+      question: Respondent %{index}
     other_parties_relationships:
-      question: Other parties
+      question: Other party %{index}
 
     # BEGIN - Non-parents permission questions
     # NOTE: these should match the heading locales in the `en.yml` file
