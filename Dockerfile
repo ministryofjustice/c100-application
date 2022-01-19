@@ -8,7 +8,7 @@ MAINTAINER HMCTS Reform Team
 #   - postgresql-dev for pg/activerecord gems
 #   - git for installing gems referred to use a git:// uri
 #
-RUN apk upgrade --available
+RUN apk update && apk upgrade --available
 RUN apk --no-cache add --virtual build-deps \
   build-base \
   libxml2-dev \
