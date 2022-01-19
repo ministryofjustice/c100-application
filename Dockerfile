@@ -25,7 +25,8 @@ RUN apk --no-cache add --virtual build-deps \
   xz-libs \
   tzdata \
   nodejs \
-  yarn
+  yarn \
+  libseccomp
 
 # Install dependencies for wkhtmltopdf and microsoft fonts
 RUN apk --no-cache add \
