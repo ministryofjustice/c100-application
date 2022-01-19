@@ -17,7 +17,6 @@ RUN apk --no-cache add --virtual build-deps \
   git \
   bash \
   curl \
-  libseccomp \
 && apk --no-cache add \
   postgresql-client \
   shared-mime-info \
@@ -25,7 +24,8 @@ RUN apk --no-cache add --virtual build-deps \
   xz-libs \
   tzdata \
   nodejs \
-  yarn
+  yarn \
+  libseccomp
 
 # Install dependencies for wkhtmltopdf and microsoft fonts
 RUN apk --no-cache add \
