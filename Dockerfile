@@ -9,10 +9,6 @@ MAINTAINER HMCTS Reform Team
 #   - git for installing gems referred to use a git:// uri
 #
 RUN apt-get update
-RUN curl https://deb.nodesource.com/setup_12.x | bash
-RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
 RUN apt-get -y install \
   build-essential \
   ruby-full \
@@ -29,8 +25,11 @@ RUN apt-get -y install \
   curl \
   shared-mime-info \
   xz-utils \
-  nodejs \
-  yarn
+  nodejs
+RUN curl https://deb.nodesource.com/setup_12.x | bash
+RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get -y install yarn
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
 
 # Install dependencies for wkhtmltopdf and microsoft fonts
