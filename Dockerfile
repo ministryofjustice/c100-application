@@ -11,6 +11,7 @@ MAINTAINER HMCTS Reform Team
 RUN apt-get update
 RUN apt-get -y install \
   build-essential \
+  ruby-full \
   libxml2-dev \
   libxslt-dev \
   postgresql \
