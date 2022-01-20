@@ -14,6 +14,8 @@ RUN apt-get -y install \
   libxml2-dev \
   libxslt-dev \
   postgresql \
+  postgresql-client \
+  libpq5 \
   libpq-dev \
   dh-autoreconf libcurl4-gnutls-dev libexpat1-dev \
   gettext libz-dev libssl-dev \
