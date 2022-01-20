@@ -17,7 +17,6 @@ RUN apk --no-cache add --virtual build-deps \
   git \
   bash \
   curl \
-  libseccomp \
 && apk --no-cache add \
   postgresql-client \
   shared-mime-info \
