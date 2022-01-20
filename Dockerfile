@@ -47,7 +47,9 @@ RUN addgroup -g 1000 -S appgroup && \
 
 # create app directory in conventional, existing dir /usr/src
 RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app/tmp
+RUN chmod a+rwx -R /usr/src/app # TEMPORARY NUCLEAR OPTION
 WORKDIR /usr/src/app
+
 
 COPY Gemfile* .ruby-version ./
 
