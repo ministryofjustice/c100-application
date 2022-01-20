@@ -10,7 +10,7 @@ orbs:
 references:
   app_containers: &app_containers
     docker:
-      - image: circleci/ruby:2.7.4-node-browsers
+      - image: cimg/ruby:2.7.5-browsers
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -168,7 +168,7 @@ jobs:
 workflows:
   test-build-deploy:
     jobs:
-      - test
+      # - test
       ### dev ###
       - build_image:
           name: build-dev

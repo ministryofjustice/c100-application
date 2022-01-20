@@ -1,4 +1,4 @@
-FROM ruby:2.7.4-alpine3.14
+FROM ruby:2.7.5-slim-buster
 MAINTAINER HMCTS Reform Team
 
 # build dependencies:
@@ -24,8 +24,7 @@ RUN apk --no-cache add --virtual build-deps \
   xz-libs \
   tzdata \
   nodejs \
-  yarn \
-  libseccomp
+  yarn
 
 # Install dependencies for wkhtmltopdf and microsoft fonts
 RUN apk --no-cache add \
@@ -47,7 +46,6 @@ RUN addgroup -g 1000 -S appgroup && \
 
 # create app directory in conventional, existing dir /usr/src
 RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app/tmp
-RUN chmod a+rwx -R /usr/src/app # TEMPORARY NUCLEAR OPTION
 WORKDIR /usr/src/app
 
 
