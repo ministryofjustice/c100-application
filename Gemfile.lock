@@ -431,7 +431,7 @@ GEM
     websocket-extensions (0.1.5)
     wicked_pdf (2.1.0)
       activesupport
-    wkhtmltopdf-binary-edge-alpine (0.12.5.0)
+    wkhtmltopdf-binary-edge (0.12.6.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -487,10 +487,10 @@ DEPENDENCIES
   webdrivers
   webmock
   wicked_pdf (~> 2.1.0)
-  wkhtmltopdf-binary-edge-alpine (~> 0.12.5)
+  wkhtmltopdf-binary-edge (~> 0.12.6.0)
 
 RUBY VERSION
-   ruby 2.7.4p191
+   ruby 2.7.5p203
 
 BUNDLED WITH
    2.1.4
