@@ -1,4 +1,4 @@
-FROM ruby:2.7.4-alpine3.14
+FROM ruby:2.7.5-slim-buster
 MAINTAINER HMCTS Reform Team
 
 # build dependencies:
@@ -8,46 +8,43 @@ MAINTAINER HMCTS Reform Team
 #   - postgresql-dev for pg/activerecord gems
 #   - git for installing gems referred to use a git:// uri
 #
-RUN apk update && apk upgrade --available
-RUN apk --no-cache add --virtual build-deps \
-  build-base \
+RUN apt-get update
+RUN apt-get -y install \
+  build-essential \
+  ruby-full \
   libxml2-dev \
   libxslt-dev \
-  postgresql-dev \
-  git \
+  postgresql \
+  postgresql-client \
+  libpq5 \
+  libgmp3-dev \
+  libpq-dev \
+  dh-autoreconf libcurl4-gnutls-dev libexpat1-dev \
+  gettext libz-dev libssl-dev \
   bash \
   curl \
-&& apk --no-cache add \
-  postgresql-client \
   shared-mime-info \
-  linux-headers \
-  xz-libs \
-  tzdata \
+  xz-utils \
   nodejs \
-  yarn \
-  libseccomp
+  yarn
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
 
 # Install dependencies for wkhtmltopdf and microsoft fonts
-RUN apk --no-cache add \
-  libx11 \
-  libxrender \
-  libxext \
+RUN apt-get -y install \
   fontconfig \
-  ttf-freefont \
-&& apk --no-cache add --virtual fonts-deps \
-  msttcorefonts-installer \
-&& update-ms-fonts && fc-cache -f
+  fonts-freefont-ttf
 
 # ensure everything is executable
 RUN chmod +x /usr/local/bin/*
 
-# add non-root user and group with alpine first available uid, 1000
-RUN addgroup -g 1000 -S appgroup && \
-    adduser -u 1000 -S appuser -G appgroup
+# add non-root user and group with first available uid, 1000
+RUN addgroup --gid 1000 --system appgroup && \
+    adduser --uid 1000 --system appuser --ingroup appgroup
 
 # create app directory in conventional, existing dir /usr/src
 RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app/tmp
 WORKDIR /usr/src/app
+
 
 COPY Gemfile* .ruby-version ./
 
@@ -75,7 +72,7 @@ RUN cp node_modules/govuk-frontend/govuk/assets/fonts/*  public/assets/govuk-fro
 RUN cp node_modules/govuk-frontend/govuk/assets/images/* public/assets/govuk-frontend/govuk/assets/images
 
 # tidy up installation
-RUN apk del build-deps fonts-deps && rm -rf /tmp/*
+RUN rm -rf /tmp/*
 
 # non-root/appuser should own only what they need to
 RUN chown -R appuser:appgroup log tmp db
