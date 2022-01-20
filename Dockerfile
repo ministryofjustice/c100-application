@@ -16,6 +16,7 @@ RUN apt-get -y install \
   postgresql \
   postgresql-client \
   libpq5 \
+  libgmp3-dev \
   libpq-dev \
   dh-autoreconf libcurl4-gnutls-dev libexpat1-dev \
   gettext libz-dev libssl-dev \
