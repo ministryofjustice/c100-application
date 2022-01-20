@@ -168,7 +168,7 @@ jobs:
 workflows:
   test-build-deploy:
     jobs:
-      # - test
+      - test
       ### dev ###
       - build_image:
           name: build-dev
