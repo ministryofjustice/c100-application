@@ -1897,6 +1897,7 @@ en:
       default: '%d-%m-%Y'
       short: '%d/%m/%Y'
       long: '%e %B %Y'
+      text_month: '%d %b %Y'
   time:
     formats:
       short: '%d %b %H:%M:%S'
