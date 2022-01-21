@@ -312,10 +312,13 @@ en:
         <<: *YESNO
     applicants_relationships:
       question: Applicant %{index}
+      absence_answer: ''
     respondents_relationships:
       question: Respondent %{index}
+      absence_answer: ''
     other_parties_relationships:
       question: Other party %{index}
+      absence_answer: ''
 
     # BEGIN - Non-parents permission questions
     # NOTE: these should match the heading locales in the `en.yml` file
