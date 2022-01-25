@@ -2,8 +2,7 @@ FROM ruby:2.7.5-slim-buster
 MAINTAINER HMCTS Reform Team
 
 # build dependencies:
-#   - virtual: create virtual package for later deletion
-#   - build-base for alpine fundamentals
+#   - ruby-full libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6 for wkhtmltopdf
 #   - libxml2-dev/libxslt-dev for nokogiri, at least
 #   - postgresql-dev for pg/activerecord gems
 #   - git for installing gems referred to use a git:// uri
@@ -14,6 +13,11 @@ RUN apt-get -y install \
   ruby-full \
   libxml2-dev \
   libxslt-dev \
+  libjpeg-dev \
+  libpng16-16 \
+  libxrender1 \
+  libfontconfig1 \
+  libxext6 \
   postgresql \
   postgresql-client \
   libpq5 \
@@ -52,10 +56,13 @@ WORKDIR /usr/src/app
 
 COPY Gemfile* .ruby-version ./
 
+# "chmod -R" is due to:
+# https://github.com/mileszs/wicked_pdf/issues/911
 RUN gem install bundler -v 2.1.4 && \
     bundle config set frozen 'true' && \
     bundle config without test:development && \
-    bundle install --jobs 2 --retry 3
+    bundle install --jobs 2 --retry 3 && \
+    chmod -R 777 /usr/local/bundle/gems/wkhtmltopdf-binary-0.12.6.5/bin
 
 COPY . .
 
