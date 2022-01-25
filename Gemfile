@@ -30,7 +30,7 @@ gem 'sidekiq', '~> 6.2'
 # PDF generation
 gem 'combine_pdf', '~> 1.0'
 gem 'wicked_pdf', '~> 2.1.0'
-gem 'wkhtmltopdf-binary-edge', '~> 0.12.6.0'
+gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
 group :production do
   gem 'lograge'
