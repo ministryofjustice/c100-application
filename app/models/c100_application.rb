@@ -63,4 +63,15 @@ class C100Application < ApplicationRecord
       CompletedApplicationsAudit.log!(self)
     end
   end
+
+  # Errors in abuse concern are added to the application
+  # so they can be shown to the user
+  validate do |application|
+    application.abuse_concerns.each do |concern|
+      next if concern.valid?
+      concern.errors.full_messages.each do |msg|
+        errors.add_to_base(msg)
+      end
+    end
+  end
 end
