@@ -63,5 +63,4 @@ class C100Application < ApplicationRecord
       CompletedApplicationsAudit.log!(self)
     end
   end
-
 end
