@@ -540,6 +540,15 @@ en:
               sexual: About the children’s sexual abuse
               financial: About the children’s financial abuse
               other: Other concerns about the children
+          errors:
+            behaviour_description: Please briefly describe what happened and who was involved
+            behaviour_start: Provide when this behaviour started
+            behaviour_ongoing: Provide whether this behaviour still ongoing
+            behaviour_stop: Provide when the behaviour stopped
+            asked_for_help: Provide whether you asked for help
+            help_party: Provide who you asked for help
+            help_provided: Provide whether the person(s) you asked for help helped you
+            help_description: Describe how the person(s) you asked for help helped
       contact:
         edit:
           page_title: Safety concerns contact with the other people
