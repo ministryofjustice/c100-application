@@ -23,11 +23,11 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
   let(:abuse_kind) {'emotional'}
   let(:behaviour_description) { 'a description' }
   let(:behaviour_start) { '1 year ago' }
-  let(:behaviour_ongoing) { 'no' }
+  let(:behaviour_ongoing) { GenericYesNo::NO }
   let(:behaviour_stop) { 'last monday' }
-  let(:asked_for_help) { 'yes' }
+  let(:asked_for_help) { GenericYesNo::YES }
   let(:help_party) { 'doctor' }
-  let(:help_provided) { 'yes' }
+  let(:help_provided) { GenericYesNo::YES }
   let(:help_description) { 'description' }
 
   subject { described_class.new(arguments) }
@@ -95,6 +95,97 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
 
           expect(subject.save).to be(true)
         end
+      end
+    end
+
+    context 'for invalid details' do
+      before do
+        allow(concerns_collection).to receive(:find_or_initialize_by).with(
+          subject: AbuseSubject::APPLICANT,
+          kind: AbuseType::EMOTIONAL
+        ).and_return(abuse_concern)
+      end
+
+      before(:each, saves: true) do
+        expect(abuse_concern).to receive(:update).with(
+          behaviour_description: behaviour_description,
+          behaviour_start: behaviour_start,
+          behaviour_ongoing: behaviour_ongoing,
+          behaviour_stop: behaviour_stop,
+          asked_for_help: asked_for_help,
+          help_party: help_party,
+          help_provided: help_provided,
+          help_description: help_description
+        ).and_return(true)
+      end
+
+      context 'requires behaviour_description' do
+        let(:behaviour_description){ nil }
+        it{ expect(subject.save).to be(false) }
+      end
+      context 'requires behaviour_start' do
+        let(:behaviour_start){ nil }
+        it{ expect(subject.save).to be(false) }
+      end
+      context 'requires behaviour_ongoing' do
+        let(:behaviour_ongoing){ nil }
+        it{ expect(subject.save).to be(false) }
+      end
+      context 'requires behaviour_stop if behaviour_ongoing is no' do
+        let(:behaviour_ongoing){ GenericYesNo::NO }
+        let(:behaviour_stop){ nil }
+        it{ expect(subject.save).to be(false) }
+      end
+      context 'does not require behaviour_stop if behaviour_ongoing is yes',
+              saves: true do
+        let(:behaviour_ongoing){ GenericYesNo::YES }
+        let(:behaviour_stop){ nil }
+        it{ expect(subject.save).to be(true) }
+      end
+      context 'requires asked_for_help' do
+        let(:asked_for_help){ nil }
+        it{ expect(subject.save).to be(false) }
+      end
+      context 'requires help_party if asked_for_help is yes' do
+        let(:asked_for_help){ GenericYesNo::YES }
+        let(:help_party){ nil }
+        it{ expect(subject.save).to be(false) }
+      end
+      context 'does not require help_party if asked_for_help is no', saves: true do
+        let(:asked_for_help){ GenericYesNo::NO }
+        let(:help_party){ nil }
+        it{ expect(subject.save).to be(true) }
+      end
+      context 'requires help_provided if asked_for_help is yes' do
+        let(:asked_for_help){ GenericYesNo::YES }
+        let(:help_provided){ nil }
+        it{ expect(subject.save).to be(false) }
+      end
+      context 'does not require help_provided if asked_for_help is no', saves: true do
+        let(:asked_for_help){ GenericYesNo::NO }
+        let(:help_provided){ nil }
+        it{ expect(subject.save).to be(true) }
+      end
+      context 'requires help_description if asked_for_help'+
+         ' is yes and help_provided yes' do
+        let(:asked_for_help){ GenericYesNo::YES }
+        let(:help_provided){ GenericYesNo::YES }
+        let(:help_description){ nil }
+        it{ expect(subject.save).to be(false) }
+      end
+      context 'does not require help_description if asked_for_help is no',
+              saves: true do
+        let(:asked_for_help){ GenericYesNo::NO }
+        let(:help_provided){ GenericYesNo::NO }
+        let(:help_description){ nil }
+        it{ expect(subject.save).to be(true) }
+      end
+      context 'does not require help_description if asked_for_help is yes'+
+         ' and help_provided no', saves: true do
+        let(:asked_for_help){ GenericYesNo::YES }
+        let(:help_provided){ GenericYesNo::NO }
+        let(:help_description){ nil }
+        it{ expect(subject.save).to be(true) }
       end
     end
   end
