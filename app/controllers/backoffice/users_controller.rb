@@ -16,7 +16,7 @@ module Backoffice
     #
     def exists
       email = params[:id]
-      user  = BackofficeUser.active.find_by(email: email)
+      user = BackofficeUser.where("LOWER(email) = ?", email.downcase).first
 
       if user.nil?
         process_forbidden(email)
