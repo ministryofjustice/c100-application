@@ -20,7 +20,9 @@ class BackofficeAuditRecord < ApplicationRecord
     )
   end
 
+  # :nocov:
   def self.purge!(date)
     where('created_at <= :date', date: date).destroy_all
   end
+  # :nocov:
 end
