@@ -14,7 +14,7 @@ stop_function(){
   # Find PID
   SIDEKIQ_PID=$(ps aux | grep sidekiq | grep busy | awk '{ print $2 }')
 
-  if [[ -z "$SIDEKIQ_PID" ]]; then
+  if [ -z "$SIDEKIQ_PID" ]; then
     echo "No Sidekiq PIDs found."
   else
     echo "Sending TSTP signal..."
@@ -32,12 +32,12 @@ wait_function(){
   sleep 2
 
   i=0
-  while [[ ${i} -lt ${RETRY_LIMIT} ]]; do
+  while [ ${i} -lt ${RETRY_LIMIT} ]; do
     i=$((i+1))
 
     IS_SIDEKIQ_DONE=$(sidekiqmon processes | grep -q "(0 busy)"; echo $?)
 
-    if [[ ${IS_SIDEKIQ_DONE} -eq 0 ]]; then
+    if [ ${IS_SIDEKIQ_DONE} -eq 0 ]; then
       echo "Sidekiq finished all jobs."
       break
     else
@@ -49,7 +49,7 @@ wait_function(){
 
 # This is used in the kubernetes deployment readinessProbe and livenessProbe.
 probe_function(){
-  MONITOR_OUTPUT=$(sidekiqmon processes)
+  MONITOR_OUTPUT=$(sidekiqmon processes) || exit 1
 
   # Check redis connection
   REDIS_CHECK=$(echo ${MONITOR_OUTPUT} | grep -q "ECONNREFUSED"; echo $?)
@@ -61,7 +61,7 @@ probe_function(){
   THREADS_CHECK=$(echo ${MONITOR_OUTPUT} | grep -qE "Threads: \b[0-1]\b"; echo $?)
 
   # If any of the above checks returns '0' it means the regex found a match
-  if [[ ${REDIS_CHECK} -eq 0 ]] || [[ ${PROCESSES_CHECK} -eq 0 ]] || [[ ${THREADS_CHECK} -eq 0 ]]; then
+  if [ ${REDIS_CHECK} -eq 0 ] || [ ${PROCESSES_CHECK} -eq 0 ] || [ ${THREADS_CHECK} -eq 0 ]; then
     echo 'Sidekiq probe: KO'
     exit 1
   fi
