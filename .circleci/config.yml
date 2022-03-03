@@ -120,15 +120,10 @@ jobs:
       - checkout
 
       - run:
-          name: Authenticate to LIVE-1 cluster
+          name: kubectl use context
           command: |
-            echo -n ${CLUSTER_CERT_LIVE_1} | base64 -d > ./live_1_ca.crt
-            kubectl config set-cluster ${CLUSTER_NAME_LIVE_1} --certificate-authority=./live_1_ca.crt --server=https://api.${CLUSTER_NAME_LIVE_1}
-            kubectl config set-credentials circleci --token=${TOKEN_LIVE_1}
-            kubectl config set-context ${CLUSTER_NAME_LIVE_1} --cluster=${CLUSTER_NAME_LIVE_1} --user=circleci --namespace=${NAMESPACE}
-            kubectl config use-context ${CLUSTER_NAME_LIVE_1}
-            kubectl config current-context
-            kubectl --namespace=${NAMESPACE} get pods
+            setup-kube-auth
+            kubectl config use-context << parameters.env_name >>
 
       - deploy:
           name: rolling update image
@@ -159,13 +154,13 @@ jobs:
       - run:
           name: Authenticate to LIVE cluster
           command: |
-            echo -n ${CLUSTER_CERT_LIVE} | base64 -d > ./live_ca.crt
-            kubectl config set-cluster ${CLUSTER_NAME_LIVE} --certificate-authority=./live_ca.crt --server=https://${CLUSTER_NAME_LIVE}
-            kubectl config set-credentials circleci --token=${TOKEN_LIVE}
-            kubectl config set-context ${CLUSTER_NAME_LIVE} --cluster=${CLUSTER_NAME_LIVE} --user=circleci --namespace=${NAMESPACE}
-            kubectl config use-context ${CLUSTER_NAME_LIVE}
+            echo -n ${KUBE_ENV_LIVE_STAGING_CACERT} | base64 -d > ./ca.crt
+            kubectl config set-cluster ${KUBE_ENV_LIVE_STAGING_NAME} --certificate-authority=./ca.crt --server=https://${KUBE_ENV_LIVE_STAGING_NAME}
+            kubectl config set-credentials circleci --token=${KUBE_ENV_LIVE_STAGING_TOKEN}
+            kubectl config set-context ${KUBE_ENV_LIVE_STAGING_NAME} --cluster=${KUBE_ENV_LIVE_STAGING_NAME} --user=circleci --namespace=${KUBE_ENV_LIVE_STAGING_NAMESPACE}
+            kubectl config use-context ${KUBE_ENV_LIVE_STAGING_NAME}
             kubectl config current-context
-            kubectl --namespace=${NAMESPACE} get pods
+            kubectl --namespace=${KUBE_ENV_LIVE_STAGING_NAMESPACE} get pods
 
       - deploy:
           name: rolling update image
@@ -225,6 +220,11 @@ workflows:
           env_name: staging
           requires:
             - build-staging
+      - deploy_image_to_live:
+          name: deploy-staging
+          env_name: staging
+          requires:
+            - build-staging
       ### production ###
       - approve_production:
           type: approval
@@ -238,34 +238,12 @@ workflows:
           env_name: production
           requires:
             - tag_production
-
-      ### staging ###
-      # - build_image:
-      #     name: build-staging
-      #     env_name: staging
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only: master
-      - deploy_image_to_live:
-          name: deploy-staging
-          env_name: staging
-          requires:
-            - build-staging
-      ### production ###
-      # - approve_production:
-      #     type: approval
-      #     requires:
-      #       - deploy-staging
-      # - tag_production:
-      #     requires:
-      #       - approve_production
       - deploy_image_to_live:
           name: deploy-production
           env_name: production
           requires:
             - tag_production
+
 
 #  smoke-tests:
 #    jobs:
