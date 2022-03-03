@@ -111,7 +111,7 @@ jobs:
             docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
             docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
 
-  deploy_image_to_live_1_cluster:
+  deploy_image:
     <<: *cloud_container
     parameters:
       env_name:
@@ -148,7 +148,7 @@ jobs:
                     deployment/c100-application-deployment-<< parameters.env_name >> \
                     kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"
 
-  deploy_image_to_live_cluster:
+  deploy_image_to_live:
     <<: *cloud_container
     parameters:
       env_name:
@@ -166,7 +166,7 @@ jobs:
             kubectl config use-context ${CLUSTER_NAME_LIVE}
             kubectl config current-context
             kubectl --namespace=${NAMESPACE} get pods
-            
+
       - deploy:
           name: rolling update image
           command: |
@@ -211,20 +211,6 @@ workflows:
   test-build-deploy:
     jobs:
       - test
-      ### dev ###
-      - build_image:
-          name: build-dev
-          env_name: dev
-          requires:
-            - test
-          filters:
-            branches:
-              only: develop
-      - deploy_image:
-          name: deploy-dev
-          env_name: dev
-          requires:
-            - build-dev
       ### staging ###
       - build_image:
           name: build-staging
@@ -248,6 +234,34 @@ workflows:
           requires:
             - approve_production
       - deploy_image:
+          name: deploy-production
+          env_name: production
+          requires:
+            - tag_production
+
+      ### staging ###
+      - build_image:
+          name: build-staging
+          env_name: staging
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - deploy_image_to_live:
+          name: deploy-staging
+          env_name: staging
+          requires:
+            - build-staging
+      ### production ###
+      - approve_production:
+          type: approval
+          requires:
+            - deploy-staging
+      - tag_production:
+          requires:
+            - approve_production
+      - deploy_image_to_live:
           name: deploy-production
           env_name: production
           requires:
