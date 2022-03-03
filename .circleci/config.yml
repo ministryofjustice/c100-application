@@ -142,7 +142,41 @@ jobs:
             kubectl annotate -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-deployment-<< parameters.env_name >> \
                     kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"
+ 
+  deploy_image_to_live:
+    <<: *cloud_container
+    parameters:
+      env_name:
+        type: string
+    steps:
+      - checkout
 
+      - run:
+          name: Authenticate to LIVE cluster
+          command: |
+            echo -n ${KUBE_ENV_LIVE_STAGING_CACERT} | base64 -d > ./ca.crt
+            kubectl config set-cluster ${KUBE_ENV_LIVE_STAGING_NAME} --certificate-authority=./ca.crt --server=https://${KUBE_ENV_LIVE_STAGING_NAME}
+            kubectl config set-credentials circleci --token=${KUBE_ENV_LIVE_STAGING_TOKEN}
+            kubectl config set-context ${KUBE_ENV_LIVE_STAGING_NAME} --cluster=${KUBE_ENV_LIVE_STAGING_NAME} --user=circleci --namespace=${KUBE_ENV_LIVE_STAGING_NAMESPACE}
+            kubectl config use-context ${KUBE_ENV_LIVE_STAGING_NAME}
+
+      - deploy:
+          name: rolling update image
+          command: |
+            export BUILD_DATE=$(date -Is) >> $BASH_ENV
+            source $BASH_ENV
+
+            kubectl set image -n c100-application-<< parameters.env_name >> \
+                    deployment/c100-application-deployment-<< parameters.env_name >> \
+                    webapp="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+
+            kubectl set image -n c100-application-<< parameters.env_name >> \
+                    deployment/c100-application-sidekiq-<< parameters.env_name >> \
+                    sidekiq="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+
+            kubectl annotate -n c100-application-<< parameters.env_name >> \
+                    deployment/c100-application-deployment-<< parameters.env_name >> \
+                    kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"
   tag_production:
     <<: *cloud_container
     steps:
@@ -169,20 +203,6 @@ workflows:
   test-build-deploy:
     jobs:
       - test
-      ### dev ###
-      - build_image:
-          name: build-dev
-          env_name: dev
-          requires:
-            - test
-          filters:
-            branches:
-              only: develop
-      - deploy_image:
-          name: deploy-dev
-          env_name: dev
-          requires:
-            - build-dev
       ### staging ###
       - build_image:
           name: build-staging
@@ -194,6 +214,11 @@ workflows:
               only: master
       - deploy_image:
           name: deploy-staging
+          env_name: staging
+          requires:
+            - build-staging
+      - deploy_image_to_live:
+          name: deploy-staging-live
           env_name: staging
           requires:
             - build-staging
