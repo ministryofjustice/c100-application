@@ -221,7 +221,7 @@ workflows:
           requires:
             - build-staging
       - deploy_image_to_live:
-          name: deploy-staging
+          name: deploy-staging-live
           env_name: staging
           requires:
             - build-staging
@@ -239,7 +239,7 @@ workflows:
           requires:
             - tag_production
       - deploy_image_to_live:
-          name: deploy-production
+          name: deploy-production-live
           env_name: production
           requires:
             - tag_production
