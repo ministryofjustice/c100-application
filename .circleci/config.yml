@@ -254,13 +254,13 @@ workflows:
           requires:
             - build-staging
       ### production ###
-      - approve_production:
-          type: approval
-          requires:
-            - deploy-staging
-      - tag_production:
-          requires:
-            - approve_production
+      # - approve_production:
+      #     type: approval
+      #     requires:
+      #       - deploy-staging
+      # - tag_production:
+      #     requires:
+      #       - approve_production
       - deploy_image_to_live:
           name: deploy-production
           env_name: production
