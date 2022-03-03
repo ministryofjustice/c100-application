@@ -111,7 +111,7 @@ jobs:
             docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
             docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
 
-  deploy_image:
+  deploy_image_to_live_1_cluster:
     <<: *cloud_container
     parameters:
       env_name:
@@ -120,10 +120,15 @@ jobs:
       - checkout
 
       - run:
-          name: kubectl use context
+          name: Authenticate to LIVE-1 cluster
           command: |
-            setup-kube-auth
-            kubectl config use-context << parameters.env_name >>
+            echo -n ${CLUSTER_CERT_LIVE_1} | base64 -d > ./live_1_ca.crt
+            kubectl config set-cluster ${CLUSTER_NAME_LIVE_1} --certificate-authority=./live_1_ca.crt --server=https://api.${CLUSTER_NAME_LIVE_1}
+            kubectl config set-credentials circleci --token=${TOKEN_LIVE_1}
+            kubectl config set-context ${CLUSTER_NAME_LIVE_1} --cluster=${CLUSTER_NAME_LIVE_1} --user=circleci --namespace=${NAMESPACE}
+            kubectl config use-context ${CLUSTER_NAME_LIVE_1}
+            kubectl config current-context
+            kubectl --namespace=${NAMESPACE} get pods
 
       - deploy:
           name: rolling update image
@@ -142,6 +147,43 @@ jobs:
             kubectl annotate -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-deployment-<< parameters.env_name >> \
                     kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"
+
+  deploy_image_to_live_cluster:
+    <<: *cloud_container
+    parameters:
+      env_name:
+        type: string
+    steps:
+      - checkout
+
+      - run:
+          name: Authenticate to LIVE cluster
+          command: |
+            echo -n ${CLUSTER_CERT_LIVE} | base64 -d > ./live_ca.crt
+            kubectl config set-cluster ${CLUSTER_NAME_LIVE} --certificate-authority=./live_ca.crt --server=https://${CLUSTER_NAME_LIVE}
+            kubectl config set-credentials circleci --token=${TOKEN_LIVE}
+            kubectl config set-context ${CLUSTER_NAME_LIVE} --cluster=${CLUSTER_NAME_LIVE} --user=circleci --namespace=${NAMESPACE}
+            kubectl config use-context ${CLUSTER_NAME_LIVE}
+            kubectl config current-context
+            kubectl --namespace=${NAMESPACE} get pods
+            
+      - deploy:
+          name: rolling update image
+          command: |
+            export BUILD_DATE=$(date -Is) >> $BASH_ENV
+            source $BASH_ENV
+
+            kubectl set image -n c100-application-<< parameters.env_name >> \
+                    deployment/c100-application-deployment-<< parameters.env_name >> \
+                    webapp="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+
+            kubectl set image -n c100-application-<< parameters.env_name >> \
+                    deployment/c100-application-sidekiq-<< parameters.env_name >> \
+                    sidekiq="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+
+            kubectl annotate -n c100-application-<< parameters.env_name >> \
+                    deployment/c100-application-deployment-<< parameters.env_name >> \
+                    kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"                     
 
   tag_production:
     <<: *cloud_container
