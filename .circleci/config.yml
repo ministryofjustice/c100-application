@@ -240,14 +240,14 @@ workflows:
             - tag_production
 
       ### staging ###
-      - build_image:
-          name: build-staging
-          env_name: staging
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
+      # - build_image:
+      #     name: build-staging
+      #     env_name: staging
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: master
       - deploy_image_to_live:
           name: deploy-staging
           env_name: staging
