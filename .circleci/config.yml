@@ -225,8 +225,8 @@ workflows:
       ### production ###
       - approve_production:
           type: approval
-          requires:
-            - deploy-staging
+          # requires:
+          #   - deploy-staging
       - tag_production:
           requires:
             - approve_production
