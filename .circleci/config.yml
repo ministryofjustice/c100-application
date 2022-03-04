@@ -217,11 +217,11 @@ workflows:
           env_name: staging
           requires:
             - build-staging
-      # - deploy_image:
-      #     name: deploy-staging
-      #     env_name: staging
-      #     requires:
-      #       - build-staging
+      - deploy_image:
+          name: deploy-staging
+          env_name: staging
+          requires:
+            - build-staging
       ### production ###
       - approve_production:
           type: approval
