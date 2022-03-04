@@ -212,11 +212,11 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy_image:
-          name: deploy-staging
-          env_name: staging
-          requires:
-            - build-staging
+      # - deploy_image:
+      #     name: deploy-staging
+      #     env_name: staging
+      #     requires:
+      #       - build-staging
       - deploy_image_to_live:
           name: deploy-staging-live
           env_name: staging
