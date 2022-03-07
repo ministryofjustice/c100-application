@@ -110,38 +110,6 @@ jobs:
 
             docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
             docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
-
-  deploy_image:
-    <<: *cloud_container
-    parameters:
-      env_name:
-        type: string
-    steps:
-      - checkout
-
-      - run:
-          name: kubectl use context
-          command: |
-            setup-kube-auth
-            kubectl config use-context << parameters.env_name >>
-
-      - deploy:
-          name: rolling update image
-          command: |
-            export BUILD_DATE=$(date -Is) >> $BASH_ENV
-            source $BASH_ENV
-
-            kubectl set image -n c100-application-<< parameters.env_name >> \
-                    deployment/c100-application-deployment-<< parameters.env_name >> \
-                    webapp="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
-
-            kubectl set image -n c100-application-<< parameters.env_name >> \
-                    deployment/c100-application-sidekiq-<< parameters.env_name >> \
-                    sidekiq="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
-
-            kubectl annotate -n c100-application-<< parameters.env_name >> \
-                    deployment/c100-application-deployment-<< parameters.env_name >> \
-                    kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"
  
   deploy_image_to_live:
     <<: *cloud_container
@@ -247,11 +215,6 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy_image:
-          name: deploy-staging
-          env_name: staging
-          requires:
-            - build-staging
       - deploy_image_to_live:
           name: deploy-staging-live
           env_name: staging
@@ -265,11 +228,6 @@ workflows:
       - tag_production:
           requires:
             - approve_production
-      - deploy_image:
-          name: deploy-production
-          env_name: production
-          requires:
-            - tag_production
       - deploy_image_to_live_prod:
           name: deploy-production-live
           env_name: production
