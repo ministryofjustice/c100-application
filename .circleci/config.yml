@@ -177,6 +177,41 @@ jobs:
             kubectl annotate -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-deployment-<< parameters.env_name >> \
                     kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"
+
+  deploy_image_to_live_prod:
+    <<: *cloud_container
+    parameters:
+      env_name:
+        type: production
+    steps:
+      - checkout
+
+      - run:
+          name: Authenticate to LIVE cluster
+          command: |
+            echo -n ${KUBE_ENV_LIVE_PRODUCTION_CACERT} | base64 -d > ./ca.crt
+            kubectl config set-cluster ${KUBE_ENV_LIVE_PRODUCTION_NAME} --certificate-authority=./ca.crt --server=https://${KUBE_ENV_LIVE_PRODUCTIONNAME}
+            kubectl config set-credentials circleci --token=${KUBE_ENV_LIVE_PRODUCTION_TOKEN}
+            kubectl config set-context ${KUBE_ENV_LIVE_PRODUCTION_NAME} --cluster=${KUBE_ENV_LIVE_PRODUCTION_NAME} --user=circleci --namespace=${KUBE_ENV_LIVE_PRODUCTION_NAMESPACE}
+            kubectl config use-context ${KUBE_ENV_LIVE_PRODUCTION_NAME}
+
+      - deploy:
+          name: rolling update image
+          command: |
+            export BUILD_DATE=$(date -Is) >> $BASH_ENV
+            source $BASH_ENV
+
+            kubectl set image -n c100-application-<< parameters.env_name >> \
+                    deployment/c100-application-deployment-<< parameters.env_name >> \
+                    webapp="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+
+            kubectl set image -n c100-application-<< parameters.env_name >> \
+                    deployment/c100-application-sidekiq-<< parameters.env_name >> \
+                    sidekiq="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+
+            kubectl annotate -n c100-application-<< parameters.env_name >> \
+                    deployment/c100-application-deployment-<< parameters.env_name >> \
+                    kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"                   
   tag_production:
     <<: *cloud_container
     steps:
@@ -226,11 +261,16 @@ workflows:
       - approve_production:
           type: approval
           requires:
-            - deploy-staging
+            - deploy-staging-live
       - tag_production:
           requires:
             - approve_production
       - deploy_image:
+          name: deploy-production
+          env_name: production
+          requires:
+            - tag_production
+      - deploy_image_to_live_prod:
           name: deploy-production
           env_name: production
           requires:
