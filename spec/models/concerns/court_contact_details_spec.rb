@@ -28,14 +28,17 @@ RSpec.describe CourtContactDetails do
         slough-county-court-and-family-court
         norwich-combined-court-centre
         milton-keynes-county-court-and-family-court
+        milton-keynes-magistrates-court-and-family-court
         peterborough-combined-court-centre
         staines-county-court-and-family-court
         watford-county-court-and-family-court
         guildford-county-court-and-family-court
         reading-county-court-and-family-court
         oxford-combined-court-centre
+        oxford-and-southern-oxfordshire-magistrates-court
         luton-justice-centre
         carlisle-combined-court
+        carlisle-magistrates-court
         barrow-in-furness-county-court-and-family-court
         preston-crown-court-and-family-court-sessions-house
         central-family-court
@@ -63,6 +66,7 @@ RSpec.describe CourtContactDetails do
         bournemouth-and-poole-county-court-and-family-court
         bristol-civil-and-family-justice-centre
         exeter-combined-court-centre
+        exeter-law-courts
         gloucester-and-cheltenham-county-and-family-court
         plymouth-combined-court
         portsmouth-combined-court-centre
@@ -77,12 +81,14 @@ RSpec.describe CourtContactDetails do
         isle-of-wight-combined-court
         northampton-magistrates-court
         caernarfon-justice-centre
+        caernarfon--justice-centre
         cardiff-civil-and-family-justice-centre
         carmarthen-county-court-and-family-court
         haverfordwest-county-court-and-family-court
         newport-south-wales-county-court-and-family-court
         swansea-civil-justice-centre
         wrexham-county-and-family-court
+        wrexham-county-and-family--court
         bedford-county-court-and-family-court
         canterbury-combined-court-centre
         hertford-county-court-and-family-court
