@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev/
   specs:
     abstract_type (0.0.7)
     actioncable (5.2.6.3)
@@ -217,6 +218,7 @@ GEM
       procto (~> 0.0.2)
       unparser (~> 0.5.2)
       variable (~> 0.0.1)
+    mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
     mutant-rspec (0.9.14)
       mutant (~> 0.9.14)
       rspec-core (>= 3.8.0, < 4.0.0)
@@ -460,7 +462,7 @@ DEPENDENCIES
   lograge
   logstash-event
   mimemagic (~> 0.3.7)
-  mutant (< 0.10.0)
+  mutant-license (= 0.1.1.2.1739399027284447558325915053311580324856.4)!
   mutant-rspec
   omniauth-auth0
   omniauth-rails_csrf_protection
