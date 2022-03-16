@@ -43,7 +43,6 @@ Rails.application.routes.draw do
     # Sidekiq Web UI (when signed in)
     constraints ->(req) { req.session[:backoffice_userinfo].present? } do
       require 'sidekiq/web'
-      Sidekiq::Web.set :sessions, false
       mount Sidekiq::Web => '/sidekiq'
     end
 
