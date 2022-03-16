@@ -18,6 +18,7 @@ gem 'sentry-raven', '~> 3.0'
 gem 'uglifier'
 gem 'uk_postcode'
 gem 'virtus'
+gem 'parser', '~> 3.1', '>= 3.1.1.0'
 
 # Back office
 gem 'omniauth-auth0'
