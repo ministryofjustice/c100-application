@@ -519,7 +519,7 @@ RSpec.shared_examples 'a summary step controller' do
           get :show, format: :pdf, session: { c100_application_id: existing_case.id }
 
           expect(response.body).to eq('a majestic pdf')
-          expect(response.headers['Content-Disposition']).to eq('attachment; filename="test.pdf"')
+          expect(response.headers['Content-Disposition']).to eq('attachment; filename="test.pdf"; filename*=UTF-8\'\'test.pdf')
         end
       end
     end

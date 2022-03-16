@@ -4,7 +4,6 @@ RSpec.describe Backoffice::UsersController do
 
   before do
     allow(subject).to receive(:authenticate).and_return(true)
-    # request.env['devise.mapping'] = Devise.mappings[:user]
   end
 
   describe '#exists' do
@@ -29,7 +28,7 @@ RSpec.describe Backoffice::UsersController do
 
     it 'does not allow users that do not exist' do
       get :exists, params: { id: 'INVALID@example.com' }
-      expect(response).to be_missing
+      expect(response.status).to eq(404)
     end
 
 

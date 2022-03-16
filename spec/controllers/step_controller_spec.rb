@@ -8,7 +8,7 @@ end
 
 RSpec.describe DummyStepController, type: :controller do
   before do
-    Application.routes.draw do
+    Rails.application.routes.draw do
       get '/dummy_step' => 'dummy_step#show'
       root to: 'dummy_root#index'
     end
