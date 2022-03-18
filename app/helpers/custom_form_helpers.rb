@@ -30,8 +30,8 @@ module CustomFormHelpers
     html = Nokogiri::HTML.fragment(
       submit_button(i18n_key, opts)
     ).at(:button)
-
     html['name'] = 'commit_draft'
+    html['value'] = html.children.text
     html.to_html.html_safe
   end
 end
