@@ -10,7 +10,7 @@
 <% end %>
 
 <% content_for(:cookie_banner) do %>
-  <%= render partial: 'layouts/cookie_banner' unless cookie_settings['seen'] %>
+  <%= render partial: 'layouts/cookie_banner' unless (cookie_settings && cookie_settings['seen']) %>
   <%- if flash[:cookie_banner_confirmation].present? %>
   <%= render partial: 'layouts/cookie_banner_confirmation', locals: { message: flash[:cookie_banner_confirmation] } %>
   <% end %>
