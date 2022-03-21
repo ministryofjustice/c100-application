@@ -15,7 +15,7 @@
         <%= f.govuk_check_box :misc, MiscExemptions::WITHOUT_NOTICE.to_s %>
 
         <%= f.govuk_check_box :misc, MiscExemptions::GROUP_MIAM_ACCESS.to_s do %>
-          <%= f.govuk_collection_check_boxes :exemptions_collection, MiscExemptions::MIAM_ACCESS, :to_s, :to_s %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, MiscExemptions::MIAM_ACCESS, :to_s, :to_s, legend: nil %>
         <% end %>
 
         <%= f.govuk_check_box :misc, MiscExemptions::ACCESS_PROHIBITED.to_s %>
