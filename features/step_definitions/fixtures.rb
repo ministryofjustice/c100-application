@@ -8,7 +8,6 @@ Then(/^The form markup should match "([^"]*)"$/) do |fixture|
   ).read
 
   normaliser = MarkupNormaliser.new(raw_markup, raw_fixture)
-
   expect(
     normaliser.markup1
   ).to eq(
