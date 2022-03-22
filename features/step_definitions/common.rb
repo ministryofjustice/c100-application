@@ -37,7 +37,7 @@ When(/^I open the "([^"]*)" summary details$/) do |text|
 end
 
 When(/^I click the "([^"]*)" button$/) do |text|
-  find("input[value='#{text}']").click
+  find_button("#{text}").click
 end
 
 When(/^I have started an application$/) do

@@ -14,23 +14,23 @@
       <%= f.govuk_check_boxes_fieldset :domestic, legend: { tag: 'span', size: 'm' } do %>
 
         <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_POLICE.to_s, link_errors: true do %>
-          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::POLICE, :to_s, :to_s %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::POLICE, :to_s, :to_s, legend: nil %>
         <% end %>
 
         <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_COURT.to_s do %>
-          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::COURT, :to_s, :to_s %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::COURT, :to_s, :to_s, legend: nil %>
         <% end %>
 
         <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_SPECIALIST.to_s do %>
-          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::SPECIALIST, :to_s, :to_s %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::SPECIALIST, :to_s, :to_s, legend: nil %>
         <% end %>
 
         <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_LOCAL_AUTHORITY.to_s do %>
-          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::LOCAL_AUTHORITY, :to_s, :to_s %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::LOCAL_AUTHORITY, :to_s, :to_s, legend: nil %>
         <% end %>
 
         <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_DA_SERVICE.to_s do %>
-          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::DA_SERVICE, :to_s, :to_s %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::DA_SERVICE, :to_s, :to_s, legend: nil %>
         <% end %>
 
         <%= f.govuk_check_box :domestic, DomesticExemptions::RIGHT_TO_REMAIN.to_s %>
