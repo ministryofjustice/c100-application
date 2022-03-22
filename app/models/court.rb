@@ -36,8 +36,7 @@ class Court < ApplicationRecord
 
     if court.stale?
       court.slug_will_change! # Touch `updated_at` on save, even if there are no changes
-
-      court.update_attributes(
+      court.update(
         build(data).attributes.except('created_at', 'updated_at')
       )
     end

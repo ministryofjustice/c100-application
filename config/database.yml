@@ -8,8 +8,10 @@ default: &default
 
 development:
   <<: *default
+  database: 'c100-development'
 test:
   <<: *default
+  database: 'c100-test'
 production:
   <<: *default
   sslmode: <%= ENV.fetch('DATABASE_SSLMODE', 'verify-full') %>

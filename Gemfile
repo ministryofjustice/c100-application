@@ -4,20 +4,21 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read('.ruby-version')
 
 gem 'devise', '~> 4.7.1'
-gem 'govuk_design_system_formbuilder', '~> 2.1.2'
+gem 'govuk_design_system_formbuilder'
 gem 'govuk_notify_rails', '~> 2.1.0'
 gem 'govuk-pay-ruby-client', '~> 1.0.2'
 gem 'jquery-rails'
 gem 'mimemagic', '~> 0.3.7'
 gem 'pg', '~> 1.1'
 gem 'puma'
-gem 'rails', '~> 5.2.6'
+gem 'rails', '6.0.4.7'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
 gem 'sentry-raven', '~> 3.0'
 gem 'uglifier'
 gem 'uk_postcode'
 gem 'virtus'
+gem 'parser', '~> 3.1', '>= 3.1.1.0'
 
 # Back office
 gem 'omniauth-auth0'
@@ -44,9 +45,12 @@ group :development do
   gem 'web-console'
 end
 
+source 'https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev' do
+  gem 'mutant-license',                '0.1.1.2.1739399027284447558325915053311580324856.4'
+end
+
 group :development, :test do
   gem 'dotenv-rails'
-  gem 'mutant', '< 0.10.0'
   gem 'mutant-rspec'
   gem 'pry-byebug'
   gem 'pry-rails'
