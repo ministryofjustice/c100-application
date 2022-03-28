@@ -108,6 +108,7 @@ Rails.application.configure do
   # Prevent host header poisoning by enforcing absolute redirects
   if ENV['EXTERNAL_URL'].present?
     uri = URI.parse(ENV['EXTERNAL_URL'])
+    config.action_mailer.default_url_options = { host: uri.host }
     config.action_controller.default_url_options = {
       host: uri.host, protocol: uri.scheme, port: uri.port
     }
