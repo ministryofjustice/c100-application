@@ -26,6 +26,7 @@ Rails.application.configure do
   # get the constantized attribute name itself, in form labels.
   config.action_view.raise_on_missing_translations = true
 
+  routes.default_url_options = { host: 'localhost' }
   config.action_mailer.default_url_options = { host: "localhost" }
-
+  config.default_url_options = { host: "localhost" }
 end
