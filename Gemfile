@@ -5,7 +5,7 @@ ruby File.read('.ruby-version')
 
 gem 'devise', '~> 4.7.1'
 gem 'govuk_design_system_formbuilder'
-gem 'govuk_notify_rails', '~> 2.1.0'
+gem 'govuk_notify_rails', '~> 2.2.0'
 gem 'govuk-pay-ruby-client', '~> 1.0.2'
 gem 'jquery-rails'
 gem 'mimemagic', '~> 0.3.7'
