@@ -5,7 +5,7 @@ class PaymentIntent < ApplicationRecord
 
   # URLs are one-time use only. Once accessed, they are invalidated.
   def return_url
-    validate_payment_url(self, nonce: init_nonce)
+    validate_payment_url(self, nonce: init_nonce, protocol: return_url_protocol)
   end
 
   def revoke_nonce!
@@ -20,5 +20,9 @@ class PaymentIntent < ApplicationRecord
 
   def init_nonce
     update_column(:nonce, SecureRandom.hex(8)) && nonce
+  end
+
+  def return_url_protocol
+    Rails.configuration.force_ssl ? 'https' : 'http'
   end
 end
