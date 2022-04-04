@@ -23,10 +23,18 @@ RSpec.describe PaymentIntent, type: :model do
       }.to change { subject.nonce }.from(nil).to(nonce)
     end
 
-    it 'returns the url with the nonce parameter' do
+    it 'returns the https url with the nonce parameter' do
+      Rails.configuration.force_ssl = true
       expect(
         subject.return_url
       ).to eq("https://c100.justice.uk/payments/#{subject.id}/validate?nonce=#{nonce}")
+    end
+
+    it 'returns the http url with the nonce parameter' do
+      Rails.configuration.force_ssl = false
+      expect(
+        subject.return_url
+      ).to eq("http://c100.justice.uk/payments/#{subject.id}/validate?nonce=#{nonce}")
     end
   end
 
