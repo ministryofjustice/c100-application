@@ -1,6 +1,10 @@
 GEM
-  remote: https://rubygems.org/
   remote: https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev/
+  specs:
+    mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
+
+GEM
+  remote: https://rubygems.org/
   specs:
     actioncable (6.0.4.7)
       actionpack (= 6.0.4.7)
@@ -204,12 +208,11 @@ GEM
       regexp_parser (~> 2.0, >= 2.0.3)
       sorbet-runtime (~> 0.5.0)
       unparser (~> 0.6.4)
-    mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
     mutant-rspec (0.11.4)
       mutant (= 0.11.4)
       rspec-core (>= 3.8.0, < 4.0.0)
     nio4r (2.5.8)
-    nokogiri (1.13.3)
+    nokogiri (1.13.4)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     notifications-ruby-client (5.3.0)
