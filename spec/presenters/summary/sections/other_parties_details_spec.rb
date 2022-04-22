@@ -18,7 +18,7 @@ module Summary
         has_previous_name: has_previous_name,
         previous_name: previous_name,
         dob: dob,
-        age_estimate: age_estimate,
+        dob_estimate: dob_estimate,
         gender: 'female',
         birthplace: nil,
         residence_requirement_met: nil,
@@ -43,7 +43,7 @@ module Summary
     let(:has_previous_name) { 'no' }
     let(:previous_name) { nil }
     let(:dob) { Date.new(2018, 1, 20) }
-    let(:age_estimate) { nil }
+    let(:dob_estimate) { nil }
 
     let(:answers) { subject.answers }
 
@@ -138,16 +138,16 @@ module Summary
 
       context 'when `dob` is nil' do
         let(:dob) { nil }
-        let(:age_estimate) { 18 }
+        let(:dob_estimate) { Date.today }
 
         it 'has the correct number of rows' do
           expect(answers.count).to eq(8)
         end
 
-        it 'uses the age estimate' do
-          expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[4].question).to eq(:person_age_estimate)
-          expect(answers[4].value).to eq(18)
+        it 'uses the dob estimate' do
+          expect(answers[4]).to be_an_instance_of(DateAnswer)
+          expect(answers[4].question).to eq(:person_dob_estimate)
+          expect(answers[4].value).to eq(Date.today)
         end
       end
 

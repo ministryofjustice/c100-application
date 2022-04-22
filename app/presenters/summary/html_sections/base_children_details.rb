@@ -41,8 +41,7 @@ module Summary
 
       def personal_details_questions(child)
         [
-          DateAnswer.new(:person_dob, child.dob),
-          FreeTextAnswer.new(:person_age_estimate, child.age_estimate), # This shows only if a value is present
+          DateAnswer.new(:person_dob, child.dob || child.dob_estimate),
           Answer.new(:person_sex, child.gender),
         ]
       end

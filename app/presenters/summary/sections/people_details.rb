@@ -26,8 +26,8 @@ module Summary
             previous_name_answer(person),
             Answer.new(:person_sex, person.gender),
             DateAnswer.new(:person_dob, person.dob,
-                           show: respondents_only && person.age_estimate.blank?),
-            FreeTextAnswer.new(:person_age_estimate, person.age_estimate), # This shows only if a value is present
+                           show: respondents_only && person.dob_estimate.blank?),
+            DateAnswer.new(:person_dob_estimate, person.dob_estimate),
             FreeTextAnswer.new(:person_birthplace, person.birthplace),
             FreeTextAnswer.new(:person_address, person.full_address, show: true),
             Answer.new(:person_residence_requirement_met, person.residence_requirement_met),

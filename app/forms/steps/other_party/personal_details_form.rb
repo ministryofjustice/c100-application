@@ -6,7 +6,7 @@ module Steps
       attribute :gender, GenderAttribute
       attribute :dob, MultiParamDate
       attribute :dob_unknown, Boolean
-      attribute :age_estimate, StrippedString
+      attribute :dob_estimate, MultiParamDate
 
       validates_inclusion_of :has_previous_name, in: GenericYesNoUnknown.values
       validates_presence_of  :previous_name, if: -> { has_previous_name&.yes? }
