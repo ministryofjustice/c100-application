@@ -6,7 +6,7 @@ module Steps
       attribute :gender, GenderAttribute
       attribute :dob, MultiParamDate
       attribute :dob_unknown, Boolean
-      attribute :age_estimate, StrippedString
+      attribute :dob_estimate, MultiParamDate
       attribute :birthplace, StrippedString
       attribute :birthplace_unknown, Boolean
 

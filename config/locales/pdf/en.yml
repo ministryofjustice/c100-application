@@ -280,6 +280,8 @@ en:
       question: Date of birth
     child_age_estimate:
       question: Approximate age or year born
+    child_dob_estimate:
+      question: Approximate date of birth
     child_sex:
       question: Sex
       answers:
@@ -528,6 +530,8 @@ en:
       question: Date of birth
     person_age_estimate:
       question: Approximate age or year born
+    person_dob_estimate:
+      question: Approximate date of birth
     person_birthplace:
       question: Place of birth
       absence_answer: I don't know their place of birth

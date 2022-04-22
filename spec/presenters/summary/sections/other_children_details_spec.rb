@@ -14,14 +14,14 @@ module Summary
       instance_double(OtherChild,
         full_name: 'name',
         dob: dob,
-        age_estimate: age_estimate,
+        dob_estimate: dob_estimate,
         gender: 'female',
         relationships: relationships,
       )
     }
 
     let(:dob) { Date.new(2018, 1, 20) }
-    let(:age_estimate) { nil }
+    let(:dob_estimate) { nil }
     let(:relationships) { double('relationships') }
 
     subject { described_class.new(c100_application) }
@@ -78,12 +78,12 @@ module Summary
 
       context 'when `dob` is nil' do
         let(:dob) { nil }
-        let(:age_estimate) { 18 }
+        let(:dob_estimate) { Date.today }
 
-        it 'uses the age estimate' do
-          expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[2].question).to eq(:child_age_estimate)
-          expect(answers[2].value).to eq(18)
+        it 'uses the dob estimate' do
+          expect(answers[2]).to be_an_instance_of(DateAnswer)
+          expect(answers[2].question).to eq(:child_dob_estimate)
+          expect(answers[2].value).to eq(Date.today)
         end
       end
     end

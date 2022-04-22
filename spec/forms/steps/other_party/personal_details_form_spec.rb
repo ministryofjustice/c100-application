@@ -9,7 +9,7 @@ RSpec.describe Steps::OtherParty::PersonalDetailsForm do
     gender: gender,
     dob: dob,
     dob_unknown: dob_unknown,
-    age_estimate: age_estimate
+    dob_estimate: dob_estimate
   } }
 
   let(:c100_application) { instance_double(C100Application, other_parties: other_parties_collection) }
@@ -22,7 +22,7 @@ RSpec.describe Steps::OtherParty::PersonalDetailsForm do
   let(:gender) { 'male' }
   let(:dob) { Date.today }
   let(:dob_unknown) { false }
-  let(:age_estimate) { nil }
+  let(:dob_estimate) { nil }
 
   subject { described_class.new(arguments) }
 
@@ -51,7 +51,7 @@ RSpec.describe Steps::OtherParty::PersonalDetailsForm do
           gender: Gender::MALE,
           dob: Date.today,
           dob_unknown: false,
-          age_estimate: ''
+          dob_estimate: nil
         }
       }
 

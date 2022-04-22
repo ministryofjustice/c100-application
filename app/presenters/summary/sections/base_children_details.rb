@@ -7,7 +7,7 @@ module Summary
         [
           FreeTextAnswer.new(:child_full_name, child.full_name),
           DateAnswer.new(:child_dob, child.dob),
-          FreeTextAnswer.new(:child_age_estimate, child.age_estimate), # This shows only if a value is present
+          DateAnswer.new(:child_dob_estimate, child.dob_estimate),
           Answer.new(:child_sex, child.gender),
         ]
       end
