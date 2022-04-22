@@ -116,6 +116,7 @@ en:
         male: Male
         unspecified: Unspecified
       age_estimate: Approximate age or year born
+      dob_estimate: Approximate date of birth
       birthplace: Place of birth
       applicant_birthplace: Your place of birth
 
@@ -1477,6 +1478,7 @@ en:
       steps_children_personal_details_form:
         <<: *PERSONAL_DETAILS_FIELDS
         age_estimate: Approximate age or year child was born
+        dob_estimate: Approximate date of birth
       steps_children_orders_form:
         orders_options:
           <<: *PETITION_ORDERS

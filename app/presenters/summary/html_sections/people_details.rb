@@ -48,7 +48,7 @@ module Summary
           previous_name_answer(person),
           Answer.new(:person_sex, person.gender),
           DateAnswer.new(:person_dob, person.dob),
-          FreeTextAnswer.new(:person_age_estimate, person.age_estimate), # This shows only if a value is present
+          DateAnswer.new(:person_dob_estimate, person.dob_estimate),
           FreeTextAnswer.new(:person_birthplace, person.birthplace),
         ]
       end

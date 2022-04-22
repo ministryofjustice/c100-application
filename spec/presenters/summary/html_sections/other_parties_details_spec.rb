@@ -17,7 +17,7 @@ module Summary
         has_previous_name: 'no',
         previous_name: nil,
         dob: Date.new(2018, 1, 20),
-        age_estimate: nil,
+        dob_estimate: nil,
         gender: 'female',
         birthplace: nil,
         address_unknown: address_unknown,
