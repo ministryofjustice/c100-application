@@ -20,6 +20,8 @@
 
 //= require moj
 //= require_tree ./modules
+//= require_tree ./utils
+//= require_tree ./pages
 
 $(document).ready(function() {
   // Initialize frontend toolkit
