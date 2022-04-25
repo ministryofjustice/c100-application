@@ -17,6 +17,7 @@ module Steps
 
       validates_presence_of  :dob, unless: :dob_unknown?
       validates :dob, sensible_date: true, unless: :dob_unknown?
+      validates :dob_estimate, sensible_date: true, if: :dob_unknown?
 
       validates_presence_of :birthplace, unless: :birthplace_unknown?
 
