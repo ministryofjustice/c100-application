@@ -27,6 +27,8 @@ en:
         blank: Enter the date of birth
         invalid: Date of birth is not valid
         future: Date of birth must be in the past
+      dob_estimate:
+        invalid: Approximate date of birth is not valid
       gender:
         inclusion: Select the sex
       birthplace:
