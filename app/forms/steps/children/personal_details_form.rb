@@ -10,6 +10,7 @@ module Steps
       validates_inclusion_of :gender, in: Gender.values
 
       validates :dob, sensible_date: true, unless: :dob_unknown?
+      validates :dob_estimate, sensible_date: true, if: :dob_unknown?
 
       private
 
