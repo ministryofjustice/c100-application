@@ -169,7 +169,7 @@ RSpec.describe CourtContactDetails do
       let(:centralised) { true }
 
       it 'returns the central hub email address' do
-        expect(subject.documents_email).to eq('C100applications@justice.gov.uk')
+        expect(subject.documents_email).to eq('c100helpdesk@digital.justice.gov.uk')
       end
     end
 
