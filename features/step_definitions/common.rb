@@ -67,13 +67,3 @@ end
 Then(/^google analytics cookies are allowed to be set$/) do
   expect(any_page).to have_google_analytics_enabled
 end
-
-Given("I stub fact api call") do
-  WebMock.enable!
-  WebMock.allow_net_connect!
-  WebMock::API.stub_request(:get, "https://www.find-court-tribunal.service.gov.uk/v2/proxy/search/postcode/TQ121XX/serviceArea/childcare-arrangements").
-  to_return(status: 200, body: "{}", headers: {})
-
-  WebMock::API.stub_request(:get, "https://www.find-court-tribunal.service.gov.uk/health").
-    to_return(status: 200, body: "{\"mapit-api\":{\"status\":\"UP\"}}", headers: {})
-end
