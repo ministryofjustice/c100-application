@@ -5,16 +5,14 @@ describe C100App::CourtPostcodeChecker do
     it 'returns the blocklisted slugs' do
       expect(
         subject.court_slugs_blocklist
-      ).to match_array(%w(
-        blocklisted-slug-example
-      ))
+      ).to match_array(%w[blocklisted-slug-example])
     end
   end
 
   describe '#court_for' do
-    let(:dummy_court_objects){
-      [{'slug' => 'dummy-court-slug'}]
-    }
+    let(:dummy_court_objects) do
+      { "courts" => [{"slug" => "dummy-court-slug"}] }
+    end
 
     context 'when the CourtfinderAPI does not throw an error' do
       before do
@@ -23,21 +21,31 @@ describe C100App::CourtPostcodeChecker do
         ).and_return(dummy_court_objects)
 
         expect(subject).to receive(:choose_from).with(
-          dummy_court_objects
+          dummy_court_objects['courts']
         ).and_return(candidate_court)
       end
 
       context 'and a candidate court was found' do
-        let(:candidate_court) { 'chosen court' }
+        before do
+          expect_any_instance_of(C100App::CourtfinderAPI).to receive(:court_lookup).once.with(
+            'dummy-court-slug'
+          ).and_return('choosen court')
+        end
+
+        let(:candidate_court) { {"slug" => "dummy-court-slug"} }
+        let(:choosen_court) { 'choosen court' }
         let(:court) { instance_double(Court) }
 
         it 'returns a Court instance' do
-          expect(Court).to receive(:create_or_refresh).with(candidate_court).and_return(court)
+          expect(Court).to receive(:create_or_refresh).with(choosen_court).and_return(court)
           expect(subject.send(:court_for, 'mypostcode')).to eq(court)
         end
       end
 
       context 'and a candidate court was not found' do
+        before do
+          expect_any_instance_of(C100App::CourtfinderAPI).not_to receive(:court_lookup)
+        end
         let(:candidate_court) { nil }
 
         it 'returns nil' do
@@ -53,24 +61,24 @@ describe C100App::CourtPostcodeChecker do
       end
 
       it 'allows the error to propagate out un-caught' do
-        expect{ subject.send(:court_for, 'blah') }.to raise_error
+        expect { subject.send(:court_for, 'blah') }.to raise_error
       end
     end
   end
 
   describe '#choose_from' do
-    let(:result){ subject.send(:choose_from,arg) }
+    let(:result) { subject.send(:choose_from, arg) }
 
     context 'given an array of hashes' do
       context 'with at least one hash that has a :slug key' do
         context 'when the first slug is not blocklisted' do
-          let(:arg){
+          let(:arg) do
             [
               {key: 'value'},
               {slug: 'a-valid-slug'},
               {slug: 'another-slug'},
             ]
-          }
+          end
 
           it 'returns the hash' do
             expect(result).to eq({slug: 'a-valid-slug'})
@@ -78,13 +86,13 @@ describe C100App::CourtPostcodeChecker do
         end
 
         context 'when the first slug is blocklisted' do
-          let(:arg){
+          let(:arg) do
             [
               {key: 'value'},
               {slug: 'blocklisted-slug-example'},
               {slug: 'another-slug'},
             ]
-          }
+          end
           it 'returns nil' do
             expect(result).to eq(nil)
           end
@@ -93,13 +101,13 @@ describe C100App::CourtPostcodeChecker do
 
       context 'with no hash that has a :slug key, but at least one that has a "slug" key' do
         context 'when the first slug is not blocklisted' do
-          let(:arg){
+          let(:arg) do
             [
               {key: 'value'},
               {'slug' => 'a-valid-slug'},
               {'slug' => 'another-slug'},
             ]
-          }
+          end
 
           it 'returns the hash' do
             expect(result).to eq({'slug' => 'a-valid-slug'})
@@ -107,13 +115,13 @@ describe C100App::CourtPostcodeChecker do
         end
 
         context 'when the first slug is blocklisted' do
-          let(:arg){
+          let(:arg) do
             [
               {key: 'value'},
               {'slug' => 'blocklisted-slug-example'},
               {'slug' => 'another-slug'},
             ]
-          }
+          end
 
           it 'returns nil' do
             expect(result).to eq(nil)
