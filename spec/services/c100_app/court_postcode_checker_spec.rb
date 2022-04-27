@@ -5,9 +5,7 @@ describe C100App::CourtPostcodeChecker do
     it 'returns the blocklisted slugs' do
       expect(
         subject.court_slugs_blocklist
-      ).to match_array(%w[
-                         blocklisted-slug-example
-                       ])
+      ).to match_array(%w[blocklisted-slug-example])
     end
   end
 
