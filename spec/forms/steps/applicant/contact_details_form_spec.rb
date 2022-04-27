@@ -40,12 +40,21 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
     end
 
-    context 'mobile phone validation' do
+    context 'mobile phone presence' do
       let(:mobile_phone) { nil }
 
       it 'has a validation error on the field if not present' do
         expect(subject).to_not be_valid
         expect(subject.errors.added?(:mobile_phone, :blank)).to eq(true)
+      end
+    end
+
+    context 'mobile phone validation' do
+      let(:mobile_phone) { '3123 abc' }
+
+      it 'has a validation error on the field if not present' do
+        expect(subject).to_not be_valid
+        expect(subject.errors.added?(:mobile_phone, :invalid)).to eq(true)
       end
     end
 
