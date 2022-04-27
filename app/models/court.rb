@@ -18,7 +18,7 @@ class Court < ApplicationRecord
       slug: data.fetch('slug'),
       name: data.fetch('name'),
       address: fetch_address(data),
-      cci_code: data.fetch('county_location_code'),
+      cci_code: data.fetch('cci_code'),
       # Email and GBS code, if not already present, come from a separate API request
       email: data['email'],
       gbs: data['gbs'],
@@ -36,7 +36,6 @@ class Court < ApplicationRecord
 
     if court.stale?
       court.slug_will_change! # Touch `updated_at` on save, even if there are no changes
-
       court.update(
         build(data).attributes.except('created_at', 'updated_at')
       )
