@@ -20,6 +20,7 @@ module Steps
 
       validates :email, email: true, if: proc { |o| validate_email_value?(o) }
       validates_presence_of :mobile_phone
+      validates :mobile_phone, phone_number: true
 
       validates_inclusion_of :voicemail_consent, in: GenericYesNo.values
 

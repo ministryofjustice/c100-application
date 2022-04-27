@@ -72,6 +72,11 @@ RSpec.describe Steps::Respondent::ContactDetailsForm do
             it { expect(subject).to be_valid }
           end
 
+          context 'invalid number is invalid' do
+            let(phone_type) { '07777abc777777' }
+            it { expect(subject).not_to be_valid }
+          end
+
           context 'number is unknown is valid' do
             let(phone_type) { nil }
             let( "#{phone_type}_unknown".to_sym) { true }
