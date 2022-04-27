@@ -16,7 +16,7 @@ describe C100App::CourtfinderAPI do
       expect(
         Net::HTTP::Get
       ).to receive(:new).with(
-        '/search/results.json?aol=Children&postcode=MK93DX', http_headers
+        '/v2/proxy/search/postcode/MK93DX/serviceArea/Children', http_headers
       )
 
       subject.court_for('Children', 'MK93DX')
@@ -26,7 +26,7 @@ describe C100App::CourtfinderAPI do
       expect(
         subject
       ).to receive(:get_request).with(
-        '/search/results.json?aol=Children&postcode=MK93DX'
+        '/v2/proxy/search/postcode/MK93DX/serviceArea/Children'
       )
 
       subject.court_for('Children', 'M-K 93 D$X')
@@ -96,14 +96,14 @@ describe C100App::CourtfinderAPI do
       expect(
         Net::HTTP::Get
       ).to receive(:new).with(
-        '/courts/my-slug.json', http_headers
+        '/v2/proxy/search/slug/my-slug', http_headers
       )
 
       subject.court_lookup('my-slug')
     end
 
     it 'request the court json' do
-      expect(subject).to receive(:get_request).with('/courts/my-slug.json')
+      expect(subject).to receive(:get_request).with('/v2/proxy/search/slug/my-slug')
       subject.court_lookup('my-slug')
     end
 
