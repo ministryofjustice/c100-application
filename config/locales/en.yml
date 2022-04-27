@@ -1424,7 +1424,7 @@ en:
         relative_options:
           <<: *YESNO
       steps_address_lookup_form:
-        postcode: Your current postcode
+        postcode: Current postcode
       steps_address_results_form:
         selected_address: Select an address
       steps_applicant_personal_details_form:
