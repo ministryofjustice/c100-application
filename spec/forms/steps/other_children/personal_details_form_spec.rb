@@ -40,12 +40,14 @@ RSpec.describe Steps::OtherChildren::PersonalDetailsForm do
     end
 
     context 'for valid details' do
+      let(:dob_unknown) { false }
+      let(:dob_estimate) { nil }
       let(:expected_attributes) {
         {
           gender: Gender::MALE,
           dob: Date.today,
-          dob_unknown: false,
-          dob_estimate: nil
+          dob_unknown: dob_unknown,
+          dob_estimate: dob_estimate
         }
       }
 
@@ -62,6 +64,20 @@ RSpec.describe Steps::OtherChildren::PersonalDetailsForm do
           ).and_return(true)
 
           expect(subject.save).to be(true)
+        end
+      end
+
+      context 'cannot have both dob and dob_unknown' do
+        let(:dob_unknown) { true }
+        it 'is not valid' do
+          expect(subject.valid?).to be(false)
+        end
+      end
+
+      context 'cannot have both dob and dob_estimate' do
+        let(:dob_estimate) { Date.today }
+        it 'is not valid' do
+          expect(subject.valid?).to be(false)
         end
       end
 

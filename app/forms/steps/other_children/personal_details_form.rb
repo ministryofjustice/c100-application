@@ -8,6 +8,9 @@ module Steps
 
       validates_presence_of :dob, unless: :dob_unknown?
       validates_inclusion_of :gender, in: Gender.values
+      validates_absence_of :dob, if: :dob_unknown?
+      validates_absence_of :dob, if: :dob_unknown?, message: 'Please untick "unknown date of birth" if date of birth is known.'
+      validates_absence_of :dob, if: :dob_estimate, message: 'Please remove "estimate date of birth" if date of birth is known.'
 
       validates :dob, sensible_date: true, unless: :dob_unknown?
       validates :dob_estimate, sensible_date: true, if: :dob_unknown?
