@@ -5,7 +5,7 @@ module CourtContactDetails
   # For API access, refer to `services/c100_app/courtfinder_api.rb`
   FACT_COURT_BASE_URL = 'https://www.find-court-tribunal.service.gov.uk/courts/'.freeze
 
-  CENTRAL_HUB_EMAIL = 'c100helpdesk@digital.justice.gov.uk'.freeze
+  CENTRAL_HUB_EMAIL = 'C100applications@justice.gov.uk'.freeze
   CENTRAL_HUB_ADDRESS = [
     'C100 Applications',
     'PO Box 1792',
