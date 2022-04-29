@@ -1,8 +1,8 @@
 module C100App
   class CourtfinderAPI
     API_BASE_URL = "https://www.find-court-tribunal.service.gov.uk".freeze
-    SEARCH_PATH  = "/search/results.json?aol=%<aol>s&postcode=%<postcode>s".freeze
-    COURT_PATH   = "/courts/%<slug>s.json".freeze
+    SEARCH_PATH  = "/v2/proxy/search/postcode/%<postcode>s/serviceArea/%<aol>s".freeze
+    COURT_PATH   = "/v2/proxy/search/slug/%<slug>s".freeze
     HEALTH_CHECK = "/health".freeze
 
     HTTP_HEADERS = {
@@ -46,7 +46,6 @@ module C100App
     def get_request(path)
       request = Net::HTTP::Get.new(path, HTTP_HEADERS)
       uri = URI.parse(API_BASE_URL)
-
       Net::HTTP.start(uri.host, uri.port, :ENV, HTTP_OPTIONS) do |http|
         JSON.parse http.request(request).body
       end
