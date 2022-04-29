@@ -67,6 +67,8 @@ RSpec.shared_examples 'a date of birth validation with unknown checkbox' do
   end
 
   context 'cannot have invalid dob_estimate' do
+    let(:dob) { nil }
+    let(:dob_unknown) { true }
     let(:dob_estimate) { [nil, 0, 2, 31] }
     it 'is not valid' do
       expect(subject.valid?).to be(false)
