@@ -42,10 +42,11 @@ RSpec.describe Steps::Children::PersonalDetailsForm do
     context 'for valid details' do
       let(:dob_unknown) { false }
       let(:dob_estimate) { nil }
+      let(:dob) { Date.today }
       let(:expected_attributes) {
         {
           gender: Gender::MALE,
-          dob: Date.today,
+          dob: dob,
           dob_unknown: dob_unknown,
           dob_estimate: dob_estimate
         }

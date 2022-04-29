@@ -8,7 +8,8 @@ class MultiParamDate < Virtus::Attribute
     return value unless value.is_a?(Array)
 
     set_values = value.values_at(1, 2, 3) # index 0 not in use
-    return if set_values.any? { |num| num.nil? || num.zero? }
+    return if set_values.any?(&:nil?)
+    return if set_values.all?(&:zero?)
 
     Date.new(*set_values)
   rescue ArgumentError
