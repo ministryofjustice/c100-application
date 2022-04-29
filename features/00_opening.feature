@@ -44,7 +44,7 @@ Feature: Opening
 
   @unhappy_path
   Scenario: Postcode not eligible
-    When I fill in "Postcode" with "ZE2 9TE"
+    When I fill in "Postcode" with "TQ12 1FF"
     And I click the "Continue" button
 
     Then I should see "Sorry, you cannot apply online"
@@ -52,7 +52,8 @@ Feature: Opening
 
   @unhappy_path
   Scenario: Postcode not recognised
-    When I fill in "Postcode" with "GU2 9JE"
+    Given I stub fact api call
+    When I fill in "Postcode" with "TQ121XX"
     And I click the "Continue" button
 
     Then I should see "Something went wrong"
