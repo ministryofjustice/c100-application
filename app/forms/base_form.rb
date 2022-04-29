@@ -65,7 +65,7 @@ class BaseForm
   def validate_date(field, value)
     return if value.blank? || !value.is_a?(Array)
     set_values = value.values_at(1, 2, 3)
-    return if set_values.all?{|v| v.blank?} || set_values.all?{|v| v.zero?}
+    return if set_values.all?(&:blank?) || set_values.all?(&:zero?)
     Date.new(*set_values)
   rescue ArgumentError
     errors.add(field, :invalid)
