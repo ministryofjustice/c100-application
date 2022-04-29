@@ -59,7 +59,7 @@ RSpec.describe ValidPaymentsArray do
         'name' => 'Test court',
         'email' => 'court@example.com',
         'address' => 'Court address',
-        'cci_code' => 123,
+        'county_location_code' => 123,
         'slug' => court_slug,
         'gbs' => court_gbs,
       }
