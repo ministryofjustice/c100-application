@@ -37,11 +37,20 @@ module Steps
         selected_options.include?(PetitionOrder::OTHER_ISSUE.to_s)
       end
 
+      def clean_options
+        cleaned = selected_options
+        cleaned -= PetitionOrder::PROHIBITED_STEPS.map(&:to_s) \
+          if selected_options.exclude?(PetitionOrder::GROUP_PROHIBITED_STEPS.to_s)
+        cleaned -= PetitionOrder::SPECIFIC_ISSUES.map(&:to_s) \
+          if selected_options.exclude?(PetitionOrder::GROUP_SPECIFIC_ISSUES.to_s)
+        cleaned
+      end
+
       def persist!
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          orders: selected_options,
+          orders: clean_options,
           orders_additional_details: (orders_additional_details if other_issue?),
         )
       end
