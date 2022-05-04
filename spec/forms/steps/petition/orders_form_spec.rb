@@ -48,6 +48,17 @@ RSpec.describe Steps::Petition::OrdersForm do
     end
   end
 
+  describe 'clean options' do
+    # Remove the group selections
+    let(:orders) { %w(child_arrangements_home) }
+
+    it 'removes options that are no longer visible' do
+      expect(
+        subject.send(:clean_options)
+      ).to eq(orders)
+    end
+  end
+
   describe 'validations' do
     context 'when `other_issue` is checked' do
       let(:orders) { ['other_issue'] }
@@ -150,13 +161,13 @@ RSpec.describe Steps::Petition::OrdersForm do
       end
 
       context 'when there are additional details but `another issue` checkbox is not selected' do
-        let(:orders) { %w(prohibited_steps_holiday) }
-        let(:orders_collection) { nil }
+        let(:orders) { %w(group_prohibited_steps) }
+        let(:orders_collection) { %w(prohibited_steps_holiday) }
         let(:orders_additional_details) { 'orders_additional_details' }
 
         it 'resets the content `orders_additional_details` attribute' do
           expect(c100_application).to receive(:update).with(
-            orders: %w(prohibited_steps_holiday),
+            orders: %w(prohibited_steps_holiday group_prohibited_steps),
             orders_additional_details: nil,
           ).and_return(true)
 
