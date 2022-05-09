@@ -18,6 +18,8 @@ module Steps
       validates :input_dob, date: true, unless: :dob_unknown?
       validates :dob_estimate, sensible_date: true, if: :dob_unknown?
       validates :input_dob_estimate, date: true, if: :dob_unknown?
+      validates_absence_of :input_dob, if: :dob_unknown?,
+        message: 'Cannot have a date of birth and also "I don\'t know their date of birth"'
 
       # We have to save the date inputes to validate later
       # because MultiParamDate will nil
@@ -27,6 +29,7 @@ module Steps
 
       def initialize(args)
         super(**args)
+        self.dob_estimate = nil unless dob_unknown?
         self.input_dob = args[:dob]
         self.input_dob_estimate = args[:dob_estimate]
       end

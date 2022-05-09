@@ -75,13 +75,6 @@ RSpec.describe Steps::Children::PersonalDetailsForm do
         end
       end
 
-      context 'cannot have both dob and dob_estimate' do
-        let(:dob_estimate) { Date.today }
-        it 'is not valid' do
-          expect(subject.valid?).to be(false)
-        end
-      end
-
       context 'when record already exists' do
         let(:record) { child }
 
