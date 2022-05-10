@@ -56,9 +56,17 @@ end
 
 RSpec.shared_examples 'a date of birth validation with unknown checkbox' do
   context 'validate presence unless `unknown` is selected' do
-    it { should validate_presence_unless_unknown_of(:dob) }
+    let(:dob) { nil }
+    it 'is not valid' do
+      expect(subject.valid?).to be(false)
+    end
   end
-
+  context 'validate presence unless `unknown` is selected' do
+    let(:dob) { [nil, 1999,2,12] }
+    it 'is valid' do
+      expect(subject.valid?).to be(true)
+    end
+  end
   context 'cannot have invalid dob' do
     let(:dob) { [nil, 0, 2, 31] }
     it 'is not valid' do
@@ -72,6 +80,18 @@ RSpec.shared_examples 'a date of birth validation with unknown checkbox' do
     let(:dob_estimate) { [nil, 0, 2, 31] }
     it 'is not valid' do
       expect(subject.valid?).to be(false)
+    end
+  end
+
+  context 'nils the dob_estimate if dob_unknown is false' do
+    let(:dob) { [nil, 1999, 2, 19] }
+    let(:dob_unknown) { false }
+    let(:dob_estimate) { [nil, 1999, 2, 19] }
+    it 'is valid' do
+      expect(subject.valid?).to be(true)
+    end
+    it 'has no dob_estimate' do
+      expect(subject.dob_estimate).to be(nil)
     end
   end
 
