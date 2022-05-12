@@ -6,6 +6,7 @@ en:
     yes_no_error: &yes_no_error "Select yes or no"
     blank_details_error: &blank_details_error "Enter details"
     blank_exemptions_error: &blank_exemptions_error "Select at least one exemption or ‘None of these’"
+    postcode_error: &postcode_error "Enter a valid full postcode, with or without a space"
 
     # Errors shared in all the split first/last name forms
     NAMES_FORM_ERRORS: &NAMES_FORM_ERRORS
@@ -44,7 +45,8 @@ en:
         inclusion: Select yes if they’ve lived at the address for more than 5 years
       residence_history:
         blank: Enter details and dates of previous addresses
-
+      postcode:
+        invalid: *postcode_error
   errors:
     format: "%{message}"
     attributes:
@@ -57,7 +59,7 @@ en:
         blank: *blank_email_error
         typo: *email_typo_error
       children_postcode:
-        invalid: Enter a valid full postcode, with or without a space
+        invalid: *postcode_error
         blank: Enter a full postcode, with or without a space
     # fallback error messages in case no specific one is found
     messages:

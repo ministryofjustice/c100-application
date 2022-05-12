@@ -34,7 +34,7 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
   let(:address_line_3) { 'address_line_3' }
   let(:town) { 'town' }
   let(:country) { 'country' }
-  let(:postcode) { 'postcode' }
+  let(:postcode) { 'SE10 3AD' }
 
   subject { described_class.new(arguments) }
 
@@ -113,6 +113,8 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
       end
     end
 
+    it_behaves_like 'has a validated postcode'
+
     context 'residence_requirement_met' do
       context 'when attribute is not given' do
         let(:residence_requirement_met) { nil }
@@ -176,7 +178,7 @@ RSpec.describe Steps::Respondent::AddressDetailsForm do
             address_line_3: 'address_line_3',
             town: 'town',
             country: 'country',
-            postcode: 'postcode'
+            postcode: 'SE10 3AD'
           },
           address_unknown: false,
           residence_requirement_met: GenericYesNoUnknown::NO,
