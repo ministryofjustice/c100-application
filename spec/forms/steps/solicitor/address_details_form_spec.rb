@@ -8,8 +8,10 @@ RSpec.describe Steps::Solicitor::AddressDetailsForm do
     address_line_3: 'address_line_3',
     town: 'town',
     country: 'country',
-    postcode: 'postcode',
+    postcode: postcode,
   } }
+
+  let(:postcode) { 'E3 6AA' }
 
   let(:c100_application) { instance_double(C100Application) }
 
@@ -26,6 +28,8 @@ RSpec.describe Steps::Solicitor::AddressDetailsForm do
       it { should validate_presence_of(:postcode) }
     end
 
+    it_behaves_like 'has a validated postcode'
+
     it_behaves_like 'a has-one-association form',
                     association_name: :solicitor,
                     expected_attributes: {
@@ -35,7 +39,7 @@ RSpec.describe Steps::Solicitor::AddressDetailsForm do
                         address_line_3: 'address_line_3',
                         town: 'town',
                         country: 'country',
-                        postcode: 'postcode',
+                        postcode: 'E3 6AA',
                       }
                     }
   end

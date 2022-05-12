@@ -203,3 +203,55 @@ RSpec.shared_examples 'a has-one-association form' do |options|
     end
   end
 end
+
+RSpec.shared_examples 'has a validated postcode' do |options|
+
+  context 'when the attribute is given' do
+    context 'but not a valid full postcode' do
+      let(:postcode) { 'SE1' }
+
+      it 'is not valid' do
+        expect(subject).to_not be_valid
+      end
+
+      it 'adds an error on the attribute' do
+        subject.valid?
+        expect(subject.errors[:postcode]).to_not be_empty
+      end
+    end
+
+    context 'and is a valid postcode' do
+      context 'without a space, upper case' do
+        let(:postcode) { 'SW1H9AJ' }
+
+        it 'is valid' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context 'without a space, mixed case' do
+        let(:postcode) { 'SW1h9aj' }
+
+        it 'is valid' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context 'with a space, upper case' do
+        let(:postcode) { 'SW1H 9AJ' }
+
+        it 'is valid' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context 'with a space, mixed case' do
+        let(:postcode) { 'SW1h 9aj' }
+
+        it 'is valid' do
+          expect(subject).to be_valid
+        end
+      end
+    end
+  end
+end

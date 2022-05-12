@@ -30,7 +30,7 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
   let(:address_line_3) { 'address_line_3' }
   let(:town) { 'town' }
   let(:country) { 'country' }
-  let(:postcode) { 'postcode' }
+  let(:postcode) { 'E3 6AA' }
 
   subject { described_class.new(arguments) }
 
@@ -42,6 +42,8 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
         expect { subject.save }.to raise_error(BaseForm::C100ApplicationNotFound)
       end
     end
+
+    it_behaves_like 'has a validated postcode'
 
     context 'residence_requirement_met' do
       context 'when attribute is not given' do
@@ -133,7 +135,7 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
             address_line_3: 'address_line_3',
             town: 'town',
             country: 'country',
-            postcode: 'postcode'
+            postcode: 'E3 6AA'
           },
           address_unknown: false,
           residence_requirement_met: GenericYesNo::NO,
