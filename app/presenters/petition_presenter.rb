@@ -19,14 +19,6 @@ class PetitionPresenter < SimpleDelegator
     selected_orders_from(PetitionOrder.values)
   end
 
-  def other_issue?
-    orders.include?(PetitionOrder::OTHER_ISSUE.to_s)
-  end
-
-  def other_issue_details
-    orders_additional_details
-  end
-
   # This is just a little helper for the view to customise the copy based
   # on number of orders selected (to know when to say 'you also want to...')
   def count_for(*order_groups)

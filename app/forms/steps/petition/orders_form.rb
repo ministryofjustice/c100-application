@@ -3,10 +3,8 @@ module Steps
     class OrdersForm < BaseForm
       attribute :orders, Array[String]
       attribute :orders_collection, Array[String]
-      attribute :orders_additional_details, String
 
       validate :at_least_one_order_validation
-      validates_presence_of :orders_additional_details, if: :other_issue?
 
       # Custom setter so we always have both attributes synced, as one attribute is
       # the main categories and the other are subcategories.
@@ -33,10 +31,6 @@ module Steps
         errors.add(:orders, :blank) unless valid_options.any?
       end
 
-      def other_issue?
-        selected_options.include?(PetitionOrder::OTHER_ISSUE.to_s)
-      end
-
       def clean_options
         cleaned = selected_options
         cleaned -= PetitionOrder::PROHIBITED_STEPS.map(&:to_s) \
@@ -50,8 +44,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          orders: clean_options,
-          orders_additional_details: (orders_additional_details if other_issue?),
+          orders: clean_options
         )
       end
     end
