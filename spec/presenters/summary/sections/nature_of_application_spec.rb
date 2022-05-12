@@ -10,8 +10,7 @@ module Summary
           prohibited_steps_moving
           specific_issues_school
           other_issue
-        ),
-        orders_additional_details: 'details'
+        )
       )
     }
     subject { described_class.new(c100_application) }
@@ -26,7 +25,7 @@ module Summary
 
     describe '#answers' do
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(4)
+        expect(answers.count).to eq(3)
       end
 
       it 'has the correct rows in the right order' do
@@ -38,15 +37,12 @@ module Summary
 
         expect(answers[2]).to be_an_instance_of(MultiAnswer)
         expect(answers[2].question).to eq(:specific_issues_orders)
-
-        expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[3].question).to eq(:other_issue_details)
       end
     end
 
     context 'for a consent order' do
       let(:c100_application) {
-        instance_double(C100Application, orders: %w(consent_order), orders_additional_details: nil)
+        instance_double(C100Application, orders: %w(consent_order))
       }
 
       it 'has the correct number of rows' do

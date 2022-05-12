@@ -484,9 +484,6 @@ en:
       question: Formalise an agreement
       answers:
         <<: *FORMALISE_ARRANGEMENTS
-    other_issue_details:
-      question: 'You told us that you need help with this dispute:'
-      question_a11y: You need help with this dispute
     protection_orders:
       question: ''
       answers:

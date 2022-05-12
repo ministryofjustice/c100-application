@@ -4,11 +4,10 @@ RSpec.describe PetitionPresenter do
   subject { described_class.new(c100_application) }
 
   let(:c100_application) {
-    instance_double(C100Application, orders: orders, orders_additional_details: orders_additional_details)
+    instance_double(C100Application, orders: orders)
   }
 
   let(:orders) { PetitionOrder.string_values }
-  let(:orders_additional_details) { 'details' }
 
   describe '#child_arrangements_orders' do
     it 'only returns the orders set to true' do
@@ -95,24 +94,6 @@ RSpec.describe PetitionPresenter do
           specific_issues_religion
         ))
       }
-    end
-  end
-
-  describe 'Other issue' do
-    context 'when there is `other` issue' do
-      let(:orders) { ['other_issue'] }
-      let(:orders_additional_details) { 'details' }
-
-      it { expect(subject.other_issue?).to eq(true) }
-      it { expect(subject.other_issue_details).to eq('details') }
-    end
-
-    context 'when there is no `other` issue' do
-      let(:orders) { ['prohibited_steps_moving'] }
-      let(:orders_additional_details) { nil }
-
-      it { expect(subject.other_issue?).to eq(false) }
-      it { expect(subject.other_issue_details).to eq(nil) }
     end
   end
 
