@@ -198,8 +198,6 @@ en:
       question: 'Formalise an agreement:'
       answers:
         <<: *FORMALISE_ARRANGEMENTS
-    other_issue_details:
-      question: 'Other issue:'
     domestic_abuse:
       question: Any form of domestic violence or abuse?
       answers:
