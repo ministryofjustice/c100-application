@@ -9,6 +9,7 @@ class AddressBaseForm < BaseForm
 
   validates_presence_of :address_line_1, unless: :address_unknown?
   validates_presence_of :town, unless: :address_unknown?
+  validates :postcode, full_uk_postcode: true, unless: :address_unknown?
 
   private
 
