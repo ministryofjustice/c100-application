@@ -340,8 +340,6 @@ en:
           attributes:
             orders:
               blank: Select what you’re asking the court to decide
-            orders_additional_details:
-              blank: *blank_details_error
         steps/children/orders_form:
           attributes:
             orders:

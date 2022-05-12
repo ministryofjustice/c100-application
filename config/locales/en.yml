@@ -1365,7 +1365,6 @@ en:
           <<: *PETITION_ORDERS
         orders_collection_options:
           <<: *PETITION_ORDERS
-        orders_additional_details: Briefly provide more details
       steps_petition_protection_form:
         protection_orders_details: Please give details
         protection_orders_options:
