@@ -532,7 +532,7 @@ en:
       question: Approximate date of birth
     person_birthplace:
       question: Place of birth
-      absence_answer: I don't know their place of birth
+      absence_answer: *unknown
     person_address:
       question: Address
       absence_answer: *unknown
@@ -546,15 +546,16 @@ en:
         <<: *YESNO
     person_residence_history:
       question: Previous addresses
+      absence_answer: *unknown
     person_home_phone:
       question: Home telephone number
-      absence_answer: I don't know their home phone number
+      absence_answer: *unknown
     person_mobile_phone:
       question: Mobile telephone number
-      absence_answer: I don't know their mobile number
+      absence_answer: *unknown
     person_email:
       question: Email address
-      absence_answer: I don't know their email
+      absence_answer: *unknown
     email_keep_private:
       question: Keep the email address private
       answers:
