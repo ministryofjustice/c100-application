@@ -539,6 +539,7 @@ en:
         <<: *YESNO
     person_residence_history:
       question: Previous addresses
+      absence_answer: *unknown
     person_home_phone:
       question: Home telephone number
       absence_answer: *unknown
