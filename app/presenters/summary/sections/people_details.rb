@@ -33,7 +33,7 @@ module Summary
             Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
             Answer.new(:residence_keep_private, person.residence_keep_private),
             FreeTextAnswer.new(:person_residence_history, person.residence_history,
-              show: person.residence_requirement_met == 'no'),
+                               show: person.residence_requirement_met == 'no'),
             FreeTextAnswer.new(:person_email, person.email, show: true),
             Answer.new(:email_keep_private, person.email_keep_private),
             FreeTextAnswer.new(:person_home_phone, person.home_phone, show: true),
