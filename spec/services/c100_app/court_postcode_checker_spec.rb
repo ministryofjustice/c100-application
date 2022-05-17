@@ -64,6 +64,13 @@ describe C100App::CourtPostcodeChecker do
         expect { subject.send(:court_for, 'blah') }.to raise_error
       end
     end
+
+
+    context 'when the postcode is in Scotland or NI' do
+      it 'returns nil' do
+        expect(subject.send(:court_for, 'DD4 7SN')).to be_nil
+      end
+    end
   end
 
   describe '#choose_from' do
@@ -127,6 +134,38 @@ describe C100App::CourtPostcodeChecker do
             expect(result).to eq(nil)
           end
         end
+      end
+    end
+  end
+
+  describe '#scotland_or_ni' do
+    it 'returns false for English postcodes' do
+      %w(BH BS DT EX GL HR PL TA TQ TR WR BN BR CR CT DA KT ME RH SM
+      TN TW BA GU HA HP OX PO RG SL SN SO SP UB E EC N NW SE SW W
+      WC BB BL CA CW FY L LA M OL PR SK SY TF WA WN CH BD DH DL DN
+      HD HG HU HX LN LS NE S SR TS WF YO B CV DE DY LE NG NN ST WS
+      WV AL CB CM CO EN IG IP LU MK NR PE RM SG SS WD
+      ).each do |area|
+        expect(subject.send(:scotland_or_ni, area)).to be(false),
+          "error in #{area}"
+      end
+    end
+    it 'returns false for Welsh postcodes' do
+      %w(CF LD LL NP SA).each do |area|
+        expect(subject.send(:scotland_or_ni, area)).to be(false),
+          "error in #{area}"
+      end
+    end
+    it 'returns true for Scottish postcodes' do
+      %w(AB DD DG EH FK G1 HS IV KA KW KY ML PA PH TD ZE).each do |area|
+        expect(subject.send(:scotland_or_ni, area)).to be(true),
+          "error in #{area}"
+      end
+    end
+    it 'returns true for Northern Irish postcodes' do
+      %w(BT).each do |area|
+        expect(subject.send(:scotland_or_ni, area)).to be(true),
+          "error in #{area}"
       end
     end
   end
