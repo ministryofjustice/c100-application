@@ -5,6 +5,8 @@ module C100App
     AREA_OF_LAW = "childcare-arrangements".freeze
 
     def court_for(postcode)
+      return nil if scotland_or_ni(postcode)
+
       possible_courts = CourtfinderAPI.new.court_for(AREA_OF_LAW, postcode)
 
       candidate_court = court_lookup(possible_courts['courts'])
@@ -31,6 +33,11 @@ module C100App
       court = choose_from(courts)
       return unless court
       C100App::CourtfinderAPI.new.court_lookup(court['slug'])
+    end
+
+    def scotland_or_ni(postcode)
+      /^(ZE|KW|IV|HS|PH|AB|DD|PA|FK|G[0-9]|KY|KA|DG|TD|EH|ML|BT)/i
+        .match? postcode
     end
   end
 end
