@@ -28,9 +28,9 @@ module Steps
       validates :mobile_phone, phone_number: true, if: proc { |o| validate_mobile_value?(o) }
 
       validates_presence_of :mobile_not_provided_reason,
-        if: proc { |o| GenericYesNo.new(o.mobile_provided).no? }
+                            if: proc { |o| GenericYesNo.new(o.mobile_provided).no? }
 
-      validates_inclusion_of :voicemail_consent, in: GenericYesNo.values
+      validates_inclusion_of :voicemail_consent, in: GenericYesNo.values, if: proc { |o| validate_mobile_value?(o) }
 
       validates_inclusion_of :email_keep_private, in: GenericYesNo.values, if: proc { |o|
                                                                                  validate_email_value?(o) && address_confidential?

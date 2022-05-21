@@ -118,6 +118,16 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
     end
 
     context 'voicemail consent validation' do
+      context 'when mobile not provided' do
+        let(:mobile_provided) { 'no' }
+        let(:voicemail_consent) { nil }
+        let(:mobile_not_provided_reason) { 'No phone' }
+
+        it 'is valid' do
+          expect(subject).to be_valid
+        end
+      end
+
       context 'when attribute is not given' do
         let(:voicemail_consent) { nil }
 

@@ -15,6 +15,7 @@ module Summary
         full_name: 'fullname',
         residence_history: 'history',
         home_phone: 'home_phone',
+        mobile_provided: nil,
         mobile_phone: 'mobile_phone',
         email: 'email',
         voicemail_consent: 'yes',
