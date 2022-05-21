@@ -86,7 +86,7 @@ module Summary
       end
 
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(11)
+        expect(answers.count).to eq(8)
       end
 
       it 'has the correct rows in the right order' do
@@ -115,23 +115,11 @@ module Summary
         expect(answers[5].value).to eq('full address')
 
         expect(answers[6]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[6].question).to eq(:person_email)
-        expect(answers[6].value).to eq(nil)
+        expect(answers[6].question).to eq(:person_relationship_to_children)
+        expect(answers[6].value).to eq('relationships')
 
-        expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[7].question).to eq(:person_home_phone)
-        expect(answers[7].value).to eq(nil)
-
-        expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[8].question).to eq(:person_mobile_phone)
-        expect(answers[8].value).to eq(nil)
-
-        expect(answers[9]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[9].question).to eq(:person_relationship_to_children)
-        expect(answers[9].value).to eq('relationships')
-
-        expect(answers[10]).to be_an_instance_of(Partial)
-        expect(answers[10].name).to eq(:row_blank_space)
+        expect(answers[7]).to be_an_instance_of(Partial)
+        expect(answers[7].name).to eq(:row_blank_space)
       end
 
       context 'for existing previous name' do
@@ -139,7 +127,7 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(11)
+          expect(answers.count).to eq(8)
         end
 
         it 'renders the previous name' do
@@ -154,7 +142,7 @@ module Summary
         let(:dob_estimate) { Date.today }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(11)
+          expect(answers.count).to eq(8)
         end
 
         it 'uses the dob estimate' do
