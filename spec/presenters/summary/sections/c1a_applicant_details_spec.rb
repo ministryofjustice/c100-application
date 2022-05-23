@@ -15,13 +15,16 @@ module Summary
         full_name: 'fullname',
         gender: 'female',
         home_phone: 'home_phone',
-        mobile_provided: nil,
+        mobile_provided: mobile_provided,
+        mobile_not_provided_reason: mobile_not_provided_reason,
         mobile_phone: 'mobile_phone',
         email: 'email',
         voicemail_consent: 'yes',
       )
     }
 
+    let(:mobile_provided) { nil }
+    let(:mobile_not_provided_reason) { nil }
     let(:address_confidentiality) { nil }
 
     subject { described_class.new(c100_application) }
@@ -91,6 +94,15 @@ module Summary
         expect(answers[10]).to be_an_instance_of(Answer)
         expect(answers[10].question).to eq(:c1a_address_confidentiality)
         expect(answers[10].value).to eq(GenericYesNo::NO)
+      end
+
+
+      context "when no mobile and a reason given" do
+        let(:mobile_not_provided_reason) { "No phone" }
+        let(:mobile_provided) { 'no' }
+        it "shows the reason" do
+          expect(answers[7].value).to eq('No phone')
+        end
       end
 
       context 'when no applicant present' do

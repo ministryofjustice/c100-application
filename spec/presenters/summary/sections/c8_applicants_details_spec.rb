@@ -15,7 +15,8 @@ module Summary
         full_name: 'fullname',
         residence_history: 'history',
         home_phone: 'home_phone',
-        mobile_provided: nil,
+        mobile_provided: mobile_provided,
+        mobile_not_provided_reason: mobile_not_provided_reason,
         mobile_phone: 'mobile_phone',
         email: 'email',
         voicemail_consent: 'yes',
@@ -25,6 +26,9 @@ module Summary
         mobile_keep_private: 'yes'
       )
     }
+
+    let(:mobile_provided) { nil }
+    let(:mobile_not_provided_reason) { nil }
 
     before do
       allow(applicant).to receive(:full_address).and_return('full address')
@@ -96,6 +100,14 @@ module Summary
 
         expect(answers[9]).to be_an_instance_of(Partial)
         expect(answers[9].name).to eq(:row_blank_space)
+      end
+
+      context "when no mobile and a reason given" do
+        let(:mobile_not_provided_reason) { "No phone" }
+        let(:mobile_provided) { 'no' }
+        it "shows the reason" do
+          expect(answers[5].value).to eq('No phone')
+        end
       end
 
       context 'only one marked as private' do
