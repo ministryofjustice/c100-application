@@ -58,8 +58,18 @@ module Summary
       end
 
       def person_mobile_phone(person)
-        value = confidential? && person.mobile_keep_private == 'yes' ? person.mobile_phone : nil
+        value = if confidential? && person.mobile_keep_private == 'yes'
+                  mobile_phone_answer(person)
+                end
         FreeTextAnswer.new(:person_mobile_phone, value)
+      end
+
+      def mobile_phone_answer(person)
+        if person.mobile_provided == GenericYesNo::NO.to_s
+          person.mobile_not_provided_reason
+        else
+          person.mobile_phone
+        end
       end
 
       def confidential?
