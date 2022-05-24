@@ -28,7 +28,7 @@ module Steps
       validates :mobile_phone, phone_number: true, if: proc { |o| validate_mobile_value?(o) }
 
       validates_presence_of :mobile_not_provided_reason,
-                            if: proc { |o| GenericYesNo.new(o.mobile_provided).no? }
+                            if: proc { |o| validate_mobile_not_provided_reason?(o) }
 
       validates_inclusion_of :voicemail_consent, in: GenericYesNo.values, if: proc { |o| validate_mobile_value?(o) }
 
@@ -69,6 +69,10 @@ module Steps
 
       def validate_mobile_value?(o)
         o.mobile_provided && GenericYesNo.new(o.mobile_provided).yes?
+      end
+
+      def validate_mobile_not_provided_reason?(o)
+        o.mobile_provided && GenericYesNo.new(o.mobile_provided).no?
       end
     end
   end
