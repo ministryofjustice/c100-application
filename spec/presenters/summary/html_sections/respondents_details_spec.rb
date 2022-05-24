@@ -26,6 +26,7 @@ module Summary
         residence_history: 'history',
         home_phone: 'home_phone',
         home_phone_unknown: false,
+        mobile_provided: nil,
         mobile_phone: 'mobile_phone',
         mobile_phone_unknown: false,
         voicemail_consent: nil,

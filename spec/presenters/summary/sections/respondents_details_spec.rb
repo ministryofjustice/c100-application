@@ -17,6 +17,7 @@ module Summary
         residence_keep_private: 'yes',
         residence_history: 'history',
         home_phone: 'home_phone',
+        mobile_provided: nil,
         mobile_phone: 'mobile_phone',
         email: 'email',
         email_keep_private: 'yes',

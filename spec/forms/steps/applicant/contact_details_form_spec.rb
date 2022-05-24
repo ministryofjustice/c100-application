@@ -9,6 +9,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
     email: email,
     voicemail_consent: voicemail_consent,
     email_provided: email_provided,
+    mobile_provided: mobile_provided,
+    mobile_not_provided_reason: mobile_not_provided_reason,
     email_keep_private: email_keep_private,
     mobile_keep_private: mobile_keep_private,
     phone_keep_private: phone_keep_private
@@ -25,6 +27,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
   let(:email) { 'test@example.com' }
   let(:voicemail_consent) { 'yes' }
   let(:email_provided) { 'yes' }
+  let(:mobile_provided) { 'yes' }
+  let(:mobile_not_provided_reason ) { nil }
   let(:email_keep_private) { nil }
   let(:mobile_keep_private) { nil }
   let(:phone_keep_private) { nil }
@@ -55,6 +59,22 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       it 'has a validation error on the field if not present' do
         expect(subject).to_not be_valid
         expect(subject.errors.added?(:mobile_phone, :invalid)).to eq(true)
+      end
+    end
+
+    context 'mobile not provided' do
+      let(:mobile_provided) { 'no' }
+      context 'reason is present' do
+        let(:mobile_not_provided_reason) { 'No phone' }
+        it 'is valid' do
+          expect(subject).to be_valid
+        end
+      end
+      context 'reason not present' do
+        let(:mobile_not_provided_reason) { '' }
+        it 'is not valid' do
+          expect(subject).not_to be_valid
+        end
       end
     end
 
@@ -98,6 +118,16 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
     end
 
     context 'voicemail consent validation' do
+      context 'when mobile not provided' do
+        let(:mobile_provided) { 'no' }
+        let(:voicemail_consent) { nil }
+        let(:mobile_not_provided_reason) { 'No phone' }
+
+        it 'is valid' do
+          expect(subject).to be_valid
+        end
+      end
+
       context 'when attribute is not given' do
         let(:voicemail_consent) { nil }
 
@@ -188,6 +218,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
           mobile_phone: '12345',
           voicemail_consent: GenericYesNo::YES,
           email_provided: GenericYesNo::YES,
+          mobile_not_provided_reason: '',
+          mobile_provided: GenericYesNo::YES,
           email_keep_private: nil,
           phone_keep_private: nil,
           mobile_keep_private: nil,
