@@ -6,6 +6,8 @@ module Steps
       attribute :mobile_phone, StrippedString
       attribute :voicemail_consent, YesNo
       attribute :email_provided, YesNo
+      attribute :mobile_provided, YesNo
+      attribute :mobile_not_provided_reason, StrippedString
 
       attribute :email_keep_private, YesNo
       attribute :phone_keep_private, YesNo
@@ -19,10 +21,16 @@ module Steps
       validates_inclusion_of :email_provided, in: GenericYesNo.values
 
       validates :email, email: true, if: proc { |o| validate_email_value?(o) }
-      validates_presence_of :mobile_phone
-      validates :mobile_phone, phone_number: true
 
-      validates_inclusion_of :voicemail_consent, in: GenericYesNo.values
+      validates_inclusion_of :mobile_provided, in: GenericYesNo.values
+
+      validates_presence_of :mobile_phone, if: proc { |o| validate_mobile_value?(o) }
+      validates :mobile_phone, phone_number: true, if: proc { |o| validate_mobile_value?(o) }
+
+      validates_presence_of :mobile_not_provided_reason,
+                            if: proc { |o| validate_mobile_not_provided_reason?(o) }
+
+      validates_inclusion_of :voicemail_consent, in: GenericYesNo.values, if: proc { |o| validate_mobile_value?(o) }
 
       validates_inclusion_of :email_keep_private, in: GenericYesNo.values, if: proc { |o|
                                                                                  validate_email_value?(o) && address_confidential?
@@ -38,6 +46,8 @@ module Steps
         super().tap do |hsh|
           hsh[:email] = nil unless email_provided.yes?
           hsh[:email_keep_private] = nil unless email_provided.yes?
+          hsh[:mobile_phone] = nil unless mobile_provided.yes?
+          hsh[:mobile_not_provided_reason] = nil unless mobile_provided.yes?
         end
       end
 
@@ -55,6 +65,14 @@ module Steps
 
       def validate_email_value?(o)
         o.email_provided && GenericYesNo.new(o.email_provided).yes?
+      end
+
+      def validate_mobile_value?(o)
+        o.mobile_provided && GenericYesNo.new(o.mobile_provided).yes?
+      end
+
+      def validate_mobile_not_provided_reason?(o)
+        o.mobile_provided && GenericYesNo.new(o.mobile_provided).no?
       end
     end
   end

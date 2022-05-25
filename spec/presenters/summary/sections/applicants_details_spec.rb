@@ -23,7 +23,9 @@ module Summary
         residence_keep_private: 'yes',
         residence_history: 'history',
         home_phone: 'home_phone',
-        mobile_phone: 'mobile_phone',
+        mobile_provided: mobile_provided,
+        mobile_phone: mobile_phone,
+        mobile_not_provided_reason: mobile_not_provided_reason,
         email: 'email',
         email_keep_private: 'yes',
         phone_keep_private: 'yes',
@@ -37,6 +39,10 @@ module Summary
     end
 
     subject { described_class.new(c100_application) }
+
+    let(:mobile_phone) { 'mobile_phone' }
+    let(:mobile_provided) { 'yes' }
+    let(:mobile_not_provided_reason) { nil }
 
     let(:has_previous_name) { 'no' }
     let(:previous_name) { nil }
@@ -159,6 +165,37 @@ module Summary
 
         expect(answers[18]).to be_an_instance_of(Partial)
         expect(answers[18].name).to eq(:row_blank_space)
+      end
+
+
+      context 'when mobile phone' do
+        context 'has not selected whether to give or not' do
+          let(:mobile_phone) { 'mobile_phone' }
+          let(:mobile_provided) { nil }
+          let(:mobile_not_provided_reason) { nil }
+
+          it 'shows the phone number' do
+            expect(answers[14].value).to eq('mobile_phone')
+          end
+        end
+        context 'is given' do
+          let(:mobile_phone) { 'mobile_phone' }
+          let(:mobile_provided) { 'yes' }
+          let(:mobile_not_provided_reason) { nil }
+
+          it 'shows the phone number' do
+            expect(answers[14].value).to eq('mobile_phone')
+          end
+        end
+        context 'is not given with a reason' do
+          let(:mobile_phone) { nil }
+          let(:mobile_provided) { 'no' }
+          let(:mobile_not_provided_reason) { 'no phone' }
+
+          it 'shows the reason' do
+            expect(answers[14].value).to eq('no phone')
+          end
+        end
       end
 
       context 'for existing previous name' do
