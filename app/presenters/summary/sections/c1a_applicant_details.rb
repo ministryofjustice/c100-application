@@ -21,7 +21,7 @@ module Summary
           Separator.new(:contact_details),
           FreeTextAnswer.new(:person_email, applicant.email),
           FreeTextAnswer.new(:person_home_phone, applicant.home_phone),
-          FreeTextAnswer.new(:person_mobile_phone, applicant.mobile_phone),
+          FreeTextAnswer.new(:person_mobile_phone, mobile_phone_answer(applicant)),
           Answer.new(:person_voicemail_consent, applicant.voicemail_consent),
           Partial.row_blank_space,
           Answer.new(:c1a_address_confidentiality, c100.address_confidentiality, default: GenericYesNo::NO),
@@ -33,6 +33,14 @@ module Summary
 
       def applicant
         @_applicant ||= record_collection.first
+      end
+
+      def mobile_phone_answer(person)
+        if person.mobile_provided == GenericYesNo::NO.to_s
+          person.mobile_not_provided_reason
+        else
+          person.mobile_phone
+        end
       end
 
       def record_collection

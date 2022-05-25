@@ -34,11 +34,11 @@ module Summary
             Answer.new(:residence_keep_private, person.residence_keep_private),
             FreeTextAnswer.new(:person_residence_history, person.residence_history,
                                show: person.residence_requirement_met == 'no'),
-            FreeTextAnswer.new(:person_email, person.email, show: true),
+            FreeTextAnswer.new(:person_email, person.email),
             Answer.new(:email_keep_private, person.email_keep_private),
-            FreeTextAnswer.new(:person_home_phone, person.home_phone, show: true),
+            FreeTextAnswer.new(:person_home_phone, person.home_phone),
             Answer.new(:phone_keep_private, person.phone_keep_private),
-            FreeTextAnswer.new(:person_mobile_phone, person.mobile_phone, show: true),
+            FreeTextAnswer.new(:person_mobile_phone, mobile_phone_answer(person)),
             Answer.new(:mobile_keep_private, person.mobile_keep_private),
             Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
             FreeTextAnswer.new(
@@ -60,6 +60,14 @@ module Summary
           FreeTextAnswer.new(:person_previous_name, person.previous_name)
         else
           Answer.new(:person_previous_name, person.has_previous_name)
+        end
+      end
+
+      def mobile_phone_answer(person)
+        if person.mobile_provided == GenericYesNo::NO.to_s
+          person.mobile_not_provided_reason
+        else
+          person.mobile_phone
         end
       end
 
