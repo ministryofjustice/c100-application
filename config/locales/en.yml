@@ -37,6 +37,10 @@ en:
       'yes': I can provide an email address
       'no': I cannot provide an email address
 
+    YESPROVIDEMOBILE: &YESPROVIDEMOBILE
+      'yes': I can provide a mobile phone number
+      'no': I cannot provide a mobile phone number
+
     RELATIONS: &RELATIONS
       mother: Mother
       father: Father
@@ -132,6 +136,9 @@ en:
         'true': I don't know their home phone number
       mobile_phone_unknown_options:
         'true': I don't know their mobile number
+      mobile_provided_options:
+        <<: *YESPROVIDEMOBILE
+      mobile_not_provided_reason: Tell us why the court cannot phone you
 
     PERSONAL_ADDRESS_FIELDS: &PERSONAL_ADDRESS_FIELDS
       address_line_1: Building and street
