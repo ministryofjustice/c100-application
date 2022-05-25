@@ -18,8 +18,10 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
 
   let(:c100_application) { instance_double(C100Application, applicants: applicants_collection, address_confidentiality: address_confidentiality) }
   let(:applicants_collection) { double('applicants_collection') }
-  let(:applicant) { double('Applicant', id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe6') }
+  let(:applicant) { double('Applicant', id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe6', residence_keep_private: residence_keep_private) }
   let(:address_confidentiality) { 'no' }
+  let(:residence_keep_private) { :no }
+
 
   let(:record) { nil }
   let(:home_phone) { nil }
@@ -33,6 +35,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
   let(:mobile_keep_private) { nil }
   let(:phone_keep_private) { nil }
 
+  before { allow(applicants_collection).to receive(:find_or_initialize_by).and_return applicant }
   subject { described_class.new(arguments) }
 
   describe '#save' do
@@ -152,6 +155,35 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
           expect(subject).to_not be_valid
           expect(subject.errors[:voicemail_consent]).to_not be_empty
         end
+      end
+    end
+
+    describe 'privacy_check validation' do
+      context 'not valid' do
+        let(:address_confidentiality) { 'yes' }
+        let(:phone_keep_private) { GenericYesNo::NO }
+        let(:email_keep_private) { GenericYesNo::NO }
+        let(:mobile_keep_private) { GenericYesNo::NO }
+
+        it { expect(subject).not_to be_valid }
+      end
+
+      context 'valid due to email privacy' do
+        let(:address_confidentiality) { 'yes' }
+        let(:phone_keep_private) { GenericYesNo::NO }
+        let(:email_keep_private) { GenericYesNo::YES }
+        let(:mobile_keep_private) { GenericYesNo::NO }
+
+        it { expect(subject).to be_valid }
+      end
+      context 'valid due to residence_keep_private privacy' do
+        let(:address_confidentiality) { 'yes' }
+        let(:phone_keep_private) { GenericYesNo::NO }
+        let(:email_keep_private) { GenericYesNo::NO }
+        let(:mobile_keep_private) { GenericYesNo::NO }
+        let(:residence_keep_private) { GenericYesNo::YES }
+
+        it { expect(subject).to be_valid }
       end
     end
 

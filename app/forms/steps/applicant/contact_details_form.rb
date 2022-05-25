@@ -1,6 +1,8 @@
 module Steps
   module Applicant
     class ContactDetailsForm < BaseForm
+      include ActiveModel::Validations::Callbacks
+
       attribute :email, StrippedString
       attribute :home_phone, StrippedString
       attribute :mobile_phone, StrippedString
@@ -40,6 +42,8 @@ module Steps
                                                                                }
       validates_inclusion_of :mobile_keep_private, in: GenericYesNo.values, if: -> { address_confidential? }
 
+      validate :privacy_check
+
       private
 
       def attributes_map
@@ -73,6 +77,24 @@ module Steps
 
       def validate_mobile_not_provided_reason?(o)
         o.mobile_provided && GenericYesNo.new(o.mobile_provided).no?
+      end
+
+      def privacy_check
+        return if errors.any? || !address_confidential?
+
+        if GenericYesNo.new(mobile_keep_private).no? &&
+           GenericYesNo.new(phone_keep_private).no? &&
+           GenericYesNo.new(email_keep_private).no? &&
+           GenericYesNo.new(residence_keep_private).no?
+
+          errors.add :base, :invalid,
+                     message: I18n.t('.dictionary.privacy_question_consistency')
+        end
+      end
+
+      def residence_keep_private
+        applicant = c100_application.applicants.find_or_initialize_by(id: record_id)
+        applicant.try(:residence_keep_private)
       end
     end
   end
