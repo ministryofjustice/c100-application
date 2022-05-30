@@ -22,6 +22,7 @@ module Summary
         residence_keep_private: nil,
         residence_history: nil,
         home_phone: nil,
+        mobile_provided: nil,
         mobile_phone: nil,
         email: nil,
         email_keep_private: nil,

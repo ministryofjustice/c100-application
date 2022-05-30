@@ -209,7 +209,7 @@ GEM
       mutant (= 0.11.4)
       rspec-core (>= 3.8.0, < 4.0.0)
     nio4r (2.5.8)
-    nokogiri (1.13.4)
+    nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     notifications-ruby-client (5.3.0)
@@ -367,6 +367,7 @@ GEM
       capybara (~> 3.8)
       site_prism-all_there (>= 0.3.1, < 1.0)
     site_prism-all_there (0.3.2)
+    slack-incoming-webhooks (0.3.0)
     sorbet-runtime (0.5.9763)
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
@@ -466,6 +467,7 @@ DEPENDENCIES
   simplecov
   simplecov-rcov
   site_prism (~> 3.7, >= 3.7.1)
+  slack-incoming-webhooks
   spring (~> 2.0)
   spring-commands-rspec
   uglifier

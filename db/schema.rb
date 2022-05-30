@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_11_170515) do
+ActiveRecord::Schema.define(version: 2022_05_19_073552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -335,6 +335,8 @@ ActiveRecord::Schema.define(version: 2022_04_11_170515) do
     t.string "mobile_keep_private"
     t.boolean "birthplace_unknown", default: false
     t.date "dob_estimate"
+    t.string "mobile_provided"
+    t.string "mobile_not_provided_reason"
     t.index ["c100_application_id"], name: "index_people_on_c100_application_id"
   end
 

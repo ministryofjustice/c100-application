@@ -37,6 +37,10 @@ en:
       'yes': I can provide an email address
       'no': I cannot provide an email address
 
+    YESPROVIDEMOBILE: &YESPROVIDEMOBILE
+      'yes': I can provide a mobile phone number
+      'no': I cannot provide a mobile phone number
+
     RELATIONS: &RELATIONS
       mother: Mother
       father: Father
@@ -132,6 +136,9 @@ en:
         'true': I don't know their home phone number
       mobile_phone_unknown_options:
         'true': I don't know their mobile number
+      mobile_provided_options:
+        <<: *YESPROVIDEMOBILE
+      mobile_not_provided_reason: Tell us why the court cannot phone you
 
     PERSONAL_ADDRESS_FIELDS: &PERSONAL_ADDRESS_FIELDS
       address_line_1: Building and street
@@ -1001,7 +1008,7 @@ en:
       child_protection_cases:
         edit:
           page_title: Child protection cases
-          lead_text: These will often involve a local authority.
+          lead_text: These will usually involve a local authority.
           details:
             summary: Why we use the term ‘children’
             text_html: We use ‘children’ as a general term to mean whether you have a child or children. We do this to avoid repetition.
@@ -1537,7 +1544,7 @@ en:
       steps_opening_consent_order_form:
         consent_order_options:
           'no': This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter
-          'yes_html': This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter<br /><br />This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent).<br />If you select this option, you must have a draft consent order signed by the respondent which you are able to forward to the court immediately after you have submitted this application
+          'yes_html': This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent).<br />If you select this option, you must have a draft consent order signed by the respondent which you are able to forward to the court immediately after you have submitted this application
       steps_miam_certification_date_form:
         miam_certification_date: For example, 31 3 2020
       steps_application_court_proceedings_form:
@@ -1669,7 +1676,7 @@ en:
       steps_opening_research_consent_form:
         research_consent: Are you willing to be contacted to share your experience of using this service?
       steps_opening_child_protection_cases_form:
-        child_protection_cases: Are the children involved in any emergency protection, care or supervision proceedings (or have they been)?
+        child_protection_cases: Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?
 
       # MIAM steps
       steps_miam_acknowledgement_form:
