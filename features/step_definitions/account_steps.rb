@@ -3,7 +3,7 @@ Given("I am on safety concern page") do
   click_button "Continue"
   expect(page).to have_text "You do not have to attend a MIAM"
   click_link("Continue")
-  expect(page).to have_text "Are the children involved in any emergency protection, care or supervision proceedings (or have they been)?"
+  expect(page).to have_text "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
   choose('No', visible: :all)
   click_button "Continue"
   expect(page).to have_text "Safety concerns"
