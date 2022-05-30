@@ -40,7 +40,9 @@ module Steps
       validates_inclusion_of :phone_keep_private, in: GenericYesNo.values, if: proc { |o|
                                                                                  o.home_phone.present? && address_confidential?
                                                                                }
-      validates_inclusion_of :mobile_keep_private, in: GenericYesNo.values, if: -> { address_confidential? }
+      validates_inclusion_of :mobile_keep_private, in: GenericYesNo.values, if: lambda {
+                                                                                  address_confidential? && mobile_provided.yes?
+                                                                                }
 
       validate :privacy_check
 
@@ -82,10 +84,10 @@ module Steps
       def privacy_check
         return if errors.any? || !address_confidential?
 
-        if GenericYesNo.new(mobile_keep_private).no? &&
-           GenericYesNo.new(phone_keep_private).no? &&
-           GenericYesNo.new(email_keep_private).no? &&
-           GenericYesNo.new(residence_keep_private).no?
+        if  mobile_checked_and_public &&
+            email_checked_and_public &&
+            GenericYesNo.new(phone_keep_private).no? &&
+            GenericYesNo.new(residence_keep_private).no?
 
           errors.add :base, :invalid,
                      message: I18n.t('.dictionary.privacy_question_consistency')
@@ -95,6 +97,16 @@ module Steps
       def residence_keep_private
         applicant = c100_application.applicants.find_or_initialize_by(id: record_id)
         applicant.try(:residence_keep_private)
+      end
+
+      def email_checked_and_public
+        return true if email.blank?
+        GenericYesNo.new(email_keep_private).no?
+      end
+
+      def mobile_checked_and_public
+        return true if mobile_phone.blank?
+        GenericYesNo.new(mobile_keep_private).no?
       end
     end
   end
