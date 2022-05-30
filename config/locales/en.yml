@@ -1544,7 +1544,7 @@ en:
       steps_opening_consent_order_form:
         consent_order_options:
           'no': This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter
-          'yes_html': This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent).<br />If you select this option, you must have a draft consent order signed by the respondent which you are able to forward to the court immediately after you have submitted this application
+          'yes_html': <p class='govuk-hint'>This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter.</p><p class='govuk-hint'> This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent). If you select this option, you must have a draft consent order signed by the respondent which you are able to forward to the court immediately after you have submitted this application.</p>
       steps_miam_certification_date_form:
         miam_certification_date: For example, 31 3 2020
       steps_application_court_proceedings_form:
