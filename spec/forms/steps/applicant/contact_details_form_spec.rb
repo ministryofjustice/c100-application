@@ -47,75 +47,166 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
     end
 
-    context 'mobile phone presence' do
-      let(:mobile_phone) { nil }
-
-      it 'has a validation error on the field if not present' do
-        expect(subject).to_not be_valid
-        expect(subject.errors.added?(:mobile_phone, :blank)).to eq(true)
-      end
-    end
-
-    context 'mobile phone validation' do
-      let(:mobile_phone) { '3123 abc' }
-
-      it 'has a validation error on the field if not present' do
-        expect(subject).to_not be_valid
-        expect(subject.errors.added?(:mobile_phone, :invalid)).to eq(true)
-      end
-    end
-
-    context 'mobile not provided' do
-      let(:mobile_provided) { 'no' }
-      context 'reason is present' do
-        let(:mobile_not_provided_reason) { 'No phone' }
-        it 'is valid' do
-          expect(subject).to be_valid
-        end
-      end
-      context 'reason not present' do
-        let(:mobile_not_provided_reason) { '' }
-        it 'is not valid' do
-          expect(subject).not_to be_valid
-        end
-      end
-    end
-
-    context 'when no email provided' do
-      let(:email_provided) { 'no' }
+    context 'address_confidentiality set to yes' do
+      let(:address_confidentiality) { 'yes' }
       let(:email_keep_private) { 'yes' }
+      let(:mobile_keep_private) { 'yes' }
 
-      it '#attributes_map resets email' do
-        expect(subject.send(:attributes_map)).to include(email: nil)
+      context 'mobile phone presence' do
+        let(:mobile_phone) { nil }
+
+        it 'has a validation error on the field if not present' do
+          expect(subject).to_not be_valid
+          expect(subject.errors.added?(:mobile_phone, :blank)).to eq(true)
+        end
       end
 
-      it '#attributes_map resets email' do
-        expect(subject.send(:attributes_map)).to include(email_keep_private: nil)
-      end
-    end
+      context 'mobile phone validation' do
+        let(:mobile_phone) { '3123 abc' }
 
-    describe 'email validation' do
-      context 'when email not provided' do
-        let(:email) { nil }
+        it 'has a validation error on the field if not present' do
+          expect(subject).to_not be_valid
+          expect(subject.errors.added?(:mobile_phone, :invalid)).to eq(true)
+        end
+      end
+
+      context 'mobile not provided' do
+        let(:mobile_provided) { 'no' }
+        let(:mobile_phone) { nil }
+        let(:mobile_keep_private) { nil }
+
+        context 'reason is present' do
+          let(:mobile_not_provided_reason) { 'No phone' }
+          it 'is valid' do
+            expect(subject).to be_valid
+          end
+        end
+        context 'reason not present' do
+          let(:mobile_not_provided_reason) { '' }
+          it 'is not valid' do
+            expect(subject).not_to be_valid
+          end
+        end
+      end
+
+      context 'when no email provided' do
         let(:email_provided) { 'no' }
-        before { subject.valid? }
-        specify { expect(subject).to be_valid }
+        let(:email_keep_private) { nil }
+
+        it '#attributes_map resets email' do
+          expect(subject.send(:attributes_map)).to include(email: nil)
+        end
+
+        it '#attributes_map resets email' do
+          expect(subject.send(:attributes_map)).to include(email_keep_private: nil)
+        end
       end
 
-      context 'when email provided' do
-        let(:email) { nil }
-        let(:email_provided) { 'yes' }
-        before { subject.valid? }
-        specify { expect(subject).to_not be_valid }
-        specify { expect(subject.errors.details.dig(:email, 0, :error)).to eq(:invalid) }
-      end
+      describe 'email validation' do
+        context 'when email not provided' do
+          let(:email) { nil }
+          let(:email_provided) { 'no' }
+          let(:email_keep_private) { nil }
+          before { subject.valid? }
+          specify { expect(subject).to be_valid }
+        end
 
-      %w(bad bad@ bad@domain bad@domain.).each do |malformed_email|
-        context "when email set to '#{malformed_email}'" do
-          let(:email) { malformed_email }
+        context 'when email provided' do
+          let(:email) { nil }
+          let(:email_provided) { 'yes' }
           before { subject.valid? }
           specify { expect(subject).to_not be_valid }
           specify { expect(subject.errors.details.dig(:email, 0, :error)).to eq(:invalid) }
+        end
+
+        %w(bad bad@ bad@domain bad@domain.).each do |malformed_email|
+          context "when email set to '#{malformed_email}'" do
+            let(:email) { malformed_email }
+            before { subject.valid? }
+            specify { expect(subject).to_not be_valid }
+            specify { expect(subject.errors.details.dig(:email, 0, :error)).to eq(:invalid) }
+          end
+        end
+      end
+    end
+
+    context 'address_confidentiality set to No' do
+      let(:address_confidentiality) { 'no' }
+
+      context 'mobile phone presence' do
+        let(:mobile_phone) { nil }
+
+        it 'has a validation error on the field if not present' do
+          expect(subject).to_not be_valid
+          expect(subject.errors.added?(:mobile_phone, :blank)).to eq(true)
+        end
+      end
+
+      context 'mobile phone validation' do
+        let(:mobile_phone) { '3123 abc' }
+
+        it 'has a validation error on the field if not present' do
+          expect(subject).to_not be_valid
+          expect(subject.errors.added?(:mobile_phone, :invalid)).to eq(true)
+        end
+      end
+
+      context 'mobile not provided' do
+        let(:mobile_provided) { 'no' }
+        let(:mobile_phone) { nil }
+        let(:mobile_keep_private) { nil }
+
+        context 'reason is present' do
+          let(:mobile_not_provided_reason) { 'No phone' }
+          it 'is valid' do
+            expect(subject).to be_valid
+          end
+        end
+        context 'reason not present' do
+          let(:mobile_not_provided_reason) { '' }
+          it 'is not valid' do
+            expect(subject).not_to be_valid
+          end
+        end
+      end
+
+      context 'when no email provided' do
+        let(:email_provided) { 'no' }
+        let(:email_keep_private) { nil }
+
+        it '#attributes_map resets email' do
+          expect(subject.send(:attributes_map)).to include(email: nil)
+        end
+
+        it '#attributes_map resets email' do
+          expect(subject.send(:attributes_map)).to include(email_keep_private: nil)
+        end
+      end
+
+      describe 'email validation' do
+        context 'when email not provided' do
+          let(:email) { nil }
+          let(:email_provided) { 'no' }
+          let(:email_keep_private) { nil }
+          before { subject.valid? }
+          specify { expect(subject).to be_valid }
+        end
+
+        context 'when email provided' do
+          let(:email) { nil }
+          let(:email_provided) { 'yes' }
+          before { subject.valid? }
+          specify { expect(subject).to_not be_valid }
+          specify { expect(subject.errors.details.dig(:email, 0, :error)).to eq(:invalid) }
+        end
+
+        %w(bad bad@ bad@domain bad@domain.).each do |malformed_email|
+          context "when email set to '#{malformed_email}'" do
+            let(:email) { malformed_email }
+            before { subject.valid? }
+            specify { expect(subject).to_not be_valid }
+            specify { expect(subject.errors.details.dig(:email, 0, :error)).to eq(:invalid) }
+          end
         end
       end
     end
@@ -176,6 +267,31 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
 
         it { expect(subject).to be_valid }
       end
+
+      context 'empty email' do
+        let(:address_confidentiality) { 'yes' }
+        let(:email) { nil }
+        let(:email_keep_private) { nil }
+        let(:email_provided) { GenericYesNo::NO }
+        let(:mobile_keep_private) { GenericYesNo::YES }
+        let(:phone_keep_private) { GenericYesNo::YES }
+
+        it { expect(subject).to be_valid }
+      end
+
+      context 'empty mobile phone' do
+        let(:address_confidentiality) { 'yes' }
+        let(:email_keep_private) { GenericYesNo::YES }
+        let(:email_provided) { GenericYesNo::YES }
+        let(:mobile_keep_private) { nil }
+        let(:mobile_provided) { GenericYesNo::NO }
+        let(:mobile_phone) { nil }
+        let(:mobile_not_provided_reason) { 'test' }
+        let(:phone_keep_private) { GenericYesNo::YES }
+
+        it { expect(subject).to be_valid }
+      end
+
       context 'valid due to residence_keep_private privacy' do
         let(:address_confidentiality) { 'yes' }
         let(:phone_keep_private) { GenericYesNo::NO }
