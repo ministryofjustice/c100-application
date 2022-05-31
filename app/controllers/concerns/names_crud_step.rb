@@ -10,7 +10,7 @@ module NamesCrudStep
       c100_application: current_c100_application
     )
     response.set_header('Cache-Control',
-      'max-age=0, no-cache, no-store, must-revalidate, private')
+                        'max-age=0, no-cache, no-store, must-revalidate, private')
   end
 
   def update
@@ -26,8 +26,7 @@ module NamesCrudStep
 
   protected
 
-  def prevent_cache
-  end
+  def prevent_cache; end
 
   private
 
