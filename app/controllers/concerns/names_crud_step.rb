@@ -24,10 +24,6 @@ module NamesCrudStep
     )
   end
 
-  protected
-
-  def prevent_cache; end
-
   private
 
   def destroy(uuid)
