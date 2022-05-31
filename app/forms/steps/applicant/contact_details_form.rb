@@ -41,7 +41,7 @@ module Steps
                                                                                  o.home_phone.present? && address_confidential?
                                                                                }
       validates_inclusion_of :mobile_keep_private, in: GenericYesNo.values, if: lambda {
-                                                                                  address_confidential? && mobile_provided.yes?
+                                                                                  address_confidential? && mobile_phone.present?
                                                                                 }
 
       validate :privacy_check
