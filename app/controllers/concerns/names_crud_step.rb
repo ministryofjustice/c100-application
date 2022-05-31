@@ -9,6 +9,8 @@ module NamesCrudStep
     @form_object = names_form_class.new(
       c100_application: current_c100_application
     )
+    response.set_header('Cache-Control',
+                        'max-age=0, no-cache, no-store, must-revalidate, private')
   end
 
   def update
