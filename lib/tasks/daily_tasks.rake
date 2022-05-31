@@ -40,7 +40,7 @@ namespace :purge do
     log "Purging orphan applications older than #{expire_after} days"
     purged = C100Application.not_eligible_orphans.purge!(expire_after.days.ago)
     log "Purged #{purged.size} orphan applications"
-  end
+    end
 
   task email_submissions_audit: :environment do
     expire_after = Rails.configuration.x.email_submissions_audit.expire_in_days
@@ -88,5 +88,7 @@ end
 private
 
 def log(message)
+  @slack ||= Slack::Incoming::Webhooks.new ENV.fetch('SLACK_WEBHOOK_URL')
+  @slack.post "#{ENV.fetch('SLACK_WEBHOOK_ENV')}: #{message}"
   Rails.logger.info message
 end
