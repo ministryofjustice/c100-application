@@ -59,9 +59,8 @@ RSpec.describe C100App::ChildrenDecisionTree do
     end
 
     context 'and selected orders does not include `child_arrangements_home`' do
-      it 'goes to edit the next child' do
-        expect(subject).to receive(:next_child_step)
-        subject.destination
+      it 'goes to parental_responsibility' do
+        expect(subject.destination).to eq(controller: :parental_responsibility, action: :edit)
       end
     end
   end

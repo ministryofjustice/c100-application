@@ -35,7 +35,7 @@ module C100App
       if cao_home_order?
         edit(:special_guardianship_order, id: record)
       else
-        next_child_step
+        edit(:parental_responsibility)
       end
     end
 
