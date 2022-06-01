@@ -25,6 +25,8 @@ module Summary
             MultiAnswer.new(:child_orders, order_types(child)),
             # SGO only shows if a value is present
             Answer.new(:special_guardianship_order, child.special_guardianship_order),
+            FreeTextAnswer.new(:parental_responsibility, child.parental_responsibility,
+                               i18n_opts: { name: child.full_name }),
             Partial.row_blank_space,
           ]
         end

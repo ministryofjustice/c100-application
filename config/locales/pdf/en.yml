@@ -310,6 +310,9 @@ en:
       question: Special Guardianship Order in force?
       answers:
         <<: *YESNO
+    parental_responsibility:
+      question: "State everyone who has parental responsibility for %{name} and how they have parental responsibility.
+      For example 'child's mother', or 'child's father who was married to the mother when the child was born.'"
     applicants_relationships:
       question: Applicant %{index}
       absence_answer: ''
