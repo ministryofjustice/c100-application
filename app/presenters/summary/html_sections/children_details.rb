@@ -18,6 +18,10 @@ module Summary
       def personal_details_path(child)
         edit_steps_children_personal_details_path(child)
       end
+
+      def parental_responsibility_path(child)
+        edit_steps_children_parental_responsibility_path(child)
+      end
     end
   end
 end

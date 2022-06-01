@@ -212,6 +212,7 @@ Rails.application.routes.draw do
     namespace :children do
       crud_step :names
       crud_step :personal_details, only: [:edit, :update]
+      crud_step :parental_responsibility, only: [:edit, :update]
       crud_step :orders, only: [:edit, :update]
       crud_step :special_guardianship_order, only: [:edit, :update]
       edit_step :additional_details
