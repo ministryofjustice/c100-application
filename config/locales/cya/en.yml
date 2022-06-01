@@ -238,6 +238,8 @@ en:
       question: Special Guardianship Order in force?
       answers:
         <<: *YESNO
+    parental_responsibility:
+      question: "State everyone who has parental responsibility for %{name} and how they have parental responsibility"
     children_known_to_authorities:
       question: Are any of the children known to social services?
       answers:

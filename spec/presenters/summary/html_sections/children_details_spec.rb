@@ -16,6 +16,7 @@ module Summary
         dob_estimate: dob_estimate,
         gender: 'female',
         special_guardianship_order: special_guardianship_order,
+        parental_responsibility: parental_responsibility,
         child_order: child_order,
       )
     }
@@ -23,6 +24,7 @@ module Summary
     let(:dob) { Date.new(2018, 1, 20) }
     let(:dob_estimate) { nil }
     let(:special_guardianship_order) { nil }
+    let(:parental_responsibility) { nil }
     let(:child_order) { instance_double(ChildOrder, orders: ['an_order']) }
 
     subject { described_class.new(c100_application) }
@@ -100,6 +102,17 @@ module Summary
           expect(answers[4].question).to eq(:special_guardianship_order)
           expect(answers[4].value).to eq('yes')
           expect(answers[4].change_path).to eq('/steps/children/special_guardianship_order/uuid-123')
+        end
+      end
+
+      context 'when the `parental_responsibility` attribute is not `nil`' do
+        let(:parental_responsibility) { "child's mother" }
+
+        it 'shows the question-answer' do
+          expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[4].question).to eq(:parental_responsibility)
+          expect(answers[4].value).to eq("child's mother")
+          expect(answers[4].change_path).to eq('/steps/children/parental_responsibility/uuid-123')
         end
       end
     end
