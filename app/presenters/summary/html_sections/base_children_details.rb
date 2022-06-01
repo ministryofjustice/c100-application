@@ -62,8 +62,8 @@ module Summary
       def parental_responsibility(child)
         return [] unless child.respond_to?(:parental_responsibility)
         FreeTextAnswer.new(:parental_responsibility, child.parental_responsibility,
-                   change_path: parental_responsibility_path(child),
-                   i18n_opts: { name: child.full_name })
+                           change_path: parental_responsibility_path(child),
+                           i18n_opts: { name: child.full_name })
       end
     end
   end
