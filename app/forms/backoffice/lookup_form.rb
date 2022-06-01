@@ -4,7 +4,7 @@ module Backoffice
 
     attr_accessor :reference_code, :email_address
 
-    validates_presence_of :reference_code
+    validates_presence_of :reference_code, if: -> { email_address.blank? }
     validates :reference_code, c100_reference_code: true, allow_blank: true
 
     # Email is optional, and in some places we don't even ask for it
