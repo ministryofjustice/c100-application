@@ -44,12 +44,23 @@ Feature: Add children to the application
     Then I check "Decide how much time they spend with each person"
 
     When I click the "Continue" button
+    Then I should see "Parental responsibility for John Doe Junior"
+
+    # Provoke validation errors
+    When I click the "Continue" button
+    Then Page has title "Error: Parental responsibility - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Enter an answer" link to "#steps-children-parental-responsibility-form-parental-responsibility-field-error"
+
+    # Fix validation errors and continue
+    Then I fill in "State everyone who has parental responsibility for John Doe Junior and how they have parental responsibility." with "child's mother"
+    When I click the "Continue" button
     Then I should see "Further information"
     And I should see "Are any of the children known to social services?"
     And I should see "Are any of the children the subject of a child protection plan?"
 
     # Go back and select "home" order to enter the special guardianship question
     When I click the "Back" link
+    And I click the "Back" link
     And I check "Decide who they live with and when"
     When I click the "Continue" button
     Then I should see "Is there a Special Guardianship Order in force in relation to John Doe Junior?"
@@ -64,6 +75,7 @@ Feature: Add children to the application
     Then I should see "Parental responsibility for John Doe Junior"
 
     # Provoke validation errors
+    Then I fill in "State everyone who has parental responsibility for John Doe Junior and how they have parental responsibility." with ""
     When I click the "Continue" button
     Then Page has title "Error: Parental responsibility - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter an answer" link to "#steps-children-parental-responsibility-form-parental-responsibility-field-error"
