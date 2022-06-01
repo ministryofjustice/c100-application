@@ -15,21 +15,10 @@ module Backoffice
 
       render :lookup && return if @form.invalid?
 
-      if (@application = CompletedApplicationsAudit.find_by(reference_code: @form.reference_code))
-        audit!(
-          action: :application_lookup,
-          details: { reference_code: @form.reference_code, found: true, completed: true }
-        )
-      elsif (@application = C100Application.find_by_reference_code(@form.reference_code))
-        audit!(
-          action: :application_lookup,
-          details: { reference_code: @form.reference_code, found: true, completed: false }
-        )
+      if @form.reference_code.present?
+        search_by_reference_code
       else
-        audit!(
-          action: :application_lookup,
-          details: { reference_code: @form.reference_code, found: false }
-        )
+        search_by_email
       end
     end
 
@@ -62,7 +51,7 @@ module Backoffice
     private
 
     def form_params
-      params.require(:backoffice_lookup_form).permit(:reference_code)
+      params.require(:backoffice_lookup_form).permit(:reference_code, :email_address)
     end
 
     def default_limit
@@ -75,6 +64,39 @@ module Backoffice
 
     def payments_report
       PaymentIntent.order(updated_at: :desc).limit(default_limit)
+    end
+
+    def search_by_email
+      if (@application = C100Application.find_by_receipt_email(@form.email_address))
+        audit!(
+          action: :application_lookup,
+          details: { email_address: @form.email_address, found: true, completed: @application.completed? }
+        )
+      else
+        audit!(
+          action: :application_lookup,
+          details: { email_address: @form.email_address, found: false }
+        )
+      end
+    end
+
+    def search_by_reference_code
+      if (@application = CompletedApplicationsAudit.find_by(reference_code: @form.reference_code))
+        audit!(
+          action: :application_lookup,
+          details: { reference_code: @form.reference_code, found: true, completed: true }
+        )
+      elsif (@application = C100Application.find_by_reference_code(@form.reference_code))
+        audit!(
+          action: :application_lookup,
+          details: { reference_code: @form.reference_code, found: true, completed: false }
+        )
+      else
+        audit!(
+          action: :application_lookup,
+          details: { reference_code: @form.reference_code, found: false }
+        )
+      end
     end
   end
 end
