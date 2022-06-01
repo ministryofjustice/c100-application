@@ -9,6 +9,7 @@ class Person < ApplicationRecord
 
   self.ignored_columns = %w[
     special_guardianship_order
+    parental_responsibility
   ]
 
   def full_name
