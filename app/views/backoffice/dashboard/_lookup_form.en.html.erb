@@ -10,5 +10,7 @@
 
 <%= form_for(@form, url: lookup_backoffice_dashboard_index_path, html: { class: 'govuk-!-margin-bottom-5' }) do |f| %>
   <%= f.govuk_text_field :reference_code, width: 'one-half', label: { text: 'Reference code'} %>
+  <p>or</p>
+  <%= f.govuk_text_field :email_address, width: 'one-half', label: { text: 'Email address' } %>
   <%= f.govuk_submit 'Lookup application' %>
 <% end %>
