@@ -5,6 +5,7 @@ module MiamExemptionsForm
   included do
     has_one_association :miam_exemption
     validate :at_least_one_checkbox_validation
+    validate :none_must_be_exclusive
   end
 
   class_methods do
@@ -32,6 +33,11 @@ module MiamExemptionsForm
   end
 
   private
+
+  def none_must_be_exclusive
+    return unless selected_options.grep(/_none$/).any? && selected_options.length > 1
+    errors.add(self.class.attribute_name, :none_not_exclusive)
+  end
 
   # We filter out `group_xxx` items, as the purpose of these are to present the exemptions
   # in groups for the user to show/hide them, and are not really an exemption by itself.
