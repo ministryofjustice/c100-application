@@ -70,5 +70,27 @@ RSpec.describe Steps::MiamExemptions::UrgencyForm do
         expect(subject.save).to be(true)
       end
     end
+
+    context 'when "none of the above" is selected' do
+      context 'and nothing else is selected' do
+        let(:arguments) { {
+          c100_application: c100_application,
+          urgency: ['urgency_none']
+        } }
+        it 'is valid' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context 'and something else is selected' do
+        let(:arguments) { {
+          c100_application: c100_application,
+          urgency: ['risk_applicant', 'urgency_none']
+        } }
+        it 'is not valid' do
+          expect(subject).to_not be_valid
+        end
+      end
+    end
   end
 end
