@@ -4,8 +4,6 @@ Feature: Safety Concerns
     When I visit "steps/safety_questions/start"
     Then I should see "Safety concerns"
     And I click the "Continue" link
-    Then I should see "Keeping your contact details private"
-    And I choose "Yes"
 
   @happy_path
   Scenario: Children Safety Concerns

@@ -8,7 +8,7 @@ Given("I am on safety concern page") do
   click_button "Continue"
   expect(page).to have_text "Safety concerns"
   click_link("Continue")
-  expect(page).to have_text "Keeping your contact details private"
+  expect(page).to have_text "Are the children at risk of being abducted?"
 end
 
 Then("I create an account") do

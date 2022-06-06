@@ -7,8 +7,6 @@ module Summary
 
       def answers
         [
-          Answer.new(:address_confidentiality, c100.address_confidentiality,
-                     change_path: edit_steps_safety_questions_address_confidentiality_path),
           Answer.new(:risk_of_abduction, c100.risk_of_abduction,
                      change_path: edit_steps_safety_questions_risk_of_abduction_path),
           substance_abuse,

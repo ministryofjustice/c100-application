@@ -174,7 +174,6 @@ Rails.application.routes.draw do
     end
     namespace :safety_questions do
       show_step :start
-      edit_step :address_confidentiality
       edit_step :risk_of_abduction
       edit_step :substance_abuse
       edit_step :children_abuse

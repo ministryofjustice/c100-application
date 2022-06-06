@@ -4,7 +4,6 @@ module Summary
   describe HtmlSections::SafetyConcerns do
     let(:c100_application) {
       instance_double(C100Application,
-        address_confidentiality: 'yes',
         risk_of_abduction: 'no',
         substance_abuse: 'yes',
         substance_abuse_details: 'substance details',
@@ -28,40 +27,35 @@ module Summary
     #
     describe '#answers' do
       it 'has the correct rows' do
-        expect(answers.count).to eq(6)
+        expect(answers.count).to eq(5)
 
         expect(answers[0]).to be_an_instance_of(Answer)
-        expect(answers[0].question).to eq(:address_confidentiality)
-        expect(answers[0].change_path).to eq('/steps/safety_questions/address_confidentiality')
-        expect(answers[0].value).to eq('yes')
+        expect(answers[0].question).to eq(:risk_of_abduction)
+        expect(answers[0].change_path).to eq('/steps/safety_questions/risk_of_abduction')
+        expect(answers[0].value).to eq('no')
 
-        expect(answers[1]).to be_an_instance_of(Answer)
-        expect(answers[1].question).to eq(:risk_of_abduction)
-        expect(answers[1].change_path).to eq('/steps/safety_questions/risk_of_abduction')
-        expect(answers[1].value).to eq('no')
+        expect(answers[1]).to be_an_instance_of(AnswersGroup)
+        expect(answers[1].name).to eq(:substance_abuse)
+        expect(answers[1].change_path).to eq('/steps/safety_questions/substance_abuse')
 
-        expect(answers[2]).to be_an_instance_of(AnswersGroup)
-        expect(answers[2].name).to eq(:substance_abuse)
-        expect(answers[2].change_path).to eq('/steps/safety_questions/substance_abuse')
+        expect(answers[2]).to be_an_instance_of(Answer)
+        expect(answers[2].question).to eq(:children_abuse)
+        expect(answers[2].change_path).to eq('/steps/safety_questions/children_abuse')
+        expect(answers[2].value).to eq('no')
 
         expect(answers[3]).to be_an_instance_of(Answer)
-        expect(answers[3].question).to eq(:children_abuse)
-        expect(answers[3].change_path).to eq('/steps/safety_questions/children_abuse')
+        expect(answers[3].question).to eq(:domestic_abuse)
+        expect(answers[3].change_path).to eq('/steps/safety_questions/domestic_abuse')
         expect(answers[3].value).to eq('no')
 
         expect(answers[4]).to be_an_instance_of(Answer)
-        expect(answers[4].question).to eq(:domestic_abuse)
-        expect(answers[4].change_path).to eq('/steps/safety_questions/domestic_abuse')
+        expect(answers[4].question).to eq(:other_abuse)
+        expect(answers[4].change_path).to eq('/steps/safety_questions/other_abuse')
         expect(answers[4].value).to eq('no')
-
-        expect(answers[5]).to be_an_instance_of(Answer)
-        expect(answers[5].question).to eq(:other_abuse)
-        expect(answers[5].change_path).to eq('/steps/safety_questions/other_abuse')
-        expect(answers[5].value).to eq('no')
       end
 
       context 'substance abuse' do
-        let(:group_answers) { answers[2].answers }
+        let(:group_answers) { answers[1].answers }
 
         it 'has the correct rows in the right order' do
           expect(group_answers.count).to eq(2)
