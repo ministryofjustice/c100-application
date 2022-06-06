@@ -88,5 +88,29 @@ RSpec.describe Steps::MiamExemptions::DomesticForm do
         expect(subject.save).to be(true)
       end
     end
+
+    context 'when "none of the above" is selected' do
+      context 'and nothing else is selected' do
+        let(:arguments) { {
+          c100_application: c100_application,
+          domestic: ['financial_abuse'],
+          exemptions_collection: ['group_police'],
+        } }
+        it 'is valid' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context 'and something else is selected' do
+        let(:arguments) { {
+          c100_application: c100_application,
+          domestic: ['financial_abuse', 'domestic_none'],
+          exemptions_collection: ['group_police'],
+        } }
+        it 'is not valid' do
+          expect(subject).to_not be_valid
+        end
+      end
+    end
   end
 end
