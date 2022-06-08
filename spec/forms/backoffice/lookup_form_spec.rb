@@ -1,7 +1,22 @@
 require 'spec_helper'
 
 RSpec.describe Backoffice::LookupForm do
-  it { should validate_presence_of(:reference_code) }
+  context 'reference code validation' do
+    it 'when email present' do
+      form = described_class.new(reference_code: '', email_address: 'test@hmcts.net')
+      expect(form).to be_valid
+    end
+
+    it 'when email is not present' do
+      form = described_class.new(reference_code: '', email_address: '')
+      expect(form).not_to be_valid
+    end
+
+    it 'when reference is present' do
+      form = described_class.new(reference_code: '2021/05/CD7A69BC', email_address: '')
+      expect(form).to be_valid
+    end
+  end
 
   context 'reference_code transformation' do
     it "strip spaces" do

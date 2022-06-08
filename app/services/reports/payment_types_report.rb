@@ -36,8 +36,8 @@ module Reports
     end
 
     def log(message)
-      @slack ||= Slack::Incoming::Webhooks.new ENV.fetch('SLACK_WEBHOOK_URL')
-      @slack.post "#{ENV.fetch('SLACK_WEBHOOK_ENV')}: #{message}"
+      # @slack ||= Slack::Incoming::Webhooks.new ENV.fetch('SLACK_WEBHOOK_URL')
+      # @slack.post "#{ENV.fetch('SLACK_WEBHOOK_ENV')}: #{message}"
       Rails.logger.info message
     end
   end

@@ -1,5 +1,6 @@
 module C100App
   class ChildrenDecisionTree < BaseDecisionTree
+    # rubocop:disable Metrics/MethodLength
     def destination
       return next_step if next_step
 
@@ -13,6 +14,8 @@ module C100App
       when :orders
         after_orders
       when :special_guardianship_order
+        edit(:parental_responsibility)
+      when :parental_responsibility
         next_child_step
       when :additional_details
         edit(:has_other_children)
@@ -24,6 +27,7 @@ module C100App
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     private
 
@@ -31,7 +35,7 @@ module C100App
       if cao_home_order?
         edit(:special_guardianship_order, id: record)
       else
-        next_child_step
+        edit(:parental_responsibility)
       end
     end
 

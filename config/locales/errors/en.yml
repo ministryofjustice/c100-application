@@ -6,7 +6,9 @@ en:
     yes_no_error: &yes_no_error "Select yes or no"
     blank_details_error: &blank_details_error "Enter details"
     blank_exemptions_error: &blank_exemptions_error "Select at least one exemption or ‘None of these’"
+    none_not_exclusive_error: &none_not_exclusive_error "Deselect 'None of these' if you would like to select any of the other options."
     postcode_error: &postcode_error "Enter a valid full postcode, with or without a space"
+    privacy_question_consistency: "Select Yes for at least one privacy question on this page or the previous page, or choose not to keep your contact details private from the named respondents."
 
     # Errors shared in all the split first/last name forms
     NAMES_FORM_ERRORS: &NAMES_FORM_ERRORS
@@ -520,23 +522,27 @@ en:
           attributes:
             domestic:
               blank: *blank_exemptions_error
+              none_not_exclusive: *none_not_exclusive_error
         steps/miam_exemptions/protection_form:
           attributes:
             protection:
               blank: *blank_exemptions_error
+              none_not_exclusive: *none_not_exclusive_error
         steps/miam_exemptions/urgency_form:
           attributes:
             urgency:
               blank: *blank_exemptions_error
+              none_not_exclusive: *none_not_exclusive_error
         steps/miam_exemptions/adr_form:
           attributes:
             adr:
               blank: *blank_exemptions_error
+              none_not_exclusive: *none_not_exclusive_error
         steps/miam_exemptions/misc_form:
           attributes:
             misc:
               blank: *blank_exemptions_error
-
+              none_not_exclusive: *none_not_exclusive_error
         steps/application/previous_proceedings_form:
           attributes:
             children_previous_proceedings:

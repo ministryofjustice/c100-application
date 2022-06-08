@@ -59,15 +59,14 @@ RSpec.describe C100App::ChildrenDecisionTree do
     end
 
     context 'and selected orders does not include `child_arrangements_home`' do
-      it 'goes to edit the next child' do
-        expect(subject).to receive(:next_child_step)
-        subject.destination
+      it 'goes to parental_responsibility' do
+        expect(subject.destination).to eq(controller: :parental_responsibility, action: :edit)
       end
     end
   end
 
-  context 'when the step is `special_guardianship_order`' do
-    let(:step_params) { {'special_guardianship_order' => 'anything'} }
+  context 'when the step is `parental_responsibility`' do
+    let(:step_params) { {'parental_responsibility' => 'anything'} }
     let(:record) { double('Child', id: 1) }
 
     context 'when there are remaining children' do
@@ -81,6 +80,15 @@ RSpec.describe C100App::ChildrenDecisionTree do
     context 'when all children have been edited' do
       let(:record) { double('Child', id: 3) }
       it {is_expected.to have_destination(:additional_details, :edit)}
+    end
+  end
+
+  context 'when the step is `special_guardianship_order`' do
+    let(:step_params) { {'special_guardianship_order' => 'anything'} }
+    let(:record) { double('Child', id: 1) }
+
+    it 'goes to parental responsibility for the child' do
+      expect(subject.destination).to eq(controller: :parental_responsibility, action: :edit)
     end
   end
 

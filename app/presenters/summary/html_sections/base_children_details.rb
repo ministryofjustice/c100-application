@@ -33,6 +33,7 @@ module Summary
             # SGO only shows if a value is present
             Answer.new(:special_guardianship_order, child.special_guardianship_order,
                        change_path: edit_steps_children_special_guardianship_order_path(child)),
+            parental_responsibility(child)
           ]
         end.flatten.select(&:show?)
       end
@@ -52,6 +53,17 @@ module Summary
         child.child_order&.orders.to_a.map do |order|
           PetitionOrder.type_for(order)
         end.uniq
+      end
+
+      def parental_responsibility(child)
+        return [] unless child.respond_to?(:parental_responsibility)
+        FreeTextAnswer.new(:parental_responsibility, child.parental_responsibility,
+                           change_path: parental_responsibility_path(child),
+                           i18n_opts: { name: child.full_name })
+      end
+
+      def parental_responsibility_path(child)
+        edit_steps_children_parental_responsibility_path(child)
       end
     end
   end
