@@ -13,10 +13,6 @@ module Summary
       def personal_details_path(*)
         raise 'must be implemented in subclasses'
       end
-
-      def parental_responsibility_path(*)
-        raise 'must be implemented in subclasses'
-      end
       # :nocov:
 
       def answers
@@ -64,6 +60,10 @@ module Summary
         FreeTextAnswer.new(:parental_responsibility, child.parental_responsibility,
                            change_path: parental_responsibility_path(child),
                            i18n_opts: { name: child.full_name })
+      end
+
+      def parental_responsibility_path(child)
+        edit_steps_children_parental_responsibility_path(child)
       end
     end
   end
