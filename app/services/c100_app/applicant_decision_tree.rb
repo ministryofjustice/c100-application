@@ -7,7 +7,13 @@ module C100App
       when :add_another_name
         edit(:names)
       when :names_finished
-        edit(:personal_details, id: next_applicant_id)
+        edit(:privacy_known, id: next_applicant_id)
+      when :privacy_known
+        edit(:privacy_consent)
+      when :privacy_consent
+        show(:privacy_summary)
+      when :privacy_summary
+        edit(:personal_details)
       when :personal_details
         after_personal_details
       when :under_age
