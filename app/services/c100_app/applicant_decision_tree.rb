@@ -9,11 +9,11 @@ module C100App
       when :names_finished
         edit(:privacy_known, id: next_applicant_id)
       when :privacy_known
-        edit(:privacy_consent)
-      when :privacy_consent
+        edit(:privacy_preferences, id: next_applicant_id)
+      when :privacy_preferences
         show(:privacy_summary)
       when :privacy_summary
-        edit(:personal_details)
+        edit(:personal_details, id: next_applicant_id)
       when :personal_details
         after_personal_details
       when :under_age

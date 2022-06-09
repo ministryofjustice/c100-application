@@ -11,7 +11,7 @@ module Steps
         update_and_advance(
           PrivacyPreferencesForm,
           record: current_record,
-          as: :personal_details
+          as: :privacy_preferences
         )
       end
     end

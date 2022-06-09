@@ -261,6 +261,31 @@ en:
             <p class="govuk-body">The other people who will receive this application are known as the respondents. We will ask for their details later.</p>
           record_index: "Applicant %{index}"
           btn_add_another: Add another applicant
+      privacy_known:
+        edit:
+          page_title: Contact details confidentiality
+          section: *safety_concerns
+          heading: Keeping your contact details private
+          privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
+      privacy_preferences:
+        edit:
+          page_title: Contact details confidentiality
+          section: *safety_concerns
+          heading: Keeping your contact details private
+          lead_text_html: |
+            <p class="govuk-body">The answers you give in your response will be shared with other people named in this application (the respondents). This will include your contact details.</p>
+            <p class="govuk-body">For example, if you believe the other people in the case pose a risk to you or your children, you can ask the court to keep your contact details private.</p>
+            <p class="govuk-body"><strong>Please note:</strong> you will need to make sure that any form or document, either completed by you now, or at a later date, for use in court <strong>does not</strong> contain the information you wish to keep private. This includes documents received from other people e.g. medical reports or financial statements etc.</p>
+            <p class="govuk-body">The court staff are not able to check the documents you submit to the court for any unintentional disclosure of your contact details.</p>
+      privacy_summary:
+        show:
+          page_title: Contact details confidentiality
+          section: *safety_concerns
+          heading: The court will keep your contact details private
+          body_text_html: <p class="govuk-body">You have told us you want to keep these contact details private</p>
+          second_text_html: |
+            <h2 class="govuk-heading-m">What the court will do</h2>
+            <p class="govuk-body">The court will hold this information securely and it will not be shared with any other party except Cafcass (Children and Family Court Advisory and Support Service) or Cafcass CYMRU unless it is by order of the court.</p>
       personal_details:
         edit:
           page_title: Applicant personal details
@@ -1440,6 +1465,17 @@ en:
         postcode: Current postcode
       steps_address_results_form:
         selected_address: Select an address
+      steps_applicant_privacy_known_form:
+        privacy_known_options:
+          <<: *YESNO
+      steps_applicant_privacy_preferences_form:
+        are_contact_details_private_options:
+          <<: *YESNO
+        contact_details_private_options:
+          address: Current address
+          email: Email address
+          mobile: Home phone number
+          home_phone: Mobile phone number
       steps_applicant_personal_details_form:
         <<: *PERSONAL_DETAILS_FIELDS
         previous_name: Enter your previous name
@@ -1598,6 +1634,8 @@ en:
           group_specific_issues: For example, what school they’ll go to
         orders_collection_options:
           specific_issues_child_return: If the children have been abducted, unlawfully removed or unlawfully retained
+      steps_applicant_privacy_preferences_form:
+        contact_details_private: You've stated that the respondents know some of your contact details. Make sure you select the contact details the applicants do not already know.
       steps_applicant_personal_details_form:
         has_previous_name: For example, through marriage or adoption or by deed poll. This includes first name, surname and any middle names
         previous_name: *previous_name_hint
@@ -1792,6 +1830,11 @@ en:
         <<: *PERSONAL_DETAILS_LEGENDS
 
       # Applicant
+      steps_applicant_privacy_known_form:
+        privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
+      steps_applicant_privacy_preferences_form:
+        are_contact_details_private: Do you want to keep your contact details private from the other people named in the application (the respondents)?
+        contact_details_private: Which contact details do you want to keep private from the other people in this application?
       steps_applicant_personal_details_form:
         <<: *PERSONAL_DETAILS_LEGENDS
         has_previous_name: Have you changed your name?

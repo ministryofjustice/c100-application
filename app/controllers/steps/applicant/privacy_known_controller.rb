@@ -11,7 +11,7 @@ module Steps
         update_and_advance(
           PrivacyKnownForm,
           record: current_record,
-          as: :personal_details
+          as: :privacy_known
         )
       end
     end
