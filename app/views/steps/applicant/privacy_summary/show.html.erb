@@ -4,19 +4,26 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <span class="govuk-caption-xl"><%=t '.section' %></span>
-    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+    <% if @current_record.are_contact_details_private == 'yes' %>
+      <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
 
-    <%=t '.body_text_html' %>
+      <%=t '.body_text_html' %>
 
-    <ul>
-      <%# application.contact_details_private.each do |item| %>
-        <li>Email<%#= item %></li>
-      <%# end %>
-    </ul>
+      <ul>
+        <% @current_record.contact_details_private.each do |item| %>
+          <li><p class="govuk-body"><%= item.capitalize %></p></li>
+        <% end %>
+      </ul>
+      <br>
 
-    <%=t '.second_text_html' %>
+      <%=t '.second_text_html' %>
+    <% else %>
+      <h1 class="govuk-heading-xl"><%=t '.heading_not_private' %></h1>
 
-    <%= link_button 'Continue', edit_steps_applicant_personal_details_path(id: @application.id) %>
+      <%=t '.body_text_not_private_html' %>
+      <br>
+    <% end %>
+
+    <%= link_button 'Continue', edit_steps_applicant_personal_details_path(id: params[:id]) %>
   </div>
 </div>

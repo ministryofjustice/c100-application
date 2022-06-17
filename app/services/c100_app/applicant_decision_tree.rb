@@ -9,11 +9,11 @@ module C100App
       when :names_finished
         edit(:privacy_known, id: next_applicant_id)
       when :privacy_known
-        edit(:privacy_preferences, id: next_applicant_id)
+        edit(:privacy_preferences)
       when :privacy_preferences
         show(:privacy_summary)
       when :privacy_summary
-        edit(:personal_details, id: next_applicant_id)
+        edit(:personal_details)
       when :personal_details
         after_personal_details
       when :under_age
@@ -43,7 +43,7 @@ module C100App
 
     def after_contact_details
       if next_applicant_id
-        edit(:personal_details, id: next_applicant_id)
+        edit(:privacy_known, id: next_applicant_id)
       else
         edit(:has_solicitor)
       end

@@ -264,13 +264,11 @@ en:
       privacy_known:
         edit:
           page_title: Contact details confidentiality
-          section: *safety_concerns
           heading: Keeping your contact details private
           privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
       privacy_preferences:
         edit:
           page_title: Contact details confidentiality
-          section: *safety_concerns
           heading: Keeping your contact details private
           lead_text_html: |
             <p class="govuk-body">The answers you give in your response will be shared with other people named in this application (the respondents). This will include your contact details.</p>
@@ -280,9 +278,10 @@ en:
       privacy_summary:
         show:
           page_title: Contact details confidentiality
-          section: *safety_concerns
           heading: The court will keep your contact details private
+          heading_not_private: The court will not keep your contact details private
           body_text_html: <p class="govuk-body">You have told us you want to keep these contact details private</p>
+          body_text_not_private_html: <p class="govuk-body">You have told us the other people named in this application do not know any of your contact details, or you do not want to keep your contact details private from the other people named in this application (the respondents).</p>
           second_text_html: |
             <h2 class="govuk-heading-m">What the court will do</h2>
             <p class="govuk-body">The court will hold this information securely and it will not be shared with any other party except Cafcass (Children and Family Court Advisory and Support Service) or Cafcass CYMRU unless it is by order of the court.</p>

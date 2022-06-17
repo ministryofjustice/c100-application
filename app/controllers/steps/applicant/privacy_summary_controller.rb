@@ -1,7 +1,9 @@
 module Steps
   module Applicant
     class PrivacySummaryController < Steps::ApplicantStepController
-      def show; end
+      def show
+        @current_record = current_record
+      end
     end
   end
 end
