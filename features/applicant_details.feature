@@ -20,7 +20,7 @@ Feature: Add an applicant to the application
     Then I fill in "First name(s)" with "John"
     And I fill in "Last name(s)" with "Doe Senior"
     When I click the "Continue" button
-    Then I should see "Do the other people named in this application (the respondents) know any of your contact details?"
+    Then I should see "Do the other people named in this application (the respondents) know any of their contact details?"
 
     # Provoke privacy known validation errors
     When I click the "Continue" button
@@ -29,17 +29,17 @@ Feature: Add an applicant to the application
 
     # Fix privacy known validation errors and continue
     And I choose "Yes"
-    Then I should see "Do you want to keep your contact details private"
+    Then I should see "Do you want to keep their contact details private"
 
     # Provoke privacy preferences validation errors
     When I click the "Continue" button
-    Then I should see "Do you want to keep your contact details private"
+    Then I should see "Do you want to keep their contact details private"
     Then Page has title "Error: Contact details confidentiality - Apply to court about child arrangements - GOV.UK"
     And I should see a "Select an option" link to "#steps-applicant-privacy-preferences-form-are-contact-details-private-field-error"
 
     # Fix privacy preferences validation errors and continue
     When I choose "No"
-    Then I should see "The court will not keep your contact details private"
+    Then I should see "The court will not keep John Doe Senior's contact details private"
     When I click the "Continue" link
     Then I should see "Provide details for John Doe Senior"
 

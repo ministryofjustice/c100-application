@@ -35,7 +35,7 @@ module Summary
         mobile_keep_private: 'yes',
         relationships: [relationship],
         privacy_known: 'yes',
-        are_contact_details_private: 'yes',
+        are_contact_details_private: are_contact_details_private,
         contact_details_private: contact_details_private
       )
     }
@@ -43,6 +43,7 @@ module Summary
     let(:mobile_phone) { 'mobile_phone' }
     let(:mobile_provided) { 'yes' }
     let(:mobile_not_provided_reason) { nil }
+    let(:are_contact_details_private) { 'yes' }
     let(:contact_details_private) { ['email', 'address'] }
 
     before do
@@ -276,6 +277,18 @@ module Summary
           expect(answers[7].value).to eq('Aunt')
           expect(answers[7].i18n_opts).to eq({child_name: 'Child Test'})
         end
+      end
+
+      context 'when contact details are not kept private' do
+        let(:are_contact_details_private) { 'no' }
+
+        it 'renders the correct contact details preferences' do
+          expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[3].question).to eq(:person_contact_details_private)
+          expect(answers[3].change_path).to eq('/steps/applicant/privacy_preferences/uuid-123')
+          expect(answers[3].value).to eq('No')
+        end
+
       end
 
       context 'for a children relationship with permission questions answered' do

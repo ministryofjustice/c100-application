@@ -5,7 +5,7 @@
   <div class="govuk-grid-column-two-thirds">
 
     <% if @current_record.are_contact_details_private == 'yes' %>
-      <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+      <h1 class="govuk-heading-xl"><%=t '.heading', name: @current_record.full_name %></h1>
 
       <%=t '.body_text_html' %>
 
@@ -18,9 +18,9 @@
 
       <%=t '.second_text_html' %>
     <% else %>
-      <h1 class="govuk-heading-xl"><%=t '.heading_not_private' %></h1>
+      <h1 class="govuk-heading-xl"><%=t '.heading_not_private', name: @current_record.full_name %></h1>
 
-      <%=t '.body_text_not_private_html' %>
+      <%=t '.body_text_not_private_html', name: @current_record.full_name %>
       <br>
     <% end %>
 

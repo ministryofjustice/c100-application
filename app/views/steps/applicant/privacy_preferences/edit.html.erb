@@ -5,9 +5,9 @@
   <div class="govuk-grid-column-two-thirds">
     <%= govuk_error_summary %>
 
-    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+    <h1 class="govuk-heading-xl"><%=t '.heading', name: @form_object.record.full_name %></h1>
 
-    <%=t '.lead_text_html' %>
+    <%=t '.lead_text_html', name: @form_object.record.full_name %>
 
     <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
       <%= f.govuk_radio_buttons_fieldset :are_contact_details_private, legend: { tag: 'span', size: 's' } do %>
