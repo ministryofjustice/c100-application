@@ -3,7 +3,8 @@ module Steps
     class PrivacyPreferencesController < Steps::ApplicantStepController
       def edit
         @form_object = PrivacyPreferencesForm.build(
-          current_record, c100_application: current_c100_application
+          current_record,
+          c100_application: current_c100_application
         )
       end
 

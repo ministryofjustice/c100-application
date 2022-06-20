@@ -29,7 +29,6 @@ Feature: Add an applicant to the application
 
     # Fix privacy known validation errors and continue
     And I choose "Yes"
-    When I click the "Continue" button
     Then I should see "Do you want to keep your contact details private"
 
     # Provoke privacy preferences validation errors
@@ -40,7 +39,6 @@ Feature: Add an applicant to the application
 
     # Fix privacy preferences validation errors and continue
     When I choose "No"
-    And I click the "Continue" button
     Then I should see "The court will not keep your contact details private"
     When I click the "Continue" link
     Then I should see "Provide details for John Doe Senior"

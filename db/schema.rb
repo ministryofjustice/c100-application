@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_09_104551) do
+ActiveRecord::Schema.define(version: 2022_06_20_144235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -340,6 +340,7 @@ ActiveRecord::Schema.define(version: 2022_06_09_104551) do
     t.string "parental_responsibility"
     t.string "privacy_known"
     t.string "contact_details_private", default: [], array: true
+    t.string "are_contact_details_private"
     t.index ["c100_application_id"], name: "index_people_on_c100_application_id"
   end
 

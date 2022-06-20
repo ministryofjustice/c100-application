@@ -1,5 +1,4 @@
 class CrudStepController < StepController
-
   def current_record
     @_current_record ||= record_collection.find_or_initialize_by(id: params[:id])
   end

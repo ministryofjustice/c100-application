@@ -12,6 +12,8 @@ module C100App
       %r{^/steps/abuse_concerns/details.*},
       %r{^/steps/abuse_concerns/contact$},
       %r{^/steps/petition/protection$},
+      %r{^/steps/.+/privacy_known.*},
+      %r{^/steps/.+/privacy_preferences.*},
       %r{^/steps/.+/personal_details.*},
       %r{^/steps/.+/address_details.*},
       %r{^/steps/.+/contact_details.*},

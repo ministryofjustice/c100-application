@@ -18,6 +18,8 @@ module Summary
         special_guardianship_order: special_guardianship_order,
         parental_responsibility: parental_responsibility,
         child_order: child_order,
+        privacy_known: nil,
+        are_contact_details_private: nil
       )
     }
 

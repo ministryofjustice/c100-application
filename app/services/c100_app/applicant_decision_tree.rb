@@ -1,5 +1,6 @@
 module C100App
   class ApplicantDecisionTree < PeopleDecisionTree
+    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength
     def destination
       return next_step if next_step
 
@@ -30,6 +31,7 @@ module C100App
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
     end
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength
 
     private
 

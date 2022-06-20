@@ -247,4 +247,9 @@ body:not(.status-completed) {
       border-bottom: none;
     }
   }
+
+  .contact-details-privacy-response{
+    background-color: red;
+    display: inline-block;
+  }
 }

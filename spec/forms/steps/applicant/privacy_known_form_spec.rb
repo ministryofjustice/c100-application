@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Steps::Applicant::PrivacyKnownForm, focus: true do
+RSpec.describe Steps::Applicant::PrivacyKnownForm do
   let(:arguments) { {
     c100_application: c100_application,
     record: applicant,

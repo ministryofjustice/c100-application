@@ -519,6 +519,11 @@ en:
 
     person_full_name:
       question: Full name
+    person_privacy_known:
+      question: Do other people named in this application know any of your contact details?
+    person_contact_details_private:
+      question: Do you want to keep your contact details private from the other people named in the application (the respondents)?
+      c8: C8 has been generated separately
     person_previous_name:
       question: Previous name
       answers:

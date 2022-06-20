@@ -23,7 +23,7 @@ RSpec.describe C100App::ApplicantDecisionTree do
 
   context 'when the step is `add_another_name`' do
     let(:step_params) {{'add_another_name' => 'anything'}}
-    it {is_expected.to have_destination(:names, :edit, id: 1)}
+    it {is_expected.to have_destination(:names, :edit)}
   end
 
   context 'when the step is `names_finished`' do
@@ -38,14 +38,14 @@ RSpec.describe C100App::ApplicantDecisionTree do
     let(:step_params) {{'privacy_known' => 'anything'}}
     it 'goes to ask whether the privacy of the first applicant is known' do
       expect(subject.destination).to eq(
-        controller: :privacy_preferences, action: :edit, id: 1)
+        controller: :privacy_preferences, action: :edit)
     end
   end
 
   context 'when the step is `privacy_preferences`' do
     let(:step_params) {{'privacy_preferences' => 'anything'}}
     it 'goes to show the privacy_summary of the first applicant' do
-      expect(subject.destination).to eq(controller: :privacy_summary, action: :show, id: 1)
+      expect(subject.destination).to eq(controller: :privacy_summary, action: :show)
     end
   end
 
@@ -53,7 +53,7 @@ RSpec.describe C100App::ApplicantDecisionTree do
     let(:step_params) {{'privacy_summary' => 'anything'}}
     it 'goes to edit the details of the first applicant' do
       expect(subject.destination).to eq(
-        controller: :personal_details, action: :edit, id: 1)
+        controller: :personal_details, action: :edit)
     end
   end
 
@@ -151,7 +151,7 @@ RSpec.describe C100App::ApplicantDecisionTree do
       let(:record) { double('Applicant', id: 1) }
 
       it 'goes to edit the personal details of the next applicant' do
-        expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: 2)
+        expect(subject.destination).to eq(controller: :privacy_known, action: :edit, id: 2)
       end
     end
 

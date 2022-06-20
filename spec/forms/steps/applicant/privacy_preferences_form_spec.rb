@@ -13,7 +13,7 @@ RSpec.describe Steps::Applicant::PrivacyPreferencesForm do
   let(:applicants_collection) { double('applicants_collection') }
   let(:applicant) { double('Applicant', id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe6') }
   let(:are_contact_details_private) { GenericYesNo::YES }
-  let(:contact_details_private) { ['address', 'email'] }
+  let(:contact_details_private) { ['', 'address', 'email'] }
 
   subject { described_class.new(arguments) }
 
@@ -62,12 +62,60 @@ RSpec.describe Steps::Applicant::PrivacyPreferencesForm do
       end
     end
 
-    context 'for valid details' do
+    context 'for valid private details' do
 
       let(:expected_attributes) {
         {
           are_contact_details_private: GenericYesNo::YES,
           contact_details_private: ['address', 'email']
+        }
+      }
+
+      it 'saves' do
+        expect(applicants_collection).to receive(:find_or_initialize_by).with(
+          id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe6'
+        ).and_return(applicant)
+    
+        expect(applicant).to receive(:update).with(
+          expected_attributes
+        ).and_return(true)
+
+        expect(subject.save).to be(true)
+      end
+    end
+
+    context 'for valid not private details' do
+      let(:are_contact_details_private) { GenericYesNo::NO }
+      let(:contact_details_private) { [''] }
+
+      let(:expected_attributes) {
+        {
+          are_contact_details_private: GenericYesNo::NO,
+          contact_details_private: []
+        }
+      }
+
+      it 'saves' do
+        expect(applicants_collection).to receive(:find_or_initialize_by).with(
+          id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe6'
+        ).and_return(applicant)
+    
+        expect(applicant).to receive(:update).with(
+          expected_attributes
+        ).and_return(true)
+
+        expect(subject.save).to be(true)
+      end
+    end
+
+    context 'for not private details, even if one is selected' do
+      let(:are_contact_details_private) { GenericYesNo::NO }
+      let(:contact_details_private) { ['', 'email'] }
+
+      let(:expected_attributes) {
+        {
+          are_contact_details_private: GenericYesNo::NO,
+          contact_details_private: []
         }
       }
 

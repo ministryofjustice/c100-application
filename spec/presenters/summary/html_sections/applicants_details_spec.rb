@@ -34,12 +34,16 @@ module Summary
         phone_keep_private: 'yes',
         mobile_keep_private: 'yes',
         relationships: [relationship],
+        privacy_known: 'yes',
+        are_contact_details_private: 'yes',
+        contact_details_private: contact_details_private
       )
     }
 
     let(:mobile_phone) { 'mobile_phone' }
     let(:mobile_provided) { 'yes' }
     let(:mobile_not_provided_reason) { nil }
+    let(:contact_details_private) { ['email', 'address'] }
 
     before do
        allow(applicant).to receive(:full_address).and_return('full address')
@@ -82,7 +86,7 @@ module Summary
     #
     describe '#answers' do
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(6)
+        expect(answers.count).to eq(8)
       end
 
       it 'has the correct rows in the right order' do
@@ -95,13 +99,23 @@ module Summary
         expect(answers[1].change_path).to eq('/steps/applicant/names/')
         expect(answers[1].value).to eq('Applicant Test')
 
-        expect(answers[2]).to be_an_instance_of(AnswersGroup)
-        expect(answers[2].name).to eq(:person_personal_details)
-        expect(answers[2].change_path).to eq('/steps/applicant/personal_details/uuid-123')
-        expect(answers[2].answers.count).to eq(4)
+        expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[2].question).to eq(:person_privacy_known)
+        expect(answers[2].change_path).to eq('/steps/applicant/privacy_known/uuid-123')
+        expect(answers[2].value).to eq('Yes')
+
+        expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[3].question).to eq(:person_contact_details_private)
+        expect(answers[3].change_path).to eq('/steps/applicant/privacy_preferences/uuid-123')
+        expect(answers[3].value).to eq('Email, Current address')
+
+        expect(answers[4]).to be_an_instance_of(AnswersGroup)
+        expect(answers[4].name).to eq(:person_personal_details)
+        expect(answers[4].change_path).to eq('/steps/applicant/personal_details/uuid-123')
+        expect(answers[4].answers.count).to eq(4)
 
           # personal_details group answers ###
-          details = answers[2].answers
+          details = answers[4].answers
 
           expect(details[0]).to be_an_instance_of(Answer)
           expect(details[0].question).to eq(:person_previous_name)
@@ -119,14 +133,14 @@ module Summary
           expect(details[3].question).to eq(:person_birthplace)
           expect(details[3].value).to eq('birthplace')
 
-          expect(answers[3]).to be_an_instance_of(AnswersGroup)
-          expect(answers[3].name).to eq(:person_address_details)
-          expect(answers[3].change_path).to eq('/steps/applicant/address_details/uuid-123')
+          expect(answers[5]).to be_an_instance_of(AnswersGroup)
+          expect(answers[5].name).to eq(:person_address_details)
+          expect(answers[5].change_path).to eq('/steps/applicant/address_details/uuid-123')
 
-          expect(answers[3].answers.count).to eq(4)
+          expect(answers[5].answers.count).to eq(4)
 
           # personal_details group answers ###
-          details = answers[3].answers
+          details = answers[5].answers
 
           expect(details[0]).to be_an_instance_of(FreeTextAnswer)
           expect(details[0].question).to eq(:person_address)
@@ -145,13 +159,13 @@ module Summary
           expect(details[3].value).to eq('history')
 
 
-        expect(answers[4]).to be_an_instance_of(AnswersGroup)
-        expect(answers[4].name).to eq(:person_contact_details)
-        expect(answers[4].change_path).to eq('/steps/applicant/contact_details/uuid-123')
-        expect(answers[4].answers.count).to eq(8)
+        expect(answers[6]).to be_an_instance_of(AnswersGroup)
+        expect(answers[6].name).to eq(:person_contact_details)
+        expect(answers[6].change_path).to eq('/steps/applicant/contact_details/uuid-123')
+        expect(answers[6].answers.count).to eq(8)
 
           # contact details group answers ###
-          details = answers[4].answers
+          details = answers[6].answers
 
           expect(details[0]).to be_an_instance_of(Answer)
           expect(details[0].question).to eq(:person_email_provided)
@@ -185,11 +199,11 @@ module Summary
           expect(details[7].question).to eq(:person_voicemail_consent)
           expect(details[7].value).to eq('yes')
 
-        expect(answers[5]).to be_an_instance_of(Answer)
-        expect(answers[5].question).to eq(:relationship_to_child)
-        expect(answers[5].change_path).to eq('/steps/applicant/relationship/uuid-123/child/uuid-555')
-        expect(answers[5].value).to eq('mother')
-        expect(answers[5].i18n_opts).to eq({child_name: 'Child Test'})
+        expect(answers[7]).to be_an_instance_of(Answer)
+        expect(answers[7].question).to eq(:relationship_to_child)
+        expect(answers[7].change_path).to eq('/steps/applicant/relationship/uuid-123/child/uuid-555')
+        expect(answers[7].value).to eq('mother')
+        expect(answers[7].i18n_opts).to eq({child_name: 'Child Test'})
       end
 
       context 'when mobile phone' do
@@ -199,7 +213,7 @@ module Summary
           let(:mobile_not_provided_reason) { nil }
 
           it 'shows the phone number' do
-            expect(answers[4].answers[5].value).to eq('mobile_phone')
+            expect(answers[6].answers[5].value).to eq('mobile_phone')
           end
         end
         context 'is given' do
@@ -208,7 +222,7 @@ module Summary
           let(:mobile_not_provided_reason) { nil }
 
           it 'shows the phone number' do
-            expect(answers[4].answers[5].value).to eq('mobile_phone')
+            expect(answers[6].answers[5].value).to eq('mobile_phone')
           end
         end
         context 'is not given with a reason' do
@@ -217,7 +231,7 @@ module Summary
           let(:mobile_not_provided_reason) { 'no phone' }
 
           it 'shows the reason' do
-            expect(answers[4].answers[5].value).to eq('no phone')
+            expect(answers[6].answers[5].value).to eq('no phone')
           end
         end
       end
@@ -227,13 +241,13 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(6)
+          expect(answers.count).to eq(8)
         end
 
         it 'renders the previous name' do
-          expect(answers[2]).to be_an_instance_of(AnswersGroup)
+          expect(answers[4]).to be_an_instance_of(AnswersGroup)
 
-          details = answers[2].answers
+          details = answers[4].answers
           expect(details[0]).to be_an_instance_of(FreeTextAnswer)
           expect(details[0].question).to eq(:person_previous_name)
           expect(details[0].value).to eq('previous_name')
@@ -252,15 +266,15 @@ module Summary
         }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(6)
+          expect(answers.count).to eq(8)
         end
 
         it 'renders the correct relationship value' do
-          expect(answers[5]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[5].question).to eq(:relationship_to_child)
-          expect(answers[5].change_path).to eq('/steps/applicant/relationship/uuid-123/child/uuid-555')
-          expect(answers[5].value).to eq('Aunt')
-          expect(answers[5].i18n_opts).to eq({child_name: 'Child Test'})
+          expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[7].question).to eq(:relationship_to_child)
+          expect(answers[7].change_path).to eq('/steps/applicant/relationship/uuid-123/child/uuid-555')
+          expect(answers[7].value).to eq('Aunt')
+          expect(answers[7].i18n_opts).to eq({child_name: 'Child Test'})
         end
       end
 
@@ -289,21 +303,21 @@ module Summary
         end
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(8)
+          expect(answers.count).to eq(10)
         end
 
         it 'renders the correct permission values' do
-          expect(answers[6]).to be_an_instance_of(Answer)
-          expect(answers[6].question).to eq('child_permission_parental_responsibility')
-          expect(answers[6].change_path).to eq('/steps/permission/parental_responsibility/relationship/uuid-123')
-          expect(answers[6].value).to eq('no')
-          expect(answers[6].i18n_opts).to eq({ applicant_name: 'Applicant Test', child_name: 'Child Test'})
+          expect(answers[8]).to be_an_instance_of(Answer)
+          expect(answers[8].question).to eq('child_permission_parental_responsibility')
+          expect(answers[8].change_path).to eq('/steps/permission/parental_responsibility/relationship/uuid-123')
+          expect(answers[8].value).to eq('no')
+          expect(answers[8].i18n_opts).to eq({ applicant_name: 'Applicant Test', child_name: 'Child Test'})
 
-          expect(answers[7]).to be_an_instance_of(Answer)
-          expect(answers[7].question).to eq('child_permission_living_order')
-          expect(answers[7].change_path).to eq('/steps/permission/living_order/relationship/uuid-123')
-          expect(answers[7].value).to eq('yes')
-          expect(answers[7].i18n_opts).to eq({ applicant_name: 'Applicant Test', child_name: 'Child Test'})
+          expect(answers[9]).to be_an_instance_of(Answer)
+          expect(answers[9].question).to eq('child_permission_living_order')
+          expect(answers[9].change_path).to eq('/steps/permission/living_order/relationship/uuid-123')
+          expect(answers[9].value).to eq('yes')
+          expect(answers[9].i18n_opts).to eq({ applicant_name: 'Applicant Test', child_name: 'Child Test'})
         end
       end
     end

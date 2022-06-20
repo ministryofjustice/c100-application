@@ -23,6 +23,8 @@ module Summary
           [
             Separator.new("#{name}_index_title", index: index),
             FreeTextAnswer.new(:person_full_name, person.full_name),
+            FreeTextAnswer.new(:person_privacy_known, person.privacy_known.try(:capitalize)),
+            contact_details_privacy_preferences(person),
             previous_name_answer(person),
             Answer.new(:person_sex, person.gender),
             DateAnswer.new(:person_dob, person.dob,
@@ -54,6 +56,14 @@ module Summary
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength
 
       private
+
+      def contact_details_privacy_preferences(person)
+        return [] unless person.are_contact_details_private.present?
+        Partial.new(:privacy_preferences, {
+                      are_contact_details_private: person.are_contact_details_private,
+          contact_details_private: person.contact_details_private
+                    })
+      end
 
       def previous_name_answer(person)
         if person.has_previous_name.eql?(GenericYesNo::YES.to_s)

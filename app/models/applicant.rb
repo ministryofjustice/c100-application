@@ -1,7 +1,4 @@
 class Applicant < Person
-
-  attr_accessor :are_contact_details_private
-
   # In the case of more than one applicant, if at least one of them
   # is under age, the whole application is considered as "under age"
   def self.under_age?

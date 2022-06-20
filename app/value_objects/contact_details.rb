@@ -9,4 +9,13 @@ class ContactDetails < ValueObject
   def self.values
     VALUES
   end
+
+  def long_name
+    {
+      address: 'Current address',
+      email: 'Email',
+      mobile: 'Mobile phone number',
+      home_phone: 'Home phone number'
+    }[to_sym]
+  end
 end

@@ -11,7 +11,7 @@
 
       <ul>
         <% @current_record.contact_details_private.each do |item| %>
-          <li><p class="govuk-body"><%= item.capitalize %></p></li>
+          <li><p class="govuk-body"><%= ContactDetails.new(item).long_name %></p></li>
         <% end %>
       </ul>
       <br>
