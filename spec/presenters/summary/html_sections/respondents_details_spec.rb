@@ -37,6 +37,8 @@ module Summary
         phone_keep_private: nil,
         mobile_keep_private: nil,
         relationships: [relationship],
+        privacy_known: nil,
+        are_contact_details_private: nil
       )
     }
 

@@ -1,0 +1,29 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <% if @current_record.are_contact_details_private == 'yes' %>
+      <h1 class="govuk-heading-xl"><%=t '.heading', name: @current_record.full_name %></h1>
+
+      <%=t '.body_text_html' %>
+
+      <ul>
+        <% @current_record.contact_details_private.each do |item| %>
+          <li><p class="govuk-body"><%= ContactDetails.new(item).long_name %></p></li>
+        <% end %>
+      </ul>
+      <br>
+
+      <%=t '.second_text_html' %>
+    <% else %>
+      <h1 class="govuk-heading-xl"><%=t '.heading_not_private', name: @current_record.full_name %></h1>
+
+      <%=t '.body_text_not_private_html', name: @current_record.full_name %>
+      <br>
+    <% end %>
+
+    <%= link_button 'Continue', edit_steps_applicant_personal_details_path(id: params[:id]) %>
+  </div>
+</div>

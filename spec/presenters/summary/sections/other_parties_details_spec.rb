@@ -31,7 +31,9 @@ module Summary
         voicemail_consent: nil,
         email_keep_private: nil,
         phone_keep_private: nil,
-        mobile_keep_private: nil
+        mobile_keep_private: nil,
+        privacy_known: nil,
+        are_contact_details_private: nil
       )
     }
 

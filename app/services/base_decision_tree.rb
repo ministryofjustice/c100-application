@@ -26,8 +26,8 @@ class BaseDecisionTree
     step_params.fetch(attribute_name).eql?(value)
   end
 
-  def show(step_controller)
-    {controller: step_controller, action: :show}
+  def show(step_controller, params = {})
+    {controller: step_controller, action: :show}.merge(params)
   end
 
   def edit(step_controller, params = {})
