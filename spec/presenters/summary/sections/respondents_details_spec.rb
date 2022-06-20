@@ -24,6 +24,8 @@ module Summary
         phone_keep_private: 'yes',
         mobile_keep_private: 'yes',
         voicemail_consent: nil,
+        privacy_known: nil,
+        are_contact_details_private: nil
       )
     }
 

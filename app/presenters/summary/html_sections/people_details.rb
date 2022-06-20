@@ -33,6 +33,7 @@ module Summary
           [
             Separator.new("#{name}_index_title", index: index),
             FreeTextAnswer.new(:person_full_name, person.full_name, change_path: names_path),
+            person_privacy_answers_group(person),
             person_personal_details_answers_group(person),
             person_address_details_answers_group(person),
             person_contact_details_answers_group(person),
@@ -81,6 +82,27 @@ module Summary
           FreeTextAnswer.new(:person_previous_name, person.previous_name)
         else
           Answer.new(:person_previous_name, person.has_previous_name)
+        end
+      end
+
+      def person_privacy_answers_group(person)
+        return [] unless person.privacy_known
+        [
+          FreeTextAnswer.new(:person_privacy_known, person.privacy_known.capitalize,
+                             change_path: edit_steps_applicant_privacy_known_path(person)),
+          FreeTextAnswer.new(:person_contact_details_private,
+                             privacy_preferences_answer(person),
+                             change_path: edit_steps_applicant_privacy_preferences_path(person))
+        ]
+      end
+
+      def privacy_preferences_answer(person)
+        if person.are_contact_details_private == GenericYesNo::YES.to_s
+          person.contact_details_private.map do |detail|
+            ContactDetails.new(detail).long_name
+          end.join(', ')
+        else
+          GenericYesNo::NO.to_s.capitalize
         end
       end
 

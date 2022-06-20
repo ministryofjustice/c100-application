@@ -1,4 +1,8 @@
 class CrudStepController < StepController
+  def current_record
+    @_current_record ||= record_collection.find_or_initialize_by(id: params[:id])
+  end
+
   private
 
   # :nocov:
@@ -10,10 +14,6 @@ class CrudStepController < StepController
     raise 'implement in subclasses'
   end
   # :nocov:
-
-  def current_record
-    @_current_record ||= record_collection.find_or_initialize_by(id: params[:id])
-  end
 
   def set_existing_records
     @existing_records = record_collection.persisted

@@ -174,7 +174,6 @@ Rails.application.routes.draw do
     end
     namespace :safety_questions do
       show_step :start
-      edit_step :address_confidentiality
       edit_step :risk_of_abduction
       edit_step :substance_abuse
       edit_step :children_abuse
@@ -225,6 +224,9 @@ Rails.application.routes.draw do
     end
     namespace :applicant do
       crud_step :names
+      crud_step :privacy_known, only: [:edit, :update]
+      crud_step :privacy_preferences, only: [:edit, :update]
+      crud_step :privacy_summary, only: [:show]
       crud_step :personal_details, only: [:edit, :update]
       crud_step :under_age,        only: [:edit, :update]
       crud_step :contact_details,  only: [:edit, :update]
