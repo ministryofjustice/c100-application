@@ -265,7 +265,7 @@ en:
         edit:
           page_title: Contact details confidentiality
           heading: "Keeping %{name}'s contact details private"
-          privacy_known: Do the other people named in this application (the respondents) know any of their contact details?
+          privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
       privacy_preferences:
         edit:
           page_title: Contact details confidentiality
@@ -1830,9 +1830,9 @@ en:
 
       # Applicant
       steps_applicant_privacy_known_form:
-        privacy_known: Do the other people named in this application (the respondents) know any of their contact details?
+        privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
       steps_applicant_privacy_preferences_form:
-        are_contact_details_private: Do you want to keep their contact details private from the other people named in the application (the respondents)?
+        are_contact_details_private: Do you want to keep your contact details private from the other people named in the application (the respondents)?
         contact_details_private: Which contact details do you want to keep private from the other people in this application?
       steps_applicant_personal_details_form:
         <<: *PERSONAL_DETAILS_LEGENDS
