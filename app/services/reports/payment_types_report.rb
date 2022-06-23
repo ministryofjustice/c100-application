@@ -11,11 +11,19 @@ module Reports
 
         log "Sending payment types report"
 
-        ReportsMailer.payment_types_report(
-          report_csv,
-          to_address: ENV['PAYMENT_TYPE_REPORT_EMAIL'],
-          cc_address: ENV['PAYMENT_TYPE_REPORT_EMAIL_CC'],
-        ).deliver_later
+        begin
+          retries ||= 0
+          log "try ##{retries}"
+
+          ReportsMailer.payment_types_report(
+            report_csv,
+            to_address: ENV['PAYMENT_TYPE_REPORT_EMAIL'],
+            cc_address: ENV['PAYMENT_TYPE_REPORT_EMAIL_CC'],
+          ).deliver_later
+        rescue PG::ConnectionBad
+          retry if (retries += 1) < 3
+          raise # Reraises PG::ConnectionBad if still failing
+        end
       end
 
       def report_data
