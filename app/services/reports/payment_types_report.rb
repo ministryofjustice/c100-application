@@ -13,7 +13,7 @@ module Reports
 
         begin
           retries ||= 0
-          log "try ##{ retries }"
+          log "try ##{retries}"
 
           ReportsMailer.payment_types_report(
             report_csv,
@@ -22,8 +22,8 @@ module Reports
           ).deliver_later
         rescue PG::ConnectionBad
           retry if (retries += 1) < 3
+          raise # Reraises PG::ConnectionBad if still failing
         end
-
       end
 
       def report_data
