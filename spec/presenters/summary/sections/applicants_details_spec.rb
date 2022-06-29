@@ -49,9 +49,9 @@ module Summary
 
     let(:has_previous_name) { 'no' }
     let(:previous_name) { nil }
-    let(:privacy_known) { 'yes' }
-    let(:are_contact_details_private) { 'yes' }
-    let(:contact_details_private) { ['email', 'address'] }
+    let(:privacy_known) { 'no' }
+    let(:are_contact_details_private) { 'no' }
+    let(:contact_details_private) { [] }
 
     let(:answers) { subject.answers }
 
@@ -107,13 +107,13 @@ module Summary
 
         expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
         expect(answers[2].question).to eq(:person_privacy_known)
-        expect(answers[2].value).to eq('Yes')
+        expect(answers[2].value).to eq('No')
 
         expect(answers[3]).to be_an_instance_of(Partial)
         expect(answers[3].name).to eq(:privacy_preferences)
         expect(answers[3].ivar).to eq({
-          are_contact_details_private: 'yes',
-          contact_details_private: ['email', 'address']
+          are_contact_details_private: 'no',
+          contact_details_private: []
         })
 
         expect(answers[4]).to be_an_instance_of(Answer)
@@ -243,6 +243,45 @@ module Summary
           expect(answers[2]).to be_an_instance_of(Answer)
           expect(answers[2].question).to eq(:person_previous_name)
           expect(answers[2].value).to eq('no')
+        end
+      end
+
+
+      context 'when contact details kept private' do
+        let(:privacy_known) { 'yes' }
+        let(:are_contact_details_private) { 'yes' }
+        let(:contact_details_private) { ['email', 'address', 'mobile', 'home_phone'] }
+
+        it 'shows as private' do
+          expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[2].question).to eq(:person_privacy_known)
+          expect(answers[2].value).to eq('Yes')
+
+          expect(answers[3]).to be_an_instance_of(Partial)
+          expect(answers[3].name).to eq(:privacy_preferences)
+          expect(answers[3].ivar).to eq({
+            are_contact_details_private: 'yes',
+            contact_details_private: ['email', 'address', 'mobile', 'home_phone']
+          })
+        end
+
+        it 'hides the relevant details' do
+          expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[8].question).to eq(:person_address)
+          expect(answers[8].value).to eq('[See C8]')
+
+          expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[12].question).to eq(:person_email)
+          expect(answers[12].value).to eq('[See C8]')
+
+          expect(answers[14]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[14].question).to eq(:person_home_phone)
+          expect(answers[14].value).to eq('[See C8]')
+
+
+          expect(answers[16]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[16].question).to eq(:person_mobile_phone)
+          expect(answers[16].value).to eq('[See C8]')
         end
       end
     end
