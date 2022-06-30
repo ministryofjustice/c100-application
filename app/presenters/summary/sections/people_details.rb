@@ -43,8 +43,8 @@ module Summary
             Answer.new(:email_keep_private, person.email_keep_private),
             FreeTextAnswer.new(:person_home_phone,
                                data_or_private(person,
-                                 home_phone_answer(person),
-                                 ContactDetails::HOME_PHONE.to_s)),
+                                               home_phone_answer(person),
+                                               ContactDetails::HOME_PHONE.to_s)),
             Answer.new(:phone_keep_private, person.phone_keep_private),
             FreeTextAnswer.new(:person_mobile_phone,
                                data_or_private(
