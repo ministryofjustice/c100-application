@@ -31,6 +31,9 @@ module Summary
         phone_keep_private: 'yes',
         mobile_keep_private: 'yes',
         voicemail_consent: 'yes',
+        mobile_phone_unknown: nil,
+        home_phone_unknown: nil,
+        email_unknown: nil,
         privacy_known: privacy_known,
         are_contact_details_private: are_contact_details_private,
         contact_details_private: contact_details_private
