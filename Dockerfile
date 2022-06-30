@@ -1,4 +1,4 @@
-FROM ruby:2.7.5-slim-buster
+FROM ruby:2.7.6-slim-buster
 MAINTAINER HMCTS Reform Team
 
 # build dependencies:
@@ -58,7 +58,7 @@ COPY Gemfile* .ruby-version ./
 
 # "chmod -R" is due to:
 # https://github.com/mileszs/wicked_pdf/issues/911
-RUN gem install bundler -v 2.1.4 && \
+RUN gem install bundler -v 2.3.17 && \
     bundle config set frozen 'true' && \
     bundle config without test:development && \
     bundle install --jobs 2 --retry 3 && \
