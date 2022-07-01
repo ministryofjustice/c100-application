@@ -20,6 +20,9 @@ module Summary
         mobile_provided: nil,
         mobile_phone: 'mobile_phone',
         email: 'email',
+        mobile_phone_unknown: mobile_phone_unknown,
+        home_phone_unknown: home_phone_unknown,
+        email_unknown: email_unknown,
         email_keep_private: 'yes',
         phone_keep_private: 'yes',
         mobile_keep_private: 'yes',
@@ -40,6 +43,9 @@ module Summary
     let(:previous_name) { nil }
     let(:dob) { Date.new(2018, 1, 20) }
     let(:dob_estimate) { nil }
+    let(:mobile_phone_unknown) { nil }
+    let(:home_phone_unknown) { nil }
+    let(:email_unknown) { nil }
 
     let(:answers) { subject.answers }
 
@@ -199,6 +205,26 @@ module Summary
           expect(answers[4]).to be_an_instance_of(DateAnswer)
           expect(answers[4].question).to eq(:person_dob)
           expect(answers[4].value).to eq(nil)
+        end
+      end
+
+      context 'when contact details not known' do
+        let(:mobile_phone_unknown) { true }
+        let(:home_phone_unknown) { true }
+        let(:email_unknown) { true }
+
+        it 'shows that they are not known' do
+          expect(answers[10]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[10].question).to eq(:person_email)
+          expect(answers[10].value).to eq("Don't know")
+
+          expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[12].question).to eq(:person_home_phone)
+          expect(answers[12].value).to eq("Don't know")
+
+          expect(answers[14]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[14].question).to eq(:person_mobile_phone)
+          expect(answers[14].value).to eq("Don't know")
         end
       end
     end
