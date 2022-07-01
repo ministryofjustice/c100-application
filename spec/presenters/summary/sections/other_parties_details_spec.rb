@@ -11,7 +11,6 @@ module Summary
     }
     let(:confidentiality_enabled) { false }
     let(:other_parties) { [other_party] }
-
     let(:other_party) {
       instance_double(OtherParty,
         full_name: 'fullname',
@@ -32,6 +31,9 @@ module Summary
         email_keep_private: nil,
         phone_keep_private: nil,
         mobile_keep_private: nil,
+        mobile_phone_unknown: nil,
+        home_phone_unknown: nil,
+        email_unknown: nil,
         privacy_known: nil,
         are_contact_details_private: nil
       )
