@@ -19,7 +19,7 @@ module Summary
         id: @c100_application.id,
         children: children,
         applicants: applicants,
-        respondents: {},
+        respondents: respondents,
         typeOfApplication: {},
         hearingUrgency: {},
         miam: {},
@@ -83,6 +83,14 @@ module Summary
       applicants_data
     end
 
+    def respondents
+      respondents_data = []
+      @c100_application.respondents.each do |respondent|
+        respondents_data << respondent_json(respondent)
+      end
+      respondents_data
+    end
+
     private
 
     def child_json(child)
@@ -121,9 +129,38 @@ module Summary
       }
     end
 
+    def respondent_json(respondent)
+      {
+        firstName: respondent.first_name,
+        lastName: respondent.last_name,
+        previousName: respondent.previous_name,
+        dateOfBirth: respondent_dob(respondent),
+        isDateOfBirthKnown: yes_no(respondent.dob.present?),
+        gender: respondent.gender,
+        email: respondent.email,
+        phoneNumber: respondent.mobile_phone,
+        isPlaceOfBirthKnown: yes_no(respondent.birthplace.present?),
+        placeOfBirth: respondent.birthplace,
+        isCurrentAddressKnown: yes_no(respondent.address_data.present?),
+        address: map_address_data(respondent.address_data),
+        isAtAddressLessThan5Years: "No",
+        addressLivedLessThan5YearsDetails: nil,
+        isAddressConfidential: yes_no(respondent.residence_keep_private),
+        canYouProvidePhoneNumber: yes_no(!respondent.mobile_keep_private),
+        canYouProvideEmailAddress: yes_no(!respondent.email_keep_private)
+      }
+    end
+
     def yes_no(value)
       return 'No' if value == false
       'Yes' if value == true
     end
+
+    def respondent_dob(respondent)
+      dob = respondent.try(:dob)
+      dob.to_s(:db) if dob
+    end
+
+
   end
 end

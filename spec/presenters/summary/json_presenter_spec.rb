@@ -4,6 +4,7 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     id: '17536fe9-53f1-4bc9-a839-54434f83202e',
     children: [child],
     applicants: [applicant],
+    respondents: [respondent],
     ) }
 
   let(:solicitor) do
@@ -113,16 +114,15 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     context 'applicant data' do
       let(:applicant_json) { json_file[0][:applicants][0] }
       let(:address) do
-      {
-        "address_line_1" => 'house 2',
-        "address_line_2" => 'street 2',
-        "address_line_3" => 'block 2',
-        "town" => 'Birmingham 2',
-        "country" => 'United Kingdom',
-        "postcode" => 'BQODFD'
-      }
-    end
-
+        {
+          "address_line_1" => 'house 2',
+          "address_line_2" => 'street 2',
+          "address_line_3" => 'block 2',
+          "town" => 'Birmingham 2',
+          "country" => 'United Kingdom',
+          "postcode" => 'BQODFD'
+        }
+      end
 
       it { expect(applicant_json[:firstName]).to eql 'Kate' }
       it { expect(applicant_json[:lastName]).to eql 'Holmes' }
@@ -134,11 +134,55 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(applicant_json[:phoneNumber]).to eql '123456987' }
       it { expect(applicant_json[:placeOfBirth]).to eql 'cirencester' }
       it { expect(applicant_json[:address]).to eq ({:AddressLine1=>"house 2", :AddressLine2=>"street 2", :AddressLine3=>"block 2", :Country=>"United Kingdom", :County=>nil, :PostCode=>"BQODFD", :PostTown=>"Birmingham 2"})}
-      it { expect(applicant_json[:isAtAddressLessThan5Years]).to eql 'No' }
-      it { expect(applicant_json[:addressLivedLessThan5YearsDetails]).to eql nil }
+      # it { expect(applicant_json[:isAtAddressLessThan5Years]).to eql 'No' }
+      # it { expect(applicant_json[:addressLivedLessThan5YearsDetails]).to eql nil }
       it { expect(applicant_json[:isAddressConfidential]).to eql 'Yes' }
       it { expect(applicant_json[:isPhoneNumberConfidential]).to eql nil }
       it { expect(applicant_json[:isEmailAddressConfidential]).to eql nil }
+    end
+
+    let(:respondent) do
+      instance_double(Applicant,
+       first_name: "Tom",
+       last_name: "Jones",
+       previous_name: "Sherlock",
+       gender: "male",
+       dob: nil,
+       birthplace: nil,
+       mobile_phone: "003456987",
+       email: "tom@holmes.com",
+       address_data: address,
+       residence_requirement_met: "yes",
+       residence_history: '',
+       email_keep_private: true,
+       mobile_keep_private: true,
+       residence_keep_private: true
+       )
+    end
+
+    context 'respondent data' do
+      let(:respondent_json) { json_file[0][:respondents][0] }
+      let(:address) {{}}
+
+
+      it { expect(respondent_json[:firstName]).to eql 'Tom' }
+      it { expect(respondent_json[:lastName]).to eql 'Jones' }
+      it { expect(respondent_json[:previousName]).to eql 'Sherlock' }
+      it { expect(respondent_json[:dateOfBirth]).to eql nil }
+      it { expect(respondent_json[:isDateOfBirthKnown]).to eql 'No' }
+      it { expect(respondent_json[:gender]).to eql 'male' }
+      it { expect(respondent_json[:email]).to eql 'tom@holmes.com' }
+      it { expect(respondent_json[:phoneNumber]).to eql '003456987' }
+      it { expect(respondent_json[:isPlaceOfBirthKnown]).to eql 'No' }
+      it { expect(respondent_json[:placeOfBirth]).to eql nil }
+      it { expect(respondent_json[:isCurrentAddressKnown]).to eql 'No' }
+      it { expect(respondent_json[:address]).to eq ({AddressLine1: nil, AddressLine2: nil, AddressLine3: nil, PostTown: nil, County: nil, Country: nil, PostCode: nil})}
+      # it { expect(respondent_json[:isAtAddressLessThan5Years]).to eql 'No' }
+      # it { expect(respondent_json[:addressLivedLessThan5YearsDetails]).to eql nil }
+      it { expect(respondent_json[:isAddressConfidential]).to eql 'Yes' }
+      it { expect(respondent_json[:canYouProvidePhoneNumber]).to eql 'No' }
+      it { expect(respondent_json[:canYouProvideEmailAddress]).to eql 'No' }
+      # it { expect(respondent_json[:doTheyHaveLegalRepresentation]).to eql nil }
     end
 
   end
