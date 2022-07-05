@@ -15,15 +15,18 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
     residence_keep_private: residence_keep_private
   } }
 
-  let(:c100_application) { instance_double(C100Application, applicants: applicants_collection, address_confidentiality: address_confidentiality) }
+  let(:c100_application) { instance_double(C100Application,
+    applicants: applicants_collection,
+    confidentiality_enabled?: confidentiality_enabled?) }
   let(:applicants_collection) { double('applicants_collection') }
-  let(:applicant) { double('Applicant', id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe9') }
+  let(:applicant) { double('Applicant',
+    id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe9') }
+  let(:confidentiality_enabled?) { 'no' }
 
   let(:record) { nil }
   let(:residence_requirement_met) { 'no' }
   let(:residence_keep_private) { 'yes' }
   let(:residence_history) { 'history' }
-  let(:address_confidentiality) { 'no' }
 
   let(:address_line_1) { 'address_line_1' }
   let(:address_line_2) { 'address_line_2' }
@@ -81,9 +84,9 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
 
     context 'residence_keep_private' do
       let(:residence_requirement_met) { 'yes' }
-      context 'when attribute is not given and address_confidentiality is true' do
+      context 'when attribute is not given and confidentiality is true' do
         let(:residence_keep_private) { nil }
-        let(:address_confidentiality) { 'yes' }
+        let(:confidentiality_enabled?) { true }
 
         it 'returns false' do
           expect(subject.save).to be(false)
@@ -95,9 +98,9 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
         end
       end
 
-      context 'when attribute is not given and address_confidentiality is false' do
+      context 'when attribute is not given and confidentiality is false' do
         let(:residence_keep_private) { nil }
-        let(:address_confidentiality) { 'no' }
+        let(:confidentiality_enabled?) { false }
 
         it 'returns true' do
           allow(applicants_collection).to receive(:find_or_initialize_by).with(

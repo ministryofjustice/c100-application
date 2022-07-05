@@ -5,7 +5,7 @@ module Summary
     let(:c100_application) {
       instance_double(
         C100Application,
-        address_confidentiality: address_confidentiality,
+        confidentiality_enabled?: confidentiality_enabled?,
         applicants: [applicant]
       )
     }
@@ -17,6 +17,7 @@ module Summary
         home_phone: 'home_phone',
         mobile_provided: mobile_provided,
         mobile_not_provided_reason: mobile_not_provided_reason,
+        are_contact_details_private: are_contact_details_private,
         mobile_phone: 'mobile_phone',
         email: 'email',
         voicemail_consent: 'yes',
@@ -25,7 +26,8 @@ module Summary
 
     let(:mobile_provided) { nil }
     let(:mobile_not_provided_reason) { nil }
-    let(:address_confidentiality) { nil }
+    let(:confidentiality_enabled?) { nil }
+    let(:are_contact_details_private) { nil }
 
     subject { described_class.new(c100_application) }
 
@@ -113,8 +115,9 @@ module Summary
         end
       end
 
-      context 'when address confidentiality is enabled' do
-        let(:address_confidentiality) { 'yes' }
+      context 'when confidentiality is enabled' do
+        let(:confidentiality_enabled?) { true }
+        let(:are_contact_details_private) { 'yes' }
         let(:applicant) {
           instance_double(Applicant,
             full_name: 'fullname',
@@ -126,7 +129,8 @@ module Summary
             voicemail_consent: 'yes',
             email_keep_private: 'yes',
             phone_keep_private: 'yes',
-            mobile_keep_private: 'yes'
+            mobile_keep_private: 'yes',
+            are_contact_details_private: are_contact_details_private
           )
         }
 
