@@ -2,11 +2,24 @@ RSpec.describe Presenters::Summary::JsonPresenter do
   subject(:subject) { described_class.new(c100_application) }
   let(:c100_application) { instance_double(C100Application, solicitor: solicitor,
     id: '17536fe9-53f1-4bc9-a839-54434f83202e',
-    children: [child],
+    children: children,
     applicants: [applicant],
     respondents: [respondent],
+    orders: orders,
+    consent_order: 'yes',
+    permission_sought: 'not required',
+    permission_details: 'test',
+    application_details: 'details',
+    urgent_hearing: 'no',
+    urgent_hearing_details:'urgency reason',
+    urgent_hearing_when: 'tomorrow',
+    without_notice: 'yes',
+    without_notice_details: 'why not',
+    urgent_hearing_short_notice: 'no'
     ) }
 
+  let(:children) { [child1] }
+  let(:orders) { [] }
   let(:solicitor) do
     instance_double(Solicitor, address_data: address,
     full_name: 'Johny lawyer',
@@ -62,7 +75,8 @@ RSpec.describe Presenters::Summary::JsonPresenter do
 
     it { expect(json_file[0][:id]).to eql '17536fe9-53f1-4bc9-a839-54434f83202e' }
 
-    let(:child) do
+
+    let(:child1) do
       instance_double(Child,
        first_name: "Joe",
        last_name: "Doe",
@@ -70,8 +84,10 @@ RSpec.describe Presenters::Summary::JsonPresenter do
        dob: Date.parse('30 Nov 1989'),
        special_guardianship_order: "no",
        parental_responsibility: "Petr and Anna",
+       child_order: child_order
        )
     end
+    let(:child_order) { instance_double(ChildOrder, orders: ['child_arrangements_home']) }
 
     context 'children data' do
       let(:children_json) { json_file[0][:children][0] }
@@ -185,6 +201,49 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       # it { expect(respondent_json[:doTheyHaveLegalRepresentation]).to eql nil }
     end
 
+    context 'type of application' do
+      let(:type_of_application_json) { json_file[0][:typeOfApplication] }
+      let(:address) {{}}
+      let(:children) { [child1, child2] }
+      let(:child2) do
+        instance_double(Child,
+         first_name: "Joe",
+         last_name: "Doe",
+         gender: "female",
+         dob: Date.parse('30 Nov 1989'),
+         special_guardianship_order: "no",
+         parental_responsibility: "Petr and Anna",
+         child_order: child_order2
+         )
+      end
+      let(:child_order2) { instance_double(ChildOrder, orders: ['prohibited_steps_moving']) }
+      let(:orders) { ['child_arrangements_home'] }
+
+
+      it { expect(type_of_application_json[:orderAppliedFor]).to eql 'Child Arrangements Order, Prohibited Steps Order' }
+      it { expect(type_of_application_json[:typeOfChildArrangementsOrder]).to eql 'Decide who they live with and when' }
+      # it { expect(type_of_application_json[:natureOfOrder]).to eql '' }
+      it { expect(type_of_application_json[:consentOrder]).to eql 'yes' }
+      it { expect(type_of_application_json[:applicationPermissionRequired]).to eql 'not required' }
+      it { expect(type_of_application_json[:applicationPermissionRequiredReason]).to eql 'test' }
+      it { expect(type_of_application_json[:applicationDetails]).to eql 'details' }
+    end
+
+    context 'hearing urgency' do
+      let(:hearing_urgency_json) { json_file[0][:hearingUrgency] }
+      let(:address) {{}}
+      let(:child_order2) { instance_double(ChildOrder, orders: ['prohibited_steps_moving']) }
+      let(:orders) { ['child_arrangements_home'] }
+
+      it { expect(hearing_urgency_json[:isCaseUrgent]).to eql 'no' }
+      it { expect(hearing_urgency_json[:setOutReasonsBelow]).to eql 'urgency reason' }
+      it { expect(hearing_urgency_json[:caseUrgencyTimeAndReason]).to eql 'tomorrow' }
+      # it { expect(hearing_urgency_json[:effortsMadeWithRespondents]).to eql 'yes' }
+      it { expect(hearing_urgency_json[:doYouNeedAWithoutNoticeHearing]).to eql 'yes' }
+      # it { expect(hearing_urgency_json[:areRespondentsAwareOfProceedings]).to eql 'test' }
+      it { expect(hearing_urgency_json[:reasonsForApplicationWithoutNotice]).to eql 'why not' }
+      it { expect(hearing_urgency_json[:doYouRequireAHearingWithReducedNotice]).to eql 'no' }
+    end
   end
 
 end

@@ -20,8 +20,8 @@ module Summary
         children: children,
         applicants: applicants,
         respondents: respondents,
-        typeOfApplication: {},
-        hearingUrgency: {},
+        typeOfApplication: type_of_application,
+        hearingUrgency: hearing_urgency,
         miam: {},
         allegationsOfHarm: {},
         otherPeopleInTheCase: {},
@@ -91,6 +91,17 @@ module Summary
       respondents_data
     end
 
+    def hearing_urgency
+      {isCaseUrgent: @c100_application.urgent_hearing,
+       setOutReasonsBelow: @c100_application.urgent_hearing_details,
+       caseUrgencyTimeAndReason: @c100_application.urgent_hearing_when,
+       # effortsMadeWithRespondents: nil,
+       doYouNeedAWithoutNoticeHearing: @c100_application.without_notice,
+       # areRespondentsAwareOfProceedings: "No",
+       reasonsForApplicationWithoutNotice: @c100_application.without_notice_details,
+       doYouRequireAHearingWithReducedNotice: @c100_application.urgent_hearing_short_notice}
+    end
+
     private
 
     def child_json(child)
@@ -151,6 +162,17 @@ module Summary
       }
     end
 
+    def type_of_application
+      child = @c100_application.children
+      {orderAppliedFor: order_type_answers(@c100_application.children),
+       typeOfChildArrangementsOrder: order_arrangements,
+       # natureOfOrder: "egb",
+       consentOrder: @c100_application.consent_order,
+       applicationPermissionRequired: @c100_application.permission_sought,
+       applicationPermissionRequiredReason: @c100_application.permission_details,
+       applicationDetails: @c100_application.application_details }
+    end
+
     def yes_no(value)
       return 'No' if value == false
       'Yes' if value == true
@@ -161,6 +183,29 @@ module Summary
       dob.to_s(:db) if dob
     end
 
+    def order_type_answers(children)
+      orders = []
+      children.each do |child|
+       orders << order_types(child).map{|order_value|
+          I18n.t(".dictionary.PETITION_ORDER_TYPES.#{order_value}")
+        }
+      end
+      orders.flatten.join(', ')
+    end
+
+    def order_arrangements
+      orders = []
+      @c100_application.orders.each do |order|
+        orders << I18n.t(".dictionary.ARRANGEMENT_ORDERS.#{order}")
+      end
+      orders.flatten.join(', ')
+    end
+
+    def order_types(child)
+      child.child_order&.orders.to_a.map do |o|
+        PetitionOrder.type_for(o)
+      end.uniq
+    end
 
   end
 end
