@@ -11,8 +11,8 @@ RSpec.describe C8ConfidentialityPresenter do
       c100_application: c100_application_one
       )
   }
-  let(:c100_application_one) { instance_double('C100Application', address_confidentiality: 'yes')}
-  let(:c100_application_two) { instance_double('C100Application', address_confidentiality: 'no')}
+  let(:c100_application_one) { instance_double('C100Application', confidentiality_enabled?: true)}
+  let(:c100_application_two) { instance_double('C100Application', confidentiality_enabled?: false)}
   
   let(:person_two) {
     instance_double(Applicant, full_address: 'real full address', residence_history: nil, 

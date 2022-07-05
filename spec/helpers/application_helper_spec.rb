@@ -222,23 +222,23 @@ RSpec.describe ApplicationHelper, type: :helper do
   end
 
   describe 'display_private_option?' do
-    let(:c100_application) { instance_double(C100Application, address_confidentiality: address_confidentiality)}
+    let(:c100_application) { instance_double(C100Application, confidentiality_enabled?: confidentiality_enabled?)}
     before {
       allow(helper).to receive(:current_c100_application).and_return c100_application
     }
 
-    context 'no' do
-      let(:address_confidentiality) { 'no' }
+    context 'false' do
+      let(:confidentiality_enabled?) { false }
       it { expect(helper.display_private_option?).to eq(false) }
     end
 
     context 'nil' do
-      let(:address_confidentiality) { nil }
+      let(:confidentiality_enabled?) { nil }
       it { expect(helper.display_private_option?).to eq(false) }
     end
 
-    context 'yes' do
-      let(:address_confidentiality) { 'yes' }
+    context 'true' do
+      let(:confidentiality_enabled?) { true }
       it { expect(helper.display_private_option?).to eq(true) }
     end
   end

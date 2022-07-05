@@ -173,10 +173,6 @@ en:
               blank: Enter a mediator registration number (URN)
             miam_certification_service_name:
               blank: Enter a family mediation service name
-        steps/safety_questions/address_confidentiality_form:
-          attributes:
-            address_confidentiality:
-              inclusion: Select yes if you want to keep your contact details private
         steps/safety_questions/risk_of_abduction_form:
           attributes:
             risk_of_abduction:

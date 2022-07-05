@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe Summary::PdfPresenter do
-  let(:c100_application) { C100Application.new(address_confidentiality: address_confidentiality, domestic_abuse: domestic_abuse) }
+  let(:c100_application) { C100Application.new(domestic_abuse: domestic_abuse) }
+  let!(:applicant) { Applicant.new(c100_application: c100_application,
+    are_contact_details_private: are_contact_details_private) }
   let(:generator) { double('Generator') }
 
-  let(:address_confidentiality) { 'no' }
+  let(:are_contact_details_private) { 'no' }
   let(:domestic_abuse) { 'no' }
 
   subject { described_class.new(c100_application, generator) }
@@ -43,7 +45,16 @@ describe Summary::PdfPresenter do
     end
 
     context 'when C8 is triggered' do
-      let(:address_confidentiality) { 'yes' }
+      let(:are_contact_details_private) { 'yes' }
+      before do
+        Applicant.create(c100_application: c100_application,
+          are_contact_details_private: are_contact_details_private)
+      end
+
+      after do
+        c100_application.applicants.destroy_all
+      end
+
 
       it 'generates the C100 form and the C8' do
         expect(generator).to receive(:generate).with(
@@ -64,7 +75,7 @@ describe Summary::PdfPresenter do
 
     context 'customisation of the bundle' do
       let(:domestic_abuse) { 'yes' }
-      let(:address_confidentiality) { 'yes' }
+      let(:are_contact_details_private) { 'yes' }
 
       it 'generates the C100 and C1A forms, but not the C8 form' do
         expect(subject).to receive(:generate_c100_form)
@@ -77,6 +88,12 @@ describe Summary::PdfPresenter do
       context 'blank pages' do
         before do
           expect(generator).to receive(:has_forms_data?).and_return(false)
+          Applicant.create(c100_application: c100_application,
+            are_contact_details_private: are_contact_details_private)
+        end
+
+        after do
+          c100_application.applicants.destroy_all
         end
 
         it 'does not add unnecessary blank pages when generating individual forms' do

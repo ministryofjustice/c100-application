@@ -66,7 +66,7 @@ module Steps
 
       def address_confidential?
         raise C100ApplicationNotFound unless c100_application
-        c100_application.address_confidentiality == 'yes'
+        c100_application.confidentiality_enabled?
       end
 
       def validate_email_value?(o)

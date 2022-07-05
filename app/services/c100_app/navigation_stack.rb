@@ -8,7 +8,6 @@ module C100App
     ].freeze
 
     FAST_FORWARD_STEPS = [
-      %r{^/steps/safety_questions/address_confidentiality$},
       %r{^/steps/abuse_concerns/details.*},
       %r{^/steps/abuse_concerns/contact$},
       %r{^/steps/petition/protection$},

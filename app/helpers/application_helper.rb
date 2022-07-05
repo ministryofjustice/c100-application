@@ -100,6 +100,6 @@ module ApplicationHelper
   end
 
   def display_private_option?
-    current_c100_application.address_confidentiality == 'yes'
+    current_c100_application.confidentiality_enabled? == true
   end
 end

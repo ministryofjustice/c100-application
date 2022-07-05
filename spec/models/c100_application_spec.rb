@@ -120,14 +120,22 @@ RSpec.describe C100Application, type: :model do
   end
 
   describe '#confidentiality_enabled?' do
-    context 'for `yes` values' do
-      let(:attributes) { {address_confidentiality: 'yes'} }
-      it { expect(subject.confidentiality_enabled?).to eq(true) }
+    context 'where an applicant is private, is true' do
+      it {
+        a = Applicant.create(c100_application: subject,
+          are_contact_details_private: 'yes')
+        expect(subject.confidentiality_enabled?).to eq(true)
+        a.destroy 
+      }
     end
 
-    context 'for `no` values' do
-      let(:attributes) { {address_confidentiality: 'no'} }
-      it { expect(subject.confidentiality_enabled?).to eq(false) }
+    context 'where applicants are not private, is false' do
+      it { 
+        a = Applicant.create(c100_application: subject,
+          are_contact_details_private: 'no')
+        expect(subject.confidentiality_enabled?).to eq(false)
+        a.destroy
+      }
     end
   end
 

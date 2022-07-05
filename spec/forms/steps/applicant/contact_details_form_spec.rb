@@ -16,10 +16,16 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
     phone_keep_private: phone_keep_private
   } }
 
-  let(:c100_application) { instance_double(C100Application, applicants: applicants_collection, address_confidentiality: address_confidentiality) }
+  let(:c100_application) { instance_double(
+    C100Application, applicants: applicants_collection,
+    confidentiality_enabled?: confidentiality_enabled?) }
   let(:applicants_collection) { double('applicants_collection') }
-  let(:applicant) { double('Applicant', id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe6', residence_keep_private: residence_keep_private) }
-  let(:address_confidentiality) { 'no' }
+  let(:applicant) { double('Applicant',
+    id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe6',
+    residence_keep_private: residence_keep_private,
+    are_contact_details_private: are_contact_details_private) }
+  let(:are_contact_details_private) { 'no' }
+  let(:confidentiality_enabled?) { false }
   let(:residence_keep_private) { :no }
 
 
@@ -47,8 +53,9 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
     end
 
-    context 'address_confidentiality set to yes' do
-      let(:address_confidentiality) { 'yes' }
+    context 'applicant.are_contact_details_private set to yes' do
+      let(:are_contact_details_private) { 'yes' }
+      let(:confidentiality_enabled?) { true }
       let(:email_keep_private) { 'yes' }
       let(:mobile_keep_private) { 'yes' }
 
@@ -130,8 +137,9 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
     end
 
-    context 'address_confidentiality set to No' do
-      let(:address_confidentiality) { 'no' }
+    context 'are_contact_details_private set to No' do
+      let(:are_contact_details_private) { 'no' }
+      let(:confidentiality_enabled?) { false }
 
       context 'mobile phone presence' do
         let(:mobile_phone) { nil }
@@ -251,7 +259,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
 
     describe 'privacy_check validation' do
       context 'not valid' do
-        let(:address_confidentiality) { 'yes' }
+        let(:confidentiality_enabled?) { true }
+        let(:are_contact_details_private) { 'yes' }
         let(:phone_keep_private) { GenericYesNo::NO }
         let(:email_keep_private) { GenericYesNo::NO }
         let(:mobile_keep_private) { GenericYesNo::NO }
@@ -260,7 +269,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
 
       context 'valid due to email privacy' do
-        let(:address_confidentiality) { 'yes' }
+        let(:confidentiality_enabled?) { true }
+        let(:are_contact_details_private) { 'yes' }
         let(:phone_keep_private) { GenericYesNo::NO }
         let(:email_keep_private) { GenericYesNo::YES }
         let(:mobile_keep_private) { GenericYesNo::NO }
@@ -269,7 +279,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
 
       context 'empty email' do
-        let(:address_confidentiality) { 'yes' }
+        let(:confidentiality_enabled?) { true }
+        let(:are_contact_details_private) { 'yes' }
         let(:email) { nil }
         let(:email_keep_private) { nil }
         let(:email_provided) { GenericYesNo::NO }
@@ -280,7 +291,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
 
       context 'empty mobile phone' do
-        let(:address_confidentiality) { 'yes' }
+        let(:confidentiality_enabled?) { true }
+        let(:are_contact_details_private) { 'yes' }
         let(:email_keep_private) { GenericYesNo::YES }
         let(:email_provided) { GenericYesNo::YES }
         let(:mobile_keep_private) { nil }
@@ -293,7 +305,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       end
 
       context 'valid due to residence_keep_private privacy' do
-        let(:address_confidentiality) { 'yes' }
+        let(:confidentiality_enabled?) { true }
+        let(:are_contact_details_private) { 'yes' }
         let(:phone_keep_private) { GenericYesNo::NO }
         let(:email_keep_private) { GenericYesNo::NO }
         let(:mobile_keep_private) { GenericYesNo::NO }
@@ -304,7 +317,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
     end
 
     context 'keep private validation' do
-      let(:address_confidentiality) { 'yes' }
+      let(:confidentiality_enabled?) { true }
+      let(:are_contact_details_private) { 'yes' }
       let(:phone_keep_private) { GenericYesNo::YES }
       let(:email_keep_private) { GenericYesNo::YES }
       let(:mobile_keep_private) { GenericYesNo::YES }

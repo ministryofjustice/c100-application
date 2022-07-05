@@ -26,7 +26,7 @@ class NotifySubmissionMailer < NotifyMailer
     set_personalisation(
       shared_personalisation.merge(
         urgent: @c100_application.urgent_hearing || 'no',
-        c8_included: @c100_application.address_confidentiality || 'no',
+        c8_included: @c100_application.confidentiality_enabled? ? 'yes' : 'no',
         link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
         link_to_pdf: prepare_upload(@documents[:bundle]),
       )
