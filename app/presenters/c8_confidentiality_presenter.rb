@@ -35,10 +35,10 @@ class C8ConfidentialityPresenter < SimpleDelegator
 
   def residence_private?
     # Temporary fix for old applications
-    try(:residence_keep_private) != 'no' && address_confidential?
+    try(:residence_keep_private) != 'no' && is_confidential?
   end
 
-  def address_confidential?
-    c100_application.address_confidentiality == 'yes'
+  def is_confidential?
+    c100_application.confidentiality_enabled?
   end
 end

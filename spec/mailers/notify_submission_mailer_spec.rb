@@ -8,13 +8,10 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       receipt_email: 'receipt@example.com',
       consent_order: 'yes',
       urgent_hearing: 'yes',
-      address_confidentiality: address_confidentiality,
       payment_type: 'foobar_payment',
       declaration_signee: 'John Doe',
     )
   }
-
-  let(:address_confidentiality) { 'no' }
 
   let(:court) {
     Court.new(
@@ -62,6 +59,9 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
     end
 
     it 'has the right personalisation' do
+      allow(c100_application).to receive(:confidentiality_enabled?).
+        and_return(false)
+
       expect(mail.govuk_notify_personalisation).to eq({
         service_name: 'Apply to court about child arrangements',
         applicant_name: 'John Doe',
@@ -73,11 +73,13 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       })
     end
 
-    context 'and applicant triggered the `address confidentiality`' do
-      let(:address_confidentiality) { 'yes' }
+    context 'and applicant has private contact details' do
       let(:c8_form) { StringIO.new('c8 form') }
 
       it 'has the right personalisation' do
+        allow(c100_application).to receive(:confidentiality_enabled?).
+          and_return(true)
+
         expect(
           mail.govuk_notify_personalisation
         ).to match(hash_including(

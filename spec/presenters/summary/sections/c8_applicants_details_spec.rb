@@ -6,7 +6,7 @@ module Summary
       instance_double(
         C100Application,
         applicants: [applicant],
-        address_confidentiality: 'yes'
+        confidentiality_enabled?: 'yes'
       )
     }
 

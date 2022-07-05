@@ -24,7 +24,7 @@ module Summary
           FreeTextAnswer.new(:person_mobile_phone, mobile_phone_answer(applicant)),
           Answer.new(:person_voicemail_consent, applicant.voicemail_consent),
           Partial.row_blank_space,
-          Answer.new(:c1a_address_confidentiality, c100.address_confidentiality, default: GenericYesNo::NO),
+          Answer.new(:c1a_address_confidentiality, applicant.are_contact_details_private, default: GenericYesNo::NO),
         ].select(&:show?)
       end
       # rubocop:enable Metrics/AbcSize

@@ -73,7 +73,7 @@ module Summary
       end
 
       def confidential?
-        c100.address_confidentiality == 'yes'
+        c100.confidentiality_enabled?
       end
     end
   end

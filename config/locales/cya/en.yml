@@ -323,10 +323,6 @@ en:
         misc_none: *none_selected
 
     ### Safety concerns ###
-    address_confidentiality:
-      question: Do you want to keep your contact details private from the other people named in the application (the respondents)?
-      answers:
-        <<: *YESNO
     risk_of_abduction:
       question: Are the children at risk of being abducted?
       answers:
