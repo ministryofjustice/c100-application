@@ -22,7 +22,7 @@ module Summary
         respondents: respondents,
         typeOfApplication: type_of_application,
         hearingUrgency: hearing_urgency,
-        miam: {},
+        miam: miam,
         allegationsOfHarm: {},
         otherPeopleInTheCase: {},
         otherProceedings: {},
@@ -102,7 +102,31 @@ module Summary
        doYouRequireAHearingWithReducedNotice: @c100_application.urgent_hearing_short_notice}
     end
 
+    def miam
+    { applicantAttendedMiam: @c100_application.miam_attended,
+      claimingExemptionMiam: @c100_application.miam_mediator_exemption,
+      # familyMediatorMiam: nil,
+      miamExemptionsChecklist: miam_list(:misc),
+      miamDomesticViolenceChecklist:  miam_list(:domestic),
+      miamUrgencyReasonChecklist: miam_list(:urgency),
+      miamPreviousAttendanceChecklist: miam_list(:adr),
+      # miamOtherGroundsChecklist: nil,
+      mediatorRegistrationNumber: @c100_application.miam_certification_number,
+      familyMediatorServiceName: @c100_application.miam_certification_service_name,
+      soleTraderName: @c100_application.miam_certification_sole_trader_name,
+      # mediatorRegistrationNumber1: nil,
+      # familyMediatorServiceName1: nil,
+      # soleTraderName1: nil
+    }
+    end
+
     private
+
+    def miam_list(key)
+      if @c100_application.miam_exemption
+        return @c100_application.miam_exemption.send(key).join(', ')
+      end
+    end
 
     def child_json(child)
       {

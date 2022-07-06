@@ -15,7 +15,14 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     urgent_hearing_when: 'tomorrow',
     without_notice: 'yes',
     without_notice_details: 'why not',
-    urgent_hearing_short_notice: 'no'
+    urgent_hearing_short_notice: 'no',
+    miam_attended: 'no',
+    miam_exemption: miam_exemption,
+    miam_certification_number: '132',
+    miam_mediator_exemption: 'yes',
+    miam_certification_sole_trader_name: 'jim',
+    miam_certification_service_name: 'miam service'
+
     ) }
 
   let(:children) { [child1] }
@@ -243,6 +250,32 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       # it { expect(hearing_urgency_json[:areRespondentsAwareOfProceedings]).to eql 'test' }
       it { expect(hearing_urgency_json[:reasonsForApplicationWithoutNotice]).to eql 'why not' }
       it { expect(hearing_urgency_json[:doYouRequireAHearingWithReducedNotice]).to eql 'no' }
+    end
+
+    let(:miam_exemption) { instance_double(MiamExemption,
+      domestic: ["police_arrested", "group_police"],
+      protection: ["protection_none"],
+      urgency: ["risk_applicant", "risk_unlawful_removal_retention"],
+      adr: ["existing_proceedings_attendance"],
+      misc: ["no_disabled_facilities", "no_respondent_address"]) }
+
+    context 'miam' do
+      let(:miam_json) { json_file[0][:miam] }
+      let(:address) {{}}
+
+
+      it { expect(miam_json[:applicantAttendedMiam]).to eql 'no' }
+      it { expect(miam_json[:claimingExemptionMiam]).to eql 'yes' }
+      # it { expect(miam_json[:familyMediatorMiam]).to eql 'no' }
+      it { expect(miam_json[:miamExemptionsChecklist]).to eql "no_disabled_facilities, no_respondent_address" }
+      it { expect(miam_json[:miamDomesticViolenceChecklist]).to eql "police_arrested, group_police" }
+      it { expect(miam_json[:miamUrgencyReasonChecklist]).to eql "risk_applicant, risk_unlawful_removal_retention" }
+      it { expect(miam_json[:miamPreviousAttendanceChecklist]).to eql "existing_proceedings_attendance" }
+      # it { expect(miam_json[:miamOtherGroundsChecklist]).to eql nil }
+      it { expect(miam_json[:mediatorRegistrationNumber]).to eql '132' }
+      it { expect(miam_json[:familyMediatorServiceName]).to eql 'miam service' }
+      it { expect(miam_json[:soleTraderName]).to eql 'jim' }
+
     end
   end
 
