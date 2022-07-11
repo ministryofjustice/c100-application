@@ -28,7 +28,9 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     abuse_concerns: abuse_concerns,
     court_order: court_order,
     concerns_contact_type: 'supervised',
-    concerns_contact_other: 'no'
+    concerns_contact_other: 'no',
+    children_previous_proceedings: 'yes',
+    court_proceeding: court_proceeding
 
     ) }
   before {
@@ -432,8 +434,37 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(allegation_of_harm_json[:agreeChildUnsupervisedTime]).to eql 'No' }
       it { expect(allegation_of_harm_json[:agreeChildSupervisedTime]).to eql 'Yes' }
       it { expect(allegation_of_harm_json[:agreeChildOtherContact]).to eql 'no' }
+    end
 
+    let(:court_proceeding) {
+      instance_double(CourtProceeding, attributes: existing_processeding_hash)
+    }
 
+    let(:existing_processeding) {
+      { "children_ames"=>"little jim",
+         "court_name"=>"court 1",
+         "case_number"=>"ABC456",
+         "proceedings_date"=>"2 2020",
+         "cafcass_details"=>"BGR586",
+         "order_types"=>"test",
+         "previous_details"=>"not sure"}
+    }
+
+    let(:existing_processeding_hash) {
+      { "id" => 123,
+        "c100_application_id" => 345,
+        "children_ames"=>"little jim",
+         "court_name"=>"court 1",
+         "case_number"=>"ABC456",
+         "proceedings_date"=>"2 2020",
+         "cafcass_details"=>"BGR586",
+         "order_types"=>"test",
+         "previous_details"=>"not sure"}
+    }
+    context 'otherProceedings' do
+      let(:other_proceeding_json) { json_file[0][:otherProceedings] }
+      it { expect(other_proceeding_json[:previousOrOngoingProceedingsForChildren]).to eql 'yes' }
+      it { expect(other_proceeding_json[:existingProceedings]).to eq existing_processeding }
 
     end
   end

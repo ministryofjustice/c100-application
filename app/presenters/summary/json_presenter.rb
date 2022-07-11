@@ -25,7 +25,7 @@ module Summary
         miam: miam,
         allegationsOfHarm: allegation_of_harm,
         otherPeopleInTheCase: {},
-        otherProceedings: {},
+        otherProceedings: other_proceedings,
         attendingTheHearing: {},
         internationalElement: {},
         litigationCapacity: {},
@@ -185,6 +185,20 @@ module Summary
       # behaviours: []
 
     }
+    end
+
+    def other_proceedings
+      {
+        previousOrOngoingProceedingsForChildren: @c100_application.children_previous_proceedings,
+        existingProceedings: existing_proceeding
+      }
+    end
+
+    def existing_proceeding
+      return nil if @c100_application.court_proceeding.blank?
+      @c100_application.court_proceeding.attributes.select {
+        |key, value| key != 'id' && key != 'c100_application_id'
+      }
     end
 
     private
