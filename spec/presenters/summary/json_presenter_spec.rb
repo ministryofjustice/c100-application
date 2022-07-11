@@ -21,10 +21,23 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     miam_certification_number: '132',
     miam_mediator_exemption: 'yes',
     miam_certification_sole_trader_name: 'jim',
-    miam_certification_service_name: 'miam service'
+    miam_certification_service_name: 'miam service',
+    abduction_detail: abduction,
+    risk_of_abduction: 'yes',
+    substance_abuse: 'yes',
+    abuse_concerns: abuse_concerns,
+    court_order: court_order,
+    concerns_contact_type: 'supervised',
+    concerns_contact_other: 'no'
 
     ) }
-
+  before {
+    allow(abuse_concerns).to receive(:find_by).with({:kind=>"sexual"}).and_return sexual_abuse
+    allow(abuse_concerns).to receive(:find_by).with({:kind=>"physical"}).and_return physical_abuse
+    allow(abuse_concerns).to receive(:find_by).with({:kind=>"financial"}).and_return financial_abuse
+    allow(abuse_concerns).to receive(:find_by).with({:kind=>"psychological"}).and_return psychological_abuse
+    allow(abuse_concerns).to receive(:find_by).with({:kind=>"emotional"}).and_return emotional_abuse
+  }
   let(:children) { [child1] }
   let(:orders) { [] }
   let(:solicitor) do
@@ -275,6 +288,152 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(miam_json[:mediatorRegistrationNumber]).to eql '132' }
       it { expect(miam_json[:familyMediatorServiceName]).to eql 'miam service' }
       it { expect(miam_json[:soleTraderName]).to eql 'jim' }
+
+    end
+
+    let(:abduction) { instance_double(AbductionDetail,
+       children_have_passport: "yes",
+       passport_office_notified: "yes",
+       children_multiple_passports: "yes",
+       passport_possession_other_details: 'other details',
+       previous_attempt: "yes",
+       previous_attempt_details: "tried to get them",
+       previous_attempt_agency_involved: "yes",
+       previous_attempt_agency_details: "told police before",
+       risk_details: "something fishy",
+       current_location: "by the sea",
+       passport_possession: ["mother", "father"] )
+    }
+
+    let(:abuse_concerns) {
+      class_double(AbuseConcern)
+    }
+
+
+    let(:sexual_abuse) { instance_double(AbuseConcern,
+      subject: "children", kind: "sexual", answer: "yes sexual")
+    }
+    let(:physical_abuse) { instance_double(AbuseConcern,
+      subject: "children", kind: "physical", answer: "yes physical")
+    }
+    let(:financial_abuse) { instance_double(AbuseConcern,
+      subject: "children", kind: "financial", answer: "yes financial")
+    }
+    let(:psychological_abuse) { instance_double(AbuseConcern,
+      subject: "children", kind: "psychological", answer: "yes psychological")
+    }
+    let(:emotional_abuse) { instance_double(AbuseConcern,
+      subject: "children", kind: "emotional", answer: "yes emotional")
+    }
+
+
+    let(:court_order) {
+      instance_double(CourtOrder,
+        non_molestation: "yes",
+        non_molestation_issue_date: 3.days.ago.to_s(:date),
+        non_molestation_length: "week",
+        non_molestation_is_current: "yes",
+        non_molestation_court_name: "bristol",
+        occupation: "yes",
+        occupation_issue_date: 2.days.ago.to_s(:date),
+        occupation_length: "",
+        occupation_is_current: "current",
+        occupation_court_name: "court oc",
+        forced_marriage_protection: "nope",
+        forced_marriage_protection_issue_date: 4.days.ago.to_s(:date),
+        forced_marriage_protection_length: "",
+        forced_marriage_protection_is_current: "forced current",
+        forced_marriage_protection_court_name: "court f",
+        restraining: "no",
+        restraining_issue_date: 4.days.ago.to_s(:date),
+        restraining_length: "",
+        restraining_is_current: "yep",
+        restraining_court_name: "court rest",
+        injunctive: "yes in",
+        injunctive_issue_date: 5.days.ago.to_s(:date),
+        injunctive_length: "",
+        injunctive_is_current: "still",
+        injunctive_court_name: "court inj",
+        undertaking: "no under",
+        undertaking_issue_date: 1.days.ago.to_s(:date),
+        undertaking_length: "",
+        undertaking_is_current: "under still",
+        undertaking_court_name: "court under",
+        c100_application_id: "33a2e4a6-7c67-4fb2-b65a-6bbe651ebbc4",
+        non_molestation_case_number: "[FILTERED]",
+        occupation_case_number: "[FILTERED]",
+        forced_marriage_protection_case_number: "[FILTERED]",
+        restraining_case_number: "[FILTERED]",
+        injunctive_case_number: "[FILTERED]",
+        undertaking_case_number: "[FILTERED]"
+      )
+    }
+    context 'allegation_of_harm' do
+      let(:allegation_of_harm_json) { json_file[0][:allegationsOfHarm] }
+      let(:address) {{}}
+
+
+      it { expect(allegation_of_harm_json[:allegationsOfHarmChildAbductionYesNo]).to eql 'yes' }
+      it { expect(allegation_of_harm_json[:abductionChildHasPassport]).to eql 'yes' }
+      it { expect(allegation_of_harm_json[:abductionPassportOfficeNotified]).to eql 'yes' }
+      it { expect(allegation_of_harm_json[:abductionChildPassportPosessionOtherDetail]).to eql 'other details' }
+      it { expect(allegation_of_harm_json[:previousAbductionThreats]).to eql 'yes' }
+      it { expect(allegation_of_harm_json[:previousAbductionThreatsDetails]).to eql 'tried to get them' }
+      it { expect(allegation_of_harm_json[:abductionPreviousPoliceInvolvement]).to eql 'yes' }
+      it { expect(allegation_of_harm_json[:abductionPreviousPoliceInvolvementDetails]).to eql 'told police before' }
+      it { expect(allegation_of_harm_json[:childAbductionReasons]).to eql 'something fishy' }
+      it { expect(allegation_of_harm_json[:childrenLocationNow]).to eql 'by the sea' }
+      it { expect(allegation_of_harm_json[:abductionChildPassportPosession]).to eq "mother, father" }
+
+      it { expect(allegation_of_harm_json[:allegationsOfHarmSubstanceAbuseYesNo]).to eq "yes" }
+      it { expect(allegation_of_harm_json[:sexualAbuseVictim]).to eq "yes sexual" }
+      it { expect(allegation_of_harm_json[:physicalAbuseVictim]).to eq "yes physical" }
+      it { expect(allegation_of_harm_json[:financialAbuseVictim]).to eq "yes financial" }
+      it { expect(allegation_of_harm_json[:psychologicalAbuseVictim]).to eq "yes psychological" }
+      it { expect(allegation_of_harm_json[:emotionalAbuseVictim]).to eq "yes emotional" }
+
+      it { expect(allegation_of_harm_json[:ordersNonMolestation]).to eql 'yes' }
+      it { expect(allegation_of_harm_json[:ordersNonMolestationDateIssued]).to eql 3.days.ago.to_s(:date) }
+      it { expect(allegation_of_harm_json[:ordersNonMolestationEndDate]).to eql nil }
+      it { expect(allegation_of_harm_json[:ordersNonMolestationCurrent]).to eql 'yes' }
+      it { expect(allegation_of_harm_json[:ordersNonMolestationCourtName]).to eql 'bristol' }
+
+      it { expect(allegation_of_harm_json[:ordersOccupationDateIssued]).to eql 2.days.ago.to_s(:date) }
+      it { expect(allegation_of_harm_json[:ordersOccupationEndDate]).to eql nil }
+      it { expect(allegation_of_harm_json[:ordersOccupation]).to eql 'yes' }
+      it { expect(allegation_of_harm_json[:ordersOccupationCurrent]).to eql 'current' }
+      it { expect(allegation_of_harm_json[:ordersOccupationCourtName]).to eql 'court oc' }
+
+      it { expect(allegation_of_harm_json[:ordersForcedMarriageProtectionDateIssued]).to eql 4.days.ago.to_s(:date) }
+      it { expect(allegation_of_harm_json[:ordersForcedMarriageProtectionEndDate]).to eql nil }
+      it { expect(allegation_of_harm_json[:ordersForcedMarriageProtection]).to eql 'nope' }
+      it { expect(allegation_of_harm_json[:ordersForcedMarriageProtectionCurrent]).to eql 'forced current' }
+      it { expect(allegation_of_harm_json[:ordersForcedMarriageProtectionCourtName]).to eql 'court f' }
+
+      it { expect(allegation_of_harm_json[:ordersRestrainingDateIssued]).to eql 4.days.ago.to_s(:date) }
+      it { expect(allegation_of_harm_json[:ordersRestrainingEndDate]).to eql nil }
+      it { expect(allegation_of_harm_json[:ordersRestrainingCourtName]).to eql 'court rest' }
+      it { expect(allegation_of_harm_json[:ordersRestrainingCurrent]).to eql 'yep' }
+      it { expect(allegation_of_harm_json[:ordersRestraining]).to eql 'no' }
+
+      it { expect(allegation_of_harm_json[:ordersOtherInjunctiveDateIssued]).to eql 5.days.ago.to_s(:date) }
+      it { expect(allegation_of_harm_json[:ordersOtherInjunctiveEndDate]).to eql nil }
+      it { expect(allegation_of_harm_json[:ordersOtherInjunctiveCourtName]).to eql 'court inj' }
+      it { expect(allegation_of_harm_json[:ordersOtherInjunctiveCurrent]).to eql 'still' }
+      it { expect(allegation_of_harm_json[:ordersOtherInjunctive]).to eql 'yes in' }
+
+      it { expect(allegation_of_harm_json[:ordersUndertakingInPlaceDateIssued]).to eql 1.days.ago.to_s(:date) }
+      it { expect(allegation_of_harm_json[:ordersUndertakingInPlaceEndDate]).to eql nil }
+      it { expect(allegation_of_harm_json[:ordersUndertakingInPlaceCourtName]).to eql 'court under' }
+      it { expect(allegation_of_harm_json[:ordersUndertakingInPlaceCurrent]).to eql 'under still' }
+      it { expect(allegation_of_harm_json[:ordersUndertakingInPlace]).to eql 'no under' }
+      # it { expect(allegation_of_harm_json[:allegationsOfHarmOtherConcerns]).to eql nil }
+
+      it { expect(allegation_of_harm_json[:agreeChildUnsupervisedTime]).to eql 'No' }
+      it { expect(allegation_of_harm_json[:agreeChildSupervisedTime]).to eql 'Yes' }
+      it { expect(allegation_of_harm_json[:agreeChildOtherContact]).to eql 'no' }
+
+
 
     end
   end
