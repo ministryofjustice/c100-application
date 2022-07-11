@@ -13,6 +13,7 @@ RSpec.describe ApplicationController do
 
   before do
     allow(Rails.application).to receive_message_chain(:config, :consider_all_requests_local).and_return(false)
+    allow(Rails.application).to receive_message_chain(:config, :maintenance_enabled).and_return(nil)
     allow(Rails.configuration).to receive_message_chain(:x, :session, :expires_in_minutes).and_return(1)
   end
 
