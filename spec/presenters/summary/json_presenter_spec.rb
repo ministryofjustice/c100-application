@@ -30,7 +30,8 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     concerns_contact_type: 'supervised',
     concerns_contact_other: 'no',
     children_previous_proceedings: 'yes',
-    court_proceeding: court_proceeding
+    court_proceeding: court_proceeding,
+    court_arrangement: court_arrangement
 
     ) }
   before {
@@ -465,6 +466,39 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       let(:other_proceeding_json) { json_file[0][:otherProceedings] }
       it { expect(other_proceeding_json[:previousOrOngoingProceedingsForChildren]).to eql 'yes' }
       it { expect(other_proceeding_json[:existingProceedings]).to eq existing_processeding }
+
+    end
+
+    let(:court_arrangement) {
+      instance_double(CourtArrangement,
+        intermediary_help: 'no',
+        language_options: [LanguageHelp::WELSH_LANGUAGE.to_s,
+          LanguageHelp::LANGUAGE_INTERPRETER.to_s,
+          LanguageHelp::SIGN_LANGUAGE_INTERPRETER.to_s],
+        welsh_language_details: 'welsh details',
+        language_interpreter_details: 'interpreter details',
+        special_arrangements: ['separate_waiting_rooms'],
+        special_arrangements_details: 'test',
+        special_assistance: ['hearing_loop', 'braille_documents'],
+        special_assistance_details: 'test assistance',
+        intermediary_help: 'no'
+        )
+    }
+
+
+    context 'attending_hearing' do
+      let(:attending_hearing_json) { json_file[0][:attendingTheHearing] }
+
+       it { expect(attending_hearing_json[:isWelshNeeded]).to eql 'Yes' }
+       it { expect(attending_hearing_json[:welshNeeds]).to eql ['welsh details'] }
+       it { expect(attending_hearing_json[:isInterpreterNeeded]).to eql 'Yes'}
+       it { expect(attending_hearing_json[:interpreterNeeds]).to eql 'welsh_language, language_interpreter, sign_language_interpreter, interpreter details' }
+       it { expect(attending_hearing_json[:isDisabilityPresent]).to eql 'Yes' }
+       it { expect(attending_hearing_json[:adjustmentsRequired]).to eql 'hearing_loop, braille_documents, test assistance' }
+       it { expect(attending_hearing_json[:isSpecialArrangementsRequired]).to eql 'Yes' }
+       it { expect(attending_hearing_json[:specialArrangementsRequired]).to eql "separate_waiting_rooms, test" }
+       it { expect(attending_hearing_json[:isIntermediaryNeeded]).to eql 'no' }
+
 
     end
   end
