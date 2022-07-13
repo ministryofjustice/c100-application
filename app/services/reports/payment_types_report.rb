@@ -9,11 +9,11 @@ module Reports
       def run
         return unless ENV.key?('PAYMENT_TYPE_REPORT_EMAIL')
 
-        log "Sending payment types report"
+        Rails.logger.info "Sending payment types report"
 
         begin
           retries ||= 0
-          log "try ##{retries}"
+          Rails.logger.info "try ##{retries}"
 
           ReportsMailer.payment_types_report(
             report_csv,
@@ -41,12 +41,6 @@ module Reports
           report_data.each { |row| csv << row }
         end
       end
-    end
-
-    def log(message)
-      # @slack ||= Slack::Incoming::Webhooks.new ENV.fetch('SLACK_WEBHOOK_URL')
-      # @slack.post "#{ENV.fetch('SLACK_WEBHOOK_ENV')}: #{message}"
-      Rails.logger.info message
     end
   end
 end

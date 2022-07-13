@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # :nocov:
   def show_maintenance_page(config = Rails.application.config)
     if config.maintenance_enabled
       Rails.logger.level = :debug
@@ -44,4 +45,5 @@ class ApplicationController < ActionController::Base
 
     render 'static_pages/maintenance', status: :service_unavailable
   end
+  # :nocov:
 end
