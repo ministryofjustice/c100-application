@@ -46,5 +46,4 @@ class ApplicationController < ActionController::Base
     render 'static_pages/maintenance', status: :service_unavailable
   end
   # :nocov:
-  
 end
