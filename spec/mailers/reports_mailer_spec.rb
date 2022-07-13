@@ -8,9 +8,6 @@ RSpec.describe ReportsMailer, type: :mailer do
       failed_emails_report: 'failed_emails_report_template_id',
       payment_types_report: 'payment_types_report_template_id',
     )
-    allow(Slack::Incoming::Webhooks).to receive(:new).and_return(
-      double(post: nil)
-    )
   end
 
   describe '#failed_emails_report' do

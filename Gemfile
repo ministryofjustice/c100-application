@@ -33,8 +33,6 @@ gem 'combine_pdf', '~> 1.0'
 gem 'wicked_pdf', '~> 2.1.0'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
-gem 'slack-incoming-webhooks'
-
 group :production do
   gem 'lograge'
   gem 'logstash-event'

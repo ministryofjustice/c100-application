@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   include SessionHandling
   include ErrorHandling
 
+  before_action :show_maintenance_page
+
   # This is required to get request attributes in to the production logs.
   # See the various lograge configurations in `production.rb`.
   def append_info_to_payload(payload)
@@ -32,4 +34,16 @@ class ApplicationController < ActionController::Base
       session[:c100_application_id] = c100_application.id
     end
   end
+
+  # :nocov:
+  def show_maintenance_page(config = Rails.application.config)
+    if config.maintenance_enabled
+      Rails.logger.level = :debug
+      Rails.logger.debug("Remote IP: #{request.remote_ip}")
+    end
+    return if !config.maintenance_enabled || config.maintenance_allowed_ips.include?(request.remote_ip)
+
+    render 'static_pages/maintenance', status: :service_unavailable
+  end
+  # :nocov:
 end
