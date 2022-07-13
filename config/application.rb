@@ -88,5 +88,8 @@ module Application
     config.x.court_fee.description = 'Court fee for a child arrangements application (C100)'
     config.x.analytics_tracking_id = ENV['GA_TRACKING_ID']
     config.x.cookie_expiry = 1.year
+
+    config.maintenance_enabled = ENV.fetch('MAINTENANCE_ENABLED', 'false').downcase == 'true'
+    config.maintenance_allowed_ips = ENV.fetch('MAINTENANCE_ALLOWED_IPS', '').split(',').map(&:strip)
   end
 end
