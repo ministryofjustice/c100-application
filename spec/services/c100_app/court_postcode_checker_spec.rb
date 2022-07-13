@@ -29,15 +29,15 @@ describe C100App::CourtPostcodeChecker do
         before do
           expect_any_instance_of(C100App::CourtfinderAPI).to receive(:court_lookup).once.with(
             'dummy-court-slug'
-          ).and_return('choosen court')
+          ).and_return(candidate_court)
         end
 
-        let(:candidate_court) { {"slug" => "dummy-court-slug"} }
+        let(:candidate_court) { {"slug" => "dummy-court-slug", 'open' => true} }
         let(:choosen_court) { 'choosen court' }
         let(:court) { instance_double(Court) }
 
         it 'returns a Court instance' do
-          expect(Court).to receive(:create_or_refresh).with(choosen_court).and_return(court)
+          expect(Court).to receive(:create_or_refresh).with(candidate_court).and_return(court)
           expect(subject.send(:court_for, 'mypostcode')).to eq(court)
         end
       end
@@ -47,6 +47,23 @@ describe C100App::CourtPostcodeChecker do
           expect_any_instance_of(C100App::CourtfinderAPI).not_to receive(:court_lookup)
         end
         let(:candidate_court) { nil }
+
+        it 'returns nil' do
+          expect(Court).not_to receive(:create_or_refresh)
+          expect(subject.send(:court_for, 'mypostcode')).to be_nil
+        end
+      end
+
+      context 'and a candidate court was found but it is closed' do
+        before do
+          expect_any_instance_of(C100App::CourtfinderAPI).to receive(:court_lookup).once.with(
+            'dummy-court-slug'
+          ).and_return(candidate_court)
+        end
+
+        let(:candidate_court) { {"slug" => "dummy-court-slug", "open" => false} }
+        let(:choosen_court) { 'choosen court' }
+        let(:court) { instance_double(Court) }
 
         it 'returns nil' do
           expect(Court).not_to receive(:create_or_refresh)
