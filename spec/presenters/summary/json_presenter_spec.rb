@@ -37,7 +37,11 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     international_jurisdiction: 'yes jurisdiction',
     international_jurisdiction_details: 'jurisdiction',
     international_request: 'yes request',
-    international_request_details: 'request'
+    international_request_details: 'request',
+    reduced_litigation_capacity: 'yes',
+    participation_capacity_details: 'capacity',
+    participation_other_factors_details: 'factors',
+    participation_referral_or_assessment_details: 'referral'
     ) }
 
 
@@ -515,7 +519,20 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(international_element_json[:requestToForeignAuthorityGiveReason]).to eql 'request' }
       it { expect(international_element_json[:jurisdictionIssue]).to eql 'yes jurisdiction' }
       it { expect(international_element_json[:jurisdictionIssueGiveReason]).to eql 'jurisdiction' }
+    end
 
+    context 'litigation_capacity' do
+      let(:litigation_capacity_json) { json_file[0][:litigationCapacity] }
+
+
+      it { expect(litigation_capacity_json[:litigationCapacityFactors]).to eql 'yes' }
+      it { expect(litigation_capacity_json[:litigationCapacityReferrals]).to eql 'capacity' }
+      it { expect(litigation_capacity_json[:litigationCapacityOtherFactors]).to eql 'factors' }
+      it { expect(litigation_capacity_json[:litigationCapacityOtherFactorsDetails]).to eql 'referral' }
+    end
+
+    context 'fee' do
+      it { expect(json_file[0][:feeAmount]).to eql '£232.00' }
     end
   end
 

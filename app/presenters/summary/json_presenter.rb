@@ -28,11 +28,11 @@ module Summary
         otherProceedings: other_proceedings,
         attendingTheHearing: attending_hearing,
         internationalElement: international_element,
-        litigationCapacity: {},
-        feeAmount: {},
-        familyManNumber: {},
-        others: {},
-        events: {}
+        litigationCapacity: litigation_capacity,
+        feeAmount: fee_amount,
+        # familyManNumber: {},
+        # others: {},
+        # events: {}
       }]
     end
 
@@ -218,6 +218,14 @@ module Summary
     }
     end
 
+    def litigation_capacity
+      {
+        litigationCapacityFactors: @c100_application.reduced_litigation_capacity,
+        litigationCapacityReferrals: @c100_application.participation_capacity_details,
+        litigationCapacityOtherFactors: @c100_application.participation_other_factors_details,
+        litigationCapacityOtherFactorsDetails: @c100_application.participation_referral_or_assessment_details
+      }
+    end
 
     def intermediary_help
       arrangement = @c100_application.court_arrangement
@@ -422,6 +430,11 @@ module Summary
       child.child_order&.orders.to_a.map do |o|
         PetitionOrder.type_for(o)
       end.uniq
+    end
+
+    def fee_amount
+      amount = sprintf("%.2f", (Rails.configuration.x.court_fee.amount_in_pence / 100))
+      "£#{amount}"
     end
 
   end
