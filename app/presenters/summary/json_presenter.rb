@@ -27,7 +27,7 @@ module Summary
         otherPeopleInTheCase: {},
         otherProceedings: other_proceedings,
         attendingTheHearing: attending_hearing,
-        internationalElement: {},
+        internationalElement: international_element,
         litigationCapacity: {},
         feeAmount: {},
         familyManNumber: {},
@@ -207,7 +207,16 @@ module Summary
      }
     end
 
-    private
+    def international_element
+    {
+      habitualResidentInOtherState: @c100_application.international_resident,
+      habitualResidentInOtherStateGiveReason: @c100_application.international_resident_details,
+      jurisdictionIssueGiveReason: @c100_application.international_jurisdiction_details,
+      jurisdictionIssue: @c100_application.international_jurisdiction,
+      requestToForeignAuthority: @c100_application.international_request,
+      requestToForeignAuthorityGiveReason: @c100_application.international_request_details
+    }
+    end
 
 
     def intermediary_help

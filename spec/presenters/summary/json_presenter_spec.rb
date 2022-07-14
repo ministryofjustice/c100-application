@@ -31,9 +31,16 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     concerns_contact_other: 'no',
     children_previous_proceedings: 'yes',
     court_proceeding: court_proceeding,
-    court_arrangement: court_arrangement
-
+    court_arrangement: court_arrangement,
+    international_resident: 'yes resident',
+    international_resident_details: 'resident',
+    international_jurisdiction: 'yes jurisdiction',
+    international_jurisdiction_details: 'jurisdiction',
+    international_request: 'yes request',
+    international_request_details: 'request'
     ) }
+
+
   before {
     allow(abuse_concerns).to receive(:find_by).with({:kind=>"sexual"}).and_return sexual_abuse
     allow(abuse_concerns).to receive(:find_by).with({:kind=>"physical"}).and_return physical_abuse
@@ -485,20 +492,29 @@ RSpec.describe Presenters::Summary::JsonPresenter do
         )
     }
 
-
     context 'attending_hearing' do
       let(:attending_hearing_json) { json_file[0][:attendingTheHearing] }
 
-       it { expect(attending_hearing_json[:isWelshNeeded]).to eql 'Yes' }
-       it { expect(attending_hearing_json[:welshNeeds]).to eql ['welsh details'] }
-       it { expect(attending_hearing_json[:isInterpreterNeeded]).to eql 'Yes'}
-       it { expect(attending_hearing_json[:interpreterNeeds]).to eql 'welsh_language, language_interpreter, sign_language_interpreter, interpreter details' }
-       it { expect(attending_hearing_json[:isDisabilityPresent]).to eql 'Yes' }
-       it { expect(attending_hearing_json[:adjustmentsRequired]).to eql 'hearing_loop, braille_documents, test assistance' }
-       it { expect(attending_hearing_json[:isSpecialArrangementsRequired]).to eql 'Yes' }
-       it { expect(attending_hearing_json[:specialArrangementsRequired]).to eql "separate_waiting_rooms, test" }
-       it { expect(attending_hearing_json[:isIntermediaryNeeded]).to eql 'no' }
+      it { expect(attending_hearing_json[:isWelshNeeded]).to eql 'Yes' }
+      it { expect(attending_hearing_json[:welshNeeds]).to eql ['welsh details'] }
+      it { expect(attending_hearing_json[:isInterpreterNeeded]).to eql 'Yes'}
+      it { expect(attending_hearing_json[:interpreterNeeds]).to eql 'welsh_language, language_interpreter, sign_language_interpreter, interpreter details' }
+      it { expect(attending_hearing_json[:isDisabilityPresent]).to eql 'Yes' }
+      it { expect(attending_hearing_json[:adjustmentsRequired]).to eql 'hearing_loop, braille_documents, test assistance' }
+      it { expect(attending_hearing_json[:isSpecialArrangementsRequired]).to eql 'Yes' }
+      it { expect(attending_hearing_json[:specialArrangementsRequired]).to eql "separate_waiting_rooms, test" }
+      it { expect(attending_hearing_json[:isIntermediaryNeeded]).to eql 'no' }
+    end
 
+    context 'international_element' do
+      let(:international_element_json) { json_file[0][:internationalElement] }
+
+      it { expect(international_element_json[:habitualResidentInOtherState]).to eql 'yes resident' }
+      it { expect(international_element_json[:habitualResidentInOtherStateGiveReason]).to eql 'resident' }
+      it { expect(international_element_json[:requestToForeignAuthority]).to eql 'yes request' }
+      it { expect(international_element_json[:requestToForeignAuthorityGiveReason]).to eql 'request' }
+      it { expect(international_element_json[:jurisdictionIssue]).to eql 'yes jurisdiction' }
+      it { expect(international_element_json[:jurisdictionIssueGiveReason]).to eql 'jurisdiction' }
 
     end
   end
