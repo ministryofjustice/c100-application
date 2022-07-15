@@ -22,23 +22,25 @@ module Summary
         birthplace: nil,
         address_unknown: address_unknown,
         residence_requirement_met: nil,
-        residence_keep_private: nil,
         residence_history: nil,
         home_phone: nil,
         mobile_phone: nil,
         email: nil,
-        email_keep_private: nil,
-        phone_keep_private: nil,
-        mobile_keep_private: nil,
         relationships: [relationship],
         privacy_known: nil,
         are_contact_details_private: nil
       )
     }
 
+    let(:contact_details_private) { [] }
+
     before do
       allow(subject).to receive(:contact_details_path).and_return(false)
       allow(other_party).to receive(:full_address).and_return('full address')
+      allow(other_party).to receive(:email_private?).and_return(contact_details_private.include?('email'))
+      allow(other_party).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
+      allow(other_party).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
     subject { described_class.new(c100_application) }

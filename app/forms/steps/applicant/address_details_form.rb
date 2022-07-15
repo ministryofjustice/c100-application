@@ -3,12 +3,10 @@ module Steps
     class AddressDetailsForm < AddressBaseForm
       attribute :residence_requirement_met, YesNo
       attribute :residence_history, String
-      attribute :residence_keep_private, YesNo
 
       validates_presence_of :country
 
       validates_inclusion_of :residence_requirement_met, in: GenericYesNo.values
-      validates_inclusion_of :residence_keep_private, in: GenericYesNo.values, if: -> { address_confidential? }
       validates_presence_of :residence_history, if: -> { residence_requirement_met&.no? }
 
       private
@@ -20,15 +18,9 @@ module Steps
         applicant.update(
           address_values.merge(
             residence_requirement_met: residence_requirement_met,
-            residence_history: residence_history,
-            residence_keep_private: residence_keep_private
+            residence_history: residence_history
           )
         )
-      end
-
-      def address_confidential?
-        raise C100ApplicationNotFound unless c100_application
-        c100_application.confidentiality_enabled?
       end
     end
   end

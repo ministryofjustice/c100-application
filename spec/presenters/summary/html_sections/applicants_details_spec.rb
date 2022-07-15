@@ -21,7 +21,6 @@ module Summary
         birthplace: 'birthplace',
         address_unknown: false, # for applicants this can only be `false`
         residence_requirement_met: 'yes',
-        residence_keep_private: 'yes',
         residence_history: 'history',
         home_phone: 'home_phone',
         mobile_provided: mobile_provided,
@@ -30,9 +29,6 @@ module Summary
         email_provided: 'yes',
         email: 'email',
         voicemail_consent: 'yes',
-        email_keep_private: 'yes',
-        phone_keep_private: 'yes',
-        mobile_keep_private: 'yes',
         relationships: [relationship],
         privacy_known: 'yes',
         are_contact_details_private: are_contact_details_private,
@@ -44,11 +40,15 @@ module Summary
     let(:mobile_provided) { 'yes' }
     let(:mobile_not_provided_reason) { nil }
     let(:are_contact_details_private) { 'yes' }
-    let(:contact_details_private) { ['email', 'address'] }
+    let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
 
     before do
        allow(applicant).to receive(:full_address).and_return('full address')
        allow(relationship).to receive(:person).and_return(applicant)
+       allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))
+       allow(applicant).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
+       allow(applicant).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+       allow(applicant).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
     subject { described_class.new(c100_application) }
@@ -108,7 +108,7 @@ module Summary
         expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
         expect(answers[3].question).to eq(:person_contact_details_private)
         expect(answers[3].change_path).to eq('/steps/applicant/privacy_preferences/uuid-123')
-        expect(answers[3].value).to eq('Email, Current address')
+        expect(answers[3].value).to eq('Email, Current address, Home phone number, Mobile phone number')
 
         expect(answers[4]).to be_an_instance_of(AnswersGroup)
         expect(answers[4].name).to eq(:person_personal_details)
