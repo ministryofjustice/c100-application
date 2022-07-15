@@ -118,6 +118,7 @@ module Summary
       context 'when confidentiality is enabled' do
         let(:confidentiality_enabled?) { true }
         let(:are_contact_details_private) { 'yes' }
+        let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
         let(:applicant) {
           instance_double(Applicant,
             full_name: 'fullname',
@@ -127,10 +128,8 @@ module Summary
             mobile_phone: 'mobile_phone',
             email: 'email',
             voicemail_consent: 'yes',
-            email_keep_private: 'yes',
-            phone_keep_private: 'yes',
-            mobile_keep_private: 'yes',
-            are_contact_details_private: are_contact_details_private
+            are_contact_details_private: are_contact_details_private,
+            contact_details_private: contact_details_private
           )
         }
 

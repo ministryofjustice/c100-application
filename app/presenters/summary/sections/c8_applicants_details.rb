@@ -38,27 +38,27 @@ module Summary
       private
 
       def residence_history(person)
-        value = confidential? && person.residence_keep_private != 'no' ? person.residence_history : nil
+        value = confidential? && private?(person, ContactDetails::ADDRESS.to_s) ? person.residence_history : nil
         FreeTextAnswer.new(:person_residence_history, value)
       end
 
       def address(person)
-        value = confidential? && person.residence_keep_private != 'no' ? person.full_address : nil
+        value = confidential? && private?(person, ContactDetails::ADDRESS.to_s) ? person.full_address : nil
         FreeTextAnswer.new(:person_address, value)
       end
 
       def person_email(person)
-        value = confidential? && person.email_keep_private == 'yes' ? person.email : nil
+        value = confidential? && private?(person, ContactDetails::EMAIL.to_s) ? person.email : nil
         FreeTextAnswer.new(:person_email, value)
       end
 
       def person_home_phone(person)
-        value = confidential? && person.phone_keep_private == 'yes' ? person.home_phone : nil
+        value = confidential? && private?(person, ContactDetails::HOME_PHONE.to_s) ? person.home_phone : nil
         FreeTextAnswer.new(:person_home_phone, value)
       end
 
       def person_mobile_phone(person)
-        value = if confidential? && person.mobile_keep_private == 'yes'
+        value = if confidential? && private?(person, ContactDetails::MOBILE.to_s)
                   mobile_phone_answer(person)
                 end
         FreeTextAnswer.new(:person_mobile_phone, value)
@@ -74,6 +74,10 @@ module Summary
 
       def confidential?
         c100.confidentiality_enabled?
+      end
+
+      def private?(person, field)
+        person.contact_details_private.include? field
       end
     end
   end

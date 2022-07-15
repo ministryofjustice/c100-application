@@ -35,22 +35,22 @@ module Summary
                                data_or_private(person, person.full_address, ContactDetails::ADDRESS.to_s),
                                show: true),
             Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
-            Answer.new(:residence_keep_private, person.residence_keep_private),
+            Answer.new(:residence_keep_private, keep_private_answer(person, :address_private?)),
             FreeTextAnswer.new(:person_residence_history, person.residence_history,
                                show: person.residence_requirement_met == 'no'),
             FreeTextAnswer.new(:person_email,
                                data_or_private(person, email_answer(person), ContactDetails::EMAIL.to_s)),
-            Answer.new(:email_keep_private, person.email_keep_private),
+            Answer.new(:email_keep_private, keep_private_answer(person, :email_private?)),
             FreeTextAnswer.new(:person_home_phone,
                                data_or_private(person,
                                                home_phone_answer(person),
                                                ContactDetails::HOME_PHONE.to_s)),
-            Answer.new(:phone_keep_private, person.phone_keep_private),
+            Answer.new(:phone_keep_private, keep_private_answer(person, :home_phone_private?)),
             FreeTextAnswer.new(:person_mobile_phone,
                                data_or_private(
                                  person, mobile_phone_answer(person), ContactDetails::MOBILE.to_s
                                )),
-            Answer.new(:mobile_keep_private, person.mobile_keep_private),
+            Answer.new(:mobile_keep_private, keep_private_answer(person, :mobile_private?)),
             Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
             FreeTextAnswer.new(
               :person_relationship_to_children,
@@ -65,6 +65,14 @@ module Summary
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength
 
       private
+
+      def keep_private_answer(person, field)
+        if person.instance_of?(Applicant)
+          person.send(field) ? 'yes' : 'no'
+        else
+          person.address_private? && 'yes'
+        end
+      end
 
       def data_or_private(person, data, type)
         return I18n.t('dictionary.c8_attached') if

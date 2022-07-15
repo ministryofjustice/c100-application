@@ -20,16 +20,12 @@ module Summary
         gender: 'female',
         birthplace: 'birthplace',
         residence_requirement_met: 'yes',
-        residence_keep_private: 'yes',
         residence_history: 'history',
         home_phone: 'home_phone',
         mobile_provided: mobile_provided,
         mobile_phone: mobile_phone,
         mobile_not_provided_reason: mobile_not_provided_reason,
         email: 'email',
-        email_keep_private: 'yes',
-        phone_keep_private: 'yes',
-        mobile_keep_private: 'yes',
         voicemail_consent: 'yes',
         mobile_phone_unknown: nil,
         home_phone_unknown: nil,
@@ -40,8 +36,15 @@ module Summary
       )
     }
 
+    let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
+
     before do
+      allow(applicant).to receive(:instance_of?).and_return(Applicant)
       allow(applicant).to receive(:full_address).and_return('full address')
+      allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))
+      allow(applicant).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
+      allow(applicant).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(applicant).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
     subject { described_class.new(c100_application) }
@@ -54,7 +57,6 @@ module Summary
     let(:previous_name) { nil }
     let(:privacy_known) { 'no' }
     let(:are_contact_details_private) { 'no' }
-    let(:contact_details_private) { [] }
 
     let(:answers) { subject.answers }
 
@@ -116,7 +118,7 @@ module Summary
         expect(answers[3].name).to eq(:privacy_preferences)
         expect(answers[3].ivar).to eq({
           are_contact_details_private: 'no',
-          contact_details_private: []
+          contact_details_private: contact_details_private
         })
 
         expect(answers[4]).to be_an_instance_of(Answer)
