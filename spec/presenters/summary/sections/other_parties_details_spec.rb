@@ -21,16 +21,12 @@ module Summary
         gender: 'female',
         birthplace: nil,
         residence_requirement_met: nil,
-        residence_keep_private: nil,
         residence_history: nil,
         home_phone: nil,
         mobile_provided: nil,
         mobile_phone: nil,
         email: nil,
         voicemail_consent: nil,
-        email_keep_private: nil,
-        phone_keep_private: nil,
-        mobile_keep_private: nil,
         mobile_phone_unknown: nil,
         home_phone_unknown: nil,
         email_unknown: nil,
@@ -39,8 +35,14 @@ module Summary
       )
     }
 
+    let(:contact_details_private) { [] }
+
     before do
       allow(other_party).to receive(:full_address).and_return('full address')
+      allow(other_party).to receive(:email_private?).and_return(contact_details_private.include?('email'))
+      allow(other_party).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
+      allow(other_party).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
     subject { described_class.new(c100_application) }

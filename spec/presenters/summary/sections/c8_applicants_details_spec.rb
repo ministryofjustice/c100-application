@@ -20,18 +20,21 @@ module Summary
         mobile_phone: 'mobile_phone',
         email: 'email',
         voicemail_consent: 'yes',
-        residence_keep_private: 'yes',
-        email_keep_private: 'yes',
-        phone_keep_private: 'yes',
-        mobile_keep_private: 'yes'
+        contact_details_private: contact_details_private
       )
     }
 
     let(:mobile_provided) { nil }
     let(:mobile_not_provided_reason) { nil }
 
+    let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
+
     before do
       allow(applicant).to receive(:full_address).and_return('full address')
+      allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))
+      allow(applicant).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
+      allow(applicant).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(applicant).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
     subject { described_class.new(c100_application) }
@@ -119,12 +122,10 @@ module Summary
             mobile_phone: 'mobile_phone',
             email: 'email',
             voicemail_consent: 'yes',
-            residence_keep_private: 'no',
-            email_keep_private: 'no',
-            phone_keep_private: 'no',
-            mobile_keep_private: 'no'
+            contact_details_private: contact_details_private
           )
         }
+        let(:contact_details_private) { [] }
         it 'has the correct number of rows' do
           expect(answers.count).to eq(5)
         end

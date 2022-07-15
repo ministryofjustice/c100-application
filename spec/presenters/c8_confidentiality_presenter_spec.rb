@@ -2,12 +2,9 @@ require 'spec_helper'
 
 RSpec.describe C8ConfidentialityPresenter do
   let(:person) {
-    instance_double(Applicant, full_address: 'real full address', residence_history: nil, 
+    instance_double(Applicant, full_address: 'real full address', residence_history: nil,
+      contact_details_private: contact_details_private,
       email: 'mail', home_phone: '12233445566', mobile_phone: '11335566', gender: 'male',
-      residence_keep_private: residence_keep_private,
-      email_keep_private: email_keep_private,
-      phone_keep_private: phone_keep_private,
-      mobile_keep_private: mobile_keep_private,
       c100_application: c100_application_one
       )
   }
@@ -16,13 +13,15 @@ RSpec.describe C8ConfidentialityPresenter do
   
   let(:person_two) {
     instance_double(Applicant, full_address: 'real full address', residence_history: nil, 
+      contact_details_private: [],
       email: 'mail', home_phone: '12233445566', mobile_phone: '11335566', gender: 'male', c100_application: c100_application_two)
   }
-
-  let(:residence_keep_private) { 'yes' }
-  let(:email_keep_private) { 'yes' }
-  let(:phone_keep_private) { 'yes' }
-  let(:mobile_keep_private) { 'yes' }
+  let(:contact_details_private) { [
+    ContactDetails::ADDRESS.to_s,
+    ContactDetails::EMAIL.to_s,
+    ContactDetails::HOME_PHONE.to_s,
+    ContactDetails::MOBILE.to_s
+  ] }
   
   subject { described_class.new(person) }
 
@@ -47,22 +46,19 @@ RSpec.describe C8ConfidentialityPresenter do
   end
 
   context 'display value when not private' do
-    let(:residence_keep_private) { 'no' }
+    let(:contact_details_private) { [] }
     it 'returns the replacement answer when residence is set to private' do
       expect(subject.full_address).not_to eq('[See C8]')
     end
 
-    let(:email_keep_private) { 'no' }
     it 'returns the replacement answer when email is set to private' do
       expect(subject.email).not_to eq('[See C8]')
     end
 
-    let(:phone_keep_private) { 'no' }
     it 'returns the replacement answer when confidentiality applies' do
       expect(subject.home_phone).not_to eq('[See C8]')
     end
 
-    let(:mobile_keep_private) { 'no' }
     it 'returns the replacement answer when confidentiality applies' do
       expect(subject.mobile_phone).not_to eq('[See C8]')
     end
