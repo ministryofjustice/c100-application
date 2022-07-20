@@ -1455,8 +1455,8 @@ en:
         contact_details_private_options:
           address: Current address
           email: Email address
-          mobile: Home phone number
-          home_phone: Mobile phone number
+          mobile: Mobile phone number
+          home_phone: Home phone number
       steps_applicant_personal_details_form:
         <<: *PERSONAL_DETAILS_FIELDS
         previous_name: Enter your previous name
