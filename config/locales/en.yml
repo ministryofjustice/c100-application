@@ -265,6 +265,7 @@ en:
         edit:
           page_title: Contact details confidentiality
           heading: "Keeping %{name}'s contact details private"
+          hint: You've stated that the respondents know some of your contact details. Make sure you select the contact details the applicants do not already know.
           lead_text_html: |
             <p class="govuk-body">The answers you give in your response will be shared with other people named in this application (the respondents). This will include your contact details.</p>
             <p class="govuk-body">For example, if you believe the other people in the case pose a risk to you or your children, you can ask the court to keep your contact details private.</p>
@@ -1448,7 +1449,9 @@ en:
         selected_address: Select an address
       steps_applicant_privacy_known_form:
         privacy_known_options:
-          <<: *YESNO
+          'yes': 'Yes'
+          'no': 'No'
+          unknown: I don't know
       steps_applicant_privacy_preferences_form:
         are_contact_details_private_options:
           <<: *YESNO
@@ -1603,8 +1606,6 @@ en:
           group_specific_issues: For example, what school they’ll go to
         orders_collection_options:
           specific_issues_child_return: If the children have been abducted, unlawfully removed or unlawfully retained
-      steps_applicant_privacy_preferences_form:
-        contact_details_private: You've stated that the respondents know some of their contact details. Make sure you select the contact details the applicants do not already know.
       steps_applicant_personal_details_form:
         has_previous_name: For example, through marriage or adoption or by deed poll. This includes first name, surname and any middle names
         previous_name: *previous_name_hint
