@@ -12,7 +12,9 @@
     <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
       <%= f.govuk_radio_buttons_fieldset :are_contact_details_private, legend: { tag: 'span', size: 's' } do %>
         <%= f.govuk_radio_button :are_contact_details_private, GenericYesNo::YES, link_errors: true, selected: true do %>
-          <%= f.govuk_check_boxes_fieldset :contact_details_private, legend: { tag: 'span', size: 's' } do %>
+          <%= f.govuk_check_boxes_fieldset :contact_details_private, legend: { tag: 'span', size: 's' }, hint: -> {
+            @form_object.record.privacy_known == GenericYesNo::YES.to_s ? t('.hint') : ''
+          } do %>
             <%= f.govuk_check_box :contact_details_private, ContactDetails::ADDRESS.to_s %>
             <%= f.govuk_check_box :contact_details_private, ContactDetails::EMAIL.to_s %>
             <%= f.govuk_check_box :contact_details_private, ContactDetails::MOBILE.to_s %>
