@@ -98,7 +98,7 @@ module Summary
       end
 
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(21)
+        expect(answers.count).to eq(17)
       end
 
       it 'has the correct rows in the right order' do
@@ -145,48 +145,32 @@ module Summary
         expect(answers[9].question).to eq(:person_residence_requirement_met)
         expect(answers[9].value).to eq('yes')
 
-        expect(answers[10]).to be_an_instance_of(Answer)
-        expect(answers[10].question).to eq(:residence_keep_private)
-        expect(answers[10].value).to eq('yes')
+        expect(answers[10]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[10].question).to eq(:person_residence_history)
+        expect(answers[10].value).to eq('history')
 
         expect(answers[11]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[11].question).to eq(:person_residence_history)
-        expect(answers[11].value).to eq('history')
+        expect(answers[11].question).to eq(:person_email)
+        expect(answers[11].value).to eq('email')
 
         expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[12].question).to eq(:person_email)
-        expect(answers[12].value).to eq('email')
+        expect(answers[12].question).to eq(:person_home_phone)
+        expect(answers[12].value).to eq('home_phone')
 
-        expect(answers[13]).to be_an_instance_of(Answer)
-        expect(answers[13].question).to eq(:email_keep_private)
-        expect(answers[13].value).to eq('yes')
+        expect(answers[13]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[13].question).to eq(:person_mobile_phone)
+        expect(answers[13].value).to eq('mobile_phone')
 
-        expect(answers[14]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[14].question).to eq(:person_home_phone)
-        expect(answers[14].value).to eq('home_phone')
+        expect(answers[14]).to be_an_instance_of(Answer)
+        expect(answers[14].question).to eq(:person_voicemail_consent)
+        expect(answers[14].value).to eq('yes')
 
-        expect(answers[15]).to be_an_instance_of(Answer)
-        expect(answers[15].question).to eq(:phone_keep_private)
-        expect(answers[15].value).to eq('yes')
+        expect(answers[15]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[15].question).to eq(:person_relationship_to_children)
+        expect(answers[15].value).to eq('relationships')
 
-        expect(answers[16]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[16].question).to eq(:person_mobile_phone)
-        expect(answers[16].value).to eq('mobile_phone')
-
-        expect(answers[17]).to be_an_instance_of(Answer)
-        expect(answers[17].question).to eq(:mobile_keep_private)
-        expect(answers[17].value).to eq('yes')
-
-        expect(answers[18]).to be_an_instance_of(Answer)
-        expect(answers[18].question).to eq(:person_voicemail_consent)
-        expect(answers[18].value).to eq('yes')
-
-        expect(answers[19]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[19].question).to eq(:person_relationship_to_children)
-        expect(answers[19].value).to eq('relationships')
-
-        expect(answers[20]).to be_an_instance_of(Partial)
-        expect(answers[20].name).to eq(:row_blank_space)
+        expect(answers[16]).to be_an_instance_of(Partial)
+        expect(answers[16].name).to eq(:row_blank_space)
       end
 
 
@@ -197,7 +181,7 @@ module Summary
           let(:mobile_not_provided_reason) { nil }
 
           it 'shows the phone number' do
-            expect(answers[16].value).to eq('mobile_phone')
+            expect(answers[13].value).to eq('mobile_phone')
           end
         end
         context 'is given' do
@@ -206,7 +190,7 @@ module Summary
           let(:mobile_not_provided_reason) { nil }
 
           it 'shows the phone number' do
-            expect(answers[16].value).to eq('mobile_phone')
+            expect(answers[13].value).to eq('mobile_phone')
           end
         end
         context 'is not given with a reason' do
@@ -215,7 +199,7 @@ module Summary
           let(:mobile_not_provided_reason) { 'no phone' }
 
           it 'shows the reason' do
-            expect(answers[16].value).to eq('no phone')
+            expect(answers[13].value).to eq('no phone')
           end
         end
       end
@@ -225,7 +209,7 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(21)
+          expect(answers.count).to eq(17)
         end
 
         it 'renders the previous name' do
@@ -241,7 +225,7 @@ module Summary
         let(:contact_details_private) { [] }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(19)
+          expect(answers.count).to eq(15)
         end
 
         it 'renders the previous name' do
@@ -275,18 +259,17 @@ module Summary
           expect(answers[8].question).to eq(:person_address)
           expect(answers[8].value).to eq('[See C8]')
 
+          expect(answers[11]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[11].question).to eq(:person_email)
+          expect(answers[11].value).to eq('[See C8]')
+
           expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[12].question).to eq(:person_email)
+          expect(answers[12].question).to eq(:person_home_phone)
           expect(answers[12].value).to eq('[See C8]')
 
-          expect(answers[14]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[14].question).to eq(:person_home_phone)
-          expect(answers[14].value).to eq('[See C8]')
-
-
-          expect(answers[16]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[16].question).to eq(:person_mobile_phone)
-          expect(answers[16].value).to eq('[See C8]')
+          expect(answers[13]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[13].question).to eq(:person_mobile_phone)
+          expect(answers[13].value).to eq('[See C8]')
         end
       end
     end
