@@ -1,0 +1,32 @@
+<tr>
+  <td class="question">
+    <%= t 'check_answers.person_contact_details_private.question' %>
+  </td>
+
+  <td class="answer answer-value">
+    <% if privacy_preferences.ivar[:are_contact_details_private] == GenericYesNo::YES.to_s %>
+      <table class="no-borders subtable">
+        <% ContactDetails::VALUES.each do |detail| %>
+          <tr>
+            <td class="question">
+              <%= detail.long_name %>
+            </td>
+            <td class="answer answer-value">
+                <% if privacy_preferences.ivar[:contact_details_private].include?(detail.to_s) %>
+                  <%= GenericYesNo::YES.to_s.capitalize %>
+                <% else %>
+                  <%= GenericYesNo::NO.to_s.capitalize %>
+                <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td><strong><%= t 'check_answers.person_contact_details_private.c8' %></strong></td>
+        </tr>
+      </table>
+    <% else %>
+      <%= GenericYesNo::NO.to_s.capitalize %>
+    <% end %>
+
+  </td>
+</tr>

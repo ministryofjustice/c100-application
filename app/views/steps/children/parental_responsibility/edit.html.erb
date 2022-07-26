@@ -1,0 +1,17 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    
+    <h1 class="govuk-heading-xl"><%=t '.heading', name: @form_object.record.full_name %></h1>
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object do |f| %>
+      <%= f.govuk_text_field :parental_responsibility,
+        label: { text: t('.subheading', name: @form_object.record.full_name) },
+        hint: { text: t('.hint_html') } %>
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>
