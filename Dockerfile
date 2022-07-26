@@ -1,4 +1,4 @@
-FROM ruby:2.7.6-slim-buster
+FROM hmctspublic.azurecr.io/imported/library/ruby-2.7.6
 MAINTAINER HMCTS Reform Team
 
 # build dependencies:
