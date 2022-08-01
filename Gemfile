@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'mimemagic', '~> 0.3.7'
 gem 'pg', '~> 1.1'
 gem 'puma'
-gem 'rails', '6.0.4.8'
+gem 'rails', '~> 6.0.5'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
 gem 'sentry-raven', '~> 3.0'
@@ -19,6 +19,7 @@ gem 'uglifier'
 gem 'uk_postcode'
 gem 'virtus'
 gem 'parser', '~> 3.1', '>= 3.1.1.0'
+gem 'tzinfo', '~> 1.2.10'
 
 # Back office
 gem 'omniauth-auth0'
@@ -32,6 +33,7 @@ gem 'sidekiq', '~> 6.4'
 gem 'combine_pdf', '~> 1.0'
 gem 'wicked_pdf', '~> 2.1.0'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
+
 
 group :production do
   gem 'lograge'
@@ -76,3 +78,5 @@ group :test do
   gem 'webdrivers'
   gem 'webmock'
 end
+
+gem "bundler-audit", "~> 0.9.1", :group => :development
