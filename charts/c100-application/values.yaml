@@ -9,7 +9,7 @@ base:
   keyVaults:
     c100:
       secrets:
-        - name: database-url
+        - name: c100-postgres-url
           alias: DATABASE_URL
         - name: external-url
           alias: EXTERNAL_URL
