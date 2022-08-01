@@ -95,7 +95,7 @@ module Reports
       def send_email_report
         # Unset the env variable to stop the emails (for example
         # on staging we don't want these emails, only on production)
-        return unless ENV.key?('SEND_FAILED_EMAILS_REPORT')
+        return unless ENV.fetch('SEND_FAILED_EMAILS_REPORT', '') == 'true'
 
         recipients = BackofficeUser.active.pluck(:email)
         report = failures.map(&:to_csv).join
