@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ template "hmcts.releasename.v2" . }}-cronjob-payments
+  name: {{ template "hmcts.releasename.v2" . }}-payments
 {{- include "hmcts.labels.v2" . | indent 2 -}}
 {{- include "hmcts.annotations.v2" . | indent 2 }}
 spec:
