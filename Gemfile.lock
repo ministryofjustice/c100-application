@@ -218,7 +218,7 @@ GEM
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
-    mimemagic (0.3.10)
+    mimemagic (0.4.3)
       nokogiri (~> 1)
       rake
     mini_mime (1.1.2)
@@ -484,7 +484,7 @@ DEPENDENCIES
   jquery-rails
   lograge
   logstash-event
-  mimemagic (~> 0.3.7)
+  mimemagic (~> 0.4.0)
   mutant-license (= 0.1.1.2.1739399027284447558325915053311580324856.4)!
   mutant-rspec
   omniauth-auth0
