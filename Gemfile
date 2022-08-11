@@ -31,7 +31,7 @@ gem 'sidekiq', '~> 6.4'
 
 # PDF generation
 gem 'combine_pdf', '~> 1.0'
-gem 'wicked_pdf', '~> 2.1.0'
+gem 'wicked_pdf', '~> 2.6.0'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
 
