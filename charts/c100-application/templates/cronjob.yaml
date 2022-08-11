@@ -25,7 +25,9 @@ spec:
             imagePullPolicy: Always
             command: ['bin/rails', 'daily_tasks']
             env:
-            - name: DATABASE_URL
-              value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
-            - name: REDIS_URL
-              value: {{ .Values.base.redis.url }}
+            {{ if eq .Values.global.environment "dev" }}
+              - name: DATABASE_URL
+                value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
+              - name: REDIS_URL
+                value: {{ .Values.base.redis.url }}
+            {{ end }}
