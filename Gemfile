@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby File.read('.ruby-version')
 
-gem 'devise', '~> 4.7.1'
+gem 'devise', '~> 4.8.0'
 gem 'govuk_design_system_formbuilder'
 gem 'govuk_notify_rails', '~> 2.2.0'
 gem 'govuk-pay-ruby-client', '~> 1.0.2'
