@@ -21,6 +21,22 @@ Bundler.require(*Rails.groups)
 
 module Application
   class Application < Rails::Application
+
+    ## Add environment variables
+    # if(ENV['KEYVAULT_NAME'].present?)
+    #   filepath = "/mnt/secrets/#{ENV.fetch('KEYVAULT_NAME')}/key"
+    #   if File.file?(filepath)
+    #   # env = {}
+    #   # env_file = File.open(filepath)
+
+    #   # env_file.each do |line|
+    #   #   key, value = line.strip.split("=")
+    #   #   break if key[0] == '#'
+    #   #   ENV[key] = value
+    #   # end
+    #   end
+    # end
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
