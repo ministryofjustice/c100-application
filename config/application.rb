@@ -22,20 +22,19 @@ Bundler.require(*Rails.groups)
 module Application
   class Application < Rails::Application
 
-    ## Add environment variables
-    # if(ENV['KEYVAULT_NAME'].present?)
-    #   filepath = "/mnt/secrets/#{ENV.fetch('KEYVAULT_NAME')}/key"
-    #   if File.file?(filepath)
-    #   # env = {}
-    #   # env_file = File.open(filepath)
-
-    #   # env_file.each do |line|
-    #   #   key, value = line.strip.split("=")
-    #   #   break if key[0] == '#'
-    #   #   ENV[key] = value
-    #   # end
-    #   end
-    # end
+    # *** Add environment variables ***
+    #
+    # In SDS system, env vars are mounted to the filesystem.
+    #
+    # Must be done here and not an initializer as
+    # env vars are needed for boot.
+    if Dir.exist?("../../../mnt/secrets/c100")
+      Dir["../../../mnt/secrets/c100/*"].each do |filepath|
+        name = filepath.split('/')[-1]
+        value = File.open(filepath).read
+        ENV[name] = value
+      end
+    end
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
