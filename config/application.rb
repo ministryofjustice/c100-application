@@ -28,6 +28,7 @@ module Application
     #
     # Must be done here and not an initializer as
     # env vars are needed for boot.
+    # :nocov:
     if Dir.exist?("../../../mnt/secrets/c100")
       Dir["../../../mnt/secrets/c100/*"].each do |filepath|
         name = filepath.split('/')[-1]
@@ -35,6 +36,7 @@ module Application
         ENV[name] = value
       end
     end
+    # :nocov:
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
