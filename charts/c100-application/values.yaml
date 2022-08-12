@@ -9,8 +9,14 @@ base:
   keyVaults:
     c100:
       secrets:
-        - name: c100-postgres-url
-          alias: DATABASE_URL
+        - name: c100-postgres-user-name
+          alias: DATABASE_USERNAME
+        - name: c100-postgres-password
+          alias: DATABASE_PASSWORD
+        - name: c100-postgres-host-name
+          alias: DATABASE_HOST
+        - name: c100-postgres-database
+          alias: DATABASE_NAME
         - name: external-url
           alias: EXTERNAL_URL
         - name: session-expires-in-minutes

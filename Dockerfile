@@ -71,8 +71,6 @@ COPY . .
 ENV EXTERNAL_URL=replace_this_at_build_time
 ENV SECRET_KEY_BASE=replace_this_at_build_time
 ENV GOVUK_NOTIFY_API_KEY=replace_this_at_build_time
-ENV SLACK_WEBHOOK_URL=replace_this_at_build_time
-ENV SLACK_WEBHOOK_ENV=replace_this_at_build_time
 
 ENV RAILS_ENV=production
 RUN bundle exec rake assets:precompile
