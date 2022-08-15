@@ -17,6 +17,8 @@ base:
           alias: DATABASE_HOST
         - name: c100-postgres-database
           alias: DATABASE_NAME
+        - name: redis-url
+          alias: REDIS_URL
         - name: external-url
           alias: EXTERNAL_URL
         - name: session-expires-in-minutes
