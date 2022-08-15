@@ -39,6 +39,7 @@ module Application
         name = filepath.split('/')[-1]
         value = File.open(filepath).read
         ENV[name] ||= value
+        ENV[name] = value if ENV[name].eql? 'replace_this_at_build_time'
       end
     end
     # :nocov:
