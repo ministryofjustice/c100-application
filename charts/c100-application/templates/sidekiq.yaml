@@ -47,44 +47,17 @@ spec:
               exec:
                 command: ["./sidekiq.sh", "stop"]
           # non-secret env vars defined in `config_map.yaml`
-{{/*          envFrom:*/}}
-{{/*            - configMapRef:*/}}
-{{/*                name: c100-application-configmap-production*/}}
           env:
             # external secrets defined in `secrets.yml`
-{{/*            - name: GOVUK_NOTIFY_API_KEY*/}}
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: c100-application-secrets-production*/}}
-{{/*                  key: govuk_notify_api_key*/}}
             - name: GOVUK_NOTIFY_API_KEY
               value: TBD
-
             - name: GOVUK_PAY_API_KEY
               value: TBD
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: c100-application-secrets-production*/}}
-{{/*                  key: govuk_pay_api_key*/}}
             - name: SECRET_KEY_BASE
               value: TBD
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: c100-application-secrets-production*/}}
-{{/*                  key: secret_key_base*/}}
-{{/*            - name: SENTRY_DSN*/}}
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: c100-application-secrets-production*/}}
-{{/*                  key: sentry_dsn*/}}
             #
             # secrets created by `terraform`
             #
-{{/*            - name: DATABASE_URL*/}}
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: rds-instance-c100-production*/}}
-{{/*                  key: url*/}}
             {{ if .Values.base.redis }}
             - name: DATABASE_URL
               value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
