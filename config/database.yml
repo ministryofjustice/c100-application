@@ -21,4 +21,3 @@ production:
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   sslmode: <%= ENV.fetch('DATABASE_SSLMODE', 'require') %>
-  sslrootcert: <%= ENV['RDS_COMBINED_CA_BUNDLE'] %>
