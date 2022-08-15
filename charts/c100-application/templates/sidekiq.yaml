@@ -46,9 +46,11 @@ spec:
             preStop:
               exec:
                 command: ["./sidekiq.sh", "stop"]
-          # non-secret env vars defined in `config_map.yaml`
+          securityContext:
+            allowPrivilegeEscalation: false
+          {{- include "hmcts.interpodantiaffinity.v2" . | indent 10 }}
+          {{- ( include "hmcts.secretCSIVolumes.v2" . ) | indent 10 }}
           env:
-            # external secrets defined in `secrets.yml`
             - name: GOVUK_NOTIFY_API_KEY
               value: TBD
             - name: GOVUK_PAY_API_KEY

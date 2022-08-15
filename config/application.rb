@@ -34,6 +34,7 @@ module Application
     #
     # :nocov:
     puts 'ATTEMPTING TO LOAD SECRETS'
+    puts "#{exec 'pwd'}"
     if Dir.exist?("../../../mnt/secrets/c100")
       puts 'DIR EXISTS'
       Dir["../../../mnt/secrets/c100/*"].each do |filepath|
