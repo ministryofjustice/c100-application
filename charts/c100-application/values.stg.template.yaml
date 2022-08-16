@@ -5,4 +5,4 @@ base:
 
 global:
   enableKeyVaults: true
-  environment: staging
+  environment: stg

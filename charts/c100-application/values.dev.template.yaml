@@ -31,3 +31,7 @@ redis:
       enabled: false
   auth:
     enabled: false
+
+global:
+  enableKeyVaults: true
+  environment: dev
