@@ -45,3 +45,7 @@ base:
           alias: MAINTENANCE_ALLOWED_IPS
 redis:
   enabled: false
+useInterpodAntiAffinity: true
+keyVaults:
+  c100:
+    anything: here
