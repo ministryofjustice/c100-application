@@ -21,6 +21,14 @@ spec:
     {{- (include "hmcts.annotations.v2" .) | indent 6 }}
     spec:
       terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+      {{- include "hmcts.interpodantiaffinity.v2" . | indent 6 }}
+      {{- ( include "hmcts.dnsConfig.v2" . ) | indent 6 }}
+      {{ if $globals.enableKeyVaults }}
+      {{- ( include "hmcts.secretCSIVolumes.v2" . ) | indent 6 }}
+      {{ end }}
       containers:
         - name: sidekiq
           image: {{ .Values.base.image }}
@@ -48,11 +56,10 @@ spec:
             preStop:
               exec:
                 command: ["./sidekiq.sh", "stop"]
-          {{ if $globals.enableKeyVaults }}
           securityContext:
             allowPrivilegeEscalation: false
-          {{- include "hmcts.interpodantiaffinity.v2" . | indent 10 }}
-          {{- ( include "hmcts.secretCSIVolumes.v2" . ) | indent 10 }}
+          {{ if $globals.enableKeyVaults }}
+          {{- ( include "hmcts.secretMounts.v2" . ) | indent 10 }}
           {{ end }}
           env:
             - name: GOVUK_NOTIFY_API_KEY
