@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure")
+@Library("Infrastructure@update-acr-client")
 
 def type = "ruby"
 def product = "c100"
