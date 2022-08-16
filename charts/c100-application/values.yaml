@@ -45,3 +45,10 @@ base:
           alias: MAINTENANCE_ALLOWED_IPS
 redis:
   enabled: false
+
+useInterpodAntiAffinity: true
+# due to including the key vault mounts directly in the chart it's not nested under the base key
+# the keys are managed in the main volume we just need to redeclare it here so that volumes are correctly mounted
+keyVaults:
+  c100:
+    this_is_a_hack: ignore
