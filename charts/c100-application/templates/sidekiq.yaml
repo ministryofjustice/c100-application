@@ -46,10 +46,12 @@ spec:
             preStop:
               exec:
                 command: ["./sidekiq.sh", "stop"]
+          {{ if .Values.global.enableKeyVaults }}
           securityContext:
             allowPrivilegeEscalation: false
           {{- include "hmcts.interpodantiaffinity.v2" . | indent 10 }}
           {{- ( include "hmcts.secretCSIVolumes.v2" . ) | indent 10 }}
+          {{ end }}
           env:
             - name: GOVUK_NOTIFY_API_KEY
               value: TBD
