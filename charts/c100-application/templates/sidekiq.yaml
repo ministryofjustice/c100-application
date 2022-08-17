@@ -1,24 +1,49 @@
+{{- $globals := .Values.global | default dict -}}
+{{- $baseValues := dict "Values" .Values.base -}}
+{{- $noValues := omit . "Values" -}}
+{{- $base := merge $baseValues  $noValues }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "hmcts.releasename.v2" . }}-sidekiq
-{{- include "hmcts.labels.v2" . | indent 2 -}}
-{{- include "hmcts.annotations.v2" . | indent 2 }}
+  name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+  labels:
+    app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+    aadpodidbinding: {{ .Values.base.aadIdentityName }}
+{{- include "hmcts.annotations.v2" $base | indent 2 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ template "hmcts.releasename.v2" . }}-sidekiq
+      app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ template "hmcts.releasename.v2" . }}-sidekiq
+        app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
         helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
-        app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" . }}-sidekiq
-    {{- (include "hmcts.annotations.v2" .) | indent 6 }}
+        app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+        aadpodidbinding: {{ .Values.base.aadIdentityName }}
+    {{- (include "hmcts.annotations.v2" $base) | indent 6 }}
     spec:
       terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+      {{- include "hmcts.interpodantiaffinity.v2" $base | indent 6 }}
+      {{- ( include "hmcts.dnsConfig.v2" $base ) | indent 6 }}
+      {{- if $globals.enableKeyVaults }}
+      volumes:
+        - name: vault-c100
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: {{ .Release.Name }}-base-c100
+      {{- end }}
       containers:
         - name: sidekiq
           image: {{ .Values.base.image }}
@@ -48,8 +73,7 @@ spec:
                 command: ["./sidekiq.sh", "stop"]
           securityContext:
             allowPrivilegeEscalation: false
-          {{- include "hmcts.interpodantiaffinity.v2" . | indent 10 }}
-          {{- ( include "hmcts.secretCSIVolumes.v2" . ) | indent 10 }}
+          {{- ( include "hmcts.secretMounts.v2" $base ) | indent 10 }}
           env:
             - name: GOVUK_NOTIFY_API_KEY
               value: TBD
@@ -60,9 +84,9 @@ spec:
             #
             # secrets created by `terraform`
             #
-            {{ if .Values.base.redis }}
+            {{ if $base.redis }}
             - name: DATABASE_URL
-              value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
+              value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ $base.postgresql.auth.database }}
             - name: REDIS_URL
-              value: {{ .Values.base.redis.url }}
+              value: {{ $base.redis.url }}
             {{ end }}
