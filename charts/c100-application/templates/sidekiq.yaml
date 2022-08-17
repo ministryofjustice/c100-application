@@ -6,21 +6,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "hmcts.releasename.v2" . }}-sidekiq
-{{- include "hmcts.labels.v2" . | indent 2 -}}
-{{- include "hmcts.annotations.v2" . | indent 2 }}
+  name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+{{- include "hmcts.labels.v2" $base | indent 2 -}}
+{{- include "hmcts.annotations.v2" $base | indent 2 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ template "hmcts.releasename.v2" . }}-sidekiq
+      app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ template "hmcts.releasename.v2" . }}-sidekiq
+        app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
         helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
-        app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" . }}-sidekiq
+        app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-sidekiq
     {{- (include "hmcts.annotations.v2" .) | indent 6 }}
     spec:
       terminationGracePeriodSeconds: 30
@@ -36,7 +36,7 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: {{ .Release.Name }}-base-c100
+              secretProviderClass: {{ template "hmcts.releasename.v2" $base }}
       {{- end }}
       containers:
         - name: sidekiq
