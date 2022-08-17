@@ -33,15 +33,11 @@ module Application
     # in the pipeline.
     #
     # :nocov:
-    puts 'ATTEMPTING TO LOAD SECRETS'
     if Dir.exist?("../../../mnt/secrets/c100")
-      puts 'DIR EXISTS'
       Dir["../../../mnt/secrets/c100/*"].each do |filepath|
         name = filepath.split('/')[-1]
         value = File.open(filepath).read
-        puts "ENV[#{name}] was #{ENV[name]}"
         ENV[name] ||= value
-        puts "#{name} ||= #{value}"
         ENV[name] = value if ENV[name].eql? 'replace_this_at_build_time'
       end
     end
