@@ -21,7 +21,7 @@ spec:
         helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-sidekiq
-    {{- (include "hmcts.annotations.v2" .) | indent 6 }}
+    {{- (include "hmcts.annotations.v2" $base) | indent 6 }}
     spec:
       terminationGracePeriodSeconds: 30
       securityContext:
