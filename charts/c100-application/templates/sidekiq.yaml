@@ -31,7 +31,8 @@ spec:
       {{- ( include "hmcts.dnsConfig.v2" $base ) | indent 6 }}
       {{- if $globals.enableKeyVaults }}
       volumes:
-        - csi:
+        - name: c100
+          csi:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
