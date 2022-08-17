@@ -1,4 +1,3 @@
-{{- $globals := .Values.global | default dict -}}
 {{- $baseValues := dict "Values" .Values.base -}}
 {{- $noValues := omit . "Values" -}}
 {{- $base := merge $baseValues  $noValues }}
