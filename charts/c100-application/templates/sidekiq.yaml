@@ -7,7 +7,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
-{{- include "hmcts.labels.v2" $base | indent 2 -}}
+  labels:
+    app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+    aadpodidbinding: {{ .Values.base.aadIdentityName }}
 {{- include "hmcts.annotations.v2" $base | indent 2 }}
 spec:
   replicas: 1
@@ -21,6 +26,7 @@ spec:
         helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+        aadpodidbinding: {{ .Values.base.aadIdentityName }}
     {{- (include "hmcts.annotations.v2" $base) | indent 6 }}
     spec:
       terminationGracePeriodSeconds: 30
