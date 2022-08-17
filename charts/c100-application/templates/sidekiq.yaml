@@ -36,7 +36,7 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: {{ template "hmcts.releasename.v2" $base }}
+              secretProviderClass: {{ .Release.Name }}-base-c100
       {{- end }}
       containers:
         - name: sidekiq
