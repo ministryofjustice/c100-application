@@ -1,3 +1,4 @@
+{{- $globals := .Values.global | default dict -}}
 {{- $baseValues := dict "Values" .Values.base -}}
 {{- $noValues := omit . "Values" -}}
 {{- $base := merge $baseValues  $noValues }}
@@ -28,7 +29,14 @@ spec:
         fsGroup: 1000
       {{- include "hmcts.interpodantiaffinity.v2" $base | indent 6 }}
       {{- ( include "hmcts.dnsConfig.v2" $base ) | indent 6 }}
-      {{- ( include "hmcts.secretCSIVolumes.v2" $base ) | indent 6 }}
+      {{- if $globals.enableKeyVaults }}
+      volumes:
+        - csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: {{ template "hmcts.releasename.v2" . }}-base-c100
+      {{- end }}
       containers:
         - name: sidekiq
           image: {{ .Values.base.image }}
