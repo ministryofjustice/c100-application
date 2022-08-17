@@ -1,4 +1,7 @@
 {{- $globals := .Values.global | default dict -}}
+{{- $baseValues := dict "Values" .Values.base -}}
+{{- $noValues := omit . "Values" -}}
+{{- $base := merge $baseValues  $noValues }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -24,11 +27,9 @@ spec:
       securityContext:
         runAsUser: 1000
         fsGroup: 1000
-      {{- include "hmcts.interpodantiaffinity.v2" . | indent 6 }}
-      {{- ( include "hmcts.dnsConfig.v2" . ) | indent 6 }}
-      {{ if $globals.enableKeyVaults }}
-      {{- ( include "hmcts.secretCSIVolumes.v2" . ) | indent 6 }}
-      {{ end }}
+      {{- include "hmcts.interpodantiaffinity.v2" $base | indent 6 }}
+      {{- ( include "hmcts.dnsConfig.v2" $base ) | indent 6 }}
+      {{- ( include "hmcts.secretCSIVolumes.v2" $base ) | indent 6 }}
       containers:
         - name: sidekiq
           image: {{ .Values.base.image }}
@@ -58,9 +59,7 @@ spec:
                 command: ["./sidekiq.sh", "stop"]
           securityContext:
             allowPrivilegeEscalation: false
-          {{ if $globals.enableKeyVaults }}
-          {{- ( include "hmcts.secretMounts.v2" . ) | indent 10 }}
-          {{ end }}
+          {{- ( include "hmcts.secretMounts.v2" $base ) | indent 10 }}
           env:
             - name: GOVUK_NOTIFY_API_KEY
               value: TBD
@@ -71,9 +70,9 @@ spec:
             #
             # secrets created by `terraform`
             #
-            {{ if .Values.base.redis }}
+            {{ if $base.redis }}
             - name: DATABASE_URL
-              value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
+              value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ $base.postgresql.auth.database }}
             - name: REDIS_URL
-              value: {{ .Values.base.redis.url }}
+              value: {{ $base.redis.url }}
             {{ end }}
