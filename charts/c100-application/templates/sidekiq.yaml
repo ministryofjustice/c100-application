@@ -84,9 +84,9 @@ spec:
             #
             # secrets created by `terraform`
             #
-            {{ if $base.redis }}
+            {{ if .Values.redis.url }}
             - name: DATABASE_URL
-              value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ $base.postgresql.auth.database }}
+              value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
             - name: REDIS_URL
-              value: {{ $base.redis.url }}
+              value: {{ .Values.redis.url }}
             {{ end }}

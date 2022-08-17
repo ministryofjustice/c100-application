@@ -25,9 +25,9 @@ spec:
             imagePullPolicy: IfNotPresent
             command: ['bin/rails', 'payments_mop_up']
             env:
-            {{ if .Values.base.redis }}
+            {{ if .Values.redis.url }}
               - name: DATABASE_URL
                 value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
               - name: REDIS_URL
-                value: {{ .Values.base.redis.url }}
+                value: {{ .Values.redis.url }}
             {{ end }}
