@@ -62,7 +62,7 @@ spec:
               path: /
               port: 7433
             initialDelaySeconds: 80
-            timeoutSeconds:
+            timeoutSeconds: 5
           livenessProbe:
             httpGet:
               path: /
