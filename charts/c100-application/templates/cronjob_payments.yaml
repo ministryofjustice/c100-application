@@ -1,3 +1,8 @@
+{{- $globals := .Values.global | default dict -}}
+{{- $baseValues := dict "Values" .Values.base -}}
+{{- $noValues := omit . "Values" -}}
+{{- $base := merge $baseValues  $noValues }}
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -19,6 +24,17 @@ spec:
             tier: worker
         spec:
           restartPolicy: OnFailure
+          {{- include "hmcts.interpodantiaffinity.v2" $base | indent 6 }}
+          {{- ( include "hmcts.dnsConfig.v2" $base ) | indent 6 }}
+          {{- if $globals.enableKeyVaults }}
+          volumes:
+            - name: vault-c100
+              csi:
+                driver: secrets-store.csi.k8s.io
+                readOnly: true
+                volumeAttributes:
+                  secretProviderClass: {{ .Release.Name }}-base-c100
+          {{- end }}
           containers:
           - name: cronjob-payments-mop-up
             image: {{ .Values.base.image }}
