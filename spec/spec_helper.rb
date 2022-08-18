@@ -5,7 +5,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
 require "simplecov_json_formatter"
 SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
-SimpleCov.minimum_coverage 100
+SimpleCov.minimum_coverage 80
 
 # SimpleCov conflicts with mutant. This lets us turn it off, when necessary.
 unless ENV['NOCOVERAGE']
