@@ -125,7 +125,7 @@ Rails.application.configure do
   # gov.uk elements formbuilder, exceptions will not be raised for
   # missing translations of model attribute names. The form will
   # get the constantized attribute name itself, in form labels.
-  config.action_view.raise_on_missing_translations = false
+  config.i18n.raise_on_missing_translations = false
 
   # Prevent host header poisoning by enforcing absolute redirects
   if ENV['EXTERNAL_URL'].present?
