@@ -536,7 +536,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma
-  rails (~> 7.0.1)
+  rails (~> 7.0.3.1)
   rails-controller-testing
   redis
   responders
