@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
-gem 'rails', '~> 6.0.5'
+gem 'rails', '~> 6.1.6.1'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
 gem 'sentry-raven', '~> 3.0'
@@ -19,7 +19,7 @@ gem 'uglifier'
 gem 'uk_postcode'
 gem 'virtus'
 gem 'parser', '~> 3.1', '>= 3.1.1.0'
-gem 'tzinfo', '~> 1.2.10'
+gem 'tzinfo', '~> 2.0.5'
 
 # Back office
 gem 'omniauth-auth0'
@@ -45,6 +45,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'i18n-debug'
+  gem 'listen'
   gem 'web-console'
 end
 
