@@ -8,7 +8,7 @@ module Summary
       def answers
         [:applicants, :respondents, :other_parties].map do |person_type|
           relationships_of_type(person_type)
-        end.sum + [
+        end.sum([]) + [
           Partial.row_blank_space,
         ].select(&:show?)
       end
