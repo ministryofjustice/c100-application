@@ -24,8 +24,8 @@ spec:
             tier: worker
         spec:
           restartPolicy: OnFailure
-          {{- include "hmcts.interpodantiaffinity.v2" $base | indent 6 }}
-          {{- ( include "hmcts.dnsConfig.v2" $base ) | indent 6 }}
+          {{- include "hmcts.interpodantiaffinity.v2" $base | indent 10 }}
+          {{- ( include "hmcts.dnsConfig.v2" $base ) | indent 10 }}
           {{- if $globals.enableKeyVaults }}
           volumes:
             - name: vault-c100
