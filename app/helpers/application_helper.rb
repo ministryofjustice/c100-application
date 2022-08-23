@@ -102,4 +102,23 @@ module ApplicationHelper
   def display_private_option?
     current_c100_application.confidentiality_enabled? == true
   end
+
+  def translate(key, **options)
+    super.tap do |result|
+      document = Nokogiri::HTML(result)
+      node = document.css('span.translation_missing')
+      next if node.nil?
+
+      parts = node.attr('title').to_s.gsub(/translation missing: /, '').split('.')
+      locale = parts.shift
+      missing_key = parts.join('.')
+
+      Raven.extra_context(
+        locale: locale.to_sym,
+        scope: nil,
+        key: missing_key
+      )
+      Raven.capture_exception(I18n::MissingTranslationData.new(locale, key, options))
+    end
+  end
 end

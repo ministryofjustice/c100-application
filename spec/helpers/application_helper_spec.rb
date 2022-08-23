@@ -126,7 +126,7 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   describe 'capture missing translations' do
     before do
-      ActionView::Base.raise_on_missing_translations = false
+      ActionView::Helpers::TranslationHelper.raise_on_missing_translations = false
     end
 
     it 'should not raise an exception, and capture in Sentry the missing translation' do
