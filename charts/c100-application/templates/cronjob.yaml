@@ -15,8 +15,7 @@ metadata:
     aadpodidbinding: {{ .Values.base.aadIdentityName }}
 {{- include "hmcts.annotations.v2" . | indent 2 }}
 spec:
-  schedule: "*/1 * * * *" # for testing
-  # schedule: "0 3 * * *"
+  schedule: "0 3 * * *"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   startingDeadlineSeconds: 300
