@@ -55,8 +55,9 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    logger.info "Received #{request.method.inspect} to #{request.url.inspect} from #{request.remote_ip.inspect}. Processing with headers #{http_envs.inspect} and params #{params.inspect}"
+    logger.info "Received #{request.method.inspect} to
+     #{request.url.inspect} from #{request.remote_ip.inspect}.
+     Processing with headers #{http_envs.inspect} and params #{params.inspect}"
   end
   # :nocov:
-
 end
