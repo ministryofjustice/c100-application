@@ -20,6 +20,7 @@ module ErrorHandling
         raise if Rails.application.config.consider_all_requests_local
 
         Raven.capture_exception(exception)
+        raise exception
         redirect_to unhandled_errors_path
       end
     end
@@ -28,8 +29,6 @@ module ErrorHandling
   private
 
   def check_c100_application_presence
-    puts 'Checking for current_c100_application:'
-    puts current_c100_application
     raise Errors::InvalidSession unless current_c100_application
   end
 
