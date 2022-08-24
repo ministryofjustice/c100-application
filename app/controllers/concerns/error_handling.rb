@@ -28,6 +28,8 @@ module ErrorHandling
   private
 
   def check_c100_application_presence
+    puts 'Checking for current_c100_application:'
+    puts current_c100_application
     raise Errors::InvalidSession unless current_c100_application
   end
 
