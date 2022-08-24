@@ -20,8 +20,7 @@ module ErrorHandling
         raise if Rails.application.config.consider_all_requests_local
 
         Raven.capture_exception(exception)
-        raise exception
-        # redirect_to unhandled_errors_path
+        redirect_to unhandled_errors_path
       end
     end
   end

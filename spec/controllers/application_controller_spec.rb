@@ -167,10 +167,8 @@ RSpec.describe ApplicationController do
 
         expect(Raven).to receive(:capture_exception)
 
-        expect { 
-          get :another_exception
-        }.to raise_error
-        # expect(response).to redirect_to(unhandled_errors_path)
+        get :another_exception
+        expect(response).to redirect_to(unhandled_errors_path)
       end
     end
   end
