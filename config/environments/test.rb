@@ -92,4 +92,6 @@ Rails.application.configure do
       status: 1,
     ).id
   end
+  # Needed as tests are run using rake commands and we use dotenv-rails
+  config.web_console.development_only = false
 end

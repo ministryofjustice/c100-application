@@ -46,7 +46,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'i18n-debug'
   gem 'listen'
-  # gem 'web-console'
 end
 
 source 'https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev' do
@@ -61,6 +60,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring', '~> 4.0'
   gem 'spring-commands-rspec'
+  gem 'web-console'
 end
 
 group :test do
