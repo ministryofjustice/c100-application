@@ -241,6 +241,7 @@ module Summary
 
     def special_arrangements_details
       arrangement = @c100_application.court_arrangement
+      return unless arrangement
       return arrangement.special_arrangements_details if arrangement.special_arrangements.blank?
       list = arrangement.special_arrangements
       list << arrangement.special_arrangements_details.to_s
@@ -255,6 +256,7 @@ module Summary
 
     def disability_requirements_details
       arrangement = @c100_application.court_arrangement
+      return unless arrangement
       return arrangement.special_assistance_details if arrangement.special_assistance.blank?
       list = arrangement.special_assistance
       list << arrangement.special_assistance_details.to_s
@@ -269,6 +271,7 @@ module Summary
 
     def interpreter_details
       arrangement = @c100_application.court_arrangement
+      return unless arrangement
       return arrangement.language_interpreter_details if arrangement.language_options.blank?
       return 'No' if arrangement.blank?
       list = arrangement.language_options
@@ -330,17 +333,18 @@ module Summary
     end
 
     def child_json(child)
+      relations = relationship_to_child(child)
       {
         firstName: child.first_name,
         lastName: child.last_name,
         dateOfBirth: child.dob.to_s(:db),
         gender: child.gender,
-        childLiveWith: child.first_name,
+        childLiveWith: child_live_with(child),
         parentalResponsibilityDetails: child.parental_responsibility,
         # "orderAppliedFor"=>"Child Arrangements Order",
-        # "applicantsRelationshipToChild"=>"Father",
-        # "respondentsRelationshipToChild"=>"Guardian",
-        # "otherApplicantsRelationshipToChild"=>nil,
+        applicantsRelationshipToChild: relations['Applicant'],
+        respondentsRelationshipToChild: relations['Respondent'],
+        otherApplicantsRelationshipToChild: relations['OtherParty'],
         # "otherRespondentsRelationshipToChild"=>nil,
         # "personWhoLivesWithChild"=>[]
       }
@@ -359,7 +363,7 @@ module Summary
         address: map_address_data(applicant.address_data),
         isAtAddressLessThan5Years: "No",
         addressLivedLessThan5YearsDetails: nil,
-        isAddressConfidential: yes_no(applicant.residence_keep_private),
+        isAddressConfidential: applicant.residence_keep_private,
         isPhoneNumberConfidential: yes_no(applicant.mobile_keep_private),
         isEmailAddressConfidential: yes_no(applicant.email_keep_private)
       }
@@ -381,7 +385,7 @@ module Summary
         address: map_address_data(respondent.address_data),
         isAtAddressLessThan5Years: "No",
         addressLivedLessThan5YearsDetails: nil,
-        isAddressConfidential: yes_no(respondent.residence_keep_private),
+        isAddressConfidential: respondent.residence_keep_private,
         canYouProvidePhoneNumber: yes_no(!respondent.mobile_keep_private),
         canYouProvideEmailAddress: yes_no(!respondent.email_keep_private)
       }
@@ -421,13 +425,13 @@ module Summary
     def order_arrangements
       orders = []
       @c100_application.orders.each do |order|
-        orders << I18n.t(".dictionary.ARRANGEMENT_ORDERS.#{order}")
+        orders << I18n.t(".dictionary.PETITION_ORDERS.#{order}")
       end
       orders.flatten.join(', ')
     end
 
     def order_types(child)
-      child.child_order&.orders.to_a.map do |o|
+      child.child_order.orders.to_a.map do |o|
         PetitionOrder.type_for(o)
       end.uniq
     end
@@ -435,6 +439,19 @@ module Summary
     def fee_amount
       amount = sprintf("%.2f", (Rails.configuration.x.court_fee.amount_in_pence / 100))
       "£#{amount}"
+    end
+
+    def child_live_with(child)
+      return nil if child.child_residence.blank?
+      people = Person.find(child.child_residence.person_ids)
+      people.map{|person| person.class.name }
+    end
+
+    def relationship_to_child(child)
+      child.relationships.each_with_object(Hash.new) do |l,t|
+        name = Person.find(l.person_id).class.name
+        t[name] = l.relation
+      end
     end
 
   end
