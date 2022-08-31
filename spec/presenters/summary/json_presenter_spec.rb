@@ -1,41 +1,43 @@
-RSpec.describe Presenters::Summary::JsonPresenter do
+# rubocop:disable Metrics/BlockLength
+RSpec.describe Summary::JsonPresenter do
   subject(:subject) { described_class.new(c100_application) }
-  let(:c100_application) { C100Application.create(
-    orders: orders,
-    consent_order: 'yes',
-    permission_sought: 'not required',
-    permission_details: 'test',
-    application_details: 'details',
-    urgent_hearing: 'no',
-    urgent_hearing_details:'urgency reason',
-    urgent_hearing_when: 'tomorrow',
-    without_notice: 'yes',
-    without_notice_details: 'why not',
-    urgent_hearing_short_notice: 'no',
-    miam_attended: 'no',
-    miam_certification_number: '132',
-    miam_mediator_exemption: 'yes',
-    miam_certification_sole_trader_name: 'jim',
-    miam_certification_service_name: 'miam service',
-    risk_of_abduction: 'yes',
-    substance_abuse: 'yes',
-    concerns_contact_type: 'supervised',
-    concerns_contact_other: 'no',
-    children_previous_proceedings: 'yes',
-    international_resident: 'yes resident',
-    international_resident_details: 'resident',
-    international_jurisdiction: 'yes jurisdiction',
-    international_jurisdiction_details: 'jurisdiction',
-    international_request: 'yes request',
-    international_request_details: 'request',
-    reduced_litigation_capacity: 'yes',
-    participation_capacity_details: 'capacity',
-    participation_other_factors_details: 'factors',
-    participation_referral_or_assessment_details: 'referral'
-    ) }
+  let(:c100_application) do
+    C100Application.create(
+      orders: orders,
+      consent_order: 'yes',
+      permission_sought: 'not required',
+      permission_details: 'test',
+      application_details: 'details',
+      urgent_hearing: 'no',
+      urgent_hearing_details: 'urgency reason',
+      urgent_hearing_when: 'tomorrow',
+      without_notice: 'yes',
+      without_notice_details: 'why not',
+      urgent_hearing_short_notice: 'no',
+      miam_attended: 'no',
+      miam_certification_number: '132',
+      miam_mediator_exemption: 'yes',
+      miam_certification_sole_trader_name: 'jim',
+      miam_certification_service_name: 'miam service',
+      risk_of_abduction: 'yes',
+      substance_abuse: 'yes',
+      concerns_contact_type: 'supervised',
+      concerns_contact_other: 'no',
+      children_previous_proceedings: 'yes',
+      international_resident: 'yes resident',
+      international_resident_details: 'resident',
+      international_jurisdiction: 'yes jurisdiction',
+      international_jurisdiction_details: 'jurisdiction',
+      international_request: 'yes request',
+      international_request_details: 'request',
+      reduced_litigation_capacity: 'yes',
+      participation_capacity_details: 'capacity',
+      participation_other_factors_details: 'factors',
+      participation_referral_or_assessment_details: 'referral'
+    )
+  end
 
-
-  before {
+  before do
     solicitor
     child1
     applicant
@@ -50,8 +52,7 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     relationship_applicant
     relationship_respondent
     relationship_other
-  }
-
+  end
 
   let(:orders) { [] }
   let(:solicitor) do
@@ -63,8 +64,8 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       reference: 'ref 123',
       id: '123',
       firm_name: 'Law and Order',
-      c100_application: c100_application)
-
+      c100_application: c100_application
+    )
   end
 
   let(:address) do
@@ -110,19 +111,19 @@ RSpec.describe Presenters::Summary::JsonPresenter do
 
     let(:child1) do
       Child.create(
-       first_name: "Joe",
-       last_name: "Doe",
-       gender: "female",
-       dob: Date.parse('30 Nov 1989'),
-       special_guardianship_order: "no",
-       parental_responsibility: "Petr and Anna",
-       child_order: child_order,
-       child_residence: child1_residence,
-       c100_application: c100_application
-       )
+        first_name: "Joe",
+        last_name: "Doe",
+        gender: "female",
+        dob: Date.parse('30 Nov 1989'),
+        special_guardianship_order: "no",
+        parental_responsibility: "Petr and Anna",
+        child_order: child_order,
+        child_residence: child1_residence,
+        c100_application: c100_application
+      )
     end
 
-    let(:relationship_applicant) {
+    let(:relationship_applicant) do
       Relationship.create(
         relation: "Father",
         relation_other_value: nil,
@@ -130,8 +131,8 @@ RSpec.describe Presenters::Summary::JsonPresenter do
         person_id: applicant.id,
         c100_application: c100_application,
       )
-    }
-    let(:relationship_respondent) {
+    end
+    let(:relationship_respondent) do
       Relationship.create(
         relation: "Mother",
         relation_other_value: nil,
@@ -139,8 +140,8 @@ RSpec.describe Presenters::Summary::JsonPresenter do
         person_id: respondent.id,
         c100_application: c100_application,
       )
-    }
-    let(:relationship_other) {
+    end
+    let(:relationship_other) do
       Relationship.create(
         relation: "Guardian",
         relation_other_value: nil,
@@ -148,14 +149,13 @@ RSpec.describe Presenters::Summary::JsonPresenter do
         person_id: other_party.id,
         c100_application: c100_application,
       )
-    }
+    end
 
-
-    let(:child1_residence) {
+    let(:child1_residence) do
       ChildResidence.create(person_ids: [applicant.id])
-    }
+    end
 
-    let(:child_order) { ChildOrder.create(orders: ['child_arrangements_home', 'prohibited_steps_moving']) }
+    let(:child_order) { ChildOrder.create(orders: %w[child_arrangements_home prohibited_steps_moving]) }
 
     context 'children data' do
       let(:children_json) { json_file[0][:children][0] }
@@ -177,44 +177,43 @@ RSpec.describe Presenters::Summary::JsonPresenter do
 
     let(:applicant) do
       Applicant.create(
-       first_name: "Kate",
-       last_name: "Holmes",
-       previous_name: "Dean",
-       gender: "female",
-       dob: Date.parse('30 Nov 1980'),
-       birthplace: "cirencester",
-       mobile_phone: "123456987",
-       email: "kate@holmes.com",
-       address_data: address,
-       residence_requirement_met: "yes",
-       residence_history: '',
-       email_keep_private: nil,
-       mobile_keep_private: nil,
-       residence_keep_private: 'Yes',
-       c100_application: c100_application
-       )
+        first_name: "Kate",
+        last_name: "Holmes",
+        previous_name: "Dean",
+        gender: "female",
+        dob: Date.parse('30 Nov 1980'),
+        birthplace: "cirencester",
+        mobile_phone: "123456987",
+        email: "kate@holmes.com",
+        address_data: address,
+        residence_requirement_met: "yes",
+        residence_history: '',
+        email_keep_private: nil,
+        mobile_keep_private: nil,
+        residence_keep_private: 'Yes',
+        c100_application: c100_application
+      )
     end
 
     let(:other_party) do
       OtherParty.create(
-       first_name: "Grandma",
-       last_name: "Nana",
-       previous_name: "",
-       gender: "female",
-       dob: Date.parse('30 Nov 1940'),
-       birthplace: "cirencester",
-       mobile_phone: "123456987",
-       email: "",
-       address_data: address,
-       residence_requirement_met: "yes",
-       residence_history: '',
-       email_keep_private: nil,
-       mobile_keep_private: nil,
-       residence_keep_private: 'Yes',
-       c100_application: c100_application
-       )
+        first_name: "Grandma",
+        last_name: "Nana",
+        previous_name: "",
+        gender: "female",
+        dob: Date.parse('30 Nov 1940'),
+        birthplace: "cirencester",
+        mobile_phone: "123456987",
+        email: "",
+        address_data: address,
+        residence_requirement_met: "yes",
+        residence_history: '',
+        email_keep_private: nil,
+        mobile_keep_private: nil,
+        residence_keep_private: 'Yes',
+        c100_application: c100_application
+      )
     end
-
 
     context 'applicant data' do
       let(:applicant_json) { json_file[0][:applicants][0] }
@@ -238,7 +237,10 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(applicant_json[:email]).to eql 'kate@holmes.com' }
       it { expect(applicant_json[:phoneNumber]).to eql '123456987' }
       it { expect(applicant_json[:placeOfBirth]).to eql 'cirencester' }
-      it { expect(applicant_json[:address]).to eq ({:AddressLine1=>"house 2", :AddressLine2=>"street 2", :AddressLine3=>"block 2", :Country=>"United Kingdom", :County=>nil, :PostCode=>"BQODFD", :PostTown=>"Birmingham 2"})}
+      it {
+        expect(applicant_json[:address]).to eq({AddressLine1: "house 2", AddressLine2: "street 2", AddressLine3: "block 2",
+       Country: "United Kingdom", County: nil, PostCode: "BQODFD", PostTown: "Birmingham 2"})
+      }
       # it { expect(applicant_json[:isAtAddressLessThan5Years]).to eql 'No' }
       # it { expect(applicant_json[:addressLivedLessThan5YearsDetails]).to eql nil }
       it { expect(applicant_json[:isAddressConfidential]).to eql 'Yes' }
@@ -248,28 +250,27 @@ RSpec.describe Presenters::Summary::JsonPresenter do
 
     let(:respondent) do
       Respondent.create(
-       first_name: "Tom",
-       last_name: "Jones",
-       previous_name: "Sherlock",
-       gender: "male",
-       dob: nil,
-       birthplace: nil,
-       mobile_phone: "003456987",
-       email: "tom@holmes.com",
-       address_data: address,
-       residence_requirement_met: "yes",
-       residence_history: '',
-       email_keep_private: true,
-       mobile_keep_private: true,
-       residence_keep_private: 'Yes',
-       c100_application: c100_application
-       )
+        first_name: "Tom",
+        last_name: "Jones",
+        previous_name: "Sherlock",
+        gender: "male",
+        dob: nil,
+        birthplace: nil,
+        mobile_phone: "003456987",
+        email: "tom@holmes.com",
+        address_data: address,
+        residence_requirement_met: "yes",
+        residence_history: '',
+        email_keep_private: true,
+        mobile_keep_private: true,
+        residence_keep_private: 'Yes',
+        c100_application: c100_application
+      )
     end
 
     context 'respondent data' do
       let(:respondent_json) { json_file[0][:respondents][0] }
-      let(:address) {{}}
-
+      let(:address) { {} }
 
       it { expect(respondent_json[:firstName]).to eql 'Tom' }
       it { expect(respondent_json[:lastName]).to eql 'Jones' }
@@ -282,7 +283,11 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(respondent_json[:isPlaceOfBirthKnown]).to eql 'No' }
       it { expect(respondent_json[:placeOfBirth]).to eql nil }
       it { expect(respondent_json[:isCurrentAddressKnown]).to eql 'No' }
-      it { expect(respondent_json[:address]).to eq ({AddressLine1: nil, AddressLine2: nil, AddressLine3: nil, PostTown: nil, County: nil, Country: nil, PostCode: nil})}
+      it {
+        expect(respondent_json[:address]).to eq({AddressLine1: nil, AddressLine2: nil,
+          AddressLine3: nil, PostTown: nil, County: nil,
+          Country: nil, PostCode: nil})
+      }
       # it { expect(respondent_json[:isAtAddressLessThan5Years]).to eql 'No' }
       # it { expect(respondent_json[:addressLivedLessThan5YearsDetails]).to eql nil }
       it { expect(respondent_json[:isAddressConfidential]).to eql 'Yes' }
@@ -294,11 +299,13 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     context 'type of application' do
       let(:type_of_application_json) { json_file[0][:typeOfApplication] }
 
-      let(:orders) { ["prohibited_steps_names", "child_arrangements_home", "group_prohibited_steps"] }
-
+      let(:orders) { %w[prohibited_steps_names child_arrangements_home group_prohibited_steps] }
 
       it { expect(type_of_application_json[:orderAppliedFor]).to eql 'Child Arrangements Order, Prohibited Steps Order' }
-      it { expect(type_of_application_json[:typeOfChildArrangementsOrder]).to eql 'Changing their names or surname, Decide who they live with and when, Stop the other person doing something' }
+      it {
+        text = 'Changing their names or surname, Decide who they live with and when, Stop the other person doing something'
+        expect(type_of_application_json[:typeOfChildArrangementsOrder]).to eql text
+      }
       # it { expect(type_of_application_json[:natureOfOrder]).to eql '' }
       it { expect(type_of_application_json[:consentOrder]).to eql 'yes' }
       it { expect(type_of_application_json[:applicationPermissionRequired]).to eql 'not required' }
@@ -320,18 +327,20 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(hearing_urgency_json[:doYouRequireAHearingWithReducedNotice]).to eql 'no' }
     end
 
-    let(:miam_exemption) { MiamExemption.create(
-      domestic: ["police_arrested", "group_police"],
-      protection: ["protection_none"],
-      urgency: ["risk_applicant", "risk_unlawful_removal_retention"],
-      adr: ["existing_proceedings_attendance"],
-      misc: ["no_disabled_facilities", "no_respondent_address"],
-      c100_application: c100_application) }
+    let(:miam_exemption) do
+      MiamExemption.create(
+        domestic: %w[police_arrested group_police],
+        protection: ["protection_none"],
+        urgency: %w[risk_applicant risk_unlawful_removal_retention],
+        adr: ["existing_proceedings_attendance"],
+        misc: %w[no_disabled_facilities no_respondent_address],
+        c100_application: c100_application
+      )
+    end
 
     context 'miam' do
       let(:miam_json) { json_file[0][:miam] }
-      let(:address) {{}}
-
+      let(:address) { {} }
 
       it { expect(miam_json[:applicantAttendedMiam]).to eql 'no' }
       it { expect(miam_json[:claimingExemptionMiam]).to eql 'yes' }
@@ -344,94 +353,97 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(miam_json[:mediatorRegistrationNumber]).to eql '132' }
       it { expect(miam_json[:familyMediatorServiceName]).to eql 'miam service' }
       it { expect(miam_json[:soleTraderName]).to eql 'jim' }
-
     end
 
-    let(:abduction) { AbductionDetail.create(
-       children_have_passport: "yes",
-       passport_office_notified: "yes",
-       children_multiple_passports: "yes",
-       passport_possession_other_details: 'other details',
-       previous_attempt: "yes",
-       previous_attempt_details: "tried to get them",
-       previous_attempt_agency_involved: "yes",
-       previous_attempt_agency_details: "told police before",
-       risk_details: "something fishy",
-       current_location: "by the sea",
-       passport_possession: ["mother", "father"],
-       c100_application: c100_application )
-    }
+    let(:abduction) do
+      AbductionDetail.create(
+        children_have_passport: "yes",
+        passport_office_notified: "yes",
+        children_multiple_passports: "yes",
+        passport_possession_other_details: 'other details',
+        previous_attempt: "yes",
+        previous_attempt_details: "tried to get them",
+        previous_attempt_agency_involved: "yes",
+        previous_attempt_agency_details: "told police before",
+        risk_details: "something fishy",
+        current_location: "by the sea",
+        passport_possession: %w[mother father],
+        c100_application: c100_application
+      )
+    end
 
-    let(:abuse_concerns) {
+    let(:abuse_concerns) do
       sexual_abuse
       physical_abuse
       financial_abuse
       psychological_abuse
       emotional_abuse
-    }
+    end
 
-    let(:sexual_abuse) { AbuseConcern.create(c100_application: c100_application,
-      subject: AbuseSubject::CHILDREN, kind: AbuseType::SEXUAL, answer: GenericYesNo::YES)
-    }
-    let(:physical_abuse) { AbuseConcern.create(c100_application: c100_application,
-      subject: AbuseSubject::CHILDREN, kind: AbuseType::PHYSICAL, answer: GenericYesNo::YES)
-    }
-    let(:financial_abuse) { AbuseConcern.create(c100_application: c100_application,
-      subject: AbuseSubject::CHILDREN, kind: AbuseType::FINANCIAL, answer: GenericYesNo::YES)
-    }
-    let(:psychological_abuse) { AbuseConcern.create(c100_application: c100_application,
-      subject: AbuseSubject::CHILDREN, kind: AbuseType::PSYCHOLOGICAL, answer: GenericYesNo::YES)
-    }
-    let(:emotional_abuse) { AbuseConcern.create(c100_application: c100_application,
-      subject: AbuseSubject::CHILDREN, kind: AbuseType::EMOTIONAL, answer: GenericYesNo::YES)
-    }
+    let(:sexual_abuse) do
+      AbuseConcern.create(c100_application: c100_application,
+                          subject: AbuseSubject::CHILDREN, kind: AbuseType::SEXUAL, answer: GenericYesNo::YES)
+    end
+    let(:physical_abuse) do
+      AbuseConcern.create(c100_application: c100_application,
+                          subject: AbuseSubject::CHILDREN, kind: AbuseType::PHYSICAL, answer: GenericYesNo::YES)
+    end
+    let(:financial_abuse) do
+      AbuseConcern.create(c100_application: c100_application,
+                          subject: AbuseSubject::CHILDREN, kind: AbuseType::FINANCIAL, answer: GenericYesNo::YES)
+    end
+    let(:psychological_abuse) do
+      AbuseConcern.create(c100_application: c100_application,
+                          subject: AbuseSubject::CHILDREN, kind: AbuseType::PSYCHOLOGICAL, answer: GenericYesNo::YES)
+    end
+    let(:emotional_abuse) do
+      AbuseConcern.create(c100_application: c100_application,
+                          subject: AbuseSubject::CHILDREN, kind: AbuseType::EMOTIONAL, answer: GenericYesNo::YES)
+    end
 
-
-    let(:court_order) {
+    let(:court_order) do
       CourtOrder.create(c100_application: c100_application,
-        non_molestation: "yes",
-        non_molestation_issue_date: 3.days.ago.to_s(:date),
-        non_molestation_length: "week",
-        non_molestation_is_current: "yes",
-        non_molestation_court_name: "bristol",
-        occupation: "yes",
-        occupation_issue_date: 2.days.ago.to_s(:date),
-        occupation_length: "",
-        occupation_is_current: "current",
-        occupation_court_name: "court oc",
-        forced_marriage_protection: "nope",
-        forced_marriage_protection_issue_date: 4.days.ago.to_s(:date),
-        forced_marriage_protection_length: "",
-        forced_marriage_protection_is_current: "forced current",
-        forced_marriage_protection_court_name: "court f",
-        restraining: "no",
-        restraining_issue_date: 4.days.ago.to_s(:date),
-        restraining_length: "",
-        restraining_is_current: "yep",
-        restraining_court_name: "court rest",
-        injunctive: "yes in",
-        injunctive_issue_date: 5.days.ago.to_s(:date),
-        injunctive_length: "",
-        injunctive_is_current: "still",
-        injunctive_court_name: "court inj",
-        undertaking: "no under",
-        undertaking_issue_date: 1.days.ago.to_s(:date),
-        undertaking_length: "",
-        undertaking_is_current: "under still",
-        undertaking_court_name: "court under",
-        c100_application_id: "33a2e4a6-7c67-4fb2-b65a-6bbe651ebbc4",
-        non_molestation_case_number: "[FILTERED]",
-        occupation_case_number: "[FILTERED]",
-        forced_marriage_protection_case_number: "[FILTERED]",
-        restraining_case_number: "[FILTERED]",
-        injunctive_case_number: "[FILTERED]",
-        undertaking_case_number: "[FILTERED]"
-      )
-    }
+                        non_molestation: "yes",
+                        non_molestation_issue_date: 3.days.ago.to_fs(:date),
+                        non_molestation_length: "week",
+                        non_molestation_is_current: "yes",
+                        non_molestation_court_name: "bristol",
+                        occupation: "yes",
+                        occupation_issue_date: 2.days.ago.to_fs(:date),
+                        occupation_length: "",
+                        occupation_is_current: "current",
+                        occupation_court_name: "court oc",
+                        forced_marriage_protection: "nope",
+                        forced_marriage_protection_issue_date: 4.days.ago.to_fs(:date),
+                        forced_marriage_protection_length: "",
+                        forced_marriage_protection_is_current: "forced current",
+                        forced_marriage_protection_court_name: "court f",
+                        restraining: "no",
+                        restraining_issue_date: 4.days.ago.to_fs(:date),
+                        restraining_length: "",
+                        restraining_is_current: "yep",
+                        restraining_court_name: "court rest",
+                        injunctive: "yes in",
+                        injunctive_issue_date: 5.days.ago.to_fs(:date),
+                        injunctive_length: "",
+                        injunctive_is_current: "still",
+                        injunctive_court_name: "court inj",
+                        undertaking: "no under",
+                        undertaking_issue_date: 1.days.ago.to_fs(:date),
+                        undertaking_length: "",
+                        undertaking_is_current: "under still",
+                        undertaking_court_name: "court under",
+                        c100_application_id: "33a2e4a6-7c67-4fb2-b65a-6bbe651ebbc4",
+                        non_molestation_case_number: "[FILTERED]",
+                        occupation_case_number: "[FILTERED]",
+                        forced_marriage_protection_case_number: "[FILTERED]",
+                        restraining_case_number: "[FILTERED]",
+                        injunctive_case_number: "[FILTERED]",
+                        undertaking_case_number: "[FILTERED]")
+    end
     context 'allegation_of_harm' do
       let(:allegation_of_harm_json) { json_file[0][:allegationsOfHarm] }
-      let(:address) {{}}
-
+      let(:address) { {} }
 
       it { expect(allegation_of_harm_json[:allegationsOfHarmChildAbductionYesNo]).to eql 'yes' }
       it { expect(allegation_of_harm_json[:abductionChildHasPassport]).to eql 'yes' }
@@ -494,59 +506,61 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(allegation_of_harm_json[:agreeChildOtherContact]).to eql 'no' }
     end
 
-    let(:court_proceeding) {
+    let(:court_proceeding) do
       CourtProceeding.create(
-         "children_names"=>"little jim",
-         "court_name"=>"court 1",
-         "case_number"=>"ABC456",
-         "proceedings_date"=>"2 2020",
-         "cafcass_details"=>"BGR586",
-         "order_types"=>"test",
-         "previous_details"=>"not sure",
-         c100_application: c100_application)
-    }
+        "children_names" => "little jim",
+        "court_name" => "court 1",
+        "case_number" => "ABC456",
+        "proceedings_date" => "2 2020",
+        "cafcass_details" => "BGR586",
+        "order_types" => "test",
+        "previous_details" => "not sure",
+        c100_application: c100_application
+      )
+    end
 
-    let(:existing_processeding) {
-      { "children_names"=>"little jim",
-         "court_name"=>"court 1",
-         "case_number"=>"ABC456",
-         "proceedings_date"=>"2 2020",
-         "cafcass_details"=>"BGR586",
-         "order_types"=>"test",
-         "previous_details"=>"not sure"}
-    }
+    let(:existing_processeding) do
+      { "children_names" => "little jim",
+         "court_name" => "court 1",
+         "case_number" => "ABC456",
+         "proceedings_date" => "2 2020",
+         "cafcass_details" => "BGR586",
+         "order_types" => "test",
+         "previous_details" => "not sure"}
+    end
 
     context 'otherProceedings' do
       let(:other_proceeding_json) { json_file[0][:otherProceedings] }
       it { expect(other_proceeding_json[:previousOrOngoingProceedingsForChildren]).to eql 'yes' }
       it { expect(other_proceeding_json[:existingProceedings]).to eq existing_processeding }
-
     end
 
-    let(:court_arrangement) {
+    let(:court_arrangement) do
       CourtArrangement.create(
         c100_application: c100_application,
         intermediary_help: 'no',
         language_options: [LanguageHelp::WELSH_LANGUAGE.to_s,
-          LanguageHelp::LANGUAGE_INTERPRETER.to_s,
-          LanguageHelp::SIGN_LANGUAGE_INTERPRETER.to_s],
+                           LanguageHelp::LANGUAGE_INTERPRETER.to_s,
+                           LanguageHelp::SIGN_LANGUAGE_INTERPRETER.to_s],
         welsh_language_details: 'welsh details',
         language_interpreter_details: 'interpreter details',
         special_arrangements: ['separate_waiting_rooms'],
         special_arrangements_details: 'test',
-        special_assistance: ['hearing_loop', 'braille_documents'],
-        special_assistance_details: 'test assistance',
-        intermediary_help: 'no'
-        )
-    }
+        special_assistance: %w[hearing_loop braille_documents],
+        special_assistance_details: 'test assistance'
+      )
+    end
 
     context 'attending_hearing' do
       let(:attending_hearing_json) { json_file[0][:attendingTheHearing] }
 
       it { expect(attending_hearing_json[:isWelshNeeded]).to eql 'Yes' }
       it { expect(attending_hearing_json[:welshNeeds]).to eql ['welsh details'] }
-      it { expect(attending_hearing_json[:isInterpreterNeeded]).to eql 'Yes'}
-      it { expect(attending_hearing_json[:interpreterNeeds]).to eql 'welsh_language, language_interpreter, sign_language_interpreter, interpreter details' }
+      it { expect(attending_hearing_json[:isInterpreterNeeded]).to eql 'Yes' }
+      it {
+        list = 'welsh_language, language_interpreter, sign_language_interpreter, interpreter details'
+        expect(attending_hearing_json[:interpreterNeeds]).to eql list
+      }
       it { expect(attending_hearing_json[:isDisabilityPresent]).to eql 'Yes' }
       it { expect(attending_hearing_json[:adjustmentsRequired]).to eql 'hearing_loop, braille_documents, test assistance' }
       it { expect(attending_hearing_json[:isSpecialArrangementsRequired]).to eql 'Yes' }
@@ -568,7 +582,6 @@ RSpec.describe Presenters::Summary::JsonPresenter do
     context 'litigation_capacity' do
       let(:litigation_capacity_json) { json_file[0][:litigationCapacity] }
 
-
       it { expect(litigation_capacity_json[:litigationCapacityFactors]).to eql 'yes' }
       it { expect(litigation_capacity_json[:litigationCapacityReferrals]).to eql 'capacity' }
       it { expect(litigation_capacity_json[:litigationCapacityOtherFactors]).to eql 'factors' }
@@ -579,5 +592,5 @@ RSpec.describe Presenters::Summary::JsonPresenter do
       it { expect(json_file[0][:feeAmount]).to eql '£232.00' }
     end
   end
-
 end
+# rubocop:enable Metrics/BlockLength
