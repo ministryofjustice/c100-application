@@ -39,7 +39,7 @@ Feature: Add an applicant to the application
 
     # Fix privacy preferences validation errors and continue
     When I choose "No"
-    Then I should see "The court will not keep John Doe Senior's contact details private"
+    Then I should see "The court will not keep your contact details private"
     When I click the "Continue" link
     Then I should see "Provide details for John Doe Senior"
 
