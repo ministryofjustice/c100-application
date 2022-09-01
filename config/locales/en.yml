@@ -904,6 +904,9 @@ en:
         edit:
           page_title: Special arrangements
           lead_text: Not every court has the facilities listed here, and some need to be agreed by a judge, for example the use of protective screens.
+          domestic_abuse_act_header: Domestic Abuse Act 2021
+          domestic_abuse_act_first_paragraph: Provisions in the Domestic Abuse Act 2021 have the effect of preventing an individual accused of abuse from questioning in person a party or witness in the case who is the victim of the abuse, and also prevents a victim of abuse from questioning in person the accused individual in specified circumstances.
+          domestic_abuse_act_second_paragraph_html: If the court directs that the proceedings be listed for a hearing where oral evidence may be given, form <strong>EX740</strong> (person making the abuse accusation) or form <strong>EX741</strong> (person accused of abuse) ‘Application and information needed by the court to consider whether to prevent (prohibit) questioning (cross-examination) in person’ may need to be completed so that the court can consider whether questioning in person should be prevented. The court will send the appropriate form with the court order.
           court_contact: The court will contact you to discuss safety arrangements before your hearing.
       special_assistance:
         edit:
