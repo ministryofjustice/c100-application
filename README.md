@@ -102,6 +102,15 @@ env variable.
 
 Please refer to the [config/auth0](config/auth0) directory for more details.
 
+## Charts
+
+Jenkins will only automatically update the chart repository if you make the change in your chart config file. If you update one of the templates, you must also bump the version number in `/charts/c100-application/Chart.yaml`.
+
+Test your charts using the CLI command `helm template c100 charts/c100-application`
+
+Delete existing charts using `kubectl delete hr [...]`
+
+
 ## Links
 
 [infrastructure-repo]: https://github.com/hmcts/c100-shared-infrastructure
