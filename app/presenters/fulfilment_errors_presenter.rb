@@ -8,7 +8,7 @@ class FulfilmentErrorsPresenter
   end
 
   def errors
-    @errors.keys.map(&method(:build_errors)).flatten
+    @errors.attribute_names.map(&method(:build_errors)).flatten
   end
 
   private

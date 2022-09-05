@@ -1,5 +1,5 @@
 class Minor < Person
-  has_many :relationships, source: :minor, dependent: :destroy
+  has_many :relationships, dependent: :destroy
 
   # We use `Person` for STI but classes or subclasses of `Minor` don't need
   # visibility to all attributes declared in the `people` DB table.
