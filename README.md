@@ -108,7 +108,7 @@ Jenkins will only automatically update the chart repository if you make the chan
 
 Test your charts using the CLI command `helm template c100 charts/c100-application`
 
-Delete existing charts using `kubectl delete hr [...]`
+Delete existing charts using `kubectl delete hr  c100-application -n c100`
 
 
 ## Links
