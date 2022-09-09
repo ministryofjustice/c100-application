@@ -13,7 +13,8 @@ Rails.application.configure do
       referrer: event.payload[:referrer],
       session_id: event.payload[:session_id],
       tags: %w{c100-application},
-      user_agent: event.payload[:user_agent]
+      user_agent: event.payload[:user_agent],
+      ip: event.payload[:ip]
     }
   end
 
