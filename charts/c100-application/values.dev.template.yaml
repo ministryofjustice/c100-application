@@ -8,7 +8,6 @@ base:
     REDIS_URL: "redis://${SERVICE_NAME}-redis-master:6379"
     DATABASE_SSLMODE: 'allow'
     EXTERNAL_URL: "https://${SERVICE_FQDN}"
-    MAINTENANCE_ENABLED: 'true'
   postgresql:
     enabled: true
     debug: true
