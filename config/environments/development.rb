@@ -8,6 +8,25 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # Settings specified here will take precedence over those in config/application.rb.
+  config.log_level = :info
+  config.lograge.logger = ActiveSupport::Logger.new(STDOUT)
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Logstash.new
+  config.action_view.logger = nil
+  config.lograge.custom_options = lambda do |event|
+    exceptions = %w(controller action format id)
+    {
+      host: event.payload[:host],
+      params: event.payload[:params].except(*exceptions),
+      referrer: event.payload[:referrer],
+      session_id: event.payload[:session_id],
+      tags: %w{c100-application},
+      user_agent: event.payload[:user_agent],
+      ip: event.payload[:ip]
+    }
+  end
+
   # Do not eager load code on boot.
   config.eager_load = false
 
