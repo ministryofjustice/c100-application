@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     payload[:referrer] = request&.referrer
     payload[:session_id] = request&.session&.id
     payload[:user_agent] = request&.user_agent
-    payload[:ip] = request&.remote_ip if config.maintenance_enabled
+    payload[:ip] = request&.remote_ip
   end
 
   def current_c100_application
