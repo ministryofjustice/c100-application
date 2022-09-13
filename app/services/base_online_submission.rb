@@ -37,7 +37,6 @@ class BaseOnlineSubmission
     # StringIO.new(presenter.to_pdf)
   end
 
-
   # :nocov:
   def generate_documents
     raise 'implement in subclasses'

@@ -7,10 +7,12 @@ module Summary
       alias_attribute :c100, :c100_application
 
       def initialize(c100_application)
+        super()
         @c100_application = c100_application
         @section_hash = allegation_of_harm
       end
 
+      # rubocop:disable  Metrics/AbcSize, Metrics/MethodLength
       def allegation_of_harm
         {
           allegationsOfHarmYesNo: "No",
@@ -73,9 +75,9 @@ module Summary
          ordersUndertakingInPlaceCurrent: court_order(:undertaking_is_current),
          ordersUndertakingInPlace: court_order(:undertaking),
           # behaviours: []
-
         }
       end
+      # rubocop:enable  Metrics/AbcSize, Metrics/MethodLength
 
       def abuse_concern(key)
         abuse = c100_application.abuse_concerns.find_by(kind: key)
@@ -88,10 +90,9 @@ module Summary
       end
 
       def abduction_details(key)
-        if c100_application.abduction_detail
-          return c100_application.abduction_detail.send(key).join(', ') if key == :passport_possession
-          c100_application.abduction_detail.send(key)
-        end
+        return unless c100_application.abduction_detail
+        return c100_application.abduction_detail.send(key).join(', ') if key == :passport_possession
+        c100_application.abduction_detail.send(key)
       end
 
       def child_unsupervised

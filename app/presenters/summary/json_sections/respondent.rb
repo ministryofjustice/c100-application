@@ -19,6 +19,7 @@ module Summary
         respondents_data
       end
 
+      # rubocop:disable Metrics/AbcSize
       def respondent_json(respondent)
         {
           firstName: respondent.first_name,
@@ -40,6 +41,7 @@ module Summary
           canYouProvideEmailAddress: yes_no(!respondent.email_keep_private)
         }
       end
+      # rubocop:enable Metrics/AbcSize
 
       def map_address_data(address_data)
         {

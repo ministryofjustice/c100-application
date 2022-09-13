@@ -10,6 +10,7 @@ module Summary
       @c100_application = c100_application
     end
 
+    # rubocop:disable Metrics/AbcSize
     def generate
       [{
         solicitor: [JsonSections::Solicitor.new(c100_application).section_hash],
@@ -33,6 +34,7 @@ module Summary
         # events: {}
       }]
     end
+    # rubocop:enable Metrics/AbcSize
 
     def filename
       'C100 child arrangements application.json'.freeze

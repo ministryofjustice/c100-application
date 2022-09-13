@@ -7,6 +7,7 @@ module Summary
       alias_attribute :c100, :c100_application
 
       def initialize(c100_application)
+        super()
         @c100_application = c100_application
         @section_hash = children
       end
