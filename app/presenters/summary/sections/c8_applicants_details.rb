@@ -20,18 +20,22 @@ module Summary
       # modify this to list only the private details
       def answers
         record_collection.map.with_index(1) do |person, index|
-          [
-            Separator.new("#{name}_index_title", index: index),
-            FreeTextAnswer.new(:person_full_name, person.full_name),
-            address(person),
-            person_email(person),
-            person_home_phone(person),
-            person_mobile_phone(person),
-            Answer.new(:person_voicemail_consent, person.voicemail_consent),
-            Partial.row_blank_space,
-            residence_history(person),
-            Partial.row_blank_space,
-          ]
+          if address(person).value.nil? && person_email(person).value.nil? && person_home_phone(person).value.nil? && person_mobile_phone(person).value.nil? && residence_history(person).value.nil?
+            []
+          else
+            [
+              Separator.new("#{name}_index_title", index: index),
+              FreeTextAnswer.new(:person_full_name, person.full_name),
+              address(person),
+              person_email(person),
+              person_home_phone(person),
+              person_mobile_phone(person),
+              Answer.new(:person_voicemail_consent, person.voicemail_consent),
+              Partial.row_blank_space,
+              residence_history(person),
+              Partial.row_blank_space,
+            ]
+          end
         end.flatten.select(&:show?)
       end
 
