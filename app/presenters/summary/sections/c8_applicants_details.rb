@@ -20,7 +20,7 @@ module Summary
       # modify this to list only the private details
       def answers
         record_collection.map.with_index(1) do |person, index|
-          if address(person).value.nil? && person_email(person).value.nil? && person_home_phone(person).value.nil? && person_mobile_phone(person).value.nil? && residence_history(person).value.nil?
+          if empty_data?(person)
             []
           else
             [
@@ -74,6 +74,14 @@ module Summary
         else
           person.mobile_phone
         end
+      end
+
+      def empty_data?(person)
+        address(person).value.nil? &&
+          person_email(person).value.nil? &&
+          person_home_phone(person).value.nil? &&
+          person_mobile_phone(person).value.nil? &&
+          residence_history(person).value.nil?
       end
 
       def confidential?
