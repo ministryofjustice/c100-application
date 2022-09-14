@@ -1,10 +1,6 @@
 module Summary
   class JsonPresenter
-    DEFAULT_BUNDLE_FORMS ||= [:c100, :c1a, :c8].freeze
-
     attr_reader :c100_application
-
-    # delegate :to_pdf, :has_forms_data?, to: :pdf_generator
 
     def initialize(c100_application)
       @c100_application = c100_application
@@ -12,7 +8,7 @@ module Summary
 
     # rubocop:disable Metrics/AbcSize
     def generate
-      [{
+      @c100_hash = [{
         solicitor: [JsonSections::Solicitor.new(c100_application).section_hash],
         header: {},
         id: @c100_application.id,
@@ -35,6 +31,13 @@ module Summary
       }]
     end
     # rubocop:enable Metrics/AbcSize
+
+    def json_file
+      json_file = Tempfile.new
+      json_file << @c100_hash.to_json
+      json_file.rewind
+      json_file
+    end
 
     def filename
       'C100 child arrangements application.json'.freeze

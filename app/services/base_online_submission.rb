@@ -30,11 +30,9 @@ class BaseOnlineSubmission
   end
 
   def generate_json
-    Summary::JsonPresenter.new(c100_application)
-    # presenter = Summary::PdfPresenter.new(c100_application)
-    # presenter.generate(*args)
-
-    # StringIO.new(presenter.to_pdf)
+    json_presenter = Summary::JsonPresenter.new(c100_application)
+    json_presenter.generate
+    json_presenter.json_file
   end
 
   # :nocov:

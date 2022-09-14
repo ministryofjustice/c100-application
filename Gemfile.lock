@@ -1,7 +1,6 @@
 GEM
   remote: https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev/
   specs:
-    bindex (0.8.1)
     mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
 
 GEM
@@ -84,6 +83,7 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
+    bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     brakeman (5.3.1)

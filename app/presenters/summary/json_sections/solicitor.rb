@@ -13,6 +13,7 @@ module Summary
 
       def solicitor
         c100_solicitor = c100_application.solicitor
+        return {} unless c100_solicitor
         {name: c100_solicitor.full_name,
          address: map_address_data(c100_solicitor.address_data),
          contactDX: c100_solicitor.dx_number,
