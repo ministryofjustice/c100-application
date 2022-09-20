@@ -127,7 +127,7 @@ module Summary
         }
         let(:contact_details_private) { [] }
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(5)
+          expect(answers.count).to eq(0)
         end
 
       end
