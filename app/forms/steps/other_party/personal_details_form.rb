@@ -16,7 +16,8 @@ module Steps
       validates_presence_of  :dob, unless: :dob_unknown?
       validates :dob, sensible_date: true, unless: :dob_unknown?
       validates :input_dob, date: true, unless: :dob_unknown?
-      validates_presence_of :dob_estimate, sensible_date: true, if: :dob_unknown?
+      validates_presence_of :dob_estimate, if: :dob_unknown?
+      validates :dob_estimate, sensible_date: true, if: :dob_unknown?
       validates :input_dob_estimate, date: true, if: :dob_unknown?
       validates :input_dob, blank_date_input: true, if: :dob_unknown?
 
