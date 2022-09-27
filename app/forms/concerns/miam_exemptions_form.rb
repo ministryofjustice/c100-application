@@ -1,11 +1,13 @@
 module MiamExemptionsForm
   extend ActiveSupport::Concern
   include HasOneAssociationForm
+  include ActiveModel::Validations::Callbacks
 
   included do
     has_one_association :miam_exemption
     validate :at_least_one_checkbox_validation
     validate :none_must_be_exclusive
+    before_validation :valid_options
   end
 
   class_methods do
@@ -33,21 +35,52 @@ module MiamExemptionsForm
   end
 
   private
+  
+  # We filter out `group_xxx` items, as the purpose of these are to present the exemptions
+  # in groups for the user to show/hide them, and are not really an exemption by itself.
+  #
+  def valid_options
+    valid_collection = []
+    valid_collection << (remove_group_police_values << remove_group_court_values << remove_group_specialist_values << remove_group_local_authority_values << remove_group_da_service_values).flatten!
+  end
+
+  def remove_group_police_values
+    return [] unless exemptions_collection.include?("group_police")
+
+    exemptions_collection.grep(/\Apolice_/)
+  end
+
+  def remove_group_court_values
+    return [] unless exemptions_collection.include?("group_court")
+
+    exemptions_collection.grep(/\Acourt_/)
+  end
+
+  def remove_group_specialist_values
+    return [] unless exemptions_collection.include?("group_specialist")
+
+    exemptions_collection.grep(/\Aspecialist_/)
+  end
+
+  def remove_group_local_authority_values
+    return [] unless exemptions_collection.include?("group_local_authority")
+
+    exemptions_collection.grep(/\Alocal_authority_/)
+  end
+
+  def remove_group_da_service_values
+    return [] unless exemptions_collection.include?("group_da_service")
+
+    exemptions_collection.grep(/\Ada_service_/)
+  end
 
   def none_must_be_exclusive
     return unless selected_options.grep(/_none$/).any? && selected_options.length > 1
     errors.add(self.class.attribute_name, :none_not_exclusive)
   end
 
-  # We filter out `group_xxx` items, as the purpose of these are to present the exemptions
-  # in groups for the user to show/hide them, and are not really an exemption by itself.
-  #
-  def valid_options
-    selected_options.grep_v(/\Agroup_/)
-  end
-
   def selected_options
-    exemptions_collection & self.class.allowed_values
+    valid_options & self.class.allowed_values
   end
 
   def at_least_one_checkbox_validation
