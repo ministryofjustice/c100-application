@@ -314,9 +314,9 @@ en:
       answers:
         no_respondent_address: You don’t have sufficient contact details for the other people in this application (the respondents)
         without_notice: You’re applying for a without notice hearing
-        no_disabled_facilities: You or the other person has a disability and the mediator doesn’t have disabled facilities
-        no_appointment: You or the other person has contacted 3 mediators within 15 miles and can’t get an appointment within 15 working days
-        no_mediator_nearby: There is no authorised family mediator with an office within 15 miles of your home
+        miam_access_disabled_facilites: You or the other person has a disability and the mediator doesn’t have disabled facilities
+        miam_access_appointment: You or the other person has contacted 3 mediators within 15 miles and can’t get an appointment within 15 working days
+        miam_access_mediator_nearby: There is no authorised family mediator with an office within 15 miles of your home
         access_prohibited: You or any of the other people in this application (the respondents) are in prison or any other institution, subject to bail conditions that prevent contact with each other or subject to a licence that prohibits contact with each other
         non_resident: You or the other people in this application (the respondents) don’t live in England and Wales
         applicant_under_age: The applicant or any of the other people in this application (the respondents) are under 18 years old

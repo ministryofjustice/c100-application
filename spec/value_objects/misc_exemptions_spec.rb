@@ -26,9 +26,9 @@ RSpec.describe MiscExemptions do
     context 'MIAM_ACCESS' do
       it 'returns the expected values' do
         expect(described_class::MIAM_ACCESS.map(&:to_s)).to eq(%w(
-          no_disabled_facilities
-          no_appointment
-          no_mediator_nearby
+          miam_access_disabled_facilites
+          miam_access_appointment
+          miam_access_mediator_nearby
         ))
       end
     end
