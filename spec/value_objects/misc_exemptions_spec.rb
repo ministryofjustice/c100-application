@@ -6,13 +6,13 @@ RSpec.describe MiscExemptions do
 
   context 'NO_RESPONDENT_ADDRESS' do
     it 'returns the expected values' do
-      expect(described_class::NO_RESPONDENT_ADDRESS.to_s).to eq('no_respondent_address')
+      expect(described_class::NO_RESPONDENT_ADDRESS.to_s).to eq('misc_no_respondent_address')
     end
   end
 
   context 'WITHOUT_NOTICE' do
     it 'returns the expected values' do
-      expect(described_class::WITHOUT_NOTICE.to_s).to eq('without_notice')
+      expect(described_class::WITHOUT_NOTICE.to_s).to eq('misc_without_notice')
     end
   end
 
@@ -36,13 +36,13 @@ RSpec.describe MiscExemptions do
 
   context 'ACCESS_PROHIBITED' do
     it 'returns the expected values' do
-      expect(described_class::ACCESS_PROHIBITED.to_s).to eq('access_prohibited')
+      expect(described_class::ACCESS_PROHIBITED.to_s).to eq('misc_access_prohibited')
     end
   end
 
   context 'NON_RESIDENT' do
     it 'returns the expected values' do
-      expect(described_class::NON_RESIDENT.to_s).to eq('non_resident')
+      expect(described_class::NON_RESIDENT.to_s).to eq('misc_non_resident')
     end
   end
 

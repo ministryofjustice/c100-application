@@ -34,16 +34,6 @@ module MiamExemptionsForm
 
   private
 
-  def filtered_groups
-    selected_options.grep(/\Agroup_/).each_with_object(filtered_values = []) do |groupname|
-      filtered_values << groupname
-      filtered_values << valid_options.grep(/\A#{groupname.delete_prefix('group_')}/)
-    end
-    filtered_values.flatten!
-    filtered_values << filtered_values + selected_options - (filtered_values & selected_options)
-    filtered_values.flatten!.compact!
-  end
-
   def none_must_be_exclusive
     return unless selected_options.grep(/_none$/).any? && selected_options.length > 1
     errors.add(self.class.attribute_name, :none_not_exclusive)
@@ -60,8 +50,18 @@ module MiamExemptionsForm
     exemptions_collection & self.class.allowed_values
   end
 
+  def filtered_groups
+    selected_options.grep(/\Agroup_/).each_with_object(filtered_values = []) do |groupname|
+      filtered_values << groupname
+      filtered_values << valid_options.grep(/\A#{groupname.delete_prefix('group_')}/)
+    end
+    filtered_values << valid_options.grep(/\Amisc_/)
+    filtered_values.flatten!.compact!
+    filtered_values
+  end
+
   def at_least_one_checkbox_validation
-    errors.add(self.class.attribute_name, :blank) unless valid_options.any?
+    errors.add(self.class.attribute_name, :blank) unless filtered_groups.any?
   end
 
   def persist!
