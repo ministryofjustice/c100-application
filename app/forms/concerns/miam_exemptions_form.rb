@@ -51,7 +51,8 @@ module MiamExemptionsForm
   end
 
   def filtered_groups
-    selected_options.grep(/\Agroup_/).each_with_object(filtered_values = []) do |groupname|
+    filtered_values = []
+    selected_options.grep(/\Agroup_/).each do |groupname|
       filtered_values << groupname
       filtered_values << valid_options.grep(/\A#{groupname.delete_prefix('group_')}/)
     end
