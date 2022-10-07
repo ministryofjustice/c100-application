@@ -3,7 +3,7 @@ module C100App
     class MiamValueUpdate
       def update_values
         {adr: %w[previous_attendance ongoing_attendance existing_proceedings_attendance
-                 previous_exemption existing_proceedings_exemption adr_none], 
+                 previous_exemption existing_proceedings_exemption adr_none],
          domestic: %w[right_to_remain financial_abuse domestic_none],
          misc: %w[no_respondent_address without_notice access_prohibited
                   non_resident applicant_under_age],
