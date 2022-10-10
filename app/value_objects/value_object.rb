@@ -32,4 +32,12 @@ class ValueObject
   def to_sym
     value
   end
+
+  def present?
+    self.class.sym_values.include? value
+  end
+
+  def blank?
+    !present?
+  end
 end
