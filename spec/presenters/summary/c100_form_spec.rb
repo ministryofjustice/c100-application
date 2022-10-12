@@ -56,6 +56,7 @@ module Summary
           Sections::SectionHeader,
           Sections::LitigationCapacity,
           Sections::SectionHeader,
+          Sections::DomesticAbuseAct,
           Sections::AttendingCourtV2,
           Sections::SectionHeader,
           Sections::ApplicantsDetails,
