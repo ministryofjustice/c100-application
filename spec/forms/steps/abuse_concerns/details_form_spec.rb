@@ -158,7 +158,7 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
       end
       context 'requires help_provided if asked_for_help is yes' do
         let(:asked_for_help){ GenericYesNo::YES }
-        let(:help_provided){ nil }
+        let(:help_provided){ GenericYesNo.new('') }
         it{ expect(subject.save).to be(false) }
       end
       context 'does not require help_provided if asked_for_help is no', saves: true do
