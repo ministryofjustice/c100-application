@@ -4,7 +4,7 @@ class BareApplicationController < ActionController::Base
   # For any other controller, use `ApplicationController` instead.
 
   rescue_from StandardError do |exception|
-    Raven.capture_exception(exception)
+    Sentry.capture_exception(exception)
     head 500
   end
 

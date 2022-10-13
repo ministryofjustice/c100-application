@@ -1,7 +1,3 @@
-Rails.application.config.before_configuration do
-  Raven.configuration.silence_ready = true
-end
-
 class Pa11yciHeader
   DEFAULT_NAME = 'PA11YCI'.freeze
 

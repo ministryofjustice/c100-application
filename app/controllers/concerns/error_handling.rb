@@ -14,12 +14,12 @@ module ErrorHandling
         redirect_to application_completed_errors_path
       when Errors::PaymentError
         # Payment errors are reported to Sentry as it is important to know
-        Raven.capture_exception(exception, tags: { c100_application_id: session[:c100_application_id] })
+        Sentry.capture_exception(exception, tags: { c100_application_id: session[:c100_application_id] })
         redirect_to payment_error_errors_path
       else
         raise if Rails.application.config.consider_all_requests_local
 
-        Raven.capture_exception(exception)
+        Sentry.capture_exception(exception)
         redirect_to unhandled_errors_path
       end
     end
