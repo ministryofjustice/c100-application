@@ -31,16 +31,14 @@ module Steps
 
       def at_least_one_prohibited_step
         prohibited_steps = PetitionOrder::PROHIBITED_STEPS.map(&:to_s)
-        if (selected_options & prohibited_steps).empty?
-          errors.add(:orders, :missing_prohibited_step)
-        end
+        return if (selected_options & prohibited_steps).any?
+        errors.add(:orders, :missing_prohibited_step)
       end
 
       def at_least_one_specific_issue
         specific_issues = PetitionOrder::SPECIFIC_ISSUES.map(&:to_s)
-        if (selected_options & specific_issues).empty?
-          errors.add(:orders, :missing_specific_issue)
-        end
+        return if (selected_options & specific_issues).any?
+        errors.add(:orders, :missing_specific_issue)
       end
 
       def selected_options
