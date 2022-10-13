@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe C100App::Admin::MiamValueUpdate do
-  miam = MiamExemption.create(:domestic => %w[right_to_remain financial_abuse], :adr => %w[previous_exemption],
-                                    :urgency => %w[risk_children], :misc => %w[misc_none without_notice])
-  c100_application = C100Application.create(miam_exemption: miam)
+  let(:miam) {MiamExemption.create(:domestic => %w[right_to_remain financial_abuse], :adr => %w[previous_exemption],
+                                    :urgency => %w[risk_children], :misc => %w[misc_none without_notice])}
+  let!(:c100_application) {C100Application.create(miam_exemption: miam)}
 
-  miam2 = MiamExemption.create(:domestic => %w[right_to_remain financial_abuse], :adr => %w[adr_none],
-                               :misc => %w[misc_none access_prohibited non_resident])
-  c100_application2 = C100Application.create(miam_exemption: miam2)
+  let(:miam2) {MiamExemption.create(:domestic => %w[right_to_remain financial_abuse], :adr => %w[adr_none],
+                               :misc => %w[misc_none access_prohibited non_resident])}
+  let!(:c100_application2) {C100Application.create(miam_exemption: miam2)}
 
-  after(:all) do
+  after do
     c100_application.destroy
     c100_application2.destroy
     miam.destroy

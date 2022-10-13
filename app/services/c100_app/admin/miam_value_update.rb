@@ -42,7 +42,7 @@ module C100App
                             end
             end
             new_column.flatten!
-            MiamExemption.find("id = '#{id[count]}'").update(attribute_key => new_column)
+            MiamExemption.find(id[count]).update(attribute_key => new_column)
             new_column = []
             count += 1
           end
@@ -64,7 +64,7 @@ module C100App
                             end
             end
             new_column.flatten!
-            MiamExemption.find("id = '#{id[count]}'").update(attribute_key => new_column)
+            MiamExemption.find(id[count]).update(attribute_key => new_column)
             new_column = []
             count += 1
           end
