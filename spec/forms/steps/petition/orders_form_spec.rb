@@ -91,6 +91,26 @@ RSpec.describe Steps::Petition::OrdersForm do
       end
     end
 
+    context 'when prohibited steps is ticked but lacks an item' do
+      let(:orders) { ['child_arrangements_home', 'group_prohibited_steps'] }
+      let(:orders_collection) { nil }
+
+      it 'has a validation error' do
+        expect(subject).to_not be_valid
+        expect(subject.errors.added?(:orders, :missing_prohibited_step)).to eq(true)
+      end      
+    end
+
+    context 'when specific issue is ticked but lacks an item' do
+      let(:orders) { ['child_arrangements_home', 'group_specific_issues'] }
+      let(:orders_collection) { nil }
+
+      it 'has a validation error' do
+        expect(subject).to_not be_valid
+        expect(subject.errors.added?(:orders, :missing_specific_issue)).to eq(true)
+      end      
+    end
+
     context 'when invalid checkbox values are submitted' do
       context 'in `orders` attribute' do
         let(:orders) { ['foobar'] }
