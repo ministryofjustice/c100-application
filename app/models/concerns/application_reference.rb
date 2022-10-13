@@ -7,6 +7,7 @@ module ApplicationReference
   class_methods do
     def find_by_reference_code(ref)
       year, month, uuid_part = ref.split('/')
+      return if year.nil? || month.nil?
 
       where(
         created_at: date_range(year, month)
