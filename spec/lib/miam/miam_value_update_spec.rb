@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe C100App::Admin::MiamValueUpdate do
+RSpec.describe Lib::Miam::MiamValueUpdate do
   let(:miam) {MiamExemption.create(:domestic => %w[right_to_remain financial_abuse], :adr => %w[previous_exemption],
                                     :urgency => %w[risk_children], :misc => %w[misc_none without_notice])}
   let!(:c100_application) {C100Application.create(miam_exemption: miam)}

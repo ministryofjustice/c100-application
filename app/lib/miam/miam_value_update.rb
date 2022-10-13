@@ -1,5 +1,5 @@
-module C100App
-  module Admin
+module Lib
+  module Miam
     class MiamValueUpdate
       def update_values
         {adr: %w[previous_attendance ongoing_attendance existing_proceedings_attendance
@@ -32,18 +32,13 @@ module C100App
           id = MiamExemption.pluck(:id)
           column = MiamExemption.pluck(attribute_key)
           count = 0
-          new_column = []
           column.each do |set|
+            new_column = []
             set.each do |entry|
-              new_column << if attribute_array.include?(entry)
-                              "misc_#{entry}"
-                            else
-                              entry
-                            end
+              new_column << (attribute_array.include?(entry) ? "misc_#{entry}" : entry)
             end
             new_column.flatten!
             MiamExemption.find(id[count]).update(attribute_key => new_column)
-            new_column = []
             count += 1
           end
         end
@@ -54,18 +49,13 @@ module C100App
           id = MiamExemption.pluck(:id)
           column = MiamExemption.pluck(attribute_key)
           count = 0
-          new_column = []
           column.each do |set|
+            new_column = []
             set.each do |entry|
-              new_column << if attribute_array.include?(entry)
-                              entry.delete_prefix("misc_")
-                            else
-                              entry
-                            end
+              new_column << (attribute_array.include?(entry) ? entry.delete_prefix("misc_") : entry)
             end
             new_column.flatten!
             MiamExemption.find(id[count]).update(attribute_key => new_column)
-            new_column = []
             count += 1
           end
         end
