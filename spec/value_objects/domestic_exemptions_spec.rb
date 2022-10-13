@@ -100,19 +100,19 @@ RSpec.describe DomesticExemptions do
 
   context 'RIGHT_TO_REMAIN' do
     it 'returns the expected values' do
-      expect(described_class::RIGHT_TO_REMAIN.to_s).to eq('right_to_remain')
+      expect(described_class::RIGHT_TO_REMAIN.to_s).to eq('misc_right_to_remain')
     end
   end
 
   context 'FINANCIAL_ABUSE' do
     it 'returns the expected values' do
-      expect(described_class::FINANCIAL_ABUSE.to_s).to eq('financial_abuse')
+      expect(described_class::FINANCIAL_ABUSE.to_s).to eq('misc_financial_abuse')
     end
   end
 
   context 'DOMESTIC_NONE' do
     it 'returns the expected values' do
-      expect(described_class::DOMESTIC_NONE.to_s).to eq('domestic_none')
+      expect(described_class::DOMESTIC_NONE.to_s).to eq('misc_domestic_none')
     end
   end
 end

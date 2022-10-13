@@ -39,9 +39,9 @@ class DomesticExemptions < ValueObject
       new(:da_service_refuge_refusal)
     ].freeze,
 
-    RIGHT_TO_REMAIN = new(:right_to_remain),
-    FINANCIAL_ABUSE = new(:financial_abuse),
-    DOMESTIC_NONE = new(:domestic_none)
+    RIGHT_TO_REMAIN = new(:misc_right_to_remain),
+    FINANCIAL_ABUSE = new(:misc_financial_abuse),
+    DOMESTIC_NONE = new(:misc_domestic_none)
   ].flatten.freeze
 
   # :nocov:

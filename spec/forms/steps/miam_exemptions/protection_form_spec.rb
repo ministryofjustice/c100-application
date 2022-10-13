@@ -3,17 +3,17 @@ require 'spec_helper'
 RSpec.describe Steps::MiamExemptions::ProtectionForm do
   let(:arguments) { {
     c100_application: c100_application,
-    protection: ['authority_enquiring'],
+    protection: ['misc_authority_enquiring'],
   } }
 
   let(:c100_application) { instance_double(C100Application, miam_exemption: miam_exemption_record) }
-  let(:miam_exemption_record) { MiamExemption.new(protection: ['authority_enquiring']) }
+  let(:miam_exemption_record) { MiamExemption.new(protection: ['misc_authority_enquiring']) }
 
   subject { described_class.new(arguments) }
 
   describe 'custom getter override' do
     it 'returns all the exemptions in all attributes' do
-      expect(subject.exemptions_collection).to eq(['authority_enquiring'])
+      expect(subject.exemptions_collection).to eq(['misc_authority_enquiring'])
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe Steps::MiamExemptions::ProtectionForm do
     context 'when form is valid' do
       it 'saves the record' do
         expect(miam_exemption_record).to receive(:update).with(
-          protection: %w(authority_enquiring),
+          protection: %w(misc_authority_enquiring),
         ).and_return(true)
 
         expect(subject.save).to be(true)
@@ -75,7 +75,7 @@ RSpec.describe Steps::MiamExemptions::ProtectionForm do
       context 'and nothing else is selected' do
         let(:arguments) { {
           c100_application: c100_application,
-          protection: ['protection_none']
+          protection: ['misc_protection_none']
         } }
         it 'is valid' do
           expect(subject).to be_valid
@@ -85,7 +85,7 @@ RSpec.describe Steps::MiamExemptions::ProtectionForm do
       context 'and something else is selected' do
         let(:arguments) { {
           c100_application: c100_application,
-          protection: ['authority_protection_order', 'protection_none']
+          protection: ['misc_authority_protection_order', 'misc_protection_none']
         } }
         it 'is not valid' do
           expect(subject).to_not be_valid

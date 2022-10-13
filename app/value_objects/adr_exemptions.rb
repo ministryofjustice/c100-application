@@ -1,17 +1,17 @@
 class AdrExemptions < ValueObject
   VALUES = [
     PREVIOUS_ADR = [
-      new(:previous_attendance),
-      new(:ongoing_attendance),
-      new(:existing_proceedings_attendance),
+      new(:misc_previous_attendance),
+      new(:misc_ongoing_attendance),
+      new(:misc_existing_proceedings_attendance),
     ].freeze,
 
     PREVIOUS_MIAM = [
-      new(:previous_exemption),
-      new(:existing_proceedings_exemption),
+      new(:misc_previous_exemption),
+      new(:misc_existing_proceedings_exemption),
     ].freeze,
 
-    ADR_NONE = new(:adr_none)
+    ADR_NONE = new(:misc_adr_none)
   ].flatten.freeze
 
   # :nocov:

@@ -3,17 +3,17 @@ require 'spec_helper'
 RSpec.describe Steps::MiamExemptions::UrgencyForm do
   let(:arguments) { {
     c100_application: c100_application,
-    urgency: ['risk_applicant'],
+    urgency: ['misc_risk_applicant'],
   } }
 
   let(:c100_application) { instance_double(C100Application, miam_exemption: miam_exemption_record) }
-  let(:miam_exemption_record) { MiamExemption.new(urgency: ['risk_applicant']) }
+  let(:miam_exemption_record) { MiamExemption.new(urgency: ['misc_risk_applicant']) }
 
   subject { described_class.new(arguments) }
 
   describe 'custom getter override' do
     it 'returns all the exemptions in all attributes' do
-      expect(subject.exemptions_collection).to eq(['risk_applicant'])
+      expect(subject.exemptions_collection).to eq(['misc_risk_applicant'])
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe Steps::MiamExemptions::UrgencyForm do
     context 'when form is valid' do
       it 'saves the record' do
         expect(miam_exemption_record).to receive(:update).with(
-          urgency: %w(risk_applicant),
+          urgency: %w(misc_risk_applicant),
         ).and_return(true)
 
         expect(subject.save).to be(true)
@@ -75,7 +75,7 @@ RSpec.describe Steps::MiamExemptions::UrgencyForm do
       context 'and nothing else is selected' do
         let(:arguments) { {
           c100_application: c100_application,
-          urgency: ['urgency_none']
+          urgency: ['misc_urgency_none']
         } }
         it 'is valid' do
           expect(subject).to be_valid
@@ -85,7 +85,7 @@ RSpec.describe Steps::MiamExemptions::UrgencyForm do
       context 'and something else is selected' do
         let(:arguments) { {
           c100_application: c100_application,
-          urgency: ['risk_applicant', 'urgency_none']
+          urgency: ['misc_risk_applicant', 'misc_urgency_none']
         } }
         it 'is not valid' do
           expect(subject).to_not be_valid
