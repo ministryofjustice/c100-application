@@ -121,8 +121,11 @@ class Court < ApplicationRecord
   end
 
   def self.log_and_raise(exception, data)
-    Raven.extra_context(data: data)
-    Raven.capture_exception(exception)
+    Sentry.with_scope do |scope|
+      scope.set_extras(data: data)
+      Sentry.capture_exception(exception)
+    end
+
     raise
   end
   private_class_method :log_and_raise

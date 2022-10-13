@@ -60,7 +60,7 @@ RSpec.describe CallbacksController, type: :controller do
         end
 
         it 'captures the exception' do
-          expect(Raven).to receive(:capture_exception).with(ActionController::ParameterMissing)
+          expect(Sentry).to receive(:capture_exception).with(ActionController::ParameterMissing)
           post :notify, body: ''
         end
       end

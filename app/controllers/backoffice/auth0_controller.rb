@@ -32,7 +32,7 @@ module Backoffice
     def failure
       error = request.env['omniauth.error']
 
-      Raven.capture_exception(
+      Sentry.capture_exception(
         RuntimeError.new("Auth0 Error: #{error.message}")
       )
 
