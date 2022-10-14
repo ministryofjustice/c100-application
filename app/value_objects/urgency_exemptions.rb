@@ -1,14 +1,14 @@
 class UrgencyExemptions < ValueObject
   VALUES = [
-    RISK_APPLICANT = new(:risk_applicant),
-    UNREASONABLE_HARDSHIP = new(:unreasonable_hardship),
-    RISK_CHILDREN = new(:risk_children),
-    RISK_UNLAWFUL_REMOVAL_RETENTION = new(:risk_unlawful_removal_retention),
-    MISCARRIAGE_JUSTICE = new(:miscarriage_justice),
-    IRRETRIEVABLE_PROBLEMS = new(:irretrievable_problems),
-    INTERNATIONAL_PROCEEDINGS = new(:international_proceedings),
+    RISK_APPLICANT = new(:misc_risk_applicant),
+    UNREASONABLE_HARDSHIP = new(:misc_unreasonable_hardship),
+    RISK_CHILDREN = new(:misc_risk_children),
+    RISK_UNLAWFUL_REMOVAL_RETENTION = new(:misc_risk_unlawful_removal_retention),
+    MISCARRIAGE_JUSTICE = new(:misc_miscarriage_justice),
+    IRRETRIEVABLE_PROBLEMS = new(:misc_irretrievable_problems),
+    INTERNATIONAL_PROCEEDINGS = new(:misc_international_proceedings),
 
-    URGENCY_NONE = new(:urgency_none)
+    URGENCY_NONE = new(:misc_urgency_none)
   ].flatten.freeze
 
   # :nocov:

@@ -7,9 +7,9 @@ RSpec.describe AdrExemptions do
   context 'PREVIOUS_ADR' do
     it 'returns the expected values' do
       expect(described_class::PREVIOUS_ADR.map(&:to_s)).to eq(%w(
-        previous_attendance
-        ongoing_attendance
-        existing_proceedings_attendance
+        misc_previous_attendance
+        misc_ongoing_attendance
+        misc_existing_proceedings_attendance
       ))
     end
   end
@@ -17,15 +17,15 @@ RSpec.describe AdrExemptions do
   context 'PREVIOUS_MIAM' do
     it 'returns the expected values' do
       expect(described_class::PREVIOUS_MIAM.map(&:to_s)).to eq(%w(
-        previous_exemption
-        existing_proceedings_exemption
+        misc_previous_exemption
+        misc_existing_proceedings_exemption
       ))
     end
   end
 
   context 'ADR_NONE' do
     it 'returns the expected values' do
-      expect(described_class::ADR_NONE.to_s).to eq('adr_none')
+      expect(described_class::ADR_NONE.to_s).to eq('misc_adr_none')
     end
   end
 end

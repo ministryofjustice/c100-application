@@ -36,7 +36,7 @@ RSpec.describe MiamExemptionsPresenter do
     end
 
     context 'filter out `xxx_none` items' do
-      let(:domestic_exemptions) { %w(domestic_none) }
+      let(:domestic_exemptions) { %w(misc_domestic_none) }
 
       it 'retrieves the exemptions from the groups' do
         expect(exemptions.size).to eq(0)
@@ -51,7 +51,7 @@ RSpec.describe MiamExemptionsPresenter do
   end
 
   describe '#selection_for' do
-    let(:domestic_exemptions) { %w(group_police police_conviction domestic_none) }
+    let(:domestic_exemptions) { %w(group_police police_conviction misc_domestic_none) }
 
     context 'when there are no exemptions' do
       let(:miam_exemption) { nil }
@@ -66,7 +66,7 @@ RSpec.describe MiamExemptionsPresenter do
 
     context 'when a filter is provided' do
       it 'retrieves the exemptions from the given group, using the default filter' do
-        expect(subject.selection_for(:domestic, filter: :groups)).to eq(%w(police_conviction domestic_none))
+        expect(subject.selection_for(:domestic, filter: :groups)).to eq(%w(police_conviction misc_domestic_none))
       end
     end
   end

@@ -26,7 +26,7 @@ module Steps
       # in groups for the user to show/hide them, and are not really an order by itself.
       #
       def valid_options
-        selected_options.grep_v(/\Agroup_/)
+        clean_options.grep_v(/\Agroup_/)
       end
 
       def at_least_one_prohibited_step
