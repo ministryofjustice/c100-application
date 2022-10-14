@@ -3,17 +3,17 @@ require 'spec_helper'
 RSpec.describe Steps::MiamExemptions::AdrForm do
   let(:arguments) { {
     c100_application: c100_application,
-    adr: ['previous_attendance'],
+    adr: ['misc_previous_attendance'],
   } }
 
   let(:c100_application) { instance_double(C100Application, miam_exemption: miam_exemption_record) }
-  let(:miam_exemption_record) { MiamExemption.new(adr: ['previous_attendance']) }
+  let(:miam_exemption_record) { MiamExemption.new(adr: ['misc_previous_attendance']) }
 
   subject { described_class.new(arguments) }
 
   describe 'custom getter override' do
     it 'returns all the exemptions in all attributes' do
-      expect(subject.exemptions_collection).to eq(['previous_attendance'])
+      expect(subject.exemptions_collection).to eq(['misc_previous_attendance'])
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe Steps::MiamExemptions::AdrForm do
     context 'when form is valid' do
       it 'saves the record' do
         expect(miam_exemption_record).to receive(:update).with(
-          adr: %w(previous_attendance),
+          adr: %w(misc_previous_attendance),
         ).and_return(true)
 
         expect(subject.save).to be(true)
@@ -75,7 +75,7 @@ RSpec.describe Steps::MiamExemptions::AdrForm do
       context 'and nothing else is selected' do
         let(:arguments) { {
           c100_application: c100_application,
-          adr: ['adr_none']
+          adr: ['misc_adr_none']
         } }
         it 'is valid' do
           expect(subject).to be_valid
@@ -85,7 +85,7 @@ RSpec.describe Steps::MiamExemptions::AdrForm do
       context 'and something else is selected' do
         let(:arguments) { {
           c100_application: c100_application,
-          adr: ['previous_attendance', 'adr_none']
+          adr: ['misc_previous_attendance', 'misc_adr_none']
         } }
         it 'is not valid' do
           expect(subject).to_not be_valid

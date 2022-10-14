@@ -50,15 +50,26 @@ module MiamExemptionsForm
     exemptions_collection & self.class.allowed_values
   end
 
+  def filtered_groups
+    filtered_values = []
+    selected_options.grep(/\Agroup_/).each do |groupname|
+      filtered_values << groupname
+      filtered_values << valid_options.grep(/\A#{groupname.delete_prefix('group_')}/)
+    end
+    filtered_values << valid_options.grep(/\Amisc_/)
+    filtered_values.flatten!.compact!
+    filtered_values
+  end
+
   def at_least_one_checkbox_validation
-    errors.add(self.class.attribute_name, :blank) unless valid_options.any?
+    errors.add(self.class.attribute_name, :blank) unless filtered_groups.any?
   end
 
   def persist!
     raise BaseForm::C100ApplicationNotFound unless c100_application
 
     record_to_persist.update(
-      self.class.attribute_name => selected_options
+      self.class.attribute_name => filtered_groups
     )
   end
 end
