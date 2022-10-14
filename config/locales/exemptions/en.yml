@@ -65,8 +65,8 @@ en:
       misc_adr_none: *none_of_these
 
     MISC_EXEMPTIONS: &MISC_EXEMPTIONS
-      no_respondent_address: You don’t have sufficient contact details for the other people in this application (the respondents) to enable a family mediator to contact any of them for the purpose of scheduling the MIAM
-      without_notice: You’re applying for a without notice hearing
+      misc_no_respondent_address: You don’t have sufficient contact details for the other people in this application (the respondents) to enable a family mediator to contact any of them for the purpose of scheduling the MIAM
+      misc_without_notice: You’re applying for a without notice hearing
       ## GROUP MIAM ACCESS ##
       group_miam_access: You can’t access a mediator
       miam_access_disabled_facilites: You or the other person has a disability and the mediator doesn’t have disabled facilities
