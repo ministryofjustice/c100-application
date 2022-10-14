@@ -62,7 +62,7 @@ RSpec.shared_examples 'a date of birth validation with unknown checkbox' do
     end
   end
   context 'validate presence unless `unknown` is selected' do
-    let(:dob) { [nil, 1999,2,12] }
+    let(:dob) { [nil, 2021,2,12] }
     it 'is valid' do
       expect(subject.valid?).to be(true)
     end
@@ -86,16 +86,16 @@ RSpec.shared_examples 'a date of birth validation with unknown checkbox' do
   context 'can have valid dob_estimate' do
     let(:dob) { nil }
     let(:dob_unknown) { true }
-    let(:dob_estimate) { [nil, 1999, 2, 19] }
+    let(:dob_estimate) { [nil, 2021, 2, 19] }
     it 'is valid' do
       expect(subject.valid?).to be(true)
     end
   end
 
   context 'nils the dob_estimate if dob_unknown is false' do
-    let(:dob) { [nil, 1999, 2, 19] }
+    let(:dob) { [nil, 2021, 2, 19] }
     let(:dob_unknown) { false }
-    let(:dob_estimate) { [nil, 1999, 2, 19] }
+    let(:dob_estimate) { [nil, 2021, 2, 19] }
     it 'is valid' do
       expect(subject.valid?).to be(true)
     end
