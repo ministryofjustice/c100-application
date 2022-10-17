@@ -312,8 +312,8 @@ en:
     miam_exemptions_misc:
       question: Other exemptions
       answers:
-        no_respondent_address: You don’t have sufficient contact details for the other people in this application (the respondents)
-        without_notice: You’re applying for a without notice hearing
+        misc_no_respondent_address: You don’t have sufficient contact details for the other people in this application (the respondents)
+        misc_without_notice: You’re applying for a without notice hearing
         miam_access_disabled_facilites: You or the other person has a disability and the mediator doesn’t have disabled facilities
         miam_access_appointment: You or the other person has contacted 3 mediators within 15 miles and can’t get an appointment within 15 working days
         miam_access_mediator_nearby: There is no authorised family mediator with an office within 15 miles of your home
