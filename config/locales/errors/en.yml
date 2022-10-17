@@ -30,10 +30,12 @@ en:
         blank: Enter the date of birth
         invalid: Date of birth is not valid
         future: Date of birth must be in the past
+        under_18: Enter a date of birth under 18 years of age
       dob_estimate:
         blank: Enter the date of birth
         invalid: Approximate date of birth is not valid
         future: Approximate date of birth must be in the past
+        under_18: Enter a date of birth under 18 years of age
       gender:
         inclusion: Select the sex
       birthplace:
