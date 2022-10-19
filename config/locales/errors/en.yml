@@ -30,9 +30,12 @@ en:
         blank: Enter the date of birth
         invalid: Date of birth is not valid
         future: Date of birth must be in the past
+        under_18: Enter a date of birth under 18 years of age
       dob_estimate:
+        blank: Enter the date of birth
         invalid: Approximate date of birth is not valid
         future: Approximate date of birth must be in the past
+        under_18: Enter a date of birth under 18 years of age
       gender:
         inclusion: Select the sex
       birthplace:
@@ -340,6 +343,8 @@ en:
           attributes:
             orders:
               blank: Select what you’re asking the court to decide
+              missing_prohibited_step: Select the activities you wish to stop
+              missing_specific_issue: Select the specific issues you would like to have resolved
         steps/children/orders_form:
           attributes:
             orders:

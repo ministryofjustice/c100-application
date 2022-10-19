@@ -259,12 +259,12 @@ en:
       privacy_known:
         edit:
           page_title: Contact details confidentiality
-          heading: "Keeping %{name}'s contact details private"
+          heading: "Keeping your contact details private"
           privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
       privacy_preferences:
         edit:
           page_title: Contact details confidentiality
-          heading: "Keeping %{name}'s contact details private"
+          heading: "Keeping your contact details private"
           hint: You've stated that the respondents know some of your contact details. Make sure you select the contact details the applicants do not already know.
           lead_text_html: |
             <p class="govuk-body">The answers you give in your response will be shared with other people named in this application (the respondents). This will include your contact details.</p>
@@ -274,8 +274,8 @@ en:
       privacy_summary:
         show:
           page_title: Contact details confidentiality
-          heading: "The court will keep %{name}'s contact details private"
-          heading_not_private: "The court will not keep %{name}'s contact details private"
+          heading: "The court will keep your contact details private"
+          heading_not_private: "The court will not keep your contact details private"
           body_text_html: <p class="govuk-body">You have told us you want to keep these contact details private</p>
           body_text_not_private_html: <p class="govuk-body">You have told us that either the other people named in this application do not know any of your contact details, or you do not want to keep your contact details private from the other people named in this application (the respondents).</p>
           second_text_html: |
@@ -904,6 +904,9 @@ en:
         edit:
           page_title: Special arrangements
           lead_text: Not every court has the facilities listed here, and some need to be agreed by a judge, for example the use of protective screens.
+          domestic_abuse_act_header: Domestic Abuse Act 2021
+          domestic_abuse_act_first_paragraph: Provisions in the Domestic Abuse Act 2021 have the effect of preventing an individual accused of abuse from questioning in person a party or witness in the case who is the victim of the abuse, and also prevents a victim of abuse from questioning in person the accused individual in specified circumstances.
+          domestic_abuse_act_second_paragraph_html: If the court directs that the proceedings be listed for a hearing where oral evidence may be given, form <strong>EX740</strong> (person making the abuse accusation) or form <strong>EX741</strong> (person accused of abuse) ‘Application and information needed by the court to consider whether to prevent (prohibit) questioning (cross-examination) in person’ may need to be completed so that the court can consider whether questioning in person should be prevented. The court will send the appropriate form with the court order.
           court_contact: The court will contact you to discuss safety arrangements before your hearing.
       special_assistance:
         edit:

@@ -1,6 +1,14 @@
 task daily_tasks: [:stdout_environment] do
-  log 'Starting daily tasks'
-  log "Users count: #{User.count} / Applications count: #{C100Application.count}"
+  begin
+    retries ||= 0
+    log 'Starting daily tasks'
+    log "Users count: #{User.count} / Applications count: #{C100Application.count}"
+  rescue PG::ConnectionBad
+    log "PG::ConnectionBad on attempt #{retries+1}"
+    sleep((retries + 1) * 5)
+    retry if (retries += 1) < 3
+    raise # Reraises PG::ConnectionBad if still failing
+  end
 
   Rake::Task['purge:users'].invoke
 
