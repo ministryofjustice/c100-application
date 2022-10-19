@@ -36,14 +36,12 @@ gem 'wicked_pdf', '~> 2.6.0'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
 
-group :production do
+group :development, :production do
   gem 'lograge'
   gem 'logstash-event'
 end
 
 group :development do
-  gem 'lograge'
-  gem 'logstash-event'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'i18n-debug'

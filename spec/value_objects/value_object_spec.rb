@@ -1,8 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe ValueObject do
-  class FooValue < ValueObject; end
-  class BarValue < ValueObject; end
+  class FooValue < ValueObject
+    VALUES=[
+      ONE = new(:one),
+      TWO = new(:two)
+    ].freeze
+    def self.values
+      VALUES
+    end
+  end
+
+  class BarValue < ValueObject
+    VALUES=[
+      ONE = new(:one),
+      TWO = new(:two)
+    ].freeze
+    def self.values
+      VALUES
+    end
+  end
 
   let(:value) { 'Hello!' }
   subject     { described_class.new(value) }

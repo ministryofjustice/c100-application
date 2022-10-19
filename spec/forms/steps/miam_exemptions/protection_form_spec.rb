@@ -85,7 +85,7 @@ RSpec.describe Steps::MiamExemptions::ProtectionForm do
       context 'and something else is selected' do
         let(:arguments) { {
           c100_application: c100_application,
-          protection: ['authority_protection_order', 'misc_protection_none']
+          protection: ['misc_authority_protection_order', 'misc_protection_none']
         } }
         it 'is not valid' do
           expect(subject).to_not be_valid

@@ -104,7 +104,7 @@ RSpec.describe Steps::MiamExemptions::DomesticForm do
       context 'and something else is selected' do
         let(:arguments) { {
           c100_application: c100_application,
-          domestic: ['misc_financial_abuse', 'domestic_none'],
+          domestic: ['misc_financial_abuse', 'misc_domestic_none'],
           exemptions_collection: ['group_police'],
         } }
         it 'is not valid' do
