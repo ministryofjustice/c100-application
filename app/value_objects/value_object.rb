@@ -40,5 +40,4 @@ class ValueObject
   def to_sym
     value
   end
-
 end
