@@ -6,6 +6,10 @@ RSpec.describe Users::RegistrationsController do
   before do
     allow(subject).to receive(:current_c100_application).and_return(c100_application)
     request.env['devise.mapping'] = Devise.mappings[:user]
+<<<<<<< HEAD
+=======
+    C100Application.delete_all
+>>>>>>> merge-new-c100
     User.delete_all # ensure no left-overs
   end
 

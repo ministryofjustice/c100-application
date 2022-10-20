@@ -1,5 +1,8 @@
 task daily_tasks: [:stdout_environment] do
+<<<<<<< HEAD
 
+=======
+>>>>>>> merge-new-c100
   begin
     retries ||= 0
     log 'Starting daily tasks'

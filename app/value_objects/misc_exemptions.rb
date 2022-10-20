@@ -5,7 +5,7 @@ class MiscExemptions < ValueObject
 
     GROUP_MIAM_ACCESS = new(:group_miam_access),
     MIAM_ACCESS = [
-      new(:miam_access_disabled_facilites),
+      new(:miam_access_disabled_facilities),
       new(:miam_access_appointment),
       new(:miam_access_mediator_nearby),
     ].freeze,

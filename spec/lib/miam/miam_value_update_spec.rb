@@ -66,4 +66,8 @@ RSpec.describe Miam::MiamValueUpdate do
     expect(miam2.adr).to eq(%w[adr_none])
     expect(miam2.misc).to eq(%w[misc_none access_prohibited non_resident])
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> merge-new-c100

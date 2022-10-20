@@ -13,6 +13,14 @@ class ValueObject
   alias === ==
   alias eql? ==
 
+  def present?
+    self.class.sym_values.include? value
+  end
+
+  def blank?
+    !present?
+  end
+
   def self.string_values
     values.map(&:to_s)
   end
@@ -33,11 +41,4 @@ class ValueObject
     value
   end
 
-  def present?
-    self.class.sym_values.include? value
-  end
-
-  def blank?
-    !present?
-  end
 end

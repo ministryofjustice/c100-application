@@ -13,14 +13,27 @@ RSpec.describe C100App::CourtOnlineSubmission do
 
   describe '#process' do
     let(:pdf_presenter) { instance_double(Summary::PdfPresenter, generate: true, to_pdf: 'pdf content') }
+<<<<<<< HEAD
 
     before do
       allow(Summary::PdfPresenter).to receive(:new).with(c100_application).and_return(pdf_presenter)
+=======
+    let(:json_presenter) { instance_double(Summary::JsonPresenter, generate: true, json_file: json_file) }
+    let(:json_file) { Tempfile.new }
+
+    before do
+      allow(Summary::PdfPresenter).to receive(:new).with(c100_application).and_return(pdf_presenter)
+      allow(Summary::JsonPresenter).to receive(:new).with(c100_application).and_return(json_presenter)
+>>>>>>> merge-new-c100
     end
 
     context '#generate_documents' do
       before do
         allow(subject).to receive(:deliver_email) # do not care here about the email
+<<<<<<< HEAD
+=======
+        allow(json_presenter).to receive(:generate)
+>>>>>>> merge-new-c100
       end
 
       it 'generates a bundle with C100 and C1A and a separate C8 form' do
@@ -28,8 +41,13 @@ RSpec.describe C100App::CourtOnlineSubmission do
         expect(pdf_presenter).to receive(:generate).with(:c8).ordered
         subject.process
 
+<<<<<<< HEAD
         expect(subject.documents.size).to eq(2)
         expect(subject.documents.keys).to match_array([:bundle, :c8_form])
+=======
+        expect(subject.documents.size).to eq(3)
+        expect(subject.documents.keys).to match_array([:bundle, :c8_form, :json_form])
+>>>>>>> merge-new-c100
       end
     end
 
@@ -38,7 +56,11 @@ RSpec.describe C100App::CourtOnlineSubmission do
 
       before do
         allow(NotifySubmissionMailer).to receive(:with).with(
+<<<<<<< HEAD
           c100_application: c100_application, documents: { bundle: kind_of(StringIO), c8_form: kind_of(StringIO) }
+=======
+          c100_application: c100_application, documents: { bundle: kind_of(StringIO), c8_form: kind_of(StringIO), json_form: json_file}
+>>>>>>> merge-new-c100
         ).and_return(mailer)
       end
 

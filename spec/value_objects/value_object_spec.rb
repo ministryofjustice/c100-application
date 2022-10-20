@@ -1,8 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe ValueObject do
+<<<<<<< HEAD
   class FooValue < ValueObject; end
   class BarValue < ValueObject; end
+=======
+  class FooValue < ValueObject
+    VALUES=[
+      ONE = new(:one),
+      TWO = new(:two)
+    ].freeze
+    def self.values
+      VALUES
+    end
+  end
+
+  class BarValue < ValueObject
+    VALUES=[
+      ONE = new(:one),
+      TWO = new(:two)
+    ].freeze
+    def self.values
+      VALUES
+    end
+  end
+>>>>>>> merge-new-c100
 
   let(:value) { 'Hello!' }
   subject     { described_class.new(value) }
@@ -11,6 +33,10 @@ RSpec.describe ValueObject do
   let(:also_foo_one) { FooValue.new('one') }
   let(:foo_two)      { FooValue.new('two') }
   let(:bar_one)      { BarValue.new('one') }
+<<<<<<< HEAD
+=======
+  let(:blank_one)    { BarValue.new('') }
+>>>>>>> merge-new-c100
 
   it 'is immutable' do
     expect(subject).to be_frozen
@@ -63,4 +89,14 @@ RSpec.describe ValueObject do
       expect(foo_one.to_sym).to eq(:one)
     end
   end
+<<<<<<< HEAD
+=======
+
+  describe '#blank?' do
+    it 'returns whether value is blank' do
+      expect(foo_one.blank?).to eq(false)
+      expect(blank_one.blank?).to eq(true)
+    end
+  end
+>>>>>>> merge-new-c100
 end

@@ -10,6 +10,13 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     }
   )
 end
+<<<<<<< HEAD
 
 OmniAuth.config.allowed_request_methods = [:post]
 OmniAuth.config.on_failure = Backoffice::Auth0Controller.action(:failure)
+=======
+Rails.application.config.to_prepare do
+  OmniAuth.config.allowed_request_methods = [:post]
+  OmniAuth.config.on_failure = Backoffice::Auth0Controller.action(:failure)
+end
+>>>>>>> merge-new-c100
