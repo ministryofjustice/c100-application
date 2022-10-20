@@ -15,7 +15,7 @@ RSpec.shared_examples 'a mandatory date of birth validation' do
   end
 
   context 'when date is invalid' do
-    let(:dob) { Date.new(18, 10, 31) } # 2-digits year (18)
+    let(:dob) { [nil, 18, 10, 31] } # 2-digits year (18)
 
     it 'returns false' do
       expect(subject.save).to be(false)
@@ -28,7 +28,8 @@ RSpec.shared_examples 'a mandatory date of birth validation' do
   end
 
   context 'when date is too old' do
-    let(:dob) { Date.new(1919, 10, 31) }
+    let(:dob) { [nil, 1919, 10, 31] }
+
 
     it 'returns false' do
       expect(subject.save).to be(false)
@@ -41,7 +42,7 @@ RSpec.shared_examples 'a mandatory date of birth validation' do
   end
 
   context 'when date is in the future' do
-    let(:dob) { Date.tomorrow }
+    let(:dob) { [nil, Date.today.year, Date.today.month, Date.tomorrow.day] }
 
     it 'returns false' do
       expect(subject.save).to be(false)
@@ -63,6 +64,7 @@ RSpec.shared_examples 'a date of birth validation with unknown checkbox' do
   end
   context 'validate presence unless `unknown` is selected' do
     let(:dob) { [nil, 2021,2,12] }
+    let(:dob_estimate) { [nil, 0, 0, 0]}
     it 'is valid' do
       expect(subject.valid?).to be(true)
     end
@@ -84,7 +86,7 @@ RSpec.shared_examples 'a date of birth validation with unknown checkbox' do
   end
 
   context 'can have valid dob_estimate' do
-    let(:dob) { nil }
+    let(:dob) { [nil, 0, 0, 0] }
     let(:dob_unknown) { true }
     let(:dob_estimate) { [nil, 2021, 2, 19] }
     it 'is valid' do
