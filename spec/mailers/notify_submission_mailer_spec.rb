@@ -75,8 +75,12 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         urgent: 'yes',
         c8_included: 'no',
         link_to_c8_pdf: '',
-        link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false },
-        link_to_json: { file: 'dGVzdDI=', is_csv: false }
+        link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
+          confirm_email_before_download: nil,
+          retention_period: nil },
+        link_to_json: { file: 'dGVzdDI=', is_csv: false,
+          confirm_email_before_download: nil,
+          retention_period: nil }
       })
     end
 
@@ -91,8 +95,12 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           mail.govuk_notify_personalisation
         ).to match(hash_including(
           c8_included: 'yes',
-          link_to_c8_pdf: { file: 'YzggZm9ybQ==', is_csv: false },
-          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false },
+          link_to_c8_pdf: { file: 'YzggZm9ybQ==', is_csv: false,
+          confirm_email_before_download: nil,
+          retention_period: nil },
+          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
+          confirm_email_before_download: nil,
+          retention_period: nil },
         ))
       end
     end
