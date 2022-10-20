@@ -40,10 +40,6 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
   end
 
   describe '#application_to_court' do
-<<<<<<< HEAD
-    let(:documents) { { bundle: StringIO.new('bundle pdf'), c8_form: c8_form } }
-    let(:c8_form) { StringIO.new('') }
-=======
     let(:documents) { { bundle: StringIO.new('bundle pdf'), c8_form: c8_form, json_form: tmp_file } }
     let(:c8_form) { StringIO.new('') }
     let(:tmp_file) {
@@ -52,7 +48,6 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       tmp.rewind
       tmp
     }
->>>>>>> merge-new-c100
 
     let(:mail) {
       described_class.with(
@@ -81,10 +76,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         c8_included: 'no',
         link_to_c8_pdf: '',
         link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false },
-<<<<<<< HEAD
-=======
         link_to_json: { file: 'dGVzdDI=', is_csv: false }
->>>>>>> merge-new-c100
       })
     end
 

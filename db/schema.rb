@@ -2,25 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-<<<<<<< HEAD
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
-=======
 # This file is the source Rails uses to define your schema when running `bin/rails
 # db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
->>>>>>> merge-new-c100
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2022_10_05_130946) do
-
-=======
 ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
->>>>>>> merge-new-c100
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -55,22 +45,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
     t.string "help_provided"
     t.text "help_description"
     t.uuid "c100_application_id"
-<<<<<<< HEAD
-    t.datetime "created_at"
-    t.datetime "updated_at"
-=======
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
->>>>>>> merge-new-c100
     t.index ["c100_application_id"], name: "index_abuse_concerns_on_c100_application_id"
   end
 
   create_table "backoffice_audit_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-=======
     t.datetime "created_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.string "author", null: false
     t.string "action", null: false
     t.json "details", default: {}
@@ -81,24 +62,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
     t.string "email", null: false
     t.boolean "active", default: true
     t.integer "logins_count", default: 0
-<<<<<<< HEAD
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-=======
     t.datetime "current_login_at", precision: nil
     t.datetime "last_login_at", precision: nil
->>>>>>> merge-new-c100
     t.index ["email"], name: "index_backoffice_users_on_email", unique: true
   end
 
   create_table "c100_applications", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.string "navigation_stack", default: [], array: true
     t.uuid "user_id"
     t.string "user_type"
@@ -178,11 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
     t.string "research_consent"
     t.string "research_consent_email"
     t.string "miam_mediator_exemption"
-<<<<<<< HEAD
-    t.datetime "completed_at"
-=======
     t.datetime "completed_at", precision: nil
->>>>>>> merge-new-c100
     t.string "declaration_confirmation"
     t.string "mediation_voucher_scheme"
     t.index ["court_id"], name: "index_c100_applications_on_court_id"
@@ -203,13 +170,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
   end
 
   create_table "completed_applications_audit", id: false, force: :cascade do |t|
-<<<<<<< HEAD
-    t.datetime "started_at", null: false
-    t.datetime "completed_at", null: false
-=======
     t.datetime "started_at", precision: nil, null: false
     t.datetime "completed_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.string "submission_type"
     t.string "court", null: false
     t.string "reference_code", null: false
@@ -218,13 +180,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
   end
 
   create_table "court_arrangements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.string "language_options", array: true
     t.text "language_interpreter_details"
     t.text "sign_language_interpreter_details"
@@ -293,13 +250,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
   end
 
   create_table "courts", id: :string, force: :cascade do |t|
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.string "name", null: false
     t.string "email", null: false
     t.string "gbs", null: false
@@ -310,19 +262,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
   create_table "email_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "to_address"
     t.string "email_copy_to"
-<<<<<<< HEAD
-    t.datetime "sent_at"
-    t.datetime "user_copy_sent_at"
-    t.uuid "c100_application_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-=======
     t.datetime "sent_at", precision: nil
     t.datetime "user_copy_sent_at", precision: nil
     t.uuid "c100_application_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
->>>>>>> merge-new-c100
     t.index ["c100_application_id"], name: "index_email_submissions_on_c100_application_id", unique: true
   end
 
@@ -330,15 +274,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
     t.string "to", null: false
     t.string "reference", null: false
     t.string "status", null: false
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-    t.datetime "completed_at", null: false
-    t.datetime "sent_at"
-=======
     t.datetime "created_at", precision: nil, null: false
     t.datetime "completed_at", precision: nil, null: false
     t.datetime "sent_at", precision: nil
->>>>>>> merge-new-c100
     t.index ["reference"], name: "index_email_submissions_audit_on_reference"
   end
 
@@ -353,13 +291,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
   end
 
   create_table "payment_intents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.string "nonce"
     t.string "payment_id"
     t.uuid "c100_application_id"
@@ -368,13 +301,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
   end
 
   create_table "people", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.string "type", null: false
     t.string "first_name"
     t.string "last_name"
@@ -435,13 +363,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
   end
 
   create_table "short_urls", primary_key: "path", id: :string, force: :cascade do |t|
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.string "target_url"
     t.string "target_path"
     t.string "utm_source"
@@ -451,13 +374,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
   end
 
   create_table "solicitors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.string "full_name"
     t.string "firm_name"
     t.string "reference"
@@ -475,21 +393,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_130946) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-<<<<<<< HEAD
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
     t.datetime "reset_password_sent_at", precision: nil
     t.datetime "remember_created_at", precision: nil
     t.datetime "current_sign_in_at", precision: nil
     t.datetime "last_sign_in_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
->>>>>>> merge-new-c100
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

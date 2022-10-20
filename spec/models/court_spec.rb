@@ -303,11 +303,7 @@ describe Court do
 
         it 'does not refresh the data' do
           expect(court).to receive(:stale?).and_return(false)
-<<<<<<< HEAD
-          expect(court).not_to receive(:update_attributes)
-=======
           expect(court).not_to receive(:update)
->>>>>>> merge-new-c100
 
           expect(subject).to eq(court)
         end

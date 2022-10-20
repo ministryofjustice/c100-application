@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-workers_count = ENV.fetch("WEB_CONCURRENCY") { 2 }.to_i
-threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i
-
-workers workers_count if ENV['RAILS_ENV'] == 'production'
-threads threads_count, threads_count
-
-preload_app!
-
-port        ENV.fetch("PUMA_PORT") { 3000 }
-environment ENV.fetch("RAILS_ENV") { "development" }
-
-=======
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
@@ -53,7 +40,6 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # preload_app!
 
 # Allow puma to be restarted by `rails restart` command.
->>>>>>> merge-new-c100
 plugin :tmp_restart
 
 on_worker_boot do

@@ -201,8 +201,4 @@ RSpec.shared_examples 'a model with structured first and last names' do
       it { expect(subject.full_name).to eq('John Doe') }
     end
   end
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> merge-new-c100

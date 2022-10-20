@@ -17,14 +17,10 @@ end
 # Refer to: `config/initializers/form_builder.rb`
 #
 RSpec.describe GOVUKDesignSystemFormBuilder::FormBuilder do
-<<<<<<< HEAD
-  let(:helper) { TestHelper.new }
-=======
   let(:assigns) { {} }
   let(:controller) { ActionView::TestCase::TestController.new }
   let(:lookup_context) { ActionView::LookupContext.new(nil) }
   let(:helper) { ActionView::Base.new(lookup_context, assigns, controller) }
->>>>>>> merge-new-c100
 
   describe '#continue_button' do
     let(:builder) { described_class.new :applicant, Applicant.new, helper, {} }
@@ -34,15 +30,10 @@ RSpec.describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:user_signed_in)   { false }
 
     before do
-<<<<<<< HEAD
-      allow(helper).to receive(:current_c100_application).and_return(c100_application)
-      allow(helper).to receive(:user_signed_in?).and_return(user_signed_in)
-=======
       without_partial_double_verification do
         allow(helper).to receive(:current_c100_application).and_return(c100_application)
         allow(helper).to receive(:user_signed_in?).and_return(user_signed_in)
       end
->>>>>>> merge-new-c100
     end
 
     context 'no c100 application yet' do

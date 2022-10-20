@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-Rails.application.configure do
-  config.lograge.logger = ActiveSupport::Logger.new(STDOUT)
-  config.lograge.enabled = true
-  config.lograge.formatter = Lograge::Formatters::Logstash.new
-  config.log_level = :info
-  config.action_view.logger = nil
-
-=======
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
@@ -16,7 +7,6 @@ Rails.application.configure do
   config.lograge.enabled = true
   config.lograge.formatter = Lograge::Formatters::Logstash.new
   config.action_view.logger = nil
->>>>>>> merge-new-c100
   config.lograge.custom_options = lambda do |event|
     exceptions = %w(controller action format id)
     {
@@ -25,19 +15,12 @@ Rails.application.configure do
       referrer: event.payload[:referrer],
       session_id: event.payload[:session_id],
       tags: %w{c100-application},
-<<<<<<< HEAD
-      user_agent: event.payload[:user_agent]
-    }
-  end
-  # Settings specified here will take precedence over those in config/application.rb.
-=======
       user_agent: event.payload[:user_agent],
       ip: event.payload[:ip]
     }
   end
 
   config.action_view.logger = nil
->>>>>>> merge-new-c100
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -64,37 +47,22 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   config.assets.js_compressor = :uglifier
-<<<<<<< HEAD
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
-
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = 'http://assets.example.com'
-=======
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = 'http://assets.example.com'
->>>>>>> merge-new-c100
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-<<<<<<< HEAD
-  config.force_ssl = ENV.key?('DISABLE_HTTPS') ? false : true
-
-  # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
-=======
   # config.force_ssl = true
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
->>>>>>> merge-new-c100
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
@@ -117,13 +85,8 @@ Rails.application.configure do
   # https://github.com/ruby-i18n/i18n/releases/tag/v1.1.0
   config.i18n.fallbacks = [I18n.default_locale]
 
-<<<<<<< HEAD
-  # Send deprecation notices to registered listeners.
-  config.active_support.deprecation = :notify
-=======
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
->>>>>>> merge-new-c100
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
@@ -141,8 +104,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-<<<<<<< HEAD
-=======
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
   # middleware. The `delay` is used to determine how long to wait after a write
@@ -163,16 +124,11 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
->>>>>>> merge-new-c100
   # NB: Because of the way the form builder works, and hence the
   # gov.uk elements formbuilder, exceptions will not be raised for
   # missing translations of model attribute names. The form will
   # get the constantized attribute name itself, in form labels.
-<<<<<<< HEAD
-  config.action_view.raise_on_missing_translations = false
-=======
   config.i18n.raise_on_missing_translations = false
->>>>>>> merge-new-c100
 
   # Prevent host header poisoning by enforcing absolute redirects
   if ENV['EXTERNAL_URL'].present?

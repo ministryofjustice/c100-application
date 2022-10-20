@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-Rails.application.configure do
-  config.cache_classes = false
-
-  config.eager_load = false
-
-  config.consider_all_requests_local = true
-  config.action_controller.perform_caching = false
-
-  # save mails to tmp/mails
-  config.action_mailer.delivery_method = :file
-  config.action_mailer.raise_delivery_errors = true
-=======
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
@@ -69,20 +56,10 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
 
->>>>>>> merge-new-c100
   config.action_mailer.perform_caching = false
   # lets you preview action_mailer mails from the browser at:
   # /rails/mailers/(mailer name)/(method name)
   config.action_mailer.preview_path = "#{Rails.root}/app/mailer_previews"
-<<<<<<< HEAD
-  config.active_support.deprecation = :log
-
-  config.active_record.migration_error = :page_load
-
-  config.assets.debug = true
-  config.assets.quiet = true
-
-=======
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -119,16 +96,11 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
->>>>>>> merge-new-c100
   # NB: Because of the way the form builder works, and hence the
   # gov.uk elements formbuilder, exceptions will not be raised for
   # missing translations of model attribute names. The form will
   # get the constantized attribute name itself, in form labels.
-<<<<<<< HEAD
-  config.action_view.raise_on_missing_translations = true
-=======
   config.i18n.raise_on_missing_translations = true
->>>>>>> merge-new-c100
 
   routes.default_url_options = { host: 'localhost' }
   config.action_mailer.default_url_options = { host: "localhost" }

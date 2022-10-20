@@ -12,10 +12,7 @@ development:
 test:
   <<: *default
   database: 'c100-test'
-<<<<<<< HEAD
-=======
 
->>>>>>> merge-new-c100
 production:
   <<: *default
   sslmode: <%= ENV.fetch('DATABASE_SSLMODE', 'verify-full') %>

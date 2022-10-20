@@ -3,11 +3,8 @@ require 'webmock/rspec'
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
-<<<<<<< HEAD
-=======
 require "simplecov_json_formatter"
 SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
->>>>>>> merge-new-c100
 SimpleCov.minimum_coverage 100
 
 # SimpleCov conflicts with mutant. This lets us turn it off, when necessary.
