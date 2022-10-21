@@ -1,4 +1,5 @@
 require 'webmock/rspec'
+require 'capybara/rails'
 
 ENV['RAILS_ENV'] ||= 'test'
 

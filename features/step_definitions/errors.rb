@@ -5,7 +5,7 @@ When(/^I should see "([^"]*)" in the error summary$/) do |text|
 end
 
 When(/^I should see "([^"]*)" error in the form$/) do |text|
-  expect(page.find("span.govuk-error-message")).to have_text(text)
+  expect(page.find(".govuk-error-message")).to have_text(text)
 end
 
 When(/^"([^"]*)" has focus/) do |text|
