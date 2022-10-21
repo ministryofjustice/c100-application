@@ -7,7 +7,7 @@ Sidekiq.configure_server do |config|
   }
 
   config.death_handlers << ->(job, ex) do
-    Raven.capture_exception(ex, level: 'error', tags: { job_class: job['class'], job_id: job['jid'] })
+    Sentry.capture_exception(ex, level: 'error', tags: { job_class: job['class'], job_id: job['jid'] })
   end
 
   Rails.logger = Sidekiq.logger

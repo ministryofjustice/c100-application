@@ -6,11 +6,11 @@
   <script>
     // Use only the public DSN here!
     Sentry.init({
-      dsn: '<%= "https://#{Raven.configuration.public_key}@#{Raven.configuration.host}/#{Raven.configuration.project_id}" %>'
+      dsn: '<%= "https://#{Sentry.configuration.public_key}@#{Sentry.configuration.host}/#{Sentry.configuration.project_id}" %>'
     });
 
     Sentry.showReportDialog({
-      eventId: '<%= Raven.last_event_id %>'
+      eventId: '<%= Sentry.last_event_id %>'
     });
   </script>
 <% end %>
