@@ -11,12 +11,11 @@ module I18n
     def initialize(locale, key, options = nil)
       super
 
-      Raven.extra_context(
-        locale: locale,
-        scope: options[:scope],
-        key: key
-      )
-      Raven.capture_exception(self)
+      Sentry.with_scope do |scope|
+        scope.set_tags(locale: locale, scope: options[:scope], key: key)
+
+        Sentry.capture_exception(self)
+      end
 
       self
     end

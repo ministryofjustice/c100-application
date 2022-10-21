@@ -129,7 +129,7 @@ RSpec.describe C100App::AddressLookupService do
       end
 
       it 'sends the error to Sentry' do
-        expect(Raven).to receive(:capture_exception).with(exception)
+        expect(Sentry).to receive(:capture_exception).with(exception)
         service.result
       end
 

@@ -52,7 +52,7 @@ module C100App
         response.body
       )
     rescue StandardError => ex
-      Raven.capture_exception(ex)
+      Sentry.capture_exception(ex)
       @last_exception = ex
       []
     end

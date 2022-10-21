@@ -54,7 +54,7 @@ module C100App
     end
 
     def log_and_raise(exception)
-      Raven.capture_exception(exception)
+      Sentry.capture_exception(exception)
       raise
     end
   end
