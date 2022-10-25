@@ -44,6 +44,21 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
     end
   end
 
+  describe '#err_msg' do
+    it 'finds the correct translation' do
+      allow(I18n).to receive(:translate!)
+
+      Steps::AbuseConcerns::DetailsForm.err_msg({
+        attribute: "Help description",
+        model: "Details form",
+        value: nil
+      })
+      expect(I18n).to have_received(:translate!).with(
+        'steps.abuse_concerns.details.edit.errors.help_description')
+    end
+    described_class
+  end
+
   describe '#save' do
     context 'when no c100_application is associated with the form' do
       let(:c100_application) { nil }
