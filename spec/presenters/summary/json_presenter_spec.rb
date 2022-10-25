@@ -591,6 +591,37 @@ RSpec.describe Summary::JsonPresenter do
     context 'fee' do
       it { expect(json_file[0][:feeAmount]).to eql '£232.00' }
     end
+
+    describe '#filename' do
+      it 'returns filename' do
+        expect(subject.filename).to eq('C100 child arrangements application.json')
+      end
+    end
+
+    describe '#json_file' do
+      it 'returns json version of c100_hash' do
+        subject.generate
+        expect(JSON.parse(subject.json_file.read)[0].keys).to eq(
+          ["solicitor",
+          "header",
+           "id",
+           "children",
+           "applicants",
+           "respondents",
+           "typeOfApplication",
+           "hearingUrgency",
+           "miam",
+           "allegationsOfHarm",
+           "otherPeopleInTheCase",
+           "otherProceedings",
+           "attendingTheHearing",
+           "internationalElement",
+           "litigationCapacity",
+           "feeAmount"])
+      end
+    end
   end
+
+
 end
 # rubocop:enable Metrics/BlockLength
