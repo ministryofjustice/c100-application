@@ -19,7 +19,7 @@ RSpec.describe Steps::Applicant::PersonalDetailsForm do
   let(:has_previous_name) { 'no' }
   let(:previous_name) { nil }
   let(:gender) { 'male' }
-  let(:dob) { Date.today }
+  let(:dob) { [nil, Date.today.year, Date.today.month, Date.today.day] }
   let(:birthplace) { 'London' }
 
   subject { described_class.new(arguments) }
