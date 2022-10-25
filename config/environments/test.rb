@@ -5,10 +5,6 @@ require "active_support/core_ext/integer/time"
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
 
-Rails.application.config.before_configuration do
-  Raven.configuration.silence_ready = true
-end
-
 class Pa11yciHeader
   DEFAULT_NAME = 'PA11YCI'.freeze
 

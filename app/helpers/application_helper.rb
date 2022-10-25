@@ -113,12 +113,14 @@ module ApplicationHelper
       locale = parts.shift
       missing_key = parts.join('.')
 
-      Raven.extra_context(
-        locale: locale.to_sym,
-        scope: nil,
-        key: missing_key
-      )
-      Raven.capture_exception(I18n::MissingTranslationData.new(locale, key, options))
+      Sentry.with_scope do |scope|
+        scope.set_extras({
+          locale: locale.to_sym,
+          scope: nil,
+          key: missing_key          
+        })
+      end
+      Sentry.capture_exception(I18n::MissingTranslationData.new(locale, key, options))
     end
   end
 end
