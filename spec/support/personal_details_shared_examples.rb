@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.shared_examples 'a mandatory date of birth validation' do
   context 'when date is not given' do
-    let(:dob) { nil }
+    let(:dob) { [nil, 0, 0, 0] }
 
     it 'returns false' do
       expect(subject.save).to be(false)
@@ -57,7 +57,7 @@ end
 
 RSpec.shared_examples 'a date of birth validation with unknown checkbox' do
   context 'validate presence unless `unknown` is selected' do
-    let(:dob) { nil }
+    let(:dob) { [nil, 0, 0, 0] }
     it 'is not valid' do
       expect(subject.valid?).to be(false)
     end
@@ -77,7 +77,7 @@ RSpec.shared_examples 'a date of birth validation with unknown checkbox' do
   end
 
   context 'cannot have invalid dob_estimate' do
-    let(:dob) { nil }
+    let(:dob) { [nil, 0, 0, 0] }
     let(:dob_unknown) { true }
     let(:dob_estimate) { [nil, 0, 2, 31] }
     it 'is not valid' do
