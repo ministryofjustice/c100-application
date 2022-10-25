@@ -114,7 +114,7 @@ module ApplicationHelper
       missing_key = parts.join('.')
 
       Sentry.with_scope do |scope|
-        scope.set_extras({
+        scope.set_tags({
                            locale: locale.to_sym,
           scope: nil,
           key: missing_key
