@@ -20,9 +20,9 @@ RSpec.describe Steps::OtherParty::PersonalDetailsForm do
   let(:has_previous_name) { 'no' }
   let(:previous_name) { nil }
   let(:gender) { 'male' }
-  let(:dob) { Date.today }
+  let(:dob) { [nil, Date.today.year, Date.today.month, Date.today.day] }
   let(:dob_unknown) { false }
-  let(:dob_estimate) { nil }
+  let(:dob_estimate) { [nil, 0, 0, 0] }
 
   subject { described_class.new(arguments) }
 
