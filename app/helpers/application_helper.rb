@@ -115,10 +115,10 @@ module ApplicationHelper
 
       Sentry.with_scope do |scope|
         scope.set_tags({
-                           locale: locale.to_sym,
+                         locale: locale.to_sym,
           scope: nil,
           key: missing_key
-                         })
+                       })
       end
       Sentry.capture_exception(I18n::MissingTranslationData.new(locale, key, options))
     end
