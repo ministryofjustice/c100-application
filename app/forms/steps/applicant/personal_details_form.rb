@@ -9,14 +9,29 @@ module Steps
 
       validates_inclusion_of :has_previous_name, in: GenericYesNo.values
       validates_presence_of  :previous_name, if: -> { has_previous_name&.yes? }
-
       validates_inclusion_of :gender, in: Gender.values
-
-      validates_presence_of :dob, :birthplace
-
+      validates_presence_of :input_dob, :birthplace
+      validates_presence_of :dob, unless: :date_entered?
       validates :dob, sensible_date: true
+      validates :input_dob, date: true
+
+      attr_accessor :input_dob
+
+      def initialize(args)
+        super(**args)
+        self.input_dob = args[:dob]
+      end
 
       private
+
+      def date_entered?
+        return false if input_dob.nil?
+
+        set_values = input_dob.values_at(1, 2, 3)
+        return false if set_values.all?(&:zero?)
+
+        true
+      end
 
       def persist!
         raise C100ApplicationNotFound unless c100_application

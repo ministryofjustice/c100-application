@@ -16,9 +16,9 @@ RSpec.describe Steps::OtherChildren::PersonalDetailsForm do
 
   let(:record) { nil }
   let(:gender) { 'male' }
-  let(:dob) { Date.today }
+  let(:dob) { [nil, Date.today.year, Date.today.month, Date.today.day] }
   let(:dob_unknown) { false }
-  let(:dob_estimate) { nil }
+  let(:dob_estimate) { [nil, 0, 0, 0] }
 
   subject { described_class.new(arguments) }
 
@@ -41,13 +41,13 @@ RSpec.describe Steps::OtherChildren::PersonalDetailsForm do
 
     context 'for valid details' do
       let(:dob_unknown) { false }
-      let(:dob_estimate) { nil }
+      let(:dob_estimate) { [nil, 0, 0, 0] }
       let(:expected_attributes) {
         {
           gender: Gender::MALE,
           dob: Date.today,
           dob_unknown: dob_unknown,
-          dob_estimate: dob_estimate
+          dob_estimate: nil
         }
       }
 

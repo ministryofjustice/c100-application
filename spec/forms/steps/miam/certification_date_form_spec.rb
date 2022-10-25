@@ -6,12 +6,16 @@ RSpec.describe Steps::Miam::CertificationDateForm do
     miam_certification_date: miam_certification_date
   } }
   let(:c100_application) { instance_double(C100Application) }
-  let(:miam_certification_date) { 3.months.ago.to_date }
+  let(:miam_certification_date) { [nil, Date.today.year, 3.months.ago.month, Date.today.day] }
 
   subject { described_class.new(arguments) }
 
   describe '#save' do
-    it { should validate_presence_of(:miam_certification_date) }
+    context  do
+      let (:miam_certification_date) { nil }
+
+      it { should validate_presence_of(:miam_certification_date) }
+    end
 
     context 'when no c100_application is associated with the form' do
       let(:c100_application) { nil }
@@ -36,7 +40,7 @@ RSpec.describe Steps::Miam::CertificationDateForm do
       end
 
       context 'when date is invalid' do
-        let(:miam_certification_date) { Date.new(18, 10, 31) } # 2-digits year (18)
+        let(:miam_certification_date) { [nil, 18, 10, 31] } # 2-digits year (18)
 
         it 'returns false' do
           expect(subject.save).to be(false)
@@ -49,7 +53,7 @@ RSpec.describe Steps::Miam::CertificationDateForm do
       end
 
       context 'when date is in the future' do
-        let(:miam_certification_date) { Date.tomorrow }
+        let(:miam_certification_date) { [nil, Date.today.year, Date.today.month, Date.tomorrow.day] }
 
         it 'returns false' do
           expect(subject.save).to be(false)
