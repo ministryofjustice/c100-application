@@ -77,7 +77,7 @@ describe C100App::CourtfinderAPI do
       end
 
       it 'reports the error to Sentry and re-raise it' do
-        expect(Raven).to receive(:capture_exception).with(dummy_exception)
+        expect(Sentry).to receive(:capture_exception).with(dummy_exception)
 
         expect {
           subject.court_for('a', 'b')
@@ -115,7 +115,7 @@ describe C100App::CourtfinderAPI do
       end
 
       it 'reports the error to Sentry and re-raise it' do
-        expect(Raven).to receive(:capture_exception).with(dummy_exception)
+        expect(Sentry).to receive(:capture_exception).with(dummy_exception)
 
         expect {
           subject.court_lookup('my-slug')

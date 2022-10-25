@@ -62,8 +62,8 @@ describe Court do
         let(:data) { super().except('name') }
 
         it 'sends the exception to Sentry with extra context' do
-          expect(Raven).to receive(:extra_context).with(data: data)
-          expect(Raven).to receive(:capture_exception).with(an_instance_of(KeyError))
+          expect_any_instance_of(Sentry::Scope).to receive(:set_extras).with(data: data)
+          expect(Sentry).to receive(:capture_exception).with(an_instance_of(KeyError))
           expect { subject.name }.to raise_error(KeyError, 'key not found: "name"')
         end
       end
@@ -72,8 +72,8 @@ describe Court do
         let(:data) { super().except('slug') }
 
         it 'sends the exception to Sentry with extra context' do
-          expect(Raven).to receive(:extra_context).with(data: data)
-          expect(Raven).to receive(:capture_exception).with(an_instance_of(KeyError))
+          expect_any_instance_of(Sentry::Scope).to receive(:set_extras).with(data: data)
+          expect(Sentry).to receive(:capture_exception).with(an_instance_of(KeyError))
           expect { subject.name }.to raise_error(KeyError, 'key not found: "slug"')
         end
       end
@@ -82,8 +82,8 @@ describe Court do
         let(:data) { super().except('addresses') }
 
         it 'sends the exception to Sentry with extra context' do
-          expect(Raven).to receive(:extra_context).with(data: data)
-          expect(Raven).to receive(:capture_exception).with(an_instance_of(KeyError))
+          expect_any_instance_of(Sentry::Scope).to receive(:set_extras).with(data: data)
+          expect(Sentry).to receive(:capture_exception).with(an_instance_of(KeyError))
           expect { subject.name }.to raise_error(KeyError, 'key not found: "addresses"')
         end
       end
@@ -92,8 +92,8 @@ describe Court do
         let(:data) { super().except('county_location_code') }
 
         it 'sends the exception to Sentry with extra context' do
-          expect(Raven).to receive(:extra_context).with(data: data)
-          expect(Raven).to receive(:capture_exception).with(an_instance_of(KeyError))
+          expect_any_instance_of(Sentry::Scope).to receive(:set_extras).with(data: data)
+          expect(Sentry).to receive(:capture_exception).with(an_instance_of(KeyError))
           expect { subject.name }.to raise_error(KeyError, 'key not found: "county_location_code"')
         end
       end
@@ -228,8 +228,8 @@ describe Court do
       end
 
       it 'sends the exception to Sentry with extra context' do
-        expect(Raven).to receive(:extra_context).with(data: data)
-        expect(Raven).to receive(:capture_exception).with(an_instance_of(StandardError))
+        expect_any_instance_of(Sentry::Scope).to receive(:set_extras).with(data: data)
+        expect(Sentry).to receive(:capture_exception).with(an_instance_of(StandardError))
 
         expect { subject }.to raise_error(StandardError, 'boom!')
       end

@@ -5,7 +5,7 @@ if ENV.key?('REDIS_URL')
     write_timeout: 0.3,
 
     error_handler: -> (method:, returning:, exception:) {
-      Raven.capture_exception(exception, level: 'warning', tags: { method: method, returning: returning })
+      Sentry.capture_exception(exception, level: 'warning', tags: { method: method, returning: returning })
     }
   }
 else

@@ -141,7 +141,7 @@ en:
         </ol>
 
     MISC_EXEMPTIONS_HINTS: &MISC_EXEMPTIONS_HINTS
-      without_notice: Hearings which take place without notice to the other people will only be justified where your case is exceptionally urgent or there is good reason not to tell the other people about your application (either because they could take steps to obstruct the application or because doing so may expose you or the children to a risk of harm)
+      misc_without_notice: Hearings which take place without notice to the other people will only be justified where your case is exceptionally urgent or there is good reason not to tell the other people about your application (either because they could take steps to obstruct the application or because doing so may expose you or the children to a risk of harm)
       group_miam_access: For example you live further than 15 miles from a mediator, you are not able to get an appointment for a MIAM within 15 working days or you or the other people in this application (the respondents) have a disability and the mediator doesn’t have disabled facilities
       miam_access_disabled_facilites_html: |
         You will need to provide:
