@@ -6,10 +6,5 @@
   "dependencies": {
     "govuk-frontend": "3.14.0"
   },
-  "devDependencies": {
-    "pa11y-ci": "3.0.1"
-  },
-  "scripts": {
-    "test-pa11y": "./node_modules/.bin/pa11y-ci --config ./pa11y/tests/.pa11yci.json"
-  }
+  "devDependencies": {},
 }
