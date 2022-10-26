@@ -29,6 +29,12 @@ class BaseOnlineSubmission
     StringIO.new(presenter.to_pdf)
   end
 
+  def generate_json
+    json_presenter = Summary::JsonPresenter.new(c100_application)
+    json_presenter.generate
+    json_presenter.json_file
+  end
+
   # :nocov:
   def generate_documents
     raise 'implement in subclasses'

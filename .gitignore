@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+!/tmp/pids/.keep
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -27,3 +28,5 @@ node_modules/
 public/assets/
 .DS_Store
 .idea
+vendor/bundle/
+*.rdb

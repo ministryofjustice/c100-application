@@ -1,5 +1,4 @@
 task daily_tasks: [:stdout_environment] do
-
   begin
     retries ||= 0
     log 'Starting daily tasks'

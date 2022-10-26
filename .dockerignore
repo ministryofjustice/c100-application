@@ -1,6 +1,7 @@
 logs/
 log/
 tmp/
+!tmp/pids/.keep
 Dockerfile
 README.md
 .env*

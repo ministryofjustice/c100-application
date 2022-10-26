@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     payload[:referrer] = request&.referrer
     payload[:session_id] = request&.session&.id
     payload[:user_agent] = request&.user_agent
+    payload[:ip] = request&.remote_ip
   end
 
   def current_c100_application
@@ -38,8 +39,7 @@ class ApplicationController < ActionController::Base
   # :nocov:
   def show_maintenance_page(config = Rails.application.config)
     if config.maintenance_enabled
-      Rails.logger.level = :debug
-      Rails.logger.debug("Remote IP: #{request.remote_ip}")
+      Rails.logger.info("Remote IP: #{request.remote_ip}")
     end
     return if !config.maintenance_enabled || config.maintenance_allowed_ips.include?(request.remote_ip)
 
