@@ -67,7 +67,7 @@ RUN gem install bundler -v 2.3.17 && \
 
 COPY . .
 
-RUN yarn
+RUN yarn install --production --frozen-lockfile
 
 # The following are ENV variables that need to be present by the time
 # the assets pipeline run, but doesn't matter their value.
