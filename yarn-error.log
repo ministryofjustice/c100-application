@@ -1,0 +1,40 @@
+Arguments: 
+  /Users/williamtaylor/.nvm/versions/node/v16.13.0/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /usr/local/opt/postgresql@10/bin:/Users/williamtaylor/.nvm/versions/node/v16.13.0/bin:/Users/williamtaylor/.rvm/gems/ruby-2.7.6/bin:/Users/williamtaylor/.rvm/gems/ruby-2.7.6@global/bin:/Users/williamtaylor/.rvm/rubies/ruby-2.7.6/bin:/Users/williamtaylor/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/williamtaylor/.rvm/bin:/Users/williamtaylor/Google Drive/code/flutter/bin:/Users/williamtaylor/Google Drive/code/flutter/bin
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  16.13.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/williamtaylor/Google Drive/Code/hmcts/c100-application/package.json: Unexpected token } in JSON at position 174
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "c100-application",
+    "version": "1.0.0",
+    "private": true,
+    "license": "MIT",
+    "dependencies": {
+      "govuk-frontend": "3.14.0"
+    },
+    "devDependencies": {},
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

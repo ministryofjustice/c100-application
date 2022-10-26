@@ -68,9 +68,6 @@ jobs:
       - run:
           name: run tests
           command: << parameters.test_command >>
-      # - run:
-      #     name: Pa11y tests
-      #     command: bundle exec rails s & sleep 5; npm run test-pa11y
 
   build_image:
     <<: *cloud_container
