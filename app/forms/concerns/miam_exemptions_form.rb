@@ -35,7 +35,7 @@ module MiamExemptionsForm
   private
 
   def none_must_be_exclusive
-    return unless return unless filtered_groups.grep(/_none$/).any? && filtered_groups.length > 1
+    return unless filtered_groups.grep(/_none$/).any? && filtered_groups.length > 1
     errors.add(self.class.attribute_name, :none_not_exclusive)
   end
 
