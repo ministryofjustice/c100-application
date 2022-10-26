@@ -55,6 +55,8 @@ WORKDIR /usr/src/app
 
 COPY Gemfile* .ruby-version ./
 
+RUN yarn
+
 # "chmod -R" is due to:
 # https://github.com/mileszs/wicked_pdf/issues/911
 RUN gem install bundler -v 2.3.17 && \

@@ -5,6 +5,5 @@
   "license": "MIT",
   "dependencies": {
     "govuk-frontend": "3.14.0"
-  },
-  "devDependencies": {},
+  }
 }
