@@ -42,7 +42,12 @@ RSpec.describe ReportsMailer, type: :mailer do
     it 'has the right personalisation' do
       expect(mail.govuk_notify_personalisation).to eq({
         service_name: 'Apply to court about child arrangements',
-        link_to_report: { file: "RGF0ZSwyMDIxLTEyLTIwXG5wY2QsMTA=", is_csv: true},
+        link_to_report: { 
+          file: "RGF0ZSwyMDIxLTEyLTIwXG5wY2QsMTA=",
+          is_csv: true,
+          confirm_email_before_download: nil,
+          retention_period: nil
+        },
       })
     end
   end

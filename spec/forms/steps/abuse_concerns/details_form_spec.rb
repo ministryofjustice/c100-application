@@ -44,6 +44,21 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
     end
   end
 
+  describe '#err_msg' do
+    it 'finds the correct translation' do
+      allow(I18n).to receive(:translate!)
+
+      Steps::AbuseConcerns::DetailsForm.err_msg({
+        attribute: "Help description",
+        model: "Details form",
+        value: nil
+      })
+      expect(I18n).to have_received(:translate!).with(
+        'steps.abuse_concerns.details.edit.errors.help_description')
+    end
+    described_class
+  end
+
   describe '#save' do
     context 'when no c100_application is associated with the form' do
       let(:c100_application) { nil }
@@ -104,6 +119,7 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
           subject: AbuseSubject::APPLICANT,
           kind: AbuseType::EMOTIONAL
         ).and_return(abuse_concern)
+        allow(described_class).to receive(:err_msg)
       end
 
       before(:each, saves: true) do
@@ -122,6 +138,16 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
       context 'requires behaviour_description' do
         let(:behaviour_description){ nil }
         it{ expect(subject.save).to be(false) }
+        it 'shows the full message' do
+          subject.save
+          subject.errors.full_messages
+          expect(described_class).to have_received(:err_msg).
+            with({
+              attribute: "Behaviour description",
+              model: "Details form",
+              value: nil
+            })
+        end
       end
       context 'requires behaviour_start' do
         let(:behaviour_start){ nil }
@@ -135,6 +161,16 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
         let(:behaviour_ongoing){ GenericYesNo::NO }
         let(:behaviour_stop){ nil }
         it{ expect(subject.save).to be(false) }
+        it 'shows the full message' do
+          subject.save
+          subject.errors.full_messages
+          expect(described_class).to have_received(:err_msg).
+            with({
+              attribute: "Behaviour stop",
+              model: "Details form",
+              value: nil
+            })
+        end
       end
       context 'does not require behaviour_stop if behaviour_ongoing is yes',
               saves: true do
@@ -150,6 +186,16 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
         let(:asked_for_help){ GenericYesNo::YES }
         let(:help_party){ nil }
         it{ expect(subject.save).to be(false) }
+        it 'shows the full message' do
+          subject.save
+          subject.errors.full_messages
+          expect(described_class).to have_received(:err_msg).
+            with({
+              attribute: "Help party",
+              model: "Details form",
+              value: nil
+            })
+        end
       end
       context 'does not require help_party if asked_for_help is no', saves: true do
         let(:asked_for_help){ GenericYesNo::NO }
@@ -160,6 +206,16 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
         let(:asked_for_help){ GenericYesNo::YES }
         let(:help_provided){ GenericYesNo.new('') }
         it{ expect(subject.save).to be(false) }
+        it 'shows the full message' do
+          subject.save
+          subject.errors.full_messages
+          expect(described_class).to have_received(:err_msg).
+            with({
+              attribute: "Help provided",
+              model: "Details form",
+              value: help_provided
+            })
+        end
       end
       context 'does not require help_provided if asked_for_help is no', saves: true do
         let(:asked_for_help){ GenericYesNo::NO }
@@ -172,6 +228,16 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
         let(:help_provided){ GenericYesNo::YES }
         let(:help_description){ nil }
         it{ expect(subject.save).to be(false) }
+        it 'shows the full message' do
+          subject.save
+          subject.errors.full_messages
+          expect(described_class).to have_received(:err_msg).
+            with({
+              attribute: "Help description",
+              model: "Details form",
+              value: nil
+            })
+        end
       end
       context 'does not require help_description if asked_for_help is no',
               saves: true do

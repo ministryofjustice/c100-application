@@ -1,5 +1,4 @@
-FROM ruby:2.7.6-slim-buster
-MAINTAINER HMCTS Reform Team
+FROM hmctspublic.azurecr.io/imported/library/ruby:2.7.6-slim-buster
 
 # build dependencies:
 #   - ruby-full libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6 for wkhtmltopdf
@@ -72,9 +71,6 @@ COPY . .
 ENV EXTERNAL_URL=replace_this_at_build_time
 ENV SECRET_KEY_BASE=replace_this_at_build_time
 ENV GOVUK_NOTIFY_API_KEY=replace_this_at_build_time
-ENV SLACK_WEBHOOK_URL=replace_this_at_build_time
-ENV SLACK_WEBHOOK_ENV=replace_this_at_build_time
-
 ENV RAILS_ENV=production
 RUN bundle exec rake assets:precompile
 

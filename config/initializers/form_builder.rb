@@ -6,6 +6,8 @@ GOVUKDesignSystemFormBuilder.configure do |config|
   config.default_caption_size = 'xl'
 end
 
-GOVUKDesignSystemFormBuilder::FormBuilder.class_eval do
-  include CustomFormHelpers
+Rails.application.config.to_prepare do
+  GOVUKDesignSystemFormBuilder::FormBuilder.class_eval do
+    include CustomFormHelpers
+  end
 end

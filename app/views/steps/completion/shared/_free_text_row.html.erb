@@ -3,9 +3,11 @@
     <%=t "check_answers_html.#{free_text_row.question}.question", free_text_row.i18n_opts %>
   </dt>
   <dd class="govuk-summary-list__value">
-    <%= simple_format(
-      free_text_row.value.presence || t("check_answers_html.#{free_text_row.question}.absence_answer"), { class: 'govuk-body' }
-    ) %>
+    <span class='govuk-body'>
+      <%= free_text_row.value.presence || simple_format(
+        t("check_answers_html.#{free_text_row.question}.absence_answer"), {  }
+      ) %>
+    </span>
   </dd>
   <dd class="govuk-summary-list__actions">
     <%= render partial: 'steps/completion/shared/change_link', locals: { question: free_text_row } %>

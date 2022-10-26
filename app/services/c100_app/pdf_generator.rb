@@ -31,7 +31,8 @@ module C100App
 
     def render(presenter)
       ApplicationController.render(
-        template: presenter.template,
+        template: presenter.template.gsub(/\.pdf$/, ''),
+        format: :pdf,
         locals: { presenter: presenter }
       )
     end

@@ -40,8 +40,14 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
   end
 
   describe '#application_to_court' do
-    let(:documents) { { bundle: StringIO.new('bundle pdf'), c8_form: c8_form } }
+    let(:documents) { { bundle: StringIO.new('bundle pdf'), c8_form: c8_form, json_form: tmp_file } }
     let(:c8_form) { StringIO.new('') }
+    let(:tmp_file) {
+      tmp = Tempfile.new('test')
+      tmp << 'test2'
+      tmp.rewind
+      tmp
+    }
 
     let(:mail) {
       described_class.with(
@@ -69,7 +75,12 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         urgent: 'yes',
         c8_included: 'no',
         link_to_c8_pdf: '',
-        link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false },
+        link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
+          confirm_email_before_download: nil,
+          retention_period: nil },
+        link_to_json: { file: 'dGVzdDI=', is_csv: false,
+          confirm_email_before_download: nil,
+          retention_period: nil }
       })
     end
 
@@ -84,8 +95,12 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           mail.govuk_notify_personalisation
         ).to match(hash_including(
           c8_included: 'yes',
-          link_to_c8_pdf: { file: 'YzggZm9ybQ==', is_csv: false },
-          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false },
+          link_to_c8_pdf: { file: 'YzggZm9ybQ==', is_csv: false,
+          confirm_email_before_download: nil,
+          retention_period: nil },
+          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
+          confirm_email_before_download: nil,
+          retention_period: nil },
         ))
       end
     end

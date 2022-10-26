@@ -44,7 +44,7 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
     end
 
     context 'when there are MIAM exemptions' do
-      let(:attributes) { super().merge(miam_exemption: MiamExemption.new(misc: ['misc_applicant_under_age'])) }
+      let(:attributes) { super().merge(miam_exemption: MiamExemption.new(misc: ['applicant_under_age'])) }
 
       it { is_expected.to have_destination(:reasons_playback, :show) }
     end
