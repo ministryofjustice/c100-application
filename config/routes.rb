@@ -115,6 +115,7 @@ Rails.application.routes.draw do
       show_step :no_court_found
       edit_step :research_consent
       edit_step :consent_order
+      edit_step :consent_order_upload
       show_step :consent_order_sought
       edit_step :child_protection_cases
       show_step :child_protection_info

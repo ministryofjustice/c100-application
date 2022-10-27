@@ -10,6 +10,8 @@ module C100App
         edit(:consent_order)
       when :consent_order
         after_consent_order
+      when :consent_order_upload
+        show(:consent_order_sought)
       when :child_protection_cases
         after_child_protection_cases
       else
@@ -44,7 +46,7 @@ module C100App
 
     def after_consent_order
       if question(:consent_order).yes?
-        show(:consent_order_sought)
+        edit(:consent_order_upload)
       else
         edit(:child_protection_cases)
       end
