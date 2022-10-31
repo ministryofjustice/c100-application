@@ -37,7 +37,6 @@ module Steps
       private
 
       def persist!
-        # super(attributes_map)
         super(
           subject: subject,
           kind: kind,
