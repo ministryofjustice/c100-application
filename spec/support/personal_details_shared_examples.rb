@@ -42,7 +42,7 @@ RSpec.shared_examples 'a mandatory date of birth validation' do
   end
 
   context 'when date is in the future' do
-    let(:dob) { [nil, Date.today.year, Date.today.month, Date.tomorrow.day] }
+    let(:dob) { [nil, Date.today.year + 1, Date.today.month, Date.today.day] }
 
     it 'returns false' do
       expect(subject.save).to be(false)

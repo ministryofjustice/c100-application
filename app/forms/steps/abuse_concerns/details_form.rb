@@ -37,7 +37,18 @@ module Steps
       private
 
       def persist!
-        super(attributes_map)
+        super(
+          subject: subject,
+          kind: kind,
+          behaviour_description: behaviour_description,
+          behaviour_start: behaviour_start,
+          behaviour_ongoing: behaviour_ongoing,
+          behaviour_stop: (behaviour_stop if behaviour_ongoing.no?),
+          asked_for_help: asked_for_help,
+          help_party: (help_party if asked_for_help.yes?),
+          help_provided: (help_provided if asked_for_help.yes?),
+          help_description: (help_description if asked_for_help.yes?)
+        )
       end
     end
   end
