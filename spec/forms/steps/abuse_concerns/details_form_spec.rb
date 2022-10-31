@@ -200,6 +200,8 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
       context 'does not require help_party if asked_for_help is no', saves: true do
         let(:asked_for_help){ GenericYesNo::NO }
         let(:help_party){ nil }
+        let(:help_description){ nil }
+        let(:help_provided){ nil }
         it{ expect(subject.save).to be(true) }
       end
       context 'requires help_provided if asked_for_help is yes' do
@@ -220,6 +222,8 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
       context 'does not require help_provided if asked_for_help is no', saves: true do
         let(:asked_for_help){ GenericYesNo::NO }
         let(:help_provided){ nil }
+        let(:help_description){ nil }
+        let(:help_party){ nil }
         it{ expect(subject.save).to be(true) }
       end
       context 'requires help_description if asked_for_help'+
@@ -242,8 +246,9 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
       context 'does not require help_description if asked_for_help is no',
               saves: true do
         let(:asked_for_help){ GenericYesNo::NO }
-        let(:help_provided){ GenericYesNo::NO }
+        let(:help_provided){ nil }
         let(:help_description){ nil }
+        let(:help_party){ nil }
         it{ expect(subject.save).to be(true) }
       end
       context 'does not require help_description if asked_for_help is yes'+

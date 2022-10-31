@@ -18,7 +18,7 @@ module Steps
         applicant.update(
           address_values.merge(
             residence_requirement_met: residence_requirement_met,
-            residence_history: residence_history
+            residence_history: (residence_history if residence_requirement_met.no?)
           )
         )
       end
