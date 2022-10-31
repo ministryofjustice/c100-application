@@ -21,7 +21,11 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          attributes_map
+          without_notice_details: without_notice_details,
+          without_notice_frustrate: without_notice_frustrate,
+          without_notice_frustrate_details: (without_notice_frustrate_details if without_notice_frustrate.yes?),
+          without_notice_impossible: without_notice_impossible,
+          without_notice_impossible_details: (without_notice_impossible_details if without_notice_impossible.yes?)
         )
       end
     end

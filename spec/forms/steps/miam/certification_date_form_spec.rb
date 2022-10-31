@@ -53,7 +53,7 @@ RSpec.describe Steps::Miam::CertificationDateForm do
       end
 
       context 'when date is in the future' do
-        let(:miam_certification_date) { [nil, Date.today.year, Date.today.month, Date.tomorrow.day] }
+        let(:miam_certification_date) { [nil, Date.today.year + 1, Date.today.month, Date.today.day] }
 
         it 'returns false' do
           expect(subject.save).to be(false)
