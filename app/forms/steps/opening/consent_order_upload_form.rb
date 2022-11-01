@@ -1,8 +1,10 @@
 module Steps
   module Opening
     class ConsentOrderUploadForm < BaseForm
+      include DocumentAttachable
       # attribute :consent_order_file
       # validates :consent_order_file, presence: true
+      attribute :consent_order_file, DocumentUpload
 
       private
 

@@ -35,6 +35,8 @@ gem 'combine_pdf', '~> 1.0'
 gem 'wicked_pdf', '~> 2.6.0'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
+# Amazon S3 blob storage
+gem 'aws-sdk-s3', '~> 1'
 
 group :development, :production do
   gem 'lograge'
