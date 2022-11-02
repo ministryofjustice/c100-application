@@ -91,8 +91,11 @@ module Summary
 
       def abduction_details(key)
         return unless c100_application.abduction_detail
-        return c100_application.abduction_detail.send(key).join(', ') if key == :passport_possession
-        c100_application.abduction_detail.send(key)
+        abduction_details_value = c100_application.abduction_detail.send(key)
+        if key == :passport_possession && abduction_details_value
+          return abduction_details_value.join(', ')
+        end
+        abduction_details_value
       end
 
       def child_unsupervised
