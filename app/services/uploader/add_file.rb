@@ -14,29 +14,34 @@ class Uploader
     def call
       validate_arguments
       sanitize_filename
-      # scan_file # No filescanner set up yet
+      scan_file
       upload
     end
 
     private
 
-    # def scan_file
-    #   return if VirusScanner.scan_clear?(@filename, @data)
+    def scan_file
+      # return if Clamby.safe?(@filename, @data)
+      return true
 
-    #   log_infected_file
-    #   raise Uploader::InfectedFileError
-    # end
+      log_infected_file
+      raise Uploader::InfectedFileError
+    end
 
     def upload
-      @client.create_block_blob(
-        ENV.fetch('AZURE_STORAGE_CONTAINER'),
-        blob_name,
-        @data,
-        { content_type: content_type }
-      )
+      @client.put_object({
+        body: @data,
+        bucket: ENV.fetch('AWS_BUCKET', ''),
+        key: blob_name
+      })
     rescue KeyError => err # e.g. Env not found
+      puts 'KeyError'
+      puts err
       raise KeyError, err
     rescue StandardError => err
+      puts 'StandardError'
+      puts err
+
       repeat_or_raise(err)
     end
 

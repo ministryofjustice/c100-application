@@ -7,8 +7,8 @@ class Uploader
     end
 
     def call
-      files = @client.list_blobs(
-        ENV.fetch('AZURE_STORAGE_CONTAINER'),
+      files = @client.list_objects(
+        bucket: ENV.fetch('AWS_BUCKET'),
         prefix: prefix
       )
       log_files_empty if files.empty?

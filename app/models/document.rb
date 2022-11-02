@@ -27,11 +27,11 @@ class Document
     Uploader.list_files(
       collection_ref: collection_ref,
       document_key: document_key
-    ).map do |file|
+    ).contents.map do |file|
       new(
-        name: file.name,
+        name: file.key,
         collection_ref: collection_ref,
-        last_modified: DateTime.parse(file.properties[:last_modified])
+        last_modified: DateTime.parse(file.last_modified.to_s)
       )
     end.sort
   end

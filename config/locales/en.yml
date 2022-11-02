@@ -196,6 +196,9 @@ en:
         fieldset_legend: Enter a new name
       children_personal_details:
         heading: "Provide details for %{name}"
+      document_upload:
+        current_document:
+          previous_document_html: "<strong>Previously attached document:</strong><br>%{file_name}"      
 
     # BEGIN - Non-parents journey
     # We use the approach of one single controller-view.
@@ -1041,6 +1044,9 @@ en:
               <li>Email or send the photo or scan to the device you are using now.</li>
               <li>Upload it here.</li>
             </ol>
+          attach_document_html: "<strong>Attach consent order draft as a single document (optional)</strong>"
+          upload_explanation_html: |
+            <p class="govuk-body">Your document will upload when you click 'Continue'.</p>
       child_protection_cases:
         edit:
           page_title: Child protection cases
@@ -1981,6 +1987,42 @@ en:
         <p class="govuk-body">As part of their enquiries they will contact organisations such as the police and local authorities for any relevant information about you, any other person and the children.</p>
         <p class="govuk-body">They will submit information to the court before your first hearing. Their assessment helps the judge make a decision that is in the best interests of the children.</p>
         <p class="govuk-body">The information you provide in this section will also be shared with the respondents so that they have the opportunity to respond to your allegations.</p>
+    file_upload:
+      header: File upload requirements
+      file_warning: You cannot view a document once it has been uploaded nor view a document to be removed. Please check documents prior to upload.
+      file_list_html: |
+        <ul class="govuk-list govuk-list--bullet">
+          <li>File formats: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF</li>
+          <li>File size per document: up to 20 megabytes (MB)</li>
+          <li>Files cannot be password protected</li>
+          <li>Do not use the following (reserved) characters in the filename - #, $, +, %, &, {}, [], <>,*, =, and ? as these may result in a problem uploading the file or retrieving the file once uploaded</li>
+          <li>Do not use spaces and full stops ('.') at the start or end of the filename as this may result in a problem uploading the file or retrieving the file once uploaded</li>
+          <li>If invalid characters are left within the filename, the system will attempt to remove these, resulting in the uploaded filename being different to the filename at the point of upload. A problem may also be encountered when retrieving the file once uploaded</li>
+        </ul>
+      footer: You can’t upload executable (.exe), zip or other archive files due to
+        virus risks.
+      technical_info_html: |
+        We accept a <strong>good quality and legible</strong> scan or photograph.
+        Your %{appeal_or_application} may be returned if we can't read the letter,
+        and you risk missing the deadline.
+      dropzone_message_html: Drag and drop files here<br> <strong>or</strong><br><span
+        class="faux-link" tabindex="-1">click to choose a file</span>
+      uploaded_files_header: Uploaded files
+      no_uploaded_files: No files uploaded
+      explanation_html: |
+        <p class="govuk-body"><strong>What to do next</strong></p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>See <a href="%{contact_url}" class="govuk-link">useful contact information</a> for help on using this service.</li>
+          <li>Enter reasons if you are still having trouble uploading.</li>
+          <li>Click 'continue' to print and complete your appeal by post.</li>
+        </ul>
+      select_file: Select file
+      remove_file: Remove
+      cancel_upload: Cancel
+      confirm_cancel_upload: Are you sure you want to cancel this upload?
+      file_wrong_format: " is in a format we don't accept. You can upload JPG, PNG, GIF, PDF, Word or Excel files."
+      file_too_big: " is too big. You will need to resubmit a smaller version, less than XXX megabytes (MB)."
+      confirm_delete: Are you sure you want to remove this file?
 
   session:
     note:

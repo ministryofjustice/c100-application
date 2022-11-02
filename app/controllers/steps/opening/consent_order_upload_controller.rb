@@ -2,6 +2,8 @@ module Steps
   module Opening
     class ConsentOrderUploadController < Steps::OpeningStepController
       include SavepointStep
+      
+      before_action :store_step_path_in_session, only: [:edit, :update]
 
       def edit
         @form_object = ConsentOrderUploadForm.new(

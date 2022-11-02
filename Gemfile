@@ -37,6 +37,8 @@ gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
 # Amazon S3 blob storage
 gem 'aws-sdk-s3', '~> 1'
+gem 'clamby'
+gem 'sanitize', '~> 6.0'                        
 
 group :development, :production do
   gem 'lograge'

@@ -2,19 +2,19 @@ module Steps
   module Opening
     class ConsentOrderUploadForm < BaseForm
       include DocumentAttachable
-      # attribute :consent_order_file
-      # validates :consent_order_file, presence: true
-      attribute :consent_order_file, DocumentUpload
+
+      attribute :draft_consent_order_document, DocumentUpload
+  
+      def document_key
+        :draft_consent_order
+      end
 
       private
 
       def persist!
         raise C100ApplicationNotFound unless c100_application
 
-        # c100_application.update(
-        #   consent_order_file: consent_order_file,
-        # )
-        true
+        upload_document_if_present
       end
     end
   end

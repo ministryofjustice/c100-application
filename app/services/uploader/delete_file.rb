@@ -10,10 +10,10 @@ class Uploader
     def call
       log_delete
 
-      @client.delete_blob(
-        ENV.fetch('AZURE_STORAGE_CONTAINER'),
-        blob_name
-      )
+      @client.delete_object({
+        bucket: ENV.fetch('AWS_BUCKET', ''),
+        key: blob_name
+      })
     rescue KeyError => err # e.g. Env not found
       raise KeyError, err
     rescue StandardError => err

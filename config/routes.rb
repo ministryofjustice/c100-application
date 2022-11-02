@@ -285,6 +285,10 @@ Rails.application.routes.draw do
     end
   end
 
+  scope 'uploader/:document_key' do
+    resources :documents, only: [:create, :destroy]
+  end
+
   resource :session, only: [:destroy] do
     member do
       get :ping

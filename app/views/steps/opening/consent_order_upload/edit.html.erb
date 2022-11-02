@@ -22,7 +22,12 @@
 
     <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
 
+      <%= document_upload_field(f, @form_object.document_key, label_text: t('.attach_document_html'),
+        paragraph_text: t('.upload_explanation_html')) %>
+
       <%= f.continue_button %>
     <% end %>
+
+    <%= display_current_document(@form_object.document_key) %>
   </div>
 </div>
