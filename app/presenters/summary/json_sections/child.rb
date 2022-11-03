@@ -26,7 +26,7 @@ module Summary
         {
           firstName: child.first_name,
           lastName: child.last_name,
-          dateOfBirth: child_dob_nil?(child),
+          dateOfBirth: child_dob(child),
           gender: child.gender,
           childLiveWith: child_live_with(child),
           parentalResponsibilityDetails: child.parental_responsibility,
@@ -39,7 +39,7 @@ module Summary
         }
       end
 
-      def child_dob_nil?(child)
+      def child_dob(child)
         return "" if child.dob.nil?
 
         child.dob.to_fs(:db)
