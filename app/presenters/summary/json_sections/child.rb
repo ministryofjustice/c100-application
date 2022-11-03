@@ -26,7 +26,7 @@ module Summary
         {
           firstName: child.first_name,
           lastName: child.last_name,
-          dateOfBirth: child.dob.to_fs(:db),
+          dateOfBirth: child_dob_nil?(child),
           gender: child.gender,
           childLiveWith: child_live_with(child),
           parentalResponsibilityDetails: child.parental_responsibility,
@@ -37,6 +37,12 @@ module Summary
           # "otherRespondentsRelationshipToChild"=>nil,
           # "personWhoLivesWithChild"=>[]
         }
+      end
+
+      def child_dob_nil?(child)
+        return "" if child.dob.nil?
+
+        child.dob.to_fs(:db)
       end
 
       def relationship_to_child(child)
