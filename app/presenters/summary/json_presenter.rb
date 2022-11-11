@@ -32,7 +32,6 @@ module Summary
         internationalElement: JsonSections::InternationalElement.new(c100_application).section_hash,
         litigationCapacity: JsonSections::LitigationCapacity.new(c100_application).section_hash,
         feeAmount: fee_amount,
-        # thisWillError: this_will_error,
         # familyManNumber: {},
         # others: {},
         # events: {}
@@ -56,10 +55,6 @@ module Summary
     def fee_amount
       amount = format("%.2f", (Rails.configuration.x.court_fee.amount_in_pence / 100))
       "£#{amount}"
-    end
-
-    def this_will_error
-      nil.to_fs
     end
   end
 end
