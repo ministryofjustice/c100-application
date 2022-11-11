@@ -6,8 +6,15 @@ module Summary
       @c100_application = c100_application
     end
 
-    # rubocop:disable Metrics/AbcSize
     def generate
+      create_hash
+    rescue StandardError => e
+      Sentry.capture_exception(e, tags: { id: @c100_application.id, ref: @c100_application.reference_code })
+      @c100_hash = [{}]
+    end
+
+    # rubocop:disable Metrics/AbcSize
+    def create_hash
       @c100_hash = [{
         solicitor: [JsonSections::Solicitor.new(c100_application).section_hash],
         header: {},
