@@ -14,6 +14,9 @@ module Steps
       validates :mobile_phone, phone_number: true, unless: :mobile_phone_unknown?
       validates_presence_of  :home_phone, unless: :home_phone_unknown?
       validates :home_phone, phone_number: true, unless: :home_phone_unknown?
+      validates :email, unknown_respondent_input: true, if: :email_unknown?
+      validates :home_phone, unknown_respondent_input: true, if: :home_phone_unknown?
+      validates :mobile_phone, unknown_respondent_input: true, if: :mobile_phone_unknown?
 
       private
 
