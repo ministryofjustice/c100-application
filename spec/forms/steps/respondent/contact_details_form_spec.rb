@@ -62,6 +62,15 @@ RSpec.describe Steps::Respondent::ContactDetailsForm do
           expect(subject.errors[:email]).to_not be_empty
         }
       end
+
+      context 'email should be blank if unknown box is checked' do
+        let(:email) { 'name@example.com' }
+        let(:email_unknown) { true }
+        it {
+          expect(subject).not_to be_valid
+          expect(subject.errors[:email]).to_not be_empty
+        }
+      end
     end
 
     context 'phone validation' do      
@@ -86,6 +95,15 @@ RSpec.describe Steps::Respondent::ContactDetailsForm do
           context 'no input from user is invalid' do
             let(phone_type) { nil }
             let( "#{phone_type}_unknown".to_sym) { false }
+            it {
+              expect(subject).not_to be_valid
+              expect(subject.errors[phone_type]).to_not be_empty
+            }
+          end
+
+          context 'should be blank if unknown box is checked' do
+            let(phone_type) { '07777777777' }
+            let( "#{phone_type}_unknown".to_sym) { true }
             it {
               expect(subject).not_to be_valid
               expect(subject.errors[phone_type]).to_not be_empty
