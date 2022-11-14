@@ -28,4 +28,12 @@ class Uploader
       filename:       args[:filename],
     ).call
   end
+
+  def self.get_file(**args)
+    Uploader::GetFile.new(
+      collection_ref: args[:collection_ref],
+      document_key:   args[:document_key]
+    ).call
+  end
+
 end

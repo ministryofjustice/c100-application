@@ -17,22 +17,22 @@ class DocumentUpload
   ALLOWED_CONTENT_TYPES = %w(
     application/pdf
     application/msword
-    application/vnd.ms-excel
-    application/vnd.openxmlformats-officedocument.wordprocessingml.document
-    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-    application/vnd.oasis.opendocument.text
-    application/rtf
-    text/plain
-    text/rtf
-    text/csv
-    image/gif
     image/jpeg
     image/pjpeg
     image/png
     image/tiff
     image/bmp
-    image/x-bitmap
   ).freeze
+  # application/vnd.ms-excel
+  # image/gif
+  # application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  # application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  # application/vnd.oasis.opendocument.text
+  # application/rtf
+  # text/plain
+  # text/rtf
+  # text/csv
+  # image/x-bitmap
 
   def initialize(obj, document_key: nil, content_type: nil, filename: nil, collection_ref: nil)
     raise ArgumentError.new('Must receive an IO object') unless obj.respond_to?(:read)

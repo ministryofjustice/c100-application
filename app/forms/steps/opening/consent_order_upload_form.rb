@@ -3,6 +3,7 @@ module Steps
     class ConsentOrderUploadForm < BaseForm
       include DocumentAttachable
 
+      validate :check_document_presence
       attribute :draft_consent_order_document, DocumentUpload
   
       def document_key

@@ -21,8 +21,12 @@ class Uploader
     private
 
     def scan_file
-      # return if Clamby.safe?(@filename, @data)
-      return true
+      return if ENV.fetch('SKIP_VIRUS_CHECK', '').present?
+
+      file_to_test = Tempfile.new
+      file_to_test << @data.force_encoding("UTF-8")
+      file_to_test.rewind
+      return if Clamby.safe?(file_to_test.path)
 
       log_infected_file
       raise Uploader::InfectedFileError
@@ -35,20 +39,15 @@ class Uploader
         key: blob_name
       })
     rescue KeyError => err # e.g. Env not found
-      puts 'KeyError'
-      puts err
       raise KeyError, err
     rescue StandardError => err
-      puts 'StandardError'
-      puts err
-
       repeat_or_raise(err)
     end
 
-    def content_type
+    def content_type_valid?
       type = MimeMagic.by_path(@filename).try(:type)
       raise ArgumentError, 'File content type not recognised' unless type
-      type
+      true
     end
 
     def sanitize_filename
@@ -60,6 +59,7 @@ class Uploader
     def validate_arguments
       raise Uploader::UploaderError, 'Filename must be provided' unless @filename.present?
       raise Uploader::UploaderError, 'File data must be provided' unless @data.present?
+      content_type_valid?
     end
 
     def repeat_or_raise(err)

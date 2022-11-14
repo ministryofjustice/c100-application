@@ -8,7 +8,7 @@ class Uploader
 
     def call
       files = @client.list_objects(
-        bucket: ENV.fetch('AWS_BUCKET'),
+        bucket: ENV.fetch('AWS_BUCKET', ''),
         prefix: prefix
       )
       log_files_empty if files.empty?

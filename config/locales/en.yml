@@ -1044,7 +1044,7 @@ en:
               <li>Email or send the photo or scan to the device you are using now.</li>
               <li>Upload it here.</li>
             </ol>
-          attach_document_html: "<strong>Attach consent order draft as a single document (optional)</strong>"
+          attach_document_html: "<strong>Attach consent order draft as a single document</strong>"
           upload_explanation_html: |
             <p class="govuk-body">Your document will upload when you click 'Continue'.</p>
       child_protection_cases:
@@ -1087,6 +1087,20 @@ en:
       logout: Sign out
       change_password: Change password
       your_drafts: Your drafts
+
+  # Document Upload
+  document_upload:
+    errors:
+      file_size: "%{file_name} is too big. You will need to resubmit a smaller version,
+        less than %{max_size} megabytes (MB)"
+      content_type: "%{file_name} is in a format we don't accept. You can upload JPG, BMP, PNG, TIF, PDF or Word files"
+      invalid_characters: "%{file_name} contains invalid characters. Please do not use
+        characters like £ or ¬ in the file name"
+      virus_detected: "%{file_name} has a virus. You will need to resubmit a virus
+        free copy"
+      response_error: "%{file_name} failed to upload. Please try again"
+    file_selected: SELECTED
+    file_uploading: UPLOADING
 
   # Error pages (`errors_controller`)
   errors:
@@ -2020,7 +2034,7 @@ en:
       remove_file: Remove
       cancel_upload: Cancel
       confirm_cancel_upload: Are you sure you want to cancel this upload?
-      file_wrong_format: " is in a format we don't accept. You can upload JPG, PNG, GIF, PDF, Word or Excel files."
+      file_wrong_format: " is in a format we don't accept. You can upload JPG, BMP, PNG, TIF, PDF or Word files."
       file_too_big: " is too big. You will need to resubmit a smaller version, less than XXX megabytes (MB)."
       confirm_delete: Are you sure you want to remove this file?
 

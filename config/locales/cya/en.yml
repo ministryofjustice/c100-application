@@ -136,6 +136,8 @@ en:
       answers:
         'no': Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
         'yes': Consent order
+    consent_order_upload:
+      question: Draft of your consent order
     child_protection_cases:
       question: Are the children involved in any emergency protection, care or supervision proceedings (or have they been)?
       answers:

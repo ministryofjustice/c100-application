@@ -45,7 +45,7 @@ module DocumentAttachable
 
   def retrieve_document_errors
     document.errors.each do |error|
-      errors.add(document_attribute, error)
+      errors.add(document_attribute, error.type) # CHANGED_HERE
     end
   end
 end

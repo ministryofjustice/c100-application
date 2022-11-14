@@ -1,0 +1,12 @@
+<div class="govuk-summary-list__row" id="<%= file_row.question %>">
+  <dt class="govuk-summary-list__key govuk-!-width-one-third">
+    <%=t "check_answers_html.#{file_row.question}.question", file_row.i18n_opts %>
+  </dt>
+  <dd class="govuk-summary-list__value">
+    <strong>Attached document</strong><br>
+    <%= file_row.value %>
+  </dd>
+  <dd class="govuk-summary-list__actions">
+    <%= render partial: 'steps/completion/shared/change_link', locals: { question: file_row } %>
+  </dd>
+</div>

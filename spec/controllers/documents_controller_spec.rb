@@ -24,7 +24,7 @@ RSpec.describe DocumentsController, type: :controller do
     session[:current_step_path] = 'step/to/redirect'
   end
 
-  include_examples 'checks the validity of the current tribunal case on create', { document_key: :foo_bar }
+  include_examples 'checks the validity of the current c100 application on create', { document_key: :foo_bar }
 
   describe '#create' do
     let(:format) { :html }
@@ -96,7 +96,7 @@ RSpec.describe DocumentsController, type: :controller do
     end
   end
 
-  include_examples 'checks the validity of the current tribunal case on destroy', { document_key: :foo_bar }
+  include_examples 'checks the validity of the current c100 application on destroy', { document_key: :foo_bar }
 
   describe '#destroy' do
     context 'response formats' do

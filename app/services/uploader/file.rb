@@ -9,21 +9,21 @@ class Uploader
       @key = key
     end
 
-    def url
-      file_uri = @client.generate_uri("#{ENV.fetch('AZURE_STORAGE_CONTAINER')}/#{key}")
+    # def url
+    #   file_uri = @client.generate_uri("#{ENV.fetch('AZURE_STORAGE_CONTAINER')}/#{key}")
 
-      signer.signed_uri(
-        file_uri,
-        false,
-        service: 'b',
-        permissions: 'r',
-        content_disposition: :attachment,
-        expiry: expires_at
-      ).to_s
-    end
+    #   signer.signed_uri(
+    #     file_uri,
+    #     false,
+    #     service: 'b',
+    #     permissions: 'r',
+    #     content_disposition: :attachment,
+    #     expiry: expires_at
+    #   ).to_s
+    # end
 
     def name
-      key.partition('/').last
+      key.split('/').last
     end
 
     # Allow two File objects to be compared
