@@ -20,8 +20,9 @@ module Reports
             to_address: ENV['PAYMENT_TYPE_REPORT_EMAIL'],
             cc_address: ENV['PAYMENT_TYPE_REPORT_EMAIL_CC'],
           ).deliver_later
-        rescue PG::ConnectionBad
+        rescue PG::ConnectionBad => e
           retry if (retries += 1) < 3
+          Sentry.capture_exception(e)
           raise # Reraises PG::ConnectionBad if still failing
         end
       end
