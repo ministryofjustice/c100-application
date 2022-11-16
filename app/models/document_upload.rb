@@ -14,7 +14,7 @@ class DocumentUpload
   # TODO: decide on the final allowed max size and content types
   #
   MAX_FILE_SIZE = 20 # MB
-  ALLOWED_CONTENT_TYPES = %w(
+  ALLOWED_CONTENT_TYPES = %w[
     application/pdf
     application/msword
     image/jpeg
@@ -22,20 +22,10 @@ class DocumentUpload
     image/png
     image/tiff
     image/bmp
-  ).freeze
-  # application/vnd.ms-excel
-  # image/gif
-  # application/vnd.openxmlformats-officedocument.wordprocessingml.document
-  # application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-  # application/vnd.oasis.opendocument.text
-  # application/rtf
-  # text/plain
-  # text/rtf
-  # text/csv
-  # image/x-bitmap
+  ].freeze
 
   def initialize(obj, document_key: nil, content_type: nil, filename: nil, collection_ref: nil)
-    raise ArgumentError.new('Must receive an IO object') unless obj.respond_to?(:read)
+    raise ArgumentError, 'Must receive an IO object' unless obj.respond_to?(:read)
 
     self.tempfile = obj.respond_to?(:tempfile) ? obj.tempfile : obj
     self.content_type = content_type || obj.content_type
@@ -52,7 +42,7 @@ class DocumentUpload
       filename: file_name,
       data: file_data
     )
-    @file_name = response.etag
+    @_file_name = response.etag
   rescue Uploader::InfectedFileError
     add_error(:virus_detected)
   rescue Uploader::UploaderError => e
@@ -63,7 +53,7 @@ class DocumentUpload
   end
 
   def file_name
-    @file_name ||= unique_filename(suffix: '(%d)')
+    @_file_name ||= unique_filename(suffix: '(%d)')
   end
 
   def encoded_file_name
@@ -99,7 +89,7 @@ class DocumentUpload
 
   # returns array of documents
   def uploaded_documents
-    @uploaded_documents ||= Document.for_collection(collection_ref, document_key: document_key)
+    @_uploaded_documents ||= Document.for_collection(collection_ref, document_key: document_key)
   end
 
   def unique_filename(suffix:)
@@ -136,12 +126,10 @@ class DocumentUpload
     add_error(:invalid_characters) unless valid_characters?
     add_error(:file_size) if file_size > MAX_FILE_SIZE.megabytes
     add_error(:content_type) unless content_type.downcase.in?(ALLOWED_CONTENT_TYPES)
-  rescue ArgumentError
-    add_error(:invalid_characters)
   end
 
   def add_error(code)
-    errors.add(code, translate(code)) unless errors.has_key?(code)
+    errors.add(code, translate(code)) unless errors.key?(code)
   end
 
   def translate(key)
@@ -150,20 +138,19 @@ class DocumentUpload
 
   def encoding_options
     {
-      invalid: :replace,  # Replace invalid byte sequences
-      undef: :replace,  # Replace anything not defined in ASCII
-      replace: '*',        # Use a blank for those replacements
+      invalid: :replace, # Replace invalid byte sequences
+      undef: :replace, # Replace anything not defined in ASCII
+      replace: '*', # Use a blank for those replacements
       universal_newline: true       # Always break lines with \n
     }
   end
 
   def valid_characters?
     return true if file_name.ascii_only?
-    @file_name = file_name.unicode_normalize(:nfkc)
-    @file_name = @file_name.gsub(Regexp.union(WelshCharacters::MAPPING_TO_ASCII.keys), WelshCharacters::MAPPING_TO_ASCII)
-    unless @file_name.ascii_only?
-      @file_name = @file_name.encode(Encoding.find('ASCII'), encoding_options)
+    @_file_name = file_name.unicode_normalize(:nfkc)
+    unless @_file_name.ascii_only?
+      @_file_name = @_file_name.encode(Encoding.find('ASCII'), encoding_options)
     end
-    @file_name.ascii_only?
+    @_file_name.ascii_only?
   end
 end

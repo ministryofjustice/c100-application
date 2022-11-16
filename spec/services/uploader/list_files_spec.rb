@@ -6,7 +6,7 @@ RSpec.describe Uploader::ListFiles do
 
   before do
     allow_any_instance_of(Aws::S3::Client).to receive(:list_objects).
-      and_return([])
+      and_return(['123'])
     allow(ENV).to receive(:fetch).with('AWS_BUCKET', '').and_return(bucket)
   end
 
@@ -28,6 +28,33 @@ RSpec.describe Uploader::ListFiles do
           prefix: "#{collection_ref}/#{document_key}/"
         })
       subject
+    end
+
+    context 'when no files found' do
+      before do
+        allow_any_instance_of(Aws::S3::Client).to receive(:list_objects).
+          and_return([])
+      end
+      it 'logs and raises error' do
+        allow(Rails).to receive_message_chain(:logger, :tagged).and_yield
+        expect(Rails).to receive_message_chain(:logger, :warn)
+        subject
+      end
+    end
+
+
+    context 'when AWS raises error' do
+      before do
+        allow_any_instance_of(Aws::S3::Client).to receive(:list_objects).
+          and_raise(StandardError)
+      end
+
+      it 'logs and raises error' do
+        allow(Rails).to receive_message_chain(:logger, :tagged).and_yield
+        expect(Rails).to receive_message_chain(:logger, :warn)
+
+        expect { subject }.to raise_error(Uploader::UploaderError)
+      end
     end
 
   end

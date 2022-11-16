@@ -35,5 +35,4 @@ class Uploader
       document_key:   args[:document_key]
     ).call
   end
-
 end

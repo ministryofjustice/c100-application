@@ -22,6 +22,8 @@ AllCops:
 
 Metrics/ClassLength:
   Max: 105
+  Exclude:
+    - app/models/document_upload.rb
 
 Layout/LineLength:
   Max: 130

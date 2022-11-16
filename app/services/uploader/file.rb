@@ -9,19 +9,6 @@ class Uploader
       @key = key
     end
 
-    # def url
-    #   file_uri = @client.generate_uri("#{ENV.fetch('AZURE_STORAGE_CONTAINER')}/#{key}")
-
-    #   signer.signed_uri(
-    #     file_uri,
-    #     false,
-    #     service: 'b',
-    #     permissions: 'r',
-    #     content_disposition: :attachment,
-    #     expiry: expires_at
-    #   ).to_s
-    # end
-
     def name
       key.split('/').last
     end
@@ -33,12 +20,6 @@ class Uploader
 
     def hash
       key.hash
-    end
-
-    private
-
-    def expires_at
-      (Time.now + EXPIRES_IN).utc.iso8601
     end
   end
 end

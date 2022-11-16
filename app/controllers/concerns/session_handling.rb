@@ -7,9 +7,7 @@ module SessionHandling
   end
 
   def session_expire_in_minutes
-    debugger
-    1
-    # Rails.configuration.x.session.expires_in_minutes
+    Rails.configuration.x.session.expires_in_minutes
   end
 
   def session_expire_in_seconds

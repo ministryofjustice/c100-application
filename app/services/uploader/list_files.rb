@@ -14,8 +14,6 @@ class Uploader
       log_files_empty if files.empty?
 
       files
-    rescue KeyError => err # e.g. Env not found
-      raise KeyError, err
     rescue StandardError => err
       log_uploader_error(err)
       raise Uploader::UploaderError, err
@@ -29,17 +27,17 @@ class Uploader
     end
 
     def log_files_empty
-      Rails.logger.tagged('list_files') {
+      Rails.logger.tagged('list_files') do
         Rails.logger.warn("NotFoundError")
-      }
+      end
     end
 
     def log_uploader_error(err)
-      Rails.logger.tagged('list_files') {
+      Rails.logger.tagged('list_files') do
         Rails.logger.warn('Uploader::RequestError': {
                             error: err.inspect, backtrace: err.backtrace
                           })
-      }
+      end
     end
   end
 end

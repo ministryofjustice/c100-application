@@ -7,6 +7,8 @@ RSpec.describe Uploader::DeleteFile do
   before do
     allow_any_instance_of(Aws::S3::Client).to receive(:delete_object)
     allow(ENV).to receive(:fetch).with('AWS_BUCKET', '').and_return(bucket)
+    allow(Rails).to receive_message_chain(:logger, :tagged).and_yield
+    allow(Rails).to receive_message_chain(:logger, :info)
   end
 
   let(:bucket) { 'bucket' }
@@ -29,6 +31,19 @@ RSpec.describe Uploader::DeleteFile do
           key: "#{collection_ref}/#{document_key}/#{filename}"
         })
       subject
+    end
+
+    context 'when AWS raises error' do
+      before do
+        allow_any_instance_of(Aws::S3::Client).to receive(:delete_object).
+          and_raise(StandardError)
+      end
+
+      it 'logs and raises error' do
+        expect(Rails).to receive_message_chain(:logger, :warn)
+
+        expect { subject }.to raise_error(Uploader::UploaderError)
+      end
     end
 
   end

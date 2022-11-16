@@ -8,6 +8,7 @@ RSpec.describe Uploader::AddFile do
     allow_any_instance_of(Aws::S3::Client).to receive(:put_object)
     allow(ENV).to receive(:fetch).with('SKIP_VIRUS_CHECK', '').and_return('')
     allow(ENV).to receive(:fetch).with('AWS_BUCKET', '').and_return(bucket)
+    allow(Clamby).to receive(:safe?).and_return(true)
   end
 
   let(:bucket) { 'bucket' }
@@ -24,9 +25,6 @@ RSpec.describe Uploader::AddFile do
   } }
 
   describe '.upload' do
-    before do
-      expect(Clamby).to receive(:safe?).and_return(true)
-    end
     it 'calls aws client' do
       expect_any_instance_of(Aws::S3::Client).to receive(:put_object).
         with({
@@ -35,6 +33,21 @@ RSpec.describe Uploader::AddFile do
           key: "#{collection_ref}/#{document_key}/#{filename}"
         })
       subject
+    end
+
+    context 'when AWS raises error' do
+      before do
+        allow_any_instance_of(Aws::S3::Client).to receive(:put_object).
+          and_raise(StandardError)
+      end
+
+      it 'logs and raises error' do
+        allow(Rails).to receive_message_chain(:logger, :tagged).and_yield
+        allow(Rails).to receive_message_chain(:logger, :warn)
+
+        expect { subject }.to raise_error(Uploader::UploaderError)
+      end
+
     end
 
   end

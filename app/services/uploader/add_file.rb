@@ -34,12 +34,10 @@ class Uploader
 
     def upload
       @client.put_object({
-        body: @data,
+                           body: @data,
         bucket: ENV.fetch('AWS_BUCKET', ''),
         key: blob_name
-      })
-    rescue KeyError => err # e.g. Env not found
-      raise KeyError, err
+                         })
     rescue StandardError => err
       repeat_or_raise(err)
     end
@@ -79,17 +77,15 @@ class Uploader
     end
 
     def log_retry_error
-      Rails.logger.tagged('add_file') {
+      Rails.logger.tagged('add_file') do
         Rails.logger.warn('Uploader::RequestError::Retry': {retry_counter: @retries})
-      }
+      end
     end
 
     def log_request_error(err)
-      Rails.logger.tagged('add_file') {
+      Rails.logger.tagged('add_file') do
         Rails.logger.warn('Uploader::RequestError': {error: err.inspect, backtrace: err.backtrace})
-      }
+      end
     end
   end
 end
-
-

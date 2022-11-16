@@ -5,7 +5,7 @@ module Steps
 
       validate :check_document_presence
       attribute :draft_consent_order_document, DocumentUpload
-  
+
       def document_key
         :draft_consent_order
       end

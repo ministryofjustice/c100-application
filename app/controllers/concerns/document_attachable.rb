@@ -26,7 +26,7 @@ module DocumentAttachable
   end
 
   def check_document_presence
-    errors.add(document_attribute, :blank) unless document_provided?
+    errors.add(document_attribute, :blank) unless c100_application.nil? || document_provided?
   end
 
   def valid_uploaded_file

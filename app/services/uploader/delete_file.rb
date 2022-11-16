@@ -11,11 +11,9 @@ class Uploader
       log_delete
 
       @client.delete_object({
-        bucket: ENV.fetch('AWS_BUCKET', ''),
+                              bucket: ENV.fetch('AWS_BUCKET', ''),
         key: blob_name
-      })
-    rescue KeyError => err # e.g. Env not found
-      raise KeyError, err
+                            })
     rescue StandardError => err
       log_uploader_error(err)
       raise Uploader::UploaderError, err
@@ -24,23 +22,23 @@ class Uploader
     private
 
     def log_delete
-      Rails.logger.tagged('delete_file') {
+      Rails.logger.tagged('delete_file') do
         Rails.logger.info({
                             filename: @filename,
                             collection_ref: @collection_ref,
                             folder: @document_key.to_s
                           })
-      }
+      end
     end
 
     def log_uploader_error(err)
-      Rails.logger.tagged('delete_file') {
+      Rails.logger.tagged('delete_file') do
         Rails.logger.warn('Uploader::RequestError':
           {
             error: err.inspect,
             backtrace: err.backtrace
           })
-      }
+      end
     end
   end
 end
