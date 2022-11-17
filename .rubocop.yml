@@ -1,4 +1,4 @@
-require: rubocop-performance
+# require: rubocop-performance
 
 AllCops:
   SuggestExtensions: false
@@ -20,107 +20,107 @@ AllCops:
 ## Customization for this project ##
 ####################################
 
-# Metrics/ClassLength:
-#   Max: 105
-#   Exclude:
-#     - app/models/document_upload.rb
+Metrics/ClassLength:
+  Max: 105
+  Exclude:
+    - app/models/document_upload.rb
 
-# Layout/LineLength:
-#   Max: 130
+Layout/LineLength:
+  Max: 130
 
-# Metrics/MethodLength:
-#   Max: 21
+Metrics/MethodLength:
+  Max: 21
 
-# Metrics/CyclomaticComplexity:
-#   Max: 12
+Metrics/CyclomaticComplexity:
+  Max: 12
 
-# Style/Documentation:
-#   Enabled: false
+Style/Documentation:
+  Enabled: false
 
-# Style/FrozenStringLiteralComment:
-#   Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
 
-# Style/SymbolArray:
-#   Enabled: false
+Style/SymbolArray:
+  Enabled: false
 
-# Layout/SpaceInsideHashLiteralBraces:
-#   Enabled: false
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
 
-# Naming/PredicateName:
-#   Enabled: false
+Naming/PredicateName:
+  Enabled: false
 
-# Style/MultilineIfModifier:
-#   Enabled: false
+Style/MultilineIfModifier:
+  Enabled: false
 
-# Layout/HashAlignment:
-#   Enabled: false
+Layout/HashAlignment:
+  Enabled: false
 
-# Style/IfUnlessModifier:
-#   Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
 
-# Style/StringLiterals:
-#   Enabled: false
+Style/StringLiterals:
+  Enabled: false
 
-# Style/TrailingCommaInArrayLiteral:
-#   Enabled: false
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
 
-# Style/TrailingCommaInHashLiteral:
-#   Enabled: false
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
 
-# Style/TrailingCommaInArguments:
-#   Enabled: false
+Style/TrailingCommaInArguments:
+  Enabled: false
 
-# Layout/MultilineMethodCallIndentation:
-#   Enabled: false
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
 
-# Layout/EmptyLineAfterGuardClause:
-#   Enabled: false
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
 
-# Naming/RescuedExceptionsVariableName:
-#   Enabled: false
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
 
-# Naming/MemoizedInstanceVariableName:
-#   EnforcedStyleForLeadingUnderscores: required
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: required
 
-# Style/MissingRespondToMissing:
-#   Exclude:
-#     - app/presenters/c8_confidentiality_presenter.rb
+Style/MissingRespondToMissing:
+  Exclude:
+    - app/presenters/c8_confidentiality_presenter.rb
 
-# Style/AccessorGrouping:
-#   Enabled: false
+Style/AccessorGrouping:
+  Enabled: false
 
-# Naming/VariableNumber:
-#   Enabled: false
+Naming/VariableNumber:
+  Enabled: false
 
-# Style/CommentAnnotation:
-#   Enabled: false
+Style/CommentAnnotation:
+  Enabled: false
 
-# Layout/EmptyLineBetweenDefs:
-#   Enabled: false
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
 
-# Style/CaseLikeIf:
-#   Enabled: false
+Style/CaseLikeIf:
+  Enabled: false
 
-# Style/HashAsLastArrayItem:
-#   Enabled: false
+Style/HashAsLastArrayItem:
+  Enabled: false
 
-# Layout/EmptyLinesAroundAttributeAccessor:
-#   Enabled: false
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: false
 
-# Style/HashEachMethods:
-#   Enabled: false
+Style/HashEachMethods:
+  Enabled: false
 
-# Style/StringConcatenation:
-#   Enabled: false
+Style/StringConcatenation:
+  Enabled: false
 
-# Style/SoleNestedConditional:
-#   Enabled: false
+Style/SoleNestedConditional:
+  Enabled: false
 
-# Naming/MethodParameterName:
-#   Enabled: false
+Naming/MethodParameterName:
+  Enabled: false
 
-# Metrics/AbcSize:
-#   Max: 24.5
+Metrics/AbcSize:
+  Max: 24.5
 
-# Performance/RedundantMerge:
-#   Enabled: false
+Performance/RedundantMerge:
+  Enabled: false
