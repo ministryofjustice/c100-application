@@ -2,7 +2,7 @@ Given("I am on safety concern page") do
   choose('Consent order', visible: :all)
   click_button "Continue"
   expect(page).to have_text "Upload the draft of your consent order"
-  attach_file('file', Rails.root + 'features/support/sample_file/image.jpg')
+  attach_file(Rails.root + 'features/support/sample_file/image.jpg')
   click_button "Continue"
   expect(page).to have_text "You do not have to attend a MIAM"
   click_link("Continue")
