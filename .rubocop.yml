@@ -122,5 +122,5 @@ Naming/MethodParameterName:
 Metrics/AbcSize:
   Max: 24.5
 
-Performance/RedundantMerge:
-  Enabled: false
+# Performance/RedundantMerge:
+#   Enabled: false
