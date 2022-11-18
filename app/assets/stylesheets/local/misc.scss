@@ -196,3 +196,12 @@ dl.app-description-list {
     margin-bottom: 0;
   }
 }
+
+.upload-ordered-list{
+  ol{
+    margin-top: 0.4em;
+    li:not(:last-of-type){
+      margin-bottom: 0.8em;
+    }
+  }
+}

@@ -63,4 +63,9 @@ class C100Application < ApplicationRecord
       CompletedApplicationsAudit.log!(self)
     end
   end
+
+  def documents(document_key)
+    @_documents_cache ||= Document.all_for_collection(files_collection_ref)
+    @_documents_cache.fetch(document_key, [])
+  end
 end

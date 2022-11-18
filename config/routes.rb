@@ -115,6 +115,7 @@ Rails.application.routes.draw do
       show_step :no_court_found
       edit_step :research_consent
       edit_step :consent_order
+      edit_step :consent_order_upload
       show_step :consent_order_sought
       edit_step :child_protection_cases
       show_step :child_protection_info
@@ -282,6 +283,10 @@ Rails.application.routes.draw do
       # The following is an alias of the `what_next` route, for analytics tracking
       get :how_to_submit, to: 'what_next#show'
     end
+  end
+
+  scope 'uploader/:document_key' do
+    resources :documents, only: [:create, :destroy]
   end
 
   resource :session, only: [:destroy] do

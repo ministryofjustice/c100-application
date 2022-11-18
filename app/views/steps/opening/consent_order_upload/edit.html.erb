@@ -1,0 +1,33 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%= t('.page_title') %></h1>
+
+    <%= t('.lead_text_html') %>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          <%= t('.dropdown_header') %>
+        </span>
+      </summary>
+      <div class="govuk-details__text upload-ordered-list">
+        <%= t('.dropdown_content_html') %>
+      </div>
+    </details>
+
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+
+      <%= document_upload_field(f, @form_object.document_key, label_text: t('.attach_document_html'),
+        paragraph_text: t('.upload_explanation_html')) %>
+
+      <%= f.continue_button %>
+    <% end %>
+
+    <%= display_current_document(@form_object.document_key) %>
+  </div>
+</div>
