@@ -20,6 +20,18 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_c100_application
 
+  def check_c100_application_status
+    raise Errors::CaseSubmitted if current_c100_application.completed?
+  end
+
+  def store_step_path_in_session
+    session[:current_step_path] = request.fullpath
+  end
+
+  def current_step_path
+    session[:current_step_path]
+  end
+
   private
 
   def reset_c100_application_session

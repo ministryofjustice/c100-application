@@ -1,0 +1,283 @@
+require 'spec_helper'
+
+RSpec.describe DocumentUpload do
+  let(:file_path) { 'image.jpg' }
+  let(:content_type) { 'image/jpeg' }
+  let(:file) { fixture_file_upload(file_path, content_type) }
+  let(:document_key) { 'doc_key' }
+
+  subject { described_class.new(file, collection_ref: '123', document_key: document_key) }
+
+  before do
+    allow(Uploader).to receive(:list_files).and_return(double(contents: []))
+    allow(Uploader).to receive(:add_file).and_return(double(etag: file_path))
+  end
+
+  context 'for a tempfile' do
+    let(:file) { Tempfile.new }
+
+    subject { described_class.new(file, document_key: document_key, content_type: 'image/jpeg', filename: 'image.jpg') }
+
+    context '#file_name' do
+      it 'should have a file name' do
+        expect(subject.file_name).to eq('image.jpg')
+      end
+    end
+
+    context '#file_size' do
+      it 'should have a file size' do
+        expect(subject.file_size).to eq(0)
+      end
+    end
+
+    context '#content_type' do
+      it 'should have a content_type' do
+        expect(subject.content_type).to eq('image/jpeg')
+      end
+    end
+  end
+
+  context 'for an uploaded file' do
+    context '#file_name' do
+      it 'should have a file name' do
+        expect(subject.file_name).to eq('image.jpg')
+      end
+    end
+
+    context '#file_size' do
+      it 'should have a file size' do
+        expect(subject.file_size).to eq(801)
+      end
+    end
+
+    context '#content_type' do
+      it 'should have a content_type' do
+        expect(subject.content_type).to eq('image/jpeg')
+      end
+    end
+  end
+
+  context '#encoded_file_name' do
+    it 'should have a base64 encoded file_name' do
+      expect(subject.encoded_file_name).to eq("aW1hZ2UuanBn\n")
+    end
+  end
+
+  context '#errors' do
+    it 'should be empty upon initialization' do
+      expect(subject.errors).to be_empty
+    end
+  end
+
+  context '#collection_ref' do
+    it 'should have a collection_ref if provided' do
+      instance = described_class.new(file, document_key: document_key, collection_ref: '12345')
+      expect(instance.collection_ref).to eq('12345')
+    end
+  end
+
+  context '#to_hash' do
+    it 'should expose an attributes hash' do
+      expect(subject.to_hash).to eq({name: 'image.jpg', encoded_name: "aW1hZ2UuanBn\n", collection_ref: '123'})
+    end
+  end
+
+  context '#valid?' do
+    context 'when file is valid' do
+      it 'should return true' do
+        expect(subject.valid?).to eq(true)
+      end
+    end
+
+    context 'when file is not valid due to file size' do
+      before do
+        allow(file.tempfile).to receive(:size).and_return(100.megabytes)
+      end
+
+      it 'should not be valid' do
+        expect(subject).to receive(:add_error).with(:file_size).and_call_original
+        expect(subject.valid?).to eq(false)
+        expect(subject.errors).not_to be_empty
+      end
+    end
+
+    context 'when file is not valid due to content type' do
+      let(:content_type) { 'application/zip' }
+
+      it 'should not be valid' do
+        expect(subject).to receive(:add_error).with(:content_type).and_call_original
+        expect(subject.valid?).to eq(false)
+        expect(subject.errors).not_to be_empty
+      end
+    end
+
+    context 'file is checked for ascii-characters' do
+      before do
+        allow(subject).to receive(:original_filename).and_return('invalid £ name.txt')
+      end
+
+      it 'should change the name' do
+        subject.valid?
+        expect(subject.file_name).to eq ('invalid * name.txt')
+      end
+    end
+
+    context 'file is valid with welsh characters' do
+      before do
+        allow(subject).to receive(:original_filename).and_return('invalid âêîôûÚÙŵŷ name.txt')
+      end
+
+      it 'should be valid' do
+        expect(subject.valid?).to eq(true)
+      end
+    end
+  end
+
+  context '#file_name' do
+    before do
+      allow(subject).to receive(:original_filename).and_return(new_filename)
+      allow(subject).to receive(:collection_ref).and_return('123')
+      allow(Uploader).to receive(:list_files).and_return(
+        double(contents: uploaded_files))
+    end
+
+    context 'existing `image.jpg`, uploading `image.jpg`' do
+      let(:new_filename) { 'image.jpg' }
+      let(:uploaded_files) { [double(
+        key: '123/foo/image.jpg',
+        last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000'
+      )] }
+      it { expect(subject.file_name).to eq('image(1).jpg') }
+    end
+
+    context 'existing `image(1).jpg`, uploading `image(1).jpg`' do
+      let(:new_filename) { 'image(1).jpg' }
+      let(:uploaded_files) { [double(
+        key: 'foo/123/image(1).jpg',
+        last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000'
+      )] }
+      it { expect(subject.file_name).to eq('image(1)(1).jpg') }
+    end
+
+    context 'existing `image.jpg` and `image(1).jpg`, uploading `image.jpg`' do
+      let(:new_filename) { 'image.jpg' }
+      let(:uploaded_files) { [
+        double(key: 'foo/123/image.jpg',
+               last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000'),
+        double(key: 'foo/123/image(1).jpg',
+               last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000')] }
+      it { expect(subject.file_name).to eq('image(2).jpg') }
+    end
+
+    context 'existing `image.jpg`, `image(1).jpg` and `image(2).jpg`, uploading `image.jpg`' do
+      let(:new_filename) { 'image.jpg' }
+      let(:uploaded_files) {
+        [
+          double(key: 'foo/123/image.jpg',
+                 last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000'),
+          double(key: 'foo/123/image(1).jpg',
+                 last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000'),
+          double(key: 'foo/123/image(2).jpg',
+                 last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000')
+        ]
+      }
+      it { expect(subject.file_name).to eq('image(3).jpg') }
+    end
+
+    # Although we are filtering out by extension and do not allow files without extension, the following tests cover a
+    # theoretical situation uploading files without an extension.
+    describe 'files without an extension' do
+      context 'existing `image`, uploading `image`' do
+        let(:new_filename) { 'image' }
+        let(:uploaded_files) { [double(
+            key: 'foo/123/image',
+            last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000')] }
+        it { expect(subject.file_name).to eq('image(1)') }
+      end
+
+      context 'existing `image.`, uploading `image.`' do
+        let(:new_filename) { 'image.' }
+        let(:uploaded_files) { [double(
+            key: 'foo/123/image.',
+            last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000')] }
+        it { expect(subject.file_name).to eq('image.(1).') }
+      end
+
+      context 'existing `.image`, uploading `.image`' do
+        let(:new_filename) { '.image' }
+        let(:uploaded_files) { [double(
+            key: 'foo/123/.image',
+            last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000')] }
+        it { expect(subject.file_name).to eq('.image(1)') }
+      end
+    end
+  end
+
+  context '#upload!' do
+    before do
+      expect(file.tempfile).to receive(:read).and_call_original
+    end
+
+    context 'no error' do
+      let(:response) { double('Response', error?: false) }
+
+      context 'when the document_key was provided in the initializer' do
+        subject { described_class.new(file, document_key: 'foo') }
+
+        it 'should upload the document with that key' do
+          expect(Uploader).to receive(:add_file).
+            with(hash_including(document_key: 'foo')).
+            and_return(double(etag: '123/foo/bar.png'))
+
+          subject.upload!(collection_ref: '123')
+          expect(subject.errors?).to eq(false)
+        end
+      end
+
+      context 'when the filename was sanitized' do
+        subject { described_class.new(file, document_key: 'foo') }
+
+        it 'should upload the document with that key' do
+          expect(Uploader).to receive(:add_file).with(hash_including(document_key: 'foo')).
+            and_return(double('Uploader', etag: 'new_file_name.jpg'))
+
+          subject.upload!(collection_ref: '123')
+          expect(subject.file_name).to eq 'new_file_name.jpg'
+        end
+      end
+
+      context 'when the document_key was provided in the upload! params' do
+        subject { described_class.new(file) }
+
+        it 'should use file name from response' do
+          expect(Uploader).to receive(:add_file).with(hash_including(document_key: 'bar')).
+            and_return(double('uploader', etag: ''))
+
+          subject.upload!(collection_ref: '123', document_key: 'bar')
+          expect(subject.errors?).to eq(false)
+        end
+      end
+    end
+
+    context 'with error' do
+      context 'response error' do
+        let(:error) { double("Upstream error", code: 418, body: "Is it coffee you're looking for?") }
+        it 'should upload the document' do
+          expect(Uploader).to receive(:add_file).and_raise(Uploader::UploaderError, error)
+          expect(subject).to receive(:add_error).with(:response_error).and_call_original
+          subject.upload!(collection_ref: '123')
+          expect(subject.errors?).to eq(true)
+        end
+      end
+
+      context 'virus detected error' do
+        it 'should upload the document' do
+          expect(Uploader).to receive(:add_file).and_raise(Uploader::InfectedFileError)
+          expect(subject).to receive(:add_error).with(:virus_detected).and_call_original
+          subject.upload!(collection_ref: '123')
+          expect(subject.errors?).to eq(true)
+        end
+      end
+    end
+  end
+end

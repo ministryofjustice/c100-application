@@ -92,13 +92,21 @@ RSpec.describe C100App::OpeningDecisionTree do
 
     context 'and the answer is `yes`' do
       let(:value) { 'yes' }
-      it { is_expected.to have_destination(:consent_order_sought, :show) }
+      it { is_expected.to have_destination(:consent_order_upload, :edit) }
     end
 
     context 'and the answer is `no`' do
       let(:value) { 'no' }
       it { is_expected.to have_destination(:child_protection_cases, :edit) }
     end
+  end
+
+  context 'when the step is `consent_order_upload`' do
+    let(:c100_application) { 
+      instance_double(C100Application) }
+    let(:step_params) { { consent_order_upload: 'anything' } }
+
+    it { is_expected.to have_destination(:consent_order_sought, :show) }
   end
 
   context 'when the step is `child_protection_cases`' do

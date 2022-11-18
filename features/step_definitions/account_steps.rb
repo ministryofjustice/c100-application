@@ -1,6 +1,9 @@
 Given("I am on safety concern page") do
   choose('Consent order', visible: :all)
   click_button "Continue"
+  expect(page).to have_text "Upload the draft of your consent order"
+  attach_file(Rails.root + 'features/support/sample_file/image.jpg')
+  click_button "Continue"
   expect(page).to have_text "You do not have to attend a MIAM"
   click_link("Continue")
   expect(page).to have_text "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
