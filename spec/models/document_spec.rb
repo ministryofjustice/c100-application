@@ -123,4 +123,17 @@ RSpec.describe Document do
       end
     end
   end
+
+  describe '#generate_download_token' do
+    
+    let(:c100_application) { C100Application.create }
+    
+    it 'creates a token' do
+      expect {
+        subject.generate_download_token(c100_application)
+      }.to change(DownloadToken, :count)
+      token = c100_application.download_tokens.first
+      expect(token.key).to eq(subject.full_name)
+    end
+  end
 end

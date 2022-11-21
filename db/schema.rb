@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_02_140553) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_18_113700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -260,6 +260,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_140553) do
     t.integer "cci_code"
   end
 
+  create_table "download_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "token", null: false
+    t.string "key", null: false
+    t.uuid "c100_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["c100_application_id"], name: "index_download_tokens_on_c100_application_id"
+    t.index ["token"], name: "index_download_tokens_on_token", unique: true
+  end
+
   create_table "email_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "to_address"
     t.string "email_copy_to"
@@ -413,6 +423,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_140553) do
   add_foreign_key "court_arrangements", "c100_applications"
   add_foreign_key "court_orders", "c100_applications"
   add_foreign_key "court_proceedings", "c100_applications"
+  add_foreign_key "download_tokens", "c100_applications"
   add_foreign_key "email_submissions", "c100_applications"
   add_foreign_key "miam_exemptions", "c100_applications"
   add_foreign_key "payment_intents", "c100_applications"

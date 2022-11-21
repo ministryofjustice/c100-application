@@ -245,4 +245,29 @@ RSpec.describe C100Application, type: :model do
       expect(subject.documents(:doc_key)).to eq([file])
     end
   end
+
+  describe '#document' do
+    let(:files_collection_ref) { 'b2411f49-db48-4074-b26a-944002bcebf1' }
+    let(:attributes) { {
+      files_collection_ref: files_collection_ref
+    } }
+    let(:file) { double('file') }
+    it 'returns documents for this application' do
+      expect(Document).to receive(:all_for_collection).with(
+        files_collection_ref
+      ).and_return({
+        doc_key: [file]
+      })
+      expect(subject.document(:doc_key)).to eq(file)
+    end
+
+    it 'returns nil when no application present' do
+      expect(Document).to receive(:all_for_collection).with(
+        files_collection_ref
+      ).and_return({
+        doc_key: []
+      })
+      expect(subject.document(:doc_key)).to eq(nil)
+    end
+  end
 end

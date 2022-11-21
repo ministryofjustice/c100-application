@@ -36,6 +36,12 @@ class Document
     end.sort
   end
 
+  def generate_download_token(c100_application)
+    c100_application.download_tokens.create(
+      key: @full_name
+    )
+  end
+
   def encoded_name
     Base64.encode64(name)
   end
