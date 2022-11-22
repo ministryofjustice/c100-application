@@ -1,4 +1,5 @@
-FROM hmctspublic.azurecr.io/imported/library/ruby:2.7.6-slim-buster
+FROM ruby:2.7.6-slim-buster
+MAINTAINER HMCTS Reform Team
 
 # build dependencies:
 #   - ruby-full libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6 for wkhtmltopdf
@@ -39,9 +40,7 @@ RUN clamd
 # Install Yarn
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null && \
   echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  apt-get update && apt-get install yarn -y
-
-RUN yarn
+  apt-get update && apt-get install yarn
 
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
 
@@ -73,14 +72,13 @@ RUN gem install bundler -v 2.3.17 && \
 
 COPY . .
 
-RUN yarn install --production --frozen-lockfile
-
 # The following are ENV variables that need to be present by the time
 # the assets pipeline run, but doesn't matter their value.
 #
 ENV EXTERNAL_URL=replace_this_at_build_time
 ENV SECRET_KEY_BASE=replace_this_at_build_time
 ENV GOVUK_NOTIFY_API_KEY=replace_this_at_build_time
+
 ENV RAILS_ENV=production
 RUN bundle exec rake assets:precompile
 
