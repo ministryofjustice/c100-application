@@ -118,7 +118,7 @@ It will also trigger an automatic deploy to [staging][k8s-staging].
 
 The build will then hold for approval to promote to production environment, at which point it will tag it and push it to the ECR repository, and trigger a rolling update, creating new pods with the new image, and scaling down old pods, as new ones become available.
 
-For more details on the ENV variables needed for CircleCI, refer to the [deploy repo][deploy-repo].
+For more details on the ENV variables needed for CircleCI, refer to the [deploy repo][deploy-repo]. test
 
 [taxtribs]: https://github.com/ministryofjustice/tax-tribunals-datacapture
 [deploy-repo]: https://github.com/ministryofjustice/c100-application-deploy
