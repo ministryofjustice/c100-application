@@ -23,17 +23,34 @@ class NotifySubmissionMailer < NotifyMailer
     set_template(:application_submitted_to_court)
     set_reference("court;#{@c100_application.reference_code}")
 
+    build_draft_document_variables
+
     set_personalisation(
       shared_personalisation.merge(
         urgent: @c100_application.urgent_hearing || 'no',
         c8_included: @c100_application.confidentiality_enabled? ? 'yes' : 'no',
         link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
         link_to_pdf: prepare_upload(@documents[:bundle]),
-        link_to_json: prepare_upload(@documents[:json_form])
+        link_to_json: prepare_upload(@documents[:json_form]),
+        has_consent_order_draft: @has_consent_order_draft,
+        link_to_consent_order_draft_document:
+          @link_to_consent_order_draft_document
       )
     )
 
     mail(to: to_address)
+  end
+
+  def build_draft_document_variables
+    if (draft = @c100_application.document(:consent_order_draft))
+      download_token = draft.generate_download_token(@c100_application)
+      @link_to_consent_order_draft_document =
+        download_token_url(download_token.token)
+      @has_consent_order_draft = true
+    else
+      @link_to_consent_order_draft_document = ''
+      @has_consent_order_draft = false
+    end
   end
 
   def application_to_user(to_address:)

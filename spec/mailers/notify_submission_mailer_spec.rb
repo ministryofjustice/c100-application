@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe NotifySubmissionMailer, type: :mailer do
   let(:c100_application) {
     C100Application.new(
-      id: '4a362e1c-48eb-40e3-9458-a31ead3f30a4',
+      id: '4a362e1c-48eb-40e3-9458-a36ead3f30a4',
       created_at: Time.at(0),
       receipt_email: 'receipt@example.com',
       consent_order: 'yes',
@@ -33,6 +33,9 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       application_submitted_to_court: 'application_submitted_to_court_template_id',
       application_submitted_to_user: 'application_submitted_to_user_template_id',
     )
+    allow(Document).
+      to receive(:all_for_collection).
+      and_return({ consent_order_draft: [] })
 
     allow(I18n).to receive(:translate!).with('service.name').and_return(
       'Apply to court about child arrangements'
@@ -64,24 +67,82 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       expect(mail.govuk_notify_reference).to eq('court;1970/01/4A362E1C')
     end
 
-    it 'has the right personalisation' do
-      allow(c100_application).to receive(:confidentiality_enabled?).
-        and_return(false)
+    context 'with a consent order draft' do
 
-      expect(mail.govuk_notify_personalisation).to eq({
-        service_name: 'Apply to court about child arrangements',
-        applicant_name: 'John Doe',
-        reference_code: '1970/01/4A362E1C',
-        urgent: 'yes',
-        c8_included: 'no',
-        link_to_c8_pdf: '',
-        link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
-          confirm_email_before_download: nil,
-          retention_period: nil },
-        link_to_json: { file: 'dGVzdDI=', is_csv: false,
-          confirm_email_before_download: nil,
-          retention_period: nil }
-      })
+      let(:c100_application) { C100Application.create({
+        urgent_hearing: "yes",
+        declaration_signee: "John Doe"
+      })}
+      let(:file_key) { '39d2bFDf912das3gD' }
+      let(:document) { Document.new({ 
+        name: file_key,
+        collection_ref: '123'
+      }) }
+      before do
+        allow_any_instance_of(C100Application).to receive(
+          :reference_code
+        ).and_return('2022/11/0F8464CD')
+        allow(Document).
+          to receive(:all_for_collection).
+          and_return({ consent_order_draft: [document] })
+      end
+
+      it 'has the right personalisation' do
+        allow(c100_application).to receive(:confidentiality_enabled?).
+          and_return(false)
+
+        expect(mail.govuk_notify_personalisation).to eq({
+          service_name: 'Apply to court about child arrangements',
+          applicant_name: 'John Doe',
+          reference_code: '2022/11/0F8464CD',
+          urgent: 'yes',
+          c8_included: 'no',
+          link_to_c8_pdf: '',
+          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
+            confirm_email_before_download: nil,
+            retention_period: nil },
+          link_to_json: { file: 'dGVzdDI=', is_csv: false,
+            confirm_email_before_download: nil,
+            retention_period: nil },
+          has_consent_order_draft: true,
+          link_to_consent_order_draft_document:
+            download_token_url(c100_application.download_tokens.first.token)
+        })
+      end
+    end
+
+    context 'without a consent order draft' do
+
+      before do
+        allow_any_instance_of(C100Application).to receive(
+          :reference_code
+        ).and_return('2022/11/0F8464CD')
+        allow(Document).
+          to receive(:all_for_collection).
+          and_return({ consent_order_draft: [] })
+      end
+
+      it 'has the right personalisation' do
+        allow(c100_application).to receive(:confidentiality_enabled?).
+          and_return(false)
+
+        expect(mail.govuk_notify_personalisation).to eq({
+          service_name: 'Apply to court about child arrangements',
+          applicant_name: 'John Doe',
+          reference_code: '2022/11/0F8464CD',
+          urgent: 'yes',
+          c8_included: 'no',
+          link_to_c8_pdf: '',
+          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
+            confirm_email_before_download: nil,
+            retention_period: nil },
+          link_to_json: { file: 'dGVzdDI=', is_csv: false,
+            confirm_email_before_download: nil,
+            retention_period: nil },
+          has_consent_order_draft: false,
+          link_to_consent_order_draft_document: ''
+        })
+      end
     end
 
     context 'and applicant has private contact details' do

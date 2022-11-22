@@ -36,6 +36,7 @@ class C100Application < ApplicationRecord
   has_many :respondents
   has_many :other_children,     dependent: :destroy
   has_many :other_parties,      dependent: :destroy
+  has_many :download_tokens,    dependent: :destroy
 
   scope :with_owner,    -> { where.not(user: nil) }
   scope :not_completed, -> { where.not(status: :completed) }
@@ -67,5 +68,9 @@ class C100Application < ApplicationRecord
   def documents(document_key)
     @_documents_cache ||= Document.all_for_collection(files_collection_ref)
     @_documents_cache.fetch(document_key, [])
+  end
+
+  def document(document_key)
+    documents(document_key).any? ? documents(document_key)[0] : nil
   end
 end

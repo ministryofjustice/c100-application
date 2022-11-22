@@ -288,6 +288,7 @@ Rails.application.routes.draw do
   scope 'uploader/:document_key' do
     resources :documents, only: [:create, :destroy]
   end
+  resources :download_tokens, only: [:show], param: :token
 
   resource :session, only: [:destroy] do
     member do
@@ -308,6 +309,7 @@ Rails.application.routes.draw do
   resource :errors, only: [] do
     get :invalid_session
     get :application_not_found
+    get :file_not_found
     get :application_screening
     get :application_completed
     get :payment_error

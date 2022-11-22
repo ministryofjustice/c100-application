@@ -33,8 +33,6 @@ RSpec.describe Steps::Opening::ConsentOrderUploadForm do
   it_behaves_like 'a document attachable step form', attribute_name: :draft_consent_order
 
   describe '#save' do
-    # context '', focus: true do
-    # end
 
     context 'when no c100_application is associated with the form' do
       let(:c100_application) { nil }
