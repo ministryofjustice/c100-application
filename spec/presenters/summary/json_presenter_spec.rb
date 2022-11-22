@@ -157,6 +157,19 @@ RSpec.describe Summary::JsonPresenter do
 
     let(:child_order) { ChildOrder.create(orders: %w[child_arrangements_home prohibited_steps_moving]) }
 
+    context 'with error' do
+      before do
+        allow_any_instance_of(described_class).to receive(:create_hash).
+          and_raise(StandardError)
+      end
+
+      it 'reports error to sentry' do
+        expect(Sentry).to receive(:capture_exception)
+        expect(subject.generate).to eq([{}])
+      end
+
+    end
+
     context 'children data' do
       let(:children_json) { json_file[0][:children][0] }
 

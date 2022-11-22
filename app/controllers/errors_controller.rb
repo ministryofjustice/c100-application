@@ -19,6 +19,10 @@ class ErrorsController < ApplicationController
     respond_with_status(:not_found)
   end
 
+  def file_not_found
+    respond_with_status(:not_found)
+  end
+
   def application_screening
     respond_with_status(:unprocessable_entity)
   end
