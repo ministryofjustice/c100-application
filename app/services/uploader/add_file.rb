@@ -35,7 +35,7 @@ class Uploader
     def upload
       @client.put_object({
                            body: @data,
-        bucket: ENV.fetch('AWS_BUCKET', ''),
+        bucket: ENV.fetch('AWS_S3_BUCKET', ''),
         key: blob_name
                          })
     rescue StandardError => err

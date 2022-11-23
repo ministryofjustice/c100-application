@@ -7,7 +7,7 @@ RSpec.describe Uploader::ListFiles do
   before do
     allow_any_instance_of(Aws::S3::Client).to receive(:list_objects).
       and_return(['123'])
-    allow(ENV).to receive(:fetch).with('AWS_BUCKET', '').and_return(bucket)
+    allow(ENV).to receive(:fetch).with('AWS_S3_BUCKET', '').and_return(bucket)
   end
 
   let(:bucket) { 'bucket' }
