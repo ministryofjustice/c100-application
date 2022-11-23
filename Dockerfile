@@ -75,6 +75,10 @@ RUN yarn install --production --frozen-lockfile
 ENV EXTERNAL_URL=replace_this_at_build_time
 ENV SECRET_KEY_BASE=replace_this_at_build_time
 ENV GOVUK_NOTIFY_API_KEY=replace_this_at_build_time
+ENV AWS_S3_ACCESS_KEY_ID=replace_this_at_build_time
+ENV AWS_S3_SECRET_ACCESS_KEY=replace_this_at_build_time
+ENV AWS_S3_REGION=replace_this_at_build_time
+ENV AWS_S3_BUCKET=replace_this_at_build_time
 ENV RAILS_ENV=production
 RUN bundle exec rake assets:precompile
 
