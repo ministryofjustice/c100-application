@@ -28,7 +28,13 @@ RUN apt-get -y install \
   curl \
   shared-mime-info \
   xz-utils \
-  nodejs
+  nodejs \
+  clamav \
+  clamav-daemon
+
+RUN freshclam
+RUN mkdir -p var/run/clamav && chmod 777 /var/run/clamav
+RUN clamd
 
 # Install Yarn
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null && \
