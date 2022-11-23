@@ -38,7 +38,6 @@ RUN mkdir -p var/run/clamav && \
  mkdir -p var/log/clamav && \
  chmod -R 777 /var/log/clamav && \
  mkdir -p var/lib/clamav
-RUN clamd
 
 # Install Yarn
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null && \
