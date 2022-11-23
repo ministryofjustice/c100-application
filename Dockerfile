@@ -102,7 +102,7 @@ RUN cp node_modules/govuk-frontend/govuk/assets/images/* public/assets/govuk-fro
 RUN rm -rf /tmp/*
 
 # non-root/appuser should own only what they need to
-RUN chown -R appuser:appgroup log tmp db var/lib/clamav var/log/clamav var/run/clamav
+RUN chown -R appuser:appgroup log tmp db /var/lib/clamav /var/log/clamav /var/run/clamav
 
 # Download RDS certificates bundle -- needed for SSL verification
 # We set the path to the bundle in the ENV, and use it in `/config/database.yml`
