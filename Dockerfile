@@ -33,7 +33,10 @@ RUN apt-get -y install \
   clamav-daemon
 
 RUN freshclam
-RUN mkdir -p var/run/clamav && chmod 777 /var/run/clamav && chmod 777 /var/log/clamav
+RUN mkdir -p var/run/clamav && \
+ chmod -R 777 /var/run/clamav && \
+ mkdir -p var/log/clamav && \
+ chmod -R 777 /var/log/clamav
 RUN clamd
 
 # Install Yarn
