@@ -7,7 +7,7 @@ RSpec.describe Uploader::AddFile do
   before do
     allow_any_instance_of(Aws::S3::Client).to receive(:put_object)
     allow(ENV).to receive(:fetch).with('SKIP_VIRUS_CHECK', '').and_return('')
-    allow(ENV).to receive(:fetch).with('AWS_BUCKET', '').and_return(bucket)
+    allow(ENV).to receive(:fetch).with('AWS_S3_BUCKET', '').and_return(bucket)
     allow(Clamby).to receive(:safe?).and_return(true)
   end
 

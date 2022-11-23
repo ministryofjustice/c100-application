@@ -10,7 +10,7 @@ RSpec.describe Uploader::GetFile do
         double('Uploader::ListFiles', call:
           double(contents: [double('file', key: key)]))
         )
-    allow(ENV).to receive(:fetch).with('AWS_BUCKET', '').and_return(bucket)
+    allow(ENV).to receive(:fetch).with('AWS_S3_BUCKET', '').and_return(bucket)
   end
 
   let(:bucket) { 'bucket' }

@@ -11,7 +11,7 @@ class Uploader
       log_delete
 
       @client.delete_object({
-                              bucket: ENV.fetch('AWS_BUCKET', ''),
+                              bucket: ENV.fetch('AWS_S3_BUCKET', ''),
         key: blob_name
                             })
     rescue StandardError => err
