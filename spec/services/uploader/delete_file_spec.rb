@@ -7,6 +7,9 @@ RSpec.describe Uploader::DeleteFile do
   before do
     allow_any_instance_of(Aws::S3::Client).to receive(:delete_object)
     allow(ENV).to receive(:fetch).with('AWS_S3_BUCKET', '').and_return(bucket)
+    allow(ENV).to receive(:fetch).with('AWS_S3_REGION').and_return('eu-west-2')
+    allow(ENV).to receive(:fetch).with('AWS_S3_ACCESS_KEY_ID')
+    allow(ENV).to receive(:fetch).with('AWS_S3_SECRET_ACCESS_KEY')
     allow(Rails).to receive_message_chain(:logger, :tagged).and_yield
     allow(Rails).to receive_message_chain(:logger, :info)
   end
