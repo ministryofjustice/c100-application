@@ -44,7 +44,7 @@ The features can be run manually (these are not part of the default rake task) i
 * `bundle exec cucumber features/miam.feature -t @unhappy_path`
 
 By default cucumber will start a local server on a random port, run features against that server, and kill the server once the features have finished.
-
+ 
 If you want to show the browser (useful to debug issues) prefix the commands like this:
 
 * `SHOW_BROWSER=1 bundle exec cucumber features`
