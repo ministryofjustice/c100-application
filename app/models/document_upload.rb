@@ -17,6 +17,7 @@ class DocumentUpload
   ALLOWED_CONTENT_TYPES = %w[
     application/pdf
     application/msword
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document
     image/jpeg
     image/pjpeg
     image/png
