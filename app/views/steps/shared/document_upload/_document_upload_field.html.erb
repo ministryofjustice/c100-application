@@ -12,10 +12,6 @@
   <div class="govuk-grid-column-two-thirds">
     <%= form.govuk_file_field(field_name, label: { text: t('shared.file_upload.select_file') }, class: 'govuk-file-upload single-file-upload', accept: DocumentUpload::ALLOWED_CONTENT_TYPES.join(','), src: 'camera') %>
   </div>
-  <div class="govuk-grid-column-one-third">
-    <p class="js-file-status"></p>
-    <a href="#" class="govuk-button govuk-button--secondary remove-btn"><%= t('shared.file_upload.remove_file') %></a>
-  </div>
 </div>
 
 <%= render partial: 'steps/shared/document_upload/file_upload_requirements' %>
