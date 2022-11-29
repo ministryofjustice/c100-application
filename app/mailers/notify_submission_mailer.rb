@@ -32,9 +32,9 @@ class NotifySubmissionMailer < NotifyMailer
         link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
         link_to_pdf: prepare_upload(@documents[:bundle]),
         link_to_json: prepare_upload(@documents[:json_form]),
-        has_consent_order_draft: @has_consent_order_draft,
-        link_to_consent_order_draft_document:
-          @link_to_consent_order_draft_document
+        has_draft_consent_order: @has_draft_consent_order,
+        link_to_draft_consent_order_document:
+          @link_to_draft_consent_order_document
       )
     )
 
@@ -42,14 +42,14 @@ class NotifySubmissionMailer < NotifyMailer
   end
 
   def build_draft_document_variables
-    if (draft = @c100_application.document(:consent_order_draft))
+    if (draft = @c100_application.document(:draft_consent_order))
       download_token = draft.generate_download_token(@c100_application)
-      @link_to_consent_order_draft_document =
+      @link_to_draft_consent_order_document =
         download_token_url(download_token.token)
-      @has_consent_order_draft = true
+      @has_draft_consent_order = true
     else
-      @link_to_consent_order_draft_document = ''
-      @has_consent_order_draft = false
+      @link_to_draft_consent_order_document = ''
+      @has_draft_consent_order = false
     end
   end
 

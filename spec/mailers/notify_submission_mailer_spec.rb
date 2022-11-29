@@ -35,7 +35,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
     )
     allow(Document).
       to receive(:all_for_collection).
-      and_return({ consent_order_draft: [] })
+      and_return({ draft_consent_order: [] })
 
     allow(I18n).to receive(:translate!).with('service.name').and_return(
       'Apply to court about child arrangements'
@@ -84,7 +84,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         ).and_return('2022/11/0F8464CD')
         allow(Document).
           to receive(:all_for_collection).
-          and_return({ consent_order_draft: [document] })
+          and_return({ draft_consent_order: [document] })
       end
 
       it 'has the right personalisation' do
@@ -104,8 +104,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_json: { file: 'dGVzdDI=', is_csv: false,
             confirm_email_before_download: nil,
             retention_period: nil },
-          has_consent_order_draft: true,
-          link_to_consent_order_draft_document:
+          has_draft_consent_order: true,
+          link_to_draft_consent_order_document:
             download_token_url(c100_application.download_tokens.first.token)
         })
       end
@@ -119,7 +119,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         ).and_return('2022/11/0F8464CD')
         allow(Document).
           to receive(:all_for_collection).
-          and_return({ consent_order_draft: [] })
+          and_return({ draft_consent_order: [] })
       end
 
       it 'has the right personalisation' do
@@ -139,8 +139,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_json: { file: 'dGVzdDI=', is_csv: false,
             confirm_email_before_download: nil,
             retention_period: nil },
-          has_consent_order_draft: false,
-          link_to_consent_order_draft_document: ''
+          has_draft_consent_order: false,
+          link_to_draft_consent_order_document: ''
         })
       end
     end

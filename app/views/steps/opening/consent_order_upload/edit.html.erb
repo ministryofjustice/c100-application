@@ -18,7 +18,20 @@
       </div>
     </details>
 
-    <%= govuk_error_summary %>
+    <div id="other-errors">
+      <%= govuk_error_summary %>
+    </div>
+
+    <!-- File size error -->
+    <div id="file-size-error" class="govuk-error-summary hidden" role="alert" data-module="govuk-error-summary" aria-labelledby="error-summary-title">
+      <h2 id="error-summary-title" class="govuk-error-summary__title">
+        There is a problem on this page</h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li><a data-turbo="false" href="#base-form-base-field-error">This file is too big. You will need to resubmit a smaller version, less than 20 megabytes (MB)</a></li>
+        </ul>
+      </div>
+    </div>
 
     <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
 
