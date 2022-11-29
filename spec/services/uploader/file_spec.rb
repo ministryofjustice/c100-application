@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Uploader::File do
 
-  let(:filepath) { 'deb757fc-f06d-4233-b260-11edcb7416f3/consent_order_draft/letter.jpg' }
+  let(:filepath) { 'deb757fc-f06d-4233-b260-11edcb7416f3/draft_consent_order/letter.jpg' }
 
   it 'gets the name' do
     file = described_class.new(filepath)
