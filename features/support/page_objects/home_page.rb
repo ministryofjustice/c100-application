@@ -7,7 +7,7 @@ class HomePage < BasePage
     element :needs, 'p', text: 'You will need the following:'
     element :continue, '.govuk-button', text: 'Continue'
     element :sign_in, 'a', text: 'Or return to a saved application'
-    element :back, 'a', href: 'https://www.gov.uk/looking-after-children-divorce/apply-for-court-order'
+    element :back, 'a', 'https://www.gov.uk/looking-after-children-divorce/apply-for-court-order'
   end
 
   def slow_continue

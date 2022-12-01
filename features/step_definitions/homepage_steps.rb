@@ -5,10 +5,16 @@ end
 
 Then(/^I should see the home page$/) do
   expect(home_page.content).to have_needs
+  expect(home_page.content).to have_continue
+  expect(home_page.content).to have_sign_in
 end
 
 When(/^I click the continue button$/) do
-  home_page.content.continue.click
+  begin
+    click_button('Continue')
+  rescue
+    click_link('Continue')
+  end
 end
 
 When(/^I click “Or return to a saved application”$/) do
@@ -16,15 +22,11 @@ When(/^I click “Or return to a saved application”$/) do
 end
 
 When(/^I click the back button$/) do
-  click_link(href: 'https://www.gov.uk/looking-after-children-divorce/apply-for-court-order')
+  click_link('Back')
 end
 
 Then(/^I am redirected to “Making child arrangements if you divorce or separate”$/) do
   expect(page).to have_link('', href: 'https://apply-to-court-about-child-arrangements.service.justice.gov.uk/')
-end
-
-When(/^I click the “Certificate of suitability” link$/) do
-  click_link(href: 'https://www.gov.uk/government/publications/form-fp9-certificate-of-suitability-of-litigation-friend')
 end
 
 And(/^I wait for a long time$/) do
