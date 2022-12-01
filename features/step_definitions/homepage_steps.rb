@@ -7,10 +7,6 @@ Then(/^I should see the home page$/) do
   expect(home_page.content).to have_needs
 end
 
-Given(/^I am on the landing page$/) do
-  home_page.load_page
-end
-
 When(/^I click the continue button$/) do
   home_page.content.continue.click
 end
