@@ -69,6 +69,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'apparition'
   gem 'brakeman'
   gem 'capybara'
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.25'
