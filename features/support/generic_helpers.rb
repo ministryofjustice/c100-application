@@ -23,26 +23,29 @@ def no_court_page
   @no_court_page ||= NoCourtPage.new
 end
 
+def error_page
+  @error_page ||= ErrorCPage.new
+end
 
-
-def continue_button_click
+def button_click(value)
   begin
-    click_button('Continue')
+    click_button(value)
   rescue
-    click_link('Continue')
+    click_link(value)
   end
 end
 
-def back_button_click
-  click_link('Back')
-end
-
-def timeout_continue
+def timeout(value)
   travel 61.minutes do
-    begin
-      click_button('Continue')
-    rescue
-      click_link('Continue')
-    end
+    button_click(value)
   end
+end
+
+def api_stubbing
+  WebMock.enable!
+  WebMock.allow_net_connect!
+  WebMock::API.stub_request(:get, "https://www.find-court-tribunal.service.gov.uk/v2/proxy/search/postcode/TQ121XX/serviceArea/childcare-arrangements").
+    to_return(status: 200, body: "{}", headers: {})
+  WebMock::API.stub_request(:get, "https://www.find-court-tribunal.service.gov.uk/health").
+    to_return(status: 200, body: "{\"mapit-api\":{\"status\":\"UP\"}}", headers: {})
 end
