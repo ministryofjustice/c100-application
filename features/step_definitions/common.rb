@@ -4,22 +4,6 @@ When(/^I visit "([^"]*)"$/) do |path|
   visit path
 end
 
-Then(/^I should be on "([^"]*)"$/) do |page_name|
-  expect("#{Capybara.app_host}#{URI.parse(current_url).path}").to eql("#{Capybara.app_host}#{page_name}")
-end
-
-Then(/^I should see "([^"]*)"$/) do |text|
-  expect(page).to have_text(text)
-end
-
-Then(/^I should not see "([^"]*)"$/) do |text|
-  expect(page).not_to have_text(text)
-end
-
-Then(/^I should see a "([^"]*)" link to "([^"]*)"$/) do |text, href|
-  expect(page).to have_link(text, href: href)
-end
-
 Then(/^I should see the save draft button$/) do
   expect(page).to have_selector(:button, 'Save and come back later')
 end
@@ -81,14 +65,30 @@ end
 
 # Below here is rewritten common
 
-When (/^I click "([^"]*)"$/) do |text|
+When(/^I click "([^"]*)"$/) do |text|
   button_click(text)
 end
 
-When (/^I wait for a long time$/) do
+When(/^I wait for a long time$/) do
   timeout('Continue')
 end
 
 Given(/^I stub fact api call to test$/) do
   api_stubbing
+end
+
+Then(/^I should see a "([^"]*)" link to "([^"]*)"$/) do |text, href|
+  expect(page).to have_link(text, href: href)
+end
+
+Then(/^I should be on "([^"]*)"$/) do |page_name|
+  expect("#{Capybara.app_host}#{URI.parse(current_url).path}").to eql("#{Capybara.app_host}#{page_name}")
+end
+
+Then(/^I should see "([^"]*)"$/) do |text|
+  expect(page).to have_text(text)
+end
+
+Then(/^I should not see "([^"]*)"$/) do |text|
+  expect(page).not_to have_text(text)
 end

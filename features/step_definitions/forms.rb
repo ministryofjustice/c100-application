@@ -24,13 +24,13 @@ end
 
 When(/^I choose "([^"]*)"$/) do |text|
   step %[I click the radio button "#{text}"]
-  find_button('Continue').click
+  button_click('Continue')
 end
 
 And(/^I choose "([^"]*)" and fill in "([^"]*)" with "([^"]*)"$/) do |text, field, value|
   step %[I click the radio button "#{text}"]
   step %[I fill in "#{field}" with "#{value}"]
-  find_button('Continue').click
+  button_click('Continue')
 end
 
 When(/^I enter the date (\d+)\-(\d+)\-(\d+)$/) do |day, month, year|
@@ -55,7 +55,7 @@ Then(/^I submit the form details for "([^"]*)"$/) do |heading|
   step %[I click "Yes" for the radio button "Did they help you?"]
   step %[I fill in "What did they do?" with "Information..."]
 
-  step %[I click the "Continue" button]
+  step %[I click "Continue"]
 end
 
 # Needed for the children journey
@@ -63,7 +63,7 @@ When(/^I have selected orders for the court to decide$/) do
   step %[I visit "steps/petition/orders"]
   step %[I check "Decide who they live with and when"]
   step %[I check "Decide how much time they spend with each person"]
-  step %[I click the "Continue" button]
+  step %[I click "Continue"]
   step %[I should see "Decide how much time they spend with each person"]
   step %[I should see "This is known as a Child Arrangements Order"]
 end
@@ -73,7 +73,7 @@ When(/^I have entered a child with first name "([^"]*)" and last name "([^"]*)"$
   step %[I visit "steps/children/names"]
   step %[I fill in "First name(s)" with "#{first_name}"]
   step %[I fill in "Last name(s)" with "#{last_name}"]
-  step %[I click the "Continue" button]
+  step %[I click "Continue"]
   step %[I should see "Provide details for #{first_name} #{last_name}"]
 end
 
