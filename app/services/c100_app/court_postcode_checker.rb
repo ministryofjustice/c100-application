@@ -10,6 +10,7 @@ module C100App
       possible_courts = CourtfinderAPI.new.court_for(AREA_OF_LAW, postcode)
 
       candidate_court = court_lookup(possible_courts['courts'])
+
       return nil if closed_court(candidate_court)
       Court.create_or_refresh(candidate_court) if candidate_court
     end
