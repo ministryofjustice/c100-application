@@ -10,11 +10,7 @@ Then(/^I should see the home page$/) do
 end
 
 When(/^I click the continue button$/) do
-  begin
-    click_button('Continue')
-  rescue
-    click_link('Continue')
-  end
+  continue_button_click
 end
 
 When(/^I click “Or return to a saved application”$/) do
@@ -22,7 +18,7 @@ When(/^I click “Or return to a saved application”$/) do
 end
 
 When(/^I click the back button$/) do
-  click_link('Back')
+  back_button_click
 end
 
 Then(/^I am redirected to “Making child arrangements if you divorce or separate”$/) do
@@ -30,5 +26,5 @@ Then(/^I am redirected to “Making child arrangements if you divorce or separat
 end
 
 And(/^I wait for a long time$/) do
-  home_page.slow_continue
+  timeout_continue
 end

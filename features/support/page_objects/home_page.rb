@@ -10,10 +10,5 @@ class HomePage < BasePage
     element :back, 'a', 'https://www.gov.uk/looking-after-children-divorce/apply-for-court-order'
   end
 
-  def slow_continue
-    travel 61.minutes do
-      content.continue.click
-    end
-  end
 end
 
