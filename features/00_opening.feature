@@ -11,7 +11,7 @@ Feature: Opening
   @happy_path
   Scenario: Complete the opening
     When I fill in "Postcode" with "MK9 3DX"
-    And I click the "Continue" button
+    And I click the postcode page "Continue" button
 
     # Note: user research question is disabled for the time being.
     # Refer to `config.x.opening.research_consent_weight` in `config/application.rb` to enable/disable.
@@ -45,7 +45,7 @@ Feature: Opening
   @unhappy_path
   Scenario: Postcode not eligible
     When I fill in "Postcode" with "TQ12 1FF"
-    And I click the "Continue" button
+    And I click the postcode page "Continue" button with an invalid postcode
 
     Then I should see "Sorry, you cannot apply online"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
