@@ -15,6 +15,14 @@ def signin_page
   @signin_page ||= SignInPage.new
 end
 
+def application_type_page
+  @application_type_page ||= ApplicationTypePage.new
+end
+
+def no_court_page
+  @no_court_page ||= NoCourtPage.new
+end
+
 
 
 def continue_button_click

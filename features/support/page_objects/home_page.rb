@@ -1,5 +1,4 @@
 class HomePage < BasePage
-  include ActiveSupport::Testing::TimeHelpers
   set_url '/'
 
   section :content, '#main-content' do
