@@ -77,3 +77,18 @@ Given("I stub fact api call") do
   WebMock::API.stub_request(:get, "https://www.find-court-tribunal.service.gov.uk/health").
     to_return(status: 200, body: "{\"mapit-api\":{\"status\":\"UP\"}}", headers: {})
 end
+
+
+# Below here is rewritten common
+
+When (/^I click "([^"]*)"$/) do |text|
+  button_click(text)
+end
+
+When (/^I wait for a long time$/) do
+  timeout('Continue')
+end
+
+Given(/^I stub fact api call to test$/) do
+  api_stubbing
+end

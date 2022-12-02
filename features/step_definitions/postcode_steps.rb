@@ -28,7 +28,3 @@ Then(/^I should see the invalid postcode error message$/) do
   expect(postcode_page.content).to have_error_title
   expect(postcode_page.content).to have_error_message_invalid
 end
-
-Given(/^I stub fact api call to test$/) do
-  api_stubbing
-end

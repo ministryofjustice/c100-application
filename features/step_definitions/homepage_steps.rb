@@ -9,22 +9,6 @@ Then(/^I should see the home page$/) do
   expect(home_page.content).to have_sign_in
 end
 
-When(/^I click the continue button$/) do
-  button_click('Continue')
-end
-
-When(/^I click “Or return to a saved application”$/) do
-  home_page.content.sign_in.click
-end
-
-When(/^I click the back button$/) do
-  button_click('Back')
-end
-
 Then(/^I am redirected to “Making child arrangements if you divorce or separate”$/) do
   expect(page).to have_link('', href: 'https://apply-to-court-about-child-arrangements.service.justice.gov.uk/')
-end
-
-And(/^I wait for a long time$/) do
-  timeout('Continue')
 end
