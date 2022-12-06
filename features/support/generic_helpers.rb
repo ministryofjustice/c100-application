@@ -27,6 +27,10 @@ def error_page
   @error_page ||= ErrorCPage.new
 end
 
+def something_wrong_page
+  @something_wrong_page ||= SomethingWrongPage.new
+end
+
 def button_click(value)
   begin
     click_button(value)
