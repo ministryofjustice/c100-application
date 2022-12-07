@@ -29,6 +29,51 @@ Feature: Opening
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I should see the save draft button
 
+  @happy_path
+  Scenario: Testing application timeout (Should not trigger here)
+    When I fill in "Postcode" with "MK9 3DX"
+    And I wait and click the postcode page "Continue" button
+
+    # Note: user research question is disabled for the time being.
+    # Refer to `config.x.opening.research_consent_weight` in `config/application.rb` to enable/disable.
+    #
+    # Then I should see "Are you willing to be contacted to share your experience of using this service?"
+    # And I should not see the save draft button
+    # And I choose "No"
+
+    Then I should see "What kind of application do you want to make?"
+    And I should not see the save draft button
+    And I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
+    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
+    And I should not see the save draft button
+    And I choose "No"
+    Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
+    And I should see the save draft button
+
+  @happy_path
+    Scenario: Testing the back button
+      When I click the "Back" link
+      Then I should see "What you’ll need to complete your application"
+
+  @happy_path
+  Scenario: Checking the dropdown
+    When I open the "If you do not know where the children live" summary details
+    Then I should see "If you do not know the children’s postcode please enter your own."
+
+  @happy_path
+  Scenario: Postcode entry without a space
+    When I fill in "Postcode" with "MK93DX"
+    And I click the postcode page "Continue" button
+
+    # Note: user research question is disabled for the time being.
+    # Refer to `config.x.opening.research_consent_weight` in `config/application.rb` to enable/disable.
+    #
+    # Then I should see "Are you willing to be contacted to share your experience of using this service?"
+    # And I should not see the save draft button
+    # And I choose "No"
+
+    Then I should see "What kind of application do you want to make?"
+
   @unhappy_path
   Scenario: I don't fill out the postcode
     When I click the "Continue" button
