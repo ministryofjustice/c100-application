@@ -3,6 +3,7 @@ module C100
   module Test
     module PageObjects
       class AnyPage < SitePrism::Page
+        include ActiveSupport::Testing::TimeHelpers
 
         def has_google_analytics_enabled?
           wait_until_true(timeout: 100) do

@@ -21,3 +21,23 @@ Then("I create an account") do
   fill_in "Create a password", with: 'password123456'
   click_button "Create account"
 end
+
+Then("I create an account to login") do
+  click_button "Save and come back later"
+  expect(page).to have_text "Save your application"
+  fill_in "Your email address", with: "email@test.com"
+  fill_in "Create a password", with: 'password123456'
+  click_button "Create account"
+end
+
+Then("I login") do
+  fill_in "Your email address", with: "email@test.com"
+  fill_in "Enter your password", with: 'password123456'
+  click_button "Continue"
+end
+
+When(/^I fail to create an account$/) do
+  click_button "Save and come back later"
+  expect(page).to have_text "Save your application"
+  click_button "Create account"
+end
