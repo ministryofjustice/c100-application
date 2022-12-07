@@ -13,7 +13,7 @@ Feature: Create account for applicant
     When I create an account to login
     And I click the "Sign in" link
     And I login
-    Then I should see "Your application has been saved"
+    Then I should see "Your saved drafts"
 
   @unhappy_path
   Scenario: Enter no details when on the account creation page
