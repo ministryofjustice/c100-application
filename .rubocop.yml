@@ -1,4 +1,4 @@
-# require: rubocop-performance # To re-add in future
+require: rubocop-performance
 
 AllCops:
   SuggestExtensions: false

@@ -60,9 +60,9 @@ module Backoffice
       }
 
       if resend_type == 'court'
-        details.merge!(recipient: email.to_address)
+        details[:recipient] = email.to_address
       elsif resend_type == 'user'
-        details.merge!(recipient: email.email_copy_to)
+        details[:recipient] = email.email_copy_to
       end
 
       audit!(action: :resend_email, details: details)
