@@ -23,10 +23,8 @@ class BaseForm
 
     attributes = attributes_map(record)
 
-    attributes.merge!(
-      c100_application: c100_application || record,
-      record: record
-    )
+    attributes[:c100_application] = c100_application || record
+    attributes[:record] = record
 
     new(attributes)
   end
