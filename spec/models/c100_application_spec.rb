@@ -28,6 +28,65 @@ RSpec.describe C100Application, type: :model do
     end
   end
 
+
+  describe 'court redirections' do
+
+    let(:attributes) {{
+      court: court,
+      urgent_hearing: urgent_hearing
+    }}
+
+    context 'with correct court' do
+      let(:court) {
+        Court.find_or_create_by(
+          id: 'west-london-family-court') do | court|
+          court.name = "Barnet Civil and Family Courts Centre",
+          court.gbs = "unknown",
+          court.cci_code = 117,
+          court.address = {},
+          court.email = "test@example.com"
+        end
+      }
+      context 'with urgency' do
+        let(:urgent_hearing){'yes'}
+
+        it 'redirects urgent hearings from 
+            west london family court to barnet civil
+            and family courts' do
+          subject.save
+          expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
+        end
+      end
+
+      context 'without urgency' do
+        let(:urgent_hearing){'no'}
+        it 'does not redirect non-urgent' do
+          subject.save
+          expect(subject.court.id).to eq('west-london-family-court')
+        end
+      end
+    end
+    
+    context 'with incorrect court' do
+      let(:court) {
+        Court.find_or_create_by(id: 'other-court') do | court|
+          court.name = "Other",
+          court.gbs = "unknown",
+          court.cci_code = 117,
+          court.address = {},
+          court.email = "test@example.com"
+        end
+      }
+      let(:urgent_hearing){'yes'}
+      it 'does not redirect to other courts' do
+        subject.save
+        expect(subject.court.id).to eq('other-court')
+      end
+    end
+
+  end
+
+
   describe '.purge!' do
     let(:finder_double) { double.as_null_object }
 
