@@ -1,6 +1,7 @@
 class C100Application < ApplicationRecord
   include ApplicationInquiryMethods
   include ApplicationReference
+  include CourtRedirections
 
   enum status: {
     screening: 0,
