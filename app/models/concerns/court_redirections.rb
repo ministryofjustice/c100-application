@@ -38,7 +38,7 @@ module CourtRedirections
         ],
         "fields_of_law": nil
       }
-      court.email = "family.barnet.countycourt@justice.gov.uk"
+      court.email = "C100applications@justice.gov.uk"
     end
   end
 end
