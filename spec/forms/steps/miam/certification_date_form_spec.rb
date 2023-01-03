@@ -6,7 +6,7 @@ RSpec.describe Steps::Miam::CertificationDateForm do
     miam_certification_date: miam_certification_date
   } }
   let(:c100_application) { instance_double(C100Application) }
-  let(:miam_certification_date) { [nil, Date.today.year, 3.months.ago.month, Date.today.day] }
+  let(:miam_certification_date) { [nil, 3.months.ago.year, 3.months.ago.month, 3.months.ago.day] }
 
   subject { described_class.new(arguments) }
 

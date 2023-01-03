@@ -36,7 +36,7 @@ RSpec.describe C100Application, type: :model do
       urgent_hearing: urgent_hearing
     }}
 
-    context 'with correct court' do
+    context 'with west-london court' do
       let(:court) {
         Court.find_or_create_by(
           id: 'west-london-family-court') do | court|
@@ -65,9 +65,19 @@ RSpec.describe C100Application, type: :model do
           expect(subject.court.id).to eq('west-london-family-court')
         end
       end
+
+      context 'with urgency, then without urgency' do
+        let(:urgent_hearing){'yes'}
+        it 'redirects, then does not redirect non-urgent' do
+          subject.save
+          expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
+          subject.update(urgent_hearing: 'no')
+          expect(subject.court.id).to eq('west-london-family-court')
+        end
+      end
     end
     
-    context 'with incorrect court' do
+    context 'with non-west-london court' do
       let(:court) {
         Court.find_or_create_by(id: 'other-court') do | court|
           court.name = "Other",
