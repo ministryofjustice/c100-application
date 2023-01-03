@@ -29,7 +29,7 @@ RSpec.describe C100Application, type: :model do
   end
 
 
-  describe 'court redirections', focus: true do
+  describe 'court redirections' do
 
     let(:attributes) {{
       court: court,
