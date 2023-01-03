@@ -84,7 +84,7 @@ RSpec.describe Steps::Miam::CertificationDateForm do
     end
 
     context 'when form is valid' do
-      it 'saves the record', focus: true do
+      it 'saves the record' do
         expect(c100_application).to receive(:update).with(
           miam_certification_date: 3.months.ago.to_date
         ).and_return(true)
