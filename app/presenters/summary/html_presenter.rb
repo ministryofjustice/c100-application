@@ -45,7 +45,6 @@ module Summary
     def miam_questions
       [
         HtmlSections::MiamRequirement.new(c100_application),
-        HtmlSections::MiamAttendance.new(c100_application),
         HtmlSections::MiamExemptions.new(c100_application),
       ]
     end

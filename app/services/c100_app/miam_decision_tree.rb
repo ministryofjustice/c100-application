@@ -14,10 +14,6 @@ module C100App
         after_miam_exemption_claim
       when :miam_certification
         after_miam_certification
-      when :miam_certification_date
-        edit(:certification_details)
-      when :miam_certification_details
-        after_miam_certification_details
       else
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
@@ -51,14 +47,10 @@ module C100App
 
     def after_miam_certification
       if question(:miam_certification).yes?
-        edit(:certification_date)
+        show(:certification_confirmation)
       else
         show(:certification_exit)
       end
-    end
-
-    def after_miam_certification_details
-      show(:certification_confirmation)
     end
   end
 end

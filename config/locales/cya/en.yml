@@ -66,7 +66,6 @@ en:
       opening_questions: Opening questions
       mediation_voucher: Mediation voucher scheme
       miam_requirement: MIAM requirement
-      miam_attendance: MIAM attendance
       miam_exemptions: MIAM exemption
       safety_concerns: Safety concerns
       abduction: 'Safety concerns: Abduction'
@@ -95,7 +94,6 @@ en:
       submission: How will you submit your application to court?
       solicitor_details: Details of legal representative
     groups:
-      miam_certification_details: Mediator details
       abduction_passport_possession: Details of the children’s passports
       abduction_previous_attempt: Details of the previous abductions
       abduction_risk_details: Why do you think the children may be abducted or kept outside the UK without your consent?
@@ -162,15 +160,6 @@ en:
       question: Have you got a document signed by the mediator?
       answers:
         <<: *YESNO
-    miam_certification_date:
-      question: When did you meet with the mediator?
-    miam_certification_number:
-      question: Mediator registration number (URN)
-    miam_certification_service_name:
-      question: Family mediation service name
-    miam_certification_sole_trader_name:
-      question: Sole trader name
-
     alternative_negotiation_tools:
       question: Have you tried any negotiation tools or services?
       answers:

@@ -178,18 +178,6 @@ en:
           attributes:
             miam_certification:
               inclusion: Select yes if you have a signed document
-        steps/miam/certification_date_form:
-          attributes:
-            miam_certification_date:
-              blank: Enter the date you attended a MIAM
-              invalid: Date of MIAM attendance is not valid
-              future: Date of MIAM attendance must be in the past
-        steps/miam/certification_details_form:
-          attributes:
-            miam_certification_number:
-              blank: Enter a mediator registration number (URN)
-            miam_certification_service_name:
-              blank: Enter a family mediation service name
         steps/safety_questions/risk_of_abduction_form:
           attributes:
             risk_of_abduction:

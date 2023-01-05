@@ -68,25 +68,12 @@ RSpec.describe C100App::MiamDecisionTree do
 
     context 'and the answer is `yes`' do
       let(:value) { 'yes' }
-      it { is_expected.to have_destination(:certification_date, :edit) }
+      it { is_expected.to have_destination(:certification_confirmation, :show) }
     end
 
     context 'and the answer is `no`' do
       let(:value) { 'no' }
       it { is_expected.to have_destination(:certification_exit, :show) }
     end
-  end
-
-  context 'when the step is `miam_certification_date`' do
-    let(:c100_application) { instance_double(C100Application, miam_certification_date: value.to_date) }
-    let(:step_params) { { miam_certification_date: 'anything' } }
-    let(:value) { 6.months.ago }
-
-    it { is_expected.to have_destination(:certification_details, :edit) }
-  end
-
-  context 'when the step is `miam_certification_details`' do
-    let(:step_params) {{miam_certification_details: 'anything'}}
-    it {is_expected.to have_destination(:certification_confirmation, :show)}
   end
 end

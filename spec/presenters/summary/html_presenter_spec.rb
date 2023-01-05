@@ -89,7 +89,6 @@ describe Summary::HtmlPresenter do
         Summary::HtmlSections::OpeningQuestions,
         Summary::HtmlSections::MediationVoucherRequirement,
         Summary::HtmlSections::MiamRequirement,
-        Summary::HtmlSections::MiamAttendance,
         Summary::HtmlSections::MiamExemptions,
         Summary::HtmlSections::SafetyConcerns,
         Summary::HtmlSections::Abduction,
