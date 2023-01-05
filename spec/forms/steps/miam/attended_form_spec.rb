@@ -8,5 +8,5 @@ RSpec.describe Steps::Miam::AttendedForm do
                     :miam_exemption_claim,
                     :miam_exemption,
                   ],
-                  reset_when_no: :miam_certification
+                  reset_when_no: [:miam_certification]
 end
