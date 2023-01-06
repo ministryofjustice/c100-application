@@ -13,16 +13,16 @@ module CourtRedirections
   # redirected to Barnet Civil and Family Courts
   def redirect_urgent_hearings
     if urgent_hearing == 'yes' &&
-      court &&
-      court.id == 'west-london-family-court'
+       court &&
+       court.id == 'west-london-family-court'
       update(court: barnet_civil_and_family_courts_centre)
     end
   end
 
   def revert_non_urgent_hearings
     if urgent_hearing == 'no' &&
-      court &&
-      court.id == 'barnet-civil-and-family-courts-centre'
+       court &&
+       court.id == 'barnet-civil-and-family-courts-centre'
       update(court: west_london_family_court)
     end
   end
