@@ -50,7 +50,9 @@ class C100Application < ApplicationRecord
 
   # There is a 20 minute grace period, in case an application is being updated
   # by the time the purge kicks off. If so, will be purged in the next daily run.
-  #
+
+  # Fields miam_certification_date, miam_certification_number, miam_certification_service_name and
+  # miam_certification_sole_trader_name are no longer in use since 05/01/2023. Please remove in a year.
   def self.purge!(date)
     where(
       'c100_applications.created_at <= :date', date: date
