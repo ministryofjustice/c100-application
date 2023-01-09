@@ -122,17 +122,13 @@ RSpec.describe DummyStepController, type: :controller do
 
     context 'when there is more than one multi param date and different part orders' do
       let(:parameters) {
-        {
-          'birth_date(1i)' => '2008', 'birth_date(2i)' => '11', 'birth_date(3i)' => '22'
-        }.merge(
-          'miam_certification_date(3i)' => '25', 'miam_certification_date(2i)' => '12', 'miam_certification_date(1i)' => '2018'
-        ).merge(extra_parameters)
+        { 'birth_date(1i)' => '2008', 'birth_date(2i)' => '11', 'birth_date(3i)' => '22' }.merge(extra_parameters)
       }
 
       it 'converts the date parts to an array' do
         expect(
           normalised_attributes
-        ).to eq({ 'birth_date' => [nil, 2008, 11, 22], 'miam_certification_date' => [nil, 2018, 12, 25] }.merge(extra_parameters))
+        ).to eq({ 'birth_date' => [nil, 2008, 11, 22] }.merge(extra_parameters))
       end
     end
 

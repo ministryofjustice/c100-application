@@ -666,15 +666,6 @@ en:
         edit:
           page_title: MIAM certification
           lead_text: The mediator should provide you with a signed document to confirm you attended a MIAM, or do not need to attend. If you haven’t got a document, you should ask the mediator for one.
-      certification_date:
-        edit:
-          page_title: MIAM certification date
-          lead_text: You can usually find this date on the document from the mediator.
-      certification_details:
-        edit:
-          page_title: MIAM certification details
-          heading: Enter mediator details
-          lead_text: You can usually find these details on the document from the mediator. If you don't know, ask the mediator.
       certification_exit:
         show:
           page_title: MIAM certification document
@@ -1420,10 +1411,6 @@ en:
           'true': I understand that I have to attend a MIAM or provide a valid reason for not attending.
         mediation_voucher_scheme_options:
           <<: *YESNO
-      steps_miam_certification_details_form:
-        miam_certification_number: Mediator registration number (URN)
-        miam_certification_service_name: Family mediation service name
-        miam_certification_sole_trader_name: Sole trader name
       steps_petition_orders_form:
         orders_options:
           <<: *PETITION_ORDERS
@@ -1709,8 +1696,6 @@ en:
         restraining_case_number: *order_case_number_hint
         injunctive_case_number: *order_case_number_hint
         undertaking_case_number: *order_case_number_hint
-      steps_miam_certification_details_form:
-        miam_certification_sole_trader_name: *leave_blank_if_unknown
       steps_solicitor_personal_details_form:
         reference: This is the reference for this case
       steps_solicitor_contact_details_form:
@@ -1745,8 +1730,6 @@ en:
         miam_mediator_exemption: Has a mediator confirmed that you do not need to attend a MIAM?
       steps_miam_certification_form:
         miam_certification: Have you got a document signed by the mediator?
-      steps_miam_certification_date_form:
-        miam_certification_date: When did you meet with the mediator?
       steps_miam_exemption_claim_form:
         miam_exemption_claim: Do you have a valid reason for not attending a MIAM?
 

@@ -9,11 +9,7 @@ module Steps
                          :miam_exemption_claim,
                          :miam_exemption,
                        ],
-                       reset_when_no: [
-                         :miam_certification,
-                         Steps::Miam::CertificationDateForm,
-                         Steps::Miam::CertificationDetailsForm,
-                       ]
+                       reset_when_no: [:miam_certification]
     end
   end
 end

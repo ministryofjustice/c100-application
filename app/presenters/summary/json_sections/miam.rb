@@ -12,7 +12,8 @@ module Summary
       end
 
       def miam
-        { applicantAttendedMiam: c100_application.miam_attended,
+        {
+          applicantAttendedMiam: c100_application.miam_attended,
           claimingExemptionMiam: c100_application.miam_mediator_exemption,
           # familyMediatorMiam: nil,
           miamExemptionsChecklist: miam_list(:misc),
@@ -20,9 +21,7 @@ module Summary
           miamUrgencyReasonChecklist: miam_list(:urgency),
           miamPreviousAttendanceChecklist: miam_list(:adr),
           # miamOtherGroundsChecklist: nil,
-          mediatorRegistrationNumber: c100_application.miam_certification_number,
-          familyMediatorServiceName: c100_application.miam_certification_service_name,
-          soleTraderName: c100_application.miam_certification_sole_trader_name, }
+        }
         # mediatorRegistrationNumber1: nil,
         # familyMediatorServiceName1: nil,
         # soleTraderName1: nil
