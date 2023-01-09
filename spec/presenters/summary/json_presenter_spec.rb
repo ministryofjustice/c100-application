@@ -15,10 +15,7 @@ RSpec.describe Summary::JsonPresenter do
       without_notice_details: 'why not',
       urgent_hearing_short_notice: 'no',
       miam_attended: 'no',
-      miam_certification_number: '132',
       miam_mediator_exemption: 'yes',
-      miam_certification_sole_trader_name: 'jim',
-      miam_certification_service_name: 'miam service',
       risk_of_abduction: 'yes',
       substance_abuse: 'yes',
       concerns_contact_type: 'supervised',
@@ -363,9 +360,6 @@ RSpec.describe Summary::JsonPresenter do
       it { expect(miam_json[:miamUrgencyReasonChecklist]).to eql "risk_applicant, risk_unlawful_removal_retention" }
       it { expect(miam_json[:miamPreviousAttendanceChecklist]).to eql "existing_proceedings_attendance" }
       # it { expect(miam_json[:miamOtherGroundsChecklist]).to eql nil }
-      it { expect(miam_json[:mediatorRegistrationNumber]).to eql '132' }
-      it { expect(miam_json[:familyMediatorServiceName]).to eql 'miam service' }
-      it { expect(miam_json[:soleTraderName]).to eql 'jim' }
     end
 
     let(:abduction) do

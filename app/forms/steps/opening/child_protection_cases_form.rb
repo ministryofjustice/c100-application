@@ -13,8 +13,6 @@ module Steps
         :miam_mediator_exemption,
         :miam_exemption_claim,
         :miam_certification,
-        Steps::Miam::CertificationDateForm,
-        Steps::Miam::CertificationDetailsForm,
       ]
     end
   end
