@@ -14,6 +14,8 @@ module C100App
         after_miam_exemption_claim
       when :miam_certification
         after_miam_certification
+      when :certification_upload
+        show('/steps/safety_questions/start')
       else
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
@@ -47,7 +49,7 @@ module C100App
 
     def after_miam_certification
       if question(:miam_certification).yes?
-        show(:certification_confirmation)
+        edit(:certification_upload)
       else
         show(:certification_exit)
       end

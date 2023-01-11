@@ -29,6 +29,8 @@ module CourtRedirections
 
   private
 
+  # :nocov:
+  # The tests to check these are excessive
   def west_london_family_court
     Court.find_or_create_by(id: 'west-london-family-court') do |court|
       court.name = "West London Family Court"
@@ -49,7 +51,9 @@ module CourtRedirections
       court.email = "westlondonfamilyenquiries@justice.gov.uk"
     end
   end
+  # :nocov:
 
+  # :nocov:
   def barnet_civil_and_family_courts_centre
     Court.find_or_create_by(id: 'barnet-civil-and-family-courts-centre') do |court|
       court.name = "Barnet Civil and Family Courts Centre"
@@ -71,4 +75,5 @@ module CourtRedirections
       court.email = "C100applications@justice.gov.uk"
     end
   end
+  # :nocov:
 end

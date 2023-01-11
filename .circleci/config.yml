@@ -5,7 +5,7 @@
 version: 2.1
 
 orbs: 
-  browser-tools: circleci/browser-tools@1.2.3
+  browser-tools: circleci/browser-tools@1.4.0
 
 references:
   app_containers: &app_containers
@@ -39,6 +39,10 @@ jobs:
     resource_class: medium+
     steps:
       - browser-tools/install-browser-tools
+      - run:
+          name: Remove chromedriver license # prevents checkout
+          command: |
+            rm LICENSE.chromedriver
       - checkout
 
       # Download and cache dependencies
