@@ -40,9 +40,8 @@ jobs:
     steps:
       - browser-tools/install-browser-tools
       - run:
-          name: remove chromedriver license # prevents checkout
+          name: Remove chromedriver license # prevents checkout
           command: |
-            pwd
             rm LICENSE.chromedriver
       - checkout
 
