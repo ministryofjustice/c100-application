@@ -16,7 +16,7 @@ Feature: MIAM journey
     Then I should see "Have you got a document signed by the mediator?"
     And I choose "Yes"
 
-    Then I should see "Document from the mediator"
+    Then I should see "Upload your MIAM certificate"
 
   @unhappy_path
   Scenario: Applicant attended a MIAM but lacks the certificate
@@ -36,6 +36,8 @@ Feature: MIAM journey
     Then I should see "Has a mediator confirmed that you do not need to attend a MIAM?"
     And I choose "Yes"
     Then I should see "Have you got a document signed by the mediator?"
+    And I choose "Yes"
+    Then I should see "Upload your MIAM certificate"
 
   @unhappy_path
   Scenario Outline: Applicant did not attend a MIAM and do not have a mediator’s exemption

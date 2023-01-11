@@ -148,6 +148,8 @@ en:
       question: Have you attended a Mediation Information and Assessment Meeting (MIAM)?
       answers:
         <<: *YESNO
+    miam_certificate:
+      question: MIAM certificate
     miam_mediator_exemption:
       question: Has a mediator confirmed that you do not need to attend a MIAM?
       answers:

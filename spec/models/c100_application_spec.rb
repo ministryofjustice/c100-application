@@ -71,6 +71,7 @@ RSpec.describe C100Application, type: :model do
         it 'redirects, then does not redirect non-urgent' do
           subject.save
           expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
+          
           subject.update(urgent_hearing: 'no')
           expect(subject.court.id).to eq('west-london-family-court')
         end

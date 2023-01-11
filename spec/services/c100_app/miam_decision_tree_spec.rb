@@ -68,7 +68,7 @@ RSpec.describe C100App::MiamDecisionTree do
 
     context 'and the answer is `yes`' do
       let(:value) { 'yes' }
-      it { is_expected.to have_destination(:certification_confirmation, :show) }
+      it { is_expected.to have_destination(:certification_upload, :edit) }
     end
 
     context 'and the answer is `no`' do

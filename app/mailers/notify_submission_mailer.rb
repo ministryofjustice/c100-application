@@ -23,7 +23,7 @@ class NotifySubmissionMailer < NotifyMailer
     set_template(:application_submitted_to_court)
     set_reference("court;#{@c100_application.reference_code}")
 
-    build_draft_document_variables
+    document_personalisation = build_document_variables
 
     set_personalisation(
       shared_personalisation.merge(
@@ -32,25 +32,11 @@ class NotifySubmissionMailer < NotifyMailer
         link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
         link_to_pdf: prepare_upload(@documents[:bundle]),
         link_to_json: prepare_upload(@documents[:json_form]),
-        has_draft_consent_order: @has_draft_consent_order,
-        link_to_draft_consent_order_document:
-          @link_to_draft_consent_order_document
+        **document_personalisation
       )
     )
 
     mail(to: to_address)
-  end
-
-  def build_draft_document_variables
-    if (draft = @c100_application.document(:draft_consent_order))
-      download_token = draft.generate_download_token(@c100_application)
-      @link_to_draft_consent_order_document =
-        download_token_url(download_token.token)
-      @has_draft_consent_order = true
-    else
-      @link_to_draft_consent_order_document = ''
-      @has_draft_consent_order = false
-    end
   end
 
   def application_to_user(to_address:)
@@ -69,11 +55,38 @@ class NotifySubmissionMailer < NotifyMailer
         payment_instructions: payment_instructions,
       )
     )
-
     mail(to: to_address)
   end
 
   private
+
+  def build_document_variables
+    keys = %i[draft_consent_order miam_certificate]
+    keys.each { |key| build_variables_for_document(key) }
+
+    personalisation = {}
+    keys.each do |key|
+      personalisation["has_#{key}".to_sym] =
+        instance_variable_get("@has_#{key}")
+      personalisation["link_to_#{key}".to_sym] =
+        instance_variable_get("@link_to_#{key}")
+    end
+    personalisation[:has_attachments] =
+      keys.any? { |key| instance_variable_get("@has_#{key}") }
+    personalisation
+  end
+
+  def build_variables_for_document(key)
+    if (draft = @c100_application.document(key))
+      download_token = draft.generate_download_token(@c100_application)
+      instance_variable_set "@link_to_#{key}",
+                            download_token_url(download_token.token)
+      instance_variable_set "@has_#{key}", true
+    else
+      instance_variable_set "@link_to_#{key}", ''
+      instance_variable_set "@has_#{key}", false
+    end
+  end
 
   def shared_personalisation
     {
