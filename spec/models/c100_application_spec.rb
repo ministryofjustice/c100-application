@@ -50,10 +50,6 @@ RSpec.describe C100Application, type: :model do
       context 'with urgency' do
         let(:urgent_hearing){'yes'}
 
-        before do
-          Court.find_by(id: 'barnet-civil-and-family-courts-centre').try(:destroy)
-        end
-
         it 'redirects urgent hearings from 
             west london family court to barnet civil
             and family courts' do
