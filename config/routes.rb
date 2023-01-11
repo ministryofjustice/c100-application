@@ -151,7 +151,7 @@ Rails.application.routes.draw do
       edit_step :exemption_claim
       edit_step :certification
       show_step :certification_exit
-      show_step :certification_confirmation
+      edit_step :certification_upload
     end
     namespace :miam_exemptions do
       edit_step :domestic

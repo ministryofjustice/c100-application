@@ -67,15 +67,20 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       expect(mail.govuk_notify_reference).to eq('court;1970/01/4A362E1C')
     end
 
-    context 'with a consent order draft' do
+    context 'with attachments' do
 
       let(:c100_application) { C100Application.create({
         urgent_hearing: "yes",
         declaration_signee: "John Doe"
       })}
-      let(:file_key) { '39d2bFDf912das3gD' }
-      let(:document) { Document.new({ 
-        name: file_key,
+      let(:draft_consent_order_file_key) { '39d2bFDf912das3gD' }
+      let(:draft_consent_order) { Document.new({ 
+        name: draft_consent_order_file_key,
+        collection_ref: '123'
+      }) }
+      let(:miam_certificate_file_key) { '39d2bFDf912eas3gD' }
+      let(:miam_certificate) { Document.new({ 
+        name: miam_certificate_file_key,
         collection_ref: '123'
       }) }
       before do
@@ -84,7 +89,9 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         ).and_return('2022/11/0F8464CD')
         allow(Document).
           to receive(:all_for_collection).
-          and_return({ draft_consent_order: [document] })
+          and_return({ 
+            miam_certificate: [miam_certificate],
+            draft_consent_order: [draft_consent_order] })
       end
 
       it 'has the right personalisation' do
@@ -104,14 +111,20 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_json: { file: 'dGVzdDI=', is_csv: false,
             confirm_email_before_download: nil,
             retention_period: nil },
+          has_attachments: true,
           has_draft_consent_order: true,
-          link_to_draft_consent_order_document:
-            download_token_url(c100_application.download_tokens.first.token)
+          link_to_draft_consent_order:
+            download_token_url(c100_application.download_tokens.find_by(
+              key: draft_consent_order_file_key).token),
+          has_miam_certificate: true,
+          link_to_miam_certificate:
+            download_token_url(c100_application.download_tokens.find_by(
+              key: miam_certificate_file_key).token),
         })
       end
     end
 
-    context 'without a consent order draft' do
+    context 'without attachments' do
 
       before do
         allow_any_instance_of(C100Application).to receive(
@@ -139,8 +152,11 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_json: { file: 'dGVzdDI=', is_csv: false,
             confirm_email_before_download: nil,
             retention_period: nil },
+          has_attachments: false,
           has_draft_consent_order: false,
-          link_to_draft_consent_order_document: ''
+          link_to_draft_consent_order: '',
+          has_miam_certificate: false,
+          link_to_miam_certificate: ''
         })
       end
     end

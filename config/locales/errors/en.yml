@@ -17,6 +17,14 @@ en:
       new_last_name:
         blank: Enter the last name
 
+    DOCUMENT_UPLOAD_ERRORS: &DOCUMENT_UPLOAD_ERRORS
+      file_size: File too big
+      content_type: Unsupported file type
+      invalid_characters: Invalid file name
+      response_error: Response error
+      virus_detected: Virus detected
+      blank: You must choose a file to upload
+
     # This is a compilation of all possible errors shared between different parties
     # Please note some errors refer to "you" (applicant) and others to "they" (respondent, etc)
     # To customise these, overwrite them in their corresponding locale sections
@@ -133,12 +141,7 @@ en:
         steps/opening/consent_order_upload_form:
           attributes:
             draft_consent_order_document:
-              file_size: File too big
-              content_type: Unsupported file type
-              invalid_characters: Invalid file name
-              response_error: Response error
-              virus_detected: Virus detected
-              blank: You must choose a file to upload
+              <<: *DOCUMENT_UPLOAD_ERRORS
         steps/opening/research_consent_form:
           attributes:
             research_consent:
@@ -174,6 +177,10 @@ en:
           attributes:
             miam_mediator_exemption:
               inclusion: Select yes if you have an exemption from a mediator
+        steps/miam/certification_upload_form:
+          attributes:
+            miam_certificate_document:
+              <<: *DOCUMENT_UPLOAD_ERRORS
         steps/miam/certification_form:
           attributes:
             miam_certification:

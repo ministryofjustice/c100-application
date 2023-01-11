@@ -44,7 +44,7 @@ module Summary
       end
     end
 
-    context 'when no file is present' do
+    context 'when a file is present' do
       before do
         allow(Uploader).to receive(:get_file).and_return(
           double(name: 'filename.doc'))
