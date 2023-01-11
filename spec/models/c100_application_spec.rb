@@ -72,8 +72,6 @@ RSpec.describe C100Application, type: :model do
           subject.save
           expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
           
-          Court.find_by(id: 'west-london-family-court').try(:destroy)
-          
           subject.update(urgent_hearing: 'no')
           expect(subject.court.id).to eq('west-london-family-court')
         end
