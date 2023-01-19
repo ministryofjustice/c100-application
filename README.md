@@ -3,7 +3,7 @@
 This is a Rails application to enable citizens to complete the C100 form. It will also produce a C1A form and a C8 form under certain circumstances based on the answers the applicant gives (for example if there are safety concerns).
 
 ## Getting Started
-
+ 
 * Run `brew install shared-mime-info` so MimeMagic works fine if you are on a Mac.
 
 * Copy `.env.example` to `.env` and replace with suitable values. e.g. `cp .env.example .env`
