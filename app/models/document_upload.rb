@@ -150,7 +150,7 @@ class DocumentUpload
     return true if file_name.ascii_only?
     @_file_name = file_name.unicode_normalize(:nfkc)
     unless @_file_name.ascii_only?
-      @_file_name = @_file_name.encode(Encoding.find('ASCII'), encoding_options)
+      @_file_name = @_file_name.encode(Encoding.find('ASCII'), **encoding_options)
     end
     @_file_name.ascii_only?
   end
