@@ -1,10 +1,6 @@
 GEM
-  remote: https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev/
-  specs:
-    mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
-
-GEM
   remote: https://rubygems.org/
+  remote: https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev/
   specs:
     actioncable (7.0.4.1)
       actionpack (= 7.0.4.1)
@@ -270,6 +266,7 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.1.2)
+    mini_portile2 (2.8.1)
     minitest (5.17.0)
     multi_test (1.1.0)
     multi_xml (0.6.0)
@@ -280,6 +277,7 @@ GEM
       regexp_parser (~> 2.3, >= 2.3.1)
       sorbet-runtime (~> 0.5.0)
       unparser (~> 0.6.5)
+    mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
     mutant-rspec (0.11.16)
       mutant (= 0.11.16)
       rspec-core (>= 3.8.0, < 4.0.0)
@@ -293,6 +291,9 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
+    nokogiri (1.14.0)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     nokogiri (1.14.0-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.0-x86_64-darwin)
@@ -531,6 +532,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  ruby
   x86_64-darwin-21
   x86_64-linux
 
@@ -597,7 +599,7 @@ DEPENDENCIES
   wkhtmltopdf-binary (~> 0.12.6.5)
 
 RUBY VERSION
-   ruby 2.7.6p219
+   ruby 2.7.7p221
 
 BUNDLED WITH
    2.3.17

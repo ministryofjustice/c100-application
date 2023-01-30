@@ -14,12 +14,12 @@ module Summary
 
       private
 
-      # TODO: for a while some applications will lack the `county_location_code`
+      # TODO: for a while some applications will lack the `family_location_code`
       # or the `completed_at` date, so we need to cover these scenarios.
       # After 1 month approximately, this code can be simplified.
 
       def court_name_and_code
-        [court.county_location_code, court.name].compact.join(' - ')
+        [court.family_location_code, court.name].compact.join(' - ')
       end
 
       def completion_date
