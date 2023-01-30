@@ -9,8 +9,8 @@ module Summary
     subject { described_class.new(c100_application) }
 
     let(:completed_at) { Date.new(2020, 1, 31) }
-    let(:county_location_code) { 123 }
-    let(:court) { instance_double(Court, name: 'Foobar Court', county_location_code: county_location_code) }
+    let(:family_location_code) { 123 }
+    let(:court) { instance_double(Court, name: 'Foobar Court', family_location_code: family_location_code) }
 
     describe '#name' do
       it 'is expected to be correct' do
@@ -34,7 +34,7 @@ module Summary
       end
 
       context 'for a court without code' do
-        let(:county_location_code) { nil }
+        let(:family_location_code) { nil }
 
         it 'prints the name of the court, without the code' do
           expect(answers[0].value).to eq('Foobar Court')

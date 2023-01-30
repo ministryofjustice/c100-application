@@ -7,7 +7,7 @@ class Court < ApplicationRecord
   has_many :c100_applications
 
   alias_attribute :slug, :id
-  alias_attribute :county_location_code, :cci_code
+  alias_attribute :family_location_code, :cci_code
 
   # Using `fetch` so an exception is raised and we are alerted if the json
   # schema ever changes, instead of silently let the user continue, as all
@@ -18,7 +18,7 @@ class Court < ApplicationRecord
       slug: data.fetch('slug'),
       name: data.fetch('name'),
       address: fetch_address(data),
-      cci_code: data.fetch('county_location_code'),
+      cci_code: data.fetch('family_location_code'),
       # Email and GBS code, if not already present, come from a separate API request
       email: data['email'],
       gbs: data['gbs'],
