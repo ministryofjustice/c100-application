@@ -1,0 +1,31 @@
+.uploaded-files {
+  border-top: 1px solid govuk-colour("mid-grey");
+
+  li {
+    padding: 10px;
+    border-bottom: 1px solid govuk-colour("mid-grey");
+  }
+
+  .no-files {
+    padding-left: 0;
+  }
+
+  .file {
+    list-style-type: decimal;
+    list-style-position: inside;
+    padding-left: 20px;
+
+    &.js-only {
+      padding-bottom: 25px;
+    }
+
+    a {
+      float: right;
+      margin-bottom: 0px;
+    }
+
+    form {
+      padding-bottom: 0;
+    }
+  }
+}
