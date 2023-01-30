@@ -39,6 +39,10 @@ jobs:
     resource_class: medium+
     steps:
       - browser-tools/install-browser-tools
+      - run:
+          name: Remove chromedriver license # prevents checkout
+          command: |
+            rm LICENSE.chromedriver
       - checkout
 
       # Download and cache dependencies
