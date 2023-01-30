@@ -8,8 +8,7 @@ module Steps
 
       def edit
         @form_object = CourtOrderUploadsForm.new(
-          c100_application: current_c100_application,
-          has_court_order_uploads: current_c100_application.has_court_order_uploads
+          c100_application: current_c100_application
         )
       end
 
@@ -22,7 +21,6 @@ module Steps
       def set_documents_list
         @documents_list = current_c100_application&.documents(:court_order_uploads) || []
       end
-
     end
   end
 end

@@ -3,16 +3,11 @@ module Steps
     class CourtOrderUploadsForm < BaseForm
       include DocumentAttachable
 
-      attribute :has_court_order_uploads, YesNo
-
-      validates_inclusion_of :has_court_order_uploads,  in: GenericYesNo.values
-
-      validate :check_document_presence,
-        if: -> { has_court_order_uploads&.yes? }
-      attribute :court_order_document, DocumentUpload
+      validate :check_document_presence
+      attribute :court_order_uploads_document, DocumentUpload
 
       def document_key
-        :court_order
+        :court_order_uploads
       end
 
       private

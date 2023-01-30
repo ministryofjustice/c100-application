@@ -18,15 +18,13 @@
       </div>
     </details>
 
+    <%= render partial: 'steps/shared/document_upload/multiple_document_upload', locals: { document_list: @documents_list,
+  document_key: :court_order_uploads } %>
+
     <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
-
-      <%= render partial: 'steps/shared/document_upload/multiple_document_upload', locals: { document_list: @documents_list,
-    document_key: :court_order_uploads } %>
-
+      <%= govuk_error_summary %>
       <%= f.continue_button %>
     <% end %>
-
-    <%= display_current_document(@form_object.document_key) %>
 
   </div>
 </div>

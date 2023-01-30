@@ -109,12 +109,12 @@ RSpec.describe DocumentsController, type: :controller do
   describe '#destroy' do
     context 'response formats' do
       let(:params) { {
-        document_key: 'supporting_documents',
+        document_key: 'court_order_uploads',
         id: another_filename
       } }
 
       before do
-        expect(Uploader).to receive(:delete_file).with(collection_ref: collection_ref, document_key: 'supporting_documents', filename: 'another').and_return({})
+        expect(Uploader).to receive(:delete_file).with(collection_ref: collection_ref, document_key: 'court_order_uploads', filename: 'another').and_return({})
       end
 
       context 'HTML format' do

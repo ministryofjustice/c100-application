@@ -2,8 +2,17 @@
   border-top: 1px solid govuk-colour("mid-grey");
 
   li {
-    padding: 10px;
+    padding: 12px 0px;
     border-bottom: 1px solid govuk-colour("mid-grey");
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+    button.govuk-button {
+      margin-bottom: 0;
+    }
   }
 
   .no-files {
@@ -13,7 +22,6 @@
   .file {
     list-style-type: decimal;
     list-style-position: inside;
-    padding-left: 20px;
 
     &.js-only {
       padding-bottom: 25px;

@@ -4,7 +4,13 @@
   </dt>
   <dd class="govuk-summary-list__value">
     <strong>Attached document</strong><br>
-    <%= file_row.value %>
+    <% if file_row.value.instance_of? Array %>
+      <% file_row.value.each do |file_name| %>
+        <p style="margin: 5px 0;"><%= file_name %></p>
+      <% end %>
+    <% else %>
+      <%= file_row.value %>
+    <% end %>
   </dd>
   <dd class="govuk-summary-list__actions">
     <%= render partial: 'steps/completion/shared/change_link', locals: { question: file_row } %>

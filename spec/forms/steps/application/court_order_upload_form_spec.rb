@@ -4,7 +4,7 @@ RSpec.describe Steps::Application::CourtOrderUploadsForm do
   
   let(:arguments) { {
     c100_application: c100_application,
-    court_order_document: document_upload
+    court_order_uploads_document: document_upload
   } }
 
   let(:document_upload) {
@@ -22,7 +22,7 @@ RSpec.describe Steps::Application::CourtOrderUploadsForm do
 
   describe '#document_key' do
     it 'is correct' do
-      expect(subject.document_key).to eq(:court_order)
+      expect(subject.document_key).to eq(:court_order_uploads)
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe Steps::Application::CourtOrderUploadsForm do
     allow(DocumentUpload).to receive(:new).and_return(document_upload)
   end
 
-  it_behaves_like 'a document attachable step form', attribute_name: :court_order
+  it_behaves_like 'a document attachable step form', attribute_name: :court_order_uploads
 
   describe '#save' do
 
@@ -48,7 +48,7 @@ RSpec.describe Steps::Application::CourtOrderUploadsForm do
 
       it 'has validation error on the base' do
         expect(subject).to_not be_valid
-        expect(subject.errors[:court_order_document]).not_to be_empty
+        expect(subject.errors[:court_order_uploads_document]).not_to be_empty
       end
     end
 
