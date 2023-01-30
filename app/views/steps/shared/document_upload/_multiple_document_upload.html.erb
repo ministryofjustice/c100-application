@@ -7,7 +7,7 @@
 <ol class="govuk-list uploaded-files">
   <% if document_list&.any? %>
       <% document_list.each do |doc| %>
-          <li class="file no-js-only">
+          <li class="file">
             <%= doc.name %>
             <%= button_to t('shared.file_upload.remove_file'), document_path(doc, document_key: document_key), method: :delete, data: { confirm: t('shared.file_upload.confirm_delete') }, class: 'govuk-button govuk-button--secondary' %>
           </li>

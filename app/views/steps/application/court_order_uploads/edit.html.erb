@@ -5,7 +5,18 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l"><%= t('.page_title') %></h1>
 
-    <p class=".govuk-body"><%= t('.lead_text') %></p>
+    <div class="govuk-body"><%= t('.upload_instructions_html') %></div>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          <%= t('.dropdown_header') %>
+        </span>
+      </summary>
+      <div class="govuk-details__text upload-ordered-list">
+        <%= t('.dropdown_content_html') %>
+      </div>
+    </details>
 
     <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
 
