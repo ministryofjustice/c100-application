@@ -1,6 +1,10 @@
 GEM
-  remote: https://rubygems.org/
   remote: https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev/
+  specs:
+    mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
+
+GEM
+  remote: https://rubygems.org/
   specs:
     actioncable (7.0.4.1)
       actionpack (= 7.0.4.1)
@@ -277,7 +281,6 @@ GEM
       regexp_parser (~> 2.3, >= 2.3.1)
       sorbet-runtime (~> 0.5.0)
       unparser (~> 0.6.5)
-    mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
     mutant-rspec (0.11.16)
       mutant (= 0.11.16)
       rspec-core (>= 3.8.0, < 4.0.0)
@@ -599,7 +602,7 @@ DEPENDENCIES
   wkhtmltopdf-binary (~> 0.12.6.5)
 
 RUBY VERSION
-   ruby 2.7.7p221
+   ruby 2.7.6p219
 
 BUNDLED WITH
    2.3.17
