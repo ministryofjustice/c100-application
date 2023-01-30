@@ -9,7 +9,7 @@ describe Court do
       "slug" => 'court-slug',
       "email" => 'family@court',
       "addresses" => ['address'],
-      "county_location_code" => 123,
+      "family_location_code" => 123,
       "gbs" => 'X123',
     }
   }
@@ -39,7 +39,7 @@ describe Court do
           "slug" => 'court-slug',
           "email" => 'family@court',
           "address" => 'address',
-          "county_location_code" => 123,
+          "family_location_code" => 123,
           "gbs" => 'X123',
         }
       }
@@ -89,12 +89,12 @@ describe Court do
       end
 
       context 'cci_code' do
-        let(:data) { super().except('county_location_code') }
+        let(:data) { super().except('family_location_code') }
 
         it 'sends the exception to Sentry with extra context' do
           expect_any_instance_of(Sentry::Scope).to receive(:set_extras).with(data: data)
           expect(Sentry).to receive(:capture_exception).with(an_instance_of(KeyError))
-          expect { subject.name }.to raise_error(KeyError, 'key not found: "county_location_code"')
+          expect { subject.name }.to raise_error(KeyError, 'key not found: "family_location_code"')
         end
       end
     end
@@ -205,7 +205,7 @@ describe Court do
         "slug" => slug,
         "name" => 'Court Test',
         "address" => {},
-        "county_location_code" => 123,
+        "family_location_code" => 123,
         "email" => nil,
         "gbs" => nil,
       }

@@ -1,4 +1,4 @@
-FROM hmctspublic.azurecr.io/imported/library/ruby:2.7.6-slim-buster
+FROM hmctspublic.azurecr.io/imported/library/ruby:2.7.7-slim-buster
 
 # build dependencies:
 #   - ruby-full libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6 for wkhtmltopdf
