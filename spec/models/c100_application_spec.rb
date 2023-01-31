@@ -36,6 +36,7 @@ RSpec.describe C100Application, type: :model do
       urgent_hearing: urgent_hearing
     }}
 
+    # :nocov:
     context 'with west-london court' do
       let(:court) {
         Court.find_or_create_by(
@@ -77,7 +78,7 @@ RSpec.describe C100Application, type: :model do
         end
       end
     end
-    
+
     context 'with non-west-london court' do
       let(:court) {
         Court.find_or_create_by(id: 'other-court') do | court|
@@ -94,6 +95,7 @@ RSpec.describe C100Application, type: :model do
         expect(subject.court.id).to eq('other-court')
       end
     end
+    # :nocov:
 
   end
 

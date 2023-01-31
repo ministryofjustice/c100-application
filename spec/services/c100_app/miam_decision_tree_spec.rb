@@ -76,4 +76,10 @@ RSpec.describe C100App::MiamDecisionTree do
       it { is_expected.to have_destination(:certification_exit, :show) }
     end
   end
+
+  context 'when the step is `certification_upload`' do
+    let(:step_params) { { certification_upload: 'anything' } }
+    it { is_expected.to have_destination('/steps/safety_questions/start', :show) }
+  end
+
 end

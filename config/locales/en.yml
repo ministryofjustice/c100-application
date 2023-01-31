@@ -775,6 +775,31 @@ en:
         edit:
           page_title: *previous_proceedings
           lead_text: For example an emergency protection order or supervision order. Include any ongoing cases.
+      has_court_order_uploads:
+        edit:
+          page_title: Court order document upload
+          lead_text: Have you got existing court orders or previous court orders to upload?
+          secondary_text: You can select the option to upload existing or previous court orders if any of the children in this application have been involved in other family court proceedings.
+      court_order_uploads:
+        edit:
+          page_title: Upload your existing court orders or previous court orders
+          lead_text: If you are uploading documents from a computer, name the files clearly. For example, consent order.pdf
+          upload_instructions_html: |
+            <p>If you are uploading documents from a computer, name the files clearly. For example, consent order draft.pdf</p>
+            <p>Files must end with JPG, BMP, PNG, TIF, PDF, DOC or DOCX</p>
+          dropdown_header: How to take a picture of a document on your phone and upload it
+          dropdown_content_html: |
+            <ol>
+              <li>Place your document on a flat service in a well-lit room. Use a flash if you need to.</li>
+              <li>Take a picture of the whole document. You should be able to see its edges.</li>
+              <li>Check you can read all the writing, including the handwriting.</li>
+              <li>Email or send the photo or scan to the device you are using now.</li>
+              <li>Upload it here.</li>
+            </ol>
+          attach_document_html: "<strong>Attach consent order draft as a single document</strong>"
+          upload_explanation_html: |
+            <p class="govuk-body">Your document will upload when you click 'Continue'.</p>
+
       court_proceedings:
         edit:
           page_title: Previous court cases
@@ -1324,7 +1349,6 @@ en:
       steps_application_previous_proceedings_form:
         children_previous_proceedings_options:
           <<: *YESNO
-
       steps_shared_under_age_form:
         under_age: I understand I need to be represented by a litigation friend, and that my application won’t be processed until the court receives a certificate of suitability or copy of the court order appointing a litigation friend.
         under_age_options:
@@ -1341,6 +1365,9 @@ en:
         cafcass_details: Name and office of Cafcass/Cafcass Cymru officer
         order_types: Type of proceedings
         previous_details: Add details of any other previous family case
+      steps_application_has_court_order_uploads_form:
+        has_court_order_uploads_options:
+          <<: *YESNO
       steps_application_urgent_hearing_details_form:
         urgent_hearing_details: Give details of why you’re asking for an urgent hearing
         urgent_hearing_when: How soon do you need an urgent hearing?
@@ -1887,6 +1914,8 @@ en:
       # Miscellanea final application steps
       steps_application_previous_proceedings_form:
         children_previous_proceedings: Have any of the children in this application been involved in other family court proceedings?
+      steps_application_court_order_uploads:
+        has_court_order_uploads: Have you got existing court orders or previous court orders to upload?
       steps_application_litigation_capacity_form:
         reduced_litigation_capacity: Are there any factors that may affect any adult in this application taking part in the court proceedings?
       steps_application_without_notice_form:
