@@ -4,9 +4,13 @@ class DocumentsController < ApplicationController
   respond_to :html, :json, :js
 
   def create
-    # document_key is always :supporting_documents for this action because only the multi-upload POSTs end up here
+    # document_key is always :court_order_uploads for this action because only the multi-upload POSTs end up here
     # (the other places with upload functionality post to their own controllers)
-    uploader = DocumentUpload.new(document_param, document_key: :supporting_documents, collection_ref: collection_ref)
+    uploader = DocumentUpload.new(
+      document_param,
+      document_key: :court_order_uploads,
+      collection_ref: collection_ref
+    )
     uploader.upload! if uploader.valid?
 
     respond_with(uploader, location: current_step_path) do |format|
@@ -20,6 +24,9 @@ class DocumentsController < ApplicationController
         end
       end
     end
+  rescue ArgumentError
+    flash[:alert] = 'No file selected'
+    redirect_to current_step_path
   end
 
   def destroy

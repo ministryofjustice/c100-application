@@ -600,6 +600,9 @@ en:
       question: Type of proceedings - if known
     court_proceeding_previous_details:
       question: Details of any other previous family case
+    court_order_uploads:
+      question: 'Details'
+      answer: '[ File(s) uploaded with application ]'
     payment_type:
       question: Payment option selected
       answers:

@@ -1,0 +1,17 @@
+<%= form_tag documents_url(document_key: document_key), multipart: true do %>
+  <%= file_field_tag :document, class: 'govuk-file-upload' %>
+  <%= submit_tag 'Upload', class: 'govuk-button' %>
+<% end %>
+
+<ol class="govuk-list uploaded-files">
+  <% if document_list&.any? %>
+      <% document_list.each do |doc| %>
+        <li class="file">
+          <%= doc.name %>
+          <%= button_to t('shared.file_upload.remove_file'), document_path(doc, document_key: document_key), method: :delete, data: { confirm: t('shared.file_upload.confirm_delete') }, class: 'govuk-button govuk-button--secondary' %>
+        </li>
+      <% end %>
+  <% else %>
+      <li class="no-files"><%= t 'shared.file_upload.no_uploaded_files' %></li>
+  <% end %>
+</ol>

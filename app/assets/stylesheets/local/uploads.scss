@@ -1,0 +1,39 @@
+.uploaded-files {
+  border-top: 1px solid govuk-colour("mid-grey");
+
+  li {
+    padding: 12px 0px;
+    border-bottom: 1px solid govuk-colour("mid-grey");
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+    button.govuk-button {
+      margin-bottom: 0;
+    }
+  }
+
+  .no-files {
+    padding-left: 0;
+  }
+
+  .file {
+    list-style-type: decimal;
+    list-style-position: inside;
+
+    &.js-only {
+      padding-bottom: 25px;
+    }
+
+    a {
+      float: right;
+      margin-bottom: 0px;
+    }
+
+    form {
+      padding-bottom: 0;
+    }
+  }
+}
