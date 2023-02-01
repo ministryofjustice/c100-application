@@ -385,6 +385,9 @@ en:
       answers:
         <<: *YESNO
         not_applicable: *not_applicable
+    miam_certificate:
+      question: *details
+      answer: "[ File(s) uploaded with application ]"
     miam_certificate_received:
       question: Have you got a signed document from the mediator?
       answers:
