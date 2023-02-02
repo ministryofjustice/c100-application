@@ -72,9 +72,10 @@ class NotifySubmissionMailer < NotifyMailer
       personalisation["link_to_#{key}".to_sym] =
         instance_variable_get("@link_to_#{key}")
     end
-    personalisation[:has_attachments] =
-      keys.any? { |key| instance_variable_get("@has_#{key}") }
     personalisation[:court_order_links] = @court_order_links if @court_order_links.present?
+    personalisation[:has_attachments] =
+      keys.any? { |key| instance_variable_get("@has_#{key}") } ||
+      personalisation[:court_order_links].present?  
     personalisation
   end
 
