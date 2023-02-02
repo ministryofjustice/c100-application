@@ -75,7 +75,7 @@ RSpec.describe DocumentsController, type: :controller do
       end
 
       context 'document is valid but there were upload errors' do
-        let(:document_upload) { instance_double(DocumentUpload, upload!: {}, valid?: true, errors?: true, errors: ["You're doing it wrong"]) }
+        let(:document_upload) { instance_double(DocumentUpload, upload!: {}, valid?: true, errors?: true, errors: [double(message: "You're doing it wrong")]) }
 
         context 'HTML format' do
           it 'should create the document and redirect back to the step' do
@@ -96,7 +96,7 @@ RSpec.describe DocumentsController, type: :controller do
       end
 
       context 'document is not valid' do
-        let(:document_upload) { instance_double(DocumentUpload, upload!: {}, valid?: false, errors?: true, errors: ["You're doing it wrong"]) }
+        let(:document_upload) { instance_double(DocumentUpload, upload!: {}, valid?: false, errors?: true, errors: [double(message: "You're doing it wrong")]) }
 
         context 'HTML format' do
           it 'should create the document and redirect back to the step' do

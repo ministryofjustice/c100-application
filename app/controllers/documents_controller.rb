@@ -16,7 +16,7 @@ class DocumentsController < ApplicationController
     respond_with(uploader, location: current_step_path) do |format|
       if uploader.errors?
         format.html do
-          flash[:alert] = uploader.errors
+          flash[:alert] = uploader.errors.map(&:message).join('. ')
           redirect_to current_step_path
         end
         format.json do

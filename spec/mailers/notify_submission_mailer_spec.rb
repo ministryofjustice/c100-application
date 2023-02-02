@@ -79,6 +79,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         collection_ref: '123'
       }) }
       let(:miam_certificate_file_key) { '39d2bFDf912eas3gD' }
+      let(:court_order_uploads_1_key) { '39d2bFDf912eas3gF' }
+      let(:court_order_uploads_2_key) { '39d2bFDf912eas3gG' }
       let(:miam_certificate) { Document.new({ 
         name: miam_certificate_file_key,
         collection_ref: '123'
@@ -91,7 +93,17 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           to receive(:all_for_collection).
           and_return({ 
             miam_certificate: [miam_certificate],
-            draft_consent_order: [draft_consent_order] })
+            draft_consent_order: [draft_consent_order],
+            court_order_uploads: [
+              Document.new({ 
+                name: court_order_uploads_1_key,
+                collection_ref: '123'
+              }),
+              Document.new({ 
+                name: court_order_uploads_2_key,
+                collection_ref: '123'
+              })
+            ] })
       end
 
       it 'has the right personalisation' do
@@ -120,6 +132,12 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_miam_certificate:
             download_token_url(c100_application.download_tokens.find_by(
               key: miam_certificate_file_key).token),
+          court_order_links: [
+            download_token_url(c100_application.download_tokens.find_by(
+              key: court_order_uploads_1_key).token),
+            download_token_url(c100_application.download_tokens.find_by(
+              key: court_order_uploads_2_key).token)
+          ].join(' ')
         })
       end
     end

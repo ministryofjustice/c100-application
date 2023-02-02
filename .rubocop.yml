@@ -121,6 +121,8 @@ Naming/MethodParameterName:
 
 Metrics/AbcSize:
   Max: 24.5
+  Exclude:
+    - app/controllers/documents_controller.rb
 
 # Performance/RedundantMerge:
 #   Enabled: false

@@ -63,6 +63,7 @@ class NotifySubmissionMailer < NotifyMailer
   def build_document_variables
     keys = %i[draft_consent_order miam_certificate]
     keys.each { |key| build_variables_for_document(key) }
+    build_variables_for_court_order_documents
 
     personalisation = {}
     keys.each do |key|
@@ -73,7 +74,15 @@ class NotifySubmissionMailer < NotifyMailer
     end
     personalisation[:has_attachments] =
       keys.any? { |key| instance_variable_get("@has_#{key}") }
+    personalisation[:court_order_links] = @court_order_links if @court_order_links.present?
     personalisation
+  end
+
+  def build_variables_for_court_order_documents
+    @court_order_links = @c100_application.documents(:court_order_uploads).map do |doc|
+      download_token = doc.generate_download_token(@c100_application)
+      download_token_url(download_token.token)
+    end.join(' ')
   end
 
   def build_variables_for_document(key)
