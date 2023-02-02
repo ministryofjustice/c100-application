@@ -9,7 +9,7 @@ en:
     none_not_exclusive_error: &none_not_exclusive_error "Deselect 'None of these' if you would like to select any of the other options."
     postcode_error: &postcode_error "Enter a valid full postcode, with or without a space"
     privacy_question_consistency: "Select Yes for at least one privacy question on this page or the previous page, or choose not to keep your contact details private from the named respondents."
-
+    phone_numeric_error: &phone_numeric_error "Enter a phone number in the correct format, like 07700 900 982"
     # Errors shared in all the split first/last name forms
     NAMES_FORM_ERRORS: &NAMES_FORM_ERRORS
       new_first_name:
@@ -429,6 +429,9 @@ en:
             <<: *PERSONAL_DETAILS_ERRORS
             mobile_phone:
               blank: Enter a mobile number or tell us why the court cannot phone you
+              invalid: *phone_numeric_error
+            home_phone:
+              invalid: *phone_numeric_error
             email:
               blank: Enter an email address or tell us why the court cannot email you
             mobile_provided:
@@ -447,6 +450,10 @@ en:
         steps/respondent/contact_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS
+            mobile_phone:
+              invalid: *phone_numeric_error
+            home_phone:
+              invalid: *phone_numeric_error
         steps/respondent/address_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS

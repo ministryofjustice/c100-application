@@ -63,7 +63,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       context 'mobile phone validation' do
         let(:mobile_phone) { '3123 abc' }
 
-        it 'has a validation error on the field if not present' do
+        it 'has a validation error on the field if not valid' do
           expect(subject).to_not be_valid
           expect(subject.errors.added?(:mobile_phone, :invalid)).to eq(true)
         end
@@ -84,6 +84,15 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
           it 'is not valid' do
             expect(subject).not_to be_valid
           end
+        end
+      end
+
+      context 'home phone validation' do
+        let(:home_phone) { '3123 abc' }
+
+        it 'has a validation error on the field if not valid' do
+          expect(subject).to_not be_valid
+          expect(subject.errors.added?(:home_phone, :invalid)).to eq(true)
         end
       end
 
@@ -138,7 +147,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       context 'mobile phone validation' do
         let(:mobile_phone) { '3123 abc' }
 
-        it 'has a validation error on the field if not present' do
+        it 'has a validation error on the field if not valid' do
           expect(subject).to_not be_valid
           expect(subject.errors.added?(:mobile_phone, :invalid)).to eq(true)
         end
@@ -159,6 +168,15 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
           it 'is not valid' do
             expect(subject).not_to be_valid
           end
+        end
+      end
+
+      context 'home phone validation' do
+        let(:home_phone) { '3123 abc' }
+
+        it 'has a validation error on the field if not valid' do
+          expect(subject).to_not be_valid
+          expect(subject.errors.added?(:home_phone, :invalid)).to eq(true)
         end
       end
 
