@@ -174,7 +174,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           has_draft_consent_order: false,
           link_to_draft_consent_order: '',
           has_miam_certificate: false,
-          link_to_miam_certificate: ''
+          link_to_miam_certificate: '',
+          court_order_links: ''
         })
       end
     end
