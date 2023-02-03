@@ -28,6 +28,8 @@ module Steps
       validates_presence_of :mobile_not_provided_reason,
                             if: proc { |o| validate_mobile_not_provided_reason?(o) }
 
+      validates :home_phone, phone_number: true, allow_blank: true
+
       validates_inclusion_of :voicemail_consent, in: GenericYesNo.values, if: proc { |o| validate_mobile_value?(o) }
 
       private
