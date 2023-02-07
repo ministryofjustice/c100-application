@@ -38,6 +38,7 @@ jobs:
         default: bundle exec rake test:all_the_things
     resource_class: medium+
     steps:
+      - run: sudo apt-get update
       - browser-tools/install-browser-tools
       - run:
           name: Remove chromedriver license # prevents checkout

@@ -430,7 +430,10 @@ en:
             mobile_phone:
               blank: Enter a mobile number or tell us why the court cannot phone you
               invalid: *phone_numeric_error
+            mobile_not_provided_reason:
+              blank: Enter a mobile number or tell us why the court cannot phone you
             home_phone:
+              blank: *phone_numeric_error
               invalid: *phone_numeric_error
             email:
               blank: Enter an email address or tell us why the court cannot email you
