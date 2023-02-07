@@ -74,6 +74,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
         let(:mobile_phone) { nil }
 
         context 'reason is present' do
+          let(:home_phone) { '12345' }
           let(:mobile_not_provided_reason) { 'No phone' }
           it 'is valid' do
             expect(subject).to be_valid
@@ -158,6 +159,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
         let(:mobile_phone) { nil }
 
         context 'reason is present' do
+          let(:home_phone) { '12345' }
           let(:mobile_not_provided_reason) { 'No phone' }
           it 'is valid' do
             expect(subject).to be_valid
@@ -217,6 +219,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
 
     context 'voicemail consent validation' do
       context 'when mobile not provided' do
+        let(:home_phone) { '12345' }
         let(:mobile_provided) { 'no' }
         let(:voicemail_consent) { nil }
         let(:mobile_not_provided_reason) { 'No phone' }
@@ -249,6 +252,45 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
         it 'has a validation error on the field' do
           expect(subject).to_not be_valid
           expect(subject.errors[:voicemail_consent]).to_not be_empty
+        end
+      end
+
+      context 'when voicemail consent is true it makes sure there is a contact number' do
+        let(:voicemail_consent) { 'yes' }
+        let(:mobile_phone) { nil }
+        let(:mobile_provided) { 'no' }
+        let(:mobile_not_provided_reason) { 'No Phone' }
+        let(:home_phone) { nil }
+
+        it 'has a validation error' do
+          expect(subject).to_not be_valid
+        end
+
+        context 'when given a mobile number' do
+          let(:mobile_phone) { '1234' }
+          let(:mobile_provided) { 'yes' }
+
+          it 'is valid' do
+            expect(subject).to be_valid
+          end
+        end
+
+        context 'when given a home number' do
+          let(:home_phone) { '12345' }
+
+          it 'is valid' do
+            expect(subject).to be_valid
+          end
+        end
+
+        context 'when given both numbers' do
+          let(:mobile_phone) { '1234' }
+          let(:mobile_provided) { 'yes' }
+          let(:home_phone) { '12345' }
+
+          it 'is valid' do
+            expect(subject).to be_valid
+          end
         end
       end
     end

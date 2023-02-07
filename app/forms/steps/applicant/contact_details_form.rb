@@ -32,6 +32,9 @@ module Steps
 
       validates_inclusion_of :voicemail_consent, in: GenericYesNo.values, if: proc { |o| validate_mobile_value?(o) }
 
+      validates_presence_of :mobile_phone, if: proc { |o| validate_voicemail_mobile?(o) }
+      validates_presence_of :home_phone, if: proc { |o| validate_voicemail_home?(o) }
+
       private
 
       def attributes_map
@@ -59,6 +62,14 @@ module Steps
 
       def validate_mobile_not_provided_reason?(o)
         o.mobile_provided && GenericYesNo.new(o.mobile_provided).no?
+      end
+
+      def validate_voicemail_mobile?(o)
+        o.voicemail_consent && validate_mobile_value?(o) && GenericYesNo.new(o.voicemail_consent).yes? && o.home_phone == ""
+      end
+
+      def validate_voicemail_home?(o)
+        o.voicemail_consent && GenericYesNo.new(o.voicemail_consent).yes? && o.mobile_phone == ""
       end
     end
   end
