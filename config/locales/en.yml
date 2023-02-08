@@ -1058,6 +1058,10 @@ en:
               <p class="govuk-body">To get your thoughts on this service - for example, we might send you a satisfaction survey.</p>
               <h2 class="govuk-heading-m">Data and your rights</h2>
               <p class="govuk-body">You can find out how long we keep your data, your rights and how to contact us in our <a href="/about/privacy_consent" class="govuk-link">privacy policy</a>.</p>
+      my_hmcts:
+        edit:
+          page_title: Citizen or solicitor applying on behalf of a citizen?
+          lead_text: A solicitor applying on behalf of a citizen can choose to log into the MyHMCTS portal used by legal professionals to continue the application journey.
       consent_order:
         edit:
           page_title: Application kind
@@ -1213,6 +1217,13 @@ en:
         research_consent_email: Email address
         research_consent_options:
           <<: *YESNO
+      steps_opening_my_hmcts_form:
+        is_solicitor_options:
+          'yes': I am a solicitor applying on behalf of a citizen
+          'no': I am applying as a citizen
+        use_my_hmcts_options:
+          'yes': Manage my case or manage my organisation via MyHMCTS
+          'no': Continue the application on this online form
       steps_opening_consent_order_form:
         consent_order_options:
           'no': Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
@@ -1763,6 +1774,8 @@ en:
         consent_order: What kind of application do you want to make?
       steps_opening_research_consent_form:
         research_consent: Are you willing to be contacted to share your experience of using this service?
+      steps_opening_my_hmcts_form:
+        is_solicitor: Citizen or solicitor applying on behalf of a citizen?
       steps_opening_child_protection_cases_form:
         child_protection_cases: Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?
 

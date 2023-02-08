@@ -7,7 +7,9 @@ module C100App
       when :children_postcode
         check_if_court_is_valid
       when :research_consent
-        edit(:consent_order)
+        check_if_my_hmcts_eligable_court
+      when :my_hmcts
+        after_my_hmcts
       when :consent_order
         after_consent_order
       when :consent_order_upload
@@ -25,6 +27,14 @@ module C100App
       step_params.fetch(:children_postcode)
     end
 
+    def check_if_my_hmcts_eligable_court
+      if eligable_court
+        edit(:my_hmcts)
+      else
+        edit(:consent_order)
+      end
+    end
+
     def check_if_court_is_valid
       court = CourtPostcodeChecker.new.court_for(children_postcode)
 
@@ -34,7 +44,7 @@ module C100App
         if show_research_consent?
           edit(:research_consent)
         else
-          edit(:consent_order)
+          check_if_my_hmcts_eligable_court
         end
       else
         show(:no_court_found)
@@ -42,6 +52,14 @@ module C100App
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
     rescue StandardError
       show(:error_but_continue)
+    end
+
+    def after_my_hmcts
+      if question(:use_my_hmcts).yes?
+        show(:redirect_to_my_hmcts)
+      else
+        edit(:consent_order)
+      end
     end
 
     def after_consent_order
@@ -68,6 +86,17 @@ module C100App
       ResearchSampler.candidate?(
         c100_application, Rails.configuration.x.opening.research_consent_weight
       )
+    end
+
+    def eligable_court
+      c100_application.court.id.in? %w[
+        swansea-civil-justice-centre
+        gloucester-and-cheltenham-county-and-family-court
+        coventry-combined-court-centre
+        newcastle-civil-family-courts-and-tribunals-centre
+        peterborough-combined-court-centre
+        east-london-family-court
+      ]
     end
   end
 end
