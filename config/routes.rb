@@ -114,6 +114,8 @@ Rails.application.routes.draw do
       show_step :error_but_continue
       show_step :no_court_found
       edit_step :research_consent
+      edit_step :my_hmcts
+      show_step :redirect_to_my_hmcts
       edit_step :consent_order
       edit_step :consent_order_upload
       show_step :consent_order_sought

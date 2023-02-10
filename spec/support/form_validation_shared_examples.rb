@@ -43,7 +43,8 @@ RSpec.shared_examples 'a yes-no question form' do |options|
   let(:reset_when_no)  { options.fetch(:reset_when_no,  []) }
 
   let(:linked_attribute)  { options[:linked_attribute] }
-  let(:linked_attribute_value) { 'details' }
+  let(:linked_attribute_value) { options[:linked_attribute_example] ||
+                                 'details' }
   let(:linked_attributes) { linked_attribute ? { linked_attribute => linked_attribute_value } : {} }
 
   let(:arguments) {

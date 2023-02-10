@@ -134,6 +134,12 @@ en:
               invalid: The reference code format is invalid
 
         # Opening
+        steps/opening/my_hmcts_form:
+          attributes:
+            is_solicitor:
+              inclusion: Select whether you are applying as a citizen or solicitor applying on behalf of a citizen
+            use_my_hmcts:
+              blank: Will you manage your case/organisation via MyHMCTS or continue the application via this online form?
         steps/opening/consent_order_form:
           attributes:
             consent_order:
