@@ -20,6 +20,10 @@ Feature: Opening
     # And I should not see the save draft button
     # And I choose "No"
 
+    Then I should see "Citizen or solicitor applying on behalf of a citizen?"
+    And I choose "I am applying as a citizen"
+    And I click the "Continue" button
+
     Then I should see "What kind of application do you want to make?"
     And I should not see the save draft button
     And I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -40,6 +44,10 @@ Feature: Opening
     # Then I should see "Are you willing to be contacted to share your experience of using this service?"
     # And I should not see the save draft button
     # And I choose "No"
+
+    Then I should see "Citizen or solicitor applying on behalf of a citizen?"
+    And I choose "I am applying as a citizen"
+    And I click the "Continue" button
 
     Then I should see "What kind of application do you want to make?"
     And I should not see the save draft button
@@ -72,7 +80,7 @@ Feature: Opening
     # And I should not see the save draft button
     # And I choose "No"
 
-    Then I should see "What kind of application do you want to make?"
+    Then I should see "Citizen or solicitor applying on behalf of a citizen?"
 
   @unhappy_path
   Scenario: I don't fill out the postcode

@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe C100App::OpeningDecisionTree do
   let(:postcode)         { 'anything' }
   let(:local_court)      { {} }
-  let(:c100_application) { double('Object') }
+  let(:court_id)         { 'not-eligable-for-my-hmcts' }
+  let(:use_my_hmcts)     { 'no' }
+  let(:c100_application) { double('Object',
+                            court: double(id: court_id),
+                            use_my_hmcts: use_my_hmcts) }
   let(:step_params)      { double('Step') }
   let(:next_step)        { nil }
   let(:as)               { nil }
@@ -37,6 +41,19 @@ RSpec.describe C100App::OpeningDecisionTree do
         is_expected.to have_destination(:consent_order, :edit)
       end
 
+      context 'with MyHMCTS eligable court' do
+
+        # N.b. Swansea is eligable for MyHMCTS
+        let(:court_id) { 'swansea-civil-justice-centre' }
+
+        it 'assigns the court to the c100 application' do
+          expect(subject).to receive(:show_research_consent?)
+          expect(c100_application).to receive(:update!).with(court: court)
+
+          is_expected.to have_destination(:my_hmcts, :edit)
+        end
+      end
+
       context 'research consent step' do
         before do
           allow(c100_application).to receive(:created_at).and_return(Time.at(seconds))
@@ -51,6 +68,19 @@ RSpec.describe C100App::OpeningDecisionTree do
         context 'the research consent step is not shown to this user' do
           let(:seconds) { 30 }
           it { is_expected.to have_destination(:consent_order, :edit) }
+        end
+
+        context 'with MyHMCTS eligable court' do
+          let(:seconds) { 30 }
+          # N.b. Swansea is eligable for MyHMCTS
+          let(:court_id) { 'swansea-civil-justice-centre' }
+
+          it 'assigns the court to the c100 application' do
+            expect(subject).to receive(:show_research_consent?)
+            expect(c100_application).to receive(:update!).with(court: court)
+
+            is_expected.to have_destination(:my_hmcts, :edit)
+          end
         end
       end
     end
@@ -72,16 +102,31 @@ RSpec.describe C100App::OpeningDecisionTree do
   end
 
   context 'when the step is `research_consent`' do
-    let(:c100_application) { instance_double(C100Application, research_consent: value) }
     let(:step_params) { { research_consent: 'anything' } }
 
-    context 'and the answer is `yes`' do
-      let(:value) { 'yes' }
-      it { is_expected.to have_destination(:consent_order, :edit) }
+    it { is_expected.to have_destination(:consent_order, :edit) }
+  end
+
+  context 'with MyHMCTS eligable court' do
+    # N.b. Swansea is eligable for MyHMCTS
+    let(:court_id) { 'swansea-civil-justice-centre' }
+    let(:step_params) { { research_consent: 'anything' } }
+
+    it 'assigns the court to the c100 application' do
+      is_expected.to have_destination(:my_hmcts, :edit)
+    end
+  end
+
+  context 'when the step is `my_hmcts`' do
+    let(:step_params) { { my_hmcts: 'anything' } }
+
+    context 'and use_my_hmcts is `yes`' do
+      let(:use_my_hmcts) { 'yes' }
+      it { is_expected.to have_destination(:redirect_to_my_hmcts, :show) }
     end
 
-    context 'and the answer is `no`' do
-      let(:value) { 'no' }
+    context 'and use_my_hmcts is `no`' do
+      let(:use_my_hmcts) { 'no' }
       it { is_expected.to have_destination(:consent_order, :edit) }
     end
   end
