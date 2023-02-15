@@ -37,10 +37,20 @@ module DocumentAttachable
   def upload_document_if_present
     return true if document.nil?
 
+    remove_other_documents
     document.upload!(document_key: document_key, collection_ref: c100_application.files_collection_ref)
     retrieve_document_errors
-
     errors.empty?
+  end
+
+  def remove_other_documents
+    if document_key == :miam_certificate && c100_application.document(:draft_consent_order)
+      Uploader.delete_file({ collection_ref: c100_application.files_collection_ref, document_key: :draft_consent_order,
+                             filename: c100_application.document(:draft_consent_order).name })
+    elsif document_key == :draft_consent_order && c100_application.document(:miam_certificate)
+      Uploader.delete_file({ collection_ref: c100_application.files_collection_ref, document_key: :miam_certificate,
+                             filename: c100_application.document(:miam_certificate).name })
+    end
   end
 
   def retrieve_document_errors
