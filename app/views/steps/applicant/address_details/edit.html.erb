@@ -13,7 +13,9 @@
       <%= f.govuk_text_field :address_line_3, label: { hidden: true } %>
       <%= f.govuk_text_field :town, width: 'one-half' %>
       <%= f.govuk_text_field :country, width: 'one-half' %>
-      <%= f.govuk_text_field :postcode, width: 'one-third' %>
+      <%= f.govuk_text_field :postcode, width: 'one-third',
+                             hint: { text: t('dictionary.PERSONAL_ADDRESS_FIELDS.postcode_hint') } %>
+
 
       <%= f.govuk_radio_buttons_fieldset :residence_requirement_met, legend: { tag: 'span', size: 'm' } do %>
         <%= f.govuk_radio_button :residence_requirement_met, GenericYesNo::YES, link_errors: true %>
