@@ -13,7 +13,8 @@
       <%= f.govuk_text_field :address_line_3, label: { hidden: true } %>
       <%= f.govuk_text_field :town, width: 'one-half' %>
       <%= f.govuk_text_field :country, width: 'one-half' %>
-      <%= f.govuk_text_field :postcode, width: 'one-third' %>
+      <%= f.govuk_text_field :postcode, width: 'one-third',
+                             hint: { text: t('dictionary.PERSONAL_ADDRESS_FIELDS.postcode_hint') } %>
 
       <%= f.govuk_check_boxes_fieldset :address_unknown, multiple: false, legend: { tag: 'span', size: 'm', hidden: true } do %>
         <%= f.govuk_check_box :address_unknown, true, false, multiple: false %>

@@ -146,6 +146,7 @@ en:
       town: Town or city
       country: Country
       postcode: Postcode
+      postcode_hint: Enter postcode if known or UK address
       address_unknown: I don’t know where they currently live
       address_unknown_options:
         'true': I don’t know where they currently live
