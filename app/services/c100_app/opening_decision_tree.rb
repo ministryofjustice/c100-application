@@ -29,9 +29,9 @@ module C100App
 
     def check_if_my_hmcts_eligable_court
       # if eligable_court
-        # edit(:my_hmcts)
+      # edit(:my_hmcts)
       # else
-        edit(:consent_order)
+      edit(:consent_order)
       # end
     end
 
@@ -56,9 +56,9 @@ module C100App
 
     def after_my_hmcts
       # if question(:use_my_hmcts).yes?
-        # show(:redirect_to_my_hmcts)
+      # show(:redirect_to_my_hmcts)
       # else
-        edit(:consent_order)
+      edit(:consent_order)
       # end
     end
 
