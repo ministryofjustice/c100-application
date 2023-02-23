@@ -20,9 +20,9 @@ Feature: Opening
     # And I should not see the save draft button
     # And I choose "No"
 
-    Then I should see "Citizen or solicitor applying on behalf of a citizen?"
-    And I choose "I am applying as a citizen"
-    And I click the "Continue" button
+    # Then I should see "Citizen or solicitor applying on behalf of a citizen?"
+    # And I choose "I am applying as a citizen"
+    # And I click the "Continue" button
 
     Then I should see "What kind of application do you want to make?"
     And I should not see the save draft button
@@ -45,9 +45,9 @@ Feature: Opening
     # And I should not see the save draft button
     # And I choose "No"
 
-    Then I should see "Citizen or solicitor applying on behalf of a citizen?"
-    And I choose "I am applying as a citizen"
-    And I click the "Continue" button
+    #Then I should see "Citizen or solicitor applying on behalf of a citizen?"
+    #And I choose "I am applying as a citizen"
+    #And I click the "Continue" button
 
     Then I should see "What kind of application do you want to make?"
     And I should not see the save draft button
@@ -80,7 +80,8 @@ Feature: Opening
     # And I should not see the save draft button
     # And I choose "No"
 
-    Then I should see "Citizen or solicitor applying on behalf of a citizen?"
+    #Then I should see "Citizen or solicitor applying on behalf of a citizen?"
+    Then I should see "What kind of application do you want to make?"
 
   @unhappy_path
   Scenario: I don't fill out the postcode
