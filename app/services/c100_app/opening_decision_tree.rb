@@ -28,11 +28,11 @@ module C100App
     end
 
     def check_if_my_hmcts_eligable_court
-      if eligable_court
-        edit(:my_hmcts)
-      else
+      # if eligable_court
+        # edit(:my_hmcts)
+      # else
         edit(:consent_order)
-      end
+      # end
     end
 
     def check_if_court_is_valid
@@ -55,11 +55,11 @@ module C100App
     end
 
     def after_my_hmcts
-      if question(:use_my_hmcts).yes?
-        show(:redirect_to_my_hmcts)
-      else
+      # if question(:use_my_hmcts).yes?
+        # show(:redirect_to_my_hmcts)
+      # else
         edit(:consent_order)
-      end
+      # end
     end
 
     def after_consent_order
@@ -88,15 +88,15 @@ module C100App
       )
     end
 
-    def eligable_court
-      c100_application.court.id.in? %w[
-        swansea-civil-justice-centre
-        gloucester-and-cheltenham-county-and-family-court
-        coventry-combined-court-centre
-        newcastle-civil-family-courts-and-tribunals-centre
-        peterborough-combined-court-centre
-        east-london-family-court
-      ]
-    end
+    # def eligable_court
+    #   c100_application.court.id.in? %w[
+    #     swansea-civil-justice-centre
+    #     gloucester-and-cheltenham-county-and-family-court
+    #     coventry-combined-court-centre
+    #     newcastle-civil-family-courts-and-tribunals-centre
+    #     peterborough-combined-court-centre
+    #     east-london-family-court
+    #   ]
+    # end
   end
 end
