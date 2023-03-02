@@ -22,7 +22,7 @@ RSpec.describe CourtContactDetails do
         brighton-county-court
         chelmsford-county-and-family-court
         leeds-combined-court-centre
-        medway-county-and-family-court
+        medway-county-court-and-family-court
         west-london-family-court
         manchester-civil-justice-centre-civil-and-family-courts
         slough-county-court-and-family-court
