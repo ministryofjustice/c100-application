@@ -38,8 +38,8 @@ module C100App
 
     def scotland_or_ni(postcode)
       postcode == 'TD1' || # weird exception to regex
-      (/^(ZE|KW|IV|HS|PH|AB|DD|PA|FK|G[0-9]|KY|KA|DG|TD[^1]|TD1[^52]|EH|ML|BT)/i
-              .match? postcode)
+        (/^(ZE|KW|IV|HS|PH|AB|DD|PA|FK|G[0-9]|KY|KA|DG|TD[^1]|TD1[^52]|EH|ML|BT)/i
+                .match? postcode)
     end
 
     def closed_court(candidate_court)
