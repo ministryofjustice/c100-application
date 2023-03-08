@@ -161,7 +161,7 @@ describe C100App::CourtPostcodeChecker do
       TN TW BA GU HA HP OX PO RG SL SN SO SP UB E EC N NW SE SW W
       WC BB BL CA CW FY L LA M OL PR SK SY TF WA WN CH BD DH DL DN
       HD HG HU HX LN LS NE S SR TS WF YO B CV DE DY LE NG NN ST WS
-      WV AL CB CM CO EN IG IP LU MK NR PE RM SG SS WD
+      WV AL CB CM CO EN IG IP LU MK NR PE RM SG SS WD TD12 TD15
       ).each do |area|
         expect(subject.send(:scotland_or_ni, area)).to be(false),
           "error in #{area}"
@@ -174,7 +174,7 @@ describe C100App::CourtPostcodeChecker do
       end
     end
     it 'returns true for Scottish postcodes' do
-      %w(AB DD DG EH FK G1 HS IV KA KW KY ML PA PH TD ZE).each do |area|
+      %w(AB DD DG EH FK G1 HS IV KA KW KY ML PA PH TD1 TD3 TD11 TD22 ZE).each do |area|
         expect(subject.send(:scotland_or_ni, area)).to be(true),
           "error in #{area}"
       end
