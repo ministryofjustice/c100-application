@@ -14,8 +14,10 @@ en:
     NAMES_FORM_ERRORS: &NAMES_FORM_ERRORS
       new_first_name:
         blank: Enter the first name
+        invalid_name: Name must not contain special characters
       new_last_name:
         blank: Enter the last name
+        invalid_name: Name must not contain special characters
 
     DOCUMENT_UPLOAD_ERRORS: &DOCUMENT_UPLOAD_ERRORS
       file_size: File too big
@@ -34,6 +36,7 @@ en:
         inclusion: Select if they’ve changed their name
       previous_name:
         blank: Enter their previous name
+        invalid_name: Name must not contain special characters
       dob:
         blank: Enter the date of birth
         invalid: Date of birth is not valid
@@ -419,6 +422,7 @@ en:
               inclusion: Select if you’ve changed your name
             previous_name:
               blank: Enter your previous name
+              invalid_name: Name must not contain special characters
             birthplace:
               blank: Enter your place of birth
         steps/applicant/address_details_form:
@@ -482,8 +486,10 @@ en:
           attributes:
             full_name:
               blank: Enter the full name
+              invalid_name: Name must not contain special characters
             firm_name:
               blank: Enter the name of the firm
+              invalid_name: Name must not contain special characters
         steps/solicitor/address_details_form:
           attributes:
             address_line_1:
@@ -684,6 +690,7 @@ en:
           attributes:
             declaration_signee:
               blank: Enter your full name
+              invalid_name: Name must not contain special characters
             declaration_signee_capacity:
               inclusion: Select who is making this declaration
             declaration_confirmation:
