@@ -8,6 +8,8 @@ class NamesSplitBaseForm < BaseForm
   validates_presence_of :new_first_name, if: -> { new_last_name.present? },  unless: :first_record?
   validates_presence_of :new_last_name,  if: -> { new_first_name.present? }, unless: :first_record?
 
+  validates :new_first_name, :new_last_name, sensible_name: true
+
   private
 
   def persist!
