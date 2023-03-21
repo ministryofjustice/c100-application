@@ -11,6 +11,8 @@ module Steps
 
       validates_presence_of :full_name, :firm_name
 
+      validates :full_name, sensible_name: true
+
       private
 
       def persist!
