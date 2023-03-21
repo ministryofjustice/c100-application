@@ -12,19 +12,19 @@ class TestModel
   end
 end
 
-class TestUser < TestModel
+class TestName < TestModel
   validates :first_name, sensible_name: true
 end
 
 RSpec.describe SensibleNameValidator do
 
   it "should be valid for an input with no special characters" do
-    expect(TestUser.new(:first_name => 'name')).to be_valid
+    expect(TestName.new(:first_name => 'name')).to be_valid
 
   end
 
   it 'is not valid for an input with special characters' do
-    expect(TestUser.new(:first_name => 'qwe<@£$%^&*(')).to_not be_valid
+    expect(TestName.new(:first_name => 'qwe<@£$%^&*(')).to_not be_valid
 
   end
 
