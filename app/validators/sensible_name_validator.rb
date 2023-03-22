@@ -1,10 +1,9 @@
 class SensibleNameValidator < ActiveModel::EachValidator
-  ILLEGAL_CHARS = '\<>.,?[]=)(*&£^%$#~{}+@!±§|"/:;`'.freeze
-  REGEX = /[#{ILLEGAL_CHARS.gsub(/./) { |char| "\\#{char}" }}]/.freeze
+  REGEX = /^[a-zA-Z '-]+$/i.freeze
 
   def validate_each(record, attribute, value)
-    return if value.nil?
+    return if value.nil? || value == ''
 
-    record.errors.add(attribute, :invalid_name) if value.match(REGEX)
+    record.errors.add(attribute, :invalid_name) unless value.match(REGEX)
   end
 end
