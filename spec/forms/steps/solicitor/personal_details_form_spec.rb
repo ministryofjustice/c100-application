@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Steps::Solicitor::PersonalDetailsForm do
   let(:arguments) { {
     c100_application: c100_application,
-    full_name: 'full_name',
+    full_name: 'full-name',
     firm_name: 'firm_name',
     reference: 'reference',
   } }
@@ -21,7 +21,7 @@ RSpec.describe Steps::Solicitor::PersonalDetailsForm do
     it_behaves_like 'a has-one-association form',
                     association_name: :solicitor,
                     expected_attributes: {
-                      full_name: 'full_name',
+                      full_name: 'full-name',
                       firm_name: 'firm_name',
                       reference: 'reference',
                     }
