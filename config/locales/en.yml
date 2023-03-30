@@ -1011,12 +1011,15 @@ en:
     opening:
       postcode:
         edit:
-          page_title: Where the children live
-          heading: Where do the children live?
+          page_title: Start or continue an application
+          heading: Start or continue an application
           lead_text: Please tell us the postcode of the children you’re making this application about.
           details:
             summary: If you do not know where the children live
             text_html: If you do not know the children’s postcode please enter your own.
+          is_representative:
+            heading: If you are a legal representative
+            text: Confirm this before you proceed
       no_court_found:
         show:
           page_title: Not eligible
