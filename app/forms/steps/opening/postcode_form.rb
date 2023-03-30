@@ -2,6 +2,8 @@ module Steps
   module Opening
     class PostcodeForm < BaseForm
       attribute :children_postcode, StrippedString
+      attribute :start_or_continue, StrippedString
+      attribute :is_legal_representative, Boolean
       validates :children_postcode, presence: true, full_uk_postcode: true
 
       private

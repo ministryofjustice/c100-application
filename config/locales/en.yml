@@ -1013,10 +1013,9 @@ en:
         edit:
           page_title: Start or continue an application
           heading: Start or continue an application
-          lead_text: Please tell us the postcode of the children you’re making this application about.
           details:
-            summary: If you do not know where the children live
-            text_html: If you do not know the children’s postcode please enter your own.
+            summary: If you do not know where the children live, or they live at different addresses
+            text_html: <p>If you do not know where the children live, enter your own postcode.</p><p>If the children live at different addresses, enter the postcode of the eldest child who is part of the application.</p>
           is_representative:
             heading: If you are a legal representative
             text: Confirm this before you proceed
@@ -1111,7 +1110,6 @@ en:
     confirmation_message:
       true: You've accepted analytics cookies.
       false: You've rejected analytics cookies.
-
 
   layouts:
     footer_links:
@@ -1216,7 +1214,12 @@ en:
 
       # Opening steps
       steps_opening_postcode_form:
-        children_postcode: Postcode
+        children_postcode: Enter the children's postcode
+        start_or_continue_options:
+          new: Start a new application
+          continue: Sign in to continue an application
+        is_legal_representative_options:
+          'true': I am a legal representative who is acting for the applicant
       steps_opening_research_consent_form:
         research_consent_email: Email address
         research_consent_options:
@@ -2088,6 +2091,12 @@ en:
       file_wrong_format: " is in a format we don't accept. You can upload JPG, BMP, PNG, TIF, PDF or Word files."
       file_too_big: " is too big. You will need to resubmit a smaller version, less than XXX megabytes (MB)."
       confirm_delete: Are you sure you want to remove this file?
+    help_dropdown:
+      dropdown_header: Contact us for help
+      title: "Get in touch"
+      text_1: "If you'd like to report a problem or have a suggestion to help improve this service for others, get in touch by sending an email to:"
+      link: C100applications@justice.gov.uk
+      text_2_html: "This email should only be used for feedback on the digital service. We cannot answer any questions about applications that have been submitted. You can <a target='_blank' href='https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/childcare-arrangements/nearest/search-by-postcode'>contact the relevant court</a> if you need to discuss your case."
 
   session:
     note:
