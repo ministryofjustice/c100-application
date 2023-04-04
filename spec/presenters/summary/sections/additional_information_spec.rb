@@ -78,12 +78,11 @@ module Summary
     describe '`urgent_or_without_notice_value` answer values' do
       before do
         expect(c100_application).to receive(:urgent_hearing).and_return(urgent_hearing)
-        expect(c100_application).to receive(:without_notice).and_return(without_notice)
+        expect(c100_application).to receive(:without_notice)
       end
 
       context 'at least one question was answered as `YES`' do
         let(:urgent_hearing) { 'yes' }
-        let(:without_notice) { 'no' }
 
         it 'returns the question value' do
           expect(answers[1].value).to eq('yes')
@@ -92,7 +91,6 @@ module Summary
 
       context 'there are no questions answered with `YES`' do
         let(:urgent_hearing) { 'no' }
-        let(:without_notice) { 'no' }
 
         it 'returns the default value for the answer' do
           expect(answers[1].value).to eq(GenericYesNo::NO)
