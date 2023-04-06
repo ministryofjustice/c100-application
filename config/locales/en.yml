@@ -1009,7 +1009,7 @@ en:
           cait_info_html: *cait_info_html
 
     opening:
-      postcode:
+      start_or_continue:
         edit:
           page_title: Start or continue an application
           heading: Start or continue an application
@@ -1019,6 +1019,16 @@ en:
           is_representative:
             heading: If you are a legal representative
             text: Confirm this before you proceed
+      sign_in_or_create_account:
+        edit:
+          page_title: Sign in or create account
+          heading: Sign in or create account
+          lead_text: Access the MyHMCTS case management tool for legal professionals.
+      continue_application:
+        edit:
+          page_title: Continue an application
+          heading: Continue an application
+          lead_text: "If you are continuing a pending application, sign in with the relevant service:"
       no_court_found:
         show:
           page_title: Not eligible
@@ -1213,13 +1223,20 @@ en:
           <<: *YESNO
 
       # Opening steps
-      steps_opening_postcode_form:
+      steps_opening_start_or_continue_form:
         children_postcode: Enter the children's postcode
         start_or_continue_options:
           new: Start a new application
           continue: Sign in to continue an application
         is_legal_representative_options:
           'true': I am a legal representative who is acting for the applicant
+      steps_opening_sign_in_or_create_account_form:
+        has_myhmcts_account_options:
+          <<: *YESNO
+      steps_opening_continue_application_form:
+        platform_options:
+          my_hmcts: Sign in to your MyHMCTS account
+          gov_uk: Sign in using the GOV.UK service
       steps_opening_research_consent_form:
         research_consent_email: Email address
         research_consent_options:
@@ -1653,6 +1670,10 @@ en:
         consent_order_options:
           'no_html': <p class='govuk-hint'>This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter.</p><p class='govuk-hint'>If you select this option, you must have a scan, photo or electronic copy of the of the document confirming MIAM attendance or mediator’s exemption which you are able to upload to this application.</p>
           'yes_html': <p class='govuk-hint'>This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter.</p><p class='govuk-hint'>This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent). If you select this option, you must have a scan, photo or electronic copy of the draft consent order signed by the respondent which you are able to upload to this application.</p>
+      steps_opening_sign_in_or_create_account_form:
+        has_myhmcts_account_options:
+          'yes': Sign in to your account
+          'no': Create a new account
       steps_miam_certification_date_form:
         miam_certification_date: For example, 31 3 2020
       steps_application_court_proceedings_form:
@@ -1781,6 +1802,8 @@ en:
         consent_order: What kind of application do you want to make?
       steps_opening_research_consent_form:
         research_consent: Are you willing to be contacted to share your experience of using this service?
+      steps_opening_sign_in_or_create_account_form:
+        has_myhmcts_account: Do you have a MyHMCTS account?
       steps_opening_my_hmcts_form:
         is_solicitor: Citizen or solicitor applying on behalf of a citizen?
       steps_opening_child_protection_cases_form:

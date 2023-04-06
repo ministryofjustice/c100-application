@@ -7,4 +7,12 @@ class ApplicationIntent < ValueObject
   def self.values
     VALUES
   end
+
+  def new?
+    value == :new
+  end
+
+  def continue?
+    value == :continue
+  end
 end

@@ -1,11 +1,13 @@
 require 'spec_helper'
 
-RSpec.describe Steps::Opening::PostcodeForm do
+RSpec.describe Steps::Opening::StartOrContinueForm do
   let(:arguments) { {
+    start_or_continue: start_or_continue,
     c100_application: c100_application,
     children_postcode: children_postcode
   } }
 
+  let(:start_or_continue) { ApplicationIntent::NEW.to_s }
   let(:c100_application) { instance_double(C100Application) }
   let(:children_postcode) { 'E3 6AA' }
 
@@ -21,11 +23,15 @@ RSpec.describe Steps::Opening::PostcodeForm do
     end
 
     context 'validations' do
-      context 'when the attribute is not given' do
+      context 'when start_or_continue is not given' do
+        it { should validate_presence_of(:start_or_continue) }
+      end
+
+      context 'when the postcode is not given' do
         it { should validate_presence_of(:children_postcode) }
       end
 
-      context 'when the attribute is given' do
+      context 'when the postcode is given' do
         context 'but not a valid full postcode' do
           let(:children_postcode) { 'SE1' }
 
