@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_08_104601) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_143357) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -153,7 +153,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_104601) do
     t.string "declaration_confirmation"
     t.string "mediation_voucher_scheme"
     t.uuid "files_collection_ref", default: -> { "uuid_generate_v4()" }
-    t.string "has_court_order_uploads"
     t.string "is_solicitor"
     t.string "use_my_hmcts"
     t.index ["court_id"], name: "index_c100_applications_on_court_id"

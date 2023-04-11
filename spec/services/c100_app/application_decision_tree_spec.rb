@@ -27,27 +27,6 @@ RSpec.describe C100App::ApplicationDecisionTree do
 
   context 'when the step is `court_proceedings`' do
     let(:step_params) { { court_proceedings: 'anything' } }
-    it { is_expected.to have_destination(:has_court_order_uploads, :edit) }
-  end
-
-  describe 'when the step is `has_court_order_uploads`' do
-    let(:c100_application) { instance_double(C100Application,
-        has_court_order_uploads: answer) }
-    let(:step_params) { { has_court_order_uploads: 'whatever' } }
-
-    context 'when answer is `yes`' do
-      let(:answer) { 'yes' }
-      it { is_expected.to have_destination(:court_order_uploads, :edit) }
-    end
-
-    context 'when answer is `no`' do
-      let(:answer) { 'no' }
-      it { is_expected.to have_destination(:urgent_hearing, :edit) }
-    end
-  end
-
-  context 'when the step is `court_order_uploads`' do
-    let(:step_params) { { court_order_uploads: 'anything' } }
     it { is_expected.to have_destination(:urgent_hearing, :edit) }
   end
 

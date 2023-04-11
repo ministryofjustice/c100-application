@@ -6,7 +6,6 @@ module Summary
       instance_double(C100Application,
         children_previous_proceedings: children_previous_proceedings,
         court_proceeding: court_proceeding,
-        documents: documents
     ) }
 
     let(:court_proceeding) {
@@ -20,7 +19,6 @@ module Summary
         previous_details: 'previous_details',
     ) }
 
-    let(:documents) { [] }
     let(:children_previous_proceedings) { 'yes' }
 
     subject { described_class.new(c100_application) }
@@ -76,18 +74,6 @@ module Summary
 
           expect(answers[0]).to be_an_instance_of(Separator)
           expect(answers[0].title).to eq(:not_applicable)
-        end
-      end
-
-      context 'when there are previous proceedings and file uploads' do
-        let(:documents) { [double(name: 'file.jpg')] }
-
-        it 'has the correct rows' do
-          expect(answers.count).to eq(8)
-
-          expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[7].question).to eq(:court_order_uploads)
-          expect(answers[7].value).to eq('[ File(s) uploaded with application ]')
         end
       end
     end
