@@ -121,6 +121,7 @@ Rails.application.routes.draw do
       edit_step :research_consent
       edit_step :my_hmcts
       show_step :redirect_to_my_hmcts
+      show_step :redirect_to_guidance
       edit_step :consent_order
       edit_step :consent_order_upload
       show_step :consent_order_sought

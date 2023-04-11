@@ -59,9 +59,15 @@ module C100App
         edit(:continue_application)
       
       # # scenario 3
-      # elsif question(:start_or_continue, c100_application, ApplicationIntent).new? &&
-      #       question(:is_legal_representative).no?
-      #   check_if_valid_court(send_to_sign_in(send_to_my_hmcts_guidance))
+      elsif question(:start_or_continue, c100_application, ApplicationIntent).new? &&
+            question(:is_legal_representative).no?
+        check_court_and_send_to_court_based_destination_for_citizens
+
+      # scenario 5
+      elsif question(:start_or_continue, c100_application, ApplicationIntent).continue?
+        show(:redirect_to_login)
+
+      
 
       else
         edit(:sign_in_or_create_account)
@@ -81,6 +87,19 @@ module C100App
       show(:error_but_continue)
     end
 
+    def check_court_and_send_to_court_based_destination_for_citizens
+      court = CourtPostcodeChecker.new.court_for(children_postcode)
+
+      return show(:no_court_found) unless 
+      court
+      c100_application.update!(court: court)
+
+      send_to_court_based_destination_for_citizens
+    # `CourtPostcodeChecker` and `Court` already log any potential exceptions
+    rescue StandardError
+      show(:error_but_continue)
+    end
+
     def send_to_court_based_destination
       if show_research_consent?
         edit(:research_consent)
@@ -91,9 +110,15 @@ module C100App
       end
     end
 
-    def send_to_my_hmcts_guidance
-      url = 'https://apply-to-court-about-child-arrangements-c100.service.gov.uk/complete-your-application-guidance'
-      url
+    def send_to_court_based_destination_for_citizens
+      if show_research_consent?
+        edit(:research_consent)
+      elsif eligable_court
+        show(:redirect_to_guidance)
+      else
+        edit(:consent_order)
+        # show(:redirect_to_login)
+      end
     end
 
     def after_my_hmcts
