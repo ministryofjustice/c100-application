@@ -93,6 +93,7 @@ RSpec.describe CourtContactDetails do
         canterbury-combined-court-centre
         hertford-county-court-and-family-court
         high-wycombe-magistrates-court-and-family-court
+        lancaster-courthouse
       ))
     end
   end
