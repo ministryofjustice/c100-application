@@ -18,8 +18,8 @@ class BaseDecisionTree
   end
 
   def question(attribute_name,
-      record = c100_application,
-      value_object = GenericYesNo)
+               record = c100_application,
+               value_object = GenericYesNo)
     value = record.public_send(attribute_name) || 'na'
     value_object.new(value)
   end

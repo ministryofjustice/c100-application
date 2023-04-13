@@ -1225,6 +1225,7 @@ en:
       # Opening steps
       steps_opening_start_or_continue_form:
         children_postcode: Enter the children's postcode
+        children_postcode_continue: Enter the children's postcode
         start_or_continue_options:
           new: Start a new application
           continue: Sign in to continue an application

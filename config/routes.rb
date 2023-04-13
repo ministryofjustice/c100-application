@@ -119,7 +119,7 @@ Rails.application.routes.draw do
       show_step :error_but_continue
       show_step :no_court_found
       edit_step :research_consent
-      edit_step :my_hmcts
+      # edit_step :my_hmcts
       show_step :redirect_to_my_hmcts
       show_step :redirect_to_guidance
       edit_step :consent_order
@@ -330,7 +330,7 @@ Rails.application.routes.draw do
            path_names: { edit: '/' },
            only: [:edit, :update, :create]
 
-  root 'steps/opening/start#show'
+  root 'steps/opening/start_or_continue#edit'
 
   get 'about/accessibility'
   get 'about/contact'

@@ -3,11 +3,14 @@ module Steps
     class StartOrContinueForm < BaseForm
       attribute :start_or_continue, StrippedString
       attribute :children_postcode, StrippedString
+      attribute :children_postcode_continue, StrippedString
       attribute :is_legal_representative, Boolean
 
       validates :start_or_continue, presence: true
       validates :children_postcode, presence: true, full_uk_postcode: true,
-        if: -> { start_or_continue == ApplicationIntent::NEW }
+        if: -> { new? }
+      validates :children_postcode_continue, presence: true, full_uk_postcode: true,
+        if: -> { continue? }
 
       private
 
@@ -15,14 +18,22 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          children_postcode: children_postcode,
+          children_postcode: new? ? children_postcode : children_postcode_continue,
           start_or_continue: start_or_continue,
-          is_legal_representative: convertToBoolean(is_legal_representative)
+          is_legal_representative: convert_to_boolean(is_legal_representative)
         )
       end
 
-      def convertToBoolean(value)
-        (value == true || value == 't') ? 'yes' : 'no'
+      def new?
+        start_or_continue == ApplicationIntent::NEW.to_s
+      end
+
+      def continue?
+        start_or_continue == ApplicationIntent::CONTINUE.to_s
+      end
+
+      def convert_to_boolean(value)
+        [true, 't'].include?(value) ? 'yes' : 'no'
       end
     end
   end

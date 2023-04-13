@@ -1,7 +1,6 @@
 module Steps
   module Opening
     class SignInOrCreateAccountController < Steps::OpeningStepController
-
       def edit
         @form_object = SignInOrCreateAccountForm.build(current_c100_application)
       end

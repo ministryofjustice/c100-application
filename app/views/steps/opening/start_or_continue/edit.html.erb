@@ -1,5 +1,5 @@
 <% title t('.page_title') %>
-<% step_header(path: root_path) %>
+<% step_header(path: Rails.configuration.gds_service_homepage_url) %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -12,7 +12,9 @@
         <%= f.govuk_radio_button :start_or_continue, ApplicationIntent::NEW, link_errors: true do %>
           <%= f.govuk_text_field :children_postcode, width: 'one-third', autocomplete: 'postal-code' %>
         <% end %>
-        <%= f.govuk_radio_button :start_or_continue, ApplicationIntent::CONTINUE, link_errors: true %>
+        <%= f.govuk_radio_button :start_or_continue, ApplicationIntent::CONTINUE, link_errors: true do %>
+          <%= f.govuk_text_field :children_postcode_continue, width: 'one-third', autocomplete: 'postal-code' %>
+        <% end %>
       <% end %>
 
       <details class="govuk-details" data-module="govuk-details">

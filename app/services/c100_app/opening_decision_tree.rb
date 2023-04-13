@@ -11,9 +11,9 @@ module C100App
       when :continue_application
         after_continue_application
       when :research_consent
-        check_if_valid_court
-      when :my_hmcts
-        after_my_hmcts
+        after_research_consent
+      # when :my_hmcts
+      #   after_my_hmcts
       when :consent_order
         after_consent_order
       when :consent_order_upload
@@ -40,7 +40,7 @@ module C100App
     end
 
     def after_continue_application
-      if(question(:platform, c100_application, ApplicationPlatform).my_hmcts?)
+      if question(:platform, c100_application, ApplicationPlatform).my_hmcts?
         show(:my_hmcts_manage_case)
       else
         show(:redirect_to_login)
@@ -48,37 +48,37 @@ module C100App
     end
 
     def after_start_or_continue
-      # scenario 1
-      if question(:start_or_continue, c100_application, ApplicationIntent).new? &&
-         question(:is_legal_representative).yes?
-         check_court_and_send_to_court_based_destination
-
-      # scenario 2
-      elsif question(:start_or_continue, c100_application, ApplicationIntent).continue? &&
-            question(:is_legal_representative).yes?
-        edit(:continue_application)
-      
-      # # scenario 3
-      elsif question(:start_or_continue, c100_application, ApplicationIntent).new? &&
-            question(:is_legal_representative).no?
-        check_court_and_send_to_court_based_destination_for_citizens
-
-      # scenario 5
-      elsif question(:start_or_continue, c100_application, ApplicationIntent).continue?
-        show(:redirect_to_login)
-
-      
-
+      if question(:start_or_continue, c100_application, ApplicationIntent).new?
+        after_start
       else
-        edit(:sign_in_or_create_account)
+        after_continue
+      end
+    end
+
+    def after_start
+      if question(:is_legal_representative).yes?
+        check_court_and_send_to_court_based_destination
+      else
+        check_court_and_send_to_court_based_destination_for_citizens
+      end
+    end
+
+    def after_continue
+      check_court_and_send_to_court_based_destination_for_continue
+    end
+
+    def after_research_consent
+      if question(:is_legal_representative).yes?
+        send_to_court_based_destination(skip_research_consent: true)
+      else
+        send_to_court_based_destination_for_citizens(skip_research_consent: true)
       end
     end
 
     def check_court_and_send_to_court_based_destination
       court = CourtPostcodeChecker.new.court_for(children_postcode)
 
-      return show(:no_court_found) unless 
-      court
+      return show(:no_court_found) unless court
       c100_application.update!(court: court)
 
       send_to_court_based_destination
@@ -90,8 +90,7 @@ module C100App
     def check_court_and_send_to_court_based_destination_for_citizens
       court = CourtPostcodeChecker.new.court_for(children_postcode)
 
-      return show(:no_court_found) unless 
-      court
+      return show(:no_court_found) unless court
       c100_application.update!(court: court)
 
       send_to_court_based_destination_for_citizens
@@ -100,34 +99,58 @@ module C100App
       show(:error_but_continue)
     end
 
-    def send_to_court_based_destination
-      if show_research_consent?
+    def check_court_and_send_to_court_based_destination_for_continue
+      court = CourtPostcodeChecker.new.court_for(children_postcode)
+      return show(:no_court_found) unless court
+      c100_application.update!(court: court)
+
+      send_to_court_based_destination_for_continue
+    # `CourtPostcodeChecker` and `Court` already log any potential exceptions
+    rescue StandardError
+      show(:error_but_continue)
+    end
+
+    def send_to_court_based_destination(skip_research_consent: false)
+      if show_research_consent? && !skip_research_consent
         edit(:research_consent)
       elsif eligable_court
         edit(:sign_in_or_create_account)
       else
-        edit(:consent_order)
+        show(:start)
       end
     end
 
-    def send_to_court_based_destination_for_citizens
-      if show_research_consent?
+    def send_to_court_based_destination_for_continue
+      if eligable_court
+        if question(:is_legal_representative).yes?
+          edit(:continue_application)
+        else
+          show(:redirect_to_guidance)
+        end
+      else
+        show(:redirect_to_login)
+      end
+    end
+
+    def send_to_court_based_destination_for_citizens(
+      skip_research_consent: false
+    )
+      if show_research_consent? && !skip_research_consent
         edit(:research_consent)
       elsif eligable_court
         show(:redirect_to_guidance)
       else
-        edit(:consent_order)
-        # show(:redirect_to_login)
+        show(:start)
       end
     end
 
-    def after_my_hmcts
-      # if question(:use_my_hmcts).yes?
-      # show(:redirect_to_my_hmcts)
-      # else
-      edit(:consent_order)
-      # end
-    end
+    # def after_my_hmcts
+    #   # if question(:use_my_hmcts).yes?
+    #   # show(:redirect_to_my_hmcts)
+    #   # else
+    #   edit(:consent_order)
+    #   # end
+    # end
 
     def after_consent_order
       if question(:consent_order).yes?
