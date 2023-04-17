@@ -1,0 +1,47 @@
+<% title t('.page_title') %>
+<% step_header(path: Rails.configuration.gds_service_homepage_url) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-l"><%=t '.heading' %></h1>
+
+    <%= step_form @form_object do |f| %>
+      <%= f.govuk_radio_buttons_fieldset :start_or_continue, legend: nil do %>
+        <%= f.govuk_radio_button :start_or_continue, ApplicationIntent::NEW, link_errors: true do %>
+          <%= f.govuk_text_field :children_postcode, width: 'one-third', autocomplete: 'postal-code' %>
+        <% end %>
+        <%= f.govuk_radio_button :start_or_continue, ApplicationIntent::CONTINUE, link_errors: true do %>
+          <%= f.govuk_text_field :children_postcode_continue, width: 'one-third', autocomplete: 'postal-code' %>
+        <% end %>
+      <% end %>
+
+      <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text" data-ga-category="explanations" data-ga-label="children postcode">
+            <%=t '.details.summary' %>
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          <%=t '.details.text_html' %>
+        </div>
+      </details>
+      <br/>
+      <h3 class="govuk-heading-m"><%=t '.is_representative.heading' %></h3>
+      <p class="govuk-body-m"><%=t '.is_representative.text' %></p>
+
+      <%=
+        f.govuk_check_boxes_fieldset :is_legal_representative, multiple: false, legend: nil do
+          f.govuk_check_box(:is_legal_representative, true, false, multiple: false, link_errors: true)
+        end
+      %>
+
+      <%= f.continue_button %>
+    <% end %>
+
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <%= render 'shared/help_dropdown' %>
+  </div>
+</div>

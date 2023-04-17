@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Steps::Opening::RedirectToMyHmctsController, type: :controller do
+RSpec.describe Steps::Opening::RedirectToGuidanceController, type: :controller do
   let(:c100_application) { instance_double(C100Application) }
 
   before do
@@ -9,9 +9,9 @@ RSpec.describe Steps::Opening::RedirectToMyHmctsController, type: :controller do
   end
 
   describe '#show' do
-    it 'redirects to MyHMCTS' do
+    it 'redirects to MyHMCTS guidance' do
       get :show
-      expect(response).to redirect_to('https://manage-case.platform.hmcts.net/cases')
+      expect(response).to redirect_to('https://apply-to-court-about-child-arrangements-c100.service.gov.uk/complete-your-application-guidance')
     end
   end
 end
