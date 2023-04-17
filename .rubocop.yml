@@ -24,6 +24,7 @@ Metrics/ClassLength:
   Max: 105
   Exclude:
     - app/models/document_upload.rb
+    - app/services/c100_app/opening_decision_tree.rb
 
 Layout/LineLength:
   Max: 130

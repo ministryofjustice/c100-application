@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Steps::Opening::RedirectToMyHmctsController, type: :controller do
+RSpec.describe Steps::Opening::RedirectToLoginController, type: :controller do
   let(:c100_application) { instance_double(C100Application) }
 
   before do
@@ -9,9 +9,9 @@ RSpec.describe Steps::Opening::RedirectToMyHmctsController, type: :controller do
   end
 
   describe '#show' do
-    it 'redirects to MyHMCTS' do
+    it 'redirects to login' do
       get :show
-      expect(response).to redirect_to('https://manage-case.platform.hmcts.net/cases')
+      expect(response).to redirect_to(new_user_session_path)
     end
   end
 end

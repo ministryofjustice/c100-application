@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Steps::Opening::RedirectToMyHmctsController, type: :controller do
+RSpec.describe Steps::Opening::MyHmctsCreateAccountController, type: :controller do
   let(:c100_application) { instance_double(C100Application) }
 
   before do
@@ -9,9 +9,9 @@ RSpec.describe Steps::Opening::RedirectToMyHmctsController, type: :controller do
   end
 
   describe '#show' do
-    it 'redirects to MyHMCTS' do
+    it 'redirects to MyHMCTS create account' do
       get :show
-      expect(response).to redirect_to('https://manage-case.platform.hmcts.net/cases')
+      expect(response).to redirect_to('https://www.gov.uk/guidance/myhmcts-online-case-management-for-legal-professionals#create-a-myhmcts-account-for-your-organisation')
     end
   end
 end
