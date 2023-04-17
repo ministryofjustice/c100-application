@@ -6,6 +6,7 @@ module Steps
       attribute :children_postcode_continue, StrippedString
       attribute :is_legal_representative, Boolean
 
+      validates_inclusion_of :start_or_continue, in: ApplicationIntent.values.map(&:to_s)
       validates :start_or_continue, presence: true
       validates :children_postcode, presence: true, full_uk_postcode: true,
         if: -> { new? }
