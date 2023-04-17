@@ -3,7 +3,7 @@ module Steps
     class ContinueApplicationForm < BaseForm
       attribute :platform, StrippedString
 
-      validates :platform, presence: true
+      validates_inclusion_of :platform, in: ApplicationPlatform.values.map(&:to_s)
 
       private
 
