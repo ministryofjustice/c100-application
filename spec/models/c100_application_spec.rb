@@ -33,7 +33,8 @@ RSpec.describe C100Application, type: :model do
 
     let(:attributes) {{
       court: court,
-      urgent_hearing: urgent_hearing
+      urgent_hearing: urgent_hearing,
+      without_notice: without_notice
     }}
 
     # :nocov:
@@ -48,8 +49,9 @@ RSpec.describe C100Application, type: :model do
           court.email = "test@example.com"
         end
       }
-      context 'with urgency' do
+      context 'with urgency and without notice' do
         let(:urgent_hearing){'yes'}
+        let(:without_notice){'yes'}
 
         it 'redirects urgent hearings from 
             west london family court to barnet civil
@@ -61,7 +63,19 @@ RSpec.describe C100Application, type: :model do
 
       context 'without urgency' do
         let(:urgent_hearing){'no'}
+        let(:without_notice){'yes'}
+
         it 'does not redirect non-urgent' do
+          subject.save
+          expect(subject.court.id).to eq('west-london-family-court')
+        end
+      end
+
+      context 'without notice' do
+        let(:urgent_hearing){'yes'}
+        let(:without_notice){'no'}
+
+        it 'does not redirect non-notice' do
           subject.save
           expect(subject.court.id).to eq('west-london-family-court')
         end
@@ -69,6 +83,8 @@ RSpec.describe C100Application, type: :model do
 
       context 'with urgency, then without urgency' do
         let(:urgent_hearing){'yes'}
+        let(:without_notice){'yes'}
+
         it 'redirects, then does not redirect non-urgent' do
           subject.save
           expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
@@ -90,6 +106,7 @@ RSpec.describe C100Application, type: :model do
         end
       }
       let(:urgent_hearing){'yes'}
+      let(:without_notice){'yes'}
       it 'does not redirect to other courts' do
         subject.save
         expect(subject.court.id).to eq('other-court')
