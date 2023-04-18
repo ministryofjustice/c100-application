@@ -110,4 +110,6 @@ class NotifySubmissionMailer < NotifyMailer
   def court
     @c100_application.court
   end
+
+  # random commit
 end
