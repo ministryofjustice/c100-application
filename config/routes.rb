@@ -293,9 +293,6 @@ Rails.application.routes.draw do
     end
   end
 
-  scope 'uploader/:document_key' do
-    resources :documents, only: [:create, :destroy]
-  end
   resources :download_tokens, only: [:show], param: :token
 
   resource :session, only: [:destroy] do
