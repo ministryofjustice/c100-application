@@ -2,7 +2,8 @@ module Steps
   module Opening
     class StartOrContinueController < Steps::OpeningStepController
       skip_before_action :check_c100_application_presence, :update_navigation_stack
-      before_action :existing_application_warning
+      before_action :existing_application_warning, only: [:edit], unless: -> { params[:new].present? }
+      before_action :reset_c100_application_session, only: [:edit], if: -> { params[:new].present? }
       include StartingPointStep
 
       def edit
