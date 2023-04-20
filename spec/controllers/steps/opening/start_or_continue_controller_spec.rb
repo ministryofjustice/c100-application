@@ -7,16 +7,27 @@ RSpec.describe Steps::Opening::StartOrContinueController, type: :controller do
 
     describe 'if existing application with sufficient progress' do
       let(:navigation_stack) { %w[page page page page] }
-      let(:existing_case) { C100Application.create(status: :in_progress, navigation_stack: navigation_stack) }
+      let(:existing_case) { C100Application.create(
+        status: :in_progress,
+        navigation_stack: navigation_stack)
+      }
 
-      it 'redirects to warning page' do
-        get :edit, session: { c100_application_id: existing_case.id }
-        expect(subject).to redirect_to(steps_opening_warning_path)
+      describe 'without new parameter' do
+        it 'redirects to warning page' do
+          get :edit, session: { c100_application_id: existing_case.id }
+          expect(subject).to redirect_to(steps_opening_warning_path)
+        end
+      end
+
+      describe 'with new parameter' do
+        it 'does not redirect' do
+          get :edit, params: { new: 'y' }, session: { c100_application_id: existing_case.id }
+          expect(subject).to render_template(:edit)
+        end
       end
     end
   end
 
-    
   describe '#update' do
     let(:form_class) { Steps::Opening::StartOrContinueForm }
     let(:decision_tree_class) { C100App::OpeningDecisionTree }
