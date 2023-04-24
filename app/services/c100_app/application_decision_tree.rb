@@ -8,10 +8,6 @@ module C100App
       when :previous_proceedings
         after_previous_proceedings
       when :court_proceedings
-        edit(:has_court_order_uploads)
-      when :has_court_order_uploads
-        after_has_court_order_uploads
-      when :court_order_uploads
         edit(:urgent_hearing)
       when :urgent_hearing
         after_urgent_hearing
@@ -44,14 +40,6 @@ module C100App
     # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
 
     private
-
-    def after_has_court_order_uploads
-      if question(:has_court_order_uploads).yes?
-        edit(:court_order_uploads)
-      else
-        edit(:urgent_hearing)
-      end
-    end
 
     def after_previous_proceedings
       if question(:children_previous_proceedings).yes?

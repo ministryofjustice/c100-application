@@ -21,17 +21,11 @@ module Summary
           FreeTextAnswer.new(:court_proceeding_cafcass_details,  court_proceeding.cafcass_details),
           FreeTextAnswer.new(:court_proceeding_order_types,      court_proceeding.order_types),
           FreeTextAnswer.new(:court_proceeding_previous_details, court_proceeding.previous_details),
-          FreeTextAnswer.new(:court_order_uploads,               court_order_uploads_answer)
         ].select(&:show?)
       end
       # rubocop:enable Metrics/AbcSize
 
       private
-
-      def court_order_uploads_answer
-        c100.documents(:court_order_uploads).any? &&
-          I18n.t('check_answers.court_order_uploads.answer')
-      end
 
       def court_proceeding
         @_court_proceeding ||= c100.court_proceeding
