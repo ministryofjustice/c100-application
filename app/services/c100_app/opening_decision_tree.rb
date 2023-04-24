@@ -8,7 +8,7 @@ module C100App
       case step_name
       when :children_postcode
         check_if_court_is_valid
-        # when :start_or_continue
+      # when :start_or_continue
       #   after_start_or_continue
       # when :sign_in_or_create_account
       #   after_sign_in_or_create_account
@@ -59,9 +59,9 @@ module C100App
       else
         show(:no_court_found)
       end
-      # `CourtPostcodeChecker` and `Court` already log any potential exceptions	
-    rescue StandardError	
-      show(:error_but_continue)	
+      # `CourtPostcodeChecker` and `Court` already log any potential exceptions
+    rescue StandardError
+      show(:error_but_continue)
     end
 
     def after_my_hmcts

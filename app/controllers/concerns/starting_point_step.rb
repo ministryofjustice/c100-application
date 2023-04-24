@@ -15,5 +15,4 @@ module StartingPointStep
     current_c100_application.navigation_stack = []
     super
   end
-
 end

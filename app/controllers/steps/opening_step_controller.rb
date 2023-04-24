@@ -36,6 +36,5 @@ module Steps
 
       redirect_to steps_opening_warning_path
     end
-
   end
 end
