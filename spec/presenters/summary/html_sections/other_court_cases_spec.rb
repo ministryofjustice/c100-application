@@ -6,7 +6,6 @@ module Summary
       instance_double(C100Application,
         children_previous_proceedings: children_previous_proceedings,
         court_proceeding: court_proceeding,
-        documents: documents
     ) }
 
     let(:court_proceeding) {
@@ -20,7 +19,6 @@ module Summary
         previous_details: 'previous_details',
     ) }
 
-    let(:documents) { [] }
     let(:children_previous_proceedings) { 'yes' }
 
     subject { described_class.new(c100_application) }
@@ -61,30 +59,6 @@ module Summary
           expect(answers[0].question).to eq(:has_other_court_cases)
           expect(answers[0].value).to eq('no')
           expect(answers[0].change_path).to eq('/steps/application/previous_proceedings')
-        end
-      end
-
-      context 'when there are previous proceedings and file uploads' do
-        let(:children_previous_proceedings) { 'yes' }
-        let(:documents) { [double(name: 'file.jpg')] }
-
-        it 'has the correct rows' do
-          expect(answers.count).to eq(3)
-
-          expect(answers[0]).to be_an_instance_of(Answer)
-          expect(answers[0].question).to eq(:has_other_court_cases)
-          expect(answers[0].value).to eq('yes')
-          expect(answers[0].change_path).to eq('/steps/application/previous_proceedings')
-
-          expect(answers[1]).to be_an_instance_of(AnswersGroup)
-          expect(answers[1].name).to eq(:other_court_cases_details)
-          expect(answers[1].change_path).to eq('/steps/application/court_proceedings')
-          expect(answers[1].answers.size).to eq(7)
-
-          expect(answers[2]).to be_an_instance_of(FileAnswer)
-          expect(answers[2].question).to eq(:court_order_uploads)
-          expect(answers[2].value).to eq(['file.jpg'])
-          expect(answers[2].change_path).to eq('/steps/application/court_order_uploads')
         end
       end
     end

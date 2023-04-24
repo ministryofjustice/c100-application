@@ -17,9 +17,6 @@ module Summary
             other_court_cases_details,
             change_path: edit_steps_application_court_proceedings_path
           ),
-          FileAnswer.new(:court_order_uploads,
-                         c100.documents(:court_order_uploads).map(&:name),
-                         change_path: edit_steps_application_court_order_uploads_path)
         ].select(&:show?)
       end
 
