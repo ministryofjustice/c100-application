@@ -200,7 +200,7 @@ Feature: Add an applicant to the application
     Then Page has title "Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter an email address" link to "#steps-solicitor-contact-details-form-email-field-error"
     And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-phone-number-field-error"
-  # And ... fax warning
+    And I should see a "Enter a fax number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-fax-number-field-error"
 
     When I fill in "Email address" with "¡€#"
     And I fill in "Phone number" with "¡€#"
