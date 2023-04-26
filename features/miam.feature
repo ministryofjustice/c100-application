@@ -40,7 +40,7 @@ Feature: MIAM journey
     Then I should see "Upload your MIAM certificate"
 
   @unhappy_path
-  Scenario Outline: Applicant did not attend a MIAM and do not have a mediator’s exemption
+  Scenario Outline: Applicant did not attend a MIAM and does not have a mediator’s exemption
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "No"
 
