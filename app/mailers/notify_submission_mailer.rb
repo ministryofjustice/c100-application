@@ -52,7 +52,7 @@ class NotifySubmissionMailer < NotifyMailer
         documents_email: court.documents_email,
         is_under_age: notify_boolean(@c100_application.applicants.under_age?),
         is_consent_order: @c100_application.consent_order || 'no',
-        payment_instructions: payment_instructions,
+        payment_instructions:,
       )
     )
     mail(to: to_address)
@@ -103,7 +103,9 @@ class NotifySubmissionMailer < NotifyMailer
   end
 
   def prepare_upload(file)
-    return '' if file.nil? || file.size.zero?
+    return '' if file.nil? ||
+                 file.try(:string).try(:blank?) ||
+                 file.try(:rewind).try(:blank?)
     Notifications.prepare_upload(file)
   end
 

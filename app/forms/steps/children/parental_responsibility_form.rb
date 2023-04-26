@@ -12,7 +12,7 @@ module Steps
 
         child = c100_application.children.find_by!(id: record_id)
         child.update(
-          attributes_map
+          **attributes_map
         )
       end
     end

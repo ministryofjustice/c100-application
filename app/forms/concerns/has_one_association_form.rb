@@ -5,7 +5,7 @@ module HasOneAssociationForm
     attr_accessor :association_name
 
     def build(c100_application:)
-      super(associated_record(c100_application), c100_application: c100_application)
+      super(associated_record(c100_application), c100_application:)
     end
 
     def associated_record(parent)

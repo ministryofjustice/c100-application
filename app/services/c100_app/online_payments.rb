@@ -70,7 +70,7 @@ module C100App
         return_url: payment_intent.return_url,
 
         # Needed for HMCTS reconciliation
-        metadata: metadata
+        metadata:
       }
     end
 

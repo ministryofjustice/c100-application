@@ -19,7 +19,7 @@ module C100App
     private
 
     def claim_ownership!
-      c100_application.update(user: user) && send_confirmation_email
+      c100_application.update(user:) && send_confirmation_email
     end
 
     def send_confirmation_email

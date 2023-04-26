@@ -15,8 +15,8 @@ module C100App
     # to fail and be retried in case any of the actions fail.
     #
     def deliver_email
-      NotifySubmissionMailer.with(application_details).application_to_user(
-        to_address: to_address
+      NotifySubmissionMailer.with(**application_details).application_to_user(
+        to_address:
       ).deliver_now
     end
 

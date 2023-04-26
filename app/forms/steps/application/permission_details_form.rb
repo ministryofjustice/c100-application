@@ -11,7 +11,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          permission_details: permission_details
+          permission_details:
         )
       end
     end

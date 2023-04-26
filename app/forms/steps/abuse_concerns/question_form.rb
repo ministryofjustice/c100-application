@@ -8,7 +8,7 @@ module Steps
       private
 
       def persist!
-        abuse_attributes = { answer: answer }
+        abuse_attributes = { answer: }
 
         # If answer is no, reset all detail attributes for this question
         abuse_attributes.merge!(

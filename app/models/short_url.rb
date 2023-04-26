@@ -5,7 +5,7 @@ class ShortUrl < ApplicationRecord
 
   class << self
     def resolve(path:, target_url:)
-      url = find_or_initialize_by(path: path)
+      url = find_or_initialize_by(path:)
       url.target_url ||= target_url
       url.track_visit!
       url
@@ -20,9 +20,9 @@ class ShortUrl < ApplicationRecord
 
   def analytics_query
     {
-      utm_source: utm_source,
-      utm_medium: utm_medium,
-      utm_campaign: utm_campaign,
+      utm_source:,
+      utm_medium:,
+      utm_campaign:,
     }.compact.to_query.presence&.prepend('?')
   end
 end

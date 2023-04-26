@@ -7,7 +7,7 @@ class EmailSubmissionsAudit < ApplicationRecord
     require 'bcrypt'
 
     def purge!(date)
-      where('completed_at <= :date', date: date).destroy_all
+      where('completed_at <= :date', date:).destroy_all
     end
 
     # Note: reference is the email reference, and starts with prefix

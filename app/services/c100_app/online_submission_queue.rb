@@ -24,7 +24,7 @@ module C100App
     # Do not use `find_or_create` as there are race-conditions
     #
     def ready_to_process
-      EmailSubmission.create(c100_application: c100_application)
+      EmailSubmission.create(c100_application:)
     rescue ActiveRecord::RecordNotUnique
       # do nothing and return `nil` if record already exists
       nil

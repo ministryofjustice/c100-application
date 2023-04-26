@@ -28,19 +28,19 @@ RSpec.describe ApplicationHelper, type: :helper do
     let(:form_block) { Proc.new {} }
 
     it 'acts like FormHelper#form_for with additional defaults' do
-      expect(helper).to receive(:form_for).with(record, expected_defaults) do |*_args, &block|
+      expect(helper).to receive(:form_for).with(record, **expected_defaults) do |*_args, &block|
         expect(block).to eq(form_block)
       end
       helper.step_form(record, &form_block)
     end
 
     it 'accepts additional options like FormHelper#form_for would' do
-      expect(helper).to receive(:form_for).with(record, expected_defaults.merge(foo: 'bar'))
+      expect(helper).to receive(:form_for).with(record, **expected_defaults.merge(foo: 'bar'))
       helper.step_form(record, { foo: 'bar' })
     end
 
     it 'appends optional css classes if provided' do
-      expect(helper).to receive(:form_for).with(record, expected_defaults.merge(html: {class: %w(test edit_c100_application)}))
+      expect(helper).to receive(:form_for).with(record, **expected_defaults.merge(html: {class: %w(test edit_c100_application)}))
       helper.step_form(record, html: {class: 'test'})
     end
   end
@@ -106,7 +106,7 @@ RSpec.describe ApplicationHelper, type: :helper do
         expect(
           helper.govuk_error_summary(form_object)
         ).to eq(
-          "<div class=\"govuk-error-summary\" role=\"alert\" data-module=\"govuk-error-summary\" aria-labelledby=\"error-summary-title\"><h2 id=\"error-summary-title\" class=\"govuk-error-summary__title\">There is a problem on this page</h2><div class=\"govuk-error-summary__body\"><ul class=\"govuk-list govuk-error-summary__list\"><li><a data-turbo=\"false\" href=\"#base-form-base-field-error\">Enter an answer</a></li></ul></div></div>"
+            "<div class=\"govuk-error-summary\" data-module=\"govuk-error-summary\"><div role=\"alert\"><h2 class=\"govuk-error-summary__title\">There is a problem on this page</h2><div class=\"govuk-error-summary__body\"><ul class=\"govuk-list govuk-error-summary__list\"><li><a data-turbo=\"false\" href=\"#base-form-base-field-error\">Enter an answer</a></li></ul></div></div></div>"
         )
       end
 

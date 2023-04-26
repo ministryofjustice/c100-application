@@ -6,6 +6,6 @@ class ShortUrlExpander
   end
 
   def call(params, _request)
-    ShortUrl.resolve(path: params[:path], target_url: target_url)
+    ShortUrl.resolve(path: params[:path], target_url:)
   end
 end
