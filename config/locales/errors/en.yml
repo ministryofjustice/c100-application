@@ -504,6 +504,11 @@ en:
           attributes:
             phone_number:
               blank: Enter the phone number
+              invalid: *phone_numeric_error
+            fax_number:
+              invalid: *phone_numeric_error
+            dx_number:
+              invalid: Enter a valid DX number
         steps/applicant/names_split_form:
           attributes:
             <<: *NAMES_FORM_ERRORS
