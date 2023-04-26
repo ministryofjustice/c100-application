@@ -47,12 +47,15 @@ Feature: Add children to the application
     Then Page has title "Error: Child personal details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Date of birth is not valid" link to "#steps-children-personal-details-form-dob-field-error"
 
-#    When I enter the date 1-1-1
-#    And I check "I don’t know their date of birth"
-#    And I choose "Male"
-#    And I click the "Continue" button
-#    Then Page has title "Error: Child personal details - Apply to court about child arrangements - GOV.UK"
-#    And I check "I don’t know their date of birth" - check how to uncheck "I don't know their date of birth"
+    When I enter the date 08-12-2016
+    And I check "I don’t know their date of birth"
+    And I choose "Male"
+    And I click the "Continue" button
+    Then Page has title "Error: Child personal details - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Enter the date of birth" link to "#steps-children-personal-details-form-dob-estimate-field-error"
+    Then I click the "Back" link
+    And I should see "Enter the names of the children"
+    And I click the "Continue" button
 
     # Fix validation errors and continue
     Then I enter the date 08-12-2016
