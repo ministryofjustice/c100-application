@@ -74,26 +74,80 @@ Feature: Safety Concerns
 
     Then I should see "Have the children ever been sexually abused?"
     And I choose "Yes"
-    And I submit the form details for "About the children’s sexual abuse"
 
-    Then I should see "Have the children ever been physically abused?"
-    And I choose "Yes"
-    And I submit the form details for "About the children’s physical abuse"
+    # Provoking validation error
+    Then Page has title "About the children’s sexual abuse - Apply to court about child arrangements - GOV.UK"
+    And I click the "Continue" button
+    Then I should see a "Please briefly describe what happened and who was involved" link to "#steps-abuse-concerns-details-form-behaviour-description-field-error"
+    And I should see a "Provide when this behaviour started" link to "#steps-abuse-concerns-details-form-behaviour-start-field-error"
+    And I should see a "Provide whether this behaviour still ongoing" link to "#steps-abuse-concerns-details-form-behaviour-ongoing-field-error"
+    And I should see a "Provide whether you asked for help" link to "#steps-abuse-concerns-details-form-asked-for-help-field-error"
 
-    Then I should see "Have the children ever been financially abused?"
-    And I choose "Yes"
-    And I submit the form details for "About the children’s financial abuse"
+    # Fixing validation error
+    Then I submit the form details for "About the children’s sexual abuse"
+    And I should see "Have the children ever been physically abused?"
+    Then I choose "Yes"
 
-    Then I should see "Have the children ever been psychologically abused?"
-    And I choose "Yes"
-    And I submit the form details for "About the children’s psychological abuse"
+    # Provoking validation error
+    Then Page has title "About the children’s physical abuse - Apply to court about child arrangements - GOV.UK"
+    And I click the "Continue" button
+    Then I should see a "Please briefly describe what happened and who was involved" link to "#steps-abuse-concerns-details-form-behaviour-description-field-error"
+    And I should see a "Provide when this behaviour started" link to "#steps-abuse-concerns-details-form-behaviour-start-field-error"
+    And I should see a "Provide whether this behaviour still ongoing" link to "#steps-abuse-concerns-details-form-behaviour-ongoing-field-error"
+    And I should see a "Provide whether you asked for help" link to "#steps-abuse-concerns-details-form-asked-for-help-field-error"
 
-    Then I should see "Have the children ever been emotionally abused?"
-    And I choose "Yes"
-    And I submit the form details for "About the children’s emotional abuse"
+    # Fixing validation error
+    Then I submit the form details for "About the children’s physical abuse"
+    And I should see "Have the children ever been financially abused?"
+    Then I choose "Yes"
 
-    Then I should see "Do you have any other safety or welfare concerns about the children?"
-    And I choose "Yes"
-    And I submit the form details for "Other concerns about the children"
+    # Provoking validation error
+    Then Page has title "About the children’s financial abuse - Apply to court about child arrangements - GOV.UK"
+    And I click the "Continue" button
+    Then I should see a "Please briefly describe what happened and who was involved" link to "#steps-abuse-concerns-details-form-behaviour-description-field-error"
+    And I should see a "Provide when this behaviour started" link to "#steps-abuse-concerns-details-form-behaviour-start-field-error"
+    And I should see a "Provide whether this behaviour still ongoing" link to "#steps-abuse-concerns-details-form-behaviour-ongoing-field-error"
+    And I should see a "Provide whether you asked for help" link to "#steps-abuse-concerns-details-form-asked-for-help-field-error"
 
-    Then I should see "Your safety"
+    # Fixing validation error
+    Then I submit the form details for "About the children’s financial abuse"
+    And I should see "Have the children ever been psychologically abused?"
+    Then I choose "Yes"
+
+    # Provoking validation error
+    Then Page has title "About the children’s psychological abuse - Apply to court about child arrangements - GOV.UK"
+    And I click the "Continue" button
+    Then I should see a "Please briefly describe what happened and who was involved" link to "#steps-abuse-concerns-details-form-behaviour-description-field-error"
+    And I should see a "Provide when this behaviour started" link to "#steps-abuse-concerns-details-form-behaviour-start-field-error"
+    And I should see a "Provide whether this behaviour still ongoing" link to "#steps-abuse-concerns-details-form-behaviour-ongoing-field-error"
+    And I should see a "Provide whether you asked for help" link to "#steps-abuse-concerns-details-form-asked-for-help-field-error"
+
+    # Fixing validation error
+    Then I submit the form details for "About the children’s psychological abuse"
+    And I should see "Have the children ever been emotionally abused?"
+    Then I choose "Yes"
+
+    # Provoking validation error
+    Then Page has title "About the children’s emotional abuse - Apply to court about child arrangements - GOV.UK"
+    And I click the "Continue" button
+    Then I should see a "Please briefly describe what happened and who was involved" link to "#steps-abuse-concerns-details-form-behaviour-description-field-error"
+    And I should see a "Provide when this behaviour started" link to "#steps-abuse-concerns-details-form-behaviour-start-field-error"
+    And I should see a "Provide whether this behaviour still ongoing" link to "#steps-abuse-concerns-details-form-behaviour-ongoing-field-error"
+    And I should see a "Provide whether you asked for help" link to "#steps-abuse-concerns-details-form-asked-for-help-field-error"
+
+    # Fixing validation error
+    Then I submit the form details for "About the children’s emotional abuse"
+    And I should see "Do you have any other safety or welfare concerns about the children?"
+    Then I choose "Yes"
+
+    # Provoking validation error
+    Then Page has title "Other concerns about the children - Apply to court about child arrangements - GOV.UK"
+    And I click the "Continue" button
+    Then I should see a "Please briefly describe what happened and who was involved" link to "#steps-abuse-concerns-details-form-behaviour-description-field-error"
+    And I should see a "Provide when this behaviour started" link to "#steps-abuse-concerns-details-form-behaviour-start-field-error"
+    And I should see a "Provide whether this behaviour still ongoing" link to "#steps-abuse-concerns-details-form-behaviour-ongoing-field-error"
+    And I should see a "Provide whether you asked for help" link to "#steps-abuse-concerns-details-form-asked-for-help-field-error"
+
+    # Fixing validation error
+    Then I submit the form details for "Other concerns about the children"
+    And I should see "Your safety"
