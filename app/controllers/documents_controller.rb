@@ -9,7 +9,7 @@ class DocumentsController < ApplicationController
     uploader = DocumentUpload.new(
       document_param,
       document_key: :court_order_uploads,
-      collection_ref: collection_ref
+      collection_ref:
     )
     uploader.upload! if uploader.valid?
 
@@ -31,7 +31,7 @@ class DocumentsController < ApplicationController
 
   def destroy
     Uploader.delete_file(
-      collection_ref: collection_ref,
+      collection_ref:,
       document_key: document_key_param,
       filename: decoded_filename
     )
