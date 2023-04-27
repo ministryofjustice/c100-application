@@ -37,7 +37,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         record.update(
-          {
+          **{
             relation: relation_value,
             relation_other_value: other_value
           }.merge(

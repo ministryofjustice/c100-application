@@ -23,7 +23,7 @@ module Steps
           subject: AbuseSubject.new(subject),
           kind: AbuseType.new(kind),
         ).update(
-          attributes.except(:subject, :kind)
+          **attributes.except(:subject, :kind)
         )
       end
     end

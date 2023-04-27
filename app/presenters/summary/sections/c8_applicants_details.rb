@@ -24,7 +24,7 @@ module Summary
             []
           else
             [
-              Separator.new("#{name}_index_title", index: index),
+              Separator.new("#{name}_index_title", index:),
               FreeTextAnswer.new(:person_full_name, person.full_name),
               address(person),
               person_email(person),

@@ -33,7 +33,7 @@ module C100App
       ApplicationController.render(
         template: presenter.template.gsub(/\.pdf$/, ''),
         format: :pdf,
-        locals: { presenter: presenter }
+        locals: { presenter: }
       )
     end
 

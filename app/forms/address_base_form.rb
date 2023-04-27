@@ -16,19 +16,19 @@ class AddressBaseForm < BaseForm
   def address_values
     return {
       address_data: {},
-      address_unknown: address_unknown,
+      address_unknown:,
     } if address_unknown?
 
     {
       address_data: {
-        address_line_1: address_line_1,
-        address_line_2: address_line_2,
-        address_line_3: address_line_3,
-        town: town,
-        country: country,
-        postcode: postcode,
+        address_line_1:,
+        address_line_2:,
+        address_line_3:,
+        town:,
+        country:,
+        postcode:,
       },
-      address_unknown: address_unknown,
+      address_unknown:,
     }
   end
 end

@@ -12,7 +12,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          platform: platform
+          platform:
         )
       end
     end

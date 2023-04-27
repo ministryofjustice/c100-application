@@ -23,7 +23,7 @@ class StepController < ApplicationController
     record = opts[:record]
 
     @form_object = form_class.new(
-      hash.merge(c100_application: current_c100_application, record: record)
+      hash.merge(c100_application: current_c100_application, record:)
     )
 
     if save_draft?
@@ -35,7 +35,7 @@ class StepController < ApplicationController
       if fast_forward_to_cya?
         redirect_to edit_steps_application_check_your_answers_path
       else
-        redirect_to destination(step_params: hash, opts: opts)
+        redirect_to destination(step_params: hash, opts:)
       end
     else
       render opts.fetch(:render, :edit)
@@ -46,7 +46,7 @@ class StepController < ApplicationController
     decision_tree_class.new(
       c100_application: current_c100_application,
       record: opts[:record],
-      step_params: step_params,
+      step_params:,
       # Used when the step name in the decision tree is not the same as the first
       # (and usually only) attribute in the form.
       as: opts[:as],

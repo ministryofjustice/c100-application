@@ -24,7 +24,7 @@ module FormAttributeMethods
   module ClassMethods
     # A shortcut to declaring multiple attributes of the same type
     def attributes(collection, type, opts = {})
-      collection.each { |name| attribute(name, type, opts) }
+      collection.each { |name| attribute(name, type, **opts) }
     end
 
     def attribute_names

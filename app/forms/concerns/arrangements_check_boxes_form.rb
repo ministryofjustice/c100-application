@@ -38,7 +38,7 @@ module ArrangementsCheckBoxesForm
     raise BaseForm::C100ApplicationNotFound unless c100_application
 
     record_to_persist.update(
-      attributes_map.merge(
+      **attributes_map.merge(
         self.class.attribute_name => selected_options
       ).merge(
         additional_attributes_map

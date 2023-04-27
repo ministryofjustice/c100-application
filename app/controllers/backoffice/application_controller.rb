@@ -16,7 +16,7 @@ module Backoffice
 
     def audit!(args)
       BackofficeAuditRecord.log!(
-        { author: helpers.admin_name }.merge(args)
+        **{ author: helpers.admin_name }.merge(args)
       )
     end
 

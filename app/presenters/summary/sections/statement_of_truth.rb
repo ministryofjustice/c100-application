@@ -13,8 +13,8 @@ module Summary
         [
           Partial.new(
             :statement_of_truth,
-            signee_name: signee_name,
-            signee_capacity: signee_capacity,
+            signee_name:,
+            signee_capacity:,
             is_draft: !c100.completed?,
           ),
         ]

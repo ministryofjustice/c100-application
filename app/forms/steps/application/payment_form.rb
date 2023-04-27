@@ -30,7 +30,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          payment_type: payment_type,
+          payment_type:,
           hwf_reference_number: (hwf_reference_number if help_with_fees_payment?),
           solicitor_account_number: (solicitor_account_number if solicitor_payment?),
         )

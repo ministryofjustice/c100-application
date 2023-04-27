@@ -68,7 +68,7 @@ module Reports
         return if report_type == :daily_tasks && email_type == USER_EMAIL_TYPE
 
         status = EmailSubmissionsAudit.unscoped.order(completed_at: :desc).find_by(
-          reference: reference,
+          reference:,
         )&.status || 'callback-missing'
 
         return if status == SUCCESSFUL_STATUS_CALLBACK
@@ -79,8 +79,8 @@ module Reports
       def report_line(record, reference, error_msg)
         if report_type == :backoffice
           Backoffice::FailedEmail.new(
-            record: record,
-            reference: reference,
+            record:,
+            reference:,
             error: error_msg,
           )
         else

@@ -22,7 +22,7 @@ module Steps
 
         c100_application.update(
           concerns_contact_type: concerns_contact_type_value,
-          concerns_contact_other: concerns_contact_other
+          concerns_contact_other:
         )
       end
     end

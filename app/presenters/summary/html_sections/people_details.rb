@@ -31,7 +31,7 @@ module Summary
       def answers
         record_collection.map.with_index(1) do |person, index|
           [
-            Separator.new("#{name}_index_title", index: index),
+            Separator.new("#{name}_index_title", index:),
             FreeTextAnswer.new(:person_full_name, person.full_name, change_path: names_path),
             person_privacy_answers_group(person),
             person_personal_details_answers_group(person),
@@ -171,7 +171,7 @@ module Summary
             "child_permission_#{attr}",
             relationship.try!(attr),
             change_path: steps_permission_question_path(question_name: attr, relationship_id: relationship),
-            i18n_opts: i18n_opts
+            i18n_opts:
           )
         end
       end

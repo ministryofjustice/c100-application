@@ -19,7 +19,7 @@ module Steps
         return true unless changed?
 
         record.update(
-          postcode: postcode,
+          postcode:,
           country: lookup_default_country,
           # The following are dependent attributes that need to be reset
           address_line_1: nil,

@@ -32,7 +32,7 @@ module Summary
       # Abuses are returned in the same order we ask them (`created_at`)
       def abuses_suffered
         c100.abuse_concerns.where(
-          subject: subject,
+          subject:,
         )
       end
     end

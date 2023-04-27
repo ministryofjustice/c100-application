@@ -15,8 +15,8 @@ module Summary
 
       def answer_for(kind)
         c100.abuse_concerns.find_by(
-          subject: subject,
-          kind: kind,
+          subject:,
+          kind:,
         )&.answer || default_value
       end
 

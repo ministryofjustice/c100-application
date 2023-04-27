@@ -49,7 +49,7 @@ module C100App
       court = CourtPostcodeChecker.new.court_for(children_postcode)
 
       if court
-        c100_application.update!(court: court)
+        c100_application.update!(court:)
 
         if show_research_consent?
           edit(:research_consent)

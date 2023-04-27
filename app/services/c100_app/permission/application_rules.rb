@@ -80,18 +80,18 @@ module C100App
       def relationships_require_permission?
         c100_application.relationships.with_permission_data.one? do |relationship|
           next if can_apply_for?(
-            ALL_ORDERS, relationship: relationship, child_orders: []
+            ALL_ORDERS, relationship:, child_orders: []
           )
 
           # Following checks are based on the orders selected for this child
           child_orders = relationship.minor.child_order.orders
 
           next if can_apply_for?(
-            CAO_ORDERS, relationship: relationship, child_orders: child_orders
+            CAO_ORDERS, relationship:, child_orders:
           )
 
           next if can_apply_for?(
-            CAO_HOME_ORDERS, relationship: relationship, child_orders: child_orders
+            CAO_HOME_ORDERS, relationship:, child_orders:
           )
 
           # If we reach this point, permission is required no matter what for at

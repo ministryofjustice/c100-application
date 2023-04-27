@@ -21,7 +21,7 @@ module Summary
       def answers
         record_collection.map.with_index(1) do |person, index|
           [
-            Separator.new("#{name}_index_title", index: index),
+            Separator.new("#{name}_index_title", index:),
             FreeTextAnswer.new(:person_full_name, person.full_name),
             FreeTextAnswer.new(:person_privacy_known, person.privacy_known.try(:capitalize)),
             contact_details_privacy_preferences(person),

@@ -16,8 +16,8 @@ class FulfilmentErrorsPresenter
   def build_errors(attribute)
     @errors[attribute].map.with_index do |message, index|
       FulfilmentError.new(
-        attribute: attribute,
-        message: message,
+        attribute:,
+        message:,
         error: details(attribute, index, :error),
         change_path: details(attribute, index, :change_path),
       )
