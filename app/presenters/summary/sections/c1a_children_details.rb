@@ -8,7 +8,7 @@ module Summary
       def answers
         c100.children.map.with_index(1) do |child, index|
           [
-            Separator.new(:child_index_title, index: index),
+            Separator.new(:child_index_title, index:),
             personal_details(child),
             MultiAnswer.new(:child_applicants_relationship, relation_to_child(child, c100.applicants)),
             Partial.row_blank_space,

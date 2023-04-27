@@ -14,15 +14,15 @@ class BackofficeAuditRecord < ApplicationRecord
 
   def self.log!(author:, action:, details: {})
     create(
-      author: author,
-      action: action,
-      details: details
+      author:,
+      action:,
+      details:
     )
   end
 
   # :nocov:
   def self.purge!(date)
-    where('created_at <= :date', date: date).destroy_all
+    where('created_at <= :date', date:).destroy_all
   end
   # :nocov:
 end

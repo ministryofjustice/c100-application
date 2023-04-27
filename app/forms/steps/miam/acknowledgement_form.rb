@@ -13,8 +13,8 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          miam_acknowledgement: miam_acknowledgement,
-          mediation_voucher_scheme:  mediation_voucher_scheme
+          miam_acknowledgement:,
+          mediation_voucher_scheme:
         )
       end
     end

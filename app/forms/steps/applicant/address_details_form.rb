@@ -17,7 +17,7 @@ module Steps
         applicant = c100_application.applicants.find_or_initialize_by(id: record_id)
         applicant.update(
           address_values.merge(
-            residence_requirement_met: residence_requirement_met,
+            residence_requirement_met:,
             residence_history: (residence_history if residence_requirement_met.no?)
           )
         )

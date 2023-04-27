@@ -12,7 +12,7 @@ class AuditHelper
   def metadata
     {
       v: c100.version,
-      postcode: postcode,
+      postcode:,
       centralised: court.centralised?,
       c1a_form: c100.has_safety_concerns?,
       c8_form: c100.confidentiality_enabled?,

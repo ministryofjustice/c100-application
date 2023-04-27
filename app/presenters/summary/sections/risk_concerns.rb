@@ -48,7 +48,7 @@ module Summary
       end
 
       def abuse_answers_for(subject)
-        c100.abuse_concerns.where(subject: subject).pluck(:answer)
+        c100.abuse_concerns.where(subject:).pluck(:answer)
       end
     end
   end

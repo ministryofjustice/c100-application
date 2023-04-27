@@ -18,7 +18,7 @@ module Summary
       def answers
         record_collection.map.with_index(1) do |child, index|
           [
-            Separator.new("#{name}_index_title", index: index),
+            Separator.new("#{name}_index_title", index:),
             FreeTextAnswer.new(:person_full_name, child.full_name, change_path: names_path),
             AnswersGroup.new(
               :person_personal_details,

@@ -26,7 +26,7 @@ module C100App
     end
 
     def court_lookup(slug)
-      path = format(COURT_PATH, slug: slug)
+      path = format(COURT_PATH, slug:)
 
       get_request(path)
     end

@@ -29,7 +29,7 @@ module Summary
       def abuses_suffered
         c100.abuse_concerns.where(
           answer: GenericYesNo::YES,
-          subject: subject,
+          subject:,
         ).where.not(
           kind: filtered_abuses.map(&:to_s)
         )

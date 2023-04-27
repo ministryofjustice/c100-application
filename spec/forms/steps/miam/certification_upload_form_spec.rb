@@ -18,7 +18,7 @@ RSpec.describe Steps::Miam::CertificationUploadForm do
     files_collection_ref: '123',
     documents: documents, document: document) }
 
-  subject { described_class.new(arguments) }
+  subject { described_class.new(**arguments) }
 
   describe '#document_key' do
     it 'is correct' do

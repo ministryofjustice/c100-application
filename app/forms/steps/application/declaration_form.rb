@@ -24,8 +24,8 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          declaration_signee: declaration_signee,
-          declaration_signee_capacity: declaration_signee_capacity,
+          declaration_signee:,
+          declaration_signee_capacity:,
         )
       end
     end

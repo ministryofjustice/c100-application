@@ -16,7 +16,7 @@ class User < ApplicationRecord
     # Using `#created_at` as the secondary criteria because `#current_sign_in_at`
     # does not get set until the first time they have actually signed in.
     # This does *not* automatically happen when they create their account.
-    where('current_sign_in_at <= :date OR (created_at <= :date AND current_sign_in_at IS NULL)', date: date).destroy_all
+    where('current_sign_in_at <= :date OR (created_at <= :date AND current_sign_in_at IS NULL)', date:).destroy_all
   end
 
   # Needed in order to deliver Devise emails in the background.

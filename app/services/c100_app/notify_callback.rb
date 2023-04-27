@@ -18,7 +18,7 @@ module C100App
 
     def process!
       return if payload[:reference].blank?
-      EmailSubmissionsAudit.create!(secure_payload)
+      EmailSubmissionsAudit.create!(**secure_payload)
     end
 
     private

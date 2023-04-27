@@ -4,7 +4,7 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
   def validate(record)
     validations.each do |validation|
       if (attribute, error, change_path = validation.call(record))
-        record.errors.add(attribute, error, change_path: change_path)
+        record.errors.add(attribute, error, change_path:)
       end
     end
   end

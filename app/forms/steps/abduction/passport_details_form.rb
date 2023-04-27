@@ -26,7 +26,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         record_to_persist.update(
-          children_multiple_passports: children_multiple_passports,
+          children_multiple_passports:,
           passport_possession: selected_options,
           passport_possession_other_details: (passport_possession_other_details if passport_possession_other?),
         )

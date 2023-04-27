@@ -25,7 +25,7 @@ module Summary
         FreeTextAnswer.new(
           "#{person_type}_relationships".to_sym,
           RelationshipsPresenter.new(c100_application).relationship_to_children(person),
-          i18n_opts: { index: index }
+          i18n_opts: { index: }
         )
       end
     end

@@ -11,7 +11,7 @@ module Steps
         applicant = c100_application.applicants.find_or_initialize_by(id: record_id)
 
         applicant.update(
-          under_age: under_age
+          under_age:
         )
       end
     end
