@@ -36,99 +36,17 @@ RSpec.describe DocumentsController, type: :controller do
       allow(DocumentUpload).to receive(:new).and_return(document_upload)
     end
 
-    include_examples 'checks the validity of the current c100 application on create', { document_key: :foo_bar }
-
-    describe '#create' do
-      let(:format) { :html }
-
-      before do
-        post :create, params: {document: file, document_key: 'foo'}, format: format
-      end
-
-      context 'document is valid' do
-        let(:document_upload) {
-          instance_double(DocumentUpload,
-                          upload!: {}, valid?: true,
-                          errors?: false,
-                          to_hash: {
-                            name: 'image.jpg',
-                            encoded_name: "aW1hZ2UuanBn\n",
-                            collection_ref: '12345'
-                          })
-        }
-
-        context 'HTML format' do
-          it 'should create the document and redirect back to the step' do
-            expect(subject).to redirect_to('step/to/redirect')
-            expect(flash.alert).to be_nil
-          end
-        end
-
-        context 'JSON format' do
-          let(:format) { :json }
-
-          it 'should create the document and respond with a document_upload json object' do
-            expect(response.status).to eq(201)
-            expect(response.body).to eq('{"name":"image.jpg","encoded_name":"aW1hZ2UuanBn\n","collection_ref":"12345"}')
-          end
-        end
-      end
-
-      context 'document is valid but there were upload errors' do
-        let(:document_upload) { instance_double(DocumentUpload, upload!: {}, valid?: true, errors?: true, errors: [double(message: "You're doing it wrong")]) }
-
-        context 'HTML format' do
-          it 'should create the document and redirect back to the step' do
-            expect(subject).to redirect_to('step/to/redirect')
-            expect(flash.alert).not_to be_empty
-          end
-        end
-
-        context 'JSON format' do
-          let(:format) { :json }
-
-          it 'should respond with an error object' do
-            expect(response.status).to eq(422)
-            res = JSON.parse(response.body)
-            expect(res).to have_key('error')
-          end
-        end
-      end
-
-      context 'document is not valid' do
-        let(:document_upload) { instance_double(DocumentUpload, upload!: {}, valid?: false, errors?: true, errors: [double(message: "You're doing it wrong")]) }
-
-        context 'HTML format' do
-          it 'should create the document and redirect back to the step' do
-            expect(subject).to redirect_to('step/to/redirect')
-            expect(flash.alert).not_to be_empty
-          end
-        end
-
-        context 'JSON format' do
-          let(:format) { :json }
-
-          it 'should respond with an error object' do
-            expect(response.status).to eq(422)
-            res = JSON.parse(response.body)
-            expect(res).to have_key('error')
-          end
-        end
-      end
-
-    end
-
     include_examples 'checks the validity of the current c100 application on destroy', { document_key: :foo_bar }
 
     describe '#destroy' do
       context 'response formats' do
         let(:params) { {
-          document_key: 'court_order_uploads',
+          document_key: 'miam_certificate',
           id: another_filename
         } }
 
         before do
-          expect(Uploader).to receive(:delete_file).with(collection_ref: collection_ref, document_key: 'court_order_uploads', filename: 'another').and_return({})
+          expect(Uploader).to receive(:delete_file).with(collection_ref: collection_ref, document_key: 'miam_certificate', filename: 'another').and_return({})
         end
 
         context 'HTML format' do
@@ -148,21 +66,4 @@ RSpec.describe DocumentsController, type: :controller do
       end
     end
   end
-
-  describe '#create' do
-
-    let(:format) { :html }
-
-    before do
-      post :create, params: {document: nil, document_key: 'foo'}, format: format
-    end
-
-    context 'no file given' do
-
-      it 'flags that no file selected' do
-        expect(subject).to redirect_to('step/to/redirect')
-      end
-    end
-  end
-
 end

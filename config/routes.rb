@@ -131,8 +131,6 @@ Rails.application.routes.draw do
     namespace :application do
       edit_step :previous_proceedings
       edit_step :court_proceedings
-      edit_step :has_court_order_uploads
-      edit_step :court_order_uploads
       edit_step :urgent_hearing
       edit_step :urgent_hearing_details
       edit_step :without_notice
@@ -294,7 +292,7 @@ Rails.application.routes.draw do
   end
 
   scope 'uploader/:document_key' do
-    resources :documents, only: [:create, :destroy]
+    resources :documents, only: [:destroy]
   end
 
   resources :download_tokens, only: [:show], param: :token
