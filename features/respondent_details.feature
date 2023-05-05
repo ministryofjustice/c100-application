@@ -269,10 +269,18 @@ Feature: Add a respondent to the application
     And I choose "No"
     Then I should see "Who does John Doe Junior currently live with?"
     
-#    When I click the "Back" link
-#    And I should see "Who does John Doe Junior currently live with?"
-#    And I click the "Back" link
-#    And I should see "Address details of Thomas Other Doe"
-#    And I click the "Back" link
-#    And I should see "What is Thomas Other Doe's relationship to John Doe Junior?"
-#    And I c
+  @happy_path
+  Scenario: Test timeout on respondent details page
+    When I should see "Enter the respondent’s name"
+    And I should see "Enter a new name"
+    And I wait and click the "Continue" button
+    Then I should see "Sorry, you'll have to start again"
+
+  @happy_path
+  Scenario: Testing timeout on addition of exterior person to application
+    When I visit "/steps/respondent/has_other_parties"
+    And I should see "Is there anyone else who should know about your application?"
+    And I choose "Yes"
+    Then I should see "Enter the other person’s name"
+    Then I wait and click the "Continue" button
+    And I should see "Sorry, you'll have to start again"

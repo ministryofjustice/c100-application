@@ -106,3 +106,51 @@ Feature: MIAM journey
 
     And I click the "Continue" link
     Then I should see "Safety concerns"
+
+  @happy_path
+  Scenario: Test timeout for applicant attended a MIAM
+    When I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+    And I choose "Yes"
+    Then I should see "Have you got a document signed by the mediator?"
+    When I wait and click the "Continue" button
+    Then I should see "Sorry, you'll have to start again"
+
+  @unhappy_path
+  Scenario: Test timeout for applicant attended a MIAM but lacks the certificate
+    When I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+    And I choose "Yes"
+    Then I should see "Have you got a document signed by the mediator?"
+    When I wait and click the "Continue" button
+    Then I should see "Sorry, you'll have to start again"
+
+  @happy_path
+  Scenario: Test timeout for applicant did not attend a MIAM but has mediator’s exemption
+    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+    And I choose "No"
+    Then I should see "Has a mediator confirmed that you do not need to attend a MIAM?"
+    And I choose "Yes"
+    Then I should see "Have you got a document signed by the mediator?"
+    Then I wait and click the "Continue" button
+    And I should see "Sorry, you'll have to start again"
+
+  @unhappy_path
+  Scenario: Test timeout for applicant did not attend a MIAM and does not have a mediator’s exemption
+    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+    And I choose "No"
+    Then I should see "Has a mediator confirmed that you do not need to attend a MIAM?"
+    And I choose "No"
+    Then I should see "Do you have a valid reason for not attending a MIAM?"
+    Then I wait and click the "Continue" button
+    And I should see "Sorry, you'll have to start again"
+
+  @unhappy_path
+  Scenario: Test timeout for applicant did not attend a MIAM and has not selected a valid reason
+    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+    And I choose "No"
+    Then I should see "Has a mediator confirmed that you do not need to attend a MIAM?"
+    And I choose "No"
+    Then I should see "Do you have a valid reason for not attending a MIAM?"
+    And I wait and click the "Continue" button
+    Then I should see "Sorry, you'll have to start again"
+
+
