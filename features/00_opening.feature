@@ -57,8 +57,7 @@ Feature: Opening
   @happy_path
   Scenario: Testing application timeout (Should not trigger here)
     When I should see "What you’ll need to complete your application"
-    And I wait for 61 minutes
-    And I click the "Continue" link
+    And I wait and click the "Continue" button
 
     Then I should see "Where do the children live?"
     And Page has title "Where the children live - Apply to court about child arrangements - GOV.UK"

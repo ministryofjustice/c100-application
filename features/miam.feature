@@ -12,20 +12,16 @@ Feature: MIAM journey
   Scenario: Applicant attended a MIAM
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "Yes"
-
     Then I should see "Have you got a document signed by the mediator?"
     And I choose "Yes"
-
     Then I should see "Upload your MIAM certificate"
 
   @unhappy_path
   Scenario: Applicant attended a MIAM but lacks the certificate
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "Yes"
-
     Then I should see "Have you got a document signed by the mediator?"
     And I choose "No"
-
     Then I should see "You need to get a document from the mediator"
     Then I should see "Save and come back later"
 
@@ -43,10 +39,8 @@ Feature: MIAM journey
   Scenario Outline: Applicant did not attend a MIAM and does not have a mediator’s exemption
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "No"
-
     Then I should see "Has a mediator confirmed that you do not need to attend a MIAM?"
     And I choose "No"
-
     Then I should see "Do you have a valid reason for not attending a MIAM?"
     And I choose "<has_valid_reason>"
     Then I should see "<outcome_page_header>"

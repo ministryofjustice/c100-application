@@ -17,7 +17,7 @@ end
 Then("I create an account") do
   click_button "Save and come back later"
   expect(page).to have_text "Save your application"
-  fill_in "Your email address", with: "email#{rand(100)}@test.com"
+  fill_in "Your email address", with: "email#{rand(1000)}@test.com"
   fill_in "Create a password", with: 'password123456'
   click_button "Create account"
 end
