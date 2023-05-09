@@ -327,6 +327,8 @@ GEM
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
     parallel (1.22.1)
+    parallel_tests (3.7.1)
+      parallel
     parser (3.1.2.1)
       ast (~> 2.4.1)
     pg (1.4.4)
@@ -567,6 +569,7 @@ DEPENDENCIES
   mutant-rspec
   omniauth-auth0
   omniauth-rails_csrf_protection
+  parallel_tests
   parser (~> 3.1, >= 3.1.1.0)
   pg (~> 1.1)
   pry-byebug

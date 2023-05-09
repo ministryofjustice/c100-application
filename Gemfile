@@ -85,4 +85,5 @@ group :test do
   gem 'webdrivers'
   gem 'webmock'
   gem 'database_cleaner'
+  gem 'parallel_tests'
 end
