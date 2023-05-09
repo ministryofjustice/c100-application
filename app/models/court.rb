@@ -122,7 +122,7 @@ class Court < ApplicationRecord
 
   def self.log_and_raise(exception, data)
     Sentry.with_scope do |scope|
-      scope.set_extras(data: data)
+      scope.set_extras(data:)
       Sentry.capture_exception(exception)
     end
 

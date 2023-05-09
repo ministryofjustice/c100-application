@@ -1,4 +1,5 @@
-FROM hmctspublic.azurecr.io/imported/library/ruby:2.7.6-slim-buster
+# FROM hmctspublic.azurecr.io/imported/library/ruby:3.2.2-slim-buster
+FROM ruby:3.2.2-slim-buster
 
 # build dependencies:
 #   - ruby-full libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6 for wkhtmltopdf
@@ -72,7 +73,7 @@ RUN gem install bundler -v 2.3.17 && \
     bundle config set frozen 'true' && \
     bundle config without test:development && \
     bundle install --jobs 2 --retry 3 && \
-    chmod -R 777 /usr/local/bundle/gems/wkhtmltopdf-binary-0.12.6.5/bin
+    chmod -R 777 /usr/local/bundle/gems/wkhtmltopdf-binary-0.12.6.6/bin
 
 COPY . .
 

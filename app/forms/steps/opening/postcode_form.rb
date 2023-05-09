@@ -10,7 +10,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          children_postcode: children_postcode,
+          children_postcode:,
         )
       end
     end

@@ -19,7 +19,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          attributes_map
+          **attributes_map
         )
       end
     end

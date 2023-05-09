@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Uploader::DeleteFile do
 
-  subject { described_class.new(params).call }
+  subject { described_class.new(**params).call }
 
   before do
     allow_any_instance_of(Aws::S3::Client).to receive(:delete_object)

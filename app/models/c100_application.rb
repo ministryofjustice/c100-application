@@ -55,7 +55,7 @@ class C100Application < ApplicationRecord
   # miam_certification_sole_trader_name are no longer in use since 05/01/2023. Please remove in a year.
   def self.purge!(date)
     where(
-      'c100_applications.created_at <= :date', date: date
+      'c100_applications.created_at <= :date', date:
     ).where(
       'c100_applications.updated_at <= :date', date: 20.minutes.ago
     ).destroy_all

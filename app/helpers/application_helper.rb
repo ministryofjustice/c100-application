@@ -13,7 +13,7 @@ module ApplicationHelper
       { class: old_value.values | new_value.values }
     end
 
-    form_for record, opts, &block
+    form_for record, **opts, &block
   end
 
   # Render a back link pointing to the user's previous step

@@ -11,7 +11,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          court_acknowledgement: court_acknowledgement
+          court_acknowledgement:
         )
       end
     end

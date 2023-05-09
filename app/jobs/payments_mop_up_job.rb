@@ -15,7 +15,7 @@ class PaymentsMopUpJob < ApplicationJob
   def self.run(date)
     C100Application.joins(:payment_intent)
       .where("payment_intents.state ->> 'finished' = 'false'")
-      .where("payment_intents.created_at <= :date", date: date)
+      .where("payment_intents.created_at <= :date", date:)
       .each do |c100_application|
         Rails.logger.info "Enqueuing payment status refresh for application #{c100_application.id}"
         perform_later(c100_application)
