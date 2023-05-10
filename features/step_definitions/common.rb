@@ -1,4 +1,5 @@
 require 'c100_app/courtfinder_api'
+include ActiveSupport::Testing::TimeHelpers
 
 # General and frequently used navigation steps, handling of links and page expectations
 #
@@ -141,3 +142,7 @@ Given("I stub fact api call") do
   WebMock::API.stub_request(:get, "https://www.find-court-tribunal.service.gov.uk/health").
     to_return(status: 200, body: "{\"mapit-api\":{\"status\":\"UP\"}}", headers: {})
   end
+
+And(/^I wait for (\d+) minutes$/) do |arg|
+  travel arg.minutes
+end
