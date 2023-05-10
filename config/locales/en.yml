@@ -2029,6 +2029,7 @@ en:
   time:
     formats:
       short: '%d %b %H:%M:%S'
+      date_and_time: '%d/%m/%Y %H:%Mhrs'
     draft_expires_in:
       zero: Today
       one: '%{count} day'
