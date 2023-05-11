@@ -292,6 +292,8 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.14.3-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.14.3-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.3-x86_64-linux)
@@ -321,7 +323,9 @@ GEM
     orm_adapter (0.5.0)
     parallel (1.23.0)
     parallel_tests (3.7.1)
+      ast (~> 2.4.1)
       parallel
+    parser (3.2.2.1)
       ast (~> 2.4.1)
     pg (1.5.1)
     pry (0.14.2)
@@ -531,6 +535,7 @@ GEM
     zeitwerk (2.6.7)
 
 PLATFORMS
+  arm64-darwin-22
   x86_64-darwin-22
   x86_64-linux
 
