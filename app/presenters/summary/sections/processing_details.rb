@@ -23,7 +23,7 @@ module Summary
       end
 
       def completion_date
-        I18n.l(c100.completed_at.to_date, format: :short) if c100.completed_at
+        I18n.l(c100.completed_at.in_time_zone("London").to_datetime, format: :date_and_time) if c100.completed_at
       end
 
       def court
