@@ -77,7 +77,7 @@ module C100App
       court = CourtPostcodeChecker.new.court_for(children_postcode)
 
       return show(:no_court_found) unless court
-      c100_application.update!(court: court)
+      c100_application.update!(court:)
 
       send_to_court_based_destination
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
@@ -89,7 +89,7 @@ module C100App
       court = CourtPostcodeChecker.new.court_for(children_postcode)
 
       return show(:no_court_found) unless court
-      c100_application.update!(court: court)
+      c100_application.update!(court:)
 
       send_to_court_based_destination_for_citizens
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
@@ -100,7 +100,7 @@ module C100App
     def check_court_and_send_to_court_based_destination_for_continue
       court = CourtPostcodeChecker.new.court_for(children_postcode)
       return show(:no_court_found) unless court
-      c100_application.update!(court: court)
+      c100_application.update!(court:)
 
       send_to_court_based_destination_for_continue
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions

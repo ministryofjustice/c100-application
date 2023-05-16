@@ -20,7 +20,7 @@ module Steps
 
         c100_application.update(
           children_postcode: new? ? children_postcode : children_postcode_continue,
-          start_or_continue: start_or_continue,
+          start_or_continue:,
           is_legal_representative: convert_to_boolean(is_legal_representative)
         )
       end
