@@ -5,7 +5,7 @@ Feature: Opening
     Then I should see "Start or continue an application"
     And I should see a "Back" link to "https://www.gov.uk/looking-after-children-divorce/apply-for-court-order"
 
-  @alternate_layout
+  
   Scenario: Complete the opening (alternate page layout)
     Then I should see "Start or continue an application"
     Then Page has title "What is required - Apply to court about child arrangements - GOV.UK"
@@ -19,7 +19,7 @@ Feature: Opening
     When I click the "Continue" link
     Then I should see "What kind of application do you want to make?"
 
-  @alternate_layout @happy_path
+  @happy_path
   Scenario: Complete the opening (alternate page layout)
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK9 3DX"
@@ -77,7 +77,7 @@ Feature: Opening
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I should see the save draft button
 
-  @alternate_layout
+  
   Scenario: Research question with alternate application page layout
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK9 3DX"
@@ -129,7 +129,7 @@ Feature: Opening
     Then I should see "Sorry, you cannot apply online"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
 
-  @alternate_layout @unhappy_path
+   @unhappy_path
   Scenario: Postcode not eligible (alternate page layout)
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "TQ12 1FF"
@@ -138,7 +138,7 @@ Feature: Opening
     Then I should see "Sorry, you cannot apply online"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
 
-  @alternate_layout @unhappy_path
+   @unhappy_path
   Scenario: Postcode not recognised (alternate page layout)
     Given I stub fact api call
     When I click the radio button "Start a new application"
