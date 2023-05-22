@@ -50,7 +50,6 @@ module C100App
       move_status_to :completed
       OnlineSubmissionQueue.new(c100_application).process
       steps_completion_confirmation_path
-
     end
 
     private
