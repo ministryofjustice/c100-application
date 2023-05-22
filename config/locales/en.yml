@@ -836,8 +836,8 @@ en:
           lead_text: The court fee is %{fee}. Only the person applying to court (the applicant) or their solicitor needs to pay.
       submission:
         edit:
-          page_title: How would you submit your application?
-          lead_text: Your completed application can be sent straight to the court electronically, or you can print it and send it by post if you prefer.
+          page_title: Submitting your application to court
+          lead_text: Your completed application will be sent to the court electronically.
       receipt_email_check:
         show:
           page_title: Check your email address
@@ -1156,7 +1156,6 @@ en:
     application_completed:
       page_title: Application completed
       heading: You have already completed this application
-      how_to_submit: How to submit your application
       lead_text_print: The court will not receive your application until you submit it. If you want to make changes you will need to start a new application.
       lead_text_online: Your application has been submitted to the court. You cannot make any further changes.
       application_submitted: Application submitted
@@ -1442,13 +1441,11 @@ en:
           help_with_fees: Pay with ‘Help with fees’
           solicitor: Pay through a solicitor’s fee account
           self_payment_card: Pay over the phone
-          self_payment_cheque: Pay by cheque or cash
         hwf_reference_number: Reference number
         solicitor_account_number: Solicitor’s fee account number
       steps_application_submission_form:
         submission_type_options:
           online: Submit electronically
-          print_and_post: Print and send by post
         receipt_email: Enter an email address if you would like to get a confirmation
       steps_application_declaration_form:
         declaration_signee: Enter your full name
@@ -1674,7 +1671,6 @@ en:
             You may be able to <a href="https://www.gov.uk/get-help-with-court-fees" class="govuk-link" rel="external" target="_blank">get help paying</a> if you’re on a low income, receive certain benefits or have little or no savings. If you do qualify, you’ll need to provide your reference number
           solicitor: If you have a solicitor representing you, they may pay the court by direct debit. You’ll need to provide their ‘fee account number’
           self_payment_card: Court staff will contact you within 3 working days to take payment
-          self_payment_cheque: You can send a cheque or pay in person at the court
       steps_application_submission_form:
         receipt_email: You can also download a copy on the confirmation page.
       steps_safety_questions_substance_abuse_form:
@@ -1952,7 +1948,7 @@ en:
 
       # Submission and payment steps
       steps_application_submission_form:
-        submission_type: How would you like to submit your application to court?
+        submission_type: Submitting your application to court
       steps_application_payment_form:
         payment_type: How will you pay the application fee?
 
@@ -2247,11 +2243,5 @@ en:
         You need to pay the %{fee} court fee. You’ll either:
         * receive a call from the court in the next 3 working days if you entered your phone number (it may look like a ‘private number’)
         * or you need to contact the court, by phone or in person to make payment
-
-        The court will not be able to process your application until payment has been received.
-      self_payment_cheque: |
-        You need to pay the %{fee} court fee. Post a cheque made out to ‘HM Courts and Tribunals Service’. Write your reference code, last name and ‘C100’ on the back of your cheque.
-
-        Send your cheque or pay in person within 3 working days.
 
         The court will not be able to process your application until payment has been received.

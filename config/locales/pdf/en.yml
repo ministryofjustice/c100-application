@@ -610,7 +610,6 @@ en:
         help_with_fees: Help with fees
         solicitor: Through solicitor
         self_payment_card: Over the phone - contact the applicant within 3 working days of receiving the application to take payment
-        self_payment_cheque: Cheque or cash
     solicitor_account_number:
       question: Fee account number
 

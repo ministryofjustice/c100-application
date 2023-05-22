@@ -13,11 +13,7 @@
 
   <td class="govuk-table__cell govuk-table__cell--numeric app-util--inline-buttons">
     <% if draft.completed? %>
-      <% if draft.online_submission? %>
         <%= link_to t('.application_submitted'), resume_users_draft_path(draft), class: 'govuk-link ga-pageLink', data: { ga_category: 'save and return', ga_label: 'confirmation' } %>
-      <% else %>
-        <%= link_to t('.how_to_submit'), resume_users_draft_path(draft), class: 'govuk-link ga-pageLink', data: { ga_category: 'save and return', ga_label: 'how to submit' } %>
-      <% end %>
     <% else %>
       <%= link_button t('.resume'), resume_users_draft_path(draft),
                       class: 'ga-pageLink',

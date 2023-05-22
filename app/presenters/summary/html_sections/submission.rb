@@ -10,8 +10,7 @@ module Summary
           AnswersGroup.new(
             :submission_type,
             [
-              Answer.new(:submission_type, c100.submission_type),
-              FreeTextAnswer.new(:submission_receipt_email, c100.receipt_email),
+              FreeTextAnswer.new(:submission_receipt_email, c100.receipt_email, show: true),
             ],
             change_path: edit_steps_application_submission_path
           )

@@ -31,15 +31,11 @@ module Summary
         let(:group) { answers[0] }
 
         it 'has the right questions in the right order' do
-          expect(group.answers.count).to eq(2)
+          expect(group.answers.count).to eq(1)
 
-          expect(group.answers[0]).to be_an_instance_of(Answer)
-          expect(group.answers[0].question).to eq(:submission_type)
-          expect(group.answers[0].value).to eq('online')
-
-          expect(group.answers[1]).to be_an_instance_of(FreeTextAnswer)
-          expect(group.answers[1].question).to eq(:submission_receipt_email)
-          expect(group.answers[1].value).to eq('test@example.com')
+          expect(group.answers[0]).to be_an_instance_of(FreeTextAnswer)
+          expect(group.answers[0].question).to eq(:submission_receipt_email)
+          expect(group.answers[0].value).to eq('test@example.com')
         end
       end
     end
