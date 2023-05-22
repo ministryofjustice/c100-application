@@ -99,14 +99,10 @@ module Summary
     end
 
     def locale_key_for_context
-      if c100_application.online_submission?
-        if c100_application.online_payment?
-          :online_payment
-        else
-          :online
-        end
+      if c100_application.online_payment?
+        :online_payment
       else
-        :print_and_post
+        :online
       end
     end
   end

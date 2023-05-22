@@ -123,8 +123,6 @@ en:
               blank: You must add at least one respondent
             payment_type:
               blank: You must select a payment method
-            submission_type:
-              blank: You must select a submission method
 
   activemodel:
     errors:
@@ -681,8 +679,6 @@ en:
               blank: Enter your ‘Help with fees’ reference number
         steps/application/submission_form:
           attributes:
-            submission_type:
-              inclusion: Select how you’ll submit your application
             receipt_email:
               invalid: *invalid_email_error
               typo: *email_typo_error

@@ -1,7 +1,6 @@
 class ValidPaymentsArray < SimpleDelegator
   COMMON_CHOICES = [
     PaymentType::HELP_WITH_FEES,
-    PaymentType::SELF_PAYMENT_CHEQUE,
   ].freeze
 
   GOVUK_PAY_CONFIG = YAML.load_file(
@@ -49,15 +48,11 @@ class ValidPaymentsArray < SimpleDelegator
       choices.append(
         PaymentType::SELF_PAYMENT_CARD
       ) if phone_pay_enabled?
-
-      choices.delete(
-        PaymentType::SELF_PAYMENT_CHEQUE
-      ) if c100_application.online_submission?
     end
   end
 
   def govuk_pay_enabled?
-    return false unless c100_application.online_submission?
+    return false unless c100_application.submission_type == SubmissionType::ONLINE.to_s
 
     court.gbs_known? && pay_blocklist.exclude?(court.slug)
   end

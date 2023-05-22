@@ -111,41 +111,5 @@ RSpec.describe ValidPaymentsArray do
         expect(subject).to match_array([PaymentType::HELP_WITH_FEES, PaymentType::ONLINE])
       end
     end
-
-    context 'unavailable payment type' do
-      it 'cheque' do
-        expect(subject).to_not include(PaymentType::SELF_PAYMENT_CHEQUE)
-      end
-    end
-  end
-
-  context 'for a print and post submission' do
-    let(:submission_type) { SubmissionType::PRINT_AND_POST.to_s }
-
-    it 'does not include the pay by phone option' do
-      expect(subject).not_to include(PaymentType::SELF_PAYMENT_CARD)
-    end
-
-    context 'with solicitor' do
-      let(:has_solicitor) { 'yes' }
-
-      it 'has valid payment choices' do
-        expect(subject).to match_array(common_choices + [PaymentType::SOLICITOR])
-      end
-    end
-
-    context 'without solicitor' do
-      let(:has_solicitor) { 'no' }
-
-      it 'has valid payment choices' do
-        expect(subject).to match_array(common_choices)
-      end
-    end
-
-    context 'unavailable payment type' do
-      it 'online' do
-        expect(subject).to_not include(PaymentType::ONLINE)
-      end
-    end
   end
 end

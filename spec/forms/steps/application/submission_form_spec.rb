@@ -16,7 +16,6 @@ RSpec.describe Steps::Application::SubmissionForm do
 
   describe '#save' do
     context 'validations' do
-      it { should validate_presence_of(:submission_type, :inclusion) }
       it { should_not validate_presence_of(:receipt_email) }
 
       context 'receipt_email' do
@@ -82,37 +81,6 @@ RSpec.describe Steps::Application::SubmissionForm do
             expect(submission_type).to receive(:eql?).and_call_original
             expect(receipt_email).to receive(:eql?).and_call_original
 
-            expect(c100_application).not_to receive(:update)
-            expect(subject.save).to be(true)
-          end
-        end
-      end
-
-      context 'when submission type is `print_and_post`' do
-        let(:submission_type) { SubmissionType::PRINT_AND_POST.to_s }
-
-        context 'when the form has changed' do
-          let(:c100_application) {
-            instance_double(C100Application, submission_type: submission_type, receipt_email: 'foo@bar')
-          }
-
-          it 'saves the record' do
-            expect(c100_application).to receive(:update).with(
-              submission_type: 'print_and_post',
-              receipt_email: nil,
-              payment_type: nil,
-            ).and_return(true)
-
-            expect(subject.save).to be(true)
-          end
-        end
-
-        context 'when the form has not changed' do
-          let(:c100_application) {
-            instance_double(C100Application, submission_type: submission_type, receipt_email: nil)
-          }
-
-          it 'does not save the record but returns true' do
             expect(c100_application).not_to receive(:update)
             expect(subject.save).to be(true)
           end

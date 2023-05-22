@@ -54,16 +54,6 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
           expect(subject.errors.details.include?(:submission_type)).to eq(false)
         end
       end
-
-      context 'when submission type is missing' do
-        let(:submission_type) { nil }
-
-        it 'is invalid' do
-          expect(subject).not_to be_valid
-          expect(subject.errors.details[:submission_type][0][:error]).to eq(:blank)
-          expect(subject.errors.details[:submission_type][0][:change_path]).to eq('/steps/application/submission')
-        end
-      end
     end
 
     context 'children' do
