@@ -1,10 +1,6 @@
 module ApplicationInquiryMethods
   YES_ANSWER = GenericYesNo::YES.to_s
 
-  def online_submission?
-    submission_type.eql?(SubmissionType::ONLINE.to_s)
-  end
-
   def online_payment?
     payment_type.eql?(PaymentType::ONLINE.to_s)
   end

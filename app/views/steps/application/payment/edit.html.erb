@@ -20,10 +20,6 @@
           <%= f.govuk_radio_button :payment_type, PaymentType::SELF_PAYMENT_CARD, link_errors: !online_choice %>
         <% end %>
 
-        <% if @form_object.choices.include?(PaymentType::SELF_PAYMENT_CHEQUE) %>
-          <%= f.govuk_radio_button :payment_type, PaymentType::SELF_PAYMENT_CHEQUE %>
-        <% end %>
-
         <% if @form_object.choices.include?(PaymentType::HELP_WITH_FEES) %>
           <%= f.govuk_radio_button :payment_type, PaymentType::HELP_WITH_FEES do %>
             <%= f.govuk_text_field :hwf_reference_number, width: 'one-half', label: { size: 's' } %>

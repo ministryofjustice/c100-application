@@ -48,13 +48,9 @@ module C100App
 
     def confirmation_url
       move_status_to :completed
+      OnlineSubmissionQueue.new(c100_application).process
+      steps_completion_confirmation_path
 
-      if c100_application.online_submission?
-        OnlineSubmissionQueue.new(c100_application).process
-        steps_completion_confirmation_path
-      else
-        steps_completion_what_next_path
-      end
     end
 
     private

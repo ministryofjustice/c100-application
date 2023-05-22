@@ -11,7 +11,6 @@ RSpec.describe PaymentType do
         help_with_fees
         solicitor
         self_payment_card
-        self_payment_cheque
       ))
     end
   end

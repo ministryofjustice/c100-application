@@ -220,14 +220,5 @@ RSpec.describe C100App::PaymentsFlowControl do
         expect(subject.confirmation_url).to eq('/steps/completion/confirmation')
       end
     end
-
-    context 'for a print and post submission' do
-      let(:submission_type) { SubmissionType::PRINT_AND_POST }
-
-      it 'returns the what next page' do
-        expect(queue).not_to receive(:process)
-        expect(subject.confirmation_url).to eq('/steps/completion/what_next')
-      end
-    end
   end
 end
