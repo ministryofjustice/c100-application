@@ -984,6 +984,14 @@ en:
           cait_info_html: *cait_info_html
 
     opening:
+      postcode:
+        edit:
+          page_title: Where the children live
+          heading: Where do the children live?
+          lead_text: Please tell us the postcode of the children you’re making this application about.
+          details:
+            summary: If you do not know where the children live
+            text_html: If you do not know the children’s postcode please enter your own.
       start_or_continue:
         edit:
           page_title: Start or continue an application
@@ -1197,6 +1205,8 @@ en:
           <<: *YESNO
 
       # Opening steps
+      steps_opening_postcode_form:
+        children_postcode: Postcode
       steps_opening_start_or_continue_form:
         children_postcode: Enter the children's postcode
         children_postcode_continue: Enter the children's postcode
