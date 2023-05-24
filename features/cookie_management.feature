@@ -2,9 +2,10 @@ Feature: Cookie management
   Background:
     # Simply go to the home page and on to cookies
     Given I am on the home page
-    When I click the radio button "Start a new application"
-    When I fill in "Enter the children's postcode" with "MK9 3DX"
-    And I click the "Continue" button
+  #  When I click the radio button "Start a new application"
+ #   When I fill in "Enter the children's postcode" with "MK9 3DX"
+#    And I click the "Continue" button
+    And I click the "Continue" link
   Scenario: Cookie management page viewing the basics
     When I click the "Cookies" link
     Then I should see "Essential cookies"
