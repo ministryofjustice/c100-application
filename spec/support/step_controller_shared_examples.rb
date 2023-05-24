@@ -185,6 +185,12 @@ RSpec.shared_examples 'a starting point step controller' do
         expect(session[:c100_application_id]).to eq(existing_case.id)
       end
 
+      it 'clears the navigation stack in the session' do
+        get :edit, session: { c100_application_id: existing_case.id }
+        existing_case.reload
+
+        expect(existing_case.navigation_stack).to eq([controller.request.fullpath])
+      end
     end
   end
 end
