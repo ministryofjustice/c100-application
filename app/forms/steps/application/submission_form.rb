@@ -8,14 +8,8 @@ module Steps
 
       private
 
-      def changed?
-        !c100_application.submission_type.eql?(submission_type) ||
-          !c100_application.receipt_email.to_s.eql?(receipt_email)
-      end
-
       def persist!
         raise C100ApplicationNotFound unless c100_application
-        return true unless changed?
 
         c100_application.update(
           submission_type: SubmissionType::ONLINE.to_s,
