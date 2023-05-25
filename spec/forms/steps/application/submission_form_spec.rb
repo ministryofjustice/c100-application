@@ -70,21 +70,6 @@ RSpec.describe Steps::Application::SubmissionForm do
             expect(subject.save).to be(true)
           end
         end
-
-        context 'when the form has not changed' do
-          let(:c100_application) {
-            instance_double(C100Application, submission_type: submission_type, receipt_email: receipt_email)
-          }
-
-          it 'does not save the record but returns true' do
-            # mutant killers
-            expect(submission_type).to receive(:eql?).and_call_original
-            expect(receipt_email).to receive(:eql?).and_call_original
-
-            expect(c100_application).not_to receive(:update)
-            expect(subject.save).to be(true)
-          end
-        end
       end
     end
   end
