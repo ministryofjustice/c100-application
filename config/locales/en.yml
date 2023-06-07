@@ -485,18 +485,18 @@ en:
               other: Other concerns about the children’s welfare
           heading:
             applicant:
-              physical: Have you ever been physically abused?
-              emotional: Have you ever been emotionally abused?
-              psychological: Have you ever been psychologically abused?
-              sexual: Have you ever been sexually abused?
-              financial: Have you ever been financially abused?
+              physical: Have you ever been physically abused by the respondent?
+              emotional: Have you ever been emotionally abused by the respondent?
+              psychological: Have you ever been psychologically abused by the respondent?
+              sexual: Have you ever been sexually abused by the respondent?
+              financial: Have you ever been financially abused by the respondent?
               other: Do you have any other concerns about your welfare?
             children:
-              physical: Have the children ever been physically abused?
-              emotional: Have the children ever been emotionally abused?
-              psychological: Have the children ever been psychologically abused?
-              sexual: Have the children ever been sexually abused?
-              financial: Have the children ever been financially abused?
+              physical: Have the children ever been physically abused by the respondent?
+              emotional: Have the children ever been emotionally abused by the respondent?
+              psychological: Have the children ever been psychologically abused by the respondent?
+              sexual: Have the children ever been sexually abused by the respondent?
+              financial: Have the children ever been financially abused by the respondent?
               other: Do you have any other safety or welfare concerns about the children?
           lead_text:
             applicant:

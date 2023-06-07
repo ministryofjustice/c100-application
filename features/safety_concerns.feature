@@ -73,7 +73,7 @@ Feature: Safety Concerns
     And I click the "Continue" link
     Then I should see "The children’s safety"
     And I click the "Continue" link
-    Then I should see "Have the children ever been sexually abused?"
+    Then I should see "Have the children ever been sexually abused by the respondent?"
     
     # Provoking validation error
     When I click the "Continue" button
@@ -81,7 +81,7 @@ Feature: Safety Concerns
 
     # Fixing validation error
     When I choose "No"
-    Then I should see "Have the children ever been physically abused?"
+    Then I should see "Have the children ever been physically abused by the respondent?"
 
     # Provoking validation error
     When I click the "Continue" button
@@ -89,7 +89,7 @@ Feature: Safety Concerns
 
     # Fixing validation error
     When I choose "No"
-    Then I should see "Have the children ever been financially abused?"
+    Then I should see "Have the children ever been financially abused by the respondent?"
 
     # Provoking validation error
     When I click the "Continue" button
@@ -97,7 +97,7 @@ Feature: Safety Concerns
 
     # Fixing validation error
     When I choose "No"
-    Then I should see "Have the children ever been psychologically abused?"
+    Then I should see "Have the children ever been psychologically abused by the respondent?"
 
     # Provoking validation error
     When I click the "Continue" button
@@ -105,7 +105,7 @@ Feature: Safety Concerns
 
     # Fixing validation error
     When I choose "No"
-    Then I should see "Have the children ever been emotionally abused?"
+    Then I should see "Have the children ever been emotionally abused by the respondent?"
 
     # Provoking validation error
     When I click the "Continue" button
@@ -137,7 +137,7 @@ Feature: Safety Concerns
     Then I should see "The children’s safety"
     And I click the "Continue" link
 
-    Then I should see "Have the children ever been sexually abused?"
+    Then I should see "Have the children ever been sexually abused by the respondent?"
     And I choose "Yes"
 
     # Provoking validation error
@@ -150,7 +150,7 @@ Feature: Safety Concerns
 
     # Fixing validation error
     Then I submit the form details for "About the children’s sexual abuse"
-    And I should see "Have the children ever been physically abused?"
+    And I should see "Have the children ever been physically abused by the respondent?"
     Then I choose "Yes"
 
     # Provoking validation error
@@ -163,7 +163,7 @@ Feature: Safety Concerns
 
     # Fixing validation error
     Then I submit the form details for "About the children’s physical abuse"
-    And I should see "Have the children ever been financially abused?"
+    And I should see "Have the children ever been financially abused by the respondent?"
     Then I choose "Yes"
 
     # Provoking validation error
@@ -176,7 +176,7 @@ Feature: Safety Concerns
 
     # Fixing validation error
     Then I submit the form details for "About the children’s financial abuse"
-    And I should see "Have the children ever been psychologically abused?"
+    And I should see "Have the children ever been psychologically abused by the respondent?"
     Then I choose "Yes"
 
     # Provoking validation error
@@ -189,7 +189,7 @@ Feature: Safety Concerns
 
     # Fixing validation error
     Then I submit the form details for "About the children’s psychological abuse"
-    And I should see "Have the children ever been emotionally abused?"
+    And I should see "Have the children ever been emotionally abused by the respondent?"
     Then I choose "Yes"
 
     # Provoking validation error
