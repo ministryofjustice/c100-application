@@ -143,8 +143,8 @@ en:
       c1a_court_details: *to_be_completed
       c1a_children_details: Summary of children’s details
       c1a_solicitor_details: Your solicitor’s details
-      c1a_applicant_abuse_summary: Abuse experienced by applicant
-      c1a_children_abuse_summary: Abuse experienced by children
+      c1a_applicant_abuse_summary: Abuse experienced by applicant by the respondent
+      c1a_children_abuse_summary: Abuse experienced by children by the respondent
       c1a_court_orders: Previous or current orders
       c1a_concerns_details: Short description of concerns and any relevant information
       ### C8 ###
