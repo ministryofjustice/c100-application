@@ -94,6 +94,7 @@ RSpec.describe CourtContactDetails do
         hertford-county-court-and-family-court
         high-wycombe-magistrates-court-and-family-court
         lancaster-courthouse
+        chelmsford-magistrates-court-and-family-court
       ))
     end
   end
