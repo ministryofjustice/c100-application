@@ -15,9 +15,8 @@ module C100App
       when :continue_application
         after_continue_application
       when :research_consent
-      #   check_if_my_hmcts_eligable_court
-      # when :my_hmcts
-      #   after_my_hmcts
+        #   check_if_my_hmcts_eligable_court
+        # when :my_hmcts  #   after_my_hmcts
         after_research_consent
       when :consent_order
         after_consent_order
@@ -116,7 +115,7 @@ module C100App
       court = CourtPostcodeChecker.new.court_for(children_postcode)
 
       return show(:no_court_found) unless court
-      c100_application.update!(court: court)
+      c100_application.update!(court:)
 
       send_to_court_based_destination
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
@@ -128,7 +127,7 @@ module C100App
       court = CourtPostcodeChecker.new.court_for(children_postcode)
 
       return show(:no_court_found) unless court
-      c100_application.update!(court: court)
+      c100_application.update!(court:)
 
       send_to_court_based_destination_for_citizens
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
@@ -139,7 +138,7 @@ module C100App
     def check_court_and_send_to_court_based_destination_for_continue
       court = CourtPostcodeChecker.new.court_for(children_postcode)
       return show(:no_court_found) unless court
-      c100_application.update!(court: court)
+      c100_application.update!(court:)
 
       send_to_court_based_destination_for_continue
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
