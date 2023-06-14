@@ -3,22 +3,22 @@ module C100App
     def destination
       return next_step if next_step
 
-      # Temporarily disable myhmcts
+      # Temporarily enable myhmcts
 
       case step_name
-      when :children_postcode
-        check_if_court_is_valid
-      # when :start_or_continue
-      #   after_start_or_continue
-      # when :sign_in_or_create_account
-      #   after_sign_in_or_create_account
-      # when :continue_application
-      #   after_continue_application
+      # when :children_postcode
+      #   check_if_court_is_valid
+      when :start_or_continue
+        after_start_or_continue
+      when :sign_in_or_create_account
+        after_sign_in_or_create_account
+      when :continue_application
+        after_continue_application
       when :research_consent
-        check_if_my_hmcts_eligable_court
-      when :my_hmcts
-        after_my_hmcts
-        # after_research_consent
+      #   check_if_my_hmcts_eligable_court
+      # when :my_hmcts
+      #   after_my_hmcts
+        after_research_consent
       when :consent_order
         after_consent_order
       when :consent_order_upload
@@ -36,150 +36,150 @@ module C100App
       step_params.fetch(:children_postcode)
     end
 
-    def check_if_my_hmcts_eligable_court
-      # if eligable_court
-      # edit(:my_hmcts)
-      # else
-      edit(:consent_order)
-      # end
+    # def check_if_my_hmcts_eligable_court
+    #   # if eligable_court
+    #   # edit(:my_hmcts)
+    #   # else
+    #   edit(:consent_order)
+    #   # end
+    # end
+    #
+    # # Temp
+    # def check_if_court_is_valid
+    #   court = CourtPostcodeChecker.new.court_for(children_postcode)
+    #
+    #   if court
+    #     c100_application.update!(court:)
+    #
+    #     if show_research_consent?
+    #       edit(:research_consent)
+    #     else
+    #       check_if_my_hmcts_eligable_court
+    #     end
+    #   else
+    #     show(:no_court_found)
+    #   end
+    #   # `CourtPostcodeChecker` and `Court` already log any potential exceptions
+    # rescue StandardError
+    #   show(:error_but_continue)
+    # end
+
+    # def after_my_hmcts
+    #   edit(:consent_order)
+    # end
+
+    def after_sign_in_or_create_account
+      if question(:has_myhmcts_account).yes?
+        show(:my_hmcts_manage_case)
+      else
+        show(:my_hmcts_create_account)
+      end
     end
 
-    # Temp
-    def check_if_court_is_valid
+    def after_continue_application
+      if question(:platform, c100_application, ApplicationPlatform).my_hmcts?
+        show(:my_hmcts_manage_case)
+      else
+        show(:redirect_to_login)
+      end
+    end
+
+    def after_start_or_continue
+      if question(:start_or_continue, c100_application, ApplicationIntent).new?
+        after_start
+      else
+        after_continue
+      end
+    end
+
+    def after_start
+      if question(:is_legal_representative).yes?
+        check_court_and_send_to_court_based_destination
+      else
+        check_court_and_send_to_court_based_destination_for_citizens
+      end
+    end
+
+    def after_continue
+      check_court_and_send_to_court_based_destination_for_continue
+    end
+
+    def after_research_consent
+      if question(:is_legal_representative).yes?
+        send_to_court_based_destination(skip_research_consent: true)
+      else
+        send_to_court_based_destination_for_citizens(skip_research_consent: true)
+      end
+    end
+
+    def check_court_and_send_to_court_based_destination
       court = CourtPostcodeChecker.new.court_for(children_postcode)
 
-      if court
-        c100_application.update!(court:)
+      return show(:no_court_found) unless court
+      c100_application.update!(court: court)
 
-        if show_research_consent?
-          edit(:research_consent)
-        else
-          check_if_my_hmcts_eligable_court
-        end
-      else
-        show(:no_court_found)
-      end
-      # `CourtPostcodeChecker` and `Court` already log any potential exceptions
+      send_to_court_based_destination
+    # `CourtPostcodeChecker` and `Court` already log any potential exceptions
     rescue StandardError
       show(:error_but_continue)
     end
 
-    def after_my_hmcts
-      edit(:consent_order)
+    def check_court_and_send_to_court_based_destination_for_citizens
+      court = CourtPostcodeChecker.new.court_for(children_postcode)
+
+      return show(:no_court_found) unless court
+      c100_application.update!(court: court)
+
+      send_to_court_based_destination_for_citizens
+    # `CourtPostcodeChecker` and `Court` already log any potential exceptions
+    rescue StandardError
+      show(:error_but_continue)
     end
 
-    # def after_sign_in_or_create_account
-    #   if question(:has_myhmcts_account).yes?
-    #     show(:my_hmcts_manage_case)
-    #   else
-    #     show(:my_hmcts_create_account)
-    #   end
-    # end
+    def check_court_and_send_to_court_based_destination_for_continue
+      court = CourtPostcodeChecker.new.court_for(children_postcode)
+      return show(:no_court_found) unless court
+      c100_application.update!(court: court)
 
-    # def after_continue_application
-    #   if question(:platform, c100_application, ApplicationPlatform).my_hmcts?
-    #     show(:my_hmcts_manage_case)
-    #   else
-    #     show(:redirect_to_login)
-    #   end
-    # end
+      send_to_court_based_destination_for_continue
+    # `CourtPostcodeChecker` and `Court` already log any potential exceptions
+    rescue StandardError
+      show(:error_but_continue)
+    end
 
-    # def after_start_or_continue
-    #   if question(:start_or_continue, c100_application, ApplicationIntent).new?
-    #     after_start
-    #   else
-    #     after_continue
-    #   end
-    # end
+    def send_to_court_based_destination(skip_research_consent: false)
+      if show_research_consent? && !skip_research_consent
+        edit(:research_consent)
+      elsif eligable_court
+        edit(:sign_in_or_create_account)
+      else
+        show(:start)
+      end
+    end
 
-    # def after_start
-    #   if question(:is_legal_representative).yes?
-    #     check_court_and_send_to_court_based_destination
-    #   else
-    #     check_court_and_send_to_court_based_destination_for_citizens
-    #   end
-    # end
+    def send_to_court_based_destination_for_continue
+      if eligable_court
+        if question(:is_legal_representative).yes?
+          edit(:continue_application)
+        else
+          show(:redirect_to_guidance)
+        end
+      else
+        show(:redirect_to_login)
+      end
+    end
 
-    # def after_continue
-    #   check_court_and_send_to_court_based_destination_for_continue
-    # end
-
-    # def after_research_consent
-    #   if question(:is_legal_representative).yes?
-    #     send_to_court_based_destination(skip_research_consent: true)
-    #   else
-    #     send_to_court_based_destination_for_citizens(skip_research_consent: true)
-    #   end
-    # end
-
-    # def check_court_and_send_to_court_based_destination
-    #   court = CourtPostcodeChecker.new.court_for(children_postcode)
-
-    #   return show(:no_court_found) unless court
-    #   c100_application.update!(court: court)
-
-    #   send_to_court_based_destination
-    # # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    # rescue StandardError
-    #   show(:error_but_continue)
-    # end
-
-    # def check_court_and_send_to_court_based_destination_for_citizens
-    #   court = CourtPostcodeChecker.new.court_for(children_postcode)
-
-    #   return show(:no_court_found) unless court
-    #   c100_application.update!(court: court)
-
-    #   send_to_court_based_destination_for_citizens
-    # # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    # rescue StandardError
-    #   show(:error_but_continue)
-    # end
-
-    # def check_court_and_send_to_court_based_destination_for_continue
-    #   court = CourtPostcodeChecker.new.court_for(children_postcode)
-    #   return show(:no_court_found) unless court
-    #   c100_application.update!(court: court)
-
-    #   send_to_court_based_destination_for_continue
-    # # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    # rescue StandardError
-    #   show(:error_but_continue)
-    # end
-
-    # def send_to_court_based_destination(skip_research_consent: false)
-    #   if show_research_consent? && !skip_research_consent
-    #     edit(:research_consent)
-    #   elsif eligable_court
-    #     edit(:sign_in_or_create_account)
-    #   else
-    #     show(:start)
-    #   end
-    # end
-
-    # def send_to_court_based_destination_for_continue
-    #   if eligable_court
-    #     if question(:is_legal_representative).yes?
-    #       edit(:continue_application)
-    #     else
-    #       show(:redirect_to_guidance)
-    #     end
-    #   else
-    #     show(:redirect_to_login)
-    #   end
-    # end
-
-    # def send_to_court_based_destination_for_citizens(
-    #   skip_research_consent: false
-    # )
-    #   if show_research_consent? && !skip_research_consent
-    #     edit(:research_consent)
-    #   elsif eligable_court
-    #     show(:redirect_to_guidance)
-    #   else
-    #     show(:start)
-    #   end
-    # end
+    def send_to_court_based_destination_for_citizens(
+      skip_research_consent: false
+    )
+      if show_research_consent? && !skip_research_consent
+        edit(:research_consent)
+      elsif eligable_court
+        show(:redirect_to_guidance)
+      else
+        show(:start)
+      end
+    end
 
     def after_consent_order
       if question(:consent_order).yes?
@@ -207,15 +207,15 @@ module C100App
       )
     end
 
-    # def eligable_court
-    #   c100_application.court.id.in? %w[
-    #     swansea-civil-justice-centre
-    #     gloucester-and-cheltenham-county-and-family-court
-    #     coventry-combined-court-centre
-    #     newcastle-civil-family-courts-and-tribunals-centre
-    #     peterborough-combined-court-centre
-    #     east-london-family-court
-    #   ]
-    # end
+    def eligable_court
+      c100_application.court.id.in? %w[
+        swansea-civil-justice-centre
+        gloucester-and-cheltenham-county-and-family-court
+        coventry-combined-court-centre
+        newcastle-civil-family-courts-and-tribunals-centre
+        peterborough-combined-court-centre
+        east-london-family-court
+      ]
+    end
   end
 end
