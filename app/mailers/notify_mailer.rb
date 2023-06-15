@@ -50,6 +50,16 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: c100_application.user.email)
   end
 
+  def payment_timeout(c100_application)
+    set_template(:payment_timeout)
+
+    set_personalisation(
+      resume_draft_url: C100App::PaymentsFlowControl.new(c100_application).payment_url
+    )
+
+    mail(to: c100_application.user.email)
+  end
+
   protected
 
   # rubocop:disable Naming/AccessorMethodName
