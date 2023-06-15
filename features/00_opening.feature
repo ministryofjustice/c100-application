@@ -22,7 +22,6 @@ Feature: Opening
   @happy_path
   Scenario: Complete the opening
     When I click the radio button "Start a new application"
-    Then I sleep
     When I fill in "Enter the children's postcode" with "MK9 3DX"
     And I click the "Continue" button
 
