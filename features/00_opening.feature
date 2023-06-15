@@ -19,25 +19,25 @@ Feature: Opening
 #    When I click the "Continue" link
 #    Then I should see "What kind of application do you want to make?"
 
-#  @happy_path
-#  Scenario: Complete the opening
-#    When I click the radio button "Start a new application"
-#    When I fill in "Enter the children's postcode" with "MK9 3DX"
+  @happy_path
+  Scenario: Complete the opening
+    When I click the radio button "Start a new application"
+    When I fill in "Enter the children's postcode" with "MK9 3DX"
+    And I click the "Continue" button
+
+#    Note: user research question is disabled for the time being.
+#    Refer to `config.x.opening.research_consent_weight` in `config/application.rb` to enable/disable.
+
+#    Then I should see "Are you willing to be contacted to share your experience of using this service?"
+#    And I should not see the save draft button
+#    And I choose "No"
+#
+#    Then I should see "Citizen or solicitor applying on behalf of a citizen?"
+#    And I choose "I am applying as a citizen"
 #    And I click the "Continue" button
 #
-##    Note: user research question is disabled for the time being.
-##    Refer to `config.x.opening.research_consent_weight` in `config/application.rb` to enable/disable.
-#
-##    Then I should see "Are you willing to be contacted to share your experience of using this service?"
-##    And I should not see the save draft button
-##    And I choose "No"
-##
-##    Then I should see "Citizen or solicitor applying on behalf of a citizen?"
-##    And I choose "I am applying as a citizen"
-##    And I click the "Continue" button
-##
-#    Then I should see "What you’ll need to complete your application"
-#    And I click the "Continue" link
+    Then I should see "What you’ll need to complete your application"
+    And I click the "Continue" link
 
   Scenario: Complete the opening
     When I click the radio button "Start a new application"

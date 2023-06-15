@@ -2,6 +2,7 @@
 #
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in(field, with: value)
+  sleep(5)
 end
 
 And(/^I check "([^"]*)"$/) do |text|
