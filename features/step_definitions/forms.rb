@@ -4,10 +4,6 @@ When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in(field, with: value)
 end
 
-Then(/^I sleep$/) do
-  sleep(5)
-end
-
 And(/^I check "([^"]*)"$/) do |text|
   check(text, allow_label_click: true)
 end
