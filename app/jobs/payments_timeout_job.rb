@@ -20,5 +20,4 @@ class PaymentsTimeoutJob < ApplicationJob
         NotifyMailer.payment_timeout(c100_application).deliver_later
       end
   end
-
 end
