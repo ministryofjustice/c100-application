@@ -119,8 +119,8 @@ module C100App
 
       send_to_court_based_destination
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    rescue StandardError
-      show(:error_but_continue)
+    rescue StandardError => e
+      show(:error_but_continue, { courtfinder_output: "#{e.class.name} - #{e.message}" })
     end
 
     def check_court_and_send_to_court_based_destination_for_citizens
@@ -131,8 +131,8 @@ module C100App
 
       send_to_court_based_destination_for_citizens
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    rescue StandardError
-      show(:error_but_continue)
+    rescue StandardError => e
+      show(:error_but_continue, { courtfinder_output: "#{e.class.name} - #{e.message}" })
     end
 
     def check_court_and_send_to_court_based_destination_for_continue
@@ -142,8 +142,8 @@ module C100App
 
       send_to_court_based_destination_for_continue
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    rescue StandardError
-      show(:error_but_continue)
+    rescue StandardError => e
+      show(:error_but_continue, { courtfinder_output: "#{e.class.name} - #{e.message}" })
     end
 
     def send_to_court_based_destination(skip_research_consent: false)
