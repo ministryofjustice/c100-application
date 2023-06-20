@@ -9,23 +9,23 @@ class Court < ApplicationRecord
   alias_attribute :slug, :id
   alias_attribute :family_location_code, :cci_code
 
-  # Using `fetch` so an exception is raised and we are alerted if the json
-  # schema ever changes, instead of silently let the user continue, as all
-  # details are needed for the application to progress
-  #
-  def self.build(data)
-    new(
-      slug: data.fetch('slug'),
-      name: data.fetch('name'),
-      address: fetch_address(data),
-      cci_code: data.fetch('family_location_code'),
-      # Email and GBS code, if not already present, come from a separate API request
-      email: data['email'],
-      gbs: data['gbs'],
-    )
-  rescue StandardError => ex
-    log_and_raise(ex, data)
-  end
+  # # Using `fetch` so an exception is raised and we are alerted if the json
+  # # schema ever changes, instead of silently let the user continue, as all
+  # # details are needed for the application to progress
+  # #
+  # def self.build(data)
+  #   new(
+  #     slug: data.fetch('slug'),
+  #     name: data.fetch('name'),
+  #     address: fetch_address(data),
+  #     cci_code: data.fetch('family_location_code'),
+  #     # Email and GBS code, if not already present, come from a separate API request
+  #     email: data['email'],
+  #     gbs: data['gbs'],
+  #   )
+  # rescue StandardError => ex
+  #   log_and_raise(ex, data)
+  # end
 
   # If this is the first time we see this court (slug) then we create
   # a new record in the `courts` table. If we already have this court,
@@ -35,10 +35,13 @@ class Court < ApplicationRecord
     court = find_or_initialize_by(slug: data.fetch('slug'))
 
     if court.stale?
-      court.slug_will_change! # Touch `updated_at` on save, even if there are no changes
-
       court.update(
-        build(data).attributes.except('created_at', 'updated_at')
+        name: data.fetch('name'),
+        address: fetch_address(data),
+        cci_code: data.fetch('family_location_code'),
+        email: data['email'],
+        gbs: data['gbs'],
+        updated_at: Time.now
       )
     end
 
