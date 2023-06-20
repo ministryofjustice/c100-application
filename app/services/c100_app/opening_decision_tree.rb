@@ -119,7 +119,7 @@ module C100App
 
       send_to_court_based_destination
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    rescue StandardError => e
+    rescue StandardError
       show(:error_but_continue)
     end
 
@@ -131,7 +131,7 @@ module C100App
 
       send_to_court_based_destination_for_citizens
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    rescue StandardError => e
+    rescue StandardError
       show(:error_but_continue)
     end
 
@@ -142,7 +142,7 @@ module C100App
 
       send_to_court_based_destination_for_continue
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    rescue StandardError => e
+    rescue StandardError
       show(:error_but_continue)
     end
 
