@@ -492,6 +492,7 @@ GEM
     thor (1.2.1)
     thread_safe (0.3.6)
     tilt (2.1.0)
+    timecop (0.9.6)
     timeout (0.3.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -592,6 +593,7 @@ DEPENDENCIES
   site_prism (~> 3.7, >= 3.7.1)
   spring (~> 4.0)
   spring-commands-rspec
+  timecop
   tzinfo (~> 2.0.5)
   uglifier
   uk_postcode

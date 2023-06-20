@@ -19,6 +19,7 @@ RSpec.describe NotifyMailer, type: :mailer do
       application_saved: 'application_saved_template_id',
       draft_first_reminder: 'draft_first_reminder_template_id',
       draft_last_reminder: 'draft_last_reminder_template_id',
+      payment_timeout: 'payment_timeout_template_id',
     )
   end
 
@@ -69,6 +70,28 @@ RSpec.describe NotifyMailer, type: :mailer do
           service_name: 'Apply to court about child arrangements',
           resume_draft_url: 'https://c100.justice.uk/users/drafts/4a362e1c-48eb-40e3-9458-a31ead3f30a4/resume',
           user_expire_in_days: 30,
+        })
+      end
+    end
+  end
+
+  describe 'payment_timeout' do
+    before do
+      allow_any_instance_of(C100App::PaymentsFlowControl).
+        to receive(:payment_url).and_return('example.com')
+    end
+
+    let(:mail) { described_class.payment_timeout(c100_application) }
+
+    it_behaves_like 'a Notify mail', template_id: 'payment_timeout_template_id'
+
+    it { expect(mail.to).to eq(['test@example.com']) }
+
+    context 'personalisation' do
+      it 'sets the personalisation' do
+        expect(mail.govuk_notify_personalisation).to eq({
+          service_name: 'Apply to court about child arrangements',
+          resume_draft_url: 'example.com'
         })
       end
     end
