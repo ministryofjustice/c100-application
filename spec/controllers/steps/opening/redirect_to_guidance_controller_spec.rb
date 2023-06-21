@@ -11,7 +11,7 @@ RSpec.describe Steps::Opening::RedirectToGuidanceController, type: :controller d
   describe '#show' do
     it 'redirects to MyHMCTS guidance' do
       get :show
-      expect(response).to redirect_to('https://apply-to-court-about-child-arrangements-c100.service.gov.uk/complete-your-application-guidance')
+      expect(response).to redirect_to('https://privatelaw.aat.platform.hmcts.net/complete-your-application-guidance')
     end
   end
 end
