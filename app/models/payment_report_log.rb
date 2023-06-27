@@ -1,0 +1,2 @@
+class PaymentReportLog < ApplicationRecord
+end

@@ -10,18 +10,24 @@ class ReportsMailer < NotifyMailer
   end
 
   def payment_types_report(report_csv, to_address:, cc_address:)
-    log 'starting payment_types_report'
+    @log = PaymentReportLog.where('created_at > ?', 6.hours.ago).first
+    log 'Starting payment_types_report'
     set_template(:payment_types_report)
-    log 'setting personalisation'
+    log 'Setting personalisation'
+    @log.try(:update, mailer_started: true)
     set_personalisation(
       link_to_report: Notifications.prepare_upload(
         StringIO.new(report_csv),
         true
       )
     )
-    log 'send mail'
-
+    @log.try(:update, mailer_personalised: true)
+    log 'Sending mail'
     mail(to: to_address, cc: cc_address)
+  rescue StandardError => e
+    log "#{e.class.name}: #{e.message}"
+    @log.try(:update, send_mailer_error: "#{e.class.name}: #{e.message}")
+    raise
   end
 
   private
