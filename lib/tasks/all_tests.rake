@@ -1,8 +1,8 @@
 namespace :test do
 # test:all is already defined by rails
   task all_the_things: :environment do
-    # Rake::Task['rubocop'].invoke
-    # Rake::Task['brakeman'].invoke
+    Rake::Task['rubocop'].invoke
+    Rake::Task['brakeman'].invoke
     Rake::Task['rspec'].invoke
     Rake::Task['cucumber'].invoke
 
