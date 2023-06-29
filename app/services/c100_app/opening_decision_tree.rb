@@ -119,7 +119,8 @@ module C100App
 
       send_to_court_based_destination
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    rescue StandardError
+    rescue StandardError => e
+      @errors = "Error: #{e.class.name} #{e.message}"
       show(:error_but_continue)
     end
 
@@ -131,7 +132,8 @@ module C100App
 
       send_to_court_based_destination_for_citizens
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    rescue StandardError
+    rescue StandardError => e
+      @errors = "Error: #{e.class.name} #{e.message}"
       show(:error_but_continue)
     end
 
@@ -143,6 +145,7 @@ module C100App
       send_to_court_based_destination_for_continue
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
     rescue StandardError
+      @errors = "Error: #{e.class.name} #{e.message}"
       show(:error_but_continue)
     end
 
