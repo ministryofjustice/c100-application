@@ -144,7 +144,7 @@ module C100App
 
       send_to_court_based_destination_for_continue
     # `CourtPostcodeChecker` and `Court` already log any potential exceptions
-    rescue StandardError
+    rescue StandardError => e
       @errors = "Error: #{e.class.name} #{e.message}"
       show(:error_but_continue)
     end
