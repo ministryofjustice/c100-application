@@ -123,6 +123,10 @@ en:
               blank: You must add at least one respondent
             payment_type:
               blank: You must select a payment method
+            files_collection_ref:
+              blank: You must choose a file to upload
+            consent_order:
+              blank: You must choose a file to upload
 
   activemodel:
     errors:

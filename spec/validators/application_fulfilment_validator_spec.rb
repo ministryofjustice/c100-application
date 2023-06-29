@@ -4,6 +4,11 @@ module Test
   C100ApplicationValidatable = Struct.new(:children, :applicants, :respondents, :payment_type, :submission_type, keyword_init: true) do
     include ActiveModel::Validations
     validates_with ApplicationFulfilmentValidator
+    def document(document_key)
+      uploaded_doc = [:miam_certificate, :draft_consent_order]
+      uploaded_doc.include?(document_key)
+    end
+
   end
 end
 
@@ -26,6 +31,12 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
 
   let(:submission_type) { 'submission_type' }
   let(:payment_type)    { 'payment_type' }
+
+  let(:record) { double('record') }
+
+  before do
+    allow(record).to receive(:document).and_return(nil)
+  end
 
   context 'individual validations' do
     context 'payment_type' do
@@ -110,6 +121,94 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
           expect(subject.errors.details[:respondents][0][:error]).to eq(:blank)
           expect(subject.errors.details[:respondents][0][:change_path]).to eq('/steps/respondent/names/')
         end
+      end
+    end
+  end
+
+  context 'generate_document_validation' do
+    subject{ ApplicationFulfilmentValidator.new }
+    let(:document_type) { :miam_certificate }
+    let(:path) { '/upload/path' }
+    let(:checks) { [:miam_exemption_claim?,:child_protection_cases?, :consent_order?] }
+    let(:invert) { false }
+
+    before do
+      allow(record).to receive(:document).and_return(nil)
+    end
+
+    context 'for miam' do
+
+      before do
+        allow(record).to receive(:consent_order?).and_return(false)
+        allow(record).to receive(:child_protection_cases?).and_return(false)
+        allow(record).to receive(:miam_exemption_claim?).and_return(false)
+      end
+
+      it 'returns nil when document is present' do
+        allow(record).to receive(:document).with(document_type).and_return(true)
+
+        validation_send = subject.send(:generate_document_validation, document_type, path, checks, invert: invert)
+
+        expect(validation_send.call(record)).to be_nil
+      end
+
+      it 'returns nil when the application is a consent order' do
+        allow(record).to receive(:consent_order?).and_return(true)
+
+        validation_send = subject.send(:generate_document_validation, document_type, path, checks, invert: invert)
+
+        expect(validation_send.call(record)).to be_nil
+      end
+
+      it 'returns nil when the application is a child_protection_cases' do
+        allow(record).to receive(:child_protection_cases?).and_return(true)
+
+        validation_send = subject.send(:generate_document_validation, document_type, path, checks, invert: invert)
+
+        expect(validation_send.call(record)).to be_nil
+      end
+
+      it 'returns nil when the application is a miam_exemption_claim' do
+        allow(record).to receive(:miam_exemption_claim?).and_return(true)
+
+        validation_send = subject.send(:generate_document_validation, document_type, path, checks, invert: invert)
+
+        expect(validation_send.call(record)).to be_nil
+      end
+
+      it 'returns error variables when the document is missing and no checks fail' do
+        allow(record).to receive(:document).with(document_type).and_return(false)
+
+        validation_send = subject.send(:generate_document_validation, document_type, path, checks, invert: invert)
+
+        expect(validation_send.call(record)).to eq([:files_collection_ref, :blank, path])
+      end
+    end
+
+    context 'for consent_order' do
+      let(:document_type) { :draft_consent_order }
+      let(:checks) { [:consent_order?] }
+      let(:invert) { true }
+
+      before do
+        allow(record).to receive(:consent_order?).and_return(false)
+      end
+
+      it 'returns nil when document is present' do
+        allow(record).to receive(:document).with(document_type).and_return(true)
+
+        validation_send = subject.send(:generate_document_validation, document_type, path, checks, invert: invert)
+
+        expect(validation_send.call(record)).to be_nil
+      end
+
+      it 'returns error variables when the document is missing and consent_order? is true' do
+        allow(record).to receive(:consent_order?).and_return(true)
+        allow(record).to receive(:document).with(document_type).and_return(false)
+
+        validation_send = subject.send(:generate_document_validation, document_type, path, checks, invert: invert)
+
+        expect(validation_send.call(record)).to eq([:files_collection_ref, :blank, path])
       end
     end
   end
