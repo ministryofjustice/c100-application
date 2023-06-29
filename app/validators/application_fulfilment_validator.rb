@@ -33,14 +33,13 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
 
   def generate_document_validation(document_type, path, checks, invert: false)
     lambda do |record|
-      unless record.document(document_type) || additional_checks(record, checks, invert)
+      unless record.document(document_type) || additional_checks(record, Array(checks), invert)
         [:files_collection_ref, :blank, path]
       end
     end
   end
 
   def additional_checks(record, checks, invert)
-    checks = [checks] unless checks.is_a?(Array)
     checks.map { |check| record.send(check) }.send(invert ? :none? : :any?)
   end
 end
