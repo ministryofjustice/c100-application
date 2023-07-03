@@ -146,3 +146,9 @@ Given("I stub fact api call") do
 And(/^I wait for (\d+) minutes$/) do |arg|
   travel arg.minutes
 end
+
+Given(/^I have completed an application$/) do
+  step %[I visit "/"]
+  step %[I open the "Developer Tools" summary details]
+  find('button', text: 'Bypass to CYA').click
+end
