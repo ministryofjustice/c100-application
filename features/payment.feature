@@ -15,10 +15,3 @@ Feature: Testing payment feature pages beyond the 'Check Your Answers' page
     And I fill in "Enter your full name" with "Applicant"
     And I click the "Submit application" button
     Then Page has title "Error: Check your answers - Apply to court about child arrangements - GOV.UK"
-
-#  Scenario:
-#    When I visit "/steps/application/payment"
-#    Then I should see "How will you pay the application fee"
-#    When I choose "Pay with ‘Help with fees’" and fill in "Reference number" with "HWF-XXX-XXX"
-#    Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
-#    And I should see "How will you pay the application fee?"
