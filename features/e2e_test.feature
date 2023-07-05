@@ -68,7 +68,36 @@ Feature: Testing C100 end to end
     And I fill in "State everyone who has parental responsibility for Jane Doe Jnr and how they have parental responsibility." with "Mother"
     And I click the "Continue" button
     Then I should see "Further information"
-#    And I click the radio button "No"
+    And I choose "Don't know" for all options on this page
+    Then I should see "Do you or any respondents have other children who are not part of this application?"
+    And I choose "No"
+    Then I should see "Enter your name"
+    And I fill in "First name(s)" with "John"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Keeping your contact details private"
+    And I choose "I don't know"
+    Then I should see "Keeping your contact details private"
+    And I choose "No"
+    Then I should see "The court will not keep your contact details private"
+    And I click the "Continue" link
+    Then I should see "Provide details for John Doe"
+    And I click the radio button "No"
+    And I click the radio button "Male"
+    And I enter the date 1-1-1990
+    And I fill in "Your place of birth" with "London"
+    And I click the "Continue" button
+    Then I should see "What is John Doe's relationship to Jane Doe Jnr?"
+    And I choose "Father"
+    Then I should see "Address of John Doe"
+    And I click the "I live outside the UK" link
+    And I should see "Address details of John Doe"
+    And I fill in "Building and street" with "Buckingham Palace"
+    And I fill in "Town or city" with "London"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SW1A 1AA"
+    And I choose "Yes"
+    Then I should see "Contact details of John Doe"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"

@@ -88,3 +88,11 @@ end
 And(/^a confirmation box will appear telling me that my cookie settings have been saved$/) do
   expect(any_page).to have_cookie_preferences_updated_message
 end
+
+And(/^I choose "([^"]*)" for all options on this page$/) do |arg|
+  options = page.all('label', text: arg)
+  options.each do |radio_button|
+    radio_button.click
+  end
+  find_button('Continue').click
+end
