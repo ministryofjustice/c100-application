@@ -98,6 +98,14 @@ Feature: Testing C100 end to end
     And I fill in "Postcode" with "SW1A 1AA"
     And I choose "Yes"
     Then I should see "Contact details of John Doe"
+    And I click the radio button "I can provide an email address"
+    And I fill in "Your email address" with "john@gmail.com"
+    And I fill in "Your home phone" with "00000000000"
+    And I click the radio button "I can provide a mobile phone number"
+    And I fill in "Your mobile phone" with "00000000000"
+    And I click the radio button "Yes, the court can leave me a voicemail"
+    And I click the "Continue" button
+    Then I should see "Will you be legally represented by a solicitor in these proceedings?"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
