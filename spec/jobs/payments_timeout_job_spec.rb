@@ -26,7 +26,9 @@ RSpec.describe PaymentsTimeoutJob, type: :job do
     end
 
     it 'finds any pending payment intents and sends an email' do
-      expect(finder_double).to receive(:where).with("payment_intents.state ->> 'finished' = 'false'").and_return(finder_double)
+      expect(finder_double).to receive(:where).with("(payment_intents.state ->> 'status' = 'submitted') OR
+              (payment_intents.state ->> 'status' = 'failed') OR
+              (payment_intents.state ->> 'finished' = 'false')").and_return(finder_double)
       expect(finder_double).to receive(:where).
         with("payment_intents.created_at >= :start AND payment_intents.created_at < :ending",
               start: start, ending: ending).and_return(finder_double)
