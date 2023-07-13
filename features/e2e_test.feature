@@ -65,7 +65,7 @@ Feature: Testing C100 end to end
     Then I should see "Is there a Special Guardianship Order in force in relation to Jane Doe Jnr?"
     And I choose "No"
     Then I should see "Parental responsibility for Jane Doe Jnr"
-    And I fill in "State everyone who has parental responsibility for Jane Doe Jnr and how they have parental responsibility." with "Mother"
+    And I fill in "State everyone who has parental responsibility for Jane Doe Jnr and how they have parental responsibility." with "Father"
     And I click the "Continue" button
     Then I should see "Further information"
     And I choose "Don't know" for all options on this page
@@ -106,6 +106,46 @@ Feature: Testing C100 end to end
     And I click the radio button "Yes, the court can leave me a voicemail"
     And I click the "Continue" button
     Then I should see "Will you be legally represented by a solicitor in these proceedings?"
+    And I choose "Yes"
+    Then I should see "Details of solicitor"
+    And I fill in "Full name" with "Annalise Keating"
+    And I fill in "Name of firm" with "Keating Law"
+    And I fill in "Solicitor’s reference" with "123456"
+    And I click the "Continue" button
+    Then I should see "Address details of Annalise Keating"
+    And I fill in "Building and street" with "Windsor Castle"
+    And I fill in "Town or city" with "Windsor"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SL4 1QF"
+    And I click the "Continue" button
+    Then I should see "Contact details of Annalise Keating"
+    And I fill in "Email address" with "annalise@law.com"
+    And I fill in "Phone number" with "00000000000"
+    And I fill in "Fax number" with "00000000000"
+    And I fill in "DX number" with "00000000000"
+    And I click the "Continue" button
+    Then I should see "Enter the respondent’s name"
+    And I fill in "First name(s)" with "Jane"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Provide details for Jane Doe"
+    And I click the radio button "No"
+    And I click the radio button "Female"
+    And I enter the date 1-1-1991
+    And I fill in "Place of birth" with "London"
+    And I click the "Continue" button
+    Then I should see "What is Jane Doe's relationship to Jane Doe Jnr?"
+    And I choose "Mother"
+    Then I should see "Address of Jane Doe"
+    And I click the "I don’t know their postcode or they live outside the UK" link
+    Then I should see "Address details of Jane Doe"
+    And I fill in "Building and street" with "Windsor Castle"
+    And I fill in "Town or city" with "Windsor"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SL4 1QF"
+    And I click the radio button "Yes"
+    And I click the "Continue" button
+    Then I should see "Contact details of Jane Doe"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
