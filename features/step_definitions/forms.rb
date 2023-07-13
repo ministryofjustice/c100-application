@@ -1,5 +1,6 @@
 # Everything that has to do with forms, like radios, check boxes or inputs
-#
+include ActiveSupport::Testing::TimeHelpers
+
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in(field, with: value)
 end
@@ -95,4 +96,10 @@ And(/^I choose "([^"]*)" for all options on this page$/) do |arg|
     radio_button.click
   end
   find_button('Continue').click
+end
+
+And(/^I fill in the Expiry date with a valid card expiry date$/) do
+  future = travel 365.day
+  step %[I fill in "Month" with "#{future.month}"]
+  step %[I fill in "Year" with "#{future.year}"]
 end

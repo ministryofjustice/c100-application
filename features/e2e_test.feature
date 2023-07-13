@@ -146,6 +146,81 @@ Feature: Testing C100 end to end
     And I click the radio button "Yes"
     And I click the "Continue" button
     Then I should see "Contact details of Jane Doe"
+    And I fill in "Email address" with "Jane@Hotmail.com"
+    And I check "I don't know their home phone number"
+    And I fill in "Mobile phone" with "00000000000"
+    And I click the "Continue" button
+    Then I should see "Is there anyone else who should know about your application?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Who does Jane Doe Jnr currently live with?"
+    And I check "John Doe"
+    And I click the "Continue" button
+    Then I should see "Have any of the children in this application been involved in other family court proceedings?"
+    And I click the radio button "Yes"
+    And I click the "Continue" button
+    Then I should see "Details of previous court case"
+    And I fill in "Names of children involved" with "Jane Doe Jnr"
+    And I fill in "Name of court" with "London Court"
+    And I fill in "Date/year" with "2020"
+    And I fill in "Type of proceedings" with "Legal hearing"
+    And I fill in "Add details of any other previous family case" with "Lasted for weeks"
+    And I click the "Continue" button
+    Then I should see "Do you need an urgent hearing?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Are you asking for a without notice hearing?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
+    And I click the radio button "Yes"
+    And I fill in "Provide details" with "Details"
+    And I click the "Continue" button
+    Then I should see "Has a request for information or other assistance involving the children been made to or by another country?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Why are you making this application?"
+    And I fill in "Provide details" with "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And I click the "Continue" button
+    Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need an intermediary to help them in court?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application have special language requirements?"
+    And I click the "Continue" button
+    Then I should see "Do you or the children need specific safety arrangements at court?"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
+    And I fill in "You can add more detail if neccessary" with "We need lots of light"
+    And I click the "Continue" button
+    Then I should see "Submitting your application to court"
+    And I fill in "Enter an email address if you would like to get a confirmation" with "John@Gmail.com"
+    And I click the "Continue" button
+    Then I should see "Is this email address correct?"
+    And I click the "Yes, continue" link
+    Then I should see "How will you pay the application fee?"
+    And I click the radio button "Pay online"
+    And I click the "Continue" button
+    Then I should see "Check your answers"
+    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
+    And I fill in "Enter your full name" with "John Doe"
+    And I click the radio button "I am the applicant and I believe that the facts stated in this application are true."
+    And I click the "Pay and submit application" button
+#    Then I should see "Enter card details"
+#    And I fill in "Card number" with "4000056655665556"
+#    And I fill in the Expiry date with a valid card expiry date
+#    And I fill in "Name on card" with "Mr John Doe"
+#    And I fill in "Card security code" with "100"
+#    And I fill in "Building number or name and street" with "Buckingham Palace"
+#    And I fill in "Town or city" with "London"
+#    And I fill in "Postcode" with "SW1A 1AA"
+#    And I click the "Continue" button
+#
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
