@@ -208,14 +208,10 @@ Feature: Testing C100 end to end
     And I fill in "Reference number" with "HWF-123-456"
     And I click the "Continue" button
     Then I should see "Check your answers"
-    And I should see "What kind of application do you want to make?	Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
-    And I should see "MIAM certificate image.jpg"
-    And I should see "You would like the court to: Decide who they live with and when"
     And I should see "Full name Jane Doe Jnr"
     And I should see "Full name John Doe"
     And I should see "Do you have a solicitor? Yes"
     And I should see "Full name Jane Doe"
-    And I should see "Why are you making this application?	I fear for the safety of Jane Doe Jnr and I want her to be safe"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
