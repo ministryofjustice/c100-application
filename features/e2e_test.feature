@@ -204,23 +204,18 @@ Feature: Testing C100 end to end
     Then I should see "Is this email address correct?"
     And I click the "Yes, continue" link
     Then I should see "How will you pay the application fee?"
-    And I click the radio button "Pay online"
+    And I click the radio button "Pay with ‘Help with fees’"
+    And I fill in "Reference number" with "HWF-123-456"
     And I click the "Continue" button
     Then I should see "Check your answers"
-    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
-    And I fill in "Enter your full name" with "John Doe"
-    And I click the radio button "I am the applicant and I believe that the facts stated in this application are true."
-    And I click the "Pay and submit application" button
-#    Then I should see "Enter card details"
-#    And I fill in "Card number" with "4000056655665556"
-#    And I fill in the Expiry date with a valid card expiry date
-#    And I fill in "Name on card" with "Mr John Doe"
-#    And I fill in "Card security code" with "100"
-#    And I fill in "Building number or name and street" with "Buckingham Palace"
-#    And I fill in "Town or city" with "London"
-#    And I fill in "Postcode" with "SW1A 1AA"
-#    And I click the "Continue" button
-#
+    And I should see "What kind of application do you want to make?	Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
+    And I should see "MIAM certificate image.jpg"
+    And I should see "You would like the court to: Decide who they live with and when"
+    And I should see "Full name Jane Doe Jnr"
+    And I should see "Full name John Doe"
+    And I should see "Do you have a solicitor? Yes"
+    And I should see "Full name Jane Doe"
+    And I should see "Why are you making this application?	I fear for the safety of Jane Doe Jnr and I want her to be safe"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"

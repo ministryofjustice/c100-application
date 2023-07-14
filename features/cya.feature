@@ -1,4 +1,4 @@
-Feature: Testing payment feature pages beyond the 'Check Your Answers' page
+Feature: Testing the 'Check Your Answers' page
 
   Background: Advancing to CYA page
     Given I have completed an application
