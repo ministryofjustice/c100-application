@@ -262,6 +262,26 @@ Feature: Testing C100 end to end
     And I fill in "Where are the children now?" with "They are safe and sound"
     And I click the "Continue" button
     Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
+    And I click the radio button "Yes"
+    And I fill in "Give a short description of the drug, alcohol or substance abuse" with "Alcoholic and drug abuse details"
+    And I click the "Continue" button
+    Then I should see "You and the children"
+    And I click the "Continue" link
+    Then I should see "The children’s safety"
+    And I click the "Continue" link
+    Then I should see "Have the children ever been sexually abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have the children ever been physically abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have the children ever been financially abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the children’s financial abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "They held money problems over the kids"
+    And I fill in "When did this behaviour start?" with "Many years ago"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "About two years ago"
+    And I click the "Continue" button 
+    Then I should see "Have the children ever been psychologically abused by the respondent?"
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"
