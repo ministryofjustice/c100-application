@@ -216,6 +216,13 @@ Feature: Testing C100 end to end
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
     Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
+    And I choose "Yes"
+    Then I should see "You do not have to attend a MIAM"
+    And I click the "Continue" link
+    Then I should see "Safety concerns"
+    When I click the "Back" link
+    And I click the "Back" link
+    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
     And I choose "No"
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I click the radio button "No"
@@ -226,10 +233,35 @@ Feature: Testing C100 end to end
     Then I should see "Has a mediator confirmed that you do not need to attend a MIAM?"
     And I choose "Yes"
     Then I should see "Have you got a document signed by the mediator?"
+    And I choose "No"
+    Then I should see "You need to get a document from the mediator"
+    And I click the "Back" link
     And I choose "Yes"
     Then I should see "Upload your MIAM certificate"
     When I upload a document to the MIAM certificate page
     And I click the "Continue" button
     Then I should see "Safety concerns"
+    And I click the "Continue" link
+    Then I should see "Are the children at risk of being abducted?"
+    And I choose "Yes"
+    Then I should see "Have the police been notified?"
+    And I choose "Yes"
+    Then I should see "Do any of the children have a passport?"
+    And I choose "Yes"
+    Then I should see "Provide details of the children’s passports"
+    And I check "Other"
+    And I fill in "Provide more details" with "Grandparents"
+    And I choose "No"
+    Then I should see "Have the children been abducted or kept outside the UK without your consent before?"
+    And I choose "Yes"
+    And I should see "Provide details of the previous abductions"
+    Then I click the "Back" link
+    And I choose "No"
+    Then I should see "Why do you think the children may be abducted or kept outside the UK without your consent?"
+    And I fill in "Briefly explain your concerns about abduction" with "They might be taken by mean people"
+    And I fill in "Where are the children now?" with "They are safe and sound"
+    And I click the "Continue" button
+    Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
 
 #  Scenario: Consent order
+#    When I choose "Consent Order"
