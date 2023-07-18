@@ -282,6 +282,62 @@ Feature: Testing C100 end to end
     And I fill in "When did the behaviour stop?" with "About two years ago"
     And I click the "Continue" button 
     Then I should see "Have the children ever been psychologically abused by the respondent?"
-
+    And I choose "Yes"
+    Then I should see "About the children’s psychological abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent guilt tripped the kids"
+    And I fill in "When did this behaviour start?" with "Many years ago"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "About two years ago"
+    And I click the "Continue" button
+    Then I should see "Have the children ever been emotionally abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the children’s emotional abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent was mean to the kids"
+    And I fill in "When did this behaviour start?" with "Many years ago"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "About two years ago"
+    And I click the "Continue" button
+    Then I should see "Do you have any other safety or welfare concerns about the children?"
+    And I choose "Yes"
+    Then I should see "Other concerns about the children"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent might be mean to the kids again"
+    And I fill in "When did this behaviour start?" with "Many years ago"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "About two years ago"
+    And I click the "Continue" button
+    Then I should see "Your safety"
+    And I click the "Continue" link
+    Then I should see "Have you ever been sexually abused by the respondent?"  
+    And I choose "No"
+    Then I should see "Have you ever been physically abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the physical abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent hit me"
+    And I fill in "When did this behaviour start?" with "Many years ago"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "About two years ago"
+    And I click the "Continue" button
+    Then I should see "Have you ever been financially abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the financial abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took my money"
+    And I fill in "When did this behaviour start?" with "Many years ago"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "About two years ago"
+    And I click the "Continue" button
+    Then I should see "Have you ever been psychologically abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have you ever been emotionally abused by the respondent?"
+    And I choose "No"
+    Then I should see "Do you have any other concerns about your welfare?"
+    And I choose "No"
+    Then I should see "Have you had or do you currently have any court orders made for your protection?"
+    And I choose "Yes"
+    And I choose "No" for all options on this page
+    Then I should see "Contact between the children and the other people in this application"
+    And I choose "No" for all options on this page
+    And I click the "Continue" button
+    Then I should see "What are you asking the court to decide about the children involved?"
+  
 #  Scenario: Consent order
 #    When I choose "Consent Order"
