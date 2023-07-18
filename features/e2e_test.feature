@@ -338,6 +338,29 @@ Feature: Testing C100 end to end
     And I choose "No" for all options on this page
     And I click the "Continue" button
     Then I should see "What are you asking the court to decide about the children involved?"
+    And I check "Decide who they live with and when"
+    And I check "Decide how much time they spend with each person"
+    And I click the "Continue" button
+    Then I should see "What you’re asking the court to decide about the children"
+    And I should see "Decide who they live with and when"
+    And I should see "Decide how much time they spend with each person"
+    And I click the "Continue" link
+    Then I should see "Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?"
+    And I click the radio button "Yes"
+    And I fill in "Please give details" with "I want the court to decide whether the respondent should give compensation"
+    And I click the "Continue" button
+    Then I should see "Going to court"
+    And I should see "What happens at court"
+    And I should see "Changing or enforcing an order"
+    And I should see "Representing yourself in court"
+    And I should see "Domestic violence or abuse and child abuse"
+    And I check "I understand what’s involved if I decide to go to court"
+    And I click the "Continue" button
+    Then I should see "Enter the names of the children"
+    And I fill in "First name(s)" with "Emily"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Provide details for Emily Doe"
   
 #  Scenario: Consent order
 #    When I choose "Consent Order"
