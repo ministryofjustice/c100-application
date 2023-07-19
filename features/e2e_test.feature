@@ -361,6 +361,50 @@ Feature: Testing C100 end to end
     And I fill in "Last name(s)" with "Doe"
     And I click the "Continue" button
     Then I should see "Provide details for Emily Doe"
+    And I enter the date 1-1-2020
+    And I click the radio button "Female"
+    And I click the "Continue" button
+    Then I should see "Which of the decisions you’re asking the court to resolve relate to Emily Doe?"
+    And I check "Decide who they live with and when"
+    And I check "Decide how much time they spend with each person"
+    And I click the "Continue" button
+    Then I should see "Is there a Special Guardianship Order in force in relation to Emily Doe?"
+    And I choose "No"
+    Then I should see "Parental responsibility for Emily Doe"
+    And I fill in "State everyone who has parental responsibility for Emily Doe and how they have parental responsibility." with "Mother"
+    And I click the "Continue" button
+    And I choose "Don't know" for all options on this page
+    Then I should see "Do you or any respondents have other children who are not part of this application?"
+    And I choose "Yes"
+    Then I should see "Enter the other child’s name"
+    And I fill in "First name(s)" with "John"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Provide details for John Doe"
+    And I enter the date 10-10-2020
+    And I choose "Male"
+    Then I should see "Enter your name"
+    And I fill in "First name(s)" with "Jane"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Keeping your contact details private"
+    And I choose "I don't know"
+    Then I should see "Keeping your contact details private"
+    And I click the radio button "Yes"
+    And I check "Current address"
+    And I click the "Continue" button
+    Then I should see "The court will keep your contact details private"
+    And I should see "You have told us you want to keep these contact details private"
+    And I should see "Current address"
+    And I click the "Continue" link
+    Then I should see "Provide details for Jane Doe"
+    And I click the radio button "Yes"
+    And I fill in "Enter your previous name" with "Olivia Doe Jr"
+    And I click the radio button "Female"
+    And I enter the date 10-10-1990
+    And I fill in "Your place of birth" with "London"
+    And I click the "Continue" button
+    Then I should see "What is Jane Doe's relationship to Emily Doe?"
   
 #  Scenario: Consent order
 #    When I choose "Consent Order"
