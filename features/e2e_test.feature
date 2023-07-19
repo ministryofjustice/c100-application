@@ -405,6 +405,10 @@ Feature: Testing C100 end to end
     And I fill in "Your place of birth" with "London"
     And I click the "Continue" button
     Then I should see "What is Jane Doe's relationship to Emily Doe?"
+    And I choose "Mother"
+    Then I should see "What is Jane Doe's relationship to John Doe?"
+    And I choose "Mother"
+    Then I should see "Address of Jane Doe"
   
 #  Scenario: Consent order
 #    When I choose "Consent Order"
