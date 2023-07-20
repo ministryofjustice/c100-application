@@ -1432,14 +1432,14 @@ en:
         sign_language_interpreter_details: Give details of who needs a British Sign Language interpreter
         welsh_language_details: Give details of who needs to speak or read in Welsh
       steps_attending_court_special_arrangements_form:
-        special_arrangements_details: You can add more detail if neccessary
+        special_arrangements_details: You can add more detail if necessary
         special_arrangements_options:
           separate_waiting_rooms: Separate waiting rooms
           separate_entrance_exit: Separate exits and entrances
           protective_screens: Protective screens - this needs to be approved by a judge
           video_link: Video links - this needs to be approved by a judge
       steps_attending_court_special_assistance_form:
-        special_assistance_details: You can add more detail if neccessary
+        special_assistance_details: You can add more detail if necessary
         special_assistance_options:
           hearing_loop: A hearing loop
           braille_documents: Documents in Braille
