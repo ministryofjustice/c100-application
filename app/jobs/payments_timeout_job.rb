@@ -13,7 +13,9 @@ class PaymentsTimeoutJob < ApplicationJob
     start = 75.minutes.ago
     ending = 60.minutes.ago
     C100Application.joins(:payment_intent)
-      .where("payment_intents.state ->> 'finished' = 'false'")
+      .where("(payment_intents.state ->> 'status' = 'submitted') OR
+              (payment_intents.state ->> 'status' = 'failed') OR
+              (payment_intents.state ->> 'finished' = 'false')")
       .where("payment_intents.created_at >= :start AND payment_intents.created_at < :ending", start:, ending:)
       .each do |c100_application|
         Rails.logger.info "Enqueuing payment timeout email #{c100_application.id}"
