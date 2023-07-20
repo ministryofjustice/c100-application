@@ -208,8 +208,6 @@ Feature: Testing C100 end to end
     And I fill in "Reference number" with "HWF-123-456"
     And I click the "Continue" button
     Then I should see "Check your answers"
-    And I should see "Full name Jane Doe Jnr"
-    And I should see "Full name John Doe"
     And I should see "Do you have a solicitor? Yes"
     And I should see "Full name Jane Doe"
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
@@ -220,6 +218,10 @@ Feature: Testing C100 end to end
     And I should see the child's full name is "Jane Doe Jnr"
     And I should see the child's date of birth is "01-01-2023"
     And I should see the child's gender is "Female"
+    And I should see the applicant's name is "John Doe"
+    And I should see the applicant's gender is "Male"
+    And I should see the applicant's date of birth is "01-01-1990"
+    And I should see the applicant's place of birth is "London"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -557,11 +559,11 @@ Feature: Testing C100 end to end
     And I should see the child's full name is "Emily Doe"
     And I should see the child's gender is "Female"
     And I should see the child's date of birth is "01-01-2020"
-    And I should see the applicant's name is "<string>"
-    And I should see the applicant's previous name is "<string>"
-    And I should see the applicant's gender is "<string>"
-    And I should see the applicant's date of birth is "<string>"
-    And I should see the applicant's place of birth is "<string>"
+    And I should see the applicant's name is "Jane Doe"
+    And I should see the applicant's previous name is "Olivia Doe Jr"
+    And I should see the applicant's gender is "Female"
+    And I should see the applicant's date of birth is "10-10-1990"
+    And I should see the applicant's place of birth is "London"
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"

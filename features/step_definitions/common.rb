@@ -220,21 +220,41 @@ And(/^I should see the child's gender is "([^"]*)"$/) do |arg|
 end
 
 And(/^I should see the applicant's name is "([^"]*)"$/) do |arg|
-  pending
+  within('#applicants_details') do
+    within('#person_full_name') do
+      expect(page).to have_content(arg)
+      end
+  end
 end
 
 And(/^I should see the applicant's previous name is "([^"]*)"$/) do |arg|
-  pending
+  within('#applicants_details') do
+    within('#person_previous_name') do
+      expect(page).to have_content(arg)
+    end
+  end
 end
 
 And(/^I should see the applicant's gender is "([^"]*)"$/) do |arg|
-  pending
+  within('#applicants_details') do
+    within('#person_sex') do
+      expect(page).to have_content(arg)
+    end
+  end
 end
 
 And(/^I should see the applicant's date of birth is "([^"]*)"$/) do |arg|
-  pending
+  within('#applicants_details') do
+    within('#person_dob') do
+      expect(page).to have_content(arg)
+    end
+  end
 end
 
 And(/^I should see the applicant's place of birth is "([^"]*)"$/) do |arg|
-  pending
+  within('#applicants_details') do
+    within('#person_birthplace') do
+      expect(page).to have_content(arg)
+    end
+  end
 end
