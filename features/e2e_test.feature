@@ -196,7 +196,7 @@ Feature: Testing C100 end to end
     Then I should see "Do you or the children need specific safety arrangements at court?"
     And I click the "Continue" button
     Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
-    And I fill in "You can add more detail if neccessary" with "We need lots of light"
+    And I fill in "You can add more detail if necessary" with "We need lots of light"
     And I click the "Continue" button
     Then I should see "Submitting your application to court"
     And I fill in "Enter an email address if you would like to get a confirmation" with "John@Gmail.com"
@@ -216,6 +216,10 @@ Feature: Testing C100 end to end
     And I should see they have attended MIAM
     And I should see they have a document signed by the mediator
     And I should see they have no safety concerns about the children
+    And I should see they want the court to decide: "Decide who they live with and when"
+    And I should see the child's full name is "Jane Doe Jnr"
+    And I should see the child's date of birth is "01-01-2023"
+    And I should see the child's gender is "Female"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -284,7 +288,7 @@ Feature: Testing C100 end to end
     And I fill in "When did this behaviour start?" with "Many years ago"
     And I choose "No" for all options on this page
     And I fill in "When did the behaviour stop?" with "About two years ago"
-    And I click the "Continue" button 
+    And I click the "Continue" button
     Then I should see "Have the children ever been psychologically abused by the respondent?"
     And I choose "Yes"
     Then I should see "About the children’s psychological abuse"
@@ -311,7 +315,7 @@ Feature: Testing C100 end to end
     And I click the "Continue" button
     Then I should see "Your safety"
     And I click the "Continue" link
-    Then I should see "Have you ever been sexually abused by the respondent?"  
+    Then I should see "Have you ever been sexually abused by the respondent?"
     And I choose "No"
     Then I should see "Have you ever been physically abused by the respondent?"
     And I choose "Yes"
@@ -527,7 +531,7 @@ Feature: Testing C100 end to end
     And I fill in "Give details of who needs an interpreter and the language they require (including dialect, if applicable)" with "German needed for respondent"
     And I click the "Continue" button
     Then I should see "Do you or the children need specific safety arrangements at court?"
-    And I fill in "You can add more detail if neccessary" with "Please keep the time the kids are needed for to a minimum"
+    And I fill in "You can add more detail if necessary" with "Please keep the time the kids are needed for to a minimum"
     And I click the "Continue" button
     Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
     And I click the "Continue" button
@@ -537,7 +541,7 @@ Feature: Testing C100 end to end
     Then I should see "Is this email address correct?"
     And I should see "jane_doe@gmail.com"
     And I click the "Yes, continue" link
-    Then I should see "How will you pay the application fee?" 
+    Then I should see "How will you pay the application fee?"
     And I choose "Pay with ‘Help with fees’"
     And I fill in "Reference number" with "HWF-123-456"
     And I click the "Continue" button
@@ -548,7 +552,16 @@ Feature: Testing C100 end to end
     And I should see they are exempt from an MIAM
     And I should see they have a document signed by the mediator
     And I should see they have safety concerns about the children
-
+    And I should see they want the court to decide: "Decide who they live with and when"
+    And I should see they want the court to decide: "Decide how much time they spend with each person"
+    And I should see the child's full name is "Emily Doe"
+    And I should see the child's gender is "Female"
+    And I should see the child's date of birth is "01-01-2020"
+    And I should see the applicant's name is "<string>"
+    And I should see the applicant's previous name is "<string>"
+    And I should see the applicant's gender is "<string>"
+    And I should see the applicant's date of birth is "<string>"
+    And I should see the applicant's place of birth is "<string>"
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"
