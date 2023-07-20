@@ -212,6 +212,10 @@ Feature: Testing C100 end to end
     And I should see "Full name John Doe"
     And I should see "Do you have a solicitor? Yes"
     And I should see "Full name Jane Doe"
+    And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
+    And I should see they have attended MIAM
+    And I should see they have a document signed by the mediator
+    And I should see they have no safety concerns about the children
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -538,6 +542,13 @@ Feature: Testing C100 end to end
     And I fill in "Reference number" with "HWF-123-456"
     And I click the "Continue" button
     Then I should see "Check your answers"
+    And I should see "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
+    And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
+    And I should see they haven't attended MIAM
+    And I should see they are exempt from an MIAM
+    And I should see they have a document signed by the mediator
+    And I should see they have safety concerns about the children
+
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"
