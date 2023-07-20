@@ -222,6 +222,7 @@ Feature: Testing C100 end to end
     And I should see the applicant's gender is "Male"
     And I should see the applicant's date of birth is "01-01-1990"
     And I should see the applicant's place of birth is "London"
+    And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -564,6 +565,7 @@ Feature: Testing C100 end to end
     And I should see the applicant's gender is "Female"
     And I should see the applicant's date of birth is "10-10-1990"
     And I should see the applicant's place of birth is "London"
+    And I should see the applicant's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"

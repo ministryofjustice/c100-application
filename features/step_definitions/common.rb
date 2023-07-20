@@ -258,3 +258,13 @@ And(/^I should see the applicant's place of birth is "([^"]*)"$/) do |arg|
     end
   end
 end
+
+And(/^I should see the applicant's address is "([^"]*)"$/) do |arg|
+  within('#applicants_details') do
+    within('#person_address_details') do
+      within('#person_address') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
