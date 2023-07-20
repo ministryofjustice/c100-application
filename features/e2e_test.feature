@@ -409,6 +409,135 @@ Feature: Testing C100 end to end
     Then I should see "What is Jane Doe's relationship to John Doe?"
     And I choose "Mother"
     Then I should see "Address of Jane Doe"
-  
+    And I click the "I live outside the UK" link
+    Then I should see "Address details of Jane Doe"
+    And I fill in "Building and street" with "Windsor Castle"
+    And I fill in "Town or city" with "Windsor"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SL4 1QF"
+    And I click the radio button "Yes"
+    And I click the "Continue" button
+    Then I should see "Contact details of Jane Doe"
+    And I click the radio button "I can provide an email address"
+    And I fill in "Your email address" with "jane_doe@gmail.com"
+    And I fill in "Your home phone" with "00000001111"
+    And I click the radio button "I can provide a mobile phone number"
+    And I fill in "Your mobile phone" with "00000888888"
+    And I choose "Yes, the court can leave me a voicemail"
+    Then I should see "Will you be legally represented by a solicitor in these proceedings?"
+    And I choose "No"
+    Then I should see "Enter the respondent’s name"
+    And I fill in "First name(s)" with "John"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Provide details for John Doe"
+    And I click the radio button "No"
+    And I click the radio button "Male"
+    And I enter the date 12-12-1970
+    And I fill in "Place of birth" with "Windsor"
+    And I click the "Continue" button
+    Then I should see "What is John Doe's relationship to Emily Doe?"
+    And I choose "Father"
+    Then I should see "What is John Doe's relationship to John Doe?"
+    And I choose "Father"
+    Then I should see "Address of John Doe"
+    And I click the "I don’t know their postcode or they live outside the UK" link
+    And I should see "Address details of John Doe"
+    And I fill in "Building and street" with "Windsor Castle"
+    And I fill in "Town or city" with "Windsor"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SL4 1QF"
+    And I click the radio button "Don't know"
+    And I fill in "Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent" with "They may have lived in Buckingham Palace"
+    And I click the "Continue" button
+    Then I should see "Contact details of John Doe"
+    And I fill in "Email address" with "john-doe@hotmail.com"
+    And I fill in "Mobile phone" with "00000999999"
+    And I choose "I don't know their home phone number"
+    And I click the "Continue" button
+    Then I should see "Is there anyone else who should know about your application?"
+    And I choose "Yes"
+    Then I should see "Enter the other person’s name"
+    And I fill in "First name(s)" with "Judy"
+    And I fill in "Last name(s)" with "Sitter"
+    And I click the "Continue" button
+    Then I should see "Provide details for Judy Sitter"
+    And I click the radio button "No"
+    And I click the radio button "Female"
+    And I enter the date 10-1-1991
+    And I click the "Continue" button
+    Then I should see "What is Judy Sitter's relationship to Emily Doe?"
+    And I click the radio button "Other"
+    And I fill in "Please specify" with "Caregiver"
+    And I click the "Continue" button
+    Then I should see "What is Judy Sitter's relationship to John Doe?"
+    And I click the radio button "Other"
+    And I fill in "Please specify" with "Caregiver"
+    And I click the "Continue" button
+    Then I should see "Address of Judy Sitter"
+    And I click the "I don’t know their postcode or they live outside the UK" link
+    And I fill in "Building and street" with "10 Downing Street"
+    And I fill in "Town or city" with "London"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SW1A 1AA"
+    And I click the "Continue" button
+    Then I should see "Who does Emily Doe currently live with?"
+    And I should see "Jane Doe"
+    And I should see "John Doe"
+    And I should see "Judy Sitter"
+    And I check "Jane Doe"
+    And I click the "Continue" button
+    Then I should see "Have any of the children in this application been involved in other family court proceedings?"
+    And I choose "Yes"
+    And I fill in "Names of children involved" with "Emily Doe and John Doe"
+    And I fill in "Name of court" with "Aylesbury"
+    And I fill in "Date/year" with "March 2020"
+    And I fill in "Type of proceedings" with "Care order"
+    And I fill in "Add details of any other previous family case" with "Emily Doe was involved in a care order which took place at Aylesbury court"
+    And I click the "Continue" button
+    Then I should see "Do you need an urgent hearing?"
+    And I choose "No"
+    Then I should see "Are you asking for a without notice hearing?"
+    And I choose "No"
+    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    And I click the radio button "Yes"
+    And I fill in "Provide details" with "Emily's maternal grandparents are in Austria"
+    And I click the "Continue" button
+    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
+    And I choose "No"
+    Then I should see "Has a request for information or other assistance involving the children been made to or by another country?"
+    And I choose "No"
+    Then I should see "Why are you making this application?"
+    And I fill in "Provide details" with "I fear for Emily & John's safety, but particularly Emily's"
+    And I click the "Continue" button
+    Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
+    And I choose "Yes"
+    Then I should see "Factors affecting ability to participate"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need an intermediary to help them in court?"
+    And I choose "Yes"
+    Then I fill in "Provide details" with "Needed for the respondent"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application have special language requirements?"
+    And I check "An interpreter"
+    And I fill in "Give details of who needs an interpreter and the language they require (including dialect, if applicable)" with "German needed for respondent"
+    And I click the "Continue" button
+    Then I should see "Do you or the children need specific safety arrangements at court?"
+    And I fill in "You can add more detail if neccessary" with "Please keep the time the kids are needed for to a minimum"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
+    And I click the "Continue" button
+    Then I should see "Submitting your application to court"
+    And I fill in "Enter an email address if you would like to get a confirmation" with "jane_doe@gmail.com"
+    And I click the "Continue" button
+    Then I should see "Is this email address correct?"
+    And I should see "jane_doe@gmail.com"
+    And I click the "Yes, continue" link
+    Then I should see "How will you pay the application fee?" 
+    And I choose "Pay with ‘Help with fees’"
+    And I fill in "Reference number" with "HWF-123-456"
+    And I click the "Continue" button
+    Then I should see "Check your answers"
+
 #  Scenario: Consent order
 #    When I choose "Consent Order"
