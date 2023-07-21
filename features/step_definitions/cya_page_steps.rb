@@ -407,3 +407,25 @@ And(/^I should see the type of proceeding is "([^"]*)"$/) do |arg|
     end
   end
 end
+
+And(/^I should see an urgent hearing "(is|isn't)" requested$/) do |arg|
+  element = find('dt.govuk-summary-list__key', text: 'Do you need an urgent hearing?')
+  value_element = element.sibling('dd.govuk-summary-list__value')
+
+  if arg == "is"
+    expect(value_element).to have_content("Yes")
+  elsif arg == "isn't"
+    expect(value_element).to have_content("No")
+  end
+end
+
+And(/^I should see a without notice hearing "(is|isn't)" requested$/) do |arg|
+  element = find('dt.govuk-summary-list__key', text: 'Are you asking for a without notice hearing?')
+  value_element = element.sibling('dd.govuk-summary-list__value')
+
+  if arg == "is"
+    expect(value_element).to have_content("Yes")
+  elsif arg == "isn't"
+    expect(value_element).to have_content("No")
+  end
+end

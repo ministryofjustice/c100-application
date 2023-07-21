@@ -247,6 +247,8 @@ Feature: Testing C100 end to end
     And I should see the name of the court is "London Court"
     And I should see the date of the proceeding is "2020"
     And I should see the type of proceeding is "Legal hearing"
+    And I should see an urgent hearing "isn't" requested
+    And I should see a without notice hearing "isn't" requested
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -617,6 +619,8 @@ Feature: Testing C100 end to end
     And I should see the name of the court is "Aylesbury"
     And I should see the date of the proceeding is "March 2020"
     And I should see the type of proceeding is "Care order"
+    And I should see an urgent hearing "isn't" requested
+    And I should see a without notice hearing "isn't" requested
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"
