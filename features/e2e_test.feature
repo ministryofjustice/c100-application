@@ -237,6 +237,10 @@ Feature: Testing C100 end to end
     And I should see the respondent's place of birth is "London"
     And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
     And I should see the respondent "has" lived at that address for more than 5 years
+    And I should see the respondent's email is "jane@hotmail.com"
+    And I should see the respondent's mobile phone number is "00000000000"
+    And I should see the respondent's relationship to "Jane Doe Jnr" is "Mother"
+    And I should see there "aren't" other people who need to be informed of the application
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -590,6 +594,17 @@ Feature: Testing C100 end to end
     And I should see the respondent's place of birth is "Windsor"
     And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
     And I should see the respondent "might not have" lived at that address for more than 5 years
+    And I should see the respondent's email is "john-doe@hotmail.com"
+    And I should see the respondent's mobile phone number is "00000999999"
+    And I should see the respondent's relationship to "Emily Doe" is "Father"
+    And I should see the respondent's relationship to "John Doe" is "Father"
+    And I should see there "are" other people who need to be informed of the application
+    And I should see the other party's name is "Judy Sitter"
+    And I should see the other party's gender is "Female"
+    And I should see the other party's date of birth is "10-01-1991"
+    And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 1AA"
+    And I should see the other party's relationship to "John Doe" is "Caregiver"
+    And I should see the other party's relationship to "Emily Doe" is "Caregiver"
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"

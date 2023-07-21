@@ -260,3 +260,97 @@ And(/^I should see the respondent "(has|hasn't|might not have)" lived at that ad
     end
   end
 end
+
+And(/^I should see the respondent's email is "([^"]*)"$/) do |arg|
+  within('#respondents_details') do
+    within('#person_contact_details') do
+      within('#person_email') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the respondent's mobile phone number is "([^"]*)"$/) do |arg|
+  within('#respondents_details') do
+    within('#person_contact_details') do
+      within('#person_mobile_phone') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the respondent's relationship to "([^"]*)" is "([^"]*)"$/) do |arg1, arg2|
+  children_rows = all('.govuk-summary-list__row')
+  match = false
+  children_rows.each do |element|
+    if element.text.include?("Relationship to #{arg1}") && element.text.include?(arg2)
+      match = true
+      break
+    end
+  end
+  expect(match).to be(true)
+end
+
+And(/^I should see there "(are|aren't)" other people who need to be informed of the application$/) do |arg|
+  within('#other_parties_details') do
+    within('#has_other_parties') do
+      if arg == "are"
+        expect(page).to have_content("Is there anyone else who should know about your application? Yes")
+      elsif arg == "aren't"
+        expect(page).to have_content("Is there anyone else who should know about your application? No")
+      end
+    end
+  end
+end
+
+And(/^I should see the other party's name is "([^"]*)"$/) do |arg|
+  within('#other_parties_details') do
+    within('#person_full_name') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see the other party's gender is "([^"]*)"$/) do |arg|
+  within('#other_parties_details') do
+    within('#person_personal_details') do
+      within('#person_sex') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the other party's date of birth is "([^"]*)"$/) do |arg|
+  within('#other_parties_details') do
+    within('#person_personal_details') do
+      within('#person_dob') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the other party's address is "([^"]*)"$/) do |arg|
+  within('#other_parties_details') do
+    within('#person_address_details') do
+      within('#person_address') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the other party's relationship to "([^"]*)" is "([^"]*)"$/) do |arg1, arg2|
+  children_rows = all('.govuk-summary-list__row')
+  match = false
+  children_rows.each do |element|
+    if element.text.include?("Relationship to #{arg1}") && element.text.include?(arg2)
+      match = true
+      break
+    end
+  end
+  expect(match).to be(true)
+end
