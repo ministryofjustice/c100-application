@@ -242,6 +242,11 @@ Feature: Testing C100 end to end
     And I should see the respondent's relationship to "Jane Doe Jnr" is "Mother"
     And I should see there "aren't" other people who need to be informed of the application
     And I should see the child "Jane Doe Jnr" lives with "John Doe"
+    And I should see the children "have" been involved in other proceedings
+    And I should see the names of the children involved in other proceedings are "Jane Doe Jnr"
+    And I should see the name of the court is "London Court"
+    And I should see the date of the proceeding is "2020"
+    And I should see the type of proceeding is "Legal hearing"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -607,6 +612,11 @@ Feature: Testing C100 end to end
     And I should see the other party's relationship to "John Doe" is "Caregiver"
     And I should see the other party's relationship to "Emily Doe" is "Caregiver"
     And I should see the child "Emily Doe" lives with "Jane Doe"
+    And I should see the children "have" been involved in other proceedings
+    And I should see the names of the children involved in other proceedings are "Emily Doe and John Doe"
+    And I should see the name of the court is "Aylesbury"
+    And I should see the date of the proceeding is "March 2020"
+    And I should see the type of proceeding is "Care order"
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"

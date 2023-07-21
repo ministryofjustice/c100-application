@@ -363,3 +363,47 @@ And(/^I should see the child "([^"]*)" lives with "([^"]*)"$/) do |arg1, arg2|
     end
   end
 end
+
+And(/^I should see the children "(have|haven't)" been involved in other proceedings$/) do |arg|
+  within('#other_court_cases') do
+    within('#has_other_court_cases') do
+      if arg == "have"
+        expect(page).to have_content("Have any of the children in this application been involved in other family court proceedings? Yes")
+      elsif arg == "haven't"
+        expect(page).to have_content("Have any of the children in this application been involved in other family court proceedings? No")
+      end
+    end
+  end
+end
+
+And(/^I should see the names of the children involved in other proceedings are "([^"]*)"$/) do |arg|
+  within('#other_court_cases') do
+    within('#court_proceeding_children_names') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see the name of the court is "([^"]*)"$/) do |arg|
+  within('#other_court_cases') do
+    within('#court_proceeding_court_name') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see the date of the proceeding is "([^"]*)"$/) do |arg|
+  within('#other_court_cases') do
+    within('#court_proceeding_proceedings_date') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see the type of proceeding is "([^"]*)"$/) do |arg|
+  within('#other_court_cases') do
+    within('#court_proceeding_order_types') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
