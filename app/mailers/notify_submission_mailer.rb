@@ -106,7 +106,7 @@ class NotifySubmissionMailer < NotifyMailer
     return '' if file.nil? ||
                  file.try(:string).try(:blank?) ||
                  file.try(:rewind).try(:blank?)
-    Notifications.prepare_upload(file)
+    Notifications.prepare_upload(file, confirm_email_before_download: false)
   end
 
   def court
