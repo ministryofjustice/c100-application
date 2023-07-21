@@ -165,3 +165,23 @@ And(/^I should see the solicitor's reference is "([^"]*)"$/) do |arg|
     end
   end
 end
+
+And(/^I should see the solicitor's full name is "([^"]*)"$/) do |arg|
+  within('#solicitor_details') do
+    within('#solicitor_personal_details') do
+      within('#solicitor_full_name') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the solicitor's address is "([^"]*)"$/) do |arg|
+  within('#solicitor_details') do
+    within('#solicitor_address_details') do
+      within('#solicitor_address') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end

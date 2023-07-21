@@ -228,6 +228,8 @@ Feature: Testing C100 end to end
     And I should see the applicant has provided a mobile number "00000000000"
     And I should see the applicant "does" have a solicitor
     And I should see the solicitor's reference is "123456"
+    And I should see the solicitor's full name is "Annalise Keating"
+    And I should see the solicitor's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
