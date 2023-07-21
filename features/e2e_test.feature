@@ -235,6 +235,8 @@ Feature: Testing C100 end to end
     And I should see the respondent's date of birth is "01-01-1991"
     And I should see the respondent's gender is "Female"
     And I should see the respondent's place of birth is "London"
+    And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
+    And I should see the respondent "has" lived at that address for more than 5 years
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -586,6 +588,8 @@ Feature: Testing C100 end to end
     And I should see the respondent's gender is "Male"
     And I should see the respondent's date of birth is "12-12-1970"
     And I should see the respondent's place of birth is "Windsor"
+    And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
+    And I should see the respondent "might not have" lived at that address for more than 5 years
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"

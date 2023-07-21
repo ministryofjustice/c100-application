@@ -236,3 +236,27 @@ And(/^I should see the respondent's place of birth is "([^"]*)"$/) do |arg|
     end
   end
 end
+
+And(/^I should see the respondent's address is "([^"]*)"$/) do |arg|
+  within('#respondents_details') do
+    within('#person_address_details') do
+        expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see the respondent "(has|hasn't|might not have)" lived at that address for more than 5 years$/) do |arg|
+  within('#respondents_details') do
+    within('#person_address_details') do
+      within('#person_residence_requirement_met') do
+        if arg == "has"
+          expect(page).to have_content("Yes")
+        elsif arg == "hasn't"
+          expect(page).to have_content("No")
+        elsif arg == "might not have"
+          expect(page).to have_content("Don't know")
+        end
+      end
+    end
+  end
+end
