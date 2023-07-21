@@ -185,3 +185,54 @@ And(/^I should see the solicitor's address is "([^"]*)"$/) do |arg|
     end
   end
 end
+
+And(/^I should see the solicitor's email is "([^"]*)" and phone number is "([^"]*)"$/) do |arg1, arg2|
+  within('#solicitor_details') do
+    within('#solicitor_contact_details') do
+      within('#solicitor_email') do
+        expect(page).to have_content(arg1)
+      end
+      within('#solicitor_phone_number') do
+        expect(page).to have_content(arg2)
+      end
+    end
+  end
+end
+
+And(/^I should see the respondent's name is "([^"]*)"$/) do |arg|
+  within('#respondents_details') do
+    within('#person_full_name') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see the respondent's date of birth is "([^"]*)"$/) do |arg|
+  within('#respondents_details') do
+    within('#person_personal_details') do
+      within('#person_dob') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the respondent's gender is "([^"]*)"$/) do |arg|
+  within('#respondents_details') do
+    within('#person_personal_details') do
+      within('#person_sex') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the respondent's place of birth is "([^"]*)"$/) do |arg|
+  within('#respondents_details') do
+    within('#person_personal_details') do
+      within('#person_birthplace') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
