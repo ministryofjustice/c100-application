@@ -223,6 +223,11 @@ Feature: Testing C100 end to end
     And I should see the applicant's date of birth is "01-01-1990"
     And I should see the applicant's place of birth is "London"
     And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
+    And I should see the applicant has provided an email "john@gmail.com"
+    And I should see the applicant has provided a home telephone number "00000000000"
+    And I should see the applicant has provided a mobile number "00000000000"
+    And I should see the applicant "does" have a solicitor
+    And I should see the solicitor's reference is "123456"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -566,6 +571,10 @@ Feature: Testing C100 end to end
     And I should see the applicant's date of birth is "10-10-1990"
     And I should see the applicant's place of birth is "London"
     And I should see the applicant's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
+    And I should see the applicant has provided an email "jane_doe@gmail.com"
+    And I should see the applicant has provided a home telephone number "00000001111"
+    And I should see the applicant has provided a mobile number "00000888888"
+    And I should see the applicant "doesn't" have a solicitor
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"
