@@ -354,3 +354,12 @@ And(/^I should see the other party's relationship to "([^"]*)" is "([^"]*)"$/) d
   end
   expect(match).to be(true)
 end
+
+And(/^I should see the child "([^"]*)" lives with "([^"]*)"$/) do |arg1, arg2|
+  within('#children_residence') do
+    within('#child_residence') do
+      expect(page).to have_content(arg1)
+      expect(page).to have_content(arg2)
+    end
+  end
+end

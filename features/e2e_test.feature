@@ -241,6 +241,7 @@ Feature: Testing C100 end to end
     And I should see the respondent's mobile phone number is "00000000000"
     And I should see the respondent's relationship to "Jane Doe Jnr" is "Mother"
     And I should see there "aren't" other people who need to be informed of the application
+    And I should see the child "Jane Doe Jnr" lives with "John Doe"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -605,6 +606,7 @@ Feature: Testing C100 end to end
     And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 1AA"
     And I should see the other party's relationship to "John Doe" is "Caregiver"
     And I should see the other party's relationship to "Emily Doe" is "Caregiver"
+    And I should see the child "Emily Doe" lives with "Jane Doe"
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"
