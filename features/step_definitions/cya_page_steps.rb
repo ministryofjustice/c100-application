@@ -485,3 +485,11 @@ And(/^I should see a request for information involving the children "(has|hasn't
   end
   expect(match).to be(true)
 end
+
+And(/^I should see the reason for application is "([^"]*)"$/) do |arg|
+  within('#application_reasons') do
+    within('#application_details') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
