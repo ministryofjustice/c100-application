@@ -202,6 +202,7 @@ Feature: Testing C100 end to end
     And I fill in "Enter an email address if you would like to get a confirmation" with "John@Gmail.com"
     And I click the "Continue" button
     Then I should see "Is this email address correct?"
+    And I should see "john@gmail.com"
     And I click the "Yes, continue" link
     Then I should see "How will you pay the application fee?"
     And I click the radio button "Pay with ‘Help with fees’"
@@ -258,6 +259,9 @@ Feature: Testing C100 end to end
     And I should see there "aren't" special language requirements
     And I should see there "aren't" specific safety arrangements specified for the court
     And I should see there "are" special facilities needed when attending court
+    And I should see the email for submitting an application to court is "john@gmail.com"
+    And I should see the payment type "Help with fees"
+    And I should see the HwF reference number is "HWF-123-456"
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -640,7 +644,10 @@ Feature: Testing C100 end to end
     And I should see there "are" special language requirements
     And I should see there "are" specific safety arrangements specified for the court
     And I should see there "aren't" special facilities needed when attending court
-
+    And I should see the email for submitting an application to court is "jane_doe@gmail.com"
+    And I should see the payment type "Help with fees"
+    And I should see the HwF reference number is "HWF-123-456"
+    And I should see the statement of truth
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"

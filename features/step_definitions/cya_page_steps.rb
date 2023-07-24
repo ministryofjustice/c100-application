@@ -560,3 +560,33 @@ And(/^I should see there "(are|aren't)" special facilities needed when attending
     end
   end
 end
+
+And(/^I should see the email for submitting an application to court is "([^"]*)"$/) do |arg|
+  within('#submission') do
+    within('#submission_type') do
+      within('#submission_receipt_email') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the payment type "([^"]*)"$/) do |arg|
+  payments = all('#payment_type')
+  payments.each do |element|
+    expect(element).to have_content(arg)
+  end
+end
+
+And(/^I should see the HwF reference number is "([^"]*)"$/) do |arg|
+  within('#hwf_reference_number') do
+    expect(page).to have_content(arg)
+  end
+end
+
+And(/^I should see the statement of truth$/) do
+  within('#cya-declaration-box') do
+    expect(page).to have_content('I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.')
+  end
+end
+
