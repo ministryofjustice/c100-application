@@ -249,6 +249,9 @@ Feature: Testing C100 end to end
     And I should see the type of proceeding is "Legal hearing"
     And I should see an urgent hearing "isn't" requested
     And I should see a without notice hearing "isn't" requested
+    And I should see the life of someone significant to the child "isn't" outside the UK
+    And I should see another person in this application "could" apply for an order outside the UK
+    And I should see a request for information involving the children "hasn't" been made outside the UK
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -621,6 +624,9 @@ Feature: Testing C100 end to end
     And I should see the type of proceeding is "Care order"
     And I should see an urgent hearing "isn't" requested
     And I should see a without notice hearing "isn't" requested
+    And I should see the life of someone significant to the child "is" outside the UK
+    And I should see another person in this application "couldn't" apply for an order outside the UK
+    And I should see a request for information involving the children "hasn't" been made outside the UK
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"

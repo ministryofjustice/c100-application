@@ -429,3 +429,59 @@ And(/^I should see a without notice hearing "(is|isn't)" requested$/) do |arg|
     expect(value_element).to have_content("No")
   end
 end
+
+And(/^I should see the life of someone significant to the child "(is|isn't)" outside the UK$/) do |arg|
+  international_rows = all('.app-cya--answers-group#international_resident')
+  match = false
+  international_rows.each do |element|
+    if arg == "is"
+      if element.text.include?("Yes")
+        match = true
+      end
+    elsif arg == "isn't"
+      if element.text.include?("No")
+        match = true
+      end
+      break
+    end
+  end
+  expect(match).to be(true)
+end
+
+And(/^I should see another person in this application "(could|couldn't)" apply for an order outside the UK$/) do |arg|
+  international_rows = all('.app-cya--answers-group#international_jurisdiction')
+  match = false
+  international_rows.each do |element|
+    if arg == "could"
+      if element.text.include?("Yes")
+        match = true
+        break
+      end
+    elsif arg == "couldn't"
+      if element.text.include?("No")
+        match = true
+        break
+      end
+    end
+  end
+  expect(match).to be(true)
+end
+
+And(/^I should see a request for information involving the children "(has|hasn't)" been made outside the UK$/) do |arg|
+  international_rows = all('.app-cya--answers-group#international_request')
+  match = false
+  international_rows.each do |element|
+    if arg == "has"
+      if element.text.include?("Yes")
+        match = true
+        break
+      end
+    elsif arg == "hasn't"
+      if element.text.include?("No")
+        match = true
+        break
+      end
+    end
+  end
+  expect(match).to be(true)
+end
