@@ -505,3 +505,58 @@ And(/^I should see there "(are|aren't)" factors that may affect any adult in thi
     end
   end
 end
+
+And(/^I should see there "(are|aren't)" people who need an intermediary to help them in court$/) do |arg|
+  within('#attending_court') do
+    within('#intermediary') do
+      if arg == "are"
+        expect(page).to have_content("Yes")
+      elsif arg == "aren't"
+        expect(page).to have_content("No")
+      end
+    end
+  end
+end
+
+And(/^I should see the details provided for the intermediary are "([^"]*)"$/) do |arg|
+  within('#attending_court') do
+    within('#intermediary') do
+        expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see there "(are|aren't)" special language requirements$/) do |arg|
+  language_rows = all('#language_interpreter')
+  language_rows.each do |element|
+    if arg == "are"
+      expect(element).to have_content('Yes')
+    elsif arg == "aren't"
+      expect(element).not_to have_content('Yes')
+    end
+  end
+end
+
+And(/^I should see there "(are|aren't)" specific safety arrangements specified for the court$/) do |arg|
+  arrangements = all('#special_arrangements')
+  arrangements.each do |element|
+    if arg == "aren't"
+      expect(element).to have_no_content("Additional details")
+      expect(page).to have_content("None selected")
+    elsif arg == "are"
+      expect(page).to have_content("Additional details")
+    end
+  end
+end
+
+And(/^I should see there "(are|aren't)" special facilities needed when attending court$/) do |arg|
+  arrangements = all('#special_assistance')
+  arrangements.each do |element|
+    if arg == "aren't"
+      expect(element).to have_no_content("Additional details")
+      expect(page).to have_content("None selected")
+    elsif arg == "are"
+      expect(page).to have_content("Additional details")
+    end
+  end
+end
