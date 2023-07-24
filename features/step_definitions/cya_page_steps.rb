@@ -493,3 +493,15 @@ And(/^I should see the reason for application is "([^"]*)"$/) do |arg|
     end
   end
 end
+
+And(/^I should see there "(are|aren't)" factors that may affect any adult in this application taking part in the court proceedings$/) do |arg|
+  within('#litigation_capacity') do
+    within('#reduced_litigation_capacity') do
+      if arg == "are"
+        expect(page).to have_content('Yes')
+      elsif arg == "aren't"
+        expect(page).to have_content('No')
+      end
+    end
+  end
+end

@@ -253,6 +253,7 @@ Feature: Testing C100 end to end
     And I should see another person in this application "could" apply for an order outside the UK
     And I should see a request for information involving the children "hasn't" been made outside the UK
     And I should see the reason for application is "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And I should see there "aren't" factors that may affect any adult in this application taking part in the court proceedings
 
   Scenario: Child arrangements order (MIAM) (path two: 'No' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -629,6 +630,7 @@ Feature: Testing C100 end to end
     And I should see another person in this application "couldn't" apply for an order outside the UK
     And I should see a request for information involving the children "hasn't" been made outside the UK
     And I should see the reason for application is "I fear for Emily & John's safety, but particularly Emily's"
+    And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
 
 #  Scenario: Consent order
 #    When I choose "Consent Order"
