@@ -817,6 +817,7 @@ Feature: Testing C100 end to end
     And I click the radio button "Female"
     And I enter the date 1-1-1990
     And I fill in "Your place of birth" with "Windsor"
+    And I click the "Continue" button
     Then I should see "What is June Doe's relationship to Alistair Doe?"
     And I choose "Mother"
     Then I should see "Address of June Doe"
@@ -827,6 +828,7 @@ Feature: Testing C100 end to end
     And I fill in "Country" with "United Kingdom"
     And I fill in "Postcode" with "SW1A 1AA"
     And I click the radio button "Yes"
+    And I click the "Continue" button
     Then I should see "Contact details of June Doe"
     And I click the radio button "I can provide an email address"
     And I fill in "Your email address" with "june@gmail.com"
