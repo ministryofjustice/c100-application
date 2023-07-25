@@ -1,3 +1,27 @@
+And(/^I should see the children "(are|aren't)" involved in any emergency protection, care of proceedings$/) do |arg|
+  within('#opening_questions') do
+    within('#child_protection_cases') do
+      if arg == "are"
+        expect(page).to have_content("Yes")
+      elsif arg == "aren't"
+        expect(page).to have_content("No")
+      end
+    end
+  end
+end
+
+And(/^I should see they "(have|haven't)" been to mediation through the mediation voucher scheme$/) do |arg|
+  within('#mediation_voucher') do
+    within('#mediation_voucher_scheme') do
+      if arg == "haven't"
+        expect(page).to have_content("No")
+      elsif arg == "have"
+        expect(page).to have_content("Yes")
+      end
+    end
+  end
+end
+
 And(/^I should see they haven't attended MIAM$/) do
   within('#miam_attended') do
     expect(page).to have_content("Have you attended a Mediation Information and Assessment Meeting (MIAM)? No")
@@ -22,15 +46,41 @@ And(/^I should see they are exempt from an MIAM$/) do
   end
 end
 
-And(/^I should see they have safety concerns about the children$/) do
+And(/^I should see they "(have|haven't)" got safety concerns about the children$/) do |arg|
   within('#safety_concerns') do
-    expect(page).to have_content("Yes")
+    if arg == "have"
+      expect(page).to have_content("Yes")
+    elsif arg == "haven't"
+      expect(page).to have_content("No")
+    end
   end
 end
 
-And(/^I should see they have no safety concerns about the children$/) do
-  within('#safety_concerns') do
-    expect(page).to have_content("No")
+And(/^I should see they have safety concerns with the children about: "([^"]*)"$/) do |list|
+  concerns = list.downcase.split(',').map(&:strip)
+
+  within('#children_abuse_details') do
+    all("dt.govuk-summary-list__key").each do |dt_element|
+      concern_text = dt_element.text.downcase
+      next unless concerns.any? { |concern| concern_text.include?(concern) }
+
+      dd_element = dt_element.sibling("dd.govuk-summary-list__value", visible: :all)
+      expect(dd_element).to have_text(/#{Regexp.escape('yes')}/i)
+    end
+  end
+end
+
+And(/^I should see they have safety concerns with themselves about: "([^"]*)"$/) do |list|
+  concerns = list.downcase.split(',').map(&:strip)
+
+  within('#applicant_abuse_details') do
+    all("dt.govuk-summary-list__key").each do |dt_element|
+      concern_text = dt_element.text.downcase
+      next unless concerns.any? { |concern| concern_text.include?(concern) }
+
+      dd_element = dt_element.sibling("dd.govuk-summary-list__value", visible: :all)
+      expect(dd_element).to have_text(/#{Regexp.escape('yes')}/i)
+    end
   end
 end
 
@@ -589,4 +639,3 @@ And(/^I should see the statement of truth$/) do
     expect(page).to have_content('I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.')
   end
 end
-
