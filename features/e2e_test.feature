@@ -657,4 +657,11 @@ Feature: Testing C100 end to end
     And I should see the statement of truth
 
   Scenario: Consent order
-    When I choose "Consent Order"
+    When I click the radio button "Consent order"
+    And I click the "Continue" button
+    And I should see "Upload the draft of your consent order"
+    Then I upload a document to the consent order page
+    And I click the "Continue" button
+    Then I should see "You do not have to attend a MIAM"
+    And I click the "Continue" link
+    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
