@@ -756,3 +756,49 @@ Feature: Testing C100 end to end
     Then I should see "Have you had or do you currently have any court orders made for your protection?"
     And I choose "No"
     Then I should see "Contact between the children and the other people in this application"
+    And I choose "No" for all options on this page
+    And I click the "Continue" button
+    Then I should see "What are you asking the court to decide about the children involved?"
+    And I check "Decide who they live with and when"
+    And I check "Resolve a specific issue"
+    And I check "A religious issue"
+    And I click the "Continue" button
+    Then I should see "What you’re asking the court to decide about the children"
+    And I should see "Decide who they live with and when"
+    And I should see "This is known as a Child Arrangements Order."
+    And I should see "A religious issue"
+    And I should see "This is known as a Specific Issue Order."
+    Then I click the "Continue" link
+    Then I should see "Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?"
+    And I choose "No"
+    Then I should see "Going to court"
+    And I should see "What happens at court"
+    And I should see "Changing or enforcing an order"
+    And I should see "Representing yourself in court"
+    And I should see "Domestic violence or abuse and child abuse"
+    And I check "I understand what’s involved if I decide to go to court"
+    And I click the "Continue" button
+    Then I should see "Enter the names of the children"
+    And I fill in "First name(s)" with "Alistair"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Provide details for Alistair Doe"
+    And I enter the date 1-1-2023
+    And I choose "Male"
+    And I click the "Continue" button
+    Then I should see "Which of the decisions you’re asking the court to resolve relate to Alistair Doe?"
+    And I check "Decide who they live with and when"
+    And I check "A religious issue"
+    And I click the "Continue" button
+    Then I should see "Is there a Special Guardianship Order in force in relation to Alistair Doe?"
+    And I choose "Yes"
+    Then I should see "Parental responsibility for Alistair Doe"
+    And I fill in "State everyone who has parental responsibility for Alistair Doe and how they have parental responsibility." with "Me and the respondent"
+    And I click the "Continue" button
+    Then I should see "Further information"
+    And I choose "Yes" for all options on this page
+    And I fill in "State which child and the name of the local authority and social worker, if known" with "Alistair Doe knows Jane Doe from London"
+    And I click the "Continue" button
+    Then I should see "Do you or any respondents have other children who are not part of this application?"
+    And I choose "No"
+    Then I should see "Enter your name"
