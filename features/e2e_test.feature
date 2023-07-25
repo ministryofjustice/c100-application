@@ -665,3 +665,94 @@ Feature: Testing C100 end to end
     Then I should see "You do not have to attend a MIAM"
     And I click the "Continue" link
     Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
+    And I choose "Yes"
+    Then I should see "Safety concerns"
+    And I should see "Why do we need this information and what will we do with it?"
+    And I click the "Continue" link
+    Then I should see "Are the children at risk of being abducted?"
+    And I choose "No"
+    Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
+    And I choose "No"
+    Then I should see "Have the children suffered or are they at risk of suffering domestic or child abuse?"
+    And I choose "Yes"
+    Then I should see "You and the children"
+    And I click the "Continue" link
+    Then I should see "The children’s safety"
+    And I click the "Continue" link
+    Then I should see "Have the children ever been sexually abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have the children ever been physically abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have the children ever been financially abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the children’s financial abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from the kids"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have the children ever been psychologically abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the children’s psychological abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent was horrid to the kids"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have the children ever been emotionally abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the children’s emotional abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent made the kids sad on purpose"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Do you have any other safety or welfare concerns about the children?"
+    And I choose "No"
+    Then I should see "Your safety"
+    And I click the "Continue" link
+    Then I should see "Have you ever been sexually abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the sexual abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent touched me non consensually"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have you ever been physically abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the physical abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent hit me several times"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have you ever been financially abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the financial abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from me"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have you ever been psychologically abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the psychological abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent said awful things to me"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have you ever been emotionally abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the emotional abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent called me awful names"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Do you have any other concerns about your welfare?"
+    And I choose "No"
+    Then I should see "Have you had or do you currently have any court orders made for your protection?"
+    And I choose "No"
+    Then I should see "Contact between the children and the other people in this application"
