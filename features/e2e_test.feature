@@ -839,3 +839,48 @@ Feature: Testing C100 end to end
     And I click the "Continue" button
     Then I should see "Will you be legally represented by a solicitor in these proceedings?"
     And I choose "Yes"
+    Then I should see "Details of solicitor"
+    And I fill in "Full name" with "Tegan Price"
+    And I fill in "Name of firm" with "Caplan and Gold"
+    And I fill in "Solicitor’s reference" with "123456"
+    And I click the "Continue" button
+    Then I should see "Address details of Tegan Price"
+    And I fill in "Building and street" with "12 Cannon Street Caplan and Gold"
+    And I fill in "Town or city" with "London"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "EC4N 6YA"
+    And I click the "Continue" button
+    Then I should see "Contact details of Tegan Price"
+    And I fill in "Email address" with "teganprice@caplangold.com"
+    And I fill in "Phone number" with "00000119911"
+    And I fill in "Fax number" with "00000119911"
+    And I fill in "DX number" with "00000119911"
+    And I click the "Continue" button
+    Then I should see "Enter the respondent’s name"
+    And I fill in "First name(s)" with "Jake"
+    And I fill in "Last name(s)" with "Gyllenhaal"
+    And I click the "Continue" button
+    Then I should see "Provide details for Jake Gyllenhaal"
+    And I click the radio button "Yes"
+    And I fill in "Enter their previous name" with "Ryan Reynolds"
+    And I click the radio button "Male"
+    And I enter the date 10-10-1990
+    And I fill in "Place of birth" with "Wrexham"
+    And I click the "Continue" button
+    Then I should see "What is Jake Gyllenhaal's relationship to Alistair Doe?"
+    And I choose "Father"
+    Then I should see "Address of Jake Gyllenhaal"
+    And I click the "I don’t know their postcode or they live outside the UK" link
+    Then I should see "Address details of Jake Gyllenhaal"
+    And I fill in "Building and street" with "Wrexham AFC Mold Road"
+    And I fill in "Town or city" with "Wrexham"
+    And I fill in "Country" with "Wales"
+    And I fill in "Postcode" with "LL11 2AH"
+    And I click the radio button "Yes"
+    And I click the "Continue" button
+    Then I should see "Contact details of Jake Gyllenhaal"
+    And I check "I don't know their email"
+    And I check "I don't know their home phone number"
+    And I fill in "Mobile phone" with "00000000000"
+    And I click the "Continue" button
+    Then I should see "Is there anyone else who should know about your application?"
