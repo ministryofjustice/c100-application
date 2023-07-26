@@ -57,7 +57,7 @@ Feature: Testing C100 end to end
     And I fill in "Last name(s)" with "Doe Jnr"
     And I click the "Continue" button
     Then I should see "Provide details for Jane Doe Jnr"
-    And I enter the date 1-1-2023
+    And I specify they are "2" years of age
     And I choose "Female"
     Then I should see "Which of the decisions you’re asking the court to resolve relate to Jane Doe Jnr?"
     And I check "Decide who they live with and when"
@@ -84,7 +84,7 @@ Feature: Testing C100 end to end
     Then I should see "Provide details for John Doe"
     And I click the radio button "No"
     And I click the radio button "Male"
-    And I enter the date 1-1-1990
+    And I specify they are "30" years of age
     And I fill in "Your place of birth" with "London"
     And I click the "Continue" button
     Then I should see "What is John Doe's relationship to Jane Doe Jnr?"
@@ -131,7 +131,7 @@ Feature: Testing C100 end to end
     Then I should see "Provide details for Jane Doe"
     And I click the radio button "No"
     And I click the radio button "Female"
-    And I enter the date 1-1-1991
+    And I specify they are "30" years of age
     And I fill in "Place of birth" with "London"
     And I click the "Continue" button
     Then I should see "What is Jane Doe's relationship to Jane Doe Jnr?"
@@ -219,11 +219,11 @@ Feature: Testing C100 end to end
     And I should see they "haven't" got safety concerns about the children
     And I should see they want the court to decide: "Decide who they live with and when"
     And I should see the child's full name is "Jane Doe Jnr"
-    And I should see the child's date of birth is "01-01-2023"
+    And I should see the child is "2" years old
     And I should see the child's gender is "Female"
     And I should see the applicant's name is "John Doe"
     And I should see the applicant's gender is "Male"
-    And I should see the applicant's date of birth is "01-01-1990"
+    And I should see the applicant is "30" years old
     And I should see the applicant's place of birth is "London"
     And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
     And I should see the applicant has provided an email "john@gmail.com"
@@ -235,7 +235,7 @@ Feature: Testing C100 end to end
     And I should see the solicitor's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
     And I should see the solicitor's email is "annalise@law.com" and phone number is "00000000000"
     And I should see the respondent's name is "Jane Doe"
-    And I should see the respondent's date of birth is "01-01-1991"
+    And I should see the respondent is "30" years old
     And I should see the respondent's gender is "Female"
     And I should see the respondent's place of birth is "London"
     And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
@@ -413,7 +413,7 @@ Feature: Testing C100 end to end
     And I fill in "Last name(s)" with "Doe"
     And I click the "Continue" button
     Then I should see "Provide details for Emily Doe"
-    And I enter the date 1-1-2020
+    And I specify they are "5" years of age
     And I click the radio button "Female"
     And I click the "Continue" button
     Then I should see "Which of the decisions you’re asking the court to resolve relate to Emily Doe?"
@@ -433,7 +433,7 @@ Feature: Testing C100 end to end
     And I fill in "Last name(s)" with "Doe"
     And I click the "Continue" button
     Then I should see "Provide details for John Doe"
-    And I enter the date 10-10-2020
+    And I specify they are "2" years of age
     And I choose "Male"
     Then I should see "Enter your name"
     And I fill in "First name(s)" with "Jane"
@@ -453,7 +453,7 @@ Feature: Testing C100 end to end
     And I click the radio button "Yes"
     And I fill in "Enter your previous name" with "Olivia Doe Jr"
     And I click the radio button "Female"
-    And I enter the date 10-10-1990
+    And I specify they are "32" years of age
     And I fill in "Your place of birth" with "London"
     And I click the "Continue" button
     Then I should see "What is Jane Doe's relationship to Emily Doe?"
@@ -485,7 +485,7 @@ Feature: Testing C100 end to end
     Then I should see "Provide details for John Doe"
     And I click the radio button "No"
     And I click the radio button "Male"
-    And I enter the date 12-12-1970
+    And I specify they are "35" years of age
     And I fill in "Place of birth" with "Windsor"
     And I click the "Continue" button
     Then I should see "What is John Doe's relationship to Emily Doe?"
@@ -516,7 +516,7 @@ Feature: Testing C100 end to end
     Then I should see "Provide details for Judy Sitter"
     And I click the radio button "No"
     And I click the radio button "Female"
-    And I enter the date 10-1-1991
+    And I specify they are "35" years of age
     And I click the "Continue" button
     Then I should see "What is Judy Sitter's relationship to Emily Doe?"
     And I click the radio button "Other"
@@ -605,11 +605,11 @@ Feature: Testing C100 end to end
     And I should see they want the court to decide: "Decide how much time they spend with each person"
     And I should see the child's full name is "Emily Doe"
     And I should see the child's gender is "Female"
-    And I should see the child's date of birth is "01-01-2020"
+    And I should see the child is "5" years old
     And I should see the applicant's name is "Jane Doe"
     And I should see the applicant's previous name is "Olivia Doe Jr"
     And I should see the applicant's gender is "Female"
-    And I should see the applicant's date of birth is "10-10-1990"
+    And I should see the applicant is "32" years old
     And I should see the applicant's place of birth is "London"
     And I should see the applicant's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
     And I should see the applicant has provided an email "jane_doe@gmail.com"
@@ -618,7 +618,7 @@ Feature: Testing C100 end to end
     And I should see the applicant "doesn't" have a solicitor
     And I should see the respondent's name is "John Doe"
     And I should see the respondent's gender is "Male"
-    And I should see the respondent's date of birth is "12-12-1970"
+    And I should see the respondent is "35" years old
     And I should see the respondent's place of birth is "Windsor"
     And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
     And I should see the respondent "might not have" lived at that address for more than 5 years
@@ -629,7 +629,7 @@ Feature: Testing C100 end to end
     And I should see there "are" other people who need to be informed of the application
     And I should see the other party's name is "Judy Sitter"
     And I should see the other party's gender is "Female"
-    And I should see the other party's date of birth is "10-01-1991"
+    And I should see the other party is "35" years of age
     And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 1AA"
     And I should see the other party's relationship to "John Doe" is "Caregiver"
     And I should see the other party's relationship to "Emily Doe" is "Caregiver"
@@ -783,7 +783,7 @@ Feature: Testing C100 end to end
     And I fill in "Last name(s)" with "Doe"
     And I click the "Continue" button
     Then I should see "Provide details for Alistair Doe"
-    And I enter the date 1-1-2023
+    And I specify they are "6" years of age
     And I choose "Male"
     And I click the "Continue" button
     Then I should see "Which of the decisions you’re asking the court to resolve relate to Alistair Doe?"
@@ -815,7 +815,7 @@ Feature: Testing C100 end to end
     And I click the radio button "Yes"
     And I fill in "Enter your previous name" with "Janie Doe"
     And I click the radio button "Female"
-    And I enter the date 1-1-1990
+    And I specify they are "40" years of age
     And I fill in "Your place of birth" with "Windsor"
     And I click the "Continue" button
     Then I should see "What is June Doe's relationship to Alistair Doe?"
@@ -864,7 +864,7 @@ Feature: Testing C100 end to end
     And I click the radio button "Yes"
     And I fill in "Enter their previous name" with "Ryan Reynolds"
     And I click the radio button "Male"
-    And I enter the date 10-10-1990
+    And I specify they are "46" years of age
     And I fill in "Place of birth" with "Wrexham"
     And I click the "Continue" button
     Then I should see "What is Jake Gyllenhaal's relationship to Alistair Doe?"

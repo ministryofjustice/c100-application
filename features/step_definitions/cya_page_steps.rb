@@ -102,12 +102,6 @@ And(/^I should see the child's full name is "([^"]*)"$/) do |arg|
   end
 end
 
-And(/^I should see the child's date of birth is "([^"]*)"$/) do |arg|
-  within('#children_details') do
-    expect(page).to have_content(arg)
-  end
-end
-
 And(/^I should see the child's gender is "([^"]*)"$/) do |arg|
   within('#children_details') do
     expect(page).to have_content(arg)
@@ -133,14 +127,6 @@ end
 And(/^I should see the applicant's gender is "([^"]*)"$/) do |arg|
   within('#applicants_details') do
     within('#person_sex') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the applicant's date of birth is "([^"]*)"$/) do |arg|
-  within('#applicants_details') do
-    within('#person_dob') do
       expect(page).to have_content(arg)
     end
   end
@@ -257,16 +243,6 @@ And(/^I should see the respondent's name is "([^"]*)"$/) do |arg|
   end
 end
 
-And(/^I should see the respondent's date of birth is "([^"]*)"$/) do |arg|
-  within('#respondents_details') do
-    within('#person_personal_details') do
-      within('#person_dob') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
 And(/^I should see the respondent's gender is "([^"]*)"$/) do |arg|
   within('#respondents_details') do
     within('#person_personal_details') do
@@ -367,16 +343,6 @@ And(/^I should see the other party's gender is "([^"]*)"$/) do |arg|
   within('#other_parties_details') do
     within('#person_personal_details') do
       within('#person_sex') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the other party's date of birth is "([^"]*)"$/) do |arg|
-  within('#other_parties_details') do
-    within('#person_personal_details') do
-      within('#person_dob') do
         expect(page).to have_content(arg)
       end
     end
@@ -637,5 +603,79 @@ end
 And(/^I should see the statement of truth$/) do
   within('#cya-declaration-box') do
     expect(page).to have_content('I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.')
+  end
+end
+
+Then(/^I should see the respondent is "([^"]*)" years old$/) do |age|
+  today = Date.today
+  dob_date = today - age.to_i.years
+
+  day = dob_date.day.to_s.rjust(2, '0')
+  month = dob_date.month.to_s.rjust(2, '0')
+  year = dob_date.year
+
+  expected_dob = "#{day}-#{month}-#{year}"
+
+  within('#respondents_details') do
+    within('#person_personal_details') do
+      within('#person_dob') do
+        expect(page).to have_text(expected_dob)
+      end
+    end
+  end
+end
+
+And(/^I should see the child is "([^"]*)" years old$/) do |age|
+  today = Date.today
+  dob_date = today - age.to_i.years
+
+  day = dob_date.day.to_s.rjust(2, '0')
+  month = dob_date.month.to_s.rjust(2, '0')
+  year = dob_date.year
+
+  expected_dob = "#{day}-#{month}-#{year}"
+
+  within('#children_details') do
+    within('#person_personal_details') do
+      within('#person_dob') do
+        expect(page).to have_text(expected_dob)
+      end
+    end
+  end
+end
+
+And(/^I should see the applicant is "([^"]*)" years old$/) do |age|
+  today = Date.today
+  dob_date = today - age.to_i.years
+
+  day = dob_date.day.to_s.rjust(2, '0')
+  month = dob_date.month.to_s.rjust(2, '0')
+  year = dob_date.year
+
+  expected_dob = "#{day}-#{month}-#{year}"
+
+  within('#applicants_details') do
+    within('#person_dob') do
+      expect(page).to have_content(expected_dob)
+    end
+  end
+end
+
+And(/^I should see the other party is "([^"]*)" years of age$/) do |age|
+  today = Date.today
+  dob_date = today - age.to_i.years
+
+  day = dob_date.day.to_s.rjust(2, '0')
+  month = dob_date.month.to_s.rjust(2, '0')
+  year = dob_date.year
+
+  expected_dob = "#{day}-#{month}-#{year}"
+
+  within('#other_parties_details') do
+    within('#person_personal_details') do
+      within('#person_dob') do
+        expect(page).to have_content(expected_dob)
+      end
+    end
   end
 end
