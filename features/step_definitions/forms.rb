@@ -103,3 +103,12 @@ And(/^I fill in the Expiry date with a valid card expiry date$/) do
   step %[I fill in "Month" with "#{future.month}"]
   step %[I fill in "Year" with "#{future.year}"]
 end
+
+When(/^I specify they are "(\d+)" years of age$/) do |age|
+  today = Date.today
+  date_of_birth = today - age.to_i.years
+
+  step %[I fill in "Day" with "#{date_of_birth.day}"]
+  step %[I fill in "Month" with "#{date_of_birth.month}"]
+  step %[I fill in "Year" with "#{date_of_birth.year}"]
+end

@@ -884,3 +884,29 @@ Feature: Testing C100 end to end
     And I fill in "Mobile phone" with "00000000000"
     And I click the "Continue" button
     Then I should see "Is there anyone else who should know about your application?"
+    And I choose "Yes"
+    Then I should see "Enter the other person’s name"
+    And I fill in "First name(s)" with "Cassie"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Provide details for Cassie Doe"
+    And I click the radio button "No"
+    And I click the radio button "Female"
+    And I specify they are "30" years of age
+    And I click the "Continue" button
+    Then I should see "What is Cassie Doe's relationship to Alistair Doe?"
+    And I click the radio button "Other"
+    And I fill in "Please specify" with "Caregiver"
+    And I click the "Continue" button
+    Then I should see "Address of Cassie Doe"
+    And I click the "I don’t know their postcode or they live outside the UK" link
+    Then I should see "Address details of Cassie Doe"
+    And I fill in "Building and street" with "Windsor Castle"
+    And I fill in "Town or city" with "Windsor"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SL4 1QF"
+    And I click the "Continue" button
+    Then I should see "Who does Alistair Doe currently live with?"
+    And I check "June Doe"
+    And I click the "Continue" button
+    Then I should see "Have any of the children in this application been involved in other family court proceedings?"
