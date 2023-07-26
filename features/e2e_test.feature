@@ -910,3 +910,56 @@ Feature: Testing C100 end to end
     And I check "June Doe"
     And I click the "Continue" button
     Then I should see "Have any of the children in this application been involved in other family court proceedings?"
+    And I choose "No"
+    Then I should see "Do you need an urgent hearing"
+    And I choose "Yes"
+    Then I should see "Details of urgent hearing"
+    And I fill in "Give details of why you’re asking for an urgent hearing" with "Alistair is in grave danger because of Jake Gyllenhaal"
+    And I fill in "How soon do you need an urgent hearing?" with "In the next four weeks"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Are you asking for a without notice hearing?"
+    And I choose "Yes"
+    Then I should see "Details of without notice hearing"
+    And I fill in "Give details of why you’re asking for a without notice hearing" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And I choose "No" for all options on this page
+    And I click the "Continue" button
+    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    And I choose "No"
+    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
+    And I choose "No"
+    Then I should see "Has a request for information or other assistance involving the children been made to or by another country?"
+    And I choose "No"
+    Then I should see "Why are you making this application?"
+    And I fill in "Provide details" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And I click the "Continue" button
+    Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
+    And I choose "Yes"
+    Then I should see "Factors affecting ability to participate"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need an intermediary to help them in court?"
+    And I choose "Yes"
+    And I fill in "Provide details" with "I need someone to communicate between me and the respondent"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application have special language requirements?"
+    And I check "To speak Welsh at a court hearing, or read court documents in Welsh"
+    And I fill in "Give details of who needs to speak or read in Welsh" with "Needed for Jake Gyllenhaal"
+    And I click the "Continue" button
+    Then I should see "Do you or the children need specific safety arrangements at court?"
+    And I check "Separate waiting rooms"
+    And I check "Separate exits and entrances"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
+    And I click the "Continue" button
+    Then I should see "Submitting your application to court"
+    And I fill in "Enter an email address if you would like to get a confirmation" with "june@gmail.com"
+    And I click the "Continue" button
+    Then I should see "Is this email address correct?"
+    And I should see "june@gmail.com"
+    And I click the "Yes, continue" link
+    Then I should see "How will you pay the application fee?"
+    And I choose "Pay with ‘Help with fees’"
+    And I fill in "Reference number" with "HWF-123-456"
+    And I click the "Continue" button
+    Then I should see "Check your answers"
+    
