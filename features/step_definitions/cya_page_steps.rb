@@ -90,8 +90,20 @@ And(/^I should see they have made an application related to a child arrangements
   end
 end
 
+And(/^I should see they have made a consent order application$/) do
+  within('#opening_questions') do
+    expect(page).to have_content("Consent order")
+  end
+end
+
 And(/^I should see they want the court to decide: "([^"]*)"$/) do |arg|
   within('#child_arrangements_orders') do
+    expect(page).to have_content(arg)
+  end
+end
+
+And(/^I should see they want the court to resolve an issue about: "([^"]*)"$/) do |arg|
+  within('#specific_issues_orders') do
     expect(page).to have_content(arg)
   end
 end
@@ -107,6 +119,29 @@ And(/^I should see the child's gender is "([^"]*)"$/) do |arg|
     expect(page).to have_content(arg)
   end
 end
+
+And(/^I should see the people who have parental responsibility for the child are: "([^"]*)"$/) do |arg|
+  within('#children_details') do
+    within('#parental_responsibility') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see the children "(are|aren't|might be)" known to other social services$/) do |arg|
+  within('#children_further_information') do
+    within('#children_known_to_authorities') do
+      if arg == "are"
+        expect(page).to have_content("Yes")
+      elsif arg == "aren't"
+        expect(page).to have_content("No")
+      elsif arg == "might be"
+        expect(page).to have_content("Don't know")
+      end
+    end
+  end
+end
+
 
 And(/^I should see the applicant's name is "([^"]*)"$/) do |arg|
   within('#applicants_details') do
@@ -150,6 +185,20 @@ And(/^I should see the applicant's address is "([^"]*)"$/) do |arg|
   end
 end
 
+And(/^I should see the applicant "(has|hasn't)" lived at this address for more than 5 years$/) do |arg|
+  within('#applicants_details') do
+    within('#person_address_details') do
+      within('#person_residence_requirement_met') do
+        if arg == "has"
+          expect(page).to have_content("Yes")
+        elsif arg == "hasn't"
+          expect(page).to have_content("No")
+        end
+      end
+    end
+  end
+end
+
 And(/^I should see the applicant has provided an email "([^"]*)"$/) do |arg|
   within('#applicants_details') do
     within('#person_contact_details') do
@@ -178,6 +227,18 @@ And(/^I should see the applicant has provided a mobile number "([^"]*)"$/) do |a
       end
     end
   end
+end
+
+And(/^I should see the applicant's relationship to "([^"]*)" is "([^"]*)"$/) do |arg1, arg2|
+  children_rows = all('.govuk-summary-list__row')
+  match = false
+  children_rows.each do |element|
+    if element.text.include?("Relationship to #{arg1}") && element.text.include?(arg2)
+      match = true
+      break
+    end
+  end
+  expect(match).to be(true)
 end
 
 And(/^I should see the applicant "(does|doesn't)" have a solicitor$/) do |arg|
@@ -679,3 +740,4 @@ And(/^I should see the other party is "([^"]*)" years of age$/) do |age|
     end
   end
 end
+

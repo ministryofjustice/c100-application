@@ -221,14 +221,18 @@ Feature: Testing C100 end to end
     And I should see the child's full name is "Jane Doe Jnr"
     And I should see the child is "2" years old
     And I should see the child's gender is "Female"
+    And I should see the people who have parental responsibility for the child are: "Father"
+    And I should see the children "might be" known to other social services
     And I should see the applicant's name is "John Doe"
     And I should see the applicant's gender is "Male"
     And I should see the applicant is "30" years old
     And I should see the applicant's place of birth is "London"
     And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
+    And I should see the applicant "has" lived at this address for more than 5 years
     And I should see the applicant has provided an email "john@gmail.com"
     And I should see the applicant has provided a home telephone number "00000000000"
     And I should see the applicant has provided a mobile number "00000000000"
+    And I should see the applicant's relationship to "Jane Doe Jnr" is "Father"
     And I should see the applicant "does" have a solicitor
     And I should see the solicitor's reference is "123456"
     And I should see the solicitor's full name is "Annalise Keating"
@@ -606,15 +610,20 @@ Feature: Testing C100 end to end
     And I should see the child's full name is "Emily Doe"
     And I should see the child's gender is "Female"
     And I should see the child is "5" years old
+    And I should see the people who have parental responsibility for the child are: "Mother"
+    And I should see the children "might be" known to other social services
     And I should see the applicant's name is "Jane Doe"
     And I should see the applicant's previous name is "Olivia Doe Jr"
     And I should see the applicant's gender is "Female"
     And I should see the applicant is "32" years old
     And I should see the applicant's place of birth is "London"
     And I should see the applicant's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
+    And I should see the applicant "has" lived at this address for more than 5 years
     And I should see the applicant has provided an email "jane_doe@gmail.com"
     And I should see the applicant has provided a home telephone number "00000001111"
     And I should see the applicant has provided a mobile number "00000888888"
+    And I should see the applicant's relationship to "Emily Doe" is "Mother"
+    And I should see the applicant's relationship to "John Doe" is "Mother"
     And I should see the applicant "doesn't" have a solicitor
     And I should see the respondent's name is "John Doe"
     And I should see the respondent's gender is "Male"
@@ -962,4 +971,68 @@ Feature: Testing C100 end to end
     And I fill in "Reference number" with "HWF-123-456"
     And I click the "Continue" button
     Then I should see "Check your answers"
-    
+    And I should see "Consent"
+    And I should see they have made a consent order application
+    And I should see the children "are" involved in any emergency protection, care of proceedings
+    And I should see they "have" got safety concerns about the children
+    And I should see they have safety concerns with the children about: "financial abuse, psychological abuse, emotional abuse"
+    And I should see they have safety concerns with themselves about: "sexual abuse, physical abuse, financial abuse, psychological abuse, emotional abuse"
+    And I should see "No, I do not want the other person to spend time with the children"
+    And I should see they want the court to decide: "Decide who they live with and when"
+    And I should see they want the court to resolve an issue about: "A religious issue"
+    And I should see the child's full name is "Alistair Doe"
+    And I should see the child's gender is "Male"
+    And I should see the child is "6" years old
+    And I should see the people who have parental responsibility for the child are: "Me and the respondent"
+    And I should see the children "are" known to other social services
+    And I should see the applicant's name is "June Doe"
+    And I should see the applicant's previous name is "Janie Doe"
+    And I should see the applicant's gender is "Female"
+    And I should see the applicant is "40" years old
+    And I should see the applicant's place of birth is "Windsor"
+    And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
+    And I should see the applicant "has" lived at this address for more than 5 years
+    And I should see the applicant has provided an email "june@gmail.com"
+    And I should see the applicant has provided a home telephone number "00000000000"
+    And I should see the applicant has provided a mobile number "00000000000"
+    And I should see the applicant's relationship to "Alistair Doe" is "Mother"
+#    And I should see the applicant "doesn't" have a solicitor
+#    And I should see the respondent's name is "John Doe"
+#    And I should see the respondent's gender is "Male"
+#    And I should see the respondent is "35" years old
+#    And I should see the respondent's place of birth is "Windsor"
+#    And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
+#    And I should see the respondent "might not have" lived at that address for more than 5 years
+#    And I should see the respondent's email is "john-doe@hotmail.com"
+#    And I should see the respondent's mobile phone number is "00000999999"
+#    And I should see the respondent's relationship to "Emily Doe" is "Father"
+#    And I should see the respondent's relationship to "John Doe" is "Father"
+#    And I should see there "are" other people who need to be informed of the application
+#    And I should see the other party's name is "Judy Sitter"
+#    And I should see the other party's gender is "Female"
+#    And I should see the other party is "35" years of age
+#    And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 1AA"
+#    And I should see the other party's relationship to "John Doe" is "Caregiver"
+#    And I should see the other party's relationship to "Emily Doe" is "Caregiver"
+#    And I should see the child "Emily Doe" lives with "Jane Doe"
+#    And I should see the children "have" been involved in other proceedings
+#    And I should see the names of the children involved in other proceedings are "Emily Doe and John Doe"
+#    And I should see the name of the court is "Aylesbury"
+#    And I should see the date of the proceeding is "March 2020"
+#    And I should see the type of proceeding is "Care order"
+#    And I should see an urgent hearing "isn't" requested
+#    And I should see a without notice hearing "isn't" requested
+#    And I should see the life of someone significant to the child "is" outside the UK
+#    And I should see another person in this application "couldn't" apply for an order outside the UK
+#    And I should see a request for information involving the children "hasn't" been made outside the UK
+#    And I should see the reason for application is "I fear for Emily & John's safety, but particularly Emily's"
+#    And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
+#    And I should see there "are" people who need an intermediary to help them in court
+#    And I should see the details provided for the intermediary are "Needed for the respondent"
+#    And I should see there "are" special language requirements
+#    And I should see there "are" specific safety arrangements specified for the court
+#    And I should see there "aren't" special facilities needed when attending court
+#    And I should see the email for submitting an application to court is "jane_doe@gmail.com"
+#    And I should see the payment type "Help with fees"
+#    And I should see the HwF reference number is "HWF-123-456"
+#    And I should see the statement of truth
