@@ -273,6 +273,16 @@ And(/^I should see the solicitor's full name is "([^"]*)"$/) do |arg|
   end
 end
 
+And(/^I should see the solicitor's name of firm is "([^"]*)"$/) do |arg|
+  within('#solicitor_details') do
+    within('#solicitor_personal_details') do
+      within('#solicitor_firm_name') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
 And(/^I should see the solicitor's address is "([^"]*)"$/) do |arg|
   within('#solicitor_details') do
     within('#solicitor_address_details') do
@@ -296,10 +306,40 @@ And(/^I should see the solicitor's email is "([^"]*)" and phone number is "([^"]
   end
 end
 
+And(/^I should see the solicitor's Fax number is "([^"]*)"$/) do |arg|
+  within('#solicitor_details') do
+    within('#solicitor_contact_details') do
+      within('#solicitor_fax_number') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the solicitor's DX number is "([^"]*)"$/) do |arg|
+  within('#solicitor_details') do
+    within('#solicitor_contact_details') do
+      within('#solicitor_dx_number') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
 And(/^I should see the respondent's name is "([^"]*)"$/) do |arg|
   within('#respondents_details') do
     within('#person_full_name') do
       expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see the respondent's previous name is "([^"]*)"$/) do |arg|
+  within('#respondents_details') do
+    within('#person_personal_details') do
+      within('#person_previous_name') do
+        expect(page).to have_content(arg)
+      end
     end
   end
 end
@@ -496,6 +536,32 @@ And(/^I should see an urgent hearing "(is|isn't)" requested$/) do |arg|
   end
 end
 
+And(/^I should see an urgent hearing is requested because "([^"]*)"$/) do |arg|
+  within('#urgent_hearing .app-cya--answers-group') do
+    expect(page).to have_content(arg)
+  end
+end
+
+And(/^I should see an urgent hearing is needed: "([^"]*)"$/) do |arg|
+  within('#urgent_hearing .app-cya--answers-group') do
+    within('#urgent_hearing_when') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see a hearing "(is|isn't)" needed within the next 48 hours$/) do |arg|
+  within('#urgent_hearing .app-cya--answers-group') do
+    within('#urgent_hearing_short_notice') do
+      if arg == "is"
+        expect(page).to have_content("Yes")
+      elsif arg == "isn't"
+        expect(page).to have_content("No")
+      end
+    end
+  end
+end
+
 And(/^I should see a without notice hearing "(is|isn't)" requested$/) do |arg|
   element = find('dt.govuk-summary-list__key', text: 'Are you asking for a without notice hearing?')
   value_element = element.sibling('dd.govuk-summary-list__value')
@@ -504,6 +570,12 @@ And(/^I should see a without notice hearing "(is|isn't)" requested$/) do |arg|
     expect(value_element).to have_content("Yes")
   elsif arg == "isn't"
     expect(value_element).to have_content("No")
+  end
+end
+
+And(/^I should see a without notice hearing is requested because "([^"]*)"$/) do |arg|
+  within('#without_notice_hearing .app-cya--answers-group') do
+    expect(page).to have_content(arg)
   end
 end
 
@@ -604,24 +676,28 @@ And(/^I should see the details provided for the intermediary are "([^"]*)"$/) do
 end
 
 And(/^I should see there "(are|aren't)" special language requirements$/) do |arg|
-  language_rows = all('#language_interpreter')
-  language_rows.each do |element|
+  within('#attending_court') do
+    language_rows = all('#language_interpreter')
     if arg == "are"
-      expect(element).to have_content('Yes')
+      expect(language_rows[0]).to have_content('Yes')
     elsif arg == "aren't"
-      expect(element).not_to have_content('Yes')
+      expect(language_rows[1]).not_to have_content('Yes')
     end
   end
 end
 
 And(/^I should see there "(are|aren't)" specific safety arrangements specified for the court$/) do |arg|
-  arrangements = all('#special_arrangements')
+  arrangements = all('.special_arrangements')
   arrangements.each do |element|
     if arg == "aren't"
       expect(element).to have_no_content("Additional details")
-      expect(page).to have_content("None selected")
+      within(element) do
+        expect(page).to have_content("None selected")
+      end
     elsif arg == "are"
-      expect(page).to have_content("Additional details")
+      within(element) do
+        expect(page).not_to have_content("None selected")
+      end
     end
   end
 end
@@ -663,7 +739,7 @@ end
 
 And(/^I should see the statement of truth$/) do
   within('#cya-declaration-box') do
-    expect(page).to have_content('I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.')
+    expect(page).to have_content('Statement of Truth')
   end
 end
 
@@ -740,4 +816,3 @@ And(/^I should see the other party is "([^"]*)" years of age$/) do |age|
     end
   end
 end
-

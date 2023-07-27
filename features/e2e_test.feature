@@ -234,10 +234,13 @@ Feature: Testing C100 end to end
     And I should see the applicant has provided a mobile number "00000000000"
     And I should see the applicant's relationship to "Jane Doe Jnr" is "Father"
     And I should see the applicant "does" have a solicitor
-    And I should see the solicitor's reference is "123456"
     And I should see the solicitor's full name is "Annalise Keating"
+    And I should see the solicitor's name of firm is "Keating Law"
+    And I should see the solicitor's reference is "123456"
     And I should see the solicitor's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
     And I should see the solicitor's email is "annalise@law.com" and phone number is "00000000000"
+    And I should see the solicitor's Fax number is "00000000000"
+    And I should see the solicitor's DX number is "00000000000"
     And I should see the respondent's name is "Jane Doe"
     And I should see the respondent is "30" years old
     And I should see the respondent's gender is "Female"
@@ -996,43 +999,49 @@ Feature: Testing C100 end to end
     And I should see the applicant has provided a home telephone number "00000000000"
     And I should see the applicant has provided a mobile number "00000000000"
     And I should see the applicant's relationship to "Alistair Doe" is "Mother"
-#    And I should see the applicant "doesn't" have a solicitor
-#    And I should see the respondent's name is "John Doe"
-#    And I should see the respondent's gender is "Male"
-#    And I should see the respondent is "35" years old
-#    And I should see the respondent's place of birth is "Windsor"
-#    And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
-#    And I should see the respondent "might not have" lived at that address for more than 5 years
-#    And I should see the respondent's email is "john-doe@hotmail.com"
-#    And I should see the respondent's mobile phone number is "00000999999"
-#    And I should see the respondent's relationship to "Emily Doe" is "Father"
-#    And I should see the respondent's relationship to "John Doe" is "Father"
-#    And I should see there "are" other people who need to be informed of the application
-#    And I should see the other party's name is "Judy Sitter"
-#    And I should see the other party's gender is "Female"
-#    And I should see the other party is "35" years of age
-#    And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 1AA"
-#    And I should see the other party's relationship to "John Doe" is "Caregiver"
-#    And I should see the other party's relationship to "Emily Doe" is "Caregiver"
-#    And I should see the child "Emily Doe" lives with "Jane Doe"
-#    And I should see the children "have" been involved in other proceedings
-#    And I should see the names of the children involved in other proceedings are "Emily Doe and John Doe"
-#    And I should see the name of the court is "Aylesbury"
-#    And I should see the date of the proceeding is "March 2020"
-#    And I should see the type of proceeding is "Care order"
-#    And I should see an urgent hearing "isn't" requested
-#    And I should see a without notice hearing "isn't" requested
-#    And I should see the life of someone significant to the child "is" outside the UK
-#    And I should see another person in this application "couldn't" apply for an order outside the UK
-#    And I should see a request for information involving the children "hasn't" been made outside the UK
-#    And I should see the reason for application is "I fear for Emily & John's safety, but particularly Emily's"
-#    And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
-#    And I should see there "are" people who need an intermediary to help them in court
-#    And I should see the details provided for the intermediary are "Needed for the respondent"
-#    And I should see there "are" special language requirements
-#    And I should see there "are" specific safety arrangements specified for the court
-#    And I should see there "aren't" special facilities needed when attending court
-#    And I should see the email for submitting an application to court is "jane_doe@gmail.com"
-#    And I should see the payment type "Help with fees"
-#    And I should see the HwF reference number is "HWF-123-456"
-#    And I should see the statement of truth
+    And I should see the applicant "does" have a solicitor
+    And I should see the solicitor's full name is "Tegan Price"
+    And I should see the solicitor's name of firm is "Caplan and Gold"
+    And I should see the solicitor's reference is "123456"
+    And I should see the solicitor's address is "12 Cannon Street Caplan and Gold, London, United Kingdom, EC4N 6YA"
+    And I should see the solicitor's email is "teganprice@caplangold.com" and phone number is "00000119911"
+    And I should see the solicitor's Fax number is "00000119911"
+    And I should see the solicitor's DX number is "00000119911"
+    And I should see the respondent's name is "Jake Gyllenhaal"
+    And I should see the respondent's previous name is "Ryan Reynolds"
+    And I should see the respondent's gender is "Male"
+    And I should see the respondent is "46" years old
+    And I should see the respondent's place of birth is "Wrexham"
+    And I should see the respondent's address is "Wrexham AFC Mold Road, Wrexham, Wales, LL11 2AH"
+    And I should see the respondent "has" lived at that address for more than 5 years
+    And I should see the respondent's email is "Don't know"
+    And I should see the respondent's mobile phone number is "00000000000"
+    And I should see the respondent's relationship to "Alistair Doe" is "Father"
+    And I should see there "are" other people who need to be informed of the application
+    And I should see the other party's name is "Cassie Doe"
+    And I should see the other party's gender is "Female"
+    And I should see the other party is "30" years of age
+    And I should see the other party's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
+    And I should see the other party's relationship to "Alistair Doe" is "Caregiver"
+    And I should see the child "Alistair Doe" lives with "June Doe"
+    And I should see the children "haven't" been involved in other proceedings
+    And I should see an urgent hearing "is" requested
+    And I should see an urgent hearing is requested because "Alistair is in grave danger because of Jake Gyllenhaal"
+    And I should see an urgent hearing is needed: "In the next four weeks"
+    And I should see a hearing "isn't" needed within the next 48 hours
+    And I should see a without notice hearing "is" requested
+    And I should see a without notice hearing is requested because "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And I should see the life of someone significant to the child "isn't" outside the UK
+    And I should see another person in this application "couldn't" apply for an order outside the UK
+    And I should see a request for information involving the children "hasn't" been made outside the UK
+    And I should see the reason for application is "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
+    And I should see there "are" people who need an intermediary to help them in court
+    And I should see the details provided for the intermediary are "I need someone to communicate between me and the respondent"
+    And I should see there "are" special language requirements
+    And I should see there "are" specific safety arrangements specified for the court
+    And I should see there "aren't" special facilities needed when attending court
+    And I should see the email for submitting an application to court is "june@gmail.com"
+    And I should see the payment type "Help with fees"
+    And I should see the HwF reference number is "HWF-123-456"
+    And I should see the statement of truth
