@@ -1,5 +1,6 @@
 # Everything that has to do with forms, like radios, check boxes or inputs
-#
+include ActiveSupport::Testing::TimeHelpers
+
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in(field, with: value)
 end
@@ -87,4 +88,27 @@ end
 
 And(/^a confirmation box will appear telling me that my cookie settings have been saved$/) do
   expect(any_page).to have_cookie_preferences_updated_message
+end
+
+And(/^I choose "([^"]*)" for all options on this page$/) do |arg|
+  options = page.all('label', text: arg)
+  options.each do |radio_button|
+    radio_button.click
+  end
+  find_button('Continue').click
+end
+
+And(/^I fill in the Expiry date with a valid card expiry date$/) do
+  future = travel 365.day
+  step %[I fill in "Month" with "#{future.month}"]
+  step %[I fill in "Year" with "#{future.year}"]
+end
+
+When(/^I specify they are "(\d+)" years of age$/) do |age|
+  today = Date.today
+  date_of_birth = today - age.to_i.years
+
+  step %[I fill in "Day" with "#{date_of_birth.day}"]
+  step %[I fill in "Month" with "#{date_of_birth.month}"]
+  step %[I fill in "Year" with "#{date_of_birth.year}"]
 end
