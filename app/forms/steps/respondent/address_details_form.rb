@@ -6,6 +6,8 @@ module Steps
       attribute :residence_history_no, String
       attribute :residence_history_unknown, String
 
+      validates_presence_of :country, unless: :address_unknown?
+
       validates_inclusion_of :residence_requirement_met, in: GenericYesNoUnknown.values
 
       def residence_history_no
