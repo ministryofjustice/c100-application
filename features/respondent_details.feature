@@ -108,6 +108,7 @@ Feature: Add a respondent to the application
     When I fill in "Building and street" with "Test street"
     And I fill in "Town or city" with "London"
     And I fill in "Postcode" with ""
+    And I fill in "Country" with "United Kingdom"
     And I click "Don't know" for the radio button "Have they lived at this address for more than 5 years?"
     When I click the "Continue" button
 
