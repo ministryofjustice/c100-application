@@ -12,6 +12,6 @@ class DownloadToken < ApplicationRecord
     Aws::S3::Object.new(
       ENV["AWS_S3_BUCKET"],
       key
-    ).presigned_url(:get, expires_in: 3600)
+    ).presigned_url(:get, expires_in: 604_800)
   end
 end
