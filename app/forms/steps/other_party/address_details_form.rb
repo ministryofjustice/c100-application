@@ -1,7 +1,6 @@
 module Steps
   module OtherParty
     class AddressDetailsForm < AddressBaseForm
-
       validates_presence_of :country, unless: :address_unknown?
 
       private
