@@ -1,14 +1,13 @@
 require 'spec_helper'
 
 describe Summary::PdfPresenter do
-  let(:c100_application) { C100Application.new(domestic_abuse: domestic_abuse, abuse_concerns: abuse_concerns_values) }
+  let(:c100_application) { C100Application.new(domestic_abuse: domestic_abuse) }
   let!(:applicant) { Applicant.new(c100_application: c100_application,
                                    are_contact_details_private: are_contact_details_private) }
   let(:generator) { double('Generator') }
 
   let(:are_contact_details_private) { 'no' }
   let(:domestic_abuse) { 'no' }
-  let(:abuse_concerns_values) { double('abuse_concerns_values') }
   let(:abuse_concern) {
     instance_double(
       AbuseConcern,
@@ -27,9 +26,7 @@ describe Summary::PdfPresenter do
   }
 
   before do
-    allow(abuse_concerns_values).to receive(:where).and_return([abuse_concern])
-    allow(abuse_concerns_values).to receive(:each).and_return([abuse_concern])
-    allow(c100_application.abuse_concerns_values).to receive(:each).and_return([abuse_concern])
+    allow(c100_application).to receive(:abuse_concerns).and_return([abuse_concern])
   end
 
   subject { described_class.new(c100_application, generator) }
@@ -85,7 +82,7 @@ describe Summary::PdfPresenter do
         )
       }
 
-      it 'generates the C100 form and the C1A' do
+      it 'generates the C100 form and the C1A', focus: true do
         expect(generator).to receive(:generate).with(
           an_instance_of(Summary::C100Form), copies: 1
         )
