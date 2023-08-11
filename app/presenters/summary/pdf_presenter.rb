@@ -39,7 +39,7 @@ module Summary
 
     def has_abuse_concerns_data?
       c100_application.has_safety_concerns? ||
-      c100_application.abuse_concerns.any? { |abuse| abuse.answer.to_s.eql? 'yes' }
+        c100_application.abuse_concerns.any? { |abuse| abuse.answer.to_s.eql? 'yes' }
     end
 
     def generate_c1a_form
