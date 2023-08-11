@@ -82,7 +82,7 @@ describe Summary::PdfPresenter do
         )
       }
 
-      it 'generates the C100 form and the C1A', focus: true do
+      it 'generates the C100 form and the C1A' do
         expect(generator).to receive(:generate).with(
           an_instance_of(Summary::C100Form), copies: 1
         )
