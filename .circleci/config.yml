@@ -6,6 +6,9 @@ version: 2.1
 
 # orbs: 
 #   browser-tools: circleci/browser-tools@1.4.4
+orbs:
+  aws-cli: circleci/aws-cli@4.0.0 # use v4 of this orb
+  aws-ecr: circleci/aws-ecr@8.2.1 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
 
 references:
   app_containers: &app_containers
@@ -75,6 +78,25 @@ jobs:
       - run:
           name: run tests
           command: << parameters.test_command >>
+    
+  build_and_push_image:
+    executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
+    steps:
+      # Checkout your repository
+      - checkout
+      # Authenticate to AWS using OIDC v2 with the AWS CLI
+      - aws-cli/setup:
+          role_arn: $ECR_ROLE_TO_ASSUME # this will use the env var
+          region: $ECR_REGION # this will use the env var
+      # Authenticate to the ECR repository using the standard command
+      - run: |
+          aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
+      # Build and push your Docker image
+      - aws-ecr/build-image:
+          push-image: true
+          tag: ${CIRCLE_SHA1}
+          region: $ECR_REGION # this will use the env var
+          repo: $ECR_REPOSITORY # this will use the env var
 
   build_image:
     <<: *cloud_container
@@ -211,14 +233,17 @@ workflows:
     jobs:
       - test
       ### staging ###
-      - build_image:
-          name: build-staging
-          env_name: staging
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
+
+      # PREVIOUS
+      # - build_image:
+      #     name: build-staging
+      #     env_name: staging
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: master
+      - build_and_push_image
       - deploy_image_to_live:
           name: deploy-staging-live
           env_name: staging
