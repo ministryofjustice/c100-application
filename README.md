@@ -58,7 +58,7 @@ Set ENV["SKIP_VIRUS_CHECK"] = true
 or follow this guide here: https://www.driftingruby.com/episodes/antivirus-uploads-with-clamby
 
 Then run `freshclam && clamd`
-
+ 
 ## Mutation testing
 
 This project uses extensive mutation coverage, which makes the (mutation) tests take a long time to run, and can end up with the CI killing the build due to excessive job work time.
