@@ -208,6 +208,9 @@ jobs:
                     kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"                   
   tag_production:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
+    parameters:
+      env_name:
+        type: string
     steps:
       # Authenticate to AWS using OIDC v2 with the AWS CLI
       - aws-cli/setup:
@@ -259,6 +262,7 @@ workflows:
           requires:
             - deploy-staging-live
       - tag_production:
+          env_name: staging
           requires:
             - approve_production
       - deploy_image_to_live_prod:
