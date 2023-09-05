@@ -9,6 +9,8 @@ RSpec.describe Uploader::ListFiles do
       and_return(['123'])
     allow(ENV).to receive(:fetch).with('AWS_S3_REGION').and_return('eu-west-2')
     allow(ENV).to receive(:fetch).with('AWS_S3_ACCESS_KEY_ID')
+    allow(ENV).to receive(:fetch).with('AWS_ROLE_ARN')
+    allow(ENV).to receive(:fetch).with('AWS_WEB_IDENTITY_TOKEN_FILE')
     allow(ENV).to receive(:fetch).with('AWS_S3_SECRET_ACCESS_KEY')
     allow(ENV).to receive(:fetch).with('AWS_S3_BUCKET', '').and_return(bucket)
   end
