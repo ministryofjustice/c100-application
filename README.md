@@ -52,7 +52,7 @@ If you want to show the browser (useful to debug issues) prefix the commands lik
 Note: if some assets are not found when running cucumber, try deleting the content of the `/tmp` directory (inside your local checkout of the project).
 
 ## Setting up ClamAV locally
-
+ 
 Set ENV["SKIP_VIRUS_CHECK"] = true
 
 or follow this guide here: https://www.driftingruby.com/episodes/antivirus-uploads-with-clamby
