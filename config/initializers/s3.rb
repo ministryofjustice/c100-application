@@ -1,6 +1,6 @@
 require 'aws-sdk-core'
 
-if Rails.env.production?
+if Rails.env.production? && ENV["IS_DOCKER"].blank?
   Aws.config.update(
     region: ENV["AWS_S3_REGION"],
     credentials: Aws::AssumeRoleWebIdentityCredentials.new(
