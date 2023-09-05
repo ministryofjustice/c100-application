@@ -223,11 +223,11 @@ jobs:
       - run:
           name: push docker image
           command: |
-            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+            docker tag app "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+            docker push "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
 
-            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
+            docker tag app "${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
+            docker push "${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
 
 workflows:
   test-build-deploy:
