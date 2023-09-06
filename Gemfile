@@ -83,7 +83,6 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'site_prism', '~> 3.7', '>= 3.7.1'
-  gem 'webdrivers'
   gem 'webmock'
   gem 'database_cleaner'
   gem 'parallel_tests'
