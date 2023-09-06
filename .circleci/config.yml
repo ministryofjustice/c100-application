@@ -269,7 +269,6 @@ workflows:
           requires:
             - deploy-staging-live
       - tag_production:
-          env_name: staging
           requires:
             - approve_production
       - deploy_image_to_live_prod:
