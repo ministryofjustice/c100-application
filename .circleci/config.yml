@@ -31,12 +31,6 @@ references:
           GITHUB_TEAM_NAME_SLUG: sustainingdevs
           REPO_NAME: c100-application
           ECR_NEW_ENDPOINT: ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
-  aws_ecr_container: &aws_ecr_container
-    docker:
-      - image: circleci/aws-ecr:latest
-        environment:
-          GITHUB_TEAM_NAME_SLUG: sustainingdevs
-          ECR_NEW_ENDPOINT: ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
 
 jobs:
   test:
@@ -214,7 +208,10 @@ jobs:
                     deployment/c100-application-deployment-<< parameters.env_name >> \
                     kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"                   
   tag_production:
-    <<: *aws_ecr_container
+    executor: aws-ecr/default 
+    environment:
+      GITHUB_TEAM_NAME_SLUG: sustainingdevs
+      ECR_NEW_ENDPOINT: ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
     steps:
       # Authenticate to AWS using OIDC v2 with the AWS CLI
       - aws-cli/setup:
