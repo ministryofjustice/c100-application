@@ -30,6 +30,12 @@ references:
         environment:
           GITHUB_TEAM_NAME_SLUG: sustainingdevs
           REPO_NAME: c100-application
+  aws_ecr_container: &aws_ecr_container
+    docker:
+      - image: circleci/aws-ecr:latest
+        environment:
+          GITHUB_TEAM_NAME_SLUG: sustainingdevs
+          ECR_ENDPOINT: your-ecr-endpoint-value-here
 
 jobs:
   test:
@@ -224,12 +230,12 @@ jobs:
       - run:
           name: promote staging image to production
           command: |
-            docker pull "${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/sustainingdevs/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+            docker pull "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
 
-            docker tag "${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/sustainingdevs/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" \
-                       "${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/sustainingdevs/${CIRCLE_PROJECT_REPONAME}:production.latest"
+            docker tag "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" \
+                       "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:production.latest"
 
-            docker push "${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/sustainingdevs/${CIRCLE_PROJECT_REPONAME}:production.latest"
+            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:production.latest"
 
 
 workflows:
