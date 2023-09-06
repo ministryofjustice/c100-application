@@ -1,6 +1,6 @@
 require 'aws-sdk-core'
 
-unless ENV["IS_DOCKER"].present?
+if ENV["IS_DOCKER"].blank?
   Aws.config.update(
     region: ENV["AWS_S3_REGION"],
     credentials: Aws::AssumeRoleWebIdentityCredentials.new(
@@ -9,11 +9,3 @@ unless ENV["IS_DOCKER"].present?
     )
   )
 end
-# else
-#   Aws.config.update(
-#     region: ENV["AWS_S3_REGION"],
-#     credentials: Aws::Credentials.new(
-#       ENV["AWS_S3_ACCESS_KEY_ID"], 
-#       ENV["AWS_S3_SECRET_ACCESS_KEY"])
-#   )
-# end
