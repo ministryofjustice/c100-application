@@ -30,12 +30,13 @@ references:
         environment:
           GITHUB_TEAM_NAME_SLUG: sustainingdevs
           REPO_NAME: c100-application
+          ECR_NEW_ENDPOINT: ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
   aws_ecr_container: &aws_ecr_container
     docker:
       - image: circleci/aws-ecr:latest
         environment:
           GITHUB_TEAM_NAME_SLUG: sustainingdevs
-          ECR_ENDPOINT: your-ecr-endpoint-value-here
+          ECR_NEW_ENDPOINT: ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
 
 jobs:
   test:
@@ -137,11 +138,11 @@ jobs:
             login="$(aws ecr get-login --region ${AWS_DEFAULT_REGION} --no-include-email)"
             ${login}
 
-            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+            docker tag app "${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+            docker push "${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
 
-            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
+            docker tag app "${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
+            docker push "${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
  
   deploy_image_to_live:
     <<: *cloud_container
@@ -168,11 +169,11 @@ jobs:
 
             kubectl set image -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-deployment-<< parameters.env_name >> \
-                    webapp="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+                    webapp="${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
 
             kubectl set image -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-sidekiq-<< parameters.env_name >> \
-                    sidekiq="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+                    sidekiq="${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
 
             kubectl annotate -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-deployment-<< parameters.env_name >> \
@@ -203,20 +204,17 @@ jobs:
 
             kubectl set image -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-deployment-<< parameters.env_name >> \
-                    webapp="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+                    webapp="${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
 
             kubectl set image -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-sidekiq-<< parameters.env_name >> \
-                    sidekiq="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+                    sidekiq="${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
 
             kubectl annotate -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-deployment-<< parameters.env_name >> \
                     kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"                   
   tag_production:
-    executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
-    parameters:
-      env_name:
-        type: string
+    <<: *aws_ecr_container
     steps:
       # Authenticate to AWS using OIDC v2 with the AWS CLI
       - aws-cli/setup:
@@ -224,18 +222,18 @@ jobs:
           region: $ECR_REGION # this will use the env var
       # Authenticate to the ECR repository using the standard command
       - run: |
-          aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
+          aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${ECR_NEW_ENDPOINT}
       # Build and push your Docker image
 
       - run:
           name: promote staging image to production
           command: |
-            docker pull "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+            docker pull "${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
 
-            docker tag "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" \
-                       "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:production.latest"
+            docker tag "${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" \
+                       "${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:production.latest"
 
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:production.latest"
+            docker push "${ECR_NEW_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:production.latest"
 
 
 workflows:
