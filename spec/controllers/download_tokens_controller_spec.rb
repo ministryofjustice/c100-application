@@ -7,8 +7,8 @@ RSpec.describe DownloadTokensController, type: :controller do
                             create(key: '123') }
 
   before do
-    allow_any_instance_of(Aws::S3::Object).to(
-      receive(:presigned_url).and_return('www.example.com'))
+    allow_any_instance_of(DownloadToken).to(
+      receive(:url).and_return('www.example.com'))
   end
 
   describe '#show' do
