@@ -13,9 +13,7 @@ module C100App
     def generate_documents
       documents.store(:bundle,  generate_pdf(:c100, :c1a))
       documents.store(:c8_form, generate_pdf(:c8))
-
-      # Temporary removal
-      # documents.store(:json_form, generate_json)
+      documents.store(:json_form, generate_json)
     end
 
     # We use `deliver_now` here, as we want the actions performed in
