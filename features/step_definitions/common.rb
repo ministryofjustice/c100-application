@@ -160,3 +160,7 @@ end
 When(/^I fill in a postcode for the children$/) do
   fill_in('steps_opening_postcode_form[children_postcode]', with: 'MK9 3DX')
 end
+
+When(/^I fill in a postcode "([^"]*)" for the children$/) do |arg|
+  fill_in('steps_opening_postcode_form[children_postcode]', with: arg)
+end
