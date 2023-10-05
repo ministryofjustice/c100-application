@@ -152,3 +152,15 @@ Given(/^I have completed an application$/) do
   step %[I open the "Developer Tools" summary details]
   find('button', text: 'Bypass to CYA').click
 end
+
+When(/^I start the application$/) do
+  find("a[href='/steps/opening/postcode']").click
+end
+
+When(/^I fill in a postcode for the children$/) do
+  fill_in('steps_opening_postcode_form[children_postcode]', with: 'MK9 3DX')
+end
+
+When(/^I fill in a postcode "([^"]*)" for the children$/) do |arg|
+  fill_in('steps_opening_postcode_form[children_postcode]', with: arg)
+end
