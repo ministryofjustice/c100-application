@@ -30,4 +30,8 @@ module ApplicationInquiryMethods
       other_abuse
     ].any? { |concern| concern.eql?(YES_ANSWER) }
   end
+
+  def mark_as_urgent?
+    urgent_hearing == 'yes'
+  end
 end

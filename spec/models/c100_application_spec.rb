@@ -263,6 +263,19 @@ RSpec.describe C100Application, type: :model do
     end
   end
 
+  describe '#mark_as_urgent?' do
+    context 'when urgent_hearing is yes' do
+      let(:attributes) { { urgent_hearing: 'yes' } }
+      it { expect(subject.mark_as_urgent?).to eq(true) }
+    end
+
+    context 'when urgent_hearing is not yes' do
+      let(:attributes) { { urgent_hearing: 'no' } }
+      it { expect(subject.mark_as_urgent?).to eq(false) }
+    end
+  end
+
+
   describe '#mark_as_completed!' do
     before do
       travel_to Time.at(123)
