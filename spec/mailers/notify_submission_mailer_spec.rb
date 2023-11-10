@@ -8,6 +8,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       receipt_email: 'receipt@example.com',
       consent_order: 'yes',
       urgent_hearing: 'yes',
+      risk_of_abduction: 'yes',
       payment_type: 'foobar_payment',
       declaration_signee: 'John Doe',
     )
@@ -71,6 +72,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
 
       let(:c100_application) { C100Application.create({
         urgent_hearing: "yes",
+        risk_of_abduction: "yes",
         declaration_signee: "John Doe"
       })}
       let(:draft_consent_order_file_key) { '39d2bFDf912das3gD' }
