@@ -264,8 +264,8 @@ RSpec.describe C100Application, type: :model do
   end
 
   describe '#mark_as_urgent?' do
-    context 'when urgent_hearing is yes' do
-      let(:attributes) { { urgent_hearing: 'yes' } }
+    context 'when urgent_hearing is yes and there is a safety concern' do
+      let(:attributes) { { urgent_hearing: 'yes', risk_of_abduction: 'yes' } }
       it { expect(subject.mark_as_urgent?).to eq(true) }
     end
 
