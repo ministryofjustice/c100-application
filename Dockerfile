@@ -1,4 +1,4 @@
-FROM hmctspublic.azurecr.io/imported/library/ruby:2.7.6-slim-buster
+FROM hmctspublic.azurecr.io/imported/library/ruby:3.2.2-slim-buster
 
 # build dependencies:
 #   - ruby-full libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6 for wkhtmltopdf
@@ -72,7 +72,7 @@ RUN gem install bundler -v 2.3.17 && \
     bundle config set frozen 'true' && \
     bundle config without test:development && \
     bundle install --jobs 2 --retry 3 && \
-    chmod -R 777 /usr/local/bundle/gems/wkhtmltopdf-binary-0.12.6.5/bin
+    chmod -R 777 /usr/local/bundle/gems/wkhtmltopdf-binary-0.12.6.6/bin
 
 COPY . .
 
@@ -86,9 +86,11 @@ ENV SECRET_KEY_BASE=replace_this_at_build_time
 ENV GOVUK_NOTIFY_API_KEY=replace_this_at_build_time
 ENV AWS_S3_ACCESS_KEY_ID=replace_this_at_build_time
 ENV AWS_S3_SECRET_ACCESS_KEY=replace_this_at_build_time
-ENV AWS_S3_REGION=replace_this_at_build_time
+ENV AWS_S3_REGION=eu-west-2
+ENV AWS_REGION=eu-west-2
 ENV AWS_S3_BUCKET=replace_this_at_build_time
 ENV RAILS_ENV=production
+ENV IS_DOCKER=true
 RUN bundle exec rake assets:precompile
 
 # Copy fonts and images (without digest) along with the digested ones,
@@ -107,7 +109,7 @@ RUN chown -R appuser:appgroup log tmp db /var/lib/clamav /var/log/clamav /var/ru
 # We set the path to the bundle in the ENV, and use it in `/config/database.yml`
 #
 ENV RDS_COMBINED_CA_BUNDLE=/usr/src/app/config/rds-combined-ca-bundle.pem
-ADD https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem $RDS_COMBINED_CA_BUNDLE
+ADD https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem $RDS_COMBINED_CA_BUNDLE
 RUN chmod +r $RDS_COMBINED_CA_BUNDLE
 
 ARG APP_BUILD_DATE

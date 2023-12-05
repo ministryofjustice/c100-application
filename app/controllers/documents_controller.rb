@@ -3,35 +3,9 @@ class DocumentsController < ApplicationController
 
   respond_to :html, :json, :js
 
-  def create
-    # document_key is always :court_order_uploads for this action because only the multi-upload POSTs end up here
-    # (the other places with upload functionality post to their own controllers)
-    uploader = DocumentUpload.new(
-      document_param,
-      document_key: :court_order_uploads,
-      collection_ref: collection_ref
-    )
-    uploader.upload! if uploader.valid?
-
-    respond_with(uploader, location: current_step_path) do |format|
-      if uploader.errors?
-        format.html do
-          flash[:alert] = uploader.errors.map(&:message).join('. ')
-          redirect_to current_step_path
-        end
-        format.json do
-          render json: {error: uploader.errors.first}, status: :unprocessable_entity
-        end
-      end
-    end
-  rescue ArgumentError
-    flash[:alert] = 'No file selected'
-    redirect_to current_step_path
-  end
-
   def destroy
     Uploader.delete_file(
-      collection_ref: collection_ref,
+      collection_ref:,
       document_key: document_key_param,
       filename: decoded_filename
     )

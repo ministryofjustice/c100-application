@@ -143,8 +143,8 @@ en:
       c1a_court_details: *to_be_completed
       c1a_children_details: Summary of children’s details
       c1a_solicitor_details: Your solicitor’s details
-      c1a_applicant_abuse_summary: Abuse experienced by applicant
-      c1a_children_abuse_summary: Abuse experienced by children
+      c1a_applicant_abuse_summary: Abuse experienced by applicant by the respondent
+      c1a_children_abuse_summary: Abuse experienced by children by the respondent
       c1a_court_orders: Previous or current orders
       c1a_concerns_details: Short description of concerns and any relevant information
       ### C8 ###
@@ -603,9 +603,6 @@ en:
       question: Type of proceedings - if known
     court_proceeding_previous_details:
       question: Details of any other previous family case
-    court_order_uploads:
-      question: 'Details'
-      answer: '[ File(s) uploaded with application ]'
     payment_type:
       question: Payment option selected
       answers:
@@ -613,7 +610,6 @@ en:
         help_with_fees: Help with fees
         solicitor: Through solicitor
         self_payment_card: Over the phone - contact the applicant within 3 working days of receiving the application to take payment
-        self_payment_cheque: Cheque or cash
     solicitor_account_number:
       question: Fee account number
 

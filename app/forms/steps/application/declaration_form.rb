@@ -12,6 +12,7 @@ module Steps
       # This final form object performs a `c100_application` fulfilment validation,
       # essentially a top level sanity check. Refer to `ApplicationFulfilmentValidator`
       validate :application_fulfilment, if: :c100_application
+      validates :declaration_signee, sensible_name: true
 
       private
 
@@ -23,8 +24,8 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         c100_application.update(
-          declaration_signee: declaration_signee,
-          declaration_signee_capacity: declaration_signee_capacity,
+          declaration_signee:,
+          declaration_signee_capacity:,
         )
       end
     end

@@ -35,10 +35,13 @@ class Court < ApplicationRecord
     court = find_or_initialize_by(slug: data.fetch('slug'))
 
     if court.stale?
-      court.slug_will_change! # Touch `updated_at` on save, even if there are no changes
-
       court.update(
-        build(data).attributes.except('created_at', 'updated_at')
+        name: data.fetch('name'),
+        address: fetch_address(data),
+        cci_code: data.fetch('family_location_code'),
+        email: data['email'],
+        gbs: data['gbs'],
+        updated_at: Time.now
       )
     end
 
@@ -122,7 +125,7 @@ class Court < ApplicationRecord
 
   def self.log_and_raise(exception, data)
     Sentry.with_scope do |scope|
-      scope.set_extras(data: data)
+      scope.set_extras(data:)
       Sentry.capture_exception(exception)
     end
 

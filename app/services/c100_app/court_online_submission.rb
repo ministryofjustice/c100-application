@@ -13,7 +13,9 @@ module C100App
     def generate_documents
       documents.store(:bundle,  generate_pdf(:c100, :c1a))
       documents.store(:c8_form, generate_pdf(:c8))
-      documents.store(:json_form, generate_json)
+
+      # Temporary removal
+      # documents.store(:json_form, generate_json)
     end
 
     # We use `deliver_now` here, as we want the actions performed in
@@ -21,14 +23,14 @@ module C100App
     # to fail and be retried in case any of the actions fail.
     #
     def deliver_email
-      NotifySubmissionMailer.with(application_details).application_to_court(
-        to_address: to_address
+      NotifySubmissionMailer.with(**application_details).application_to_court(
+        to_address:
       ).deliver_now
     end
 
     def audit_data
       c100_application.email_submission.update(
-        to_address: to_address, sent_at: Time.current
+        to_address:, sent_at: Time.current
       )
     end
   end

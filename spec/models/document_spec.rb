@@ -101,10 +101,6 @@ RSpec.describe Document do
       let(:document_key) { nil }
 
       let(:result) { [
-        double('uploader', key: '12345/court_order_uploads/test.doc',
-          last_modified: 'Thu, 14 Apr 2022 11:03:21 +0000'),
-        double('uploader', key: '12345/court_order_uploads/another.doc',
-          last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000'),
         double('uploader', key: '12345/other/test.doc',
           last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000'),
         double('uploader', key: '12345/foo/test.doc',
@@ -112,14 +108,12 @@ RSpec.describe Document do
       ] }
 
       it 'returns the sorted documents' do
-        expect(documents.keys).to match_array(%i(foo other court_order_uploads))
+        expect(documents.keys).to match_array(%i(foo other))
 
         expect(documents[:foo].size).to eq(1)
         expect(documents[:foo].map(&:name)).to eq(%w(test.doc))
         expect(documents[:other].size).to eq(1)
         expect(documents[:other].map(&:name)).to eq(%w(test.doc))
-        expect(documents[:court_order_uploads].size).to eq(2)
-        expect(documents[:court_order_uploads].map(&:name)).to eq(%w(another.doc test.doc))
       end
     end
   end

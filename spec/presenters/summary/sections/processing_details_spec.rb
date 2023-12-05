@@ -8,7 +8,7 @@ module Summary
 
     subject { described_class.new(c100_application) }
 
-    let(:completed_at) { Date.new(2020, 1, 31) }
+    let(:completed_at) { DateTime.new(2020, 1, 31, 10, 30) }
     let(:family_location_code) { 123 }
     let(:court) { instance_double(Court, name: 'Foobar Court', family_location_code: family_location_code) }
 
@@ -30,7 +30,7 @@ module Summary
 
         expect(answers[1]).to be_an_instance_of(FreeTextAnswer)
         expect(answers[1].question).to eq(:completion_date)
-        expect(answers[1].value).to eq('31/01/2020')
+        expect(answers[1].value).to eq('31/01/2020 10:30hrs')
       end
 
       context 'for a court without code' do

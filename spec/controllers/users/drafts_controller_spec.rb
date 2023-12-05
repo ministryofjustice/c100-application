@@ -69,15 +69,6 @@ RSpec.describe Users::DraftsController, type: :controller do
             expect(session[:c100_application_id]).to eq(c100_application.id)
           end
 
-          context 'for a print and post submission' do
-            let(:submission_type) { SubmissionType::PRINT_AND_POST }
-
-            it 'redirects to the `how_to_submit` page' do
-              get :resume, params: {id: c100_application.id}
-              expect(response).to redirect_to('/steps/completion/how_to_submit')
-            end
-          end
-
           context 'for an online submission' do
             let(:submission_type) { SubmissionType::ONLINE }
 

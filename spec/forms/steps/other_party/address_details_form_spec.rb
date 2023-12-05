@@ -43,10 +43,10 @@ RSpec.describe Steps::OtherParty::AddressDetailsForm do
     context 'validations on field presence when `address_unknown` is false' do
       it { should validate_presence_of(:address_line_1) }
       it { should validate_presence_of(:town) }
+      it { should validate_presence_of(:country) }
 
       it { should_not validate_presence_of(:address_line_2) }
       it { should_not validate_presence_of(:address_line_3) }
-      it { should_not validate_presence_of(:country) }
       it { should_not validate_presence_of(:postcode) }
     end
 

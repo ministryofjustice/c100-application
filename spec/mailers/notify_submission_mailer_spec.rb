@@ -8,6 +8,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       receipt_email: 'receipt@example.com',
       consent_order: 'yes',
       urgent_hearing: 'yes',
+      risk_of_abduction: 'yes',
       payment_type: 'foobar_payment',
       declaration_signee: 'John Doe',
     )
@@ -71,6 +72,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
 
       let(:c100_application) { C100Application.create({
         urgent_hearing: "yes",
+        risk_of_abduction: "yes",
         declaration_signee: "John Doe"
       })}
       let(:draft_consent_order_file_key) { '39d2bFDf912das3gD' }
@@ -79,8 +81,6 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         collection_ref: '123'
       }) }
       let(:miam_certificate_file_key) { '39d2bFDf912eas3gD' }
-      let(:court_order_uploads_1_key) { '39d2bFDf912eas3gF' }
-      let(:court_order_uploads_2_key) { '39d2bFDf912eas3gG' }
       let(:miam_certificate) { Document.new({ 
         name: miam_certificate_file_key,
         collection_ref: '123'
@@ -91,19 +91,9 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         ).and_return('2022/11/0F8464CD')
         allow(Document).
           to receive(:all_for_collection).
-          and_return({ 
-            miam_certificate: [miam_certificate],
-            draft_consent_order: [draft_consent_order],
-            court_order_uploads: [
-              Document.new({ 
-                name: court_order_uploads_1_key,
-                collection_ref: '123'
-              }),
-              Document.new({ 
-                name: court_order_uploads_2_key,
-                collection_ref: '123'
-              })
-            ] })
+          and_return({ miam_certificate: [miam_certificate],
+                       draft_consent_order: [draft_consent_order],
+                     })
       end
 
       it 'has the right personalisation' do
@@ -117,11 +107,15 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           urgent: 'yes',
           c8_included: 'no',
           link_to_c8_pdf: '',
-          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
-            confirm_email_before_download: nil,
+          link_to_pdf: { 
+            file: 'YnVuZGxlIHBkZg==', 
+            is_csv: false,
+            confirm_email_before_download: false,
             retention_period: nil },
-          link_to_json: { file: 'dGVzdDI=', is_csv: false,
-            confirm_email_before_download: nil,
+          link_to_json: {
+            file: 'dGVzdDI=',
+            is_csv: false,
+            confirm_email_before_download: false,
             retention_period: nil },
           has_attachments: true,
           has_draft_consent_order: true,
@@ -132,12 +126,6 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_miam_certificate:
             download_token_url(c100_application.download_tokens.find_by(
               key: miam_certificate_file_key).token),
-          court_order_links: [
-            download_token_url(c100_application.download_tokens.find_by(
-              key: court_order_uploads_1_key).token),
-            download_token_url(c100_application.download_tokens.find_by(
-              key: court_order_uploads_2_key).token)
-          ].join(' ')
         })
       end
     end
@@ -165,17 +153,16 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           c8_included: 'no',
           link_to_c8_pdf: '',
           link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
-            confirm_email_before_download: nil,
+            confirm_email_before_download: false,
             retention_period: nil },
           link_to_json: { file: 'dGVzdDI=', is_csv: false,
-            confirm_email_before_download: nil,
+            confirm_email_before_download: false,
             retention_period: nil },
           has_attachments: false,
           has_draft_consent_order: false,
           link_to_draft_consent_order: '',
           has_miam_certificate: false,
           link_to_miam_certificate: '',
-          court_order_links: ''
         })
       end
     end
@@ -192,10 +179,10 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         ).to match(hash_including(
           c8_included: 'yes',
           link_to_c8_pdf: { file: 'YzggZm9ybQ==', is_csv: false,
-          confirm_email_before_download: nil,
+          confirm_email_before_download: false,
           retention_period: nil },
           link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
-          confirm_email_before_download: nil,
+          confirm_email_before_download: false,
           retention_period: nil },
         ))
       end

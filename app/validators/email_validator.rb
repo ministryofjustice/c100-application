@@ -1,5 +1,5 @@
 class EmailValidator < ActiveModel::EachValidator
-  EMAIL_REGEX = /\A\s*([-\p{L}\d+._]{1,64})@((?:[-\p{L}\d]+\.)+?\p{L}{2,})\s*\z/i.freeze
+  EMAIL_REGEX = /\A\s*([-\p{L}\d+._]{1,64})@((?:[-\p{L}\d]+\.)+?\p{L}{2,})\s*\z/i
 
   COMMON_DOMAIN_TYPOS = %w[
     cloud.com

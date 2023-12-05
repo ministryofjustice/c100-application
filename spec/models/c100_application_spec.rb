@@ -33,7 +33,8 @@ RSpec.describe C100Application, type: :model do
 
     let(:attributes) {{
       court: court,
-      urgent_hearing: urgent_hearing
+      urgent_hearing: urgent_hearing,
+      without_notice: without_notice
     }}
 
     # :nocov:
@@ -48,8 +49,9 @@ RSpec.describe C100Application, type: :model do
           court.email = "test@example.com"
         end
       }
-      context 'with urgency' do
+      context 'with urgency and without notice' do
         let(:urgent_hearing){'yes'}
+        let(:without_notice){'yes'}
 
         it 'redirects urgent hearings from 
             west london family court to barnet civil
@@ -61,7 +63,19 @@ RSpec.describe C100Application, type: :model do
 
       context 'without urgency' do
         let(:urgent_hearing){'no'}
+        let(:without_notice){'yes'}
+
         it 'does not redirect non-urgent' do
+          subject.save
+          expect(subject.court.id).to eq('west-london-family-court')
+        end
+      end
+
+      context 'without notice' do
+        let(:urgent_hearing){'yes'}
+        let(:without_notice){'no'}
+
+        it 'does not redirect non-notice' do
           subject.save
           expect(subject.court.id).to eq('west-london-family-court')
         end
@@ -69,6 +83,8 @@ RSpec.describe C100Application, type: :model do
 
       context 'with urgency, then without urgency' do
         let(:urgent_hearing){'yes'}
+        let(:without_notice){'yes'}
+
         it 'redirects, then does not redirect non-urgent' do
           subject.save
           expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
@@ -90,6 +106,7 @@ RSpec.describe C100Application, type: :model do
         end
       }
       let(:urgent_hearing){'yes'}
+      let(:without_notice){'yes'}
       it 'does not redirect to other courts' do
         subject.save
         expect(subject.court.id).to eq('other-court')
@@ -130,18 +147,6 @@ RSpec.describe C100Application, type: :model do
       expect(finder_double).to receive(:destroy_all)
 
       described_class.purge!(28.days.ago)
-    end
-  end
-
-  describe '#online_submission?' do
-    context 'for `online` values' do
-      let(:attributes) { {submission_type: 'online'} }
-      it { expect(subject.online_submission?).to eq(true) }
-    end
-
-    context 'for other values' do
-      let(:attributes) { {submission_type: 'whatever'} }
-      it { expect(subject.online_submission?).to eq(false) }
     end
   end
 
@@ -257,6 +262,19 @@ RSpec.describe C100Application, type: :model do
       end
     end
   end
+
+  describe '#mark_as_urgent?' do
+    context 'when urgent_hearing is yes and there is a safety concern' do
+      let(:attributes) { { urgent_hearing: 'yes', risk_of_abduction: 'yes' } }
+      it { expect(subject.mark_as_urgent?).to eq(true) }
+    end
+
+    context 'when urgent_hearing is not yes' do
+      let(:attributes) { { urgent_hearing: 'no' } }
+      it { expect(subject.mark_as_urgent?).to eq(false) }
+    end
+  end
+
 
   describe '#mark_as_completed!' do
     before do

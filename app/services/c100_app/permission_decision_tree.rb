@@ -42,7 +42,7 @@ module C100App
     # Get back to the applicants-children relationship loop
     def exit_journey
       ApplicantDecisionTree.new(
-        c100_application: c100_application, record: record
+        c100_application:, record:
       ).children_relationships
     end
   end

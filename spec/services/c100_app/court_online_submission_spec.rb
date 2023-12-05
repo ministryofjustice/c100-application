@@ -32,8 +32,13 @@ RSpec.describe C100App::CourtOnlineSubmission do
         expect(pdf_presenter).to receive(:generate).with(:c8).ordered
         subject.process
 
-        expect(subject.documents.size).to eq(3)
-        expect(subject.documents.keys).to match_array([:bundle, :c8_form, :json_form])
+        # TEMPORARY REMOVAL OF JSON
+        # expect(subject.documents.size).to eq(3)
+        expect(subject.documents.size).to eq(2)
+
+        # TEMPORARY REMOVAL
+        # expect(subject.documents.keys).to match_array([:bundle, :c8_form, :json_form])
+        expect(subject.documents.keys).to match_array([:bundle, :c8_form])
       end
     end
 
@@ -41,8 +46,11 @@ RSpec.describe C100App::CourtOnlineSubmission do
       let(:mailer) { spy('mailer') }
 
       before do
+        # TEMPORARY REMOVAL OF JSON
         allow(NotifySubmissionMailer).to receive(:with).with(
-          c100_application: c100_application, documents: { bundle: kind_of(StringIO), c8_form: kind_of(StringIO), json_form: json_file}
+          c100_application: c100_application, documents: { bundle: kind_of(StringIO), c8_form: kind_of(StringIO)
+          # , json_form: json_file
+          }
         ).and_return(mailer)
       end
 

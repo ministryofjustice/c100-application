@@ -26,7 +26,7 @@ module Backoffice
       email = EmailSubmission.find(params[:email_id])
       type  = params[:type]
 
-      email.resend!(type: type)
+      email.resend!(type:)
       audit_resend(email, resend_type: type)
 
       redirect_to backoffice_emails_path, flash: {
@@ -65,7 +65,7 @@ module Backoffice
         details[:recipient] = email.email_copy_to
       end
 
-      audit!(action: :resend_email, details: details)
+      audit!(action: :resend_email, details:)
     end
   end
 end

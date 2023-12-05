@@ -4,7 +4,7 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
   def validate(record)
     validations.each do |validation|
       if (attribute, error, change_path = validation.call(record))
-        record.errors.add(attribute, error, change_path: change_path)
+        record.errors.add(attribute, error, change_path:)
       end
     end
   end
@@ -16,11 +16,30 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
   #
   def validations
     [
-      ->(record) { [:children, :blank, edit_steps_children_names_path(id: '')] unless record.children.any? },
-      ->(record) { [:applicants, :blank, edit_steps_applicant_names_path(id: '')] unless record.applicants.any? },
-      ->(record) { [:respondents, :blank, edit_steps_respondent_names_path(id: '')] unless record.respondents.any? },
-      ->(record) { [:submission_type, :blank, edit_steps_application_submission_path] unless record.submission_type.present? },
-      ->(record) { [:payment_type, :blank, edit_steps_application_payment_path] unless record.payment_type.present? },
+      generate_validation(:children, edit_steps_children_names_path(id: '')),
+      generate_validation(:applicants, edit_steps_applicant_names_path(id: '')),
+      generate_validation(:respondents, edit_steps_respondent_names_path(id: '')),
+      generate_validation(:payment_type, edit_steps_application_payment_path, :present?),
+      generate_document_validation(:miam_certificate, edit_steps_miam_certification_upload_path,
+                                   [:consent_order?, :child_protection_cases?, :miam_exemption_claim?]),
+      generate_document_validation(:draft_consent_order, edit_steps_opening_consent_order_upload_path,
+                                   :consent_order?, invert: true)
     ]
+  end
+
+  def generate_validation(attribute_type, path, method = :any?)
+    ->(record) { [attribute_type, :blank, path] unless record.send(attribute_type).send(method) }
+  end
+
+  def generate_document_validation(document_type, path, checks, invert: false)
+    lambda do |record|
+      unless record.document(document_type) || additional_checks(record, Array(checks), invert)
+        [:files_collection_ref, :blank, path]
+      end
+    end
+  end
+
+  def additional_checks(record, checks, invert)
+    checks.map { |check| record.send(check) }.send(invert ? :none? : :any?)
   end
 end

@@ -485,18 +485,18 @@ en:
               other: Other concerns about the children’s welfare
           heading:
             applicant:
-              physical: Have you ever been physically abused?
-              emotional: Have you ever been emotionally abused?
-              psychological: Have you ever been psychologically abused?
-              sexual: Have you ever been sexually abused?
-              financial: Have you ever been financially abused?
+              physical: Have you ever been physically abused by the respondent?
+              emotional: Have you ever been emotionally abused by the respondent?
+              psychological: Have you ever been psychologically abused by the respondent?
+              sexual: Have you ever been sexually abused by the respondent?
+              financial: Have you ever been financially abused by the respondent?
               other: Do you have any other concerns about your welfare?
             children:
-              physical: Have the children ever been physically abused?
-              emotional: Have the children ever been emotionally abused?
-              psychological: Have the children ever been psychologically abused?
-              sexual: Have the children ever been sexually abused?
-              financial: Have the children ever been financially abused?
+              physical: Have the children ever been physically abused by the respondent?
+              emotional: Have the children ever been emotionally abused by the respondent?
+              psychological: Have the children ever been psychologically abused by the respondent?
+              sexual: Have the children ever been sexually abused by the respondent?
+              financial: Have the children ever been financially abused by the respondent?
               other: Do you have any other safety or welfare concerns about the children?
           lead_text:
             applicant:
@@ -776,31 +776,6 @@ en:
         edit:
           page_title: *previous_proceedings
           lead_text: For example an emergency protection order or supervision order. Include any ongoing cases.
-      has_court_order_uploads:
-        edit:
-          page_title: Court order document upload
-          lead_text: Have you got existing court orders or previous court orders to upload?
-          secondary_text: You can select the option to upload existing or previous court orders if any of the children in this application have been involved in other family court proceedings.
-      court_order_uploads:
-        edit:
-          page_title: Upload your existing court orders or previous court orders
-          lead_text: If you are uploading documents from a computer, name the files clearly. For example, consent order.pdf
-          upload_instructions_html: |
-            <p>If you are uploading documents from a computer, name the files clearly. For example, consent order draft.pdf</p>
-            <p>Files must end with JPG, BMP, PNG, TIF, PDF, DOC or DOCX</p>
-          dropdown_header: How to take a picture of a document on your phone and upload it
-          dropdown_content_html: |
-            <ol>
-              <li>Place your document on a flat service in a well-lit room. Use a flash if you need to.</li>
-              <li>Take a picture of the whole document. You should be able to see its edges.</li>
-              <li>Check you can read all the writing, including the handwriting.</li>
-              <li>Email or send the photo or scan to the device you are using now.</li>
-              <li>Upload it here.</li>
-            </ol>
-          attach_document_html: "<strong>Attach consent order draft as a single document</strong>"
-          upload_explanation_html: |
-            <p class="govuk-body">Your document will upload when you click 'Continue'.</p>
-
       court_proceedings:
         edit:
           page_title: Previous court cases
@@ -861,8 +836,8 @@ en:
           lead_text: The court fee is %{fee}. Only the person applying to court (the applicant) or their solicitor needs to pay.
       submission:
         edit:
-          page_title: How would you submit your application?
-          lead_text: Your completed application can be sent straight to the court electronically, or you can print it and send it by post if you prefer.
+          page_title: Submitting your application to court
+          lead_text: Your completed application will be sent to the court electronically.
       receipt_email_check:
         show:
           page_title: Check your email address
@@ -1017,6 +992,26 @@ en:
           details:
             summary: If you do not know where the children live
             text_html: If you do not know the children’s postcode please enter your own.
+      start_or_continue:
+        edit:
+          page_title: Start or continue an application
+          heading: Start or continue an application
+          details:
+            summary: If you do not know where the children live, or they live at different addresses
+            text_html: <p>If you do not know where the children live, enter your own postcode.</p><p>If the children live at different addresses, enter the postcode of the eldest child who is part of the application.</p>
+          is_representative:
+            heading: If you are a legal representative
+            text: Confirm this before you proceed
+      sign_in_or_create_account:
+        edit:
+          page_title: Sign in or create account
+          heading: Sign in or create account
+          lead_text: Access the MyHMCTS case management tool for legal professionals.
+      continue_application:
+        edit:
+          page_title: Continue an application
+          heading: Continue an application
+          lead_text: "If you are continuing a pending application, sign in with the relevant service:"
       no_court_found:
         show:
           page_title: Not eligible
@@ -1109,7 +1104,6 @@ en:
       true: You've accepted analytics cookies.
       false: You've rejected analytics cookies.
 
-
   layouts:
     footer_links:
       header: Support links
@@ -1170,7 +1164,6 @@ en:
     application_completed:
       page_title: Application completed
       heading: You have already completed this application
-      how_to_submit: How to submit your application
       lead_text_print: The court will not receive your application until you submit it. If you want to make changes you will need to start a new application.
       lead_text_online: Your application has been submitted to the court. You cannot make any further changes.
       application_submitted: Application submitted
@@ -1214,6 +1207,21 @@ en:
       # Opening steps
       steps_opening_postcode_form:
         children_postcode: Postcode
+      steps_opening_start_or_continue_form:
+        children_postcode: Enter the children's postcode
+        children_postcode_continue: Enter the children's postcode
+        start_or_continue_options:
+          new: Start a new application
+          continue: Sign in to continue an application
+        is_legal_representative_options:
+          'true': I am a legal representative who is acting for the applicant
+      steps_opening_sign_in_or_create_account_form:
+        has_myhmcts_account_options:
+          <<: *YESNO
+      steps_opening_continue_application_form:
+        platform_options:
+          my_hmcts: Sign in to your MyHMCTS account
+          gov_uk: Sign in using the GOV.UK service
       steps_opening_research_consent_form:
         research_consent_email: Email address
         research_consent_options:
@@ -1377,9 +1385,6 @@ en:
         cafcass_details: Name and office of Cafcass/Cafcass Cymru officer
         order_types: Type of proceedings
         previous_details: Add details of any other previous family case
-      steps_application_has_court_order_uploads_form:
-        has_court_order_uploads_options:
-          <<: *YESNO
       steps_application_urgent_hearing_details_form:
         urgent_hearing_details: Give details of why you’re asking for an urgent hearing
         urgent_hearing_when: How soon do you need an urgent hearing?
@@ -1427,14 +1432,14 @@ en:
         sign_language_interpreter_details: Give details of who needs a British Sign Language interpreter
         welsh_language_details: Give details of who needs to speak or read in Welsh
       steps_attending_court_special_arrangements_form:
-        special_arrangements_details: You can add more detail if neccessary
+        special_arrangements_details: You can add more detail if necessary
         special_arrangements_options:
           separate_waiting_rooms: Separate waiting rooms
           separate_entrance_exit: Separate exits and entrances
           protective_screens: Protective screens - this needs to be approved by a judge
           video_link: Video links - this needs to be approved by a judge
       steps_attending_court_special_assistance_form:
-        special_assistance_details: You can add more detail if neccessary
+        special_assistance_details: You can add more detail if necessary
         special_assistance_options:
           hearing_loop: A hearing loop
           braille_documents: Documents in Braille
@@ -1446,13 +1451,11 @@ en:
           help_with_fees: Pay with ‘Help with fees’
           solicitor: Pay through a solicitor’s fee account
           self_payment_card: Pay over the phone
-          self_payment_cheque: Pay by cheque or cash
         hwf_reference_number: Reference number
         solicitor_account_number: Solicitor’s fee account number
       steps_application_submission_form:
         submission_type_options:
           online: Submit electronically
-          print_and_post: Print and send by post
         receipt_email: Enter an email address if you would like to get a confirmation
       steps_application_declaration_form:
         declaration_signee: Enter your full name
@@ -1647,6 +1650,10 @@ en:
         consent_order_options:
           'no_html': <p class='govuk-hint'>This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter.</p><p class='govuk-hint'>If you select this option, you must have a scan, photo or electronic copy of the of the document confirming MIAM attendance or mediator’s exemption which you are able to upload to this application.</p>
           'yes_html': <p class='govuk-hint'>This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter.</p><p class='govuk-hint'>This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent). If you select this option, you must have a scan, photo or electronic copy of the draft consent order signed by the respondent which you are able to upload to this application.</p>
+      steps_opening_sign_in_or_create_account_form:
+        has_myhmcts_account_options:
+          'yes': Sign in to your account
+          'no': Create a new account
       steps_miam_certification_date_form:
         miam_certification_date: For example, 31 3 2020
       steps_application_court_proceedings_form:
@@ -1674,7 +1681,6 @@ en:
             You may be able to <a href="https://www.gov.uk/get-help-with-court-fees" class="govuk-link" rel="external" target="_blank">get help paying</a> if you’re on a low income, receive certain benefits or have little or no savings. If you do qualify, you’ll need to provide your reference number
           solicitor: If you have a solicitor representing you, they may pay the court by direct debit. You’ll need to provide their ‘fee account number’
           self_payment_card: Court staff will contact you within 3 working days to take payment
-          self_payment_cheque: You can send a cheque or pay in person at the court
       steps_application_submission_form:
         receipt_email: You can also download a copy on the confirmation page.
       steps_safety_questions_substance_abuse_form:
@@ -1775,6 +1781,8 @@ en:
         consent_order: What kind of application do you want to make?
       steps_opening_research_consent_form:
         research_consent: Are you willing to be contacted to share your experience of using this service?
+      steps_opening_sign_in_or_create_account_form:
+        has_myhmcts_account: Do you have a MyHMCTS account?
       steps_opening_my_hmcts_form:
         is_solicitor: Citizen or solicitor applying on behalf of a citizen?
       steps_opening_child_protection_cases_form:
@@ -1928,8 +1936,6 @@ en:
       # Miscellanea final application steps
       steps_application_previous_proceedings_form:
         children_previous_proceedings: Have any of the children in this application been involved in other family court proceedings?
-      steps_application_court_order_uploads:
-        has_court_order_uploads: Have you got existing court orders or previous court orders to upload?
       steps_application_litigation_capacity_form:
         reduced_litigation_capacity: Are there any factors that may affect any adult in this application taking part in the court proceedings?
       steps_application_without_notice_form:
@@ -1952,7 +1958,7 @@ en:
 
       # Submission and payment steps
       steps_application_submission_form:
-        submission_type: How would you like to submit your application to court?
+        submission_type: Submitting your application to court
       steps_application_payment_form:
         payment_type: How will you pay the application fee?
 
@@ -2019,6 +2025,7 @@ en:
   time:
     formats:
       short: '%d %b %H:%M:%S'
+      date_and_time: '%d/%m/%Y %H:%Mhrs'
     draft_expires_in:
       zero: Today
       one: '%{count} day'
@@ -2085,6 +2092,12 @@ en:
       file_wrong_format: " is in a format we don't accept. You can upload JPG, BMP, PNG, TIF, PDF or Word files."
       file_too_big: " is too big. You will need to resubmit a smaller version, less than XXX megabytes (MB)."
       confirm_delete: Are you sure you want to remove this file?
+    help_dropdown:
+      dropdown_header: Contact us for help
+      title: "Get in touch"
+      text_1: "If you'd like to report a problem or have a suggestion to help improve this service for others, get in touch by sending an email to:"
+      link: C100applications@justice.gov.uk
+      text_2_html: "This email should only be used for feedback on the digital service. We cannot answer any questions about applications that have been submitted. You can <a target='_blank' href='https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/childcare-arrangements/nearest/search-by-postcode'>contact the relevant court</a> if you need to discuss your case."
 
   session:
     note:
@@ -2240,11 +2253,5 @@ en:
         You need to pay the %{fee} court fee. You’ll either:
         * receive a call from the court in the next 3 working days if you entered your phone number (it may look like a ‘private number’)
         * or you need to contact the court, by phone or in person to make payment
-
-        The court will not be able to process your application until payment has been received.
-      self_payment_cheque: |
-        You need to pay the %{fee} court fee. Post a cheque made out to ‘HM Courts and Tribunals Service’. Write your reference code, last name and ‘C100’ on the back of your cheque.
-
-        Send your cheque or pay in person within 3 working days.
 
         The court will not be able to process your application until payment has been received.

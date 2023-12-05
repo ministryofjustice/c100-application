@@ -1,10 +1,6 @@
 module ApplicationInquiryMethods
   YES_ANSWER = GenericYesNo::YES.to_s
 
-  def online_submission?
-    submission_type.eql?(SubmissionType::ONLINE.to_s)
-  end
-
   def online_payment?
     payment_type.eql?(PaymentType::ONLINE.to_s)
   end
@@ -33,5 +29,9 @@ module ApplicationInquiryMethods
       substance_abuse,
       other_abuse
     ].any? { |concern| concern.eql?(YES_ANSWER) }
+  end
+
+  def mark_as_urgent?
+    urgent_hearing == 'yes' && has_safety_concerns?
   end
 end

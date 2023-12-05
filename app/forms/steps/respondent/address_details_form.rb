@@ -6,6 +6,8 @@ module Steps
       attribute :residence_history_no, String
       attribute :residence_history_unknown, String
 
+      validates_presence_of :country, unless: :address_unknown?
+
       validates_inclusion_of :residence_requirement_met, in: GenericYesNoUnknown.values
 
       def residence_history_no
@@ -29,7 +31,7 @@ module Steps
         respondent = c100_application.respondents.find_or_initialize_by(id: record_id)
         respondent.update(
           address_values.merge(
-            residence_requirement_met: residence_requirement_met,
+            residence_requirement_met:,
             residence_history: residence_history_value,
           )
         )

@@ -111,11 +111,17 @@ Rails.application.routes.draw do
       show_step :start
       show_step :warning
       edit_step :postcode
+      # edit_step :start_or_continue
+      # edit_step :sign_in_or_create_account
+      # show_step :my_hmcts_manage_case
+      # show_step :my_hmcts_create_account
+      # show_step :redirect_to_login
+      # edit_step :continue_application
       show_step :error_but_continue
       show_step :no_court_found
       edit_step :research_consent
-      edit_step :my_hmcts
       show_step :redirect_to_my_hmcts
+      # show_step :redirect_to_guidance
       edit_step :consent_order
       edit_step :consent_order_upload
       show_step :consent_order_sought
@@ -125,8 +131,6 @@ Rails.application.routes.draw do
     namespace :application do
       edit_step :previous_proceedings
       edit_step :court_proceedings
-      edit_step :has_court_order_uploads
-      edit_step :court_order_uploads
       edit_step :urgent_hearing
       edit_step :urgent_hearing_details
       edit_step :without_notice
@@ -288,8 +292,9 @@ Rails.application.routes.draw do
   end
 
   scope 'uploader/:document_key' do
-    resources :documents, only: [:create, :destroy]
+    resources :documents, only: [:destroy]
   end
+
   resources :download_tokens, only: [:show], param: :token
 
   resource :session, only: [:destroy] do
@@ -325,6 +330,7 @@ Rails.application.routes.draw do
            only: [:edit, :update, :create]
 
   root 'steps/opening/start#show'
+  # root 'steps/opening/start_or_continue#edit'
 
   get 'about/accessibility'
   get 'about/contact'

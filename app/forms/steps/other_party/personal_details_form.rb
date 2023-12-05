@@ -22,6 +22,7 @@ module Steps
       validates :dob_estimate, sensible_date: true, if: :dob_unknown?
       validates :input_dob_estimate, date: true, if: :dob_unknown?
       validates :input_dob, blank_date_input: true, if: :dob_unknown?
+      validates :previous_name, sensible_name: true, if: -> { has_previous_name&.yes? }
 
       # We have to save the date inputes to validate later
       # because MultiParamDate will nil

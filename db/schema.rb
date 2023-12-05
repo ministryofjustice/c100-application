@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_08_104601) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_26_104306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -153,9 +153,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_104601) do
     t.string "declaration_confirmation"
     t.string "mediation_voucher_scheme"
     t.uuid "files_collection_ref", default: -> { "uuid_generate_v4()" }
-    t.string "has_court_order_uploads"
     t.string "is_solicitor"
     t.string "use_my_hmcts"
+    t.string "start_or_continue"
+    t.string "is_legal_representative"
+    t.string "has_myhmcts_account"
+    t.string "platform"
     t.index ["court_id"], name: "index_c100_applications_on_court_id"
     t.index ["status"], name: "index_c100_applications_on_status"
     t.index ["user_id"], name: "index_c100_applications_on_user_id"
@@ -312,6 +315,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_104601) do
     t.uuid "c100_application_id"
     t.jsonb "state", default: {}, null: false
     t.index ["c100_application_id"], name: "index_payment_intents_on_c100_application_id", unique: true
+  end
+
+  create_table "payment_report_logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "mailer_retries", default: 0, null: false
+    t.string "mailer_error"
+    t.boolean "mailer_started"
+    t.boolean "mailer_personalised"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "csv_generated"
+    t.string "send_mailer_error"
   end
 
   create_table "people", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

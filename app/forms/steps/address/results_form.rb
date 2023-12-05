@@ -10,7 +10,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         record.update(
-          selected_address
+          **selected_address
         )
       end
     end

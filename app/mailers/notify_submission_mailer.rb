@@ -27,7 +27,7 @@ class NotifySubmissionMailer < NotifyMailer
 
     set_personalisation(
       shared_personalisation.merge(
-        urgent: @c100_application.urgent_hearing || 'no',
+        urgent: @c100_application.mark_as_urgent? ? 'yes' : 'no',
         c8_included: @c100_application.confidentiality_enabled? ? 'yes' : 'no',
         link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
         link_to_pdf: prepare_upload(@documents[:bundle]),
@@ -52,7 +52,7 @@ class NotifySubmissionMailer < NotifyMailer
         documents_email: court.documents_email,
         is_under_age: notify_boolean(@c100_application.applicants.under_age?),
         is_consent_order: @c100_application.consent_order || 'no',
-        payment_instructions: payment_instructions,
+        payment_instructions:,
       )
     )
     mail(to: to_address)
@@ -63,7 +63,6 @@ class NotifySubmissionMailer < NotifyMailer
   def build_document_variables
     keys = %i[draft_consent_order miam_certificate]
     keys.each { |key| build_variables_for_document(key) }
-    build_variables_for_court_order_documents
 
     personalisation = {}
     keys.each do |key|
@@ -72,18 +71,8 @@ class NotifySubmissionMailer < NotifyMailer
       personalisation["link_to_#{key}".to_sym] =
         instance_variable_get("@link_to_#{key}")
     end
-    personalisation[:court_order_links] = @court_order_links.present? ? @court_order_links : ''
-    personalisation[:has_attachments] =
-      keys.any? { |key| instance_variable_get("@has_#{key}") } ||
-      personalisation[:court_order_links].present?
+    personalisation[:has_attachments] = keys.any? { |key| instance_variable_get("@has_#{key}") }
     personalisation
-  end
-
-  def build_variables_for_court_order_documents
-    @court_order_links = @c100_application.documents(:court_order_uploads).map do |doc|
-      download_token = doc.generate_download_token(@c100_application)
-      download_token_url(download_token.token)
-    end.join(' ')
   end
 
   def build_variables_for_document(key)
@@ -114,8 +103,10 @@ class NotifySubmissionMailer < NotifyMailer
   end
 
   def prepare_upload(file)
-    return '' if file.nil? || file.size.zero?
-    Notifications.prepare_upload(file)
+    return '' if file.nil? ||
+                 file.try(:string).try(:blank?) ||
+                 file.try(:rewind).try(:blank?)
+    Notifications.prepare_upload(file, confirm_email_before_download: false)
   end
 
   def court

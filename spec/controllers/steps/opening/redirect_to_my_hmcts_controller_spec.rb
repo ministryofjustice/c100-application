@@ -5,6 +5,7 @@ RSpec.describe Steps::Opening::RedirectToMyHmctsController, type: :controller do
 
   before do
     allow(controller).to receive(:current_c100_application).and_return(c100_application)
+    allow(controller).to receive(:update_navigation_stack)
   end
 
   describe '#show' do

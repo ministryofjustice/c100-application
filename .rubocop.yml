@@ -1,9 +1,10 @@
-require: rubocop-performance
+require:
+  - rubocop-performance
 
 AllCops:
   SuggestExtensions: false
   NewCops: disable
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.2.2
   Exclude:
     - './*'
     - 'db/**/*'
@@ -24,6 +25,7 @@ Metrics/ClassLength:
   Max: 105
   Exclude:
     - app/models/document_upload.rb
+    - app/services/c100_app/opening_decision_tree.rb
 
 Layout/LineLength:
   Max: 130

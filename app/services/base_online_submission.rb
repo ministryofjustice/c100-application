@@ -49,8 +49,8 @@ class BaseOnlineSubmission
 
   def application_details
     {
-      c100_application: c100_application,
-      documents: documents,
+      c100_application:,
+      documents:,
     }
   end
 end

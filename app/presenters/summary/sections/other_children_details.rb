@@ -18,7 +18,7 @@ module Summary
       def children_details
         children.map.with_index(1) do |child, index|
           [
-            Separator.new(:child_index_title, index: index),
+            Separator.new(:child_index_title, index:),
             personal_details(child),
             relationships(child),
           ]

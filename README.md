@@ -1,5 +1,5 @@
 # Family Justice C100 Service
-  
+   
 This is a Rails application to enable citizens to complete the C100 form. It will also produce a C1A form and a C8 form under certain circumstances based on the answers the applicant gives (for example if there are safety concerns).
 
 ## Getting Started
@@ -62,7 +62,7 @@ Then run `freshclam && clamd`
 ## Mutation testing
 
 This project uses extensive mutation coverage, which makes the (mutation) tests take a long time to run, and can end up with the CI killing the build due to excessive job work time.
-
+ 
 In order to make this a bit faster, by default in CI master branch and in local when run without any flags, the scope of mutant testing will be reduced to a few models, and a randomized small sample of classes in each of these groups: Form objects and Decision trees.
 
 In PRs, the mutation will be `--since master` meaning only files changed will be tested with mutant. This is much faster than running a random sample and also should be more accurate and pick the classes that matter (the changed ones, if any).

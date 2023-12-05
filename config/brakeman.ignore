@@ -36,6 +36,50 @@
       "note": ""
     },
     {
+      "warning_type": "Cross-Site Request Forgery",
+      "warning_code": 7,
+      "fingerprint": "59f94d5a98ea586b3af89e46e667fcaf3652db195502b91c36a82342d0fa0893",
+      "check_name": "ForgerySetting",
+      "message": "`protect_from_forgery` should be called in `Backoffice::ApplicationController`",
+      "file": "app/controllers/backoffice/application_controller.rb",
+      "line": 2,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross-site_request_forgery/",
+      "code": null,
+      "render_path": null,
+      "location": {
+        "type": "controller",
+        "controller": "Backoffice::ApplicationController"
+      },
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        352
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Request Forgery",
+      "warning_code": 7,
+      "fingerprint": "6f5239fb87c64764d0c209014deb5cf504c2c10ee424bd33590f0a4f22e01d8f",
+      "check_name": "ForgerySetting",
+      "message": "`protect_from_forgery` should be called in `ApplicationController`",
+      "file": "app/controllers/application_controller.rb",
+      "line": 1,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross-site_request_forgery/",
+      "code": null,
+      "render_path": null,
+      "location": {
+        "type": "controller",
+        "controller": "ApplicationController"
+      },
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        352
+      ],
+      "note": "Already included"
+    },
+    {
       "warning_type": "Redirect",
       "warning_code": 18,
       "fingerprint": "77bd79b7fd28a18a63e5bad7a646d1af1609fba0ff4a9675bd2dd83ab255222c",
@@ -78,6 +122,47 @@
       "note": ""
     },
     {
+      "warning_type": "Unmaintained Dependency",
+      "warning_code": 121,
+      "fingerprint": "9a3951031616a07c8e02c86652f537e92c08685da97f5ec2b12d5d3602b55bb8",
+      "check_name": "EOLRuby",
+      "message": "Support for Ruby 2.7.6 ended on 2023-03-31",
+      "file": "Gemfile.lock",
+      "line": 350,
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        1104
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Request Forgery",
+      "warning_code": 7,
+      "fingerprint": "f242fb9c017a95e2e38d907553322a524ca99a62df1307c7d77eedd88122b880",
+      "check_name": "ForgerySetting",
+      "message": "`protect_from_forgery` should be called in `BareApplicationController`",
+      "file": "app/controllers/bare_application_controller.rb",
+      "line": 1,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross-site_request_forgery/",
+      "code": null,
+      "render_path": null,
+      "location": {
+        "type": "controller",
+        "controller": "BareApplicationController"
+      },
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        352
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Redirect",
       "warning_code": 18,
       "fingerprint": "f456b32b59efb31455a291c6ea0dfb0846bfddac70e9757d9b13ba1195be1e75",
@@ -101,6 +186,6 @@
       "note": ""
     }
   ],
-  "updated": "2023-03-02 10:51:47 +0000",
-  "brakeman_version": "5.3.1"
+  "updated": "2023-04-26 15:28:01 +0100",
+  "brakeman_version": "5.4.1"
 }

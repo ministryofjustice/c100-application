@@ -74,7 +74,7 @@ module C100App
     end
 
     def next_child_id(current: record)
-      next_record_id(c100_application.child_ids, current: current)
+      next_record_id(c100_application.child_ids, current:)
     end
   end
 end

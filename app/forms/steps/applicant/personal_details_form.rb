@@ -14,6 +14,7 @@ module Steps
       validates_presence_of :dob, unless: :date_entered?
       validates :dob, sensible_date: true
       validates :input_dob, date: true
+      validates :previous_name, sensible_name: true, if: -> { has_previous_name&.yes? }
 
       attr_accessor :input_dob
 

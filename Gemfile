@@ -20,6 +20,7 @@ gem 'uk_postcode'
 gem 'virtus'
 gem 'parser', '~> 3.1', '>= 3.1.1.0'
 gem 'tzinfo', '~> 2.0.5'
+gem 'timecop'
 
 # Back office
 gem 'omniauth-auth0'
@@ -82,7 +83,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'site_prism', '~> 3.7', '>= 3.7.1'
-  gem 'webdrivers'
   gem 'webmock'
   gem 'database_cleaner'
+  gem 'parallel_tests'
 end

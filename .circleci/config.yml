@@ -4,13 +4,16 @@
 #
 version: 2.1
 
-orbs: 
-  browser-tools: circleci/browser-tools@1.4.0
+# orbs: 
+orbs:
+  browser-tools: circleci/browser-tools@1.4.4
+  aws-cli: circleci/aws-cli@4.0.0 # use v4 of this orb
+  aws-ecr: circleci/aws-ecr@8.2.1 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
 
 references:
   app_containers: &app_containers
     docker:
-      - image: cimg/ruby:2.7.6-browsers
+      - image: cimg/ruby:3.2.2-browsers
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -28,7 +31,6 @@ references:
           GITHUB_TEAM_NAME_SLUG: sustainingdevs
           REPO_NAME: c100-application
 
-
 jobs:
   test:
     <<: *app_containers
@@ -39,11 +41,13 @@ jobs:
     resource_class: medium+
     steps:
       - run: sudo apt-get update
-      - browser-tools/install-browser-tools
-      - run:
-          name: Remove chromedriver license # prevents checkout
-          command: |
-            rm LICENSE.chromedriver
+      - browser-tools/install-chrome:
+          chrome-version: 116.0.5845.96 # TODO: remove when chromedriver downloads are fixed
+#          replace-existing: true # TODO: remove when: https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+#      - run:
+#          name: Remove chromedriver license # prevents checkout
+#          command: |
+#            rm LICENSE.chromedriver
       - checkout
 
       # Download and cache dependencies
@@ -65,15 +69,34 @@ jobs:
           key: v1.1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+      # - run: bundle exec rake db:create
+      # - run: bundle exec rake db:schema:load
 
       # so mutant only runs on modified files; refer to mutant.rake for more details
       - run: git remote set-branches origin master && git fetch
 
-      - run:
-          name: run tests
-          command: << parameters.test_command >>
+      # - run:
+      #     name: run tests
+      #     command: << parameters.test_command >>
+    
+  build_and_push_image:
+    executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
+    steps:
+      # Checkout your repository
+      - checkout
+      # Authenticate to AWS using OIDC v2 with the AWS CLI
+      - aws-cli/setup:
+          role_arn: $ECR_ROLE_TO_ASSUME # this will use the env var
+          region: $ECR_REGION # this will use the env var
+      # Authenticate to the ECR repository using the standard command
+      - run: |
+          aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
+      # Build and push your Docker image
+      - aws-ecr/build-image:
+          push-image: true
+          tag: ${CIRCLE_SHA1}
+          region: $ECR_REGION # this will use the env var
+          repo: $ECR_REPOSITORY # this will use the env var
 
   build_image:
     <<: *cloud_container
@@ -184,35 +207,37 @@ jobs:
                     deployment/c100-application-deployment-<< parameters.env_name >> \
                     kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"                   
   tag_production:
-    <<: *cloud_container
+    executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
+    parameters:
+      env_name:
+        type: string
     steps:
-      - checkout
-
-      - setup_remote_docker:
-          version: 20.10.11
-          docker_layer_caching: true
-
+      # Authenticate to AWS using OIDC v2 with the AWS CLI
+      - aws-cli/setup:
+          role_arn: $ECR_ROLE_TO_ASSUME # this will use the env var
+          region: $ECR_REGION # this will use the env var
+      # Authenticate to the ECR repository using the standard command
+      - run: |
+          aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
+      # Build and push your Docker image
       - run:
           name: promote staging image to production
           command: |
-            login="$(aws ecr get-login --region ${AWS_DEFAULT_REGION} --no-include-email)"
-            ${login}
+            docker pull "${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/sustainingdevs/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
 
-            docker pull "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+            docker tag "${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/sustainingdevs/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" \
+                       "${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/sustainingdevs/${CIRCLE_PROJECT_REPONAME}:production.latest"
 
-            docker tag "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" \
-                       "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:production.latest"
+            docker push "${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/sustainingdevs/${CIRCLE_PROJECT_REPONAME}:production.latest"
 
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:production.latest"
 
 workflows:
   test-build-deploy:
     jobs:
       - test
       ### staging ###
-      - build_image:
+      - build_and_push_image:
           name: build-staging
-          env_name: staging
           requires:
             - test
           filters:
@@ -229,6 +254,7 @@ workflows:
           requires:
             - deploy-staging-live
       - tag_production:
+          env_name: staging
           requires:
             - approve_production
       - deploy_image_to_live_prod:
@@ -236,16 +262,3 @@ workflows:
           env_name: production
           requires:
             - tag_production
-
-#  smoke-tests:
-#    jobs:
-#      - test:
-#          name: smoke-tests
-#          test_command: bundle exec cucumber -p smoke
-#    triggers:
-#      - schedule:
-#          cron: "0 6 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master

@@ -76,7 +76,7 @@ class DocumentUpload
 
   # Used by Rails responders when responding with JSON.
   def to_hash
-    {name: file_name, encoded_name: encoded_file_name, collection_ref: collection_ref}
+    {name: file_name, encoded_name: encoded_file_name, collection_ref:}
   end
 
   private
@@ -90,7 +90,7 @@ class DocumentUpload
 
   # returns array of documents
   def uploaded_documents
-    @_uploaded_documents ||= Document.for_collection(collection_ref, document_key: document_key)
+    @_uploaded_documents ||= Document.for_collection(collection_ref, document_key:)
   end
 
   def unique_filename(suffix:)
