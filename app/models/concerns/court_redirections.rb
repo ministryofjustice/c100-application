@@ -1,6 +1,8 @@
 module CourtRedirections
   extend ActiveSupport::Concern
 
+  REDIRECT_POSTCODES = %w[EN1 EN2 EN3 EN4 HA0 HA1 HA3 HA8 N10 N11 N12 N13 N14 N17 N18 N2 N20 N21 N22 N3 N9 NW11 NW4 NW7 NW9].freeze
+
   def self.included(base)
     base.class_eval do
       after_save :redirect_urgent_hearings
@@ -15,7 +17,8 @@ module CourtRedirections
     if urgent_hearing == 'yes' &&
        without_notice == 'yes' &&
        court &&
-       court.id == 'west-london-family-court'
+       court.id == 'west-london-family-court' &&
+       REDIRECT_POSTCODES.include?(children_postcode.split(' ')[0])
       update(court: barnet_civil_and_family_courts_centre)
     end
   end
@@ -24,7 +27,8 @@ module CourtRedirections
     if (urgent_hearing == 'no' ||
        without_notice == 'no') &&
        court &&
-       court.id == 'barnet-civil-and-family-courts-centre'
+       court.id == 'barnet-civil-and-family-courts-centre' &&
+       REDIRECT_POSTCODES.include?(children_postcode.split(' ')[0])
       update(court: west_london_family_court)
     end
   end
