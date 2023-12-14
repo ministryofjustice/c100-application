@@ -4,6 +4,8 @@ RSpec.describe C100Application, type: :model do
   subject { described_class.new(attributes) }
   let(:attributes) { {} }
 
+  REDIRECT_POSTCODES = %w[EN1 EN2 EN3 EN4 HA0 HA1 HA3 HA8 N10 N11 N12 N13 N14 N17 N18 N2 N20 N21 N22 N3 N9 NW11 NW4 NW7 NW9].freeze
+
   describe 'status enum' do
     it 'has the right values' do
       expect(
@@ -34,7 +36,8 @@ RSpec.describe C100Application, type: :model do
     let(:attributes) {{
       court: court,
       urgent_hearing: urgent_hearing,
-      without_notice: without_notice
+      without_notice: without_notice,
+      children_postcode: children_postcode
     }}
 
     # :nocov:
@@ -52,8 +55,9 @@ RSpec.describe C100Application, type: :model do
       context 'with urgency and without notice' do
         let(:urgent_hearing){'yes'}
         let(:without_notice){'yes'}
+        let(:children_postcode){REDIRECT_POSTCODES.sample}
 
-        it 'redirects urgent hearings from 
+        it 'redirects urgent hearings from
             west london family court to barnet civil
             and family courts' do
           subject.save
@@ -64,6 +68,7 @@ RSpec.describe C100Application, type: :model do
       context 'without urgency' do
         let(:urgent_hearing){'no'}
         let(:without_notice){'yes'}
+        let(:children_postcode){REDIRECT_POSTCODES.sample}
 
         it 'does not redirect non-urgent' do
           subject.save
@@ -74,6 +79,7 @@ RSpec.describe C100Application, type: :model do
       context 'without notice' do
         let(:urgent_hearing){'yes'}
         let(:without_notice){'no'}
+        let(:children_postcode){'NW8'}
 
         it 'does not redirect non-notice' do
           subject.save
@@ -84,6 +90,7 @@ RSpec.describe C100Application, type: :model do
       context 'with urgency, then without urgency' do
         let(:urgent_hearing){'yes'}
         let(:without_notice){'yes'}
+        let(:children_postcode){REDIRECT_POSTCODES.sample}
 
         it 'redirects, then does not redirect non-urgent' do
           subject.save
@@ -107,6 +114,7 @@ RSpec.describe C100Application, type: :model do
       }
       let(:urgent_hearing){'yes'}
       let(:without_notice){'yes'}
+      let(:children_postcode){'NW8'}
       it 'does not redirect to other courts' do
         subject.save
         expect(subject.court.id).to eq('other-court')
@@ -361,3 +369,4 @@ RSpec.describe C100Application, type: :model do
     end
   end
 end
+
