@@ -55,20 +55,35 @@ RSpec.describe C100Application, type: :model do
       context 'with urgency and without notice' do
         let(:urgent_hearing){'yes'}
         let(:without_notice){'yes'}
-        let(:children_postcode){REDIRECT_POSTCODES.sample}
+        let(:children_postcode){ 'N2 0AA'}
 
-        it 'redirects urgent hearings from
+        context 'when given lowercase children_postcode' do
+          let(:children_postcode){'n2 0aa'}
+
+          it 'redirects urgent hearings from
             west london family court to barnet civil
             and family courts' do
-          subject.save
-          expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
+            subject.save
+            expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
+          end
+        end
+
+        context 'when given uppercase children_postcode' do
+          let(:children_postcode){'N2 0AA'}
+
+          it 'redirects urgent hearings from
+            west london family court to barnet civil
+            and family courts' do
+            subject.save
+            expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
+          end
         end
       end
 
       context 'without urgency' do
         let(:urgent_hearing){'no'}
         let(:without_notice){'yes'}
-        let(:children_postcode){REDIRECT_POSTCODES.sample}
+        let(:children_postcode){'N2 0AA'}
 
         it 'does not redirect non-urgent' do
           subject.save
@@ -79,7 +94,7 @@ RSpec.describe C100Application, type: :model do
       context 'without notice' do
         let(:urgent_hearing){'yes'}
         let(:without_notice){'no'}
-        let(:children_postcode){'NW8'}
+        let(:children_postcode){'NW8 0RH'}
 
         it 'does not redirect non-notice' do
           subject.save
@@ -90,14 +105,29 @@ RSpec.describe C100Application, type: :model do
       context 'with urgency, then without urgency' do
         let(:urgent_hearing){'yes'}
         let(:without_notice){'yes'}
-        let(:children_postcode){REDIRECT_POSTCODES.sample}
 
-        it 'redirects, then does not redirect non-urgent' do
-          subject.save
-          expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
-          
-          subject.update(urgent_hearing: 'no')
-          expect(subject.court.id).to eq('west-london-family-court')
+        context 'when given lowercase children_postcode' do
+          let(:children_postcode){'n2 0aa'}
+
+          it 'redirects, then does not redirect non-urgent' do
+            subject.save
+            expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
+
+            subject.update(urgent_hearing: 'no')
+            expect(subject.court.id).to eq('west-london-family-court')
+          end
+        end
+
+        context 'when given uppercase children_postcode' do
+          let(:children_postcode){'N2 0AA'}
+
+          it 'redirects, then does not redirect non-urgent' do
+            subject.save
+            expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
+
+            subject.update(urgent_hearing: 'no')
+            expect(subject.court.id).to eq('west-london-family-court')
+          end
         end
       end
     end
@@ -114,7 +144,7 @@ RSpec.describe C100Application, type: :model do
       }
       let(:urgent_hearing){'yes'}
       let(:without_notice){'yes'}
-      let(:children_postcode){'NW8'}
+      let(:children_postcode){'NW8 0RH'}
       it 'does not redirect to other courts' do
         subject.save
         expect(subject.court.id).to eq('other-court')
