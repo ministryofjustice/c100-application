@@ -18,7 +18,7 @@ module CourtRedirections
        without_notice == 'yes' &&
        court &&
        court.id == 'west-london-family-court' &&
-       REDIRECT_POSTCODES.include?(children_postcode.split(' ')[0])
+       REDIRECT_POSTCODES.include?(children_postcode.split(' ')[0].upcase)
       update(court: barnet_civil_and_family_courts_centre)
     end
   end
@@ -28,7 +28,7 @@ module CourtRedirections
        without_notice == 'no') &&
        court &&
        court.id == 'barnet-civil-and-family-courts-centre' &&
-       REDIRECT_POSTCODES.include?(children_postcode.split(' ')[0])
+       REDIRECT_POSTCODES.include?(children_postcode.split(' ')[0].upcase)
       update(court: west_london_family_court)
     end
   end
