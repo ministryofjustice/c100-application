@@ -18,7 +18,7 @@ module CourtRedirections
        without_notice == 'yes' &&
        court &&
        court.id == 'west-london-family-court' &&
-       REDIRECT_POSTCODES.include?(children_postcode.split(' ')[0].upcase)
+       redirect_postcode?(children_postcode)
       update(court: barnet_civil_and_family_courts_centre)
     end
   end
@@ -28,7 +28,7 @@ module CourtRedirections
        without_notice == 'no') &&
        court &&
        court.id == 'barnet-civil-and-family-courts-centre' &&
-       REDIRECT_POSTCODES.include?(children_postcode.split(' ')[0].upcase)
+       redirect_postcode?(children_postcode)
       update(court: west_london_family_court)
     end
   end
@@ -82,4 +82,14 @@ module CourtRedirections
     end
   end
   # :nocov:
+  def redirect_postcode?(postcode)
+    # postcode needs to be uppercase for matching
+    REDIRECT_POSTCODES.include?(postcode_area_code_regex(postcode.upcase).split(' ')[0].upcase)
+  end
+
+  def postcode_area_code_regex(postcode)
+    # first capture group should capture the postcode area code e.g. N2
+    matcher = /([A-Z]+[0-9]+)([A-Z ]*[0-9][A-Z]{2})/
+    postcode.match(matcher)[1]
+  end
 end

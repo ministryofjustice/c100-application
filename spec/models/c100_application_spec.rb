@@ -78,6 +78,17 @@ RSpec.describe C100Application, type: :model do
             expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
           end
         end
+
+        context 'when given a postcode with no spaces' do
+          let(:children_postcode){'n20AA'}
+
+          it 'redirects urgent hearings from
+            west london family court to barnet civil
+            and family courts' do
+            subject.save
+            expect(subject.court.id).to eq('barnet-civil-and-family-courts-centre')
+          end
+        end
       end
 
       context 'without urgency' do
