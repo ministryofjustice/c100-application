@@ -83,6 +83,8 @@ module CourtRedirections
   end
   # :nocov:
   def redirect_postcode?(postcode)
+    return false unless postcode.include?(' ')
+
     # postcode needs to be uppercase for matching
     REDIRECT_POSTCODES.include?(postcode_area_code_regex(postcode.upcase).split(' ')[0].upcase)
   end
