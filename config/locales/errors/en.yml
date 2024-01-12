@@ -359,6 +359,25 @@ en:
             concerns_contact_other:
               inclusion: Select yes if you agree to the other person being in touch with the children
 
+        steps/abuse_concerns/details_form:
+          attributes:
+            behaviour_description:
+              blank: Please briefly describe what happened and who was involved
+            behaviour_start:
+              blank: Provide when this behaviour started
+            behaviour_ongoing:
+              blank: Provide whether this behaviour still ongoing
+            behaviour_stop:
+              blank: Provide when the behaviour stopped
+            asked_for_help:
+              blank: Provide whether you asked for help
+            help_party:
+              blank: Provide who you asked for help
+            help_provided:
+              blank: Provide whether the person(s) you asked for help helped you
+            help_description:
+              blank: Describe how the person(s) you asked for help helped
+
         steps/petition/orders_form:
           attributes:
             orders:
