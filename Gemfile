@@ -28,7 +28,7 @@ gem 'omniauth-rails_csrf_protection'
 
 # Caching and jobs processing
 gem 'redis'
-gem 'sidekiq', '~> 6.4'
+gem 'sidekiq', '~> 7.2'
 gem 'sidekiq_alive'
 
 # PDF generation
