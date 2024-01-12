@@ -119,7 +119,7 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
           subject: AbuseSubject::APPLICANT,
           kind: AbuseType::EMOTIONAL
         ).and_return(abuse_concern)
-        allow(described_class).to receive(:err_msg)
+        allow(described_class).to receive(:err_msg).and_call_original
       end
 
       before(:each, saves: true) do
@@ -140,13 +140,9 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
         it{ expect(subject.save).to be(false) }
         it 'shows the full message' do
           subject.save
-          subject.errors.full_messages
-          expect(described_class).to have_received(:err_msg).
-            with({
-              attribute: "Behaviour description",
-              model: "Details form",
-              value: nil
-            })
+          expected_error_message = I18n.t('steps.abuse_concerns.details.edit.errors.behaviour_description')
+
+          expect(subject.errors.full_messages_for(:behaviour_description)).to include(expected_error_message)
         end
       end
       context 'requires behaviour_start' do
@@ -163,13 +159,9 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
         it{ expect(subject.save).to be(false) }
         it 'shows the full message' do
           subject.save
-          subject.errors.full_messages
-          expect(described_class).to have_received(:err_msg).
-            with({
-              attribute: "Behaviour stop",
-              model: "Details form",
-              value: nil
-            })
+          expected_error_message = I18n.t('steps.abuse_concerns.details.edit.errors.behaviour_stop')
+
+          expect(subject.errors.full_messages_for(:behaviour_stop)).to include(expected_error_message)
         end
       end
       context 'does not require behaviour_stop if behaviour_ongoing is yes',
@@ -188,13 +180,9 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
         it{ expect(subject.save).to be(false) }
         it 'shows the full message' do
           subject.save
-          subject.errors.full_messages
-          expect(described_class).to have_received(:err_msg).
-            with({
-              attribute: "Help party",
-              model: "Details form",
-              value: nil
-            })
+          expected_error_message = I18n.t('steps.abuse_concerns.details.edit.errors.help_party')
+
+          expect(subject.errors.full_messages_for(:help_party)).to include(expected_error_message)
         end
       end
       context 'does not require help_party if asked_for_help is no', saves: true do
@@ -207,16 +195,11 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
       context 'requires help_provided if asked_for_help is yes' do
         let(:asked_for_help){ GenericYesNo::YES }
         let(:help_provided){ GenericYesNo.new('') }
-        it{ expect(subject.save).to be(false) }
         it 'shows the full message' do
           subject.save
-          subject.errors.full_messages
-          expect(described_class).to have_received(:err_msg).
-            with({
-              attribute: "Help provided",
-              model: "Details form",
-              value: help_provided
-            })
+          expected_error_message = I18n.t('steps.abuse_concerns.details.edit.errors.help_provided')
+
+          expect(subject.errors.full_messages_for(:help_provided)).to include(expected_error_message)
         end
       end
       context 'does not require help_provided if asked_for_help is no', saves: true do
@@ -234,14 +217,11 @@ RSpec.describe Steps::AbuseConcerns::DetailsForm do
         it{ expect(subject.save).to be(false) }
         it 'shows the full message' do
           subject.save
-          subject.errors.full_messages
-          expect(described_class).to have_received(:err_msg).
-            with({
-              attribute: "Help description",
-              model: "Details form",
-              value: nil
-            })
+          expected_error_message = I18n.t('steps.abuse_concerns.details.edit.errors.help_description')
+
+          expect(subject.errors.full_messages_for(:help_description)).to include(expected_error_message)
         end
+
       end
       context 'does not require help_description if asked_for_help is no',
               saves: true do
