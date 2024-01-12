@@ -34,8 +34,6 @@ module Application
 
     config.active_job.queue_adapter = ENV.fetch('QUEUE_ADAPTER', :sidekiq).to_sym
 
-    # We are using our own url-shortener. These short urls redirect to surveymonkey,
-    # and tracks visits, so we can see if they are being used.
     config.surveys = {
       success: 'https://c100.service.justice.gov.uk/survey',
       kickout: 'https://c100.service.justice.gov.uk/exit_survey',
@@ -91,6 +89,5 @@ module Application
 
     config.maintenance_enabled = ENV.fetch('MAINTENANCE_ENABLED', 'false').downcase == 'true'
     config.maintenance_allowed_ips = ENV.fetch('MAINTENANCE_ALLOWED_IPS', '').split(',').map(&:strip)
-    config.active_record.legacy_connection_handling = false
   end
 end
