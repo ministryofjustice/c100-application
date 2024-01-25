@@ -411,5 +411,33 @@ RSpec.describe C100Application, type: :model do
       expect(subject.document(:doc_key)).to eq(nil)
     end
   end
+
+  describe '#has_petition_orders?' do
+
+    context 'when the application has petition orders' do
+      let(:some_order_object) { double('Order') } # Define a double for the order object
+      before do
+        # Setup the condition where the application is considered to have petition orders
+        allow_any_instance_of(PetitionPresenter).to receive(:all_selected_orders).and_return([some_order_object])
+      end
+
+      it 'returns true' do
+        expect(subject.has_petition_orders?).to eq(true)
+      end
+    end
+
+    context 'when the application does not have petition orders' do
+      before do
+        # Setup the condition where the application is considered not to have any petition orders
+        allow_any_instance_of(PetitionPresenter).to receive(:all_selected_orders).and_return([])
+      end
+
+      it 'returns false' do
+        expect(subject.has_petition_orders?).to eq(false)
+      end
+    end
+  end
+
+
 end
 
