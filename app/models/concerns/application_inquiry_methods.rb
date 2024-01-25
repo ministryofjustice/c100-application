@@ -34,4 +34,8 @@ module ApplicationInquiryMethods
   def mark_as_urgent?
     urgent_hearing == 'yes' && has_safety_concerns?
   end
+
+  def has_petition_orders?
+    PetitionPresenter.new(self).all_selected_orders.any?
+  end
 end
