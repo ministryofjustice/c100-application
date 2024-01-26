@@ -1,7 +1,7 @@
 require 'aws-sdk-core'
 
 if ENV["IS_DOCKER"].blank?
-  if ENV["AWS_S3_USE_PERMANENT_CREDENTIALS"].present?
+  if ENV["AWS_S3_USE_PERMANENT_CREDENTIALS"].present? || Rails.env.test?
     Aws.config.update(
       region: ENV["AWS_S3_REGION"],
       credentials: Aws::Credentials.new(

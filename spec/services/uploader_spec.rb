@@ -7,6 +7,10 @@ RSpec.describe Uploader do
   let(:filename) { 'filename' }
   let(:data) { 'data' }
 
+  # before do
+  #   allow_any_instance_of( Aws::AssumeRoleWebIdentityCredentials.new).to receive(:call).and_return(true)
+  # end
+
   describe '.add_file' do
     it 'calls Uploader::Addfile' do
       expect_any_instance_of(Uploader::AddFile).to receive(:call)
