@@ -23,6 +23,7 @@ tags
 # Ignore user's individual .env files
 .env
 .env.test
+config/initializers/s3_web_identity_token_file_placeholder.txt
 
 node_modules/
 public/assets/

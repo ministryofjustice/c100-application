@@ -16,6 +16,7 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
   #
   def validations
     [
+      generate_petition_validation,
       generate_validation(:children, edit_steps_children_names_path(id: '')),
       generate_validation(:applicants, edit_steps_applicant_names_path(id: '')),
       generate_validation(:respondents, edit_steps_respondent_names_path(id: '')),
@@ -37,6 +38,10 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
         [:files_collection_ref, :blank, path]
       end
     end
+  end
+
+  def generate_petition_validation
+    ->(record) { [:orders, :blank, edit_steps_petition_orders_path] unless record.has_petition_orders? }
   end
 
   def additional_checks(record, checks, invert)

@@ -1,7 +1,8 @@
 module CourtRedirections
   extend ActiveSupport::Concern
 
-  REDIRECT_POSTCODES = %w[EN1 EN2 EN3 EN4 HA0 HA1 HA3 HA8 N10 N11 N12 N13 N14 N17 N18 N2 N20 N21 N22 N3 N9 NW11 NW4 NW7 NW9].freeze
+  REDIRECT_POSTCODES = %w[EN1 EN2 EN3 EN4 HA0 HA1 HA3 HA8 N10 N11 N12 N13 N14 N17 N18 N2 N20 N21 N22 N3 N9 NW11 NW4 NW7
+                          NW9].freeze
 
   def self.included(base)
     base.class_eval do
