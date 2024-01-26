@@ -1,12 +1,23 @@
 require 'rails_helper'
 
 module Test
-  C100ApplicationValidatable = Struct.new(:children, :applicants, :respondents, :payment_type, :submission_type, keyword_init: true) do
+  C100ApplicationValidatable = Struct.new(:children,
+    :applicants,
+    :respondents,
+    :payment_type,
+    :submission_type,
+    :has_petition_orders,
+    keyword_init: true
+  ) do
     include ActiveModel::Validations
     validates_with ApplicationFulfilmentValidator
     def document(document_key)
       uploaded_doc = [:miam_certificate, :draft_consent_order]
       uploaded_doc.include?(document_key)
+    end
+
+    def has_petition_orders?
+      has_petition_orders
     end
 
   end
@@ -22,12 +33,14 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
       respondents: respondents,
       payment_type: payment_type,
       submission_type: submission_type,
+      has_petition_orders: has_petition_orders
     }
   end
 
   let(:children)    { [Object] }
   let(:applicants)  { [Object] }
   let(:respondents) { [Object] }
+  let(:has_petition_orders) { true }
 
   let(:submission_type) { 'submission_type' }
   let(:payment_type)    { 'payment_type' }
@@ -123,6 +136,28 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
         end
       end
     end
+
+    context 'orders' do
+      context 'when there are petition orders' do
+        let(:has_petition_orders) { true } # Set to true for this test case
+
+        it 'is valid' do
+          subject.valid?
+          expect(subject.errors.details.include?(:orders)).to eq(false)
+        end
+      end
+
+      context 'when there are no petition orders' do
+        let(:has_petition_orders) { false } # Set to false for this test case
+
+        it 'is invalid' do
+          expect(subject).not_to be_valid
+          expect(subject.errors.details[:orders][0][:error]).to eq(:blank)
+          expect(subject.errors.details[:orders][0][:change_path]).to eq('/steps/petition/orders')
+        end
+      end
+    end
+
   end
 
   context 'generate_document_validation' do

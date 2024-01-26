@@ -115,6 +115,8 @@ en:
         # Fulfillment validation errors
         c100_application:
           attributes:
+            orders:
+              blank: You must add at least one reason you are applying to the court
             children:
               blank: You must add at least one child
             applicants:
