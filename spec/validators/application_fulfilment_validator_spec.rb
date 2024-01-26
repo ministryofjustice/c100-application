@@ -40,6 +40,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
   let(:children)    { [Object] }
   let(:applicants)  { [Object] }
   let(:respondents) { [Object] }
+  let(:has_petition_orders) { true }
 
   let(:submission_type) { 'submission_type' }
   let(:payment_type)    { 'payment_type' }

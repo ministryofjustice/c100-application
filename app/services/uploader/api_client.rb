@@ -1,7 +1,7 @@
 class Uploader
   class ApiClient
     def initialize(*_args)
-      @client = if ENV["AWS_S3_USE_PERMANENT_CREDENTIALS"].present?
+      @client = if ENV["AWS_S3_USE_PERMANENT_CREDENTIALS"].present? || Rails.env.test?
                   Aws::S3::Client.new(
                     region: ENV["AWS_S3_REGION"],
                     credentials: Aws::Credentials.new(
