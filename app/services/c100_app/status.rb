@@ -25,12 +25,27 @@ module C100App
     # rubocop:disable Style/RescueModifier
     def checks
       [
-        ->(name: 'database') { [name, (ActiveRecord::Base.connection.active? rescue false)] },
+        ->(name: 'database') { [name, database_check] },
         ->(name: 'sidekiq') { [name, (Sidekiq::ProcessSet.new.size.positive? rescue false)] },
         ->(name: 'sidekiq_latency') { [name, (Sidekiq::Queue.all.sum(&:latency) rescue false)] },
         #->(name: 'courtfinder'){ [name, (C100App::CourtfinderAPI.new.is_ok? rescue false)] },
       ]
     end
     # rubocop:enable Style/RescueModifier
+
+    def database_check
+      active = ActiveRecord::Base.connection.active? rescue false
+      return true if active
+
+      # If the connection check fails, try to execute a raw SQL to get more details.
+      begin
+        result = ActiveRecord::Base.connection.execute("SELECT 1")
+        Sentry.capture_message("Database connection active check failed, but raw SQL executed successfully: #{result.to_a}")
+      rescue => e
+        Sentry.capture_exception(e)
+        Rails.logger.error("Database check failed: #{e.message}")
+      end
+      false
+    end
   end
 end
