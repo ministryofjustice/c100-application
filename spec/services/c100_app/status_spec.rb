@@ -26,6 +26,8 @@ RSpec.describe C100App::Status do
       allow(ActiveRecord::Base.connection).to receive(:active?).and_return(database_active)
       allow(Sidekiq::Queue).to receive(:all).and_return(sidekiq_queues)
       allow(Sidekiq::ProcessSet).to receive(:new).and_return(sidekiq_process_set)
+      allow(ActiveRecord::Base.connection).to receive(:execute).and_return([{'1' => 1}]) # Mock raw SQL response
+      allow(Sentry).to receive(:capture_message)
     end
 
     describe 'database' do
@@ -37,12 +39,13 @@ RSpec.describe C100App::Status do
         }
       end
 
-      context 'database is KO' do
+      context 'database is KO but raw SQL query succeeds' do
         let(:database_active) { false }
 
-        it {
+        it 'logs detailed error message to Sentry and includes database check as false' do
+          expect(Sentry).to receive(:capture_message).with(/Database connection active check failed/)
           expect(subject.response[:dependencies]).to include('database' => false)
-        }
+        end
       end
 
       context 'database is KO (raises error)' do
@@ -53,6 +56,18 @@ RSpec.describe C100App::Status do
         it {
           expect(subject.response[:dependencies]).to include('database' => false)
         }
+      end
+
+      context 'database is KO and raw SQL query raises error' do
+        before do
+          allow(ActiveRecord::Base.connection).to receive(:active?).and_return false
+          allow(ActiveRecord::Base.connection).to receive(:execute).and_raise('sql boom')
+        end
+
+        it 'captures exception with Sentry and includes database check as false' do
+          expect(Sentry).to receive(:capture_exception).with(instance_of(RuntimeError)).at_least(:once)
+          expect(subject.response[:dependencies]).to include('database' => false)
+        end
       end
     end
 
