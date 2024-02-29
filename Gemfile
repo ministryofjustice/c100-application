@@ -80,6 +80,7 @@ group :test do
   gem 'rubocop'
   gem 'rubocop-performance', require: false
   gem 'selenium-webdriver'
+  gem 'webdrivers'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'site_prism', '~> 3.7', '>= 3.7.1'
