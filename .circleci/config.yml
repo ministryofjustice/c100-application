@@ -43,19 +43,19 @@ jobs:
       - run: sudo apt-get update
       - browser-tools/install-chrome:
           chrome-version: 116.0.5845.96 # TODO: remove when chromedriver downloads are fixed
-#          replace-existing: true # TODO: remove when: https://github.com/CircleCI-Public/browser-tools-orb/issues/75
-#      - run:
-#          name: Remove chromedriver license # prevents checkout
-#          command: |
-#            rm LICENSE.chromedriver
+          replace-existing: true # TODO: remove when: https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+      #      - run:
+      #          name: Remove chromedriver license # prevents checkout
+      #          command: |
+      #            rm LICENSE.chromedriver
       - checkout
 
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1.1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1.1-dependencies-
+            - v1.1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1.1-dependencies-
 
       - run:
           name: install dependencies
@@ -69,16 +69,16 @@ jobs:
           key: v1.1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup
-      # - run: bundle exec rake db:create
-      # - run: bundle exec rake db:schema:load
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
 
       # so mutant only runs on modified files; refer to mutant.rake for more details
       - run: git remote set-branches origin master && git fetch
 
-      # - run:
-      #     name: run tests
-      #     command: << parameters.test_command >>
-    
+      - run:
+          name: run tests
+          command: << parameters.test_command >>
+
   build_and_push_image:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
     steps:
@@ -136,7 +136,7 @@ jobs:
 
             docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
             docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
- 
+
   deploy_image_to_live:
     <<: *cloud_container
     parameters:
@@ -205,7 +205,7 @@ jobs:
 
             kubectl annotate -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-deployment-<< parameters.env_name >> \
-                    kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"                   
+                    kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"
   tag_production:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
     parameters:
