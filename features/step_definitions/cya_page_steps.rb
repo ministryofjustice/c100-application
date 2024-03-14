@@ -40,12 +40,6 @@ And(/^I should see they have a document signed by the mediator$/) do
   end
 end
 
-And(/^I should see they are exempt from an MIAM$/) do
-  within('#miam_mediator_exemption') do
-    expect(page).to have_content("Has a mediator confirmed that you do not need to attend a MIAM? Yes")
-  end
-end
-
 And(/^I should see they "(have|haven't)" got safety concerns about the children$/) do |arg|
   within('#safety_concerns') do
     if arg == "have"
