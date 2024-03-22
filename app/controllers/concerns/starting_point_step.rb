@@ -12,7 +12,7 @@ module StartingPointStep
   def update_navigation_stack
     # The step including this concern will reset the navigation stack
     # before re-initialising it in StepController#update_navigation_stack
-    current_c100_application.navigation_stack = []
+    current_c100_application.navigation_stack = [] unless OpeningChange.changes_apply?
     super
   end
 end
