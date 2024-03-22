@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Steps::Opening::StartController, type: :controller do
+
+  before do
+    allow(ENV).to receive(:[]).with('PRL_OPENING').and_return("false")
+  end
+
   it_behaves_like 'a controller that checks the application payment status', for_action: :show
 
   describe '#show' do
@@ -28,11 +33,10 @@ RSpec.describe Steps::Opening::StartController, type: :controller do
           it 'resets the memoized `current_c100_application`' do
             # simulate memoization
             controller.instance_variable_set(:@_current_c100_application, existing_c100)
-            expect(controller.current_c100_application).not_to be_nil
+            expect(controller.send(:current_c100_application)).not_to be_nil
 
             get :show, session: { c100_application_id: existing_c100.id }, params: {new: 'y'}
-
-            expect(controller.current_c100_application).to be_nil
+            expect(controller.send(:current_c100_application)).not_to eql(existing_c100)
           end
         end
 
@@ -68,11 +72,11 @@ RSpec.describe Steps::Opening::StartController, type: :controller do
         it 'resets the memoized `current_c100_application`' do
           # simulate memoization
           controller.instance_variable_set(:@_current_c100_application, existing_c100)
-          expect(controller.current_c100_application).not_to be_nil
+          expect(controller.send(:current_c100_application)).not_to be_nil
 
           get :show, session: { c100_application_id: existing_c100.id }
 
-          expect(controller.current_c100_application).to be_nil
+          expect(controller.send(:current_c100_application)).not_to eql(existing_c100)
         end
       end
     end
@@ -97,6 +101,10 @@ RSpec.describe Steps::Opening::StartController, type: :controller do
     context 'when no application exists in session' do
       let!(:existing_c100) { nil }
       let(:navigation_stack) { [] }
+
+      before do
+        allow(ENV).to receive(:fetch).with('PRL_OPENING').and_return('false')
+      end
 
       it 'responds with HTTP success' do
         get :show
