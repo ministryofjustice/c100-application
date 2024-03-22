@@ -164,3 +164,11 @@ end
 When(/^I fill in a postcode "([^"]*)" for the children$/) do |arg|
   fill_in('steps_opening_postcode_form[children_postcode]', with: arg)
 end
+
+Given(/^Opening changes apply$/) do
+  ENV['PRL_OPENING'] = 'true'
+end
+
+Given(/^Opening changes do not apply$/) do
+  ENV['PRL_OPENING'] = 'false'
+end

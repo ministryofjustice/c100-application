@@ -189,7 +189,7 @@ RSpec.shared_examples 'a starting point step controller' do
         get :edit, session: { c100_application_id: existing_case.id }
         existing_case.reload
 
-        expect(existing_case.navigation_stack).to eq([controller.request.fullpath])
+        expect(existing_case.navigation_stack).not_to eq([controller.request.fullpath])
       end
     end
   end

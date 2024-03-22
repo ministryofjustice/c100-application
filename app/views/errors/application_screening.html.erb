@@ -6,7 +6,6 @@
 
     <p class="govuk-body-l"><%=t '.lead_text' %></p>
 
-    <%#= link_button t('.enter_postcode'), edit_steps_opening_start_or_continue_path %>
-    <%= link_button t('.enter_postcode'), edit_steps_opening_postcode_path %>
+    <%= link_button t('.enter_postcode'), PRLChange.changes_apply? ? edit_steps_opening_start_or_continue_path : edit_steps_opening_postcode_path %>
   </div>
 </div>
