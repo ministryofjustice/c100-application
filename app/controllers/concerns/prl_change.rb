@@ -1,4 +1,4 @@
-module PRLChange
+module PrlChange
   extend ActiveSupport::Concern
 
   def self.changes_apply?
