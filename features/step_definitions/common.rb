@@ -166,9 +166,9 @@ When(/^I fill in a postcode "([^"]*)" for the children$/) do |arg|
 end
 
 Given(/^Opening changes apply$/) do
-  ENV['OPENING_CHANGE'] = 'true'
+  ENV['PRL_OPENING'] = 'true'
 end
 
 Given(/^Opening changes do not apply$/) do
-  ENV['OPENING_CHANGE'] = 'false'
+  ENV['PRL_OPENING'] = 'false'
 end

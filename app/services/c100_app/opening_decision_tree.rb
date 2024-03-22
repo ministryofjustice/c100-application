@@ -15,7 +15,7 @@ module C100App
       when :continue_application
         after_continue_application
       when :research_consent
-        OpeningChange.changes_apply? ? after_research_consent : check_if_my_hmcts_eligable_court
+        PRLChange.changes_apply? ? after_research_consent : check_if_my_hmcts_eligable_court
       when :my_hmcts
         after_my_hmcts
       when :consent_order

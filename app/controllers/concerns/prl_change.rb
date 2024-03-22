@@ -1,7 +1,7 @@
-module OpeningChange
+module PRLChange
   extend ActiveSupport::Concern
 
   def self.changes_apply?
-    ENV["OPENING_CHANGE"] == "true"
+    ENV["PRL_OPENING"] == "true"
   end
 end

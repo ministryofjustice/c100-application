@@ -26,7 +26,7 @@ module Steps
     def existing_application_warning
       return unless current_c100_application
 
-      if OpeningChange.changes_apply?
+      if PRLChange.changes_apply?
         return if not_enough_progress?
         return if is_attempting_restart?
       elsif !in_progress_enough? || params.key?(:new)

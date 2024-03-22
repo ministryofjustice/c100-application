@@ -1,13 +1,13 @@
 module Steps
   module Opening
     class StartOrContinueController < Steps::OpeningStepController
-      skip_before_action :check_c100_application_presence, if: -> { OpeningChange.changes_apply? }
-      skip_before_action :update_navigation_stack, if: -> { OpeningChange.changes_apply? }
+      skip_before_action :check_c100_application_presence, if: -> { PRLChange.changes_apply? }
+      skip_before_action :update_navigation_stack, if: -> { PRLChange.changes_apply? }
       before_action :existing_application_warning, only: [:edit], unless: lambda {
-                                                                            params[:new].present? && !OpeningChange.changes_apply?
+                                                                            params[:new].present? && !PRLChange.changes_apply?
                                                                           }
       before_action :reset_c100_application_session, only: [:edit], if: lambda {
-                                                                          params[:new].present? && OpeningChange.changes_apply?
+                                                                          params[:new].present? && PRLChange.changes_apply?
                                                                         }
 
       def edit

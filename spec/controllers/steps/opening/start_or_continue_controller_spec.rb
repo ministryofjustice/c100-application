@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Steps::Opening::StartOrContinueController, type: :controller do
 
   before do
-    allow(ENV).to receive(:fetch).with('OPENING_CHANGE').and_return('true')
+    allow(ENV).to receive(:fetch).with('PRL_OPENING').and_return('true')
   end
 
   it_behaves_like 'a starting point step controller'

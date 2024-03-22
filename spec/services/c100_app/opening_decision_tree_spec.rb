@@ -461,7 +461,7 @@ RSpec.describe C100App::OpeningDecisionTree do
     it_behaves_like 'a decision tree'
 
     before do
-      allow(ENV).to receive(:[]).with("OPENING_CHANGE").and_return("false")
+      allow(ENV).to receive(:[]).with("PRL_OPENING").and_return("false")
     end
 
     context 'when the step is `children_postcode`' do
@@ -621,7 +621,7 @@ RSpec.describe C100App::OpeningDecisionTree do
       subject { described_class.new(c100_application: c100_application, step_params: step_params, as: as, next_step: next_step) }
 
       before do
-        allow(ENV).to receive(:[]).with('OPENING_CHANGE').and_return("true")
+        allow(ENV).to receive(:[]).with('PRL_OPENING').and_return("true")
       end
 
       context 'when the step is `start_or_continue`' do

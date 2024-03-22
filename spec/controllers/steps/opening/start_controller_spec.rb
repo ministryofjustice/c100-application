@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Steps::Opening::StartController, type: :controller do
 
   before do
-    allow(ENV).to receive(:[]).with('OPENING_CHANGE').and_return("false")
+    allow(ENV).to receive(:[]).with('PRL_OPENING').and_return("false")
   end
 
   it_behaves_like 'a controller that checks the application payment status', for_action: :show
@@ -103,7 +103,7 @@ RSpec.describe Steps::Opening::StartController, type: :controller do
       let(:navigation_stack) { [] }
 
       before do
-        allow(ENV).to receive(:fetch).with('OPENING_CHANGE').and_return('false')
+        allow(ENV).to receive(:fetch).with('PRL_OPENING').and_return('false')
       end
 
       it 'responds with HTTP success' do
