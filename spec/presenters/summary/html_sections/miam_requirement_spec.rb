@@ -5,7 +5,6 @@ module Summary
     let(:c100_application) {
       instance_double(C100Application,
         miam_attended: 'no',
-        miam_mediator_exemption: 'yes',
         miam_certification: 'yes',
         miam_exemption_claim: 'no',
         files_collection_ref: '123'
@@ -27,7 +26,7 @@ module Summary
 
       describe '#answers' do
         it 'has the correct rows' do
-          expect(answers.count).to eq(4)
+          expect(answers.count).to eq(3)
 
           expect(answers[0]).to be_an_instance_of(Answer)
           expect(answers[0].question).to eq(:miam_attended)
@@ -35,19 +34,14 @@ module Summary
           expect(answers[0].value).to eq('no')
 
           expect(answers[1]).to be_an_instance_of(Answer)
-          expect(answers[1].question).to eq(:miam_mediator_exemption)
-          expect(answers[1].change_path).to eq('/steps/miam/mediator_exemption')
+          expect(answers[1].question).to eq(:miam_certification)
+          expect(answers[1].change_path).to eq('/steps/miam/certification')
           expect(answers[1].value).to eq('yes')
 
           expect(answers[2]).to be_an_instance_of(Answer)
-          expect(answers[2].question).to eq(:miam_certification)
-          expect(answers[2].change_path).to eq('/steps/miam/certification')
-          expect(answers[2].value).to eq('yes')
-
-          expect(answers[3]).to be_an_instance_of(Answer)
-          expect(answers[3].question).to eq(:miam_exemption_claim)
-          expect(answers[3].change_path).to eq('/steps/miam/exemption_claim')
-          expect(answers[3].value).to eq('no')
+          expect(answers[2].question).to eq(:miam_exemption_claim)
+          expect(answers[2].change_path).to eq('/steps/miam/exemption_claim')
+          expect(answers[2].value).to eq('no')
         end
       end
 
@@ -59,7 +53,7 @@ module Summary
 
         describe '#answers' do
           it 'has the correct rows' do
-            expect(answers.count).to eq(5)
+            expect(answers.count).to eq(4)
 
             expect(answers[0]).to be_an_instance_of(Answer)
             expect(answers[0].question).to eq(:miam_attended)
@@ -67,24 +61,19 @@ module Summary
             expect(answers[0].value).to eq('no')
 
             expect(answers[1]).to be_an_instance_of(Answer)
-            expect(answers[1].question).to eq(:miam_mediator_exemption)
-            expect(answers[1].change_path).to eq('/steps/miam/mediator_exemption')
+            expect(answers[1].question).to eq(:miam_certification)
+            expect(answers[1].change_path).to eq('/steps/miam/certification')
             expect(answers[1].value).to eq('yes')
 
             expect(answers[2]).to be_an_instance_of(Answer)
-            expect(answers[2].question).to eq(:miam_certification)
-            expect(answers[2].change_path).to eq('/steps/miam/certification')
-            expect(answers[2].value).to eq('yes')
+            expect(answers[2].question).to eq(:miam_exemption_claim)
+            expect(answers[2].change_path).to eq('/steps/miam/exemption_claim')
+            expect(answers[2].value).to eq('no')
 
-            expect(answers[3]).to be_an_instance_of(Answer)
-            expect(answers[3].question).to eq(:miam_exemption_claim)
-            expect(answers[3].change_path).to eq('/steps/miam/exemption_claim')
-            expect(answers[3].value).to eq('no')
-
-            expect(answers[4]).to be_an_instance_of(FileAnswer)
-            expect(answers[4].question).to eq(:miam_certificate)
-            expect(answers[4].change_path).to eq('/steps/miam/certification_upload')
-            expect(answers[4].value).to eq('filename.doc')
+            expect(answers[3]).to be_an_instance_of(FileAnswer)
+            expect(answers[3].question).to eq(:miam_certificate)
+            expect(answers[3].change_path).to eq('/steps/miam/certification_upload')
+            expect(answers[3].value).to eq('filename.doc')
           end
         end
 

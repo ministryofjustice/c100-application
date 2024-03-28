@@ -10,7 +10,7 @@ Feature: Testing C100 end to end
     And I choose "No"
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I click the radio button "No"
-    And I check "I understand that I have to attend a MIAM or provide a valid reason for not attending."
+    And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
     And I click the "Continue" button
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "Yes"
@@ -30,7 +30,7 @@ Feature: Testing C100 end to end
     And I choose "No"
     Then I should see "Have the children suffered or are they at risk of suffering domestic or child abuse?"
     And I choose "No"
-    Then I should see "Have you suffered or are you at risk of suffering domestic violence or abuse?"
+    Then I should see "Have you suffered or are you at risk of suffering domestic abuse?"
     And I choose "No"
     Then I should see "Do you have any other safety concerns about you or the children?"
     And I choose "No"
@@ -285,11 +285,9 @@ Feature: Testing C100 end to end
     And I choose "No"
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I click the radio button "No"
-    And I check "I understand that I have to attend a MIAM or provide a valid reason for not attending."
+    And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
     And I click the "Continue" button
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
-    And I choose "No"
-    Then I should see "Has a mediator confirmed that you do not need to attend a MIAM?"
     And I choose "Yes"
     Then I should see "Have you got a document signed by the mediator?"
     And I choose "No"
@@ -412,7 +410,7 @@ Feature: Testing C100 end to end
     And I should see "What happens at court"
     And I should see "Changing or enforcing an order"
     And I should see "Representing yourself in court"
-    And I should see "Domestic violence or abuse and child abuse"
+    And I should see "Domestic abuse and child abuse"
     And I check "I understand what’s involved if I decide to go to court"
     And I click the "Continue" button
     Then I should see "Enter the names of the children"
@@ -787,7 +785,7 @@ Feature: Testing C100 end to end
     And I should see "What happens at court"
     And I should see "Changing or enforcing an order"
     And I should see "Representing yourself in court"
-    And I should see "Domestic violence or abuse and child abuse"
+    And I should see "Domestic abuse and child abuse"
     And I check "I understand what’s involved if I decide to go to court"
     And I click the "Continue" button
     Then I should see "Enter the names of the children"

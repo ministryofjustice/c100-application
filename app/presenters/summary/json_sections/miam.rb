@@ -14,7 +14,6 @@ module Summary
       def miam
         {
           applicantAttendedMiam: c100_application.miam_attended,
-          claimingExemptionMiam: c100_application.miam_mediator_exemption,
           # familyMediatorMiam: nil,
           miamExemptionsChecklist: miam_list(:misc),
           miamDomesticViolenceChecklist:  miam_list(:domestic),

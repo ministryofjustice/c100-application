@@ -116,7 +116,7 @@ en:
       statement_of_truth: 16. Statement of truth
       ### C1A ###
       c1a_applicants_details: Section 1 - About you (the person completing this form)
-      c1a_abuse_details: Section 2 - Details of domestic violence / abuse
+      c1a_abuse_details: Section 2 - Details of domestic abuse
       c1a_abduction: Section 3 - Abduction
       c1a_children_other_abuse: Section 4 - Other concerns about the child(ren)
       c1a_protection_orders: Section 5 - Steps or orders required to protect the safety and wellbeing
@@ -200,7 +200,7 @@ en:
       answers:
         <<: *FORMALISE_ARRANGEMENTS
     domestic_abuse:
-      question: Any form of domestic violence or abuse?
+      question: Any form of domestic abuse?
       answers:
         <<: *YESNO
     children_abduction:
@@ -390,11 +390,6 @@ en:
       answer: "[ File(s) uploaded with application ]"
     miam_certificate_received:
       question: Have you got a signed document from the mediator?
-      answers:
-        <<: *YESNO
-        not_applicable: *not_applicable
-    miam_mediator_exemption:
-      question: Has a family mediator informed you that a mediator’s exemption applies, and you do not need to attend a MIAM?
       answers:
         <<: *YESNO
         not_applicable: *not_applicable

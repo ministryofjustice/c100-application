@@ -3,18 +3,18 @@ require 'spec_helper'
 RSpec.describe Steps::MiamExemptions::MiscForm do
   let(:arguments) { {
     c100_application: c100_application,
-    misc: ['misc_no_respondent_address'],
+    misc: ['misc_without_notice'],
     exemptions_collection: ['group_miam_access'],
   } }
 
   let(:c100_application) { instance_double(C100Application, miam_exemption: miam_exemption_record) }
-  let(:miam_exemption_record) { MiamExemption.new(misc: ['misc_no_respondent_address']) }
+  let(:miam_exemption_record) { MiamExemption.new(misc: ['misc_without_notice']) }
 
   subject { described_class.new(arguments) }
 
   describe 'custom getter override' do
     it 'returns all the exemptions in all attributes' do
-      expect(subject.exemptions_collection).to eq(%w(group_miam_access misc_no_respondent_address))
+      expect(subject.exemptions_collection).to eq(%w(group_miam_access misc_without_notice))
     end
   end
 
@@ -82,7 +82,7 @@ RSpec.describe Steps::MiamExemptions::MiscForm do
     context 'when form is valid' do
       it 'saves the record' do
         expect(miam_exemption_record).to receive(:update).with(
-          misc: %w(group_miam_access misc_no_respondent_address),
+          misc: %w(group_miam_access misc_without_notice),
         ).and_return(true)
 
         expect(subject.save).to be(true)
@@ -103,7 +103,7 @@ RSpec.describe Steps::MiamExemptions::MiscForm do
       context 'and something else is selected' do
         let(:arguments) { {
           c100_application: c100_application,
-          misc: ['misc_no_respondent_address', 'misc_none']
+          misc: %w[misc_without_notice misc_none]
         } }
         it 'is not valid' do
           expect(subject).to_not be_valid
