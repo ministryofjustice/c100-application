@@ -398,6 +398,16 @@ en:
       answers:
         <<: *YESNO
         not_applicable: *not_applicable
+    exemption_details:
+      question: Details of exemptions from attending a MIAM
+      absence_answer: *not_applicable
+    exemption_reasons:
+      question: Reasons for not providing evidence for a MIAM exemption
+      absence_answer: *not_applicable
+    attach_evidence:
+      question: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
+      answers:
+        <<: *YESNO
     permission_sought:
       question: Have you applied to the court for permission to make this application?
       answers:

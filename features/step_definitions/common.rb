@@ -172,3 +172,15 @@ end
 Given(/^Opening changes do not apply$/) do
   ENV['PRL_OPENING'] = 'false'
 end
+
+Given(/^Mediation changes do apply$/) do
+  Timecop.freeze(DateTime.parse(ENV["MEDIATION_DATE"]) + 1.day)
+end
+
+Given(/^Mediation changes do not apply$/) do
+  Timecop.freeze(DateTime.parse(ENV["MEDIATION_DATE"]) - 1.day)
+end
+
+And('the mediation changes end') do
+  Timecop.return
+end

@@ -1,6 +1,6 @@
-Feature: MIAM journey
+Feature: MIAM mediation change journey
   Background:
-    Given Mediation changes do not apply
+    Given Mediation changes do apply
     Given I have started an application
     When I visit "steps/miam/acknowledgement"
     Then I should see "Have you previously been to mediation through the mediation voucher scheme?"
@@ -63,6 +63,11 @@ Feature: MIAM journey
     Then I should see "Confirming other valid reasons for not attending"
     And I check "None of these"
     And I click the "Continue" button
+    Then I should see "Provide details of exemptions from attending a MIAM"
+    Then I fill in "steps-miam-exemptions-exemption-details-form-exemption-details-field" with "details"
+    And I click the "Continue" button
+    Then I should see "Reasons for not providing evidence for a MIAM exemption"
+    When I choose "Yes"
     Then I should see "You must attend a MIAM"
     And the mediation changes end
 
@@ -86,13 +91,20 @@ Feature: MIAM journey
     And I check "None of these"
     And I click the "Continue" button
     Then I should see "Confirming other valid reasons for not attending"
-    And I check "You can’t access a mediator"
-    And I check "There is no authorised family mediator with an office within 15 miles of your home"
+    And I check "You’re applying for a without notice hearing"
+    And I check "You or the prospective respondents are under 18 years old"
     And I click the "Continue" button
+
+    Then I should see "Provide details of exemptions from attending a MIAM"
+    Then I fill in "steps-miam-exemptions-exemption-details-form-exemption-details-field" with "details"
+    And I click the "Continue" button
+    Then I should see "Reasons for not providing evidence for a MIAM exemption"
+    When I choose "Yes"
 
     Then I should see "You don’t have to attend a MIAM"
     Then I should see "Other exemptions"
-    Then I should see "There is no authorised family mediator with an office within 15 miles of your home"
+    Then I should see "You’re applying for a without notice hearing"
+    Then I should see "You or the prospective respondents are under 18 years old"
 
     And I click the "Continue" link
     Then I should see "Safety concerns"

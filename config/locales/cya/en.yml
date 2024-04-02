@@ -251,6 +251,7 @@ en:
         police_ongoing_proceedings: Evidence of relevant criminal proceedings for a domestic abuse offence which have not concluded
         police_conviction: Evidence of a relevant conviction for a domestic abuse offence
         police_dvpn: A domestic violence protection notice issued under section 24 of the Crime and Security Act 2010 against a prospective party
+        police_dapn: A domestic abuse protection notice given under section 22 of the Domestic Abuse Act 2021 against a prospective party
         court_bound_over: A court order binding a prospective party over in connection with a domestic abuse offence
         court_protective_injunction: A relevant protective injunction
         court_undertaking: An undertaking given in England and Wales under section 46 or 63E of the Family Law Act 1996 (or given in Scotland or Northern Ireland in place of a protective injunction) by a prospective party, provided that a cross-undertaking relating to domestic violence or abuse was not given by another prospective party
@@ -305,7 +306,18 @@ en:
         miam_access_mediator_nearby: There is no authorised family mediator with an office within 15 miles of your home
         misc_applicant_under_age: The applicant or any of the other people in this application (the respondents) are under 18 years old
         misc_none: *none_selected
-
+        misc_access: (i) The prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case is provided to the court using the text box provided; and (ii) the prospective applicant has contacted as many authorised family  mediators as have an office within fifteen miles of his or her home (or five of them if there are five or more), and all of them have stated that they are not available to conduct a MIAM within fifteen business days of the date of contact; and (iii) the names, postal addresses and telephone numbers or e-mail addresses for such authorised family mediators, and the dates of contact, are provided to the court using the text box provided
+        misc_access2: (i) The prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case is provided to the court using the text box provided; and (ii) the prospective applicant is subject to a disability or other inability that would prevent attendance in person at a MIAM unless appropriate facilities can be offered by an authorised mediator; and (iii) the prospective applicant has contacted as many authorised family mediators as have an office within fifteen miles of his or her home (or five of them if there are five or more), and all have stated that they are unable to provide such facilities; and (iv) the names, postal addresses and telephone numbers or e-mail addresses for the authorised family mediators contacted by the prospective applicant, and the dates of contact, are provided to the court using the text box provided
+        misc_access3: (i) The prospective applicant is not able to attend a MIAM online or by  video-link; and (ii) there is no authorised family mediator with an office within fifteen miles of the prospective applicant’s home; and (iii) an explanation of why this exemption applies is provided by the prospective applicant to the court using the text box provided
+        misc_access4: The prospective applicant cannot attend a MIAM because the prospective applicant is (i) in prison or any other institution in which the prospective applicant is required to be detained and facilities cannot be made available for them to attend a MIAM online or by video link; or (ii) subject to conditions of bail that prevent contact with the other person; or (iii) subject to a licence with a prohibited contact requirement in relation to the other person
+    exemption_details:
+      question: Details of exemptions from attending a MIAM
+    exemption_reasons:
+      question: Reasons for not providing evidence for a MIAM exemption
+    attach_evidence:
+      question: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
+      answers:
+        <<: *YESNO
     ### Safety concerns ###
     risk_of_abduction:
       question: Are the children at risk of being abducted?
