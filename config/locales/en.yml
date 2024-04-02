@@ -961,7 +961,34 @@ en:
         edit:
           page_title: Other valid reasons for not attending
           heading: Confirming other valid reasons for not attending
+          hint_text: Where evidence is needed to support an exemption, you will need to submit a copy of this document with this application to court.
           section: *miam_exemptions
+      exemption_details:
+        edit:
+          page_title: Provide details of exemptions from attending a MIAM
+          heading: Provide details of exemptions from attending a MIAM
+          info_html: |
+            <p class="govuk-body">Enter the following details where applicable:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Why the prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case</li>
+              <li>The names, postal addresses and telephone numbers or e-mail addresses for authorised family mediators, and the dates of contact</li>
+            </ul>
+
+      exemption_reasons:
+        edit:
+          page_title: Reasons for not providing evidence for a MIAM exemption
+          heading: Reasons for not providing evidence for a MIAM exemption
+          info_html: |
+            <p class="govuk-body">Enter the following details if applicable:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Reasons why the prospective applicant is unable to provide the required evidence to support a MIAM exemption claim</li>
+            </ul>
+          attach_evidence: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
+          alert_text: Please change your response and attach the required evidence if you are able to so. You have stated that you have evidence of domestic violence or abuse.
+          answers:
+            <<: *YESNO
+            
+
       reasons_playback:
         show:
           page_title: You don’t have to attend a MIAM
@@ -1249,6 +1276,9 @@ en:
           <<: *YESNO
       steps_miam_exemption_claim_form:
         miam_exemption_claim_options:
+          <<: *YESNO
+      steps_miam_exemptions_exemption_reasons_form:
+        attach_evidence_options:
           <<: *YESNO
 
       # Safety questions steps

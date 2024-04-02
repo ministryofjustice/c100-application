@@ -5,6 +5,9 @@ module Summary
     let(:c100_application) {
       instance_double(C100Application,
         miam_exemption: miam_exemption,
+                      exemption_details: exemption_details,
+                      exemption_reasons: exemption_reasons,
+                      attach_evidence: attach_evidence
     ) }
 
     let(:miam_exemption) {
@@ -17,6 +20,10 @@ module Summary
       )
     }
 
+    let(:exemption_details) { "details" }
+    let(:exemption_reasons) { "reasons" }
+    let(:attach_evidence) { GenericYesNo.new('yes') }
+
     subject { described_class.new(c100_application) }
 
     let(:answers) { subject.answers }
@@ -27,7 +34,7 @@ module Summary
 
     describe '#answers' do
       it 'has the correct rows' do
-        expect(answers.count).to eq(5)
+        expect(answers.count).to eq(8)
 
         expect(answers[0]).to be_an_instance_of(MultiAnswer)
         expect(answers[0].question).to eq(:miam_exemptions_domestic)
@@ -53,6 +60,21 @@ module Summary
         expect(answers[4].question).to eq(:miam_exemptions_misc)
         expect(answers[4].value).to eq(['test_misc'])
         expect(answers[4].change_path).to eq('/steps/miam_exemptions/misc')
+
+        expect(answers[5]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[5].question).to eq(:exemption_details)
+        expect(answers[5].value).to eq('details')
+        expect(answers[5].change_path).to eq('/steps/miam_exemptions/exemption_details')
+
+        expect(answers[6]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[6].question).to eq(:exemption_reasons)
+        expect(answers[6].value).to eq('reasons')
+        expect(answers[6].change_path).to eq('/steps/miam_exemptions/exemption_reasons')
+
+        expect(answers[7]).to be_an_instance_of(Answer)
+        expect(answers[7].question).to eq(:attach_evidence)
+        expect(answers[7].value).to eq(GenericYesNo::YES)
+        expect(answers[7].change_path).to eq('/steps/miam_exemptions/exemption_reasons')
       end
     end
   end

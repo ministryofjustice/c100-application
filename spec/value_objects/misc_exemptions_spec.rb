@@ -28,6 +28,15 @@ RSpec.describe MiscExemptions do
     end
   end
 
+  context 'MISC_ACCESS' do
+    it 'returns the expected values' do
+      expect(described_class::MISC_ACCESS.to_s).to eq('misc_access')
+      expect(described_class::MISC_ACCESS2.to_s).to eq('misc_access2')
+      expect(described_class::MISC_ACCESS3.to_s).to eq('misc_access3')
+      expect(described_class::MISC_ACCESS4.to_s).to eq('misc_access4')
+    end
+  end
+
   context 'MISC_NONE' do
     it 'returns the expected values' do
       expect(described_class::MISC_NONE.to_s).to eq('misc_none')

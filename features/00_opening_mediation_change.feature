@@ -1,11 +1,12 @@
-Feature: Opening
+Feature: Opening Mediation Change
 
   Background: Navigating to the start page
     Given Opening changes do not apply
-    Given Mediation changes do not apply
+    Given Mediation changes do apply
     When I visit "/"
     Then Page has title "What is required - Apply to court about child arrangements - GOV.UK"
     And I should see a "Back" link to "https://www.gov.uk/looking-after-children-divorce/apply-for-court-order"
+    And the mediation changes end
 
   @alternate_layout
   Scenario: Complete the opening (alternate page layout)

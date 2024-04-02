@@ -12,6 +12,7 @@ en:
       police_ongoing_proceedings: Evidence of relevant criminal proceedings for a domestic abuse offence which have not concluded
       police_conviction: Evidence of a relevant conviction for a domestic abuse offence
       police_dvpn: A domestic violence protection notice issued under section 24 of the Crime and Security Act 2010 against a prospective party
+      police_dapn: A domestic abuse protection notice given under section 22 of the Domestic Abuse Act 2021 against a prospective party
       ## GROUP COURT ##
       group_court: A court has already been involved
       court_bound_over: A court order binding a prospective party over in connection with a domestic abuse offence
@@ -64,6 +65,24 @@ en:
 
     MISC_EXEMPTIONS: &MISC_EXEMPTIONS
       misc_without_notice: You’re applying for a without notice hearing
+      misc_access_html: |
+        <p class="govuk-body">(i) The prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case is provided to the court using the text box provided; and</p>
+        <p class="govuk-body">(ii) the prospective applicant has contacted as many authorised family  mediators as have an office within fifteen miles of his or her home (or five of them if there are five or more), and all of them have stated that they are not available to conduct a MIAM within fifteen business days of the date of contact; and</p>
+        <p class="govuk-body">(iii) the names, postal addresses and telephone numbers or e-mail addresses for such authorised family mediators, and the dates of contact, are provided to the court using the text box provided</p>
+      misc_access2_html: |
+        <p class="govuk-body">(i) The prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case is provided to the court using the text box provided; and</p>
+        <p class="govuk-body">(ii) the prospective applicant is subject to a disability or other inability that would prevent attendance in person at a MIAM unless appropriate facilities can be offered by an authorised mediator; and</p>
+        <p class="govuk-body">(iii) the prospective applicant has contacted as many authorised family mediators as have an office within fifteen miles of his or her home (or five of them if there are five or more), and all have stated that they are unable to provide such facilities; and</p>
+        <p class="govuk-body">(iv) the names, postal addresses and telephone numbers or e-mail addresses for the authorised family mediators contacted by the prospective applicant, and the dates of contact, are provided to the court using the text box provided</p>
+      misc_access3_html: |
+        <p class="govuk-body">(i) The prospective applicant is not able to attend a MIAM online or by  video-link; and</p>
+        <p class="govuk-body">(ii) there is no authorised family mediator with an office within fifteen miles of the prospective applicant’s home; and</p>
+        <p class="govuk-body">(iii) an explanation of why this exemption applies is provided by the prospective applicant to the court using the text box provided</p>
+      misc_access4_html: |
+        <p class="govuk-body">The prospective applicant cannot attend a MIAM because the prospective applicant is</p>
+        <p class="govuk-body">(i) in prison or any other institution in which the prospective applicant is required to be detained and facilities cannot be made available for them to attend a MIAM online or by video link; or</p>
+        <p class="govuk-body">(ii) subject to conditions of bail that prevent contact with the other person; or</p>
+        <p class="govuk-body">(iii) subject to a licence with a prohibited contact requirement in relation to the other person</p>
       ## GROUP MIAM ACCESS ##
       group_miam_access: You can’t access a mediator
       miam_access_disabled_facilities: You or the other person has a disability and the mediator doesn’t have disabled facilities
@@ -220,6 +239,11 @@ en:
         header: Other exemptions
         exemptions:
           <<: *MISC_EXEMPTIONS
+          misc_access: (i) The prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case is provided to the court using the text box provided; and (ii) the prospective applicant has contacted as many authorised family  mediators as have an office within fifteen miles of his or her home (or five of them if there are five or more), and all of them have stated that they are not available to conduct a MIAM within fifteen business days of the date of contact; and (iii) the names, postal addresses and telephone numbers or e-mail addresses for such authorised family mediators, and the dates of contact, are provided to the court using the text box provided
+          misc_access2: (i) The prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case is provided to the court using the text box provided; and (ii) the prospective applicant is subject to a disability or other inability that would prevent attendance in person at a MIAM unless appropriate facilities can be offered by an authorised mediator; and (iii) the prospective applicant has contacted as many authorised family mediators as have an office within fifteen miles of his or her home (or five of them if there are five or more), and all have stated that they are unable to provide such facilities; and (iv) the names, postal addresses and telephone numbers or e-mail addresses for the authorised family mediators contacted by the prospective applicant, and the dates of contact, are provided to the court using the text box provided
+          misc_access3: (i) The prospective applicant is not able to attend a MIAM online or by  video-link; and (ii) there is no authorised family mediator with an office within fifteen miles of the prospective applicant’s home; and (iii) an explanation of why this exemption applies is provided by the prospective applicant to the court using the text box provided
+          misc_access4: The prospective applicant cannot attend a MIAM because the prospective applicant is (i) in prison or any other institution in which the prospective applicant is required to be detained and facilities cannot be made available for them to attend a MIAM online or by video link; or (ii) subject to conditions of bail that prevent contact with the other person; or (iii) subject to a licence with a prohibited contact requirement in relation to the other person
+
 
     safety_concerns_claimed:
       domestic_abuse: you have been abused

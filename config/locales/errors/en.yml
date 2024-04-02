@@ -599,6 +599,14 @@ en:
             misc:
               blank: *blank_exemptions_error
               none_not_exclusive: *none_not_exclusive_error
+        steps/miam_exemptions/exemption_details_form:
+          attributes:
+            exemption_details:
+              blank: Please provide details of exemptions from attending a MIAM
+        steps/miam_exemptions/exemption_reasons_form:
+          attributes:
+            attach_evidence:
+              inclusion: Select yes or no
         steps/application/previous_proceedings_form:
           attributes:
             children_previous_proceedings:
