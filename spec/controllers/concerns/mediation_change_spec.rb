@@ -7,7 +7,7 @@ RSpec.describe MediationChange do
 
   before do
     allow(ENV).to receive(:[])
-    allow(ENV).to receive(:[]).with('MEDIATION_DATE').and_return("29/04/2024")
+    allow(ENV).to receive(:fetch).with('MEDIATION_DATE', "29/04/2024").and_return("29/04/2024")
   end
 
   context 'when date is before mediation date' do
