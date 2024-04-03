@@ -43,7 +43,13 @@ module Summary
             change_path: edit_steps_miam_exemptions_exemption_reasons_path
           ),
           Answer.new(:attach_evidence, c100.attach_evidence,
-                     change_path: edit_steps_miam_exemptions_exemption_reasons_path)
+                     change_path: edit_steps_miam_exemptions_exemption_reasons_path),
+          FileAnswer.new(:exemption,
+                         Uploader.get_file(
+                           collection_ref: c100.files_collection_ref,
+                           document_key: :exemption
+                         ).try(:name),
+                         change_path: edit_steps_miam_exemptions_exemption_upload_path),
         ].select(&:show?)
       end
       # rubocop:enable Metrics/MethodLength

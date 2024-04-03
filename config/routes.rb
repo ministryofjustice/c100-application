@@ -172,6 +172,7 @@ Rails.application.routes.draw do
       edit_step :misc
       edit_step :exemption_details
       edit_step :exemption_reasons
+      edit_step :exemption_upload
       show_step :reasons_playback
       show_step :safety_playback
       show_step :exit_page
