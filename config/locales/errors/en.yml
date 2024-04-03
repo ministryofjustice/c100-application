@@ -607,6 +607,10 @@ en:
           attributes:
             attach_evidence:
               inclusion: Select yes or no
+        steps/miam_exemptions/exemption_upload_form:
+          attributes:
+            exemption_document:
+              <<: *DOCUMENT_UPLOAD_ERRORS
         steps/application/previous_proceedings_form:
           attributes:
             children_previous_proceedings:

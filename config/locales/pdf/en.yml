@@ -408,6 +408,9 @@ en:
       question: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
       answers:
         <<: *YESNO
+    exemption:
+      question: *details
+      answer: "[ File(s) uploaded with application ]"
     permission_sought:
       question: Have you applied to the court for permission to make this application?
       answers:

@@ -17,7 +17,9 @@ module C100App
       when :exemption_details
         edit(:exemption_reasons)
       when :exemption_reasons
-        playback_or_exit_page
+        upload_or_exit_page
+      when :exemption_upload
+        show(:reasons_playback)
       else
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
@@ -30,6 +32,14 @@ module C100App
         show(:reasons_playback)
       else
         show(:exit_page)
+      end
+    end
+
+    def upload_or_exit_page
+      if c100_application.attach_evidence == "yes"
+        edit(:exemption_upload)
+      else
+        playback_or_exit_page
       end
     end
 
