@@ -408,7 +408,6 @@ en:
       question: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
       answers:
         <<: *YESNO
-      absence_answer: *not_applicable
     exemption:
       question: *details
       answer: "[ File(s) uploaded with application ]"
