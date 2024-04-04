@@ -75,9 +75,9 @@ jobs:
       # so mutant only runs on modified files; refer to mutant.rake for more details
       - run: git remote set-branches origin master && git fetch
 
-      # - run:
-      #     name: run tests
-      #     command: << parameters.test_command >>
+      - run:
+         name: run tests
+         command: << parameters.test_command >>
     
   build_and_push_image:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
