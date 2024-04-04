@@ -174,13 +174,15 @@ Given(/^Opening changes do not apply$/) do
 end
 
 Given(/^Mediation changes do apply$/) do
-  Timecop.freeze(DateTime.parse(ENV.fetch("MEDIATION_DATE", "29/04/2024")) + 1.day)
+  @original_mediation_date = Rails.application.config.mediation_change_date
+  Rails.application.config.mediation_change_date = Rails.application.config.mediation_change_date + 1.day
 end
 
 Given(/^Mediation changes do not apply$/) do
-  Timecop.freeze(DateTime.parse(ENV.fetch("MEDIATION_DATE", "29/04/2024")) - 1.day)
+    @original_mediation_date = Rails.application.config.mediation_change_date
+    Rails.application.config.mediation_change_date = Rails.application.config.mediation_change_date - 1.day
 end
 
 And('the mediation changes end') do
-  Timecop.return
+  Rails.application.config.mediation_change_date = @original_mediation_date
 end
