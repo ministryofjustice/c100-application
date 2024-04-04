@@ -1,9 +1,9 @@
-<p>
-  <strong><%=t "check_answers.exemption_details.question" %></strong>
-</p>
+<% if exemption_details.ivar.present? %>
+  <p>
+    <strong><%=t "check_answers.exemption_details.question" %></strong>
+  </p>
 
-<ul>
-    <li><%= exemption_details.ivar %></li>
-</ul>
-
-
+  <ul>
+      <li><%= exemption_details.ivar %></li>
+  </ul>
+<% end %>
