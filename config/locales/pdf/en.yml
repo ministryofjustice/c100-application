@@ -411,6 +411,7 @@ en:
     exemption:
       question: *details
       answer: "[ File(s) uploaded with application ]"
+      absence_answer: *not_applicable
     permission_sought:
       question: Have you applied to the court for permission to make this application?
       answers:

@@ -16,8 +16,8 @@ module Summary
 
         [
           Partial.new(:miam_exemptions, exemptions),
-          FreeTextAnswer.new(:exemption_details, c100_application.exemption_details, default: Separator.not_applicable),
-          FreeTextAnswer.new(:exemption_reasons, c100_application.exemption_reasons, default: Separator.not_applicable),
+          Partial.new(:exemption_details, c100_application.exemption_details),
+          Partial.new(:exemption_reasons, c100_application.exemption_reasons),
           Answer.new(:attach_evidence, c100_application.attach_evidence),
           FreeTextAnswer.new(:exemption, exemption_document_answer),
         ]
