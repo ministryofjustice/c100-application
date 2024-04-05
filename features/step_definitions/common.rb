@@ -175,12 +175,12 @@ end
 
 Given(/^Mediation changes do apply$/) do
   @original_mediation_date = Rails.application.config.mediation_change_date
-  Rails.application.config.mediation_change_date = Rails.application.config.mediation_change_date + 1.day
+  Rails.application.config.mediation_change_date = Date.today - 1.day
 end
 
 Given(/^Mediation changes do not apply$/) do
     @original_mediation_date = Rails.application.config.mediation_change_date
-    Rails.application.config.mediation_change_date = Rails.application.config.mediation_change_date - 1.day
+    Rails.application.config.mediation_change_date = Date.today + 1.days
 end
 
 And('the mediation changes end') do
