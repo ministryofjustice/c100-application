@@ -21,7 +21,7 @@ namespace :test do
       end
     end
 
-    Rake::Task['mutant'].invoke # always disabled
+    # Rake::Task['mutant'].invoke # always disabled
   end
 end
 
