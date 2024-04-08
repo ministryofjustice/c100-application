@@ -4,6 +4,10 @@
 
 <ul class="govuk-list govuk-list--bullet">
   <% exemption.collection.each do |name| %>
-    <li><%=t "playback.exemptions_claimed.#{exemption.group_name}.exemptions.#{name}" %></li>
+    <% if name.include? 'misc_access' %>
+      <li><%=t "playback.exemptions_claimed.#{exemption.group_name}.exemptions.#{name}_html" %></li>
+    <% else %>
+      <li><%=t "playback.exemptions_claimed.#{exemption.group_name}.exemptions.#{name}" %></li>
+    <% end %>
   <% end %>
 </ul>

@@ -34,14 +34,18 @@ module C100App
     # rubocop:enable Style/RescueModifier
 
     def database_check
-      active = ActiveRecord::Base.connection.active? rescue false
+      active = begin
+        ActiveRecord::Base.connection.active?
+      rescue StandardError
+        false
+      end
       return true if active
 
       # If the connection check fails, try to execute a raw SQL to get more details.
       begin
         result = ActiveRecord::Base.connection.execute("SELECT 1")
         Sentry.capture_message("Database connection active check failed, but raw SQL executed successfully: #{result.to_a}")
-      rescue => e
+      rescue StandardError => e
         Sentry.capture_exception(e)
         Rails.logger.error("Database check failed: #{e.message}")
       end

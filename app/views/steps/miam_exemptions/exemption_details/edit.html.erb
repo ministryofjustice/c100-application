@@ -5,8 +5,12 @@
   <div class="govuk-grid-column-two-thirds">
     <%= govuk_error_summary %>
 
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%=t '.info_html' %>
+
     <%= step_form @form_object do |f| %>
-      <%= f.govuk_collection_radio_buttons :miam_mediator_exemption, GenericYesNo.values, :value, nil %>
+      <%= f.govuk_text_area :exemption_details, rows: 8, label: { hidden: true } %>
       <%= f.continue_button %>
     <% end %>
   </div>

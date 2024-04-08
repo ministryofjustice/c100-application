@@ -159,7 +159,6 @@ Rails.application.routes.draw do
     namespace :miam do
       edit_step :acknowledgement
       edit_step :attended
-      edit_step :mediator_exemption
       edit_step :exemption_claim
       edit_step :certification
       show_step :certification_exit
@@ -171,6 +170,9 @@ Rails.application.routes.draw do
       edit_step :urgency
       edit_step :adr
       edit_step :misc
+      edit_step :exemption_details
+      edit_step :exemption_reasons
+      edit_step :exemption_upload
       show_step :reasons_playback
       show_step :safety_playback
       show_step :exit_page

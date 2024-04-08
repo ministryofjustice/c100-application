@@ -632,7 +632,7 @@ en:
         edit:
           page_title: Domestic violence or abuse
           section: *safety_concerns
-          heading: Have you suffered or are you at risk of suffering domestic violence or abuse?
+          heading: Have you suffered or are you at risk of suffering domestic abuse?
           info_note: Only include abuse by the people in this application or someone connected to them.
           info_html: |
             <p class="govuk-body">Domestic violence or abuse includes any incident or pattern of incidents of controlling, coercive or threatening behaviour, violence or abuse between those aged 16 or over who are, or have been, intimate partners or family members, regardless of gender or sexuality.</p>
@@ -655,9 +655,6 @@ en:
           page_title: MIAM attended
           miam_info_html: |
             <p class="govuk-body">The MIAM must be about the same issue that is being dealt with in this application.</p>
-      mediator_exemption:
-        edit:
-          page_title: MIAM mediator’s exemption
       exemption_claim:
         edit:
           page_title: MIAM exemption claim
@@ -684,14 +681,14 @@ en:
       certification:
         edit:
           page_title: MIAM certification
-          lead_text: The mediator should provide you with a signed document to confirm you attended a MIAM, or do not need to attend. If you haven’t got a document, you should ask the mediator for one.
+          lead_text: The mediator should provide you with a signed document to confirm you attended a MIAM. If you haven’t got a document, you should ask the mediator for one.
+          body_text: This evidence must be provided to the court with your application.
       certification_exit:
         show:
           page_title: MIAM certification document
           heading: You need to get a document from the mediator
           body_text_html: |
-            <p class="govuk-body-l">Ask the mediator to provide you with a signed document confirming you attended a MIAM, or did not need to attend.</p>
-            <p class="govuk-body">You will need to bring this document to your first court hearing.</p>
+            <p class="govuk-body-l">Ask the mediator to provide you with a signed document confirming you attended a MIAM.</p>
             <p class="govuk-body">When you have a document from the mediator, return to continue with your application.</p>
     petition:
       orders:
@@ -891,11 +888,12 @@ en:
             <ul class="govuk-list govuk-list--bullet">
               <li>risk to the life, liberty or physical safety of you, your family or your home</li>
               <li>significant risk that proceedings relating to the dispute will be brought in another country</li>
+              <li>there may be an immediate risk of harm to you or the child. Otherwise, in many cases the first hearing will take place within 2 months. The court will determine whether your case requires an urgent hearing</li>
             </ul>
             <p class="govuk-body">Any delay would cause:</p>
             <ul class="govuk-list govuk-list--bullet">
               <li>a risk of harm to the children</li>
-              <li>unreasonable hardship for you</li>
+              <li>significant financial hardship to the prospective applicant</li>
               <li>a risk of unlawful removal of a child from the UK, or a risk of unlawful retention of a child who is currently outside England and Wales</li>
               <li>a significant risk of a miscarriage of justice</li>
               <li>irretrievable problems in dealing with the dispute (including the irretrievable loss of significant evidence)</li>
@@ -941,8 +939,9 @@ en:
         edit:
           page_title: Evidence of domestic violence or abuse concerns
           section: *miam_exemptions
-          heading: Providing evidence of domestic violence or abuse concerns
+          heading: Providing evidence of domestic abuse concerns
           lead_text: You’ve told us you have a valid reason for not attending a MIAM. The following questions will ask what evidence you have in support of this.
+          sub_lead_text: Where it is required, evidence of the claimed MIAM exemption(s) must be uploaded with this application to court.
       protection:
         edit:
           page_title: Child protection concerns
@@ -956,20 +955,62 @@ en:
       adr:
         edit:
           page_title: Previous valid reason or non-court resolution attendance
-          heading: Confirming that you’ve previously been to a MIAM or had a valid reason for not attending one
+          heading: You’ve already been to a MIAM or are taking part in another form of non-court dispute resolution
           section: *miam_exemptions
       misc:
         edit:
           page_title: Other valid reasons for not attending
           heading: Confirming other valid reasons for not attending
+          hint_text: Where evidence is needed to support an exemption, you will need to submit a copy of this document with this application to court.
           section: *miam_exemptions
+      exemption_details:
+        edit:
+          page_title: Provide details of exemptions from attending a MIAM
+          heading: Provide details of exemptions from attending a MIAM
+          info_html: |
+            <p class="govuk-body">Enter the following details where applicable:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Why the prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case</li>
+              <li>The names, postal addresses and telephone numbers or e-mail addresses for authorised family mediators, and the dates of contact</li>
+            </ul>
+      exemption_reasons:
+        edit:
+          page_title: Reasons for not providing evidence for a MIAM exemption
+          heading: Reasons for not providing evidence for a MIAM exemption
+          info_html: |
+            <p class="govuk-body">Enter the following details if applicable:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Reasons why the prospective applicant is unable to provide the required evidence to support a MIAM exemption claim</li>
+            </ul>
+          attach_evidence: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
+          alert_text: Please change your response and attach the required evidence if you are able to so. You have stated that you have evidence of domestic violence or abuse.
+          answers:
+            <<: *YESNO
+      exemption_upload:
+        edit:
+          page_title: Upload your evidence for a MIAM exemption
+          lead_text_html: |
+            <p>If you are uploading documents from a computer, name the files clearly. For example, miam-certificate.pdf</p>
+            <p>Files must end with JPG, BMP, PNG, TIF, PDF, DOC or DOCX</p>
+          dropdown_header: How to take a picture of a document on your phone and upload it
+          dropdown_content_html: |
+            <ol>
+              <li>Place your document on a flat service in a well-lit room. Use a flash if you need to.</li>
+              <li>Take a picture of the whole document. You should be able to see its edges.</li>
+              <li>Check you can read all the writing, including the handwriting.</li>
+              <li>Email or send the photo or scan to the device you are using now.</li>
+              <li>Upload it here.</li>
+            </ol>
+          attach_document_html: "<strong>Select document to upload</strong>"
+          upload_explanation_html: |
+            <p class="govuk-body">Your document will upload when you click 'Continue'.</p>
       reasons_playback:
         show:
           page_title: You don’t have to attend a MIAM
           heading: You don’t have to attend a MIAM
           lead_text: You’ve said you have a valid reason for not attending a MIAM.
           you_told_us: "The reasons you’ve given are:"
-          info_notice: You’ll be asked to provide more information about your circumstances at the first court hearing. Where evidence is needed to support an exemption, this should be taken to the hearing. If the court is not satisfied that you’re exempt, you may be directed to attend a MIAM.
+          info_notice: You’ll be asked to provide more information about your circumstances at the first court hearing. Where evidence is needed to support an exemption, you will need to submit a copy of this document with this application to court. If the court is not satisfied that you’re exempt, you may be directed to attend a MIAM.
           continue: Continue
       safety_playback:
         show:
@@ -1245,14 +1286,14 @@ en:
       steps_miam_attended_form:
         miam_attended_options:
           <<: *YESNO
-      steps_miam_mediator_exemption_form:
-        miam_mediator_exemption_options:
-          <<: *YESNO
       steps_miam_certification_form:
         miam_certification_options:
           <<: *YESNO
       steps_miam_exemption_claim_form:
         miam_exemption_claim_options:
+          <<: *YESNO
+      steps_miam_exemptions_exemption_reasons_form:
+        attach_evidence_options:
           <<: *YESNO
 
       # Safety questions steps
@@ -1468,7 +1509,7 @@ en:
           representative: I am the solicitor. The applicant believes that the facts stated in this application are true and I have been given the authority to make this declaration.
       steps_miam_acknowledgement_form:
         miam_acknowledgement_options:
-          'true': I understand that I have to attend a MIAM or provide a valid reason for not attending.
+          'true': I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending.
         mediation_voucher_scheme_options:
           <<: *YESNO
       steps_petition_orders_form:
@@ -1648,7 +1689,7 @@ en:
         research_consent: Your insights will help us improve the service.
       steps_opening_consent_order_form:
         consent_order_options:
-          'no_html': <p class='govuk-hint'>This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter.</p><p class='govuk-hint'>If you select this option, you must have a scan, photo or electronic copy of the of the document confirming MIAM attendance or mediator’s exemption which you are able to upload to this application.</p>
+          'no_html': <p class='govuk-hint'>This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter.</p><p class='govuk-hint'>If you select this option, you must have a scan, photo or electronic copy of the of the document confirming MIAM attendance which you are able to upload to this application or a valid reason for not attending.</p>
           'yes_html': <p class='govuk-hint'>This includes deciding who the children live with and where; stopping someone doing something; and resolving a specific matter.</p><p class='govuk-hint'>This makes a written agreement legally binding; it must be signed by you (the applicant) and the other person (respondent). If you select this option, you must have a scan, photo or electronic copy of the draft consent order signed by the respondent which you are able to upload to this application.</p>
       steps_opening_sign_in_or_create_account_form:
         has_myhmcts_account_options:
@@ -1793,8 +1834,6 @@ en:
         miam_acknowledgement: Attending a MIAM
       steps_miam_attended_form:
         miam_attended: Have you attended a Mediation Information and Assessment Meeting (MIAM)?
-      steps_miam_mediator_exemption_form:
-        miam_mediator_exemption: Has a mediator confirmed that you do not need to attend a MIAM?
       steps_miam_certification_form:
         miam_certification: Have you got a document signed by the mediator?
       steps_miam_exemption_claim_form:
@@ -1802,7 +1841,7 @@ en:
 
       # MIAM exemptions
       steps_miam_exemptions_domestic_form:
-        domestic: Do you have any of the following evidence of domestic violence or abuse?
+        domestic: Does the prospective applicant have any of the following evidence of domestic abuse?
         exemptions_collection: ""
       steps_miam_exemptions_protection_form:
         protection: Do you confirm any of the following child protection concerns?
@@ -1822,7 +1861,7 @@ en:
       steps_safety_questions_children_abuse_form:
         children_abuse: Have the children suffered or are they at risk of suffering domestic or child abuse?
       steps_safety_questions_domestic_abuse_form:
-        domestic_abuse: Have you suffered or are you at risk of suffering domestic violence or abuse?
+        domestic_abuse: Have you suffered or are you at risk of suffering domestic abuse?
       steps_safety_questions_other_abuse_form:
         other_abuse: Do you have any other safety concerns about you or the children?
 

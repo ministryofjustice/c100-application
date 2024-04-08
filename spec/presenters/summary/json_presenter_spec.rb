@@ -15,7 +15,6 @@ RSpec.describe Summary::JsonPresenter do
       without_notice_details: 'why not',
       urgent_hearing_short_notice: 'no',
       miam_attended: 'no',
-      miam_mediator_exemption: 'yes',
       risk_of_abduction: 'yes',
       substance_abuse: 'yes',
       concerns_contact_type: 'supervised',
@@ -353,7 +352,6 @@ RSpec.describe Summary::JsonPresenter do
       let(:address) { {} }
 
       it { expect(miam_json[:applicantAttendedMiam]).to eql 'no' }
-      it { expect(miam_json[:claimingExemptionMiam]).to eql 'yes' }
       # it { expect(miam_json[:familyMediatorMiam]).to eql 'no' }
       it { expect(miam_json[:miamExemptionsChecklist]).to eql "no_disabled_facilities, no_respondent_address" }
       it { expect(miam_json[:miamDomesticViolenceChecklist]).to eql "police_arrested, group_police" }

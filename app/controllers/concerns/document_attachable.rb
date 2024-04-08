@@ -44,13 +44,26 @@ module DocumentAttachable
   end
 
   def remove_other_documents
-    if document_key == :miam_certificate && c100_application.document(:draft_consent_order)
-      Uploader.delete_file(collection_ref: c100_application.files_collection_ref, document_key: :draft_consent_order,
-                           filename: c100_application.document(:draft_consent_order).name)
-    elsif document_key == :draft_consent_order && c100_application.document(:miam_certificate)
-      Uploader.delete_file(collection_ref: c100_application.files_collection_ref, document_key: :miam_certificate,
-                           filename: c100_application.document(:miam_certificate).name)
+    case document_key
+    when :miam_certificate
+      delete_file(c100_application, :draft_consent_order)
+      delete_file(c100_application, :exemption)
+    when :draft_consent_order
+      delete_file(c100_application, :miam_certificate)
+      delete_file(c100_application, :exemption)
+    when :exemption
+      delete_file(c100_application, :draft_consent_order)
+      delete_file(c100_application, :miam_certificate)
     end
+  end
+
+  def delete_file(c100_application, target_document_key)
+    document = c100_application.document(target_document_key)
+    Uploader.delete_file(
+      collection_ref: c100_application.files_collection_ref,
+      document_key: target_document_key,
+      filename: document.name
+    ) if document
   end
 
   def retrieve_document_errors

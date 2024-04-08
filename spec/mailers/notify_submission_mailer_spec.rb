@@ -85,6 +85,11 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         name: miam_certificate_file_key,
         collection_ref: '123'
       }) }
+      let(:exemption_file_key) { '39d2bFDf912fas3gD' }
+      let(:exemption) { Document.new({
+        name: exemption_file_key,
+        collection_ref: '123'
+      }) }
       before do
         allow_any_instance_of(C100Application).to receive(
           :reference_code
@@ -93,6 +98,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           to receive(:all_for_collection).
           and_return({ miam_certificate: [miam_certificate],
                        draft_consent_order: [draft_consent_order],
+                       exemption: [exemption]
                      })
       end
 
@@ -126,6 +132,10 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_miam_certificate:
             download_token_url(c100_application.download_tokens.find_by(
               key: miam_certificate_file_key).token),
+          has_exemption: true,
+          link_to_exemption:
+            download_token_url(c100_application.download_tokens.find_by(
+              key: exemption_file_key).token),
         })
       end
     end
@@ -163,6 +173,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_draft_consent_order: '',
           has_miam_certificate: false,
           link_to_miam_certificate: '',
+          has_exemption: false,
+          link_to_exemption: '',
         })
       end
     end

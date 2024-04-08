@@ -23,13 +23,13 @@ Feature: MIAM voucher acknowledgement
     Then I should see a "List of valid reasons for not attending a MIAM" link to "/about/miam_exemptions"
 
   Scenario: Checkbox complete - Yes
-    When I check "I understand that I have to attend a MIAM or provide a valid reason for not attending."
+    When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
     And I choose "Yes"
     And I click the "Continue" button
     Then I should be on "/steps/miam/attended"
 
   Scenario: Checkbox complete - No
-    When I check "I understand that I have to attend a MIAM or provide a valid reason for not attending."
+    When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
     And I choose "No"
     And I click the "Continue" button
     Then I should be on "/steps/miam/attended"
@@ -39,7 +39,7 @@ Feature: MIAM voucher acknowledgement
     Then I should see "Confirm you understand MIAM attendance requirements"
 
   Scenario: Test timeout for checkbox page
-    When I check "I understand that I have to attend a MIAM or provide a valid reason for not attending."
+    When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
 

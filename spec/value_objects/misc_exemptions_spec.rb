@@ -4,12 +4,6 @@ RSpec.describe MiscExemptions do
   let(:value) { :foo }
   subject     { described_class.new(value) }
 
-  context 'NO_RESPONDENT_ADDRESS' do
-    it 'returns the expected values' do
-      expect(described_class::NO_RESPONDENT_ADDRESS.to_s).to eq('misc_no_respondent_address')
-    end
-  end
-
   context 'WITHOUT_NOTICE' do
     it 'returns the expected values' do
       expect(described_class::WITHOUT_NOTICE.to_s).to eq('misc_without_notice')
@@ -34,15 +28,12 @@ RSpec.describe MiscExemptions do
     end
   end
 
-  context 'ACCESS_PROHIBITED' do
+  context 'MISC_ACCESS' do
     it 'returns the expected values' do
-      expect(described_class::ACCESS_PROHIBITED.to_s).to eq('misc_access_prohibited')
-    end
-  end
-
-  context 'NON_RESIDENT' do
-    it 'returns the expected values' do
-      expect(described_class::NON_RESIDENT.to_s).to eq('misc_non_resident')
+      expect(described_class::MISC_ACCESS.to_s).to eq('misc_access')
+      expect(described_class::MISC_ACCESS2.to_s).to eq('misc_access2')
+      expect(described_class::MISC_ACCESS3.to_s).to eq('misc_access3')
+      expect(described_class::MISC_ACCESS4.to_s).to eq('misc_access4')
     end
   end
 
