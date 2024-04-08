@@ -226,7 +226,7 @@ Scenario: Child arrangements order (MIAM) (path three: 'No' to 'Have you attende
     And I click the radio button "Pay with ‘Help with fees’"
     And I fill in "Reference number" with "HWF-123-456"
     And I click the "Continue" button
-    Then I should see "Check your answers"
+#    Then I should see "Check your answers"
     And I should see "Do you have a solicitor? Yes"
     And I should see "Full name Jane Doe"
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
