@@ -9,3 +9,9 @@ Then(/^I upload a document to the consent order page$/) do
   filename    = 'features/support/sample_file/image.jpg'
   attach_file(identifier, filename)
 end
+
+Then(/^I upload a document to the exemptions page$/) do
+  identifier  = 'steps-miam-exemptions-exemption-upload-form-exemption-document-field'
+  filename    = 'features/support/sample_file/image.jpg'
+  attach_file(identifier, filename)
+end

@@ -5,7 +5,6 @@ module Steps
 
       yes_no_attribute :miam_attended,
                        reset_when_yes: [
-                         :miam_mediator_exemption,
                          :miam_exemption_claim,
                          :miam_exemption,
                        ],
