@@ -89,5 +89,7 @@ module Application
 
     config.maintenance_enabled = ENV.fetch('MAINTENANCE_ENABLED', 'false').downcase == 'true'
     config.maintenance_allowed_ips = ENV.fetch('MAINTENANCE_ALLOWED_IPS', '').split(',').map(&:strip)
+
+    config.mediation_change_date = DateTime.parse(ENV.fetch("MEDIATION_DATE", "29/04/2024"))
   end
 end

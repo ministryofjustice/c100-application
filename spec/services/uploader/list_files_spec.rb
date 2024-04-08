@@ -7,12 +7,16 @@ RSpec.describe Uploader::ListFiles do
   before do
     allow_any_instance_of(Aws::S3::Client).to receive(:list_objects).
       and_return(['123'])
-    allow(ENV).to receive(:fetch).with('AWS_S3_REGION').and_return('eu-west-2')
-    allow(ENV).to receive(:fetch).with('AWS_S3_ACCESS_KEY_ID')
-    allow(ENV).to receive(:fetch).with('AWS_ROLE_ARN')
-    allow(ENV).to receive(:fetch).with('AWS_WEB_IDENTITY_TOKEN_FILE')
-    allow(ENV).to receive(:fetch).with('AWS_S3_SECRET_ACCESS_KEY')
+    allow(ENV).to receive(:[])
+    allow(ENV).to receive(:[]).with("AWS_S3_REGION").and_return('eu-west-2')
+    allow(ENV).to receive(:[]).with("AWS_ROLE_ARN").and_return('test')
+    allow(ENV).to receive(:[]).with("AWS_WEB_IDENTITY_TOKEN_FILE").and_return('test2')
     allow(ENV).to receive(:fetch).with('AWS_S3_BUCKET', '').and_return(bucket)
+    stub_request(:post, "https://sts.eu-west-2.amazonaws.com/").to_return(status: 200, body: "", headers: {})
+    allow(Aws::AssumeRoleWebIdentityCredentials).to receive(:new).with(
+      role_arn: "test",
+      web_identity_token_file: "test2"
+    )
   end
 
   let(:bucket) { 'bucket' }
