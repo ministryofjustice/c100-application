@@ -6,6 +6,7 @@ module Summary
       end
 
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       def answers
         [
           MultiAnswer.new(
@@ -33,9 +34,26 @@ module Summary
             selection_for(:misc),
             change_path: edit_steps_miam_exemptions_misc_path
           ),
+          FreeTextAnswer.new(
+            :exemption_details, c100.exemption_details,
+            change_path: edit_steps_miam_exemptions_exemption_details_path
+          ),
+          FreeTextAnswer.new(
+            :exemption_reasons, c100.exemption_reasons,
+            change_path: edit_steps_miam_exemptions_exemption_reasons_path
+          ),
+          Answer.new(:attach_evidence, c100.attach_evidence,
+                     change_path: edit_steps_miam_exemptions_exemption_reasons_path),
+          FileAnswer.new(:exemption,
+                         Uploader.get_file(
+                           collection_ref: c100.files_collection_ref,
+                           document_key: :exemption
+                         ).try(:name),
+                         change_path: edit_steps_miam_exemptions_exemption_upload_path),
         ].select(&:show?)
       end
       # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
 
       private
 

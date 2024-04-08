@@ -1,6 +1,5 @@
 class MiscExemptions < ValueObject
   VALUES = [
-    NO_RESPONDENT_ADDRESS = new(:misc_no_respondent_address),
     WITHOUT_NOTICE = new(:misc_without_notice),
 
     GROUP_MIAM_ACCESS = new(:group_miam_access),
@@ -10,9 +9,11 @@ class MiscExemptions < ValueObject
       new(:miam_access_mediator_nearby),
     ].freeze,
 
-    ACCESS_PROHIBITED = new(:misc_access_prohibited),
-    NON_RESIDENT = new(:misc_non_resident),
     APPLICANT_UNDER_AGE = new(:misc_applicant_under_age),
+    MISC_ACCESS = new(:misc_access),
+    MISC_ACCESS2 = new(:misc_access2),
+    MISC_ACCESS3 = new(:misc_access3),
+    MISC_ACCESS4 = new(:misc_access4),
 
     MISC_NONE = new(:misc_none)
   ].flatten.freeze

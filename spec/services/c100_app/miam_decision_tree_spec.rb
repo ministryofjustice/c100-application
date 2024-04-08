@@ -28,21 +28,6 @@ RSpec.describe C100App::MiamDecisionTree do
 
     context 'and the answer is `no`' do
       let(:value) { 'no' }
-      it { is_expected.to have_destination(:mediator_exemption, :edit) }
-    end
-  end
-
-  context 'when the step is `miam_mediator_exemption`' do
-    let(:c100_application) { instance_double(C100Application, miam_mediator_exemption: value) }
-    let(:step_params) { { miam_mediator_exemption: 'anything' } }
-
-    context 'and the answer is `yes`' do
-      let(:value) { 'yes' }
-      it { is_expected.to have_destination(:certification, :edit) }
-    end
-
-    context 'and the answer is `no`' do
-      let(:value) { 'no' }
       it { is_expected.to have_destination(:exemption_claim, :edit) }
     end
   end
