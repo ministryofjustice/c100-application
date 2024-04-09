@@ -451,7 +451,8 @@ RSpec.describe C100App::OpeningDecisionTree do
     let(:use_my_hmcts)     { 'no' }
     let(:c100_application) { double('Object',
                                     court: double(id: court_id),
-                                    use_my_hmcts: use_my_hmcts) }
+                                    use_my_hmcts: use_my_hmcts,
+                                    children_postcode: postcode) }
     let(:step_params)      { double('Step') }
     let(:next_step)        { nil }
     let(:as)               { nil }
@@ -612,7 +613,8 @@ RSpec.describe C100App::OpeningDecisionTree do
                                       start_or_continue: start_or_continue,
                                       is_legal_representative: is_legal_representative,
                                       has_myhmcts_account: has_myhmcts_account,
-                                      platform: platform
+                                      platform: platform,
+                                      children_postcode: postcode
                                       ) }
       let(:step_params)      { double('Step') }
       let(:next_step)        { nil }

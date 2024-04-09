@@ -33,7 +33,7 @@ module C100App
     private
 
     def children_postcode
-      step_params.fetch(:children_postcode)
+      c100_application.children_postcode
     end
 
     def check_if_my_hmcts_eligable_court
