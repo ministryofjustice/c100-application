@@ -77,6 +77,9 @@ en:
       children_postcode:
         invalid: *postcode_error
         blank: Enter a full postcode, with or without a space
+      children_postcode_continue:
+        invalid: *postcode_error
+        blank: Enter a full postcode, with or without a space
     # fallback error messages in case no specific one is found
     messages:
       blank: Enter an answer
@@ -141,6 +144,19 @@ en:
               invalid: The reference code format is invalid
 
         # Opening
+        steps/opening/start_or_continue_form:
+          attributes:
+            start_or_continue:
+              inclusion: You must make a selection
+        steps/opening/sign_in_or_create_account_form:
+          attributes:
+            has_myhmcts_account:
+              inclusion: You must make a selection
+        steps/opening/continue_application_form:
+          attributes:
+            platform:
+              inclusion: You must make a selection
+              blank: You must make a selection
         steps/opening/my_hmcts_form:
           attributes:
             is_solicitor:
