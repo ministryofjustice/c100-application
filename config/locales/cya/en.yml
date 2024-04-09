@@ -316,6 +316,8 @@ en:
       question: Reasons for not providing evidence for a MIAM exemption
     exemption:
       question: Evidence for a MIAM exemption
+      answers:
+        not_applicable: "[Not applicable in this case]"
     attach_evidence:
       question: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
       answers:

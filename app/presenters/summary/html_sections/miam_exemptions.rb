@@ -44,18 +44,27 @@ module Summary
           ),
           Answer.new(:attach_evidence, c100.attach_evidence,
                      change_path: edit_steps_miam_exemptions_exemption_reasons_path),
-          FileAnswer.new(:exemption,
-                         Uploader.get_file(
-                           collection_ref: c100.files_collection_ref,
-                           document_key: :exemption
-                         ).try(:name),
-                         change_path: edit_steps_miam_exemptions_exemption_upload_path),
+          file_answer
         ].select(&:show?)
       end
       # rubocop:enable Metrics/MethodLength
       # rubocop:enable Metrics/AbcSize
 
       private
+
+      def file_answer
+        if c100.attach_evidence == 'yes'
+          FileAnswer.new(:exemption,
+                         Uploader.get_file(
+                           collection_ref: c100.files_collection_ref,
+                           document_key: :exemption
+                         ).try(:name),
+                         change_path: edit_steps_miam_exemptions_exemption_upload_path)
+        else
+          Answer.new(:exemption, :not_applicable,
+                     change_path: edit_steps_miam_exemptions_exemption_upload_path)
+        end
+      end
 
       def selection_for(group)
         presenter.selection_for(group, filter: :groups)
