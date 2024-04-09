@@ -13,6 +13,11 @@ RSpec.describe C100App::PdfGenerator do
 
     let(:presenter) { Summary::C100Form.new(c100_application) }
 
+    before do
+      allow(c100_application).to receive(:documents)
+      allow(c100_application.documents(:exemption)).to receive(:none?).and_return(true)
+    end
+
     it 'can render the complete form' do
       allow_any_instance_of(C100Application).to receive(:id).and_return('123-456')
       expect {
