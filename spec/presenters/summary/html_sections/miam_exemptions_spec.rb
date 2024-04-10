@@ -23,7 +23,7 @@ module Summary
 
     let(:exemption_details) { "details" }
     let(:exemption_reasons) { "reasons" }
-    let(:attach_evidence) { GenericYesNo.new('yes') }
+    let(:attach_evidence) { 'yes' }
 
     subject { described_class.new(c100_application) }
 
@@ -35,13 +35,14 @@ module Summary
 
     describe '#answers' do
       context 'when no file is present' do
+        let(:attach_evidence) { GenericYesNo.new('no') }
 
         before do
           allow(Uploader).to receive(:get_file).and_return(nil)
         end
 
         it 'has the correct rows' do
-          expect(answers.count).to eq(8)
+          expect(answers.count).to eq(9)
 
           expect(answers[0]).to be_an_instance_of(MultiAnswer)
           expect(answers[0].question).to eq(:miam_exemptions_domestic)
@@ -80,8 +81,13 @@ module Summary
 
           expect(answers[7]).to be_an_instance_of(Answer)
           expect(answers[7].question).to eq(:attach_evidence)
-          expect(answers[7].value).to eq(GenericYesNo::YES)
+          expect(answers[7].value).to eq(GenericYesNo::NO)
           expect(answers[7].change_path).to eq('/steps/miam_exemptions/exemption_reasons')
+
+          expect(answers[8]).to be_an_instance_of(Answer)
+          expect(answers[8].question).to eq(:exemption)
+          expect(answers[8].value).to eq(:not_applicable)
+          expect(answers[8].change_path).to eq('/steps/miam_exemptions/exemption_upload')
         end
       end
       context 'when a file is present' do
@@ -131,7 +137,7 @@ module Summary
 
           expect(answers[7]).to be_an_instance_of(Answer)
           expect(answers[7].question).to eq(:attach_evidence)
-          expect(answers[7].value).to eq(GenericYesNo::YES)
+          expect(answers[7].value).to eq('yes')
           expect(answers[7].change_path).to eq('/steps/miam_exemptions/exemption_reasons')
 
           expect(answers[8]).to be_an_instance_of(FileAnswer)

@@ -12,7 +12,7 @@ module Summary
       def answers
         return [
           Separator.not_applicable
-        ] if exemptions.empty?
+        ] if exemptions.empty? && c100.documents(:exemption).none?
 
         [
           Partial.new(:miam_exemptions, exemptions),

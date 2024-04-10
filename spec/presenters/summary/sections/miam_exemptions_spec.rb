@@ -27,6 +27,10 @@ module Summary
       context 'when no exemptions present' do
         let(:miam_exemption) { MiamExemption.new }
 
+        before do
+          allow(c100_application.documents(:exemption)).to receive(:none?).and_return(true)
+        end
+
         it 'has the correct number of rows' do
           expect(answers.count).to eq(1)
         end
