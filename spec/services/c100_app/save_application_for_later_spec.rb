@@ -6,7 +6,7 @@ RSpec.describe C100App::SaveApplicationForLater do
   let(:user) { instance_double(User) }
 
   before do
-    allow(c100_application).to receive(:navigation_stack).and_return(%w[some page])
+    allow(c100_application).to receive(:navigation_stack).and_return(%w[/steps/opening/consent_order page])
   end
 
   describe '#save' do
@@ -28,7 +28,7 @@ RSpec.describe C100App::SaveApplicationForLater do
       end
     end
 
-    context 'when the application has not progressed 2 pages' do
+    context 'when the application has not progressed past consent order page' do
       let(:c100_application) { nil }
 
       before do
