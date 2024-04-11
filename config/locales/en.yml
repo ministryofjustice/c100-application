@@ -881,6 +881,7 @@ en:
             <ul class="govuk-list govuk-list--bullet">
               <li>there’s a risk of harm to you or the children</li>
               <li>the children are at risk of abduction</li>
+              <li>there may be an immediate risk of harm to you or the child. Otherwise, in many cases the first hearing will take place within 2 months. The court will determine whether your case requires an urgent hearing</li>
             </ul>
           reasons_title: Examples of when a court may consider an urgent hearing
           reasons_content_html: |
