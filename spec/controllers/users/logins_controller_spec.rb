@@ -5,6 +5,7 @@ RSpec.describe Users::LoginsController do
 
   before do
     allow(subject).to receive(:current_c100_application).and_return(c100_application)
+    allow(c100_application).to receive(:navigation_stack).and_return(%w[some page])
     request.env['devise.mapping'] = Devise.mappings[:user]
   end
 

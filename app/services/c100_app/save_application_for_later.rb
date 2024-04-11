@@ -9,6 +9,8 @@ module C100App
     end
 
     def save
+      return false if c100_application.navigation_stack.size < 2
+
       c100_application.nil? || c100_application.user.present? || claim_ownership!
     end
 

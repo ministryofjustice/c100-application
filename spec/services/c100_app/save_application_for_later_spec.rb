@@ -5,12 +5,38 @@ RSpec.describe C100App::SaveApplicationForLater do
 
   let(:user) { instance_double(User) }
 
+  before do
+    allow(c100_application).to receive(:navigation_stack).and_return(%w[some page])
+  end
+
   describe '#save' do
     context 'for a `nil` c100 application' do
       let(:c100_application) { nil }
 
       it 'returns true' do
         expect(subject.save).to eq(true)
+      end
+
+      it 'does not send any email' do
+        expect(NotifyMailer).not_to receive(:application_saved_confirmation)
+        subject.save
+      end
+
+      it 'email_sent? is false' do
+        subject.save
+        expect(subject.email_sent?).to eq(false)
+      end
+    end
+
+    context 'when the application has not progressed 2 pages' do
+      let(:c100_application) { nil }
+
+      before do
+        allow(c100_application).to receive(:navigation_stack).and_return(["page"])
+      end
+
+      it 'returns false' do
+        expect(subject.save).to eq(false)
       end
 
       it 'does not send any email' do
