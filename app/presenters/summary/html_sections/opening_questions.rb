@@ -11,6 +11,7 @@ module Summary
 
       def answers
         [
+          FreeTextAnswer.new(:children_postcode, c100.children_postcode, change_path: root_path(change: 'y')),
           Answer.new(:consent_order_application, c100.consent_order,
                      change_path: edit_steps_opening_consent_order_path),
           FileAnswer.new(:consent_order_upload,
