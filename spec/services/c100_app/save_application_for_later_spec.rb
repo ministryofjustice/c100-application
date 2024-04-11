@@ -29,7 +29,7 @@ RSpec.describe C100App::SaveApplicationForLater do
     end
 
     context 'when the application has not progressed past consent order page' do
-      let(:c100_application) { nil }
+      let(:c100_application) { instance_double(C100Application, user: user) }
 
       before do
         allow(c100_application).to receive(:navigation_stack).and_return(["page"])
