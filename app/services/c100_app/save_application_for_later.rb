@@ -9,6 +9,10 @@ module C100App
     end
 
     def save
+      if c100_application&.navigation_stack
+        return false unless c100_application.navigation_stack.include? "/steps/opening/consent_order"
+      end
+
       c100_application.nil? || c100_application.user.present? || claim_ownership!
     end
 
