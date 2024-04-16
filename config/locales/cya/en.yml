@@ -293,7 +293,6 @@ en:
       question: Previous MIAM attendance or MIAM exemption
       answers:
         misc_previous_attendance: In the 4 months prior to making the application, the person attended a MIAM or a non-court dispute resolution process relating to the same or substantially the same dispute; and where the applicant attended a non-court dispute resolution process, there is evidence of that attendance in the form of written confirmation from the dispute resolution provider.
-        misc_existing_proceedings_attendance: The application would be made in existing proceedings which are continuing and the prospective applicant attended a MIAM before initiating those proceedings
         misc_existing_proceedings_exemption: The application would be made in existing proceedings which are continuing and the prospective applicant attended a MIAM before initiating those proceedings. The MIAM provider must sign a document proving this attendance, to be submitted alongside your application to court
         misc_adr_none: *none_selected
 
