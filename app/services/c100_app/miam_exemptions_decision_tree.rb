@@ -29,7 +29,11 @@ module C100App
 
     def details_or_exit_page
       if has_miam_exemptions?
-        edit(:exemption_details)
+        if has_only_misc_exemptions?
+          show(:reasons_playback)
+        else
+          edit(:exemption_details)
+        end
       else
         show(:exit_page)
       end
@@ -55,6 +59,16 @@ module C100App
       MiamExemptionsPresenter.new(
         c100_application.miam_exemption
       ).exemptions.any?
+    end
+
+    def has_only_misc_exemptions?
+      groups = [:domestic, :protection, :urgency, :adr]
+      exemptions = c100_application.miam_exemption
+      groups.each do |group|
+        test = exemptions.send(group)
+        return false unless test.include? "misc_#{group}_none"
+      end
+      true
     end
   end
 end
