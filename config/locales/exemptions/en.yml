@@ -110,7 +110,7 @@ en:
       specialist_examination_html: |
         The letter or report must confirm that:
         <ol class="govuk-list app-list--lower-roman govuk-hint govuk-!-margin-top-2">
-          <li>that professional, or another appropriate health professional, has examined a prospective party in person ny telephone or by video conferencing; and</li>
+          <li>that professional, or another appropriate health professional, has examined a prospective party in person by telephone or by video conferencing; and</li>
           <li>in the reasonable professional judgment of the author or the examining appropriate health professional, that prospective party has, or has had, injuries or a condition consistent with being a victim of domestic abuse</li>
         </ol>
       specialist_referral_html: |
