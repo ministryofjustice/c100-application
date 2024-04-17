@@ -65,8 +65,8 @@ module C100App
       groups = [:domestic, :protection, :urgency, :adr]
       exemptions = c100_application.miam_exemption
       groups.each do |group|
-        test = exemptions.send(group)
-        return false unless test.include? "misc_#{group}_none"
+        exemption = exemptions.send(group)
+        return false unless exemption.include? "misc_#{group}_none"
       end
       true
     end
