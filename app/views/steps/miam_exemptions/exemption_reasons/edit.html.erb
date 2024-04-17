@@ -14,16 +14,7 @@
 
       <%= f.govuk_radio_buttons_fieldset :attach_evidence, legend: { text: "#{t '.attach_evidence' }", size: 'm' } do %>
         <%= f.govuk_radio_button :attach_evidence, GenericYesNo::YES %>
-        <%= f.govuk_radio_button :attach_evidence, GenericYesNo::NO do %>
-          <% unless current_c100_application.miam_exemption.domestic.include? 'misc_domestic_none' %>
-            <div class="govuk-warning-text">
-              <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-              <strong class="govuk-warning-text__text">
-                <%=t '.alert_text' %>
-              </strong>
-            </div>
-          <% end %>
-        <% end %>
+        <%= f.govuk_radio_button :attach_evidence, GenericYesNo::NO %>
       <% end %>
       <%= f.continue_button %>
     <% end %>

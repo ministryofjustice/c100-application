@@ -1,3 +1,7 @@
 <h2 class="main-section-header">
-  <%= t "check_answers.section_headers.#{section_header.name}" %>
+  <% if MediationChange.changes_apply?(section.c100_application) %>
+    <%= t "check_answers.section_headers_mediation_change.#{section_header.name}" %>
+  <% else %>
+    <%= t "check_answers.section_headers.#{section_header.name}" %>
+  <% end %>
 </h2>
