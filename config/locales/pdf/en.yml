@@ -98,6 +98,21 @@ en:
       c8_form:
         title: C8
         details: Confidential contact details - Family Procedure Rules 2010 Rule 29.1
+    section_headers_mediation_change:
+      children: 1. The Child(ren)
+      miam_requirement: 2. Requirement to attend a Mediation, Information and Assessment Meeting (MIAM)
+      miam_exemptions: 3. Applicant claims exemption(s) from attendance at a Mediation, Information and Assessment Meeting (MIAM)
+      application_reasons: 4. Why are you making this application?
+      urgent_and_without_notice: 5. Urgent and without notice hearings
+      other_court_cases: 6. Other court cases which concern the child(ren) listed in Section 1
+      international_element: 7. Cases with an international element
+      litigation_capacity: 8. Factors affecting ability to participate in proceedings
+      attending_court: 9. Attending the court
+      applicants_details: 10. About you (the applicant(s))
+      respondents_details: 11. The respondent(s)
+      other_parties_details: 12. Others who should be given notice
+      solicitor_details: 13. Solicitor’s details
+      statement_of_truth: 14. Statement of truth
     section_headers:
       children: 1. The Child(ren)
       miam_requirement: 2. Requirement to attend a Mediation, Information and Assessment Meeting (MIAM)
