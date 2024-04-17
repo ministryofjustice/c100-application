@@ -974,6 +974,13 @@ en:
               <li>Why the prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case</li>
               <li>The names, postal addresses and telephone numbers or e-mail addresses for authorised family mediators, and the dates of contact</li>
             </ul>
+          info_adr_selected_html: |
+            <p class="govuk-body">Enter the following details where applicable:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Why the prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case</li>
+              <li>The names, postal addresses and telephone numbers or e-mail addresses for authorised family mediators, and the dates of contact</li>
+              <li>If the applicant was the respondent in a previously attended MIAM or in another form of non-court dispute resolution you must also enter the date(s) of attendance and contact details of those sessions below</li>
+            </ul>
       exemption_reasons:
         edit:
           page_title: Reasons for not providing evidence for a MIAM exemption
@@ -981,7 +988,7 @@ en:
           info_html: |
             <p class="govuk-body">Enter the following details if applicable:</p>
             <ul class="govuk-list govuk-list--bullet">
-              <li>Reasons why the prospective applicant is unable to provide the required evidence to support a MIAM exemption claim</li>
+              <li>Reasons why you are unable to provide the required evidence to support a MIAM exemption claim</li>
             </ul>
           attach_evidence: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
           answers:
