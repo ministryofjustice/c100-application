@@ -7,7 +7,11 @@
 
     <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
 
-    <%=t '.info_html' %>
+    <% if current_c100_application.miam_exemption.adr.exclude? 'misc_adr_none' %>
+      <%=t '.info_adr_selected_html' %>
+    <% else %>
+      <%=t '.info_html' %>
+    <% end %>
 
     <%= step_form @form_object do |f| %>
       <%= f.govuk_text_area :exemption_details, rows: 8, label: { hidden: true } %>
