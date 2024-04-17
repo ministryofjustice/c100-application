@@ -78,7 +78,7 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
     end
 
     context 'when there are no MIAM exemptions' do
-      it { is_expected.to have_destination(:exemption_details, :edit) }
+      it { is_expected.to have_destination(:exit_page, :show) }
     end
 
     context 'when there are MIAM exemptions' do

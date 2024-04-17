@@ -2,7 +2,6 @@ class AdrExemptions < ValueObject
   VALUES = [
     PREVIOUS_ADR = [
       new(:misc_previous_attendance),
-      new(:misc_existing_proceedings_attendance),
     ].freeze,
 
     PREVIOUS_MIAM = [

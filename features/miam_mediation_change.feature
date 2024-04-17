@@ -63,11 +63,6 @@ Feature: MIAM mediation change journey
     Then I should see "Confirming other valid reasons for not attending"
     And I check "None of these"
     And I click the "Continue" button
-    Then I should see "Provide details of exemptions from attending a MIAM"
-    Then I fill in "steps-miam-exemptions-exemption-details-form-exemption-details-field" with "details"
-    And I click the "Continue" button
-    Then I should see "Reasons for not providing evidence for a MIAM exemption"
-    When I choose "No"
     Then I should see "You must attend a MIAM"
     And the mediation changes end
 
