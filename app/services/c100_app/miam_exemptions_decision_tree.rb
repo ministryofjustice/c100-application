@@ -13,7 +13,7 @@ module C100App
       when :adr
         edit(:misc)
       when :misc
-        MediationChange.changes_apply?(c100_application) ? edit(:exemption_details) : playback_or_exit_page
+        MediationChange.changes_apply?(c100_application) ? details_or_exit_page : playback_or_exit_page
       when :exemption_details
         edit(:exemption_reasons)
       when :exemption_reasons
@@ -26,6 +26,14 @@ module C100App
     end
 
     private
+
+    def details_or_exit_page
+      if has_miam_exemptions?
+        edit(:exemption_details)
+      else
+        show(:exit_page)
+      end
+    end
 
     def playback_or_exit_page
       if has_miam_exemptions?

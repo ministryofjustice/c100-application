@@ -8,7 +8,6 @@ RSpec.describe AdrExemptions do
     it 'returns the expected values' do
       expect(described_class::PREVIOUS_ADR.map(&:to_s)).to eq(%w(
         misc_previous_attendance
-        misc_existing_proceedings_attendance
       ))
     end
   end
