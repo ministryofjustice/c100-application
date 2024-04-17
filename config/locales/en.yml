@@ -984,14 +984,13 @@ en:
               <li>Reasons why the prospective applicant is unable to provide the required evidence to support a MIAM exemption claim</li>
             </ul>
           attach_evidence: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
-          alert_text: Please change your response and attach the required evidence if you are able to so. You have stated that you have evidence of domestic violence or abuse.
           answers:
             <<: *YESNO
       exemption_upload:
         edit:
           page_title: Upload your evidence for a MIAM exemption
           lead_text_html: |
-            <p>If you are uploading documents from a computer, name the files clearly. For example, miam-certificate.pdf</p>
+            <p>If you are uploading documents from a computer, name the files clearly. For example, miam-exemption.pdf</p>
             <p>Files must end with JPG, BMP, PNG, TIF, PDF, DOC or DOCX</p>
           dropdown_header: How to take a picture of a document on your phone and upload it
           dropdown_content_html: |
@@ -1011,7 +1010,7 @@ en:
           heading: You don’t have to attend a MIAM
           lead_text: You’ve said you have a valid reason for not attending a MIAM.
           you_told_us: "The reasons you’ve given are:"
-          info_notice: You’ll be asked to provide more information about your circumstances at the first court hearing. Where evidence is needed to support an exemption, you will need to submit a copy of this document with this application to court. If the court is not satisfied that you’re exempt, you may be directed to attend a MIAM.
+          info_notice: You’ll be asked to provide more information about your circumstances at the first court hearing. Where evidence is needed to support an exemption, you will need to submit a copy of this evidence with your application to the court or explain the reasons why you cannot provide it.
           continue: Continue
       safety_playback:
         show:
