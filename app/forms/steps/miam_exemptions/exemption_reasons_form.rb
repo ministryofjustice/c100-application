@@ -5,6 +5,7 @@ module Steps
       attribute :attach_evidence, YesNo
 
       validates_inclusion_of :attach_evidence, in: GenericYesNo.values
+      validates_presence_of :exemption_reasons, if: -> { attach_evidence == GenericYesNo::NO }
 
       private
 

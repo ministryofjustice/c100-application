@@ -623,6 +623,8 @@ en:
           attributes:
             attach_evidence:
               inclusion: Select yes or no
+            exemption_reasons:
+              blank: Enter a reason
         steps/miam_exemptions/exemption_upload_form:
           attributes:
             exemption_document:
