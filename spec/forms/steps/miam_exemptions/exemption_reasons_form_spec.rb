@@ -23,7 +23,10 @@ RSpec.describe Steps::MiamExemptions::ExemptionReasonsForm do
     end
 
     context 'validations on field presence' do
+      let(:attach_evidence) { GenericYesNo::NO }
+
       it {should validate_presence_of(:attach_evidence, :inclusion)}
+      it {should validate_presence_of(:exemption_reasons, :blank)}
     end
 
     context 'when reasons and evidence are present' do
