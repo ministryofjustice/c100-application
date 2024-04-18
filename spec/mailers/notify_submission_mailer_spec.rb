@@ -236,8 +236,6 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         court_name: 'Test court',
         court_email: 'court@example.com',
         court_url: 'https://www.find-court-tribunal.service.gov.uk/courts/test-court',
-        court_address: "Test court\nstreet1\nstreet2\ntown\npostcode",
-        documents_email: 'court@example.com',
         is_under_age: 'no',
         is_consent_order: 'yes',
         payment_instructions: 'payment instructions from locales',
@@ -261,18 +259,6 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
     context 'when the court is centralised' do
       before do
         allow(court).to receive(:centralised?).and_return(true)
-      end
-
-      it 'has the central hub postal address' do
-        expect(
-          mail.govuk_notify_personalisation
-        ).to include(court_address: Court::CENTRAL_HUB_ADDRESS.join("\n"))
-      end
-
-      it 'has the central hub documents email' do
-        expect(
-          mail.govuk_notify_personalisation
-        ).to include(documents_email: Court::CENTRAL_HUB_EMAIL)
       end
     end
   end
