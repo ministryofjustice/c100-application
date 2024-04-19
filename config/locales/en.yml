@@ -990,7 +990,7 @@ en:
             <ul class="govuk-list govuk-list--bullet">
               <li>Reasons why you are unable to provide the required evidence to support a MIAM exemption claim</li>
             </ul>
-          attach_evidence: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
+          attach_evidence: Are you able to attach the required evidence to support a MIAM exemption claim?
           answers:
             <<: *YESNO
       exemption_upload:
