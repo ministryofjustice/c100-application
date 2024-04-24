@@ -38,9 +38,9 @@ module Summary
             :exemption_details, c100.exemption_details,
             change_path: edit_steps_miam_exemptions_exemption_details_path
           ),
-          Answer.new(
+          FreeTextAnswer.new(
             :exemption_reasons, c100.exemption_reasons,
-            change_path: edit_steps_miam_exemptions_exemption_reasons_path
+            change_path: edit_steps_miam_exemptions_exemption_reasons_path,
           ),
           Answer.new(:attach_evidence, c100.attach_evidence,
                      change_path: edit_steps_miam_exemptions_exemption_reasons_path),
