@@ -10,17 +10,21 @@ module Summary
       end
 
       def answers
-        return [
-          Separator.not_applicable
-        ] if exemptions.empty? && c100.documents(:exemption).none?
-
-        [
-          Partial.new(:miam_exemptions, exemptions),
-          Partial.new(:exemption_details, c100_application.exemption_details),
-          Partial.new(:exemption_reasons, c100_application.exemption_reasons),
-          Answer.new(:attach_evidence, c100_application.attach_evidence),
-          FreeTextAnswer.new(:exemption, exemption_document_answer),
-        ]
+        if exemptions.empty? && c100.documents(:exemption).none?
+          [Separator.not_applicable]
+        elsif c100_application.exemption_reasons.nil?
+          [
+            Partial.new(:miam_exemptions, exemptions)
+          ]
+        else
+          [
+            Partial.new(:miam_exemptions, exemptions),
+            Partial.new(:exemption_details, c100_application.exemption_details),
+            Partial.new(:exemption_reasons, c100_application.exemption_reasons),
+            Answer.new(:attach_evidence, c100_application.attach_evidence),
+            FreeTextAnswer.new(:exemption, exemption_document_answer),
+          ]
+        end
       end
 
       private
