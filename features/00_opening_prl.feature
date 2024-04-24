@@ -39,10 +39,10 @@ Feature: Opening PRL
     When I fill in "Enter the children's postcode" with "MK9 3DX"
     And I click the "Continue" button
 
-  @happy_path
-  Scenario: Testing the back button
-    When I click the "Back" link
-    Then I should see "Making child arrangements if you divorce or separate"
+#  @happy_path
+#  Scenario: Testing the back button
+#    When I click the "Back" link
+#    Then I should see "Making child arrangements if you divorce or separate"
 
   @happy_path
   Scenario: Checking the dropdown

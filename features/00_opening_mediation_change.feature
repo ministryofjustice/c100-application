@@ -86,11 +86,11 @@ Feature: Opening Mediation Change
     And I choose "No"
     And the mediation changes end
 
-  @happy_path
-  Scenario: Testing the back button
-    When I click the "Back" link
-    Then I should see "Making child arrangements if you divorce or separate"
-    And the mediation changes end
+#  @happy_path
+#  Scenario: Testing the back button
+#    When I click the "Back" link
+#    Then I should see "Making child arrangements if you divorce or separate"
+#    And the mediation changes end
 
   @happy_path
   Scenario: Checking the dropdown

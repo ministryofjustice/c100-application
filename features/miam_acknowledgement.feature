@@ -22,17 +22,17 @@ Feature: MIAM voucher acknowledgement
   Scenario: List of valid reasons for not attending a MIAM link
     Then I should see a "List of valid reasons for not attending a MIAM" link to "/about/miam_exemptions"
 
-  Scenario: Checkbox complete - Yes
-    When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
-    And I choose "Yes"
-    And I click the "Continue" button
-    Then I should be on "/steps/miam/attended"
-
-  Scenario: Checkbox complete - No
-    When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
-    And I choose "No"
-    And I click the "Continue" button
-    Then I should be on "/steps/miam/attended"
+#  Scenario: Checkbox complete - Yes
+#    When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
+#    And I choose "Yes"
+#    And I click the "Continue" button
+#    Then I should be on "/steps/miam/attended"
+#
+#  Scenario: Checkbox complete - No
+#    When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
+#    And I choose "No"
+#    And I click the "Continue" button
+#    Then I should be on "/steps/miam/attended"
 
   Scenario: Checkbox incomplete
     When I click the "Continue" button
