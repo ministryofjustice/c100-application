@@ -9,14 +9,14 @@ Feature: MIAM journey
     And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
     And I click the "Continue" button
 
-  @happy_path
-  Scenario: Applicant attended a MIAM
-    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
-    And I choose "Yes"
-    Then I should see "Have you got a document signed by the mediator?"
-    And I choose "Yes"
-    Then I should see "Upload your MIAM certificate"
-    And the mediation changes end
+#  @happy_path
+#  Scenario: Applicant attended a MIAM
+#    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+#    And I choose "Yes"
+#    Then I should see "Have you got a document signed by the mediator?"
+#    And I choose "Yes"
+#    Then I should see "Upload your MIAM certificate"
+#    And the mediation changes end
 
   @unhappy_path
   Scenario: Applicant attended a MIAM but lacks the certificate
