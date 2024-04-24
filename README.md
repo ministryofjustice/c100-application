@@ -32,7 +32,7 @@ Or you can run specific tests as follows (refer to *lib/tasks/all_tests.rake* fo
 * `RAILS_ENV=test bundle exec rake spec`
 * `RAILS_ENV=test bundle exec rake brakeman`
  
-## Cucumber features
+## Cucumber features.
 
 ChromeDriver is needed for the integration tests. It can be installed on Mac using Homebrew: `brew cask install chromedriver`
 
