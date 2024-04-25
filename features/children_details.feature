@@ -5,22 +5,22 @@ Feature: Add children to the application
     When I visit "steps/children/names"
 
   @happy_path
-#  Scenario: Children personal details
-#    Then I should see "Enter the names of the children"
-#    And I should see "Enter a new name"
-#
-#    # Provoke validation errors
-#    When I click the "Continue" button
-#    Then Page has title "Error: Enter the names of the children - Apply to court about child arrangements - GOV.UK"
-#    And I should see a "Enter the first name" link to "#steps-children-names-split-form-new-first-name-field-error"
-#    And I should see a "Enter the last name" link to "#steps-children-names-split-form-new-last-name-field-error"
-#
-#    When I fill in "First name(s)" with "!@£"
-#    And I fill in "Last name(s)" with "$%^"
-#    And I click the "Continue" button
-#    Then Page has title "Error: Enter the names of the children - Apply to court about child arrangements - GOV.UK"
-#    And I should see a "Name must not contain special characters" link to "#steps-children-names-split-form-new-first-name-field-error"
-#    And I should see a "Name must not contain special characters" link to "#steps-children-names-split-form-new-last-name-field-error"
+  Scenario: Children personal details
+    Then I should see "Enter the names of the children"
+    And I should see "Enter a new name"
+
+    # Provoke validation errors
+    When I click the "Continue" button
+    Then Page has title "Error: Enter the names of the children - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Enter the first name" link to "#steps-children-names-split-form-new-first-name-field-error"
+    And I should see a "Enter the last name" link to "#steps-children-names-split-form-new-last-name-field-error"
+
+    When I fill in "First name(s)" with "!@£"
+    And I fill in "Last name(s)" with "$%^"
+    And I click the "Continue" button
+    Then Page has title "Error: Enter the names of the children - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Name must not contain special characters" link to "#steps-children-names-split-form-new-first-name-field-error"
+    And I should see a "Name must not contain special characters" link to "#steps-children-names-split-form-new-last-name-field-error"
 
     # Fix validation errors and continue
     Then I fill in "First name(s)" with "John"
