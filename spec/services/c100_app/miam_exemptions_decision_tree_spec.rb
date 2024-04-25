@@ -89,7 +89,7 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
                                                                            adr: ['misc_adr_none'],
                                                                            misc: ['applicant_under_age'])) }
 
-        it { is_expected.to have_destination(:exemption_details, :edit) }
+        it { is_expected.to have_destination(:exemption_reasons, :edit) }
       end
 
       describe 'and they are not only misc exemptions' do
