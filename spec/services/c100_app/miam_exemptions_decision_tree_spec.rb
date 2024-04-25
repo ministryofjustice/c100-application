@@ -32,12 +32,12 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
 
   context 'when the step is `exemption_details`' do
     let(:step_params) { { exemption_details: 'anything' } }
-    it { is_expected.to have_destination(:reasons_playback, :show) }
+    it { is_expected.to have_destination(:exemption_reasons, :edit) }
   end
 
   context 'when the step is `exemption_upload`' do
     let(:step_params) { { exemption_upload: 'anything' } }
-    it { is_expected.to have_destination(:exemption_details, :edit) }
+    it { is_expected.to have_destination(:reasons_playback, :show) }
   end
 
   context 'when the step is `misc` and Mediation change is false' do
@@ -95,7 +95,7 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
       describe 'and they are not only misc exemptions' do
         let(:attributes) { super().merge(miam_exemption: MiamExemption.new(adr: ['misc_previous_attendance'], misc: ['applicant_under_age'])) }
 
-        it { is_expected.to have_destination(:exemption_reasons, :edit) }
+        it { is_expected.to have_destination(:exemption_details, :edit) }
       end
     end
   end

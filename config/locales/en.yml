@@ -983,8 +983,8 @@ en:
             </ul>
       exemption_reasons:
         edit:
-          page_title: Evidence of MIAM exemption
-          heading: Evidence of MIAM exemption
+          page_title: Reasons for not providing evidence for a MIAM exemption
+          heading: Reasons for not providing evidence for a MIAM exemption
           info_html: |
             <p class="govuk-body">Enter the following details if applicable:</p>
             <ul class="govuk-list govuk-list--bullet">

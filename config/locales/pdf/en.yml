@@ -417,7 +417,7 @@ en:
       question: Details of exemptions from attending a MIAM
       absence_answer: *not_applicable
     exemption_reasons:
-      question: Evidence of MIAM exemption
+      question: Reasons for not providing evidence for a MIAM exemption
       absence_answer: *not_applicable
     attach_evidence:
       question: Are you able to attach the required evidence to support a MIAM exemption claim?

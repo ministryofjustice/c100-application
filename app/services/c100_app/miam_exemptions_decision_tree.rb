@@ -13,13 +13,13 @@ module C100App
       when :adr
         edit(:misc)
       when :misc
-        MediationChange.changes_apply?(c100_application) ? reasons_or_exit_page : playback_or_exit_page
+        MediationChange.changes_apply?(c100_application) ? details_or_exit_page : playback_or_exit_page
       when :exemption_details
-        show(:reasons_playback)
+        edit(:exemption_reasons)
       when :exemption_reasons
         upload_or_exit_page
       when :exemption_upload
-        edit(:exemption_details)
+        show(:reasons_playback)
       else
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
@@ -27,12 +27,12 @@ module C100App
 
     private
 
-    def reasons_or_exit_page
+    def details_or_exit_page
       if has_miam_exemptions?
         if has_only_misc_exemptions?
           show(:reasons_playback)
         else
-          edit(:exemption_reasons)
+          edit(:exemption_details)
         end
       else
         show(:exit_page)
