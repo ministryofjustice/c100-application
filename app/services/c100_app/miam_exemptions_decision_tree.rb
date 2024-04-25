@@ -30,7 +30,7 @@ module C100App
     def reasons_or_exit_page
       if has_miam_exemptions?
         if has_only_misc_exemptions?
-          edit(:exemption_details)
+          edit(:exemption_reasons)
         else
           show(:reasons_playback)
         end
