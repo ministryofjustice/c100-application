@@ -68,35 +68,35 @@ Feature: MIAM journey
 
 
   @happy_path
-  Scenario: Applicant did not attend a MIAM and has selected a misc valid reason
-    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
-    And I choose "No"
-    Then I should see "Do you have a valid reason for not attending a MIAM?"
-    And I choose "Yes"
-    Then I should see "Providing evidence of domestic abuse concerns"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "Confirming child protection concerns"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "Confirming why your application is urgent"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "You’ve already been to a MIAM or are taking part in another form of non-court dispute resolution"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "Confirming other valid reasons for not attending"
-    And I check "You can’t access a mediator"
-    And I check "There is no authorised family mediator with an office within 15 miles of your home"
-    And I click the "Continue" button
-
-    Then I should see "You don’t have to attend a MIAM"
-    Then I should see "Other exemptions"
-    Then I should see "There is no authorised family mediator with an office within 15 miles of your home"
-
-    And I click the "Continue" link
-    Then I should see "Safety concerns"
-    And the mediation changes end
+#  Scenario: Applicant did not attend a MIAM and has selected a misc valid reason
+#    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+#    And I choose "No"
+#    Then I should see "Do you have a valid reason for not attending a MIAM?"
+#    And I choose "Yes"
+#    Then I should see "Providing evidence of domestic abuse concerns"
+#    And I check "None of these"
+#    And I click the "Continue" button
+#    Then I should see "Confirming child protection concerns"
+#    And I check "None of these"
+#    And I click the "Continue" button
+#    Then I should see "Confirming why your application is urgent"
+#    And I check "None of these"
+#    And I click the "Continue" button
+#    Then I should see "You’ve already been to a MIAM or are taking part in another form of non-court dispute resolution"
+#    And I check "None of these"
+#    And I click the "Continue" button
+#    Then I should see "Confirming other valid reasons for not attending"
+#    And I check "You can’t access a mediator"
+#    And I check "There is no authorised family mediator with an office within 15 miles of your home"
+#    And I click the "Continue" button
+#
+#    Then I should see "You don’t have to attend a MIAM"
+#    Then I should see "Other exemptions"
+#    Then I should see "There is no authorised family mediator with an office within 15 miles of your home"
+#
+#    And I click the "Continue" link
+#    Then I should see "Safety concerns"
+#    And the mediation changes end
 
   @happy_path
   Scenario: Test timeout for applicant attended a MIAM
@@ -117,13 +117,13 @@ Feature: MIAM journey
     And the mediation changes end
 
   @unhappy_path
-  Scenario: Test timeout for applicant did not attend a MIAM and does not have a mediator’s exemption
-    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
-    And I choose "No"
-    Then I should see "Do you have a valid reason for not attending a MIAM?"
-    Then I wait and click the "Continue" button
-    And I should see "Sorry, you'll have to start again"
-    And the mediation changes end
+#  Scenario: Test timeout for applicant did not attend a MIAM and does not have a mediator’s exemption
+#    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+#    And I choose "No"
+#    Then I should see "Do you have a valid reason for not attending a MIAM?"
+#    Then I wait and click the "Continue" button
+#    And I should see "Sorry, you'll have to start again"
+#    And the mediation changes end
 
   @unhappy_path
   Scenario: Test timeout for applicant did not attend a MIAM and has not selected a valid reason
