@@ -9,7 +9,7 @@ Feature: Testing the 'Check Your Answers' page
 #    When I click the "Submit application" button
 #    Then I should see "Some information is missing"
 #    And Page has title "Error: Check your answers - Apply to court about child arrangements - GOV.UK"
-#
+
 #  Scenario: Advancing to CYA page and not selecting payment details
 #    When I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
 #    And I fill in "Enter your full name" with "Applicant"

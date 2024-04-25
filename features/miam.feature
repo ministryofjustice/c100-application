@@ -17,7 +17,7 @@ Feature: MIAM journey
 #    And I choose "Yes"
 #    Then I should see "Upload your MIAM certificate"
 #    And the mediation changes end
-#
+
 #  @unhappy_path
 #  Scenario: Applicant attended a MIAM but lacks the certificate
 #    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
