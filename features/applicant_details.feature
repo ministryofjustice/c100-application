@@ -148,84 +148,84 @@ Feature: Add an applicant to the application
     # Finalise here as we start the respondent journey in respondent_details.feature
     Then I should see "Enter the respondent’s name"
 
-#  @happy_path
-#  Scenario: Solicitor representative details journey
-#    When I visit "steps/solicitor/personal_details"
-#    Then I should see "Details of solicitor"
-#
-#    # Provoke validation errors
-#    When I click the "Continue" button
-#    Then Page has title "Error: Details of solicitor - Apply to court about child arrangements - GOV.UK"
-#    And I should see a "Enter the full name" link to "#steps-solicitor-personal-details-form-full-name-field-error"
-#    And I should see a "Enter the name of the firm" link to "#steps-solicitor-personal-details-form-firm-name-field-error"
-#
-#    When I fill in "Full name" with "¡€#"
-#    And I fill in "Name of firm" with "#¢∞"
-#    And I click the "Continue" button
-#    Then I should see a "Name must not contain special characters" link to "#steps-solicitor-personal-details-form-full-name-field-error"
-#
-#   # Fix validation errors and continue
-#    When I fill in "Full name" with "Dwayne Solicitor"
-#    And I fill in "Name of firm" with "Dwayne Firm"
-#    And I click the "Continue" button
-#    Then I should see "Address details of Dwayne"
-#    And Page has title "Address details of solicitor - Apply to court about child arrangements - GOV.UK"
-#
-#    # Provoke validation errors
-#    When I click the "Continue" button
-#    Then Page has title "Error: Address details of solicitor - Apply to court about child arrangements - GOV.UK"
-#    And I should see a "Enter the first line of the address" link to "#steps-solicitor-address-details-form-address-line-1-field-error"
-#    And I should see a "Enter the town or city" link to "#steps-solicitor-address-details-form-town-field-error"
-#    And I should see a "Enter the country" link to "#steps-solicitor-address-details-form-country-field-error"
-#    And I should see a "Enter the postcode" link to "#steps-solicitor-address-details-form-postcode-field-error"
-#
-#    When I fill in "Building and street" with "#¢∞"
-#    And I fill in "Town or city" with "#¢∞"
-#    And I fill in "Country" with "#¢∞"
-#    And I fill in "Postcode" with "#¢∞"
-#    And I click the "Continue" button
-#    Then I should see a "is invalid" link to "#steps-solicitor-address-details-form-postcode-field-error"
-#
-#    # Fix validation errors and continue
-#    When I fill in "Building and street" with "Street A"
-#    And I fill in "Town or city" with "London"
-#    And I fill in "Country" with "United Kingdom"
-#    And I fill in "Postcode" with "SW1A 1AA"
-#    And I click the "Continue" button
-#    Then I should see "Contact details of Dwayne Solicitor"
-#    And Page has title "Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
-#
-#    # Provoke validation errors
-#    When I click the "Continue" button
-#    Then Page has title "Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
-#    And I should see a "Enter an email address" link to "#steps-solicitor-contact-details-form-email-field-error"
-#    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-phone-number-field-error"
-#    And I should see a "Enter a fax number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-fax-number-field-error"
-#
-#    When I fill in "Email address" with "¡€#"
-#    And I fill in "Phone number" with "¡€#"
-#    And I fill in "Fax number" with "¡€#"
-#    And I fill in "DX number" with "¡€#"
-#    And I click the "Continue" button
-#    Then Page has title "Error: Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
-#    And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-solicitor-contact-details-form-email-field-error"
-#    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-phone-number-field-error"
-#    And I should see a "Enter a fax number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-fax-number-field-error"
-#    And I should see a "Enter a valid DX number" link to "#steps-solicitor-contact-details-form-dx-number-field-error"
-#
-#    # Fix validation errors and continue
-#    When I fill in "Email address" with "dwayne@email.com"
-#    And I fill in "Phone number" with "00000000000"
-#    And I fill in "Fax number" with "00000000000"
-#    And I fill in "DX number" with "123-456"
-#    And I click the "Continue" button
-#    Then Page has title "Respondent names - Apply to court about child arrangements - GOV.UK"
-#
-#    When I visit "steps/applicant/has_solicitor"
-#    And Page has title "Do you have a solicitor? - Apply to court about child arrangements - GOV.UK"
-#    Then I choose "No"
-#    And I click the "Continue" button
-#    Then Page has title "Respondent names - Apply to court about child arrangements - GOV.UK"
+  @happy_path
+  Scenario: Solicitor representative details journey
+    When I visit "steps/solicitor/personal_details"
+    Then I should see "Details of solicitor"
+
+    # Provoke validation errors
+    When I click the "Continue" button
+    Then Page has title "Error: Details of solicitor - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Enter the full name" link to "#steps-solicitor-personal-details-form-full-name-field-error"
+    And I should see a "Enter the name of the firm" link to "#steps-solicitor-personal-details-form-firm-name-field-error"
+
+    When I fill in "Full name" with "¡€#"
+    And I fill in "Name of firm" with "#¢∞"
+    And I click the "Continue" button
+    Then I should see a "Name must not contain special characters" link to "#steps-solicitor-personal-details-form-full-name-field-error"
+
+   # Fix validation errors and continue
+    When I fill in "Full name" with "Dwayne Solicitor"
+    And I fill in "Name of firm" with "Dwayne Firm"
+    And I click the "Continue" button
+    Then I should see "Address details of Dwayne"
+    And Page has title "Address details of solicitor - Apply to court about child arrangements - GOV.UK"
+
+    # Provoke validation errors
+    When I click the "Continue" button
+    Then Page has title "Error: Address details of solicitor - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Enter the first line of the address" link to "#steps-solicitor-address-details-form-address-line-1-field-error"
+    And I should see a "Enter the town or city" link to "#steps-solicitor-address-details-form-town-field-error"
+    And I should see a "Enter the country" link to "#steps-solicitor-address-details-form-country-field-error"
+    And I should see a "Enter the postcode" link to "#steps-solicitor-address-details-form-postcode-field-error"
+
+    When I fill in "Building and street" with "#¢∞"
+    And I fill in "Town or city" with "#¢∞"
+    And I fill in "Country" with "#¢∞"
+    And I fill in "Postcode" with "#¢∞"
+    And I click the "Continue" button
+    Then I should see a "is invalid" link to "#steps-solicitor-address-details-form-postcode-field-error"
+
+    # Fix validation errors and continue
+    When I fill in "Building and street" with "Street A"
+    And I fill in "Town or city" with "London"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SW1A 1AA"
+    And I click the "Continue" button
+    Then I should see "Contact details of Dwayne Solicitor"
+    And Page has title "Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
+
+    # Provoke validation errors
+    When I click the "Continue" button
+    Then Page has title "Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Enter an email address" link to "#steps-solicitor-contact-details-form-email-field-error"
+    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-phone-number-field-error"
+    And I should see a "Enter a fax number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-fax-number-field-error"
+
+    When I fill in "Email address" with "¡€#"
+    And I fill in "Phone number" with "¡€#"
+    And I fill in "Fax number" with "¡€#"
+    And I fill in "DX number" with "¡€#"
+    And I click the "Continue" button
+    Then Page has title "Error: Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-solicitor-contact-details-form-email-field-error"
+    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-phone-number-field-error"
+    And I should see a "Enter a fax number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-fax-number-field-error"
+    And I should see a "Enter a valid DX number" link to "#steps-solicitor-contact-details-form-dx-number-field-error"
+
+    # Fix validation errors and continue
+    When I fill in "Email address" with "dwayne@email.com"
+    And I fill in "Phone number" with "00000000000"
+    And I fill in "Fax number" with "00000000000"
+    And I fill in "DX number" with "123-456"
+    And I click the "Continue" button
+    Then Page has title "Respondent names - Apply to court about child arrangements - GOV.UK"
+
+    When I visit "steps/applicant/has_solicitor"
+    And Page has title "Do you have a solicitor? - Apply to court about child arrangements - GOV.UK"
+    Then I choose "No"
+    And I click the "Continue" button
+    Then Page has title "Respondent names - Apply to court about child arrangements - GOV.UK"
 
   @happy_path
   Scenario: Test timeout on applicant personal details
