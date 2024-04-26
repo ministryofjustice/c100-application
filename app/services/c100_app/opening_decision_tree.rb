@@ -37,11 +37,11 @@ module C100App
     end
 
     def check_if_my_hmcts_eligable_court
-      if eligable_court
-        edit(:my_hmcts)
-      else
-        edit(:consent_order)
-      end
+      # if eligable_court
+      #   edit(:my_hmcts)
+      # else
+      edit(:consent_order)
+      # end
     end
 
     # Temp
