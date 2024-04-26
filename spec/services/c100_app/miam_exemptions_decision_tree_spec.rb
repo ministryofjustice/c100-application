@@ -93,8 +93,15 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
       end
 
       describe 'and they are not only misc exemptions' do
-        let(:attributes) { super().merge(miam_exemption: MiamExemption.new(adr: ['misc_previous_attendance'], misc: ['applicant_under_age'])) }
+        let(:attributes) { super().merge(miam_exemption: MiamExemption.new(domestic: ['misc_domestic_none'],
+                                                                           adr: ['misc_previous_attendance'], misc: ['applicant_under_age'])) }
         it { is_expected.to have_destination(:reasons_playback, :show) }
+      end
+
+      describe 'and they have domestic exemptions' do
+        let(:attributes) { super().merge(miam_exemption: MiamExemption.new(domestic: ['police_arrested'],
+                                                                           adr: ['misc_previous_attendance'], misc: ['applicant_under_age'])) }
+        it { is_expected.to have_destination(:exemption_reasons, :edit) }
       end
     end
   end
