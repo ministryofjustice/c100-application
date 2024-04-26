@@ -109,13 +109,13 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
       }
     }
     context 'and attach_evidence is not yes' do
-      it { is_expected.to have_destination(:exit_page, :show) }
+      it { is_expected.to have_destination(:exemption_details, :edit) }
     end
 
     context 'and a MIAM exemption has been selected' do
       let(:attributes) { super().merge(miam_exemption: MiamExemption.new(misc: ['applicant_under_age'])) }
 
-      it { is_expected.to have_destination(:reasons_playback, :show) }
+      it { is_expected.to have_destination(:exemption_details, :edit) }
     end
 
     context 'and attach_evidence is yes' do
