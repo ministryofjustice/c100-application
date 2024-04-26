@@ -17,7 +17,7 @@ module C100App
       when :exemption_details
         show(:reasons_playback)
       when :exemption_reasons
-        upload_or_exit_page
+        upload_or_details
       when :exemption_upload
         edit(:exemption_details)
       else
@@ -47,11 +47,11 @@ module C100App
       end
     end
 
-    def upload_or_exit_page
+    def upload_or_details
       if c100_application.attach_evidence == "yes"
         edit(:exemption_upload)
       else
-        playback_or_exit_page
+        edit(:exemption_details)
       end
     end
 
