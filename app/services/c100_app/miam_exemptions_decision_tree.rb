@@ -29,7 +29,7 @@ module C100App
 
     def reasons_or_exit_page
       if has_miam_exemptions?
-        if has_only_misc_exemptions?
+        if has_domestic_exemptions? || has_only_misc_exemptions?
           edit(:exemption_reasons)
         else
           show(:reasons_playback)
@@ -69,6 +69,11 @@ module C100App
         return false unless exemption.include? "misc_#{group}_none"
       end
       true
+    end
+
+    def has_domestic_exemptions?
+      exemptions = c100_application.miam_exemption
+      exemptions.domestic.exclude? "misc_domestic_none"
     end
   end
 end
