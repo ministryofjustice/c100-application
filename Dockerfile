@@ -93,7 +93,7 @@ ENV RAILS_ENV=production
 ENV IS_DOCKER=true
 ENV PRL_OPENING=false
 ENV MEDIATION_DATE=29/04/2024
-ENV FEE_INCREASE_DATE=22/04/2024
+ENV FEE_INCREASE_DATE=01/05/2024
 RUN bundle exec rake assets:precompile
 
 # Copy fonts and images (without digest) along with the digested ones,
