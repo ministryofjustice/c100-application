@@ -27,9 +27,23 @@ module C100App
 
     private
 
-    def reasons_or_exit_page
+    def reasons_or_exit_page_old
       if has_miam_exemptions?
         if has_domestic_exemptions? || has_only_misc_exemptions?
+          edit(:exemption_reasons)
+        else
+          show(:reasons_playback)
+        end
+      else
+        show(:exit_page)
+      end
+    end
+
+    def reasons_or_exit_page
+      if has_miam_exemptions?
+        if has_misc_skip_exemptions?
+          edit(:exemption_details)
+        elsif has_domestic_exemptions? || has_only_misc_exemptions?
           edit(:exemption_reasons)
         else
           show(:reasons_playback)
@@ -69,6 +83,12 @@ module C100App
         return false unless exemption.include? "misc_#{group}_none"
       end
       true
+    end
+
+    def has_misc_skip_exemptions?
+      exemptions = c100_application.miam_exemption.send(:misc)
+      return true if %w[misc_access misc_access2 misc_access3].any? { |misc| exemptions.include? misc }
+      false
     end
 
     def has_domestic_exemptions?
