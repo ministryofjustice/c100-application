@@ -27,18 +27,6 @@ module C100App
 
     private
 
-    def reasons_or_exit_page_old
-      if has_miam_exemptions?
-        if has_domestic_exemptions? || has_only_misc_exemptions?
-          edit(:exemption_reasons)
-        else
-          show(:reasons_playback)
-        end
-      else
-        show(:exit_page)
-      end
-    end
-
     def reasons_or_exit_page
       if has_miam_exemptions?
         if has_misc_skip_exemptions?
