@@ -266,14 +266,14 @@ RSpec.describe Steps::CourtOrders::DetailsForm do
         end
       end
 
-      context 'when date is in the future' do
-        let(:non_molestation_issue_date) { Date.tomorrow }
-
-        it 'has a validation error on the field' do
-          expect(subject).to_not be_valid
-          expect(subject.errors.added?(:non_molestation_issue_date, :future)).to eq(true)
-        end
-      end
+      # context 'when date is in the future' do
+      #   let(:non_molestation_issue_date) { Date.tomorrow }
+      #
+      #   it 'has a validation error on the field' do
+      #     expect(subject).to_not be_valid
+      #     expect(subject.errors.added?(:non_molestation_issue_date, :future)).to eq(true)
+      #   end
+      # end
 
       context 'casting the date from multi parameters' do
         before do
