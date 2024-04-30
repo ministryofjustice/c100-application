@@ -206,7 +206,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       allow(c100_application).to receive(:court).and_return(court)
 
       allow(I18n).to receive(:translate!).with(
-        'foobar_payment', scope: [:notify_submission_mailer, :payment_instructions], fee: '£232'
+        'foobar_payment', scope: [:notify_submission_mailer, :payment_instructions], fee: '£255'
       ).and_return('payment instructions from locales')
     end
 
