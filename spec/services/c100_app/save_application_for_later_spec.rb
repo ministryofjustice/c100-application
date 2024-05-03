@@ -33,6 +33,7 @@ RSpec.describe C100App::SaveApplicationForLater do
 
       before do
         allow(c100_application).to receive(:navigation_stack).and_return(["page"])
+        allow(PrlChange).to receive(:changes_apply?).and_return(true)
       end
 
       it 'returns false' do
