@@ -9,7 +9,7 @@ module C100App
     end
 
     def save
-      if c100_application&.navigation_stack
+      if c100_application&.navigation_stack && PrlChange.changes_apply?
         return false unless c100_application.navigation_stack.include? "/steps/opening/consent_order"
       end
 
