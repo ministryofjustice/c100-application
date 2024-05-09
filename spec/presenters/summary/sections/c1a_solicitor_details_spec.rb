@@ -20,7 +20,6 @@ module Summary
         full_address: 'address',
         dx_number: 'dx_number',
         phone_number: 'phone_number',
-        fax_number: 'fax_number',
         email: 'email',
     ) }
 
@@ -45,7 +44,7 @@ module Summary
 
       context 'solicitor details are present' do
         it 'has the correct rows' do
-          expect(answers.count).to eq(9)
+          expect(answers.count).to eq(8)
 
           expect(answers[0]).to be_an_instance_of(Answer)
           expect(answers[0].question).to eq(:has_solicitor)
@@ -72,16 +71,12 @@ module Summary
           expect(answers[5].value).to eq('phone_number')
 
           expect(answers[6]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[6].question).to eq(:solicitor_fax_number)
-          expect(answers[6].value).to eq('fax_number')
+          expect(answers[6].question).to eq(:solicitor_dx_number)
+          expect(answers[6].value).to eq('dx_number')
 
           expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[7].question).to eq(:solicitor_dx_number)
-          expect(answers[7].value).to eq('dx_number')
-
-          expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[8].question).to eq(:solicitor_reference)
-          expect(answers[8].value).to eq('reference')
+          expect(answers[7].question).to eq(:solicitor_reference)
+          expect(answers[7].value).to eq('reference')
         end
       end
     end

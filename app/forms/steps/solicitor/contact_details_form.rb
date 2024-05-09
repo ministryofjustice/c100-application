@@ -7,12 +7,11 @@ module Steps
 
       attribute :email, NormalisedEmail
       attribute :phone_number, StrippedString
-      attribute :fax_number, StrippedString
       attribute :dx_number, StrippedString
       attribute :email_provided, YesNo
 
       validates :email, email: true, allow_blank: true
-      validates :phone_number, :fax_number, phone_number: true
+      validates :phone_number, phone_number: true
       validates :dx_number, sensible_dx: true
 
       validates_presence_of :email, :phone_number

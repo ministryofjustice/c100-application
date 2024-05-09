@@ -21,7 +21,6 @@ module Summary
         full_address: 'address',
         email: 'email',
         phone_number: 'phone_number',
-        fax_number: 'fax_number',
         dx_number: 'dx_number',
     ) }
     let(:solicitor_account_number) { '12345' }
@@ -53,18 +52,18 @@ module Summary
         let(:solicitor_account_number) { nil }
 
         it 'has the correct rows' do
-          expect(answers.count).to eq(10)
+          expect(answers.count).to eq(9)
 
-          expect(answers[9]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[9].question).to eq(:solicitor_fee_account)
-          expect(answers[9].show?).to eq(true)
-          expect(answers[9].value).to be_nil
+          expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[8].question).to eq(:solicitor_fee_account)
+          expect(answers[8].show?).to eq(true)
+          expect(answers[8].value).to be_nil
         end
       end
 
       context 'solicitor details are present' do
         it 'has the correct rows' do
-          expect(answers.count).to eq(10)
+          expect(answers.count).to eq(9)
 
           expect(answers[0]).to be_an_instance_of(Answer)
           expect(answers[0].question).to eq(:has_solicitor)
@@ -91,20 +90,16 @@ module Summary
           expect(answers[5].value).to eq('phone_number')
 
           expect(answers[6]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[6].question).to eq(:solicitor_fax_number)
-          expect(answers[6].value).to eq('fax_number')
+          expect(answers[6].question).to eq(:solicitor_dx_number)
+          expect(answers[6].value).to eq('dx_number')
 
           expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[7].question).to eq(:solicitor_dx_number)
-          expect(answers[7].value).to eq('dx_number')
+          expect(answers[7].question).to eq(:solicitor_reference)
+          expect(answers[7].value).to eq('reference')
 
           expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[8].question).to eq(:solicitor_reference)
-          expect(answers[8].value).to eq('reference')
-
-          expect(answers[9]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[9].question).to eq(:solicitor_fee_account)
-          expect(answers[9].value).to eq('12345')
+          expect(answers[8].question).to eq(:solicitor_fee_account)
+          expect(answers[8].value).to eq('12345')
         end
       end
     end
