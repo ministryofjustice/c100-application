@@ -12,6 +12,8 @@ module C100App
       when :privacy_known
         edit(:privacy_preferences)
       when :privacy_preferences
+        ConfidentialOption.changes_apply? ? edit(:refuge) : show(:privacy_summary)
+      when :refuge
         show(:privacy_summary)
       when :privacy_summary
         edit(:personal_details)

@@ -585,6 +585,10 @@ en:
       answers:
         'yes': Yes, the court can leave a voicemail
         'no': No, the court cannot leave a voicemail
+    refuge:
+      question: Applicant currently resident in a refuge?
+      answers:
+        <<: *YESNO
     person_relationship_to_children:
       question: Relationship to children listed in this application
 
