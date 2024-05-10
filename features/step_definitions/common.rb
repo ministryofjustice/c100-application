@@ -192,6 +192,12 @@ Given(/^Confidential changes do apply$/) do
   Rails.application.config.confidential_option_date= Date.today - 1.day
 end
 
+Given(/^Confidential changes do not apply$/) do
+  @original_confidential_date = Rails.application.config.confidential_option_date
+  Rails.application.config.confidential_option_date= Date.today + 1.day
+end
+
 And('the confidential changes end') do
   Rails.application.config.confidential_option_date = @original_confidential_date
 end
+

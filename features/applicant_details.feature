@@ -1,6 +1,7 @@
 Feature: Add an applicant to the application
   Background:
     # We need at least 1 child as a precondition for this journey
+    Given Confidential changes do not apply
     Given I have started an application
     And I have entered a child with first name "John" and last name "Doe Junior"
     Then I visit "steps/applicant/names"
@@ -147,6 +148,7 @@ Feature: Add an applicant to the application
 
     # Finalise here as we start the respondent journey in respondent_details.feature
     Then I should see "Enter the respondent’s name"
+    And the confidential changes end
 
   @happy_path
   Scenario: Solicitor representative details journey
@@ -226,6 +228,7 @@ Feature: Add an applicant to the application
     Then I choose "No"
     And I click the "Continue" button
     Then Page has title "Respondent names - Apply to court about child arrangements - GOV.UK"
+    And the confidential changes end
 
   @happy_path
   Scenario: Test timeout on applicant personal details
@@ -233,6 +236,7 @@ Feature: Add an applicant to the application
     And I should see "Enter a new name"
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
+    And the confidential changes end
     
   @happy_path
   Scenario: Test timeout on solicitor representative details journey
@@ -240,3 +244,4 @@ Feature: Add an applicant to the application
     And I should see "Details of solicitor"
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
+    And the confidential changes end
