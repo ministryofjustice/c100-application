@@ -51,13 +51,11 @@ Feature: Add an applicant to the application
 
     # Provoke refuge validation error
     And I choose "Yes"
-    And I click the "Continue" button
     Then Page has title "Error: Are you currently resident in a refuge? - Apply to court about child arrangements - GOV.UK"
     And I should see a "You must keep your current address private from the other people in this application if you are currently resident in a refuge. Select current address on the previous page if you are currently resident in a refuge" link to "#steps-applicant-refuge-form-refuge-field-error"
 
     # Fix refuge validation error and continue
     And I choose "No"
-    And I click the "Continue" button
     Then I should see "The court will not keep your contact details private"
     When I click the "Continue" link
     Then I should see "Provide details for John Doe Senior"
