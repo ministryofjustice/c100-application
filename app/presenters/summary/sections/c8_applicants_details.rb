@@ -31,6 +31,7 @@ module Summary
               person_home_phone(person),
               person_mobile_phone(person),
               Answer.new(:person_voicemail_consent, person.voicemail_consent),
+              Answer.new(:refuge, person.refuge),
               Partial.row_blank_space,
               residence_history(person),
               Partial.row_blank_space,
