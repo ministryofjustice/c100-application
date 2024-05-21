@@ -492,6 +492,11 @@ en:
               inclusion: *yes_no_error
             mobile_keep_private:
               inclusion: *yes_no_error
+        steps/applicant/refuge_form:
+          attributes:
+            refuge:
+              inclusion: Select yes if you are currently resident in a refuge
+              without_private_address: You must keep your current address private from the other people in this application if you are currently resident in a refuge. Select current address on the previous page if you are currently resident in a refuge
         steps/respondent/personal_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS

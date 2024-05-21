@@ -20,7 +20,8 @@ module Summary
         mobile_phone: 'mobile_phone',
         email: 'email',
         voicemail_consent: 'yes',
-        contact_details_private: contact_details_private
+        contact_details_private: contact_details_private,
+        refuge: 'yes'
       )
     }
 
@@ -62,7 +63,7 @@ module Summary
 
     describe '#answers' do
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(10)
+        expect(answers.count).to eq(11)
       end
 
       it 'has the correct rows in the right order' do
@@ -94,15 +95,19 @@ module Summary
         expect(answers[6].question).to eq(:person_voicemail_consent)
         expect(answers[6].value).to eq('yes')
 
-        expect(answers[7]).to be_an_instance_of(Partial)
-        expect(answers[7].name).to eq(:row_blank_space)
+        expect(answers[7]).to be_an_instance_of(Answer)
+        expect(answers[7].question).to eq(:refuge)
+        expect(answers[7].value).to eq('yes')
 
-        expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[8].question).to eq(:person_residence_history)
-        expect(answers[8].value).to eq('history')
+        expect(answers[8]).to be_an_instance_of(Partial)
+        expect(answers[8].name).to eq(:row_blank_space)
 
-        expect(answers[9]).to be_an_instance_of(Partial)
-        expect(answers[9].name).to eq(:row_blank_space)
+        expect(answers[9]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[9].question).to eq(:person_residence_history)
+        expect(answers[9].value).to eq('history')
+
+        expect(answers[10]).to be_an_instance_of(Partial)
+        expect(answers[10].name).to eq(:row_blank_space)
       end
 
       context "when no mobile and a reason given" do

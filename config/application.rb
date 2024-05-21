@@ -93,5 +93,6 @@ module Application
 
     config.mediation_change_date = DateTime.parse(ENV.fetch("MEDIATION_DATE", "29/04/2024"))
     config.fee_increase_date = DateTime.parse(ENV.fetch("FEE_INCREASE_DATE", "01/05/2024"))
+    config.confidential_option_date = DateTime.parse(ENV.fetch("CONFIDENTIAL_OPTION_DATE", "08/05/2024"))
   end
 end

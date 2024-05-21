@@ -238,6 +238,7 @@ Rails.application.routes.draw do
     namespace :applicant do
       crud_step :names
       crud_step :privacy_known, only: [:edit, :update]
+      crud_step :refuge, only: [:edit, :update]
       crud_step :privacy_preferences, only: [:edit, :update]
       crud_step :privacy_summary, only: [:show]
       crud_step :personal_details, only: [:edit, :update]
