@@ -1,7 +1,7 @@
 Feature: Add an applicant to the application
   Background:
     # We need at least 1 child as a precondition for this journey
-    Given Confidential changes do not apply
+    Given Confidential changes do apply
     Given I have started an application
     And I have entered a child with first name "John" and last name "Doe Junior"
     Then I visit "steps/applicant/names"
@@ -47,6 +47,15 @@ Feature: Add an applicant to the application
 
     # Fix privacy preferences validation errors and continue
     When I choose "No"
+    Then I should see "Are you currently resident in a refuge?"
+
+    # Provoke refuge validation error
+    And I choose "Yes"
+    Then Page has title "Error: Are you currently resident in a refuge? - Apply to court about child arrangements - GOV.UK"
+    And I should see a "You must keep your current address private from the other people in this application if you are currently resident in a refuge. Select current address on the previous page if you are currently resident in a refuge" link to "#steps-applicant-refuge-form-refuge-field-error"
+
+    # Fix refuge validation error and continue
+    And I choose "No"
     Then I should see "The court will not keep your contact details private"
     When I click the "Continue" link
     Then I should see "Provide details for John Doe Senior"
@@ -202,19 +211,23 @@ Feature: Add an applicant to the application
     Then Page has title "Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter an email address" link to "#steps-solicitor-contact-details-form-email-field-error"
     And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-phone-number-field-error"
+    And I should see a "Enter a fax number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-fax-number-field-error"
 
     When I fill in "Email address" with "¡€#"
     And I fill in "Phone number" with "¡€#"
+    And I fill in "Fax number" with "¡€#"
     And I fill in "DX number" with "¡€#"
     And I click the "Continue" button
     Then Page has title "Error: Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-solicitor-contact-details-form-email-field-error"
     And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-phone-number-field-error"
+    And I should see a "Enter a fax number in the correct format, like 07700 900 982" link to "#steps-solicitor-contact-details-form-fax-number-field-error"
     And I should see a "Enter a valid DX number" link to "#steps-solicitor-contact-details-form-dx-number-field-error"
 
     # Fix validation errors and continue
     When I fill in "Email address" with "dwayne@email.com"
     And I fill in "Phone number" with "00000000000"
+    And I fill in "Fax number" with "00000000000"
     And I fill in "DX number" with "123-456"
     And I click the "Continue" button
     Then Page has title "Respondent names - Apply to court about child arrangements - GOV.UK"
