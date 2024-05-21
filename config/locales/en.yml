@@ -1681,7 +1681,6 @@ en:
       steps_solicitor_contact_details_form:
         dx_number: DX number
         phone_number: Phone number
-        fax_number: Fax number
         email: Email address
         email_provided_options:
           <<: *YESPROVIDEEMAIL

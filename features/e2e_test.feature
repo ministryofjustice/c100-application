@@ -139,7 +139,6 @@
 #    Then I should see "Contact details of Annalise Keating"
 #    And I fill in "Email address" with "annalise@law.com"
 #    And I fill in "Phone number" with "00000000000"
-#    And I fill in "Fax number" with "00000000000"
 #    And I fill in "DX number" with "00000000000"
 #    And I click the "Continue" button
 #    Then I should see "Enter the respondent’s name"
@@ -256,7 +255,6 @@
 #    And I should see the solicitor's reference is "123456"
 #    And I should see the solicitor's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
 #    And I should see the solicitor's email is "annalise@law.com" and phone number is "00000000000"
-#    And I should see the solicitor's Fax number is "00000000000"
 #    And I should see the solicitor's DX number is "00000000000"
 #    And I should see the respondent's name is "Jane Doe"
 #    And I should see the respondent is "30" years old
@@ -407,7 +405,6 @@
 #    Then I should see "Contact details of Annalise Keating"
 #    And I fill in "Email address" with "annalise@law.com"
 #    And I fill in "Phone number" with "00000000000"
-#    And I fill in "Fax number" with "00000000000"
 #    And I fill in "DX number" with "00000000000"
 #    And I click the "Continue" button
 #    Then I should see "Enter the respondent’s name"
@@ -525,7 +522,6 @@
 #    And I should see the solicitor's reference is "123456"
 #    And I should see the solicitor's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
 #    And I should see the solicitor's email is "annalise@law.com" and phone number is "00000000000"
-#    And I should see the solicitor's Fax number is "00000000000"
 #    And I should see the solicitor's DX number is "00000000000"
 #    And I should see the respondent's name is "Jane Doe"
 #    And I should see the respondent is "30" years old
@@ -1289,7 +1285,6 @@
 #    And I should see the solicitor's reference is "123456"
 #    And I should see the solicitor's address is "12 Cannon Street Caplan and Gold, London, United Kingdom, EC4N 6YA"
 #    And I should see the solicitor's email is "teganprice@caplangold.com" and phone number is "00000119911"
-#    And I should see the solicitor's Fax number is "00000119911"
 #    And I should see the solicitor's DX number is "00000119911"
 #    And I should see the respondent's name is "Jake Gyllenhaal"
 #    And I should see the respondent's previous name is "Ryan Reynolds"
