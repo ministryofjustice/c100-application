@@ -22,7 +22,6 @@ module Summary
           FreeTextAnswer.new(:solicitor_address, solicitor.full_address),
           FreeTextAnswer.new(:solicitor_email, solicitor.email),
           FreeTextAnswer.new(:solicitor_phone_number, solicitor.phone_number),
-          FreeTextAnswer.new(:solicitor_fax_number, solicitor.fax_number),
           FreeTextAnswer.new(:solicitor_dx_number, solicitor.dx_number),
           FreeTextAnswer.new(:solicitor_reference, solicitor.reference),
           FreeTextAnswer.new(:solicitor_fee_account, c100.solicitor_account_number, show: true),
