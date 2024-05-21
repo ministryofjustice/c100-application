@@ -275,6 +275,10 @@ en:
             <p class="govuk-body">For example, if you believe the other people in the case pose a risk to you or your children, you can ask the court to keep your contact details private.</p>
             <p class="govuk-body"><strong>Please note:</strong> you will need to make sure that any form or document, either completed by you now, or at a later date, for use in court <strong>does not</strong> contain the information you wish to keep private. This includes documents received from other people e.g. medical reports or financial statements etc.</p>
             <p class="govuk-body">The court staff are not able to check the documents you submit to the court for any unintentional disclosure of your contact details.</p>
+      refuge:
+        edit:
+          page_title: Are you currently resident in a refuge?
+          heading: "Are you currently resident in a refuge?"
       privacy_summary:
         show:
           page_title: Contact details confidentiality
@@ -974,24 +978,30 @@ en:
               <li>Why the prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case</li>
               <li>The names, postal addresses and telephone numbers or e-mail addresses for authorised family mediators, and the dates of contact</li>
             </ul>
+          info_adr_selected_html: |
+            <p class="govuk-body">Enter the following details where applicable:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Why the prospective applicant is not able to attend a MIAM online or by video-link and an explanation of why this is the case</li>
+              <li>The names, postal addresses and telephone numbers or e-mail addresses for authorised family mediators, and the dates of contact</li>
+              <li>If the applicant was the respondent in a previously attended MIAM or in another form of non-court dispute resolution you must also enter the date(s) of attendance and contact details of those sessions below</li>
+            </ul>
       exemption_reasons:
         edit:
-          page_title: Reasons for not providing evidence for a MIAM exemption
-          heading: Reasons for not providing evidence for a MIAM exemption
+          page_title: Evidence of MIAM exemption
+          heading: Evidence of MIAM exemption
           info_html: |
             <p class="govuk-body">Enter the following details if applicable:</p>
             <ul class="govuk-list govuk-list--bullet">
-              <li>Reasons why the prospective applicant is unable to provide the required evidence to support a MIAM exemption claim</li>
+              <li>Reasons why you are unable to provide the required evidence to support a MIAM exemption claim</li>
             </ul>
-          attach_evidence: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
-          alert_text: Please change your response and attach the required evidence if you are able to so. You have stated that you have evidence of domestic violence or abuse.
+          attach_evidence: Are you able to attach the required evidence to support a MIAM exemption claim?
           answers:
             <<: *YESNO
       exemption_upload:
         edit:
           page_title: Upload your evidence for a MIAM exemption
           lead_text_html: |
-            <p>If you are uploading documents from a computer, name the files clearly. For example, miam-certificate.pdf</p>
+            <p>If you are uploading documents from a computer, name the files clearly. For example, miam-exemption.pdf</p>
             <p>Files must end with JPG, BMP, PNG, TIF, PDF, DOC or DOCX</p>
           dropdown_header: How to take a picture of a document on your phone and upload it
           dropdown_content_html: |
@@ -1011,7 +1021,7 @@ en:
           heading: You don’t have to attend a MIAM
           lead_text: You’ve said you have a valid reason for not attending a MIAM.
           you_told_us: "The reasons you’ve given are:"
-          info_notice: You’ll be asked to provide more information about your circumstances at the first court hearing. Where evidence is needed to support an exemption, you will need to submit a copy of this document with this application to court. If the court is not satisfied that you’re exempt, you may be directed to attend a MIAM.
+          info_notice: You’ll be asked to provide more information about your circumstances at the first court hearing. Where evidence is needed to support an exemption, you will need to submit a copy of this evidence with your application to the court or explain the reasons why you cannot provide it.
           continue: Continue
       safety_playback:
         show:
@@ -1592,6 +1602,10 @@ en:
           email: Email address
           mobile: Mobile phone number
           home_phone: Home phone number
+      steps_applicant_refuge_form:
+        refuge_options:
+          'yes': 'Yes'
+          'no': 'No'
       steps_applicant_personal_details_form:
         <<: *PERSONAL_DETAILS_FIELDS
         previous_name: Enter your previous name

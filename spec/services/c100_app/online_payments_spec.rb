@@ -41,7 +41,7 @@ RSpec.describe C100App::OnlinePayments do
 
     let(:payload) do
       {
-        amount: 232_00,
+        amount: 255_00,
         description: 'Court fee for a child arrangements application (C100)',
         reference: '1970/01/449362AF',
         email: 'applicant@test.com',

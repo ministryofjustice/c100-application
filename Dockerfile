@@ -91,8 +91,10 @@ ENV AWS_REGION=eu-west-2
 ENV AWS_S3_BUCKET=replace_this_at_build_time
 ENV RAILS_ENV=production
 ENV IS_DOCKER=true
-ENV PRL_OPENING=true
-ENV MEDIATION_DATE=02/04/2024
+ENV PRL_OPENING=false
+ENV MEDIATION_DATE=29/04/2024
+ENV FEE_INCREASE_DATE=01/05/2024
+ENV CONFIDENTIAL_OPTION_DATE=2024/05/30T00:00:00+1
 RUN bundle exec rake assets:precompile
 
 # Copy fonts and images (without digest) along with the digested ones,

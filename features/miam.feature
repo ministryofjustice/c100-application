@@ -86,13 +86,12 @@ Feature: MIAM journey
     And I check "None of these"
     And I click the "Continue" button
     Then I should see "Confirming other valid reasons for not attending"
-    And I check "You can’t access a mediator"
-    And I check "There is no authorised family mediator with an office within 15 miles of your home"
+    And I check "You’re applying for a without notice hearing"
     And I click the "Continue" button
 
     Then I should see "You don’t have to attend a MIAM"
     Then I should see "Other exemptions"
-    Then I should see "There is no authorised family mediator with an office within 15 miles of your home"
+    Then I should see "You’re applying for a without notice hearing"
 
     And I click the "Continue" link
     Then I should see "Safety concerns"

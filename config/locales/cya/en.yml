@@ -258,7 +258,7 @@ en:
         court_protective_injunction: A relevant protective injunction
         court_undertaking: An undertaking given in England and Wales under section 46 or 63E of the Family Law Act 1996 (or given in Scotland or Northern Ireland in place of a protective injunction) by a prospective party, provided that a cross-undertaking relating to domestic violence or abuse was not given by another prospective party
         court_finding_of_fact: A copy of a finding of fact, made in proceedings in the United Kingdom, that there has been domestic abuse by a prospective party
-        court_expert_report: An expert report produced as evidence in proceedings in the United Kingdom for the benefit of a court or tribunal confirming that a person with whom a prospective party is or was in a family relationship, was assessed as being, or at risk of being, a victim of domestic abuse by that prospective party
+        court_expert_report: An expert report produced as evidence in proceedings in the United Kingdom for the benefit of a court or tribunal confirming that a person with whom a prospective party is or was personally connected, was assessed as being, or at risk of being, a victim of domestic abuse by that prospective party
         specialist_examination: A letter or report from an appropriate health professional confirming an examination
         specialist_referral: A letter or report from an appropriate health professional confirming a referral
         local_authority_marac: A letter from any person who is a member of a multi-agency risk assessment conference (or other suitable local safeguarding forum) confirming that a prospective party, or a person with whom that prospective party is personally connected, is or has been at risk of harm from domestic abuse by another prospective party
@@ -295,7 +295,6 @@ en:
       question: Previous MIAM attendance or MIAM exemption
       answers:
         misc_previous_attendance: In the 4 months prior to making the application, the person attended a MIAM or a non-court dispute resolution process relating to the same or substantially the same dispute; and where the applicant attended a non-court dispute resolution process, there is evidence of that attendance in the form of written confirmation from the dispute resolution provider.
-        misc_existing_proceedings_attendance: The application would be made in existing proceedings which are continuing and the prospective applicant attended a MIAM before initiating those proceedings
         misc_existing_proceedings_exemption: The application would be made in existing proceedings which are continuing and the prospective applicant attended a MIAM before initiating those proceedings. The MIAM provider must sign a document proving this attendance, to be submitted alongside your application to court
         misc_adr_none: *none_selected
 
@@ -315,13 +314,13 @@ en:
     exemption_details:
       question: Details of exemptions from attending a MIAM
     exemption_reasons:
-      question: Reasons for not providing evidence for a MIAM exemption
+      question: Evidence of MIAM exemption
     exemption:
       question: Evidence for a MIAM exemption
       answers:
         not_applicable: "[Not applicable in this case]"
     attach_evidence:
-      question: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
+      question: Are you able to attach the required evidence to support a MIAM exemption claim?
       answers:
         <<: *YESNO
     ### Safety concerns ###
@@ -506,6 +505,8 @@ en:
       question: Do the other people named in this application (the respondents) know any of your contact details?
     person_contact_details_private:
       question: Do you want to keep your contact details private from the other people named in the application (the respondents)?
+    refuge:
+      question: Are you currently resident in a refuge?
     person_full_name:
       question: Full name
     person_previous_name:

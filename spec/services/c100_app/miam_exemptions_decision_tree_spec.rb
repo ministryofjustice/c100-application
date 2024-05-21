@@ -32,12 +32,12 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
 
   context 'when the step is `exemption_details`' do
     let(:step_params) { { exemption_details: 'anything' } }
-    it { is_expected.to have_destination(:exemption_reasons, :edit) }
+    it { is_expected.to have_destination(:reasons_playback, :show) }
   end
 
   context 'when the step is `exemption_upload`' do
     let(:step_params) { { exemption_upload: 'anything' } }
-    it { is_expected.to have_destination(:reasons_playback, :show) }
+    it { is_expected.to have_destination(:exemption_details, :edit) }
   end
 
   context 'when the step is `misc` and Mediation change is false' do
@@ -78,13 +78,39 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
     end
 
     context 'when there are no MIAM exemptions' do
-      it { is_expected.to have_destination(:exemption_details, :edit) }
+      it { is_expected.to have_destination(:exit_page, :show) }
     end
 
     context 'when there are MIAM exemptions' do
-      let(:attributes) { super().merge(miam_exemption: MiamExemption.new(misc: ['applicant_under_age'])) }
+      describe 'and they are only misc exemptions' do
+        let(:attributes) { super().merge(miam_exemption: MiamExemption.new(domestic: ['misc_domestic_none'],
+                                                                           protection: ['misc_protection_none'],
+                                                                           urgency: ['misc_urgency_none'],
+                                                                           adr: ['misc_adr_none'],
+                                                                           misc: ['applicant_under_age'])) }
 
-      it { is_expected.to have_destination(:exemption_details, :edit) }
+        it { is_expected.to have_destination(:exemption_reasons, :edit) }
+      end
+
+      describe 'and they are not only misc exemptions' do
+        let(:attributes) { super().merge(miam_exemption: MiamExemption.new(domestic: ['misc_domestic_none'],
+                                                                           adr: ['misc_previous_attendance'], misc: ['applicant_under_age'])) }
+        it { is_expected.to have_destination(:reasons_playback, :show) }
+      end
+
+      describe 'and they have domestic exemptions' do
+        let(:attributes) { super().merge(miam_exemption: MiamExemption.new(domestic: ['police_arrested'],
+                                                                           adr: ['misc_previous_attendance'], misc: ['applicant_under_age'])) }
+        it { is_expected.to have_destination(:exemption_reasons, :edit) }
+      end
+
+      %w[misc_access misc_access2 misc_access3].each do |misc_options|
+        describe 'and there are misc exemptions that do not require an upload' do
+          let(:attributes) { super().merge(miam_exemption: MiamExemption.new(misc: [misc_options])) }
+
+          it { is_expected.to have_destination(:exemption_details, :edit) }
+        end
+      end
     end
   end
 
@@ -97,13 +123,13 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
       }
     }
     context 'and attach_evidence is not yes' do
-      it { is_expected.to have_destination(:exit_page, :show) }
+      it { is_expected.to have_destination(:exemption_details, :edit) }
     end
 
     context 'and a MIAM exemption has been selected' do
       let(:attributes) { super().merge(miam_exemption: MiamExemption.new(misc: ['applicant_under_age'])) }
 
-      it { is_expected.to have_destination(:reasons_playback, :show) }
+      it { is_expected.to have_destination(:exemption_details, :edit) }
     end
 
     context 'and attach_evidence is yes' do

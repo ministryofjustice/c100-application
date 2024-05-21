@@ -98,6 +98,29 @@ en:
       c8_form:
         title: C8
         details: Confidential contact details - Family Procedure Rules 2010 Rule 29.1
+    section_headers_mediation_change:
+      children: 1. The Child(ren)
+      miam_requirement: 2. Requirement to attend a Mediation, Information and Assessment Meeting (MIAM)
+      miam_exemptions: 3. Applicant claims exemption(s) from attendance at a Mediation, Information and Assessment Meeting (MIAM)
+      application_reasons: 4. Why are you making this application?
+      urgent_and_without_notice: 5. Urgent and without notice hearings
+      other_court_cases: 6. Other court cases which concern the child(ren) listed in Section 1
+      international_element: 7. Cases with an international element
+      litigation_capacity: 8. Factors affecting ability to participate in proceedings
+      attending_court: 9. Attending the court
+      applicants_details: 10. About you (the applicant(s))
+      respondents_details: 11. The respondent(s)
+      other_parties_details: 12. Others who should be given notice
+      solicitor_details: 13. Solicitor’s details
+      statement_of_truth: 14. Statement of truth
+      ### C1A ###
+      c1a_applicants_details: Section 1 - About you (the person completing this form)
+      c1a_abuse_details: Section 2 - Details of domestic abuse
+      c1a_abduction: Section 3 - Abduction
+      c1a_children_other_abuse: Section 4 - Other concerns about the child(ren)
+      c1a_protection_orders: Section 5 - Steps or orders required to protect the safety and wellbeing
+      c1a_statement_of_truth: Section 6 - Statement of truth
+      c1a_attending_court: Section 7 - Attending the court
     section_headers:
       children: 1. The Child(ren)
       miam_requirement: 2. Requirement to attend a Mediation, Information and Assessment Meeting (MIAM)
@@ -402,10 +425,10 @@ en:
       question: Details of exemptions from attending a MIAM
       absence_answer: *not_applicable
     exemption_reasons:
-      question: Reasons for not providing evidence for a MIAM exemption
+      question: Evidence of MIAM exemption
       absence_answer: *not_applicable
     attach_evidence:
-      question: Are you or the prospective party able to provide the required evidence to support a MIAM exemption claim?
+      question: Are you able to attach the required evidence to support a MIAM exemption claim?
       answers:
         <<: *YESNO
     exemption:
@@ -570,6 +593,10 @@ en:
       answers:
         'yes': Yes, the court can leave a voicemail
         'no': No, the court cannot leave a voicemail
+    refuge:
+      question: Applicant currently resident in a refuge?
+      answers:
+        <<: *YESNO
     person_relationship_to_children:
       question: Relationship to children listed in this application
 
