@@ -300,16 +300,6 @@ And(/^I should see the solicitor's email is "([^"]*)" and phone number is "([^"]
   end
 end
 
-And(/^I should see the solicitor's Fax number is "([^"]*)"$/) do |arg|
-  within('#solicitor_details') do
-    within('#solicitor_contact_details') do
-      within('#solicitor_fax_number') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
 And(/^I should see the solicitor's DX number is "([^"]*)"$/) do |arg|
   within('#solicitor_details') do
     within('#solicitor_contact_details') do
