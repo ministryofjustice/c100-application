@@ -6,7 +6,8 @@ module Summary
       instance_double(C100Application,
         consent_order: 'no',
         child_protection_cases: 'no',
-        files_collection_ref: '123'
+        files_collection_ref: '123',
+                      children_postcode: 'W51BP'
     ) }
 
 
@@ -29,17 +30,22 @@ module Summary
 
       describe '#answers' do
         it 'has the correct rows' do
-          expect(answers.count).to eq(2)
+          expect(answers.count).to eq(3)
 
-          expect(answers[0]).to be_an_instance_of(Answer)
-          expect(answers[0].question).to eq(:consent_order_application)
-          expect(answers[0].change_path).to eq('/steps/opening/consent_order')
-          expect(answers[0].value).to eq('no')
+          expect(answers[0]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[0].question).to eq(:children_postcode)
+          expect(answers[0].change_path).to eq('/?change=y')
+          expect(answers[0].value).to eq('W51BP')
 
           expect(answers[1]).to be_an_instance_of(Answer)
-          expect(answers[1].question).to eq(:child_protection_cases)
-          expect(answers[1].change_path).to eq('/steps/opening/child_protection_cases')
+          expect(answers[1].question).to eq(:consent_order_application)
+          expect(answers[1].change_path).to eq('/steps/opening/consent_order')
           expect(answers[1].value).to eq('no')
+
+          expect(answers[2]).to be_an_instance_of(Answer)
+          expect(answers[2].question).to eq(:child_protection_cases)
+          expect(answers[2].change_path).to eq('/steps/opening/child_protection_cases')
+          expect(answers[2].value).to eq('no')
         end
       end
     end
@@ -52,22 +58,27 @@ module Summary
 
       describe '#answers' do
         it 'has the correct rows' do
-          expect(answers.count).to eq(3)
+          expect(answers.count).to eq(4)
 
-          expect(answers[0]).to be_an_instance_of(Answer)
-          expect(answers[0].question).to eq(:consent_order_application)
-          expect(answers[0].change_path).to eq('/steps/opening/consent_order')
-          expect(answers[0].value).to eq('no')
+          expect(answers[0]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[0].question).to eq(:children_postcode)
+          expect(answers[0].change_path).to eq('/?change=y')
+          expect(answers[0].value).to eq('W51BP')
 
-          expect(answers[1]).to be_an_instance_of(FileAnswer)
-          expect(answers[1].question).to eq(:consent_order_upload)
-          expect(answers[1].change_path).to eq('/steps/opening/consent_order_upload')
-          expect(answers[1].value).to eq('filename.doc')
+          expect(answers[1]).to be_an_instance_of(Answer)
+          expect(answers[1].question).to eq(:consent_order_application)
+          expect(answers[1].change_path).to eq('/steps/opening/consent_order')
+          expect(answers[1].value).to eq('no')
 
-          expect(answers[2]).to be_an_instance_of(Answer)
-          expect(answers[2].question).to eq(:child_protection_cases)
-          expect(answers[2].change_path).to eq('/steps/opening/child_protection_cases')
-          expect(answers[2].value).to eq('no')
+          expect(answers[2]).to be_an_instance_of(FileAnswer)
+          expect(answers[2].question).to eq(:consent_order_upload)
+          expect(answers[2].change_path).to eq('/steps/opening/consent_order_upload')
+          expect(answers[2].value).to eq('filename.doc')
+
+          expect(answers[3]).to be_an_instance_of(Answer)
+          expect(answers[3].question).to eq(:child_protection_cases)
+          expect(answers[3].change_path).to eq('/steps/opening/child_protection_cases')
+          expect(answers[3].value).to eq('no')
         end
       end
     end

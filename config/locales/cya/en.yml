@@ -129,6 +129,8 @@ en:
       respondents_details_index_title: Respondent %{index}
       other_parties_details_index_title: Other party %{index}
 
+    children_postcode:
+      question: Where do the children live?
     consent_order_application:
       question: What kind of application do you want to make?
       answers:

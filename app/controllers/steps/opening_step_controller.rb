@@ -18,6 +18,10 @@ module Steps
       params[:new].present?
     end
 
+    def is_attempting_change?
+      params[:change].present?
+    end
+
     def in_progress_enough?
       current_c100_application.navigation_stack.size > 2 &&
         %w[screening completed].exclude?(current_c100_application.status)

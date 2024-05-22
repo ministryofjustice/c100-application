@@ -3,7 +3,7 @@ module Steps
     class StartOrContinueController < Steps::OpeningStepController
       skip_before_action :check_c100_application_presence, :check_application_not_completed, if: -> { PrlChange.changes_apply? }
       skip_before_action :update_navigation_stack, if: -> { PrlChange.changes_apply? }
-      before_action :existing_application_warning, only: [:edit], unless: :restarting
+      before_action :existing_application_warning, only: [:edit], unless: :is_changing
       before_action :reset_c100_application_session, only: [:edit], if: :is_restarting
       def edit
         @form_object = StartOrContinueForm.build(current_c100_application)
@@ -15,8 +15,8 @@ module Steps
 
       private
 
-      def restarting
-        is_attempting_restart? && !PrlChange.changes_apply?
+      def is_changing
+        is_attempting_restart? && PrlChange.changes_apply? || is_attempting_change?
       end
 
       def is_restarting
