@@ -7,6 +7,7 @@ module Test
     :payment_type,
     :submission_type,
     :has_petition_orders,
+    :attach_evidence,
     keyword_init: true
   ) do
     include ActiveModel::Validations
@@ -33,7 +34,8 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
       respondents: respondents,
       payment_type: payment_type,
       submission_type: submission_type,
-      has_petition_orders: has_petition_orders
+      has_petition_orders: has_petition_orders,
+      attach_evidence: attach_evidence
     }
   end
 
@@ -41,6 +43,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
   let(:applicants)  { [Object] }
   let(:respondents) { [Object] }
   let(:has_petition_orders) { true }
+  let(:attach_evidence) { true }
 
   let(:submission_type) { 'submission_type' }
   let(:payment_type)    { 'payment_type' }
@@ -154,6 +157,25 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
           expect(subject).not_to be_valid
           expect(subject.errors.details[:orders][0][:error]).to eq(:blank)
           expect(subject.errors.details[:orders][0][:change_path]).to eq('/steps/petition/orders')
+        end
+      end
+    end
+
+    context 'attach_evidence' do
+      context 'an option to attach evidence is selected' do
+        it 'is valid' do
+          subject.valid?
+          expect(subject.errors.details.include?(:attach_evidence)).to eq(false)
+        end
+      end
+
+      context 'option for attach evidence is not selected' do
+        let(:attach_evidence) { false } # Set to false for this test case
+
+        it 'is invalid' do
+          expect(subject).not_to be_valid
+          expect(subject.errors.details[:attach_evidence][0][:error]).to eq(:blank)
+          expect(subject.errors.details[:attach_evidence][0][:change_path]).to eq('/steps/miam_exemptions/exemption_reasons')
         end
       end
     end
