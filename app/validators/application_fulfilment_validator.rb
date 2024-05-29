@@ -21,6 +21,7 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
       generate_validation(:applicants, edit_steps_applicant_names_path(id: '')),
       generate_validation(:respondents, edit_steps_respondent_names_path(id: '')),
       generate_validation(:payment_type, edit_steps_application_payment_path, :present?),
+      generate_validation(:attach_evidence, edit_steps_miam_exemptions_exemption_reasons_path, :present?),
       generate_document_validation(:miam_certificate, edit_steps_miam_certification_upload_path,
                                    [:consent_order?, :child_protection_cases?, :miam_exemption_claim?]),
       generate_document_validation(:draft_consent_order, edit_steps_opening_consent_order_upload_path,
