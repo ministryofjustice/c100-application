@@ -43,7 +43,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
   let(:applicants)  { [Object] }
   let(:respondents) { [Object] }
   let(:has_petition_orders) { true }
-  let(:attach_evidence) { true }
+  let(:attach_evidence) { 'yes' }
 
   let(:submission_type) { 'submission_type' }
   let(:payment_type)    { 'payment_type' }
@@ -170,7 +170,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
       end
 
       context 'option for attach evidence is not selected' do
-        let(:attach_evidence) { false } # Set to false for this test case
+        let(:attach_evidence) { nil }
 
         it 'is invalid' do
           expect(subject).not_to be_valid
