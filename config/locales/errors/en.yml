@@ -132,6 +132,8 @@ en:
               blank: You must choose a file to upload
             consent_order:
               blank: You must choose a file to upload
+            attach_evidence:
+              blank: You must select an option for MIAM evidence exemption
 
   activemodel:
     errors:
