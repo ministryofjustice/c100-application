@@ -87,15 +87,26 @@ module Summary
 
       def person_privacy_answers_group(person)
         return [] unless person.privacy_known
-        [
-          FreeTextAnswer.new(:person_privacy_known, person.privacy_known.capitalize,
-                             change_path: edit_steps_applicant_privacy_known_path(person)),
-          FreeTextAnswer.new(:person_contact_details_private,
-                             privacy_preferences_answer(person),
-                             change_path: edit_steps_applicant_privacy_preferences_path(person)),
-          FreeTextAnswer.new(:refuge, person.refuge.capitalize,
-                             change_path: edit_steps_applicant_refuge_path(person)),
-        ]
+
+        if ConfidentialOption.changes_apply?
+          [
+            FreeTextAnswer.new(:person_privacy_known, person.privacy_known.capitalize,
+                               change_path: edit_steps_applicant_privacy_known_path(person)),
+            FreeTextAnswer.new(:person_contact_details_private,
+                               privacy_preferences_answer(person),
+                               change_path: edit_steps_applicant_privacy_preferences_path(person)),
+            FreeTextAnswer.new(:refuge, person.refuge.capitalize,
+                               change_path: edit_steps_applicant_refuge_path(person)),
+          ]
+        else
+          [
+            FreeTextAnswer.new(:person_privacy_known, person.privacy_known.capitalize,
+                               change_path: edit_steps_applicant_privacy_known_path(person)),
+            FreeTextAnswer.new(:person_contact_details_private,
+                               privacy_preferences_answer(person),
+                               change_path: edit_steps_applicant_privacy_preferences_path(person))
+          ]
+        end
       end
 
       def privacy_preferences_answer(person)
