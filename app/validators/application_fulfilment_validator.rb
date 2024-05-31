@@ -48,12 +48,14 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
   def generate_miam_validation
     lambda { |record|
       [:attach_evidence, :blank,
-       edit_steps_miam_exemptions_exemption_reasons_path] unless record.present? || record.consent_order == 'yes' ||
+       edit_steps_miam_exemptions_exemption_reasons_path] unless record.attach_evidence.present? ||
+                                                                 record.consent_order == 'yes' ||
                                                                  has_misc_skip_exemptions?(record)
     }
   end
 
   def has_misc_skip_exemptions?(record)
+    return false unless record&.miam_exemption&.misc
     exemptions = record.miam_exemption.misc
     return true if %w[misc_access misc_access2 misc_access3].any? { |misc| exemptions.include? misc }
     false
