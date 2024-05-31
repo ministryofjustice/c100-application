@@ -7,7 +7,7 @@
 
     <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
 
-    <% if current_c100_application.miam_exemption.adr.exclude? 'misc_adr_none' %>
+    <% if current_c100_application.miam_exemption&.adr&.exclude? 'misc_adr_none' %>
       <%=t '.info_adr_selected_html' %>
     <% else %>
       <%=t '.info_html' %>
