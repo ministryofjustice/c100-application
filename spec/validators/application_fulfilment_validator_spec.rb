@@ -176,9 +176,6 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
       end
 
       context 'option for attach evidence is not selected' do
-        before do
-          allow(subject).to receive(:present?).and_return(false)
-        end
         let(:attach_evidence) { nil }
 
         it 'is invalid' do
