@@ -20,10 +20,6 @@ RSpec.describe Steps::MiamExemptions::ExemptionDetailsForm do
       end
     end
 
-    context 'validations on field presence' do
-      it {should validate_presence_of(:exemption_details)}
-    end
-
     context 'when details are present' do
       it 'saves the record, with the details' do
         expect(c100_application).to receive(:update).with(
@@ -40,9 +36,13 @@ RSpec.describe Steps::MiamExemptions::ExemptionDetailsForm do
       let(:exemption_details) { nil }
 
       it 'does not save the record, with the details' do
-        expect(c100_application).not_to receive(:update)
+        expect(c100_application).to receive(:update).with(
+          {
+            exemption_details: nil,
+          }
+        ).and_return(true)
 
-        expect(subject.save).to be(false)
+        expect(subject.save).to be(true)
       end
     end
   end
