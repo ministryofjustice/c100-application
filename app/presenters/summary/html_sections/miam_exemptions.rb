@@ -65,12 +65,11 @@ module Summary
 
       def details_answer
         if c100.exemption_details.present?
-          FreeTextAnswer.new(
-            :exemption_details, c100.exemption_details,
-            change_path: edit_steps_miam_exemptions_exemption_details_path)
+          FreeTextAnswer.new(:exemption_details, c100.exemption_details,
+                             change_path: edit_steps_miam_exemptions_exemption_details_path)
         else
           Answer.new(:exemption, :not_applicable,
-                      change_path: edit_steps_miam_exemptions_exemption_details_path)
+                     change_path: edit_steps_miam_exemptions_exemption_details_path)
         end
       end
 
