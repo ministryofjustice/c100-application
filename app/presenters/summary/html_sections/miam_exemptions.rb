@@ -68,7 +68,7 @@ module Summary
           FreeTextAnswer.new(:exemption_details, c100.exemption_details,
                              change_path: edit_steps_miam_exemptions_exemption_details_path)
         else
-          Answer.new(:exemption, :not_applicable,
+          Answer.new(:exemption_details, :not_applicable,
                      change_path: edit_steps_miam_exemptions_exemption_details_path)
         end
       end
