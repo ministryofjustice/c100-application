@@ -34,10 +34,7 @@ module Summary
             selection_for(:misc),
             change_path: edit_steps_miam_exemptions_misc_path
           ),
-          FreeTextAnswer.new(
-            :exemption_details, c100.exemption_details,
-            change_path: edit_steps_miam_exemptions_exemption_details_path
-          ),
+          details_answer,
           FreeTextAnswer.new(
             :exemption_reasons, c100.exemption_reasons,
             change_path: edit_steps_miam_exemptions_exemption_reasons_path,
@@ -63,6 +60,17 @@ module Summary
         else
           Answer.new(:exemption, :not_applicable,
                      change_path: edit_steps_miam_exemptions_exemption_upload_path)
+        end
+      end
+
+      def details_answer
+        if c100.exemption_details.present?
+          FreeTextAnswer.new(
+            :exemption_details, c100.exemption_details,
+            change_path: edit_steps_miam_exemptions_exemption_details_path)
+        else
+          Answer.new(:exemption, :not_applicable,
+                      change_path: edit_steps_miam_exemptions_exemption_details_path)
         end
       end
 
