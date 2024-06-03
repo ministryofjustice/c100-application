@@ -3,8 +3,6 @@ module Steps
     class ExemptionDetailsForm < BaseForm
       attribute :exemption_details, String
 
-      validates_presence_of :exemption_details
-
       private
 
       def persist!
