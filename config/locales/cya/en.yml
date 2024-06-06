@@ -503,6 +503,10 @@ en:
       question: Is there anyone else who should know about your application?
       answers:
         <<: *YESNO
+    person_cohabit_other:
+      question: Do any of the children live with %{name}?
+      answers:
+        <<: *YESNO
     person_privacy_known:
       question: Do the other people named in this application (the respondents) know any of your contact details?
     person_contact_details_private:

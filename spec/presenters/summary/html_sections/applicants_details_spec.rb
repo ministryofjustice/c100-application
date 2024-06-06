@@ -33,7 +33,8 @@ module Summary
         privacy_known: 'yes',
         refuge: 'yes',
         are_contact_details_private: are_contact_details_private,
-        contact_details_private: contact_details_private
+        contact_details_private: contact_details_private,
+        type: 'Applicant'
       )
     }
 
@@ -44,12 +45,13 @@ module Summary
     let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
 
     before do
-       allow(applicant).to receive(:full_address).and_return('full address')
-       allow(relationship).to receive(:person).and_return(applicant)
-       allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))
-       allow(applicant).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
-       allow(applicant).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
-       allow(applicant).to receive(:address_private?).and_return(contact_details_private.include?('address'))
+      allow(ConfidentialOption).to receive(:changes_apply?).and_return(true)
+      allow(applicant).to receive(:full_address).and_return('full address')
+      allow(relationship).to receive(:person).and_return(applicant)
+      allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))
+      allow(applicant).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
+      allow(applicant).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(applicant).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
     subject { described_class.new(c100_application) }

@@ -25,9 +25,14 @@ class RelationshipsPresenter
     c100_application.relationships
   end
 
-  # For other parties, we need to hide the relationships if C8 is triggered
   def under_c8?(person_or_people)
-    c100_application.confidentiality_enabled? && Array(person_or_people).first.is_a?(OtherParty)
+    return false if person_or_people.type == "Respondent"
+
+    if person_or_people.type == "Applicant"
+      c100_application.confidentiality_enabled?
+    else
+      person_or_people.are_contact_details_private == GenericYesNo::YES.to_s
+    end
   end
 
   def i18n_relation(relationship)
