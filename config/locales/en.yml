@@ -424,6 +424,21 @@ en:
       relationship:
         edit:
           page_title: Other person relationship
+      children_cohabit_other:
+        edit:
+          page_title: "Do any of the children live with %{name}?"
+          heading: "Do any of the children live with %{name}?"
+      privacy_known:
+        edit:
+          page_title: Contact details confidentiality
+          heading: "Keeping your contact details private"
+          privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
+      privacy_preferences:
+        edit:
+          page_title: Contact details confidentiality
+          heading: "Keeping your contact details private"
+          privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
+
     address:
       lookup:
         edit:
@@ -1642,6 +1657,12 @@ en:
         <<: *PERSONAL_DETAILS_FIELDS
       steps_other_party_address_details_form:
         <<: *PERSONAL_ADDRESS_FIELDS
+      steps_other_party_children_cohabit_other_form:
+        cohabit_with_other_options:
+          <<: *YESNO
+      steps_other_party_privacy_preferences_form:
+        are_contact_details_private_options:
+          <<: *YESNO
       steps_children_personal_details_form:
         <<: *PERSONAL_DETAILS_FIELDS
         age_estimate: Approximate age or year child was born
@@ -1975,6 +1996,8 @@ en:
         <<: *PERSONAL_DETAILS_LEGENDS
       steps_other_party_address_details_form:
         <<: *PERSONAL_DETAILS_LEGENDS
+      steps_other_party_privacy_preferences_form:
+        are_contact_details_private: Do the other people named in this application (the respondents) know any of your contact details?
 
       # Attending court steps
       steps_attending_court_intermediary_form:

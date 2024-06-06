@@ -7,6 +7,8 @@ class PeopleDecisionTree < BaseDecisionTree
 
     if next_child_id
       edit("/steps/#{namespace}/relationship", id: current_person, child_id: next_child_id)
+    elsif namespace == "other_party"
+      edit("/steps/#{namespace}/children_cohabit_other", id: current_person)
     elsif show_address_lookup?
       edit('/steps/address/lookup', id: current_person)
     else
