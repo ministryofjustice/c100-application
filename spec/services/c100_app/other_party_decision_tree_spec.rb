@@ -59,10 +59,33 @@ RSpec.describe C100App::OtherPartyDecisionTree do
 
     context 'when all child relationships have been edited' do
       let(:child) { double('Child', id: 3) }
+      let(:other_party) { OtherParty.new }
 
-      include_examples 'address lookup decision tree' do
-        let(:person) { other_party }
-        let(:namespace) { 'other_party' }
+      it 'goes to edit the children_cohabit_other page' do
+        expect(subject.destination).to eq(controller: '/steps/other_party/children_cohabit_other', action: :edit, id: other_party)
+      end
+    end
+  end
+
+  context 'when the step is children_cohabit_other' do
+    let(:step_params) {{'cohabit_with_other' => 'anything'}}
+
+    before do
+      allow(person).to receive(:reload).and_return(other_party)
+    end
+
+    include_examples 'address lookup decision tree' do
+      let(:other_party) { OtherParty.new(cohabit_with_other: 'no') }
+      let(:person) { other_party }
+      let(:namespace) { 'other_party' }
+      let(:record) { double('Relationship', person: person) }
+    end
+
+    context 'when cohabit_with_other is yes' do
+      let(:other_party) { OtherParty.new(cohabit_with_other: 'yes') }
+
+      it 'goes to edit the privacy_preferences page' do
+        expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: other_party)
       end
     end
   end

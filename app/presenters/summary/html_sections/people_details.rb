@@ -86,15 +86,45 @@ module Summary
       end
 
       def person_privacy_answers_group(person)
-        return [] unless person.privacy_known
+        if person.type == 'Applicant'
+          return [] unless person.privacy_known
+
+          applicant_privacy_answers(person)
+        elsif person.type == 'OtherParty'
+          other_party_privacy_answers(person)
+        end
+      end
+
+      def applicant_privacy_answers(person)
+        if ConfidentialOption.changes_apply?
+          [
+            FreeTextAnswer.new(:person_privacy_known, person.privacy_known.capitalize,
+                               change_path: edit_steps_applicant_privacy_known_path(person)),
+            FreeTextAnswer.new(:person_contact_details_private,
+                               privacy_preferences_answer(person),
+                               change_path: edit_steps_applicant_privacy_preferences_path(person)),
+            FreeTextAnswer.new(:refuge, person.refuge.capitalize,
+                               change_path: edit_steps_applicant_refuge_path(person)),
+          ]
+        else
+          [
+            FreeTextAnswer.new(:person_privacy_known, person.privacy_known.capitalize,
+                               change_path: edit_steps_applicant_privacy_known_path(person)),
+            FreeTextAnswer.new(:person_contact_details_private,
+                               privacy_preferences_answer(person),
+                               change_path: edit_steps_applicant_privacy_preferences_path(person))
+          ]
+        end
+      end
+
+      def other_party_privacy_answers(person)
         [
-          FreeTextAnswer.new(:person_privacy_known, person.privacy_known.capitalize,
-                             change_path: edit_steps_applicant_privacy_known_path(person)),
+          FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize),
+                             change_path: edit_steps_other_party_children_cohabit_other_path(person),
+                             i18n_opts: {name: person.full_name}),
           FreeTextAnswer.new(:person_contact_details_private,
-                             privacy_preferences_answer(person),
-                             change_path: edit_steps_applicant_privacy_preferences_path(person)),
-          FreeTextAnswer.new(:refuge, person.refuge.capitalize,
-                             change_path: edit_steps_applicant_refuge_path(person)),
+                             person.are_contact_details_private.try(:capitalize),
+                             change_path: edit_steps_other_party_privacy_preferences_path(person))
         ]
       end
 
