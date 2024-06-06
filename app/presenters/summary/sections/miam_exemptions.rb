@@ -19,7 +19,7 @@ module Summary
         else
           [
             Partial.new(:miam_exemptions, exemptions),
-            Partial.new(:exemption_details, c100_application.exemption_details),
+            Partial.new(:exemption_details, exemption_details_answer),
             Partial.new(:exemption_reasons, c100_application.exemption_reasons),
             Answer.new(:attach_evidence, c100_application.attach_evidence),
             FreeTextAnswer.new(:exemption, exemption_document_answer),
@@ -32,6 +32,11 @@ module Summary
       def exemption_document_answer
         c100.documents(:exemption).any? &&
           I18n.t('check_answers.exemption.answer')
+      end
+
+      def exemption_details_answer
+        return c100_application.exemption_details if c100_application.exemption_details.present?
+        I18n.t('check_answers.exemption_details.absence_answer')
       end
 
       def exemptions

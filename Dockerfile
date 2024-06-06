@@ -1,4 +1,5 @@
-FROM hmctspublic.azurecr.io/imported/library/ruby:3.2.2-slim-buster
+#FROM hmctspublic.azurecr.io/imported/library/ruby:3.2.2-slim-buster
+FROM ruby:3.2.2-slim-buster
 
 # build dependencies:
 #   - ruby-full libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6 for wkhtmltopdf
@@ -94,7 +95,7 @@ ENV IS_DOCKER=true
 ENV PRL_OPENING=false
 ENV MEDIATION_DATE=29/04/2024
 ENV FEE_INCREASE_DATE=01/05/2024
-ENV CONFIDENTIAL_OPTION_DATE=2024/05/30T00:00:00+1
+ENV CONFIDENTIAL_OPTION_DATE=2024/07/09T00:00:00+1
 RUN bundle exec rake assets:precompile
 
 # Copy fonts and images (without digest) along with the digested ones,
