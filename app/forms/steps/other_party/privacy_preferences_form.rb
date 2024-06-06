@@ -10,7 +10,6 @@ module Steps
 
       private
 
-
       def persist!
         raise C100ApplicationNotFound unless c100_application
 
