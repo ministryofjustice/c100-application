@@ -1,6 +1,6 @@
 module Summary
   module Sections
-    class PeopleDetails < BaseSectionPresenter
+    class PeopleDetails < BaseSectionPresenter # rubocop:disable Metrics/ClassLength
       def show_header?
         false
       end
