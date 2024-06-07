@@ -71,6 +71,7 @@ jobs:
       # Database setup
       # - run: bundle exec rake db:create
       # - run: bundle exec rake db:schema:load
+      - run: bundle exec rake db:migrate
 
       # so mutant only runs on modified files; refer to mutant.rake for more details
       - run: git remote set-branches origin master && git fetch
