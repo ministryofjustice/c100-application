@@ -17,9 +17,7 @@ module Summary
       # rubocop:disable Metrics/MethodLength
       def answers
         record_collection.map.with_index(1) do |person, index|
-          if person.are_contact_details_private == GenericYesNo::NO.to_s
-            []
-          else
+          if person.are_contact_details_private == GenericYesNo::YES.to_s
             [
               Separator.new("#{name}_index_title", index:),
               FreeTextAnswer.new(:person_full_name, person.full_name),
@@ -37,6 +35,8 @@ module Summary
               ),
               Partial.row_blank_space
             ]
+          else
+            []
           end
         end.flatten.select(&:show?)
       end
