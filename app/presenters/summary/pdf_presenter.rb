@@ -53,7 +53,8 @@ module Summary
     end
 
     def generate_c8_form
-      return unless c100_application.confidentiality_enabled? || c100_application.other_confidentiality_enabled?
+      return unless c100_application.confidentiality_enabled?
+      # || c100_application.other_confidentiality_enabled?
 
       add_blank_page_if_needed
 
