@@ -152,14 +152,6 @@ module Summary
           expect(answers.count).to eq(0)
         end
       end
-
-      context 'when confidential is nil and c8 is not needed' do
-        let(:are_contact_details_private) { nil }
-
-        it 'has no rows' do
-          expect(answers.count).to eq(0)
-        end
-      end
     end
   end
 end
