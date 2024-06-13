@@ -1,6 +1,6 @@
 module Summary
   module Sections
-    class PeopleDetails < BaseSectionPresenter # rubocop:disable Metrics/ClassLength
+    class PeopleDetails < BaseSectionPresenter
       def show_header?
         false
       end
@@ -115,7 +115,8 @@ module Summary
       # def cohabit_with_children(person)
       #   return [] unless person.type == 'OtherParty'
       #
-      #   FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize), i18n_opts: {name: person.full_name})
+      #   FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize),
+      # i18n_opts: {name: person.full_name})
       # end
 
       def contact_details_privacy_preferences(person)

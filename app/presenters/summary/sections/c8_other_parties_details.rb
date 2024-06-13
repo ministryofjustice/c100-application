@@ -17,7 +17,6 @@ module Summary
         c100.other_parties
       end
 
-
       # def answers
       #   record_collection.map.with_index(1) do |person, index|
       #     if person.are_contact_details_private == GenericYesNo::NO.to_s
@@ -43,8 +42,6 @@ module Summary
       #     end
       #   end.flatten.select(&:show?)
       # end
-      # # rubocop:enable Metrics/MethodLength
-      # # rubocop:enable Metrics/AbcSize
       #
       # private
       #
