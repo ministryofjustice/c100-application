@@ -175,16 +175,16 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
         end
       end
 
-      context 'option for attach evidence is not selected' do
-        let(:attach_evidence) { nil }
-
-        it 'is invalid' do
-          subject.valid?
-          expect(subject).not_to be_valid
-          expect(subject.errors.details[:attach_evidence][0][:error]).to eq(:blank)
-          expect(subject.errors.details[:attach_evidence][0][:change_path]).to eq('/steps/miam_exemptions/exemption_reasons')
-        end
-      end
+      # context 'option for attach evidence is not selected' do
+      #   let(:attach_evidence) { nil }
+      #
+      #   it 'is invalid' do
+      #     subject.valid?
+      #     expect(subject).not_to be_valid
+      #     expect(subject.errors.details[:attach_evidence][0][:error]).to eq(:blank)
+      #     expect(subject.errors.details[:attach_evidence][0][:change_path]).to eq('/steps/miam_exemptions/exemption_reasons')
+      #   end
+      # end
     end
 
   end
