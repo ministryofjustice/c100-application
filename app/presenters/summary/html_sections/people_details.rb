@@ -86,18 +86,16 @@ module Summary
       end
 
       def person_privacy_answers_group(person)
-        return [] unless person.privacy_known
+        if person.type == 'Applicant'
+          return [] unless person.privacy_known
 
-        #   if person.type == 'Applicant'
-        #     return [] unless person.privacy_known
-        #
-        #     applicant_privacy_answers(person)
-        #   elsif person.type == 'OtherParty'
-        #     other_party_privacy_answers(person)
-        #   end
-        # end
-        #
-        # def applicant_privacy_answers(person)
+          applicant_privacy_answers(person)
+        elsif person.type == 'OtherParty'
+          other_party_privacy_answers(person)
+        end
+      end
+
+      def applicant_privacy_answers(person)
         if ConfidentialOption.changes_apply?
           [
             FreeTextAnswer.new(:person_privacy_known, person.privacy_known.capitalize,
@@ -119,16 +117,16 @@ module Summary
         end
       end
 
-      # def other_party_privacy_answers(person)
-      #   [
-      #     FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize),
-      #                        change_path: edit_steps_other_party_children_cohabit_other_path(person),
-      #                        i18n_opts: {name: person.full_name}),
-      #     FreeTextAnswer.new(:person_contact_details_private,
-      #                        person.are_contact_details_private.try(:capitalize),
-      #                        change_path: edit_steps_other_party_privacy_preferences_path(person))
-      #   ]
-      # end
+      def other_party_privacy_answers(person)
+        [
+          FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize),
+                             change_path: edit_steps_other_party_children_cohabit_other_path(person),
+                             i18n_opts: {name: person.full_name}),
+          FreeTextAnswer.new(:person_contact_details_private,
+                             person.are_contact_details_private.try(:capitalize),
+                             change_path: edit_steps_other_party_privacy_preferences_path(person))
+        ]
+      end
 
       def privacy_preferences_answer(person)
         if person.are_contact_details_private == GenericYesNo::YES.to_s

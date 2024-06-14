@@ -5,11 +5,9 @@ module Summary
     let(:c100_application) {
       instance_double(
         C100Application,
-        confidentiality_enabled?: confidentiality_enabled,
         other_parties: other_parties,
       )
     }
-    let(:confidentiality_enabled) { false }
     let(:other_parties) { [other_party] }
     let(:other_party) {
       instance_double(OtherParty,
@@ -31,10 +29,9 @@ module Summary
         home_phone_unknown: nil,
         email_unknown: nil,
         privacy_known: nil,
-        are_contact_details_private: nil,
-        # are_contact_details_private: are_contact_details_private,
-        # cohabit_with_other: cohabit_with_other,
-        # type: 'OtherParty'
+        are_contact_details_private: are_contact_details_private,
+        cohabit_with_other: cohabit_with_other,
+        type: 'OtherParty'
       )
     }
 
@@ -54,8 +51,8 @@ module Summary
     let(:previous_name) { nil }
     let(:dob) { Date.new(2018, 1, 20) }
     let(:dob_estimate) { nil }
-    # let(:cohabit_with_other) { 'yes' }
-    # let(:are_contact_details_private) { 'no' }
+    let(:cohabit_with_other) { 'yes' }
+    let(:are_contact_details_private) { 'no' }
 
     let(:answers) { subject.answers }
 
@@ -78,10 +75,6 @@ module Summary
       }
     end
 
-    describe '#bypass_relationships_c8?' do
-      it { expect(subject.bypass_relationships_c8?).to eq(false) }
-    end
-
     # The following tests can be fragile, but on purpose. During the development phase
     # we have to update the tests each time we introduce a new row or remove another.
     # But once it is finished and stable, it will raise a red flag if it ever gets out
@@ -92,14 +85,12 @@ module Summary
         allow_any_instance_of(
           RelationshipsPresenter
         ).to receive(:relationship_to_children).with(
-          # other_party, show_person_name: false
-          other_party, show_person_name: false, bypass_c8: false
+          other_party, show_person_name: false
         ).and_return('relationships')
       end
 
       it 'has the correct number of rows' do
-        # expect(answers.count).to eq(10)
-        expect(answers.count).to eq(8)
+        expect(answers.count).to eq(10)
       end
 
       it 'has the correct rows in the right order' do
@@ -111,54 +102,36 @@ module Summary
         expect(answers[1].question).to eq(:person_full_name)
         expect(answers[1].value).to eq('fullname')
 
-        expect(answers[2]).to be_an_instance_of(Answer)
-        expect(answers[2].question).to eq(:person_previous_name)
-        expect(answers[2].value).to eq('no')
-        # expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
-        # expect(answers[2].question).to eq(:person_cohabit_other)
-        # expect(answers[2].value).to eq('Yes')
-        #
-        # expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
-        # expect(answers[3].question).to eq(:person_contact_details_private)
-        # expect(answers[3].value).to eq('No')
+        expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[2].question).to eq(:person_cohabit_other)
+        expect(answers[2].value).to eq('Yes')
 
+        expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[3].question).to eq(:person_contact_details_private)
+        expect(answers[3].value).to eq('No')
 
-        expect(answers[3]).to be_an_instance_of(Answer)
-        expect(answers[3].question).to eq(:person_sex)
-        expect(answers[3].value).to eq('female')
-        # expect(answers[4]).to be_an_instance_of(Answer)
-        # expect(answers[4].question).to eq(:person_previous_name)
-        # expect(answers[4].value).to eq('no')
+        expect(answers[4]).to be_an_instance_of(Answer)
+        expect(answers[4].question).to eq(:person_previous_name)
+        expect(answers[4].value).to eq('no')
 
-        expect(answers[4]).to be_an_instance_of(DateAnswer)
-        expect(answers[4].question).to eq(:person_dob)
-        expect(answers[4].value).to eq(Date.new(2018, 1, 20))
-        # expect(answers[5]).to be_an_instance_of(Answer)
-        # expect(answers[5].question).to eq(:person_sex)
-        # expect(answers[5].value).to eq('female')
+        expect(answers[5]).to be_an_instance_of(Answer)
+        expect(answers[5].question).to eq(:person_sex)
+        expect(answers[5].value).to eq('female')
 
-        expect(answers[5]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[5].question).to eq(:person_address)
-        expect(answers[5].value).to eq('full address')
-        # expect(answers[6]).to be_an_instance_of(DateAnswer)
-        # expect(answers[6].question).to eq(:person_dob)
-        # expect(answers[6].value).to eq(Date.new(2018, 1, 20))
+        expect(answers[6]).to be_an_instance_of(DateAnswer)
+        expect(answers[6].question).to eq(:person_dob)
+        expect(answers[6].value).to eq(Date.new(2018, 1, 20))
 
-        expect(answers[6]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[6].question).to eq(:person_relationship_to_children)
-        expect(answers[6].value).to eq('relationships')
-        # expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
-        # expect(answers[7].question).to eq(:person_address)
-        # expect(answers[7].value).to eq('full address')
+        expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[7].question).to eq(:person_address)
+        expect(answers[7].value).to eq('full address')
 
-        expect(answers[7]).to be_an_instance_of(Partial)
-        expect(answers[7].name).to eq(:row_blank_space)
-        # expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
-        # expect(answers[8].question).to eq(:person_relationship_to_children)
-        # expect(answers[8].value).to eq('relationships')
-        #
-        # expect(answers[9]).to be_an_instance_of(Partial)
-        # expect(answers[9].name).to eq(:row_blank_space)
+        expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[8].question).to eq(:person_relationship_to_children)
+        expect(answers[8].value).to eq('relationships')
+
+        expect(answers[9]).to be_an_instance_of(Partial)
+        expect(answers[9].name).to eq(:row_blank_space)
       end
 
       context 'for existing previous name' do
@@ -166,17 +139,13 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          # expect(answers.count).to eq(10)
-          expect(answers.count).to eq(8)
+          expect(answers.count).to eq(10)
         end
 
         it 'renders the previous name' do
-          # expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
-          # expect(answers[4].question).to eq(:person_previous_name)
-          # expect(answers[4].value).to eq('previous_name')
-          expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[2].question).to eq(:person_previous_name)
-          expect(answers[2].value).to eq('previous_name')
+          expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[4].question).to eq(:person_previous_name)
+          expect(answers[4].value).to eq('previous_name')
         end
       end
 
@@ -185,17 +154,13 @@ module Summary
         let(:dob_estimate) { Date.today }
 
         it 'has the correct number of rows' do
-          # expect(answers.count).to eq(10)
-          expect(answers.count).to eq(8)
+          expect(answers.count).to eq(10)
         end
 
         it 'uses the dob estimate' do
-          # expect(answers[6]).to be_an_instance_of(DateAnswer)
-          # expect(answers[6].question).to eq(:person_dob_estimate)
-          # expect(answers[6].value).to eq(Date.today)
-          expect(answers[4]).to be_an_instance_of(DateAnswer)
-          expect(answers[4].question).to eq(:person_dob_estimate)
-          expect(answers[4].value).to eq(Date.today)
+          expect(answers[6]).to be_an_instance_of(DateAnswer)
+          expect(answers[6].question).to eq(:person_dob_estimate)
+          expect(answers[6].value).to eq(Date.today)
         end
       end
 
@@ -213,21 +178,18 @@ module Summary
       end
 
       context 'when confidentiality is enabled' do
-        # let(:are_contact_details_private) { GenericYesNo::YES.to_s }
-        let(:confidentiality_enabled) { true }
+        let(:are_contact_details_private) { GenericYesNo::YES.to_s }
 
         it 'has the correct number of rows' do
-          # expect(answers.count).to eq(2)
-          expect(answers.count).to eq(1)
+          expect(answers.count).to eq(2)
         end
 
         it 'has the correct rows in the right order' do
           expect(answers[0]).to be_an_instance_of(Separator)
-          expect(answers[0].title).to eq(:c8_attached)
-          # expect(answers[0].title).to eq("other_parties_details_index_title")
-          #
-          # expect(answers[1]).to be_an_instance_of(Separator)
-          # expect(answers[1].title).to eq(:c8_attached)
+          expect(answers[0].title).to eq("other_parties_details_index_title")
+
+          expect(answers[1]).to be_an_instance_of(Separator)
+          expect(answers[1].title).to eq(:c8_attached)
         end
       end
     end
