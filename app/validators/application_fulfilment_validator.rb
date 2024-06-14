@@ -51,7 +51,8 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
        edit_steps_miam_exemptions_exemption_reasons_path] unless record.attach_evidence.present? ||
                                                                  record.consent_order == 'yes' ||
                                                                  has_misc_skip_exemptions?(record) ||
-                                                                 record.document(:miam_certificate)
+                                                                 record.document(:miam_certificate) ||
+                                                                 record.child_protection_cases == 'yes'
     }
   end
 
