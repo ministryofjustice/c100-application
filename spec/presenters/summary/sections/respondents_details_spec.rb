@@ -25,7 +25,7 @@ module Summary
         voicemail_consent: nil,
         privacy_known: nil,
         are_contact_details_private: nil,
-        # type: 'Respondent'
+        type: 'Respondent'
       )
     }
 
@@ -71,10 +71,6 @@ module Summary
       }
     end
 
-    describe '#bypass_relationships_c8?' do
-      it { expect(subject.bypass_relationships_c8?).to eq(false) }
-    end
-
     # The following tests can be fragile, but on purpose. During the development phase
     # we have to update the tests each time we introduce a new row or remove another.
     # But once it is finished and stable, it will raise a red flag if it ever gets out
@@ -85,8 +81,7 @@ module Summary
         allow_any_instance_of(
           RelationshipsPresenter
         ).to receive(:relationship_to_children).with(
-          # respondent, show_person_name: false
-          respondent, show_person_name: false, bypass_c8: false
+          respondent, show_person_name: false
         ).and_return('relationships')
       end
 

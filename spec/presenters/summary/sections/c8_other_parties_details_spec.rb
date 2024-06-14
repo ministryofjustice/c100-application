@@ -29,9 +29,8 @@ module Summary
         email_unknown: nil,
         voicemail_consent: nil,
         privacy_known: nil,
-        are_contact_details_private: nil,
-        # are_contact_details_private: are_contact_details_private,
-        # type: 'OtherParty'
+        are_contact_details_private: are_contact_details_private,
+        type: 'OtherParty'
       )
     }
 
@@ -51,7 +50,7 @@ module Summary
     let(:previous_name) { nil }
     let(:dob) { Date.new(2018, 1, 20) }
     let(:dob_estimate) { nil }
-    # let(:are_contact_details_private) { 'yes' }
+    let(:are_contact_details_private) { 'yes' }
 
     let(:answers) { subject.answers }
 
@@ -61,10 +60,6 @@ module Summary
 
     describe '#show_header?' do
       it { expect(subject.show_header?).to eq(true) }
-    end
-
-    describe '#bypass_relationships_c8?' do
-      it { expect(subject.bypass_relationships_c8?).to eq(true) }
     end
 
     describe '#record_collection' do
@@ -150,13 +145,13 @@ module Summary
         end
       end
 
-      # context 'when confidential is set to yes and c8 is not needed' do
-      #   let(:are_contact_details_private) { 'no' }
-      #
-      #   it 'has no rows' do
-      #     expect(answers.count).to eq(0)
-      #   end
-      # end
+      context 'when confidential is nil and c8 is not needed' do
+        let(:are_contact_details_private) { nil }
+
+        it 'has no rows' do
+          expect(answers.count).to eq(0)
+        end
+      end
     end
   end
 end
