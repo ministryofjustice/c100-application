@@ -14,7 +14,7 @@ module PersonWithPrivacy
   end
 
   def address_private?
-    # return false unless contact_details_private
+    return false unless contact_details_private
 
     contact_details_private.include? ContactDetails::ADDRESS.to_s
   end

@@ -272,8 +272,8 @@ Rails.application.routes.draw do
       edit_step :relationship, only: [] do
         edit_routes ':id/child/:child_id'
       end
-      # crud_step :children_cohabit_other, only: [:edit, :update]
-      # crud_step :privacy_preferences, only: [:edit, :update]
+      crud_step :children_cohabit_other, only: [:edit, :update]
+      crud_step :privacy_preferences, only: [:edit, :update]
     end
     namespace :permission do
       namespace :question, path: ':question_name' do
