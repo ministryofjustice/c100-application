@@ -17,9 +17,9 @@ module ApplicationInquiryMethods
     applicants.where(are_contact_details_private: GenericYesNo::YES.to_s).any?
   end
 
-  # def other_confidentiality_enabled?
-  #   other_parties.where(are_contact_details_private: GenericYesNo::YES.to_s).any?
-  # end
+  def other_confidentiality_enabled?
+    other_parties.where(are_contact_details_private: GenericYesNo::YES.to_s).any?
+  end
 
   def has_solicitor?
     has_solicitor.eql?(YES_ANSWER)

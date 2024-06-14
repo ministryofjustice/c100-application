@@ -19,8 +19,7 @@ RSpec.describe RelationshipsPresenter do
   subject { described_class.new(c100_application) }
 
   describe '#relationship_to_children' do
-    # let(:person) { instance_double(Person, relationships: relationships, type: 'Applicant') }
-    let(:person) { instance_double(Person, relationships: relationships) }
+    let(:person) { instance_double(Person, relationships: relationships, type: 'Applicant') }
 
     before do
       allow(relationships).to receive(:where).with(minor: minors, person: person).and_return([child_relationship])
@@ -76,27 +75,18 @@ RSpec.describe RelationshipsPresenter do
     end
 
     context 'for a collection under C8 confidentiality' do
-      # let(:person) { other_party }
-      let(:person) { OtherParty.new }
+      let(:person) { other_party }
 
       context 'and confidentiality is enabled' do
-        # let(:other_party) { OtherParty.new(are_contact_details_private: 'yes') }
-        let(:confidentiality_enabled) { true }
+        let(:other_party) { OtherParty.new(are_contact_details_private: 'yes') }
 
         it 'returns the C8 replacement string' do
           expect(subject.relationship_to_children(person)).to eq('[See C8]')
         end
-
-        context 'but the bypass is activated' do
-          it 'returns the relationship details' do
-            expect(subject.relationship_to_children(person, bypass_c8: true)).to eq('Person name - Father to Child name')
-          end
-        end
       end
 
       context 'and confidentiality is disabled' do
-        # let(:other_party) { OtherParty.new(are_contact_details_private: 'no') }
-        let(:confidentiality_enabled) { false }
+        let(:other_party) { OtherParty.new(are_contact_details_private: 'no') }
 
         it 'returns the relationship details' do
           expect(subject.relationship_to_children(person)).to eq('Person name - Father to Child name')

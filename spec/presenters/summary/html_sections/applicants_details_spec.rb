@@ -34,7 +34,7 @@ module Summary
         refuge: 'yes',
         are_contact_details_private: are_contact_details_private,
         contact_details_private: contact_details_private,
-        # type: 'Applicant'
+        type: 'Applicant'
       )
     }
 
