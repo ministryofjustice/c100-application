@@ -40,6 +40,7 @@ module Summary
     let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
 
     before do
+      allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(applicant).to receive(:instance_of?).and_return(Applicant)
       allow(applicant).to receive(:full_address).and_return('full address')
       allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))

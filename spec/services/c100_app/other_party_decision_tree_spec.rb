@@ -19,6 +19,10 @@ RSpec.describe C100App::OtherPartyDecisionTree do
     )
   }
 
+  before do
+    allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
+  end
+
   it_behaves_like 'a decision tree'
 
   context 'when the step is `add_another_name`' do
