@@ -99,7 +99,6 @@ module Summary
 
           applicant_privacy_answers(person)
         end
-
       end
 
       def applicant_privacy_answers(person)
