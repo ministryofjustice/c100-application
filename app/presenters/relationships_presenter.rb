@@ -26,9 +26,13 @@ class RelationshipsPresenter
   end
 
   def under_c8?(person_or_people)
-    return false unless person_or_people.type == "OtherParty"
+    if PrivacyChange.changes_apply?
+      return false unless person_or_people.type == "OtherParty"
 
-    person_or_people.are_contact_details_private == GenericYesNo::YES.to_s
+      person_or_people.are_contact_details_private == GenericYesNo::YES.to_s
+    else
+      c100_application.confidentiality_enabled? && Array(person_or_people).first.is_a?(OtherParty)
+    end
   end
 
   def i18n_relation(relationship)

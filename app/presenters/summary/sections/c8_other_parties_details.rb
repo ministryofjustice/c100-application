@@ -9,6 +9,12 @@ module Summary
         true
       end
 
+      def bypass_relationships_c8?
+        return nil if PrivacyChange.changes_apply?
+
+        true
+      end
+
       def record_collection
         c100.other_parties
       end
@@ -16,6 +22,8 @@ module Summary
       # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/MethodLength
       def answers
+        return super unless PrivacyChange.changes_apply?
+
         record_collection.map.with_index(1) do |person, index|
           if person.are_contact_details_private == GenericYesNo::YES.to_s
             [

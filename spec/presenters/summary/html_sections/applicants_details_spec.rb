@@ -45,6 +45,7 @@ module Summary
     let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
 
     before do
+      allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(ConfidentialOption).to receive(:changes_apply?).and_return(true)
       allow(applicant).to receive(:full_address).and_return('full address')
       allow(relationship).to receive(:person).and_return(applicant)

@@ -32,6 +32,7 @@ module Summary
     let(:contact_details_private) { [] }
 
     before do
+      allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(respondent).to receive(:full_address).and_return('full address')
       allow(respondent).to receive(:email_private?).and_return(contact_details_private.include?('email'))
       allow(respondent).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
