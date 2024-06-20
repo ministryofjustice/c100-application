@@ -17,7 +17,7 @@ module Summary
         false
       end
 
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity
       def answers
         record_collection.map.with_index(1) do |person, index|
           if PrivacyChange.changes_apply?
@@ -105,7 +105,7 @@ module Summary
           end
         end.flatten.select(&:show?)
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity
 
       private
 
@@ -143,8 +143,6 @@ module Summary
                         contact_details_private: person.contact_details_private
                       })
         end
-
-
       end
 
       def privacy_known_applicant_only(person)
