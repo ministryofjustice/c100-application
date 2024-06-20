@@ -201,3 +201,6 @@ And('the confidential changes end') do
   Rails.application.config.confidential_option_date = @original_confidential_date
 end
 
+Given(/^Privacy changes apply$/) do
+  ENV['PRIVACY_CHANGE'] = 'true'
+end

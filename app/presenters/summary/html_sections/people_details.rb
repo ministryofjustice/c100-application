@@ -86,13 +86,20 @@ module Summary
       end
 
       def person_privacy_answers_group(person)
-        if person.type == 'Applicant'
+        if PrivacyChange.changes_apply?
+          if person.type == 'Applicant'
+            return [] unless person.privacy_known
+
+            applicant_privacy_answers(person)
+          elsif person.type == 'OtherParty'
+            other_party_privacy_answers(person)
+          end
+        else
           return [] unless person.privacy_known
 
           applicant_privacy_answers(person)
-        elsif person.type == 'OtherParty'
-          other_party_privacy_answers(person)
         end
+
       end
 
       def applicant_privacy_answers(person)
