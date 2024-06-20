@@ -14,6 +14,10 @@ module Summary
           Separator.not_applicable
         ] if record_collection.empty?
 
+        return [
+          Separator.new(:c8_attached)
+        ] if !PrivacyChange.changes_apply? && c100.confidentiality_enabled?
+
         super
       end
     end
