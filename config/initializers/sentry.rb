@@ -17,13 +17,13 @@ Sentry.init do |config|
     transaction_name.in?(EXCLUDE_PATHS) ? 0.0 : 0.01
   end
 
-  config.before_send = lambda do |event, hint|
-    # NOTE: hint[:exception] would be a String if you use async callback
-    if hint[:exception].is_a?(Puma::HttpParserError)
-      nil
-    else
-      event
-    end
-  end
+  # config.before_send = lambda do |event, hint|
+  #   # NOTE: hint[:exception] would be a String if you use async callback
+  #   if hint[:exception].is_a?(Puma::HttpParserError)
+  #     nil
+  #   else
+  #     event
+  #   end
+  # end
 end
 
