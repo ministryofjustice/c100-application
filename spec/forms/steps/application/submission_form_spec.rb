@@ -63,8 +63,7 @@ RSpec.describe Steps::Application::SubmissionForm do
           it 'saves the record' do
             expect(c100_application).to receive(:update).with(
               submission_type: 'online',
-              receipt_email: 'test@example.com',
-              payment_type: nil,
+              receipt_email: 'test@example.com'
             ).and_return(true)
 
             expect(subject.save).to be(true)
