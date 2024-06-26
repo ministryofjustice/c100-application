@@ -303,7 +303,7 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
           mobile_phone: '12345',
           voicemail_consent: GenericYesNo::YES,
           email_provided: GenericYesNo::YES,
-          mobile_not_provided_reason: '',
+          mobile_not_provided_reason: nil,
           mobile_provided: GenericYesNo::YES
         }
       }
