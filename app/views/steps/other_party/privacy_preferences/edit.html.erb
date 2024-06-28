@@ -5,10 +5,13 @@
   <div class="govuk-grid-column-two-thirds">
     <%= govuk_error_summary %>
 
-    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+    <h1 class="govuk-heading-xl"><%= t('.heading', name: @form_object.record.person.full_name) %></h1>
+
+    <p class="govuk-body"><%=t '.lead_text' %></p>
 
     <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
-      <%= f.govuk_collection_radio_buttons :are_contact_details_private, GenericYesNo.values, :value, nil, legend: { tag: 'span', size: 's' } %>
+      <%= f.govuk_collection_radio_buttons :are_contact_details_private, GenericYesNo.values, :value, nil,
+                                           legend: { tag: 'span', size: 's' , text: t('.legend', name: @form_object.record.person.full_name) } %>
 
       <%= f.continue_button %>
     <% end %>
