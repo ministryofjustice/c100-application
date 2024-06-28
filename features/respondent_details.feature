@@ -189,6 +189,26 @@ Feature: Add a respondent to the application
     When I fill in "First name(s)" with "Thomas"
     And I fill in "Last name(s)" with "Other Doe"
     And I click the "Continue" button
+    Then Page has title "Do any of the children live with Thomas Other Doe? - Apply to court about child arrangements - GOV.UK"
+    And I should see "Do any of the children live with Thomas Other Doe?"
+
+    # Provoke validation errors
+    And I click the "Continue" button
+    Then Page has title "Error: Do any of the children live with Thomas Other Doe? - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Select an option" link to "#steps-other-party-children-cohabit-other-form-cohabit-with-other-field-error"
+
+    # Fix validation errors and continue
+    And I choose "Yes"
+    And I should see "Keeping Thomas Other Doe's details private"
+
+    # Provoke validation errors
+    And I click the "Continue" button
+    Then Page has title "Error: Contact details confidentiality - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Select an option" link to "#steps-other-party-privacy-preferences-form-are-contact-details-private-field-error"
+
+    # Fix validation errors and continue
+    And I choose "No"
+    And I click the "Continue" button
     Then Page has title "Other person personal details - Apply to court about child arrangements - GOV.UK"
     And I should see "Provide details for Thomas Other Doe"
     
@@ -228,27 +248,6 @@ Feature: Add a respondent to the application
 
     # Fix validation errors and continue
     When I choose "Grandparent"
-    Then Page has title "Do any of the children live with Thomas Other Doe? - Apply to court about child arrangements - GOV.UK"
-    And I should see "Do any of the children live with Thomas Other Doe?"
-
-    # Provoke validation errors
-    And I click the "Continue" button
-    Then Page has title "Error: Do any of the children live with Thomas Other Doe? - Apply to court about child arrangements - GOV.UK"
-    And I should see a "Select an option" link to "#steps-other-party-children-cohabit-other-form-cohabit-with-other-field-error"
-
-    # Fix validation errors and continue
-    And I choose "Yes"
-    And I click the "Continue" button
-    And I should see "Keeping your contact details private"
-
-    # Provoke validation errors
-    And I click the "Continue" button
-    Then Page has title "Error: Contact details confidentiality - Apply to court about child arrangements - GOV.UK"
-    And I should see a "Select an option" link to "#steps-other-party-privacy-preferences-form-are-contact-details-private-field-error"
-
-    # Fix validation errors and continue
-    And I choose "No"
-    And I click the "Continue" button
     And I should see "Address of Thomas Other Doe"
 
     # Provoke validation errors
@@ -290,6 +289,10 @@ Feature: Add a respondent to the application
     Then I should see "Enter the other person’s name"
 
     And I click the "Continue" button
+    Then Page has title "Do any of the children live with Thomas Other Doe? - Apply to court about child arrangements - GOV.UK"
+    And I should see "Do any of the children live with Thomas Other Doe?"
+
+    And I choose "No"
     Then Page has title "Other person personal details - Apply to court about child arrangements - GOV.UK"
     And I should see "Provide details for Thomas Other Doe"
 
@@ -298,10 +301,7 @@ Feature: Add a respondent to the application
     And I should see "What is Thomas Other Doe's relationship to John Doe Junior?"
 
     When I choose "Grandparent"
-    Then Page has title "Do any of the children live with Thomas Other Doe? - Apply to court about child arrangements - GOV.UK"
-    And I should see "Do any of the children live with Thomas Other Doe?"
 
-    And I choose "No"
     And I should see "Address details of Thomas Other Doe"
 
     When I visit "/steps/respondent/has_other_parties"
