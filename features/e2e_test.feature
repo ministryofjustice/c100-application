@@ -951,380 +951,381 @@ Scenario: Child arrangements order (MIAM) (path: 'No' to 'Have you attended a MI
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
     And I should see the statement of truth
-#
-#  Scenario: Consent order
-#    When I click the radio button "Consent order"
-#    And I click the "Continue" button
-#    And I should see "Upload the draft of your consent order"
-#    Then I upload a document to the consent order page
-#    And I click the "Continue" button
-#    Then I should see "You do not have to attend a MIAM"
-#    And I click the "Continue" link
-#    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
-#    And I choose "Yes"
-#    Then I should see "Safety concerns"
-#    And I should see "Why do we need this information and what will we do with it?"
-#    And I click the "Continue" link
-#    Then I should see "Are the children at risk of being abducted?"
-#    And I choose "No"
-#    Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
-#    And I choose "No"
-#    Then I should see "Have the children suffered or are they at risk of suffering domestic or child abuse?"
-#    And I choose "Yes"
-#    Then I should see "You and the children"
-#    And I click the "Continue" link
-#    Then I should see "The children’s safety"
-#    And I click the "Continue" link
-#    Then I should see "Have the children ever been sexually abused by the respondent?"
-#    And I choose "No"
-#    Then I should see "Have the children ever been physically abused by the respondent?"
-#    And I choose "No"
-#    Then I should see "Have the children ever been financially abused by the respondent?"
-#    And I choose "Yes"
-#    Then I should see "About the children’s financial abuse"
-#    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from the kids"
-#    And I fill in "When did this behaviour start?" with "01-2023"
-#    And I choose "No" for all options on this page
-#    And I fill in "When did the behaviour stop?" with "06-2023"
-#    And I click the "Continue" button
-#    Then I should see "Have the children ever been psychologically abused by the respondent?"
-#    And I choose "Yes"
-#    Then I should see "About the children’s psychological abuse"
-#    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent was horrid to the kids"
-#    And I fill in "When did this behaviour start?" with "01-2023"
-#    And I choose "No" for all options on this page
-#    And I fill in "When did the behaviour stop?" with "06-2023"
-#    And I click the "Continue" button
-#    Then I should see "Have the children ever been emotionally abused by the respondent?"
-#    And I choose "Yes"
-#    Then I should see "About the children’s emotional abuse"
-#    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent made the kids sad on purpose"
-#    And I fill in "When did this behaviour start?" with "01-2023"
-#    And I choose "No" for all options on this page
-#    And I fill in "When did the behaviour stop?" with "06-2023"
-#    And I click the "Continue" button
-#    Then I should see "Do you have any other safety or welfare concerns about the children?"
-#    And I choose "No"
-#    Then I should see "Your safety"
-#    And I click the "Continue" link
-#    Then I should see "Have you ever been sexually abused by the respondent?"
-#    And I choose "Yes"
-#    Then I should see "About the sexual abuse"
-#    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent touched me non consensually"
-#    And I fill in "When did this behaviour start?" with "01-2023"
-#    And I choose "No" for all options on this page
-#    And I fill in "When did the behaviour stop?" with "06-2023"
-#    And I click the "Continue" button
-#    Then I should see "Have you ever been physically abused by the respondent?"
-#    And I choose "Yes"
-#    Then I should see "About the physical abuse"
-#    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent hit me several times"
-#    And I fill in "When did this behaviour start?" with "01-2023"
-#    And I choose "No" for all options on this page
-#    And I fill in "When did the behaviour stop?" with "06-2023"
-#    And I click the "Continue" button
-#    Then I should see "Have you ever been financially abused by the respondent?"
-#    And I choose "Yes"
-#    Then I should see "About the financial abuse"
-#    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from me"
-#    And I fill in "When did this behaviour start?" with "01-2023"
-#    And I choose "No" for all options on this page
-#    And I fill in "When did the behaviour stop?" with "06-2023"
-#    And I click the "Continue" button
-#    Then I should see "Have you ever been psychologically abused by the respondent?"
-#    And I choose "Yes"
-#    Then I should see "About the psychological abuse"
-#    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent said awful things to me"
-#    And I fill in "When did this behaviour start?" with "01-2023"
-#    And I choose "No" for all options on this page
-#    And I fill in "When did the behaviour stop?" with "06-2023"
-#    And I click the "Continue" button
-#    Then I should see "Have you ever been emotionally abused by the respondent?"
-#    And I choose "Yes"
-#    Then I should see "About the emotional abuse"
-#    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent called me awful names"
-#    And I fill in "When did this behaviour start?" with "01-2023"
-#    And I choose "No" for all options on this page
-#    And I fill in "When did the behaviour stop?" with "06-2023"
-#    And I click the "Continue" button
-#    Then I should see "Do you have any other concerns about your welfare?"
-#    And I choose "No"
-#    Then I should see "Have you had or do you currently have any court orders made for your protection?"
-#    And I choose "No"
-#    Then I should see "Contact between the children and the other people in this application"
-#    And I choose "No" for all options on this page
-#    And I click the "Continue" button
-#    Then I should see "What are you asking the court to decide about the children involved?"
-#    And I check "Decide who they live with and when"
-#    And I check "Resolve a specific issue"
-#    And I check "A religious issue"
-#    And I click the "Continue" button
-#    Then I should see "What you’re asking the court to decide about the children"
-#    And I should see "Decide who they live with and when"
-#    And I should see "This is known as a Child Arrangements Order."
-#    And I should see "A religious issue"
-#    And I should see "This is known as a Specific Issue Order."
-#    Then I click the "Continue" link
-#    Then I should see "Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?"
-#    And I choose "No"
-#    Then I should see "Going to court"
-#    And I should see "What happens at court"
-#    And I should see "Changing or enforcing an order"
-#    And I should see "Representing yourself in court"
-#    And I should see "Domestic abuse and child abuse"
-#    And I check "I understand what’s involved if I decide to go to court"
-#    And I click the "Continue" button
-#    Then I should see "Enter the names of the children"
-#    And I fill in "First name(s)" with "Alistair"
-#    And I fill in "Last name(s)" with "Doe"
-#    And I click the "Continue" button
-#    Then I should see "Provide details for Alistair Doe"
-#    And I specify they are "6" years of age
-#    And I choose "Male"
-#    And I click the "Continue" button
-#    Then I should see "Which of the decisions you’re asking the court to resolve relate to Alistair Doe?"
-#    And I check "Decide who they live with and when"
-#    And I check "A religious issue"
-#    And I click the "Continue" button
-#    Then I should see "Is there a Special Guardianship Order in force in relation to Alistair Doe?"
-#    And I choose "Yes"
-#    Then I should see "Parental responsibility for Alistair Doe"
-#    And I fill in "State everyone who has parental responsibility for Alistair Doe and how they have parental responsibility." with "Me and the respondent"
-#    And I click the "Continue" button
-#    Then I should see "Further information"
-#    And I choose "Yes" for all options on this page
-#    And I fill in "State which child and the name of the local authority and social worker, if known" with "Alistair Doe knows Jane Doe from London"
-#    And I click the "Continue" button
-#    Then I should see "Do you or any respondents have other children who are not part of this application?"
-#    And I choose "No"
-#    Then I should see "Enter your name"
-#    And I fill in "First name(s)" with "June"
-#    And I fill in "Last name(s)" with "Doe"
-#    And I click the "Continue" button
-#    Then I should see "Keeping your contact details private"
-#    And I choose "I don't know"
-#    Then I should see "Keeping your contact details private"
-#    And I choose "No"
-#    Then I should see "The court will not keep your contact details private"
-#    And I click the "Continue" link
-#    Then I should see "Provide details for June Doe"
-#    And I click the radio button "Yes"
-#    And I fill in "Enter your previous name" with "Janie Doe"
-#    And I click the radio button "Female"
-#    And I specify they are "40" years of age
-#    And I fill in "Your place of birth" with "Windsor"
-#    And I click the "Continue" button
-#    Then I should see "What is June Doe's relationship to Alistair Doe?"
-#    And I choose "Mother"
-#    Then I should see "Address of June Doe"
-#    And I click the "I live outside the UK" link
-#    Then I should see "Address details of June Doe"
-#    And I fill in "Building and street" with "Buckingham Palace"
-#    And I fill in "Town or city" with "London"
-#    And I fill in "Country" with "United Kingdom"
-#    And I fill in "Postcode" with "SW1A 1AA"
-#    And I click the radio button "Yes"
-#    And I click the "Continue" button
-#    Then I should see "Contact details of June Doe"
-#    And I click the radio button "I can provide an email address"
-#    And I fill in "Your email address" with "june@gmail.com"
-#    And I fill in "Your home phone" with "00000000000"
-#    And I click the radio button "I can provide a mobile phone number"
-#    And I fill in "Your mobile phone" with "00000000000"
-#    And I click the radio button "No, the court cannot leave me a voicemail"
-#    And I click the "Continue" button
-#    Then I should see "Will you be legally represented by a solicitor in these proceedings?"
-#    And I choose "Yes"
-#    Then I should see "Details of solicitor"
-#    And I fill in "Full name" with "Tegan Price"
-#    And I fill in "Name of firm" with "Caplan and Gold"
-#    And I fill in "Solicitor’s reference" with "123456"
-#    And I click the "Continue" button
-#    Then I should see "Address details of Tegan Price"
-#    And I fill in "Building and street" with "12 Cannon Street Caplan and Gold"
-#    And I fill in "Town or city" with "London"
-#    And I fill in "Country" with "United Kingdom"
-#    And I fill in "Postcode" with "EC4N 6YA"
-#    And I click the "Continue" button
-#    Then I should see "Contact details of Tegan Price"
-#    And I fill in "Email address" with "teganprice@caplangold.com"
-#    And I fill in "Phone number" with "00000119911"
-#    And I fill in "Fax number" with "00000119911"
-#    And I fill in "DX number" with "00000119911"
-#    And I click the "Continue" button
-#    Then I should see "Enter the respondent’s name"
-#    And I fill in "First name(s)" with "Jake"
-#    And I fill in "Last name(s)" with "Gyllenhaal"
-#    And I click the "Continue" button
-#    Then I should see "Provide details for Jake Gyllenhaal"
-#    And I click the radio button "Yes"
-#    And I fill in "Enter their previous name" with "Ryan Reynolds"
-#    And I click the radio button "Male"
-#    And I specify they are "46" years of age
-#    And I fill in "Place of birth" with "Wrexham"
-#    And I click the "Continue" button
-#    Then I should see "What is Jake Gyllenhaal's relationship to Alistair Doe?"
-#    And I choose "Father"
-#    Then I should see "Address of Jake Gyllenhaal"
-#    And I click the "I don’t know their postcode or they live outside the UK" link
-#    Then I should see "Address details of Jake Gyllenhaal"
-#    And I fill in "Building and street" with "Wrexham AFC Mold Road"
-#    And I fill in "Town or city" with "Wrexham"
-#    And I fill in "Country" with "Wales"
-#    And I fill in "Postcode" with "LL11 2AH"
-#    And I click the radio button "Yes"
-#    And I click the "Continue" button
-#    Then I should see "Contact details of Jake Gyllenhaal"
-#    And I check "I don't know their email"
-#    And I check "I don't know their home phone number"
-#    And I fill in "Mobile phone" with "00000000000"
-#    And I click the "Continue" button
-#    Then I should see "Is there anyone else who should know about your application?"
-#    And I choose "Yes"
-#    Then I should see "Enter the other person’s name"
-#    And I fill in "First name(s)" with "Cassie"
-#    And I fill in "Last name(s)" with "Doe"
-#    And I click the "Continue" button
-#    Then I should see "Provide details for Cassie Doe"
-#    And I click the radio button "No"
-#    And I click the radio button "Female"
-#    And I specify they are "30" years of age
-#    And I click the "Continue" button
-#    Then I should see "What is Cassie Doe's relationship to Alistair Doe?"
-#    And I click the radio button "Other"
-#    And I fill in "Please specify" with "Caregiver"
-#    And I click the "Continue" button
-#    Then I should see "Address of Cassie Doe"
-#    And I click the "I don’t know their postcode or they live outside the UK" link
-#    Then I should see "Address details of Cassie Doe"
-#    And I fill in "Building and street" with "Windsor Castle"
-#    And I fill in "Town or city" with "Windsor"
-#    And I fill in "Country" with "United Kingdom"
-#    And I fill in "Postcode" with "SL4 1QF"
-#    And I click the "Continue" button
-#    Then I should see "Who does Alistair Doe currently live with?"
-#    And I check "June Doe"
-#    And I click the "Continue" button
-#    Then I should see "Have any of the children in this application been involved in other family court proceedings?"
-#    And I choose "No"
-#    Then I should see "Do you need an urgent hearing"
-#    And I choose "Yes"
-#    Then I should see "Details of urgent hearing"
-#    And I fill in "Give details of why you’re asking for an urgent hearing" with "Alistair is in grave danger because of Jake Gyllenhaal"
-#    And I fill in "How soon do you need an urgent hearing?" with "In the next four weeks"
-#    And I click the radio button "No"
-#    And I click the "Continue" button
-#    Then I should see "Are you asking for a without notice hearing?"
-#    And I choose "Yes"
-#    Then I should see "Details of without notice hearing"
-#    And I fill in "Give details of why you’re asking for a without notice hearing" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
-#    And I choose "No" for all options on this page
-#    And I click the "Continue" button
-#    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
-#    And I choose "No"
-#    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
-#    And I choose "No"
-#    Then I should see "Has a request for information or other assistance involving the children been made to or by another country?"
-#    And I choose "No"
-#    Then I should see "Why are you making this application?"
-#    And I fill in "Provide details" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
-#    And I click the "Continue" button
-#    Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
-#    And I choose "Yes"
-#    Then I should see "Factors affecting ability to participate"
-#    And I click the "Continue" button
-#    Then I should see "Does anyone in this application need an intermediary to help them in court?"
-#    And I choose "Yes"
-#    And I fill in "Provide details" with "I need someone to communicate between me and the respondent"
-#    And I click the "Continue" button
-#    Then I should see "Does anyone in this application have special language requirements?"
-#    And I check "To speak Welsh at a court hearing, or read court documents in Welsh"
-#    And I fill in "Give details of who needs to speak or read in Welsh" with "Needed for Jake Gyllenhaal"
-#    And I click the "Continue" button
-#    Then I should see "Do you or the children need specific safety arrangements at court?"
-#    And I check "Separate waiting rooms"
-#    And I check "Separate exits and entrances"
-#    And I click the "Continue" button
-#    Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
-#    And I click the "Continue" button
-#    Then I should see "Submitting your application to court"
-#    And I fill in "Enter an email address if you would like to get a confirmation" with "june@gmail.com"
-#    And I click the "Continue" button
-#    Then I should see "Is this email address correct?"
-#    And I should see "june@gmail.com"
-#    And I click the "Yes, continue" link
-#    Then I should see "How will you pay the application fee?"
-#    And I choose "Pay with ‘Help with fees’"
-#    And I fill in "Reference number" with "HWF-123-456"
-#    And I click the "Continue" button
-#    Then I should see "Check your answers"
-#    And I should see "Consent"
-#    And I should see they have made a consent order application
-#    And I should see the children "are" involved in any emergency protection, care of proceedings
-#    And I should see they "have" got safety concerns about the children
-#    And I should see they have safety concerns with the children about: "financial abuse, psychological abuse, emotional abuse"
-#    And I should see they have safety concerns with themselves about: "sexual abuse, physical abuse, financial abuse, psychological abuse, emotional abuse"
-#    And I should see "No, I do not want the other person to spend time with the children"
-#    And I should see they want the court to decide: "Decide who they live with and when"
-#    And I should see they want the court to resolve an issue about: "A religious issue"
-#    And I should see the child's full name is "Alistair Doe"
-#    And I should see the child's gender is "Male"
-#    And I should see the child is "6" years old
-#    And I should see the people who have parental responsibility for the child are: "Me and the respondent"
-#    And I should see the children "are" known to other social services
-#    And I should see the applicant's name is "June Doe"
-#    And I should see the applicant's previous name is "Janie Doe"
-#    And I should see the applicant's gender is "Female"
-#    And I should see the applicant is "40" years old
-#    And I should see the applicant's place of birth is "Windsor"
-#    And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
-#    And I should see the applicant "has" lived at this address for more than 5 years
-#    And I should see the applicant has provided an email "june@gmail.com"
-#    And I should see the applicant has provided a home telephone number "00000000000"
-#    And I should see the applicant has provided a mobile number "00000000000"
-#    And I should see the applicant's relationship to "Alistair Doe" is "Mother"
-#    And I should see the applicant "does" have a solicitor
-#    And I should see the solicitor's full name is "Tegan Price"
-#    And I should see the solicitor's name of firm is "Caplan and Gold"
-#    And I should see the solicitor's reference is "123456"
-#    And I should see the solicitor's address is "12 Cannon Street Caplan and Gold, London, United Kingdom, EC4N 6YA"
-#    And I should see the solicitor's email is "teganprice@caplangold.com" and phone number is "00000119911"
-#    And I should see the solicitor's DX number is "00000119911"
-#    And I should see the respondent's name is "Jake Gyllenhaal"
-#    And I should see the respondent's previous name is "Ryan Reynolds"
-#    And I should see the respondent's gender is "Male"
-#    And I should see the respondent is "46" years old
-#    And I should see the respondent's place of birth is "Wrexham"
-#    And I should see the respondent's address is "Wrexham AFC Mold Road, Wrexham, Wales, LL11 2AH"
-#    And I should see the respondent "has" lived at that address for more than 5 years
-#    And I should see the respondent's email is "Don't know"
-#    And I should see the respondent's mobile phone number is "00000000000"
-#    And I should see the respondent's relationship to "Alistair Doe" is "Father"
-#    And I should see there "are" other people who need to be informed of the application
-#    And I should see the other party's name is "Cassie Doe"
-#    And I should see the other party's gender is "Female"
-#    And I should see the other party is "30" years of age
-#    And I should see the other party's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
-#    And I should see the other party's relationship to "Alistair Doe" is "Caregiver"
-#    And I should see the child "Alistair Doe" lives with "June Doe"
-#    And I should see the children "haven't" been involved in other proceedings
-#    And I should see an urgent hearing "is" requested
-#    And I should see an urgent hearing is requested because "Alistair is in grave danger because of Jake Gyllenhaal"
-#    And I should see an urgent hearing is needed: "In the next four weeks"
-#    And I should see a hearing "isn't" needed within the next 48 hours
-#    And I should see a without notice hearing "is" requested
-#    And I should see a without notice hearing is requested because "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
-#    And I should see the life of someone significant to the child "isn't" outside the UK
-#    And I should see another person in this application "couldn't" apply for an order outside the UK
-#    And I should see a request for information involving the children "hasn't" been made outside the UK
-#    And I should see the reason for application is "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
-#    And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
-#    And I should see there "are" people who need an intermediary to help them in court
-#    And I should see the details provided for the intermediary are "I need someone to communicate between me and the respondent"
-#    And I should see there "are" special language requirements
-#    And I should see there "are" specific safety arrangements specified for the court
-#    And I should see there "aren't" special facilities needed when attending court
-#    And I should see the email for submitting an application to court is "june@gmail.com"
-#    And I should see the payment type "Help with fees"
-#    And I should see the HwF reference number is "HWF-123-456"
-#    And I should see the statement of truth
+
+  Scenario: Consent order
+    When I click the radio button "Consent order"
+    And I click the "Continue" button
+    And I should see "Upload the draft of your consent order"
+    Then I upload a document to the consent order page
+    And I click the "Continue" button
+    Then I should see "You do not have to attend a MIAM"
+    And I click the "Continue" link
+    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
+    And I choose "Yes"
+    Then I should see "Safety concerns"
+    And I should see "Why do we need this information and what will we do with it?"
+    And I click the "Continue" link
+    Then I should see "Are the children at risk of being abducted?"
+    And I choose "No"
+    Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
+    And I choose "No"
+    Then I should see "Have the children suffered or are they at risk of suffering domestic or child abuse?"
+    And I choose "Yes"
+    Then I should see "You and the children"
+    And I click the "Continue" link
+    Then I should see "The children’s safety"
+    And I click the "Continue" link
+    Then I should see "Have the children ever been sexually abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have the children ever been physically abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have the children ever been financially abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the children’s financial abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from the kids"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have the children ever been psychologically abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the children’s psychological abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent was horrid to the kids"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have the children ever been emotionally abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the children’s emotional abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent made the kids sad on purpose"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Do you have any other safety or welfare concerns about the children?"
+    And I choose "No"
+    Then I should see "Your safety"
+    And I click the "Continue" link
+    Then I should see "Have you ever been sexually abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the sexual abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent touched me non consensually"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have you ever been physically abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the physical abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent hit me several times"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have you ever been financially abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the financial abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from me"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have you ever been psychologically abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the psychological abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent said awful things to me"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Have you ever been emotionally abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the emotional abuse"
+    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent called me awful names"
+    And I fill in "When did this behaviour start?" with "01-2023"
+    And I choose "No" for all options on this page
+    And I fill in "When did the behaviour stop?" with "06-2023"
+    And I click the "Continue" button
+    Then I should see "Do you have any other concerns about your welfare?"
+    And I choose "No"
+    Then I should see "Have you had or do you currently have any court orders made for your protection?"
+    And I choose "No"
+    Then I should see "Contact between the children and the other people in this application"
+    And I choose "No" for all options on this page
+    And I click the "Continue" button
+    Then I should see "What are you asking the court to decide about the children involved?"
+    And I check "Decide who they live with and when"
+    And I check "Resolve a specific issue"
+    And I check "A religious issue"
+    And I click the "Continue" button
+    Then I should see "What you’re asking the court to decide about the children"
+    And I should see "Decide who they live with and when"
+    And I should see "This is known as a Child Arrangements Order."
+    And I should see "A religious issue"
+    And I should see "This is known as a Specific Issue Order."
+    Then I click the "Continue" link
+    Then I should see "Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?"
+    And I choose "No"
+    Then I should see "Going to court"
+    And I should see "What happens at court"
+    And I should see "Changing or enforcing an order"
+    And I should see "Representing yourself in court"
+    And I should see "Domestic abuse and child abuse"
+    And I check "I understand what’s involved if I decide to go to court"
+    And I click the "Continue" button
+    Then I should see "Enter the names of the children"
+    And I fill in "First name(s)" with "Alistair"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Provide details for Alistair Doe"
+    And I specify they are "6" years of age
+    And I choose "Male"
+    And I click the "Continue" button
+    Then I should see "Which of the decisions you’re asking the court to resolve relate to Alistair Doe?"
+    And I check "Decide who they live with and when"
+    And I check "A religious issue"
+    And I click the "Continue" button
+    Then I should see "Is there a Special Guardianship Order in force in relation to Alistair Doe?"
+    And I choose "Yes"
+    Then I should see "Parental responsibility for Alistair Doe"
+    And I fill in "State everyone who has parental responsibility for Alistair Doe and how they have parental responsibility." with "Me and the respondent"
+    And I click the "Continue" button
+    Then I should see "Further information"
+    And I choose "Yes" for all options on this page
+    And I fill in "State which child and the name of the local authority and social worker, if known" with "Alistair Doe knows Jane Doe from London"
+    And I click the "Continue" button
+    Then I should see "Do you or any respondents have other children who are not part of this application?"
+    And I choose "No"
+    Then I should see "Enter your name"
+    And I fill in "First name(s)" with "June"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Keeping your contact details private"
+    And I choose "I don't know"
+    Then I should see "Keeping your contact details private"
+    And I choose "No"
+    Then I should see "Are you currently resident in a refuge?"
+    And I choose "No"
+    Then I should see "The court will not keep your contact details private"
+    And I click the "Continue" link
+    Then I should see "Provide details for June Doe"
+    And I click the radio button "Yes"
+    And I fill in "Enter your previous name" with "Janie Doe"
+    And I click the radio button "Female"
+    And I specify they are "40" years of age
+    And I fill in "Your place of birth" with "Windsor"
+    And I click the "Continue" button
+    Then I should see "What is June Doe's relationship to Alistair Doe?"
+    And I choose "Mother"
+    Then I should see "Address of June Doe"
+    And I click the "I live outside the UK" link
+    Then I should see "Address details of June Doe"
+    And I fill in "Building and street" with "Buckingham Palace"
+    And I fill in "Town or city" with "London"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SW1A 1AA"
+    And I click the radio button "Yes"
+    And I click the "Continue" button
+    Then I should see "Contact details of June Doe"
+    And I click the radio button "I can provide an email address"
+    And I fill in "Your email address" with "june@gmail.com"
+    And I fill in "Your home phone" with "00000000000"
+    And I click the radio button "I can provide a mobile phone number"
+    And I fill in "Your mobile phone" with "00000000000"
+    And I click the radio button "No, the court cannot leave me a voicemail"
+    And I click the "Continue" button
+    Then I should see "Will you be legally represented by a solicitor in these proceedings?"
+    And I choose "Yes"
+    Then I should see "Details of solicitor"
+    And I fill in "Full name" with "Tegan Price"
+    And I fill in "Name of firm" with "Caplan and Gold"
+    And I fill in "Solicitor’s reference" with "123456"
+    And I click the "Continue" button
+    Then I should see "Address details of Tegan Price"
+    And I fill in "Building and street" with "12 Cannon Street Caplan and Gold"
+    And I fill in "Town or city" with "London"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "EC4N 6YA"
+    And I click the "Continue" button
+    Then I should see "Contact details of Tegan Price"
+    And I fill in "Email address" with "teganprice@caplangold.com"
+    And I fill in "Phone number" with "00000119911"
+    And I fill in "DX number" with "00000119911"
+    And I click the "Continue" button
+    Then I should see "Enter the respondent’s name"
+    And I fill in "First name(s)" with "Jake"
+    And I fill in "Last name(s)" with "Gyllenhaal"
+    And I click the "Continue" button
+    Then I should see "Provide details for Jake Gyllenhaal"
+    And I click the radio button "Yes"
+    And I fill in "Enter their previous name" with "Ryan Reynolds"
+    And I click the radio button "Male"
+    And I specify they are "46" years of age
+    And I fill in "Place of birth" with "Wrexham"
+    And I click the "Continue" button
+    Then I should see "What is Jake Gyllenhaal's relationship to Alistair Doe?"
+    And I choose "Father"
+    Then I should see "Address of Jake Gyllenhaal"
+    And I click the "I don’t know their postcode or they live outside the UK" link
+    Then I should see "Address details of Jake Gyllenhaal"
+    And I fill in "Building and street" with "Wrexham AFC Mold Road"
+    And I fill in "Town or city" with "Wrexham"
+    And I fill in "Country" with "Wales"
+    And I fill in "Postcode" with "LL11 2AH"
+    And I click the radio button "Yes"
+    And I click the "Continue" button
+    Then I should see "Contact details of Jake Gyllenhaal"
+    And I check "I don't know their email"
+    And I check "I don't know their home phone number"
+    And I fill in "Mobile phone" with "00000000000"
+    And I click the "Continue" button
+    Then I should see "Is there anyone else who should know about your application?"
+    And I choose "Yes"
+    Then I should see "Enter the other person’s name"
+    And I fill in "First name(s)" with "Cassie"
+    And I fill in "Last name(s)" with "Doe"
+    And I click the "Continue" button
+    Then I should see "Provide details for Cassie Doe"
+    And I click the radio button "No"
+    And I click the radio button "Female"
+    And I specify they are "30" years of age
+    And I click the "Continue" button
+    Then I should see "What is Cassie Doe's relationship to Alistair Doe?"
+    And I click the radio button "Other"
+    And I fill in "Please specify" with "Caregiver"
+    And I click the "Continue" button
+    Then I should see "Address of Cassie Doe"
+    And I click the "I don’t know their postcode or they live outside the UK" link
+    Then I should see "Address details of Cassie Doe"
+    And I fill in "Building and street" with "Windsor Castle"
+    And I fill in "Town or city" with "Windsor"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SL4 1QF"
+    And I click the "Continue" button
+    Then I should see "Who does Alistair Doe currently live with?"
+    And I check "June Doe"
+    And I click the "Continue" button
+    Then I should see "Have any of the children in this application been involved in other family court proceedings?"
+    And I choose "No"
+    Then I should see "Do you need an urgent hearing"
+    And I choose "Yes"
+    Then I should see "Details of urgent hearing"
+    And I fill in "Give details of why you’re asking for an urgent hearing" with "Alistair is in grave danger because of Jake Gyllenhaal"
+    And I fill in "How soon do you need an urgent hearing?" with "In the next four weeks"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Are you asking for a without notice hearing?"
+    And I choose "Yes"
+    Then I should see "Details of without notice hearing"
+    And I fill in "Give details of why you’re asking for a without notice hearing" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And I choose "No" for all options on this page
+    And I click the "Continue" button
+    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    And I choose "No"
+    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
+    And I choose "No"
+    Then I should see "Has a request for information or other assistance involving the children been made to or by another country?"
+    And I choose "No"
+    Then I should see "Why are you making this application?"
+    And I fill in "Provide details" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And I click the "Continue" button
+    Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
+    And I choose "Yes"
+    Then I should see "Factors affecting ability to participate"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need an intermediary to help them in court?"
+    And I choose "Yes"
+    And I fill in "Provide details" with "I need someone to communicate between me and the respondent"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application have special language requirements?"
+    And I check "To speak Welsh at a court hearing, or read court documents in Welsh"
+    And I fill in "Give details of who needs to speak or read in Welsh" with "Needed for Jake Gyllenhaal"
+    And I click the "Continue" button
+    Then I should see "Do you or the children need specific safety arrangements at court?"
+    And I check "Separate waiting rooms"
+    And I check "Separate exits and entrances"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
+    And I click the "Continue" button
+    Then I should see "Submitting your application to court"
+    And I fill in "Enter an email address if you would like to get a confirmation" with "june@gmail.com"
+    And I click the "Continue" button
+    Then I should see "Is this email address correct?"
+    And I should see "june@gmail.com"
+    And I click the "Yes, continue" link
+    Then I should see "How will you pay the application fee?"
+    And I choose "Pay with ‘Help with fees’"
+    And I fill in "Reference number" with "HWF-123-456"
+    And I click the "Continue" button
+    Then I should see "Check your answers"
+    And I should see "Consent"
+    And I should see they have made a consent order application
+    And I should see the children "are" involved in any emergency protection, care of proceedings
+    And I should see they "have" got safety concerns about the children
+    And I should see they have safety concerns with the children about: "financial abuse, psychological abuse, emotional abuse"
+    And I should see they have safety concerns with themselves about: "sexual abuse, physical abuse, financial abuse, psychological abuse, emotional abuse"
+    And I should see "No, I do not want the other person to spend time with the children"
+    And I should see they want the court to decide: "Decide who they live with and when"
+    And I should see they want the court to resolve an issue about: "A religious issue"
+    And I should see the child's full name is "Alistair Doe"
+    And I should see the child's gender is "Male"
+    And I should see the child is "6" years old
+    And I should see the people who have parental responsibility for the child are: "Me and the respondent"
+    And I should see the children "are" known to other social services
+    And I should see the applicant's name is "June Doe"
+    And I should see the applicant's previous name is "Janie Doe"
+    And I should see the applicant's gender is "Female"
+    And I should see the applicant is "40" years old
+    And I should see the applicant's place of birth is "Windsor"
+    And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
+    And I should see the applicant "has" lived at this address for more than 5 years
+    And I should see the applicant has provided an email "june@gmail.com"
+    And I should see the applicant has provided a home telephone number "00000000000"
+    And I should see the applicant has provided a mobile number "00000000000"
+    And I should see the applicant's relationship to "Alistair Doe" is "Mother"
+    And I should see the applicant "does" have a solicitor
+    And I should see the solicitor's full name is "Tegan Price"
+    And I should see the solicitor's name of firm is "Caplan and Gold"
+    And I should see the solicitor's reference is "123456"
+    And I should see the solicitor's address is "12 Cannon Street Caplan and Gold, London, United Kingdom, EC4N 6YA"
+    And I should see the solicitor's email is "teganprice@caplangold.com" and phone number is "00000119911"
+    And I should see the solicitor's DX number is "00000119911"
+    And I should see the respondent's name is "Jake Gyllenhaal"
+    And I should see the respondent's previous name is "Ryan Reynolds"
+    And I should see the respondent's gender is "Male"
+    And I should see the respondent is "46" years old
+    And I should see the respondent's place of birth is "Wrexham"
+    And I should see the respondent's address is "Wrexham AFC Mold Road, Wrexham, Wales, LL11 2AH"
+    And I should see the respondent "has" lived at that address for more than 5 years
+    And I should see the respondent's email is "Don't know"
+    And I should see the respondent's mobile phone number is "00000000000"
+    And I should see the respondent's relationship to "Alistair Doe" is "Father"
+    And I should see there "are" other people who need to be informed of the application
+    And I should see the other party's name is "Cassie Doe"
+    And I should see the other party's gender is "Female"
+    And I should see the other party is "30" years of age
+    And I should see the other party's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
+    And I should see the other party's relationship to "Alistair Doe" is "Caregiver"
+    And I should see the child "Alistair Doe" lives with "June Doe"
+    And I should see the children "haven't" been involved in other proceedings
+    And I should see an urgent hearing "is" requested
+    And I should see an urgent hearing is requested because "Alistair is in grave danger because of Jake Gyllenhaal"
+    And I should see an urgent hearing is needed: "In the next four weeks"
+    And I should see a hearing "isn't" needed within the next 48 hours
+    And I should see a without notice hearing "is" requested
+    And I should see a without notice hearing is requested because "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And I should see the life of someone significant to the child "isn't" outside the UK
+    And I should see another person in this application "couldn't" apply for an order outside the UK
+    And I should see a request for information involving the children "hasn't" been made outside the UK
+    And I should see the reason for application is "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
+    And I should see there "are" people who need an intermediary to help them in court
+    And I should see the details provided for the intermediary are "I need someone to communicate between me and the respondent"
+    And I should see there "are" special language requirements
+    And I should see there "are" specific safety arrangements specified for the court
+    And I should see there "aren't" special facilities needed when attending court
+    And I should see the email for submitting an application to court is "june@gmail.com"
+    And I should see the payment type "Help with fees"
+    And I should see the HwF reference number is "HWF-123-456"
+    And I should see the statement of truth
