@@ -226,7 +226,7 @@ Scenario: Child arrangements order (MIAM) (path: 'No' to 'Have you attended a MI
     And I click the radio button "Pay with ‘Help with fees’"
     And I fill in "Reference number" with "HWF-123-456"
     And I click the "Continue" button
-    Then I should see "Check your answers"
+    Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
     And I should see "Do you have a solicitor? Yes"
     And I should see "Full name Jane Doe"
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
@@ -1258,7 +1258,7 @@ Scenario: Child arrangements order (MIAM) (path: 'No' to 'Have you attended a MI
     And I choose "Pay with ‘Help with fees’"
     And I fill in "Reference number" with "HWF-123-456"
     And I click the "Continue" button
-    Then I should see "Check your answers"
+    Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
     And I should see "Consent"
     And I should see they have made a consent order application
     And I should see the children "are" involved in any emergency protection, care of proceedings
