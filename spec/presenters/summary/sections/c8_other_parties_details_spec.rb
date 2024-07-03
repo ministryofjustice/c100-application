@@ -29,6 +29,7 @@ module Summary
         email_unknown: nil,
         voicemail_consent: nil,
         privacy_known: nil,
+        cohabit_with_other: cohabit_with_other,
         are_contact_details_private: are_contact_details_private,
         type: 'OtherParty'
       )
@@ -51,6 +52,7 @@ module Summary
     let(:previous_name) { nil }
     let(:dob) { Date.new(2018, 1, 20) }
     let(:dob_estimate) { nil }
+    let(:cohabit_with_other) { 'yes' }
     let(:are_contact_details_private) { 'yes' }
 
     let(:answers) { subject.answers }
@@ -80,7 +82,7 @@ module Summary
       end
 
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(8)
+        expect(answers.count).to eq(9)
       end
 
       it 'has the correct rows in the right order' do
@@ -92,28 +94,32 @@ module Summary
         expect(answers[1].question).to eq(:person_full_name)
         expect(answers[1].value).to eq('fullname')
 
-        expect(answers[2]).to be_an_instance_of(Answer)
-        expect(answers[2].question).to eq(:person_previous_name)
-        expect(answers[2].value).to eq('no')
+        expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[2].question).to eq(:person_cohabit_other)
+        expect(answers[2].value).to eq('Yes')
 
         expect(answers[3]).to be_an_instance_of(Answer)
-        expect(answers[3].question).to eq(:person_sex)
-        expect(answers[3].value).to eq('female')
+        expect(answers[3].question).to eq(:person_previous_name)
+        expect(answers[3].value).to eq('no')
 
-        expect(answers[4]).to be_an_instance_of(DateAnswer)
-        expect(answers[4].question).to eq(:person_dob)
-        expect(answers[4].value).to eq(Date.new(2018, 1, 20))
+        expect(answers[4]).to be_an_instance_of(Answer)
+        expect(answers[4].question).to eq(:person_sex)
+        expect(answers[4].value).to eq('female')
 
-        expect(answers[5]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[5].question).to eq(:person_address)
-        expect(answers[5].value).to eq('full address')
+        expect(answers[5]).to be_an_instance_of(DateAnswer)
+        expect(answers[5].question).to eq(:person_dob)
+        expect(answers[5].value).to eq(Date.new(2018, 1, 20))
 
         expect(answers[6]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[6].question).to eq(:person_relationship_to_children)
-        expect(answers[6].value).to eq('relationships')
+        expect(answers[6].question).to eq(:person_address)
+        expect(answers[6].value).to eq('full address')
 
-        expect(answers[7]).to be_an_instance_of(Partial)
-        expect(answers[7].name).to eq(:row_blank_space)
+        expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[7].question).to eq(:person_relationship_to_children)
+        expect(answers[7].value).to eq('relationships')
+
+        expect(answers[8]).to be_an_instance_of(Partial)
+        expect(answers[8].name).to eq(:row_blank_space)
       end
 
       context 'for existing previous name' do
@@ -121,13 +127,13 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(8)
+          expect(answers.count).to eq(9)
         end
 
         it 'renders the previous name' do
-          expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[2].question).to eq(:person_previous_name)
-          expect(answers[2].value).to eq('previous_name')
+          expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[3].question).to eq(:person_previous_name)
+          expect(answers[3].value).to eq('previous_name')
         end
       end
 
@@ -136,13 +142,13 @@ module Summary
         let(:dob_estimate) { Date.today }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(8)
+          expect(answers.count).to eq(9)
         end
 
         it 'uses the dob estimate' do
-          expect(answers[4]).to be_an_instance_of(DateAnswer)
-          expect(answers[4].question).to eq(:person_dob_estimate)
-          expect(answers[4].value).to eq(Date.today)
+          expect(answers[5]).to be_an_instance_of(DateAnswer)
+          expect(answers[5].question).to eq(:person_dob_estimate)
+          expect(answers[5].value).to eq(Date.today)
         end
       end
 
