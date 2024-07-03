@@ -29,6 +29,8 @@ module Summary
             [
               Separator.new("#{name}_index_title", index:),
               FreeTextAnswer.new(:person_full_name, person.full_name),
+              FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize),
+                                 i18n_opts: {name: person.full_name}),
               previous_name_answer(person),
               Answer.new(:person_sex, person.gender),
               DateAnswer.new(:person_dob, person.dob,
