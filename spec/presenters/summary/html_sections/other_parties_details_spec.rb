@@ -129,23 +129,24 @@ module Summary
           expect(details[2].question).to eq(:person_dob)
           expect(details[2].value).to eq(Date.new(2018, 1, 20))
 
-        expect(answers[6]).to be_an_instance_of(AnswersGroup)
-        expect(answers[6].name).to eq(:person_address_details)
-        expect(answers[6].change_path).to eq('/steps/other_party/address_details/uuid-123')
-        expect(answers[6].answers.count).to eq(1)
+        expect(answers[6]).to be_an_instance_of(Answer)
+        expect(answers[6].question).to eq(:relationship_to_child)
+        expect(answers[6].change_path).to eq('/steps/other_party/relationship/uuid-123/child/uuid-555')
+        expect(answers[6].value).to eq('mother')
+        expect(answers[6].i18n_opts).to eq({child_name: 'Child Test'})
+
+        expect(answers[7]).to be_an_instance_of(AnswersGroup)
+        expect(answers[7].name).to eq(:person_address_details)
+        expect(answers[7].change_path).to eq('/steps/other_party/address_details/uuid-123')
+        expect(answers[7].answers.count).to eq(1)
 
           # personal_details group answers ###
-          details = answers[6].answers
+          details = answers[7].answers
 
           expect(details[0]).to be_an_instance_of(FreeTextAnswer)
           expect(details[0].question).to eq(:person_address)
           expect(details[0].value).to eq('full address')
 
-        expect(answers[7]).to be_an_instance_of(Answer)
-        expect(answers[7].question).to eq(:relationship_to_child)
-        expect(answers[7].change_path).to eq('/steps/other_party/relationship/uuid-123/child/uuid-555')
-        expect(answers[7].value).to eq('mother')
-        expect(answers[7].i18n_opts).to eq({child_name: 'Child Test'})
       end
 
       context 'when there are no other parties' do
@@ -175,9 +176,9 @@ module Summary
         end
 
         it 'renders the expected answer row' do
-          expect(answers[6]).to be_an_instance_of(AnswersGroup)
+          expect(answers[7]).to be_an_instance_of(AnswersGroup)
 
-          details = answers[6].answers
+          details = answers[7].answers
           expect(details[0]).to be_an_instance_of(Answer)
           expect(details[0].question).to eq(:person_address_unknown)
           expect(details[0].value).to eq(true)
@@ -200,11 +201,11 @@ module Summary
         end
 
         it 'renders the correct relationship value' do
-          expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[7].question).to eq(:relationship_to_child)
-          expect(answers[7].change_path).to eq('/steps/other_party/relationship/uuid-123/child/uuid-555')
-          expect(answers[7].value).to eq('Aunt')
-          expect(answers[7].i18n_opts).to eq({child_name: 'Child Test'})
+          expect(answers[6]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[6].question).to eq(:relationship_to_child)
+          expect(answers[6].change_path).to eq('/steps/other_party/relationship/uuid-123/child/uuid-555')
+          expect(answers[6].value).to eq('Aunt')
+          expect(answers[6].i18n_opts).to eq({child_name: 'Child Test'})
         end
       end
     end
