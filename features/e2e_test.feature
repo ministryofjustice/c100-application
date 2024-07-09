@@ -2,6 +2,7 @@ Feature: Testing C100 end to end
 
   Background: Bypassing postcode page
     Given Mediation changes do apply
+    Given Confidential changes do apply
     Given I have started an application
     Then I should see "What kind of application do you want to make?"
 
