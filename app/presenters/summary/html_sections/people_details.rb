@@ -35,9 +35,9 @@ module Summary
             FreeTextAnswer.new(:person_full_name, person.full_name, change_path: names_path),
             person_privacy_answers_group(person),
             person_personal_details_answers_group(person),
+            children_relationships(person),
             person_address_details_answers_group(person),
             person_contact_details_answers_group(person),
-            children_relationships(person),
           ].compact
         end.flatten.select(&:show?)
       end

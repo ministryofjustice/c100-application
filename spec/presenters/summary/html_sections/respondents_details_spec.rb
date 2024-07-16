@@ -126,13 +126,19 @@ module Summary
           expect(details[3].question).to eq(:person_birthplace)
           expect(details[3].value).to eq('birthplace')
 
-        expect(answers[3]).to be_an_instance_of(AnswersGroup)
-        expect(answers[3].name).to eq(:person_address_details)
-        expect(answers[3].change_path).to eq('/steps/respondent/address_details/uuid-123')
-        expect(answers[3].answers.count).to eq(3)
+        expect(answers[3]).to be_an_instance_of(Answer)
+        expect(answers[3].question).to eq(:relationship_to_child)
+        expect(answers[3].change_path).to eq('/steps/respondent/relationship/uuid-123/child/uuid-555')
+        expect(answers[3].value).to eq('mother')
+        expect(answers[3].i18n_opts).to eq({child_name: 'Child Test'})
+
+        expect(answers[4]).to be_an_instance_of(AnswersGroup)
+        expect(answers[4].name).to eq(:person_address_details)
+        expect(answers[4].change_path).to eq('/steps/respondent/address_details/uuid-123')
+        expect(answers[4].answers.count).to eq(3)
 
           # personal_details group answers ###
-          details = answers[3].answers
+          details = answers[4].answers
 
           expect(details[0]).to be_an_instance_of(FreeTextAnswer)
           expect(details[0].question).to eq(:person_address)
@@ -146,12 +152,12 @@ module Summary
           expect(details[2].question).to eq(:person_residence_history)
           expect(details[2].value).to eq('history')
 
-        expect(answers[4]).to be_an_instance_of(AnswersGroup)
-        expect(answers[4].name).to eq(:person_contact_details)
-        expect(answers[4].change_path).to eq('/steps/respondent/contact_details/uuid-123')
-        expect(answers[4].answers.count).to eq(3)
+        expect(answers[5]).to be_an_instance_of(AnswersGroup)
+        expect(answers[5].name).to eq(:person_contact_details)
+        expect(answers[5].change_path).to eq('/steps/respondent/contact_details/uuid-123')
+        expect(answers[5].answers.count).to eq(3)
 
-          details = answers[4].answers
+          details = answers[5].answers
 
           expect(details[0]).to be_an_instance_of(FreeTextAnswer)
           expect(details[0].question).to eq(:person_email)
@@ -165,11 +171,6 @@ module Summary
           expect(details[2].question).to eq(:person_mobile_phone)
           expect(details[2].value).to eq('mobile_phone')
 
-        expect(answers[5]).to be_an_instance_of(Answer)
-        expect(answers[5].question).to eq(:relationship_to_child)
-        expect(answers[5].change_path).to eq('/steps/respondent/relationship/uuid-123/child/uuid-555')
-        expect(answers[5].value).to eq('mother')
-        expect(answers[5].i18n_opts).to eq({child_name: 'Child Test'})
       end
 
       context 'for existing previous name' do
@@ -198,9 +199,9 @@ module Summary
         end
 
         it 'renders the expected answer row' do
-          expect(answers[3]).to be_an_instance_of(AnswersGroup)
+          expect(answers[4]).to be_an_instance_of(AnswersGroup)
 
-          details = answers[3].answers
+          details = answers[4].answers
           expect(details[0]).to be_an_instance_of(Answer)
           expect(details[0].question).to eq(:person_address_unknown)
           expect(details[0].value).to eq(true)
@@ -223,11 +224,11 @@ module Summary
         end
 
         it 'renders the correct relationship value' do
-          expect(answers[5]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[5].question).to eq(:relationship_to_child)
-          expect(answers[5].change_path).to eq('/steps/respondent/relationship/uuid-123/child/uuid-555')
-          expect(answers[5].value).to eq('Aunt')
-          expect(answers[5].i18n_opts).to eq({child_name: 'Child Test'})
+          expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[3].question).to eq(:relationship_to_child)
+          expect(answers[3].change_path).to eq('/steps/respondent/relationship/uuid-123/child/uuid-555')
+          expect(answers[3].value).to eq('Aunt')
+          expect(answers[3].i18n_opts).to eq({child_name: 'Child Test'})
         end
       end
     end
