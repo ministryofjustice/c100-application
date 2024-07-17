@@ -6,7 +6,7 @@ Feature: Testing C100 end to end
     Given I have started an application
     Then I should see "What kind of application do you want to make?"
 
-Scenario: Child arrangements order (MIAM) (path: 'No' to 'Have you attended a MIAM?')
+  Scenario: Child arrangements order (MIAM) (path one: exemption with no evidence)
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
     Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
     And I choose "No"
@@ -290,7 +290,312 @@ Scenario: Child arrangements order (MIAM) (path: 'No' to 'Have you attended a MI
     And I should see the HwF reference number is "HWF-123-456"
     And the mediation changes end
 
-  Scenario: Child arrangements order (MIAM) (path one: 'Yes' to 'Have you attended a MIAM?')
+  Scenario: Child arrangements order (MIAM) (path two: exemption with evidence upload)
+    When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
+    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
+    And I choose "No"
+    Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
+    And I click the radio button "No"
+    And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
+    And I click the "Continue" button
+    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+    And I choose "No"
+    Then I should see "Do you have a valid reason for not attending a MIAM?"
+    And I choose "Yes"
+    Then I should see "Providing evidence of domestic abuse concerns"
+    And I check "None of these"
+    And I click the "Continue" button
+    Then I should see "Confirming child protection concerns"
+    And I check "None of these"
+    And I click the "Continue" button
+    Then I should see "Confirming why your application is urgent"
+    And I check "None of these"
+    And I click the "Continue" button
+    Then I should see "You’ve already been to a MIAM or are taking part in another form of non-court dispute resolution"
+    And I check "None of these"
+    And I click the "Continue" button
+    Then I should see "Confirming other valid reasons for not attending"
+    And I check "You’re applying for a without notice hearing."
+    And I click the "Continue" button
+    Then I should see "Evidence of MIAM exemption"
+    And I choose "Yes"
+    Then I should see "Upload your evidence for a MIAM exemption"
+    And I upload a document to the exemptions page
+    And I click the "Continue" button
+    Then I should see "Provide details of exemptions from attending a MIAM"
+    And I click the "Continue" button
+    Then I should see "You don’t have to attend a MIAM"
+    And I should see "Other exemptions"
+    And I click the "Continue" link
+    Then I should see "Safety concerns"
+    And I click the "Continue" link
+    Then I should see "Are the children at risk of being abducted?"
+    And I choose "Yes"
+    Then I should see "Have the police been notified?"
+    And I choose "Yes"
+    Then I should see "Do any of the children have a passport?"
+    And I choose "Yes"
+    Then I should see "Provide details of the children’s passports"
+    And I check "Mother"
+    And I choose "No"
+    Then I should see "Have the children been abducted or kept outside the UK without your consent before?"
+    And I choose "No"
+    Then I should see "Why do you think the children may be abducted or kept outside the UK without your consent?"
+    And I fill in "steps-abduction-risk-details-form-risk-details-field" with "They might be taken by their other parent"
+    And I fill in "Where are the children now?" with "The children are with me"
+    And I click the "Continue" button
+    Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
+    And I choose "No"
+    Then I should see "You and the children"
+    And I click the "Continue" link
+    Then I should see "The children’s safety"
+    And I click the "Continue" link
+    Then I should see "Have the children ever been sexually abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have the children ever been physically abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have the children ever been financially abused by the respondent?"
+    And I choose "Yes"
+    Then I should see "About the children’s financial abuse"
+    And I fill in "steps-abuse-concerns-details-form-behaviour-description-field" with "Details of the abuse"
+    And I fill in "steps-abuse-concerns-details-form-behaviour-start-field" with "It started a year ago"
+    And I choose "No" for all options on this page without continuing
+    And I fill in "steps-abuse-concerns-details-form-behaviour-stop-field" with "It stopped earlier this month"
+    And I click the "Continue" button
+    Then I should see "Have the children ever been psychologically abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have the children ever been emotionally abused by the respondent?"
+    And I choose "No"
+    Then I should see "Do you have any other safety or welfare concerns about the children?"
+    And I choose "Yes"
+    Then I should see "Other concerns about the children"
+    And I fill in "steps-abuse-concerns-details-form-behaviour-description-field" with "Description of safety concerns I have"
+    And I fill in "steps-abuse-concerns-details-form-behaviour-start-field" with "This started about a year ago"
+    And I choose "No" for all options on this page without continuing
+    And I fill in "steps-abuse-concerns-details-form-behaviour-stop-field" with "It stopped earlier this month"
+    And I click the "Continue" button
+    Then I should see "Your safety"
+    And I click the "Continue" link
+    Then I should see "Have you ever been sexually abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have you ever been physically abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have you ever been financially abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have you ever been psychologically abused by the respondent?"
+    And I choose "No"
+    Then I should see "Have you ever been emotionally abused by the respondent?"
+    And I choose "No"
+    Then I should see "Do you have any other concerns about your welfare?"
+    And I choose "No"
+    Then I should see "Have you had or do you currently have any court orders made for your protection?"
+    And I choose "No"
+    Then I should see "Contact between the children and the other people in this application"
+    And I choose "No" for all options on this page
+    Then I should see "What are you asking the court to decide about the children involved?"
+    And I check "Decide who they live with and when"
+    And I click the "Continue" button
+    Then I should see "What you’re asking the court to decide about the children"
+    And I should see "You would like the court to:"
+    And I should see "Decide who they live with and when"
+    And I should see "This is known as a Child Arrangements Order."
+    And I click the "Continue" link
+    Then I should see "Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?"
+    And I click the radio button "Yes"
+    And I fill in "steps-petition-protection-form-protection-orders-details-field" with "This is what I want resolved"
+    And I click the "Continue" button
+    Then I should see "Going to court"
+    And I should see "What happens at court"
+    And I should see "Changing or enforcing an order"
+    And I should see "Representing yourself in court"
+    And I should see "Domestic abuse and child abuse"
+    And I check "I understand what’s involved if I decide to go to court"
+    And I click the "Continue" button
+    Then I should see "Enter the names of the children"
+    And I fill in "First name(s)" with "Jane"
+    And I fill in "Last name(s)" with "Doe Jnr"
+    And I click the "Continue" button
+    Then I should see "Provide details for Jane Doe Jnr"
+    And I specify they are "2" years of age
+    And I choose "Female"
+    Then I should see "Which of the decisions you’re asking the court to resolve relate to Jane Doe Jnr?"
+    And I check "Decide who they live with and when"
+    And I click the "Continue" button
+    Then I should see "Is there a Special Guardianship Order in force in relation to Jane Doe Jnr?"
+    And I choose "No"
+    Then I should see "Parental responsibility for Jane Doe Jnr"
+    And I fill in "State everyone who has parental responsibility for Jane Doe Jnr and how they have parental responsibility." with "Father"
+    And I click the "Continue" button
+    Then I should see "Further information"
+    And I choose "Don't know" for all options on this page
+    Then I should see "Do you or any respondents have other children who are not part of this application?"
+    And I choose "No"
+    Then I should see "Enter your name"
+    And I fill in "First name(s)" with "Alfred"
+    And I fill in "Last name(s)" with "Applicant"
+    And I click the "Continue" button
+    Then I should see "Keeping your contact details private"
+    And I choose "I don't know"
+    Then I should see "Keeping your contact details private"
+    And I choose "No"
+    Then I should see "Are you currently resident in a refuge?"
+    And I choose "No"
+    Then I should see "The court will not keep your contact details private"
+    And I click the "Continue" link
+    Then I should see "Provide details for Alfred Applicant"
+    And I click the radio button "No"
+    And I click the radio button "Male"
+    And I specify they are "30" years of age
+    And I fill in "Your place of birth" with "London"
+    And I click the "Continue" button
+    Then I should see "What is Alfred Applicant's relationship to Jane Doe Jnr?"
+    And I choose "Father"
+    Then I should see "Address of Alfred Applicant"
+    And I click the "I live outside the UK" link
+    And I should see "Address details of Alfred Applicant"
+    And I fill in "Building and street" with "Buckingham Palace"
+    And I fill in "Town or city" with "London"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SW1A 1AA"
+    And I choose "Yes"
+    Then I should see "Contact details of Alfred Applicant"
+    And I click the radio button "I cannot provide an email address"
+    And I fill in "Your home phone" with "00000000000"
+    And I click the radio button "I cannot provide a mobile phone number"
+    And I fill in "Tell us why the court cannot phone you" with "It is unsafe for me"
+    And I click the radio button "Yes, the court can leave me a voicemail"
+    And I click the "Continue" button
+    Then I should see "Will you be legally represented by a solicitor in these proceedings?"
+    And I choose "No"
+    Then I should see "Enter the respondent’s name"
+    And I fill in "First name(s)" with "Rachel"
+    And I fill in "Last name(s)" with "Respondent"
+    And I click the "Continue" button
+    Then I should see "Provide details for Rachel Respondent"
+    And I click the radio button "No"
+    And I click the radio button "Female"
+    And I specify they are "30" years of age
+    And I fill in "Place of birth" with "London"
+    And I click the "Continue" button
+    Then I should see "What is Rachel Respondent's relationship to Jane Doe Jnr?"
+    And I choose "Mother"
+    Then I should see "Address of Rachel Respondent"
+    And I click the "I don’t know their postcode or they live outside the UK" link
+    Then I should see "Address details of Rachel Respondent"
+    And I fill in "Building and street" with "Windsor Castle"
+    And I fill in "Town or city" with "Windsor"
+    And I fill in "Country" with "United Kingdom"
+    And I fill in "Postcode" with "SL4 1QF"
+    And I click the radio button "Yes"
+    And I click the "Continue" button
+    Then I should see "Contact details of Rachel Respondent"
+    And I fill in "Email address" with "Rachel@Hotmail.com"
+    And I check "I don't know their home phone number"
+    And I check "I don't know their mobile number"
+    And I click the "Continue" button
+    Then I should see "Is there anyone else who should know about your application?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Who does Jane Doe Jnr currently live with?"
+    And I check "Alfred Applicant"
+    And I click the "Continue" button
+    Then I should see "Have any of the children in this application been involved in other family court proceedings?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Do you need an urgent hearing?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Are you asking for a without notice hearing?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Has a request for information or other assistance involving the children been made to or by another country?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Why are you making this application?"
+    And I fill in "Provide details" with "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And I click the "Continue" button
+    Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need an intermediary to help them in court?"
+    And I click the radio button "No"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application have special language requirements?"
+    And I click the "Continue" button
+    Then I should see "Do you or the children need specific safety arrangements at court?"
+    And I click the "Continue" button
+    Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
+    And I click the "Continue" button
+    Then I should see "Submitting your application to court"
+    And I fill in "Enter an email address if you would like to get a confirmation" with "alfred@Gmail.com"
+    And I click the "Continue" button
+    Then I should see "Is this email address correct?"
+    And I should see "alfred@gmail.com"
+    And I click the "Yes, continue" link
+    Then I should see "How will you pay the application fee?"
+    And I click the radio button "Pay with ‘Help with fees’"
+    And I fill in "Reference number" with "HWF-123-456"
+    And I click the "Continue" button
+    Then Page has title "Check your answers"
+    And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
+    And I should see the children "aren't" involved in any emergency protection, care of proceedings
+    And I should see they "haven't" been to mediation through the mediation voucher scheme
+    And I should see they "haven't" been to mediation through the mediation voucher scheme
+    And I should see they have got a valid exemption: "You’re applying for a without notice hearing"
+    And I should see the details provided for the exemption are ""
+    And I should see an attachment presenting MIAM exemption evidence "is" present
+    And I should see they "have" got safety concerns about the children
+    And I should see they have safety concerns with the children about: "abduction, financial abuse, other abuse"
+    And I should see "No, I do not want the other person to spend time with the children"
+    And I should see they want the court to decide: "Decide who they live with and when"
+    And I should see the child's full name is "Jane Doe Jnr"
+    And I should see the child's gender is "Female"
+    And I should see the child is "2" years old
+    And I should see the people who have parental responsibility for the child are: "Father"
+    And I should see the children "might be" known to other social services
+    And I should see the applicant's name is "Alfred Applicant"
+    And I should see the applicant's gender is "Male"
+    And I should see the applicant is "30" years old
+    And I should see the applicant's place of birth is "London"
+    And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
+    And I should see the applicant "has" lived at this address for more than 5 years
+    And I should see the applicant has provided a home telephone number "00000000000"
+    And I should see the applicant's relationship to "Jane Doe Jnr" is "Father"
+    And I should see the applicant "doesn't" have a solicitor
+    And I should see the respondent's name is "Rachel Respondent"
+    And I should see the respondent's gender is "Female"
+    And I should see the respondent is "30" years old
+    And I should see the respondent's place of birth is "London"
+    And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
+    And I should see the respondent "has" lived at that address for more than 5 years
+    And I should see the respondent's email is "rachel@hotmail.com"
+    And I should see the respondent's relationship to "Jane Doe Jnr" is "Mother"
+    And I should see there "aren't" other people who need to be informed of the application
+    And I should see the child "Jane Doe Jnr" lives with "Alfred Applicant"
+    And I should see the children "haven't" been involved in other proceedings
+    And I should see an urgent hearing "isn't" requested
+    And I should see a without notice hearing "isn't" requested
+    And I should see the life of someone significant to the child "isn't" outside the UK
+    And I should see another person in this application "couldn't" apply for an order outside the UK
+    And I should see a request for information involving the children "hasn't" been made outside the UK
+    And I should see the reason for application is "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And I should see there "aren't" factors that may affect any adult in this application taking part in the court proceedings
+    And I should see there "aren't" people who need an intermediary to help them in court
+    And I should see there "aren't" special language requirements
+    And I should see there "aren't" specific safety arrangements specified for the court
+    And I should see there "aren't" special facilities needed when attending court
+    And I should see the email for submitting an application to court is "alfred@gmail.com"
+    And I should see the payment type "Help with fees"
+    And I should see the HwF reference number is "HWF-123-456"
+    And I should see the statement of truth
+
+  Scenario: Child arrangements order (MIAM) (path three: 'Yes' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
     Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
     And I choose "No"
@@ -558,7 +863,7 @@ Scenario: Child arrangements order (MIAM) (path: 'No' to 'Have you attended a MI
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
 
-  Scenario: Child arrangements order (MIAM) (path two: 'Yes' to 'Have you attended a MIAM?')
+  Scenario: Child arrangements order (MIAM) (path four: 'Yes' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
     Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
     And I choose "Yes"
@@ -952,8 +1257,16 @@ Scenario: Child arrangements order (MIAM) (path: 'No' to 'Have you attended a MI
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
     And I should see the statement of truth
+    
+  Scenario: Skip child arrangements order (MIAM) (path five)
+    When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
+    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
+    And I choose "Yes"
+    Then I should see "You do not have to attend a MIAM"
+    And I click the "Continue" link
+    Then I should see "Safety concerns"
 
-  Scenario: Consent order
+  Scenario: Consent order (path six)
     When I click the radio button "Consent order"
     And I click the "Continue" button
     And I should see "Upload the draft of your consent order"
