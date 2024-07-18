@@ -98,6 +98,13 @@ And(/^I choose "([^"]*)" for all options on this page$/) do |arg|
   find_button('Continue').click
 end
 
+And(/^I choose "([^"]*)" for all options on this page without continuing$/) do |arg|
+  options = page.all('label', text: arg)
+  options.each do |radio_button|
+    radio_button.click
+  end
+end
+
 And(/^I fill in the Expiry date with a valid card expiry date$/) do
   future = travel 365.day
   step %[I fill in "Month" with "#{future.month}"]
