@@ -800,3 +800,29 @@ And(/^I should see the other party is "([^"]*)" years of age$/) do |age|
     end
   end
 end
+
+And(/^I should see they have got a valid exemption: "([^"]*)"$/) do |arg|
+  within('#miam_exemptions') do
+    expect(page).to have_content(arg)
+  end
+end
+
+And(/^I should see the details provided for the exemption are "([^"]*)"$/) do |arg|
+  within('#miam_exemptions') do
+    within('#exemption_details') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see an attachment presenting MIAM exemption evidence "(is|isn't)" present$/) do |arg|
+  within('#miam_exemptions') do
+    within('#exemption') do
+      if arg == "is"
+        expect(page).to have_content("Attached document")
+      elsif arg == "isn't"
+        expect(page).not_to have_content("Attached document")
+      end
+    end
+  end
+end
