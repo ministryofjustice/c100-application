@@ -13,9 +13,7 @@ module Steps
 
         c100_application.update(
           submission_type: SubmissionType::ONLINE.to_s,
-          receipt_email:,
-          # The following are dependent attributes that need to be reset
-          payment_type: nil,
+          receipt_email:
         )
       end
     end
