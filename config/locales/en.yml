@@ -428,16 +428,12 @@ en:
         edit:
           page_title: "Do any of the children live with %{name}?"
           heading: "Do any of the children live with %{name}?"
-      privacy_known:
-        edit:
-          page_title: Contact details confidentiality
-          heading: "Keeping your contact details private"
-          privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
       privacy_preferences:
         edit:
           page_title: Contact details confidentiality
-          heading: "Keeping your contact details private"
-          privacy_known: Do the other people named in this application (the respondents) know any of your contact details?
+          heading: "Keeping %{name}'s details private"
+          lead_text: The answers you give in your response will be shared with other people named in this application (the respondents). This will include your contact details.
+          legend: "Do you want to keep %{name}'s details private from the other people named in the application (the respondents)?"
 
     address:
       lookup:
@@ -1996,9 +1992,6 @@ en:
         <<: *PERSONAL_DETAILS_LEGENDS
       steps_other_party_address_details_form:
         <<: *PERSONAL_DETAILS_LEGENDS
-      steps_other_party_privacy_preferences_form:
-        are_contact_details_private: Do the other people named in this application (the respondents) know any of your contact details?
-
       # Attending court steps
       steps_attending_court_intermediary_form:
         intermediary_help: Does anyone in this application need an intermediary to help them in court?

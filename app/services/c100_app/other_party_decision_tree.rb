@@ -1,5 +1,6 @@
 module C100App
   class OtherPartyDecisionTree < PeopleDecisionTree
+    # rubocop:disable Metrics/MethodLength
     def destination
       return next_step if next_step
 
@@ -7,7 +8,11 @@ module C100App
       when :add_another_name
         edit(:names)
       when :names_finished
-        edit(:personal_details, id: next_party_id)
+        if PrivacyChange.changes_apply?
+          edit("/steps/other_party/children_cohabit_other", id: next_party_id)
+        else
+          edit(:personal_details, id: next_party_id)
+        end
       when :personal_details
         edit_first_child_relationships
       when :relationship
@@ -22,6 +27,7 @@ module C100App
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     private
 
@@ -34,15 +40,13 @@ module C100App
     end
 
     def after_privacy_preferences
-      if show_address_lookup?
-        edit('/steps/address/lookup', id: record.person)
-      else
-        edit("/steps/#{record.person.type.underscore}/address_details", id: record.person)
-      end
+      edit(:personal_details, id: record.person)
     end
 
     def after_address_details
-      if next_party_id
+      if PrivacyChange.changes_apply? && next_party_id
+        edit("/steps/other_party/children_cohabit_other", id: next_party_id)
+      elsif next_party_id
         edit(:personal_details, id: next_party_id)
       else
         edit('/steps/children/residence', id: first_child_id)

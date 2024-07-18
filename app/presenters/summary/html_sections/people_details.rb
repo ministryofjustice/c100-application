@@ -35,9 +35,9 @@ module Summary
             FreeTextAnswer.new(:person_full_name, person.full_name, change_path: names_path),
             person_privacy_answers_group(person),
             person_personal_details_answers_group(person),
+            children_relationships(person),
             person_address_details_answers_group(person),
             person_contact_details_answers_group(person),
-            children_relationships(person),
           ].compact
         end.flatten.select(&:show?)
       end
@@ -108,7 +108,8 @@ module Summary
                                change_path: edit_steps_applicant_privacy_known_path(person)),
             FreeTextAnswer.new(:person_contact_details_private,
                                privacy_preferences_answer(person),
-                               change_path: edit_steps_applicant_privacy_preferences_path(person)),
+                               change_path: edit_steps_applicant_privacy_preferences_path(person),
+                               i18n_opts: {name: "your contact"}),
             FreeTextAnswer.new(:refuge, person.refuge.capitalize,
                                change_path: edit_steps_applicant_refuge_path(person)),
           ]
@@ -118,7 +119,8 @@ module Summary
                                change_path: edit_steps_applicant_privacy_known_path(person)),
             FreeTextAnswer.new(:person_contact_details_private,
                                privacy_preferences_answer(person),
-                               change_path: edit_steps_applicant_privacy_preferences_path(person))
+                               change_path: edit_steps_applicant_privacy_preferences_path(person),
+                               i18n_opts: {name: "your contact"})
           ]
         end
       end
@@ -130,7 +132,8 @@ module Summary
                              i18n_opts: {name: person.full_name}),
           FreeTextAnswer.new(:person_contact_details_private,
                              person.are_contact_details_private.try(:capitalize),
-                             change_path: edit_steps_other_party_privacy_preferences_path(person))
+                             change_path: edit_steps_other_party_privacy_preferences_path(person),
+                             i18n_opts: {name: person.full_name})
         ]
       end
 

@@ -6,10 +6,11 @@
 
     <p class="govuk-body-l"><%=t '.lead_text' %></p>
 
-    <%= render @presenter.sections %>
-
     <p class="govuk-body govuk-!-margin-top-6">
       <%= link_button t('.resume'), previous_step_path %>
     </p>
+
+    <%= render @presenter.sections %>
+
   </div>
 </div>

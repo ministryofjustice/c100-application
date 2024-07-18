@@ -34,7 +34,7 @@ RSpec.describe C100App::OtherPartyDecisionTree do
     let(:step_params) {{'names_finished' => 'anything'}}
 
     it 'goes to edit the details of the first party' do
-      expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: 1)
+      expect(subject.destination).to eq(controller: '/steps/other_party/children_cohabit_other', action: :edit, id: 1)
     end
   end
 
@@ -50,6 +50,7 @@ RSpec.describe C100App::OtherPartyDecisionTree do
   context 'when the step is `relationship`' do
     let(:step_params) {{'relationship' => 'anything'}}
     let(:record) { double('Relationship', person: other_party, minor: child) }
+    let(:child) { double('Child', id: 3) }
 
     let(:other_party) { OtherParty.new }
 
@@ -62,28 +63,22 @@ RSpec.describe C100App::OtherPartyDecisionTree do
     end
 
     context 'when all child relationships have been edited' do
-      let(:child) { double('Child', id: 3) }
-      let(:other_party) { OtherParty.new }
-
-      it 'goes to edit the children_cohabit_other page' do
-        expect(subject.destination).to eq(controller: '/steps/other_party/children_cohabit_other', action: :edit, id: other_party)
+      include_examples 'address lookup decision tree' do
+        let(:person) { other_party }
+        let(:namespace) { 'other_party' }
       end
     end
   end
 
   context 'when the step is children_cohabit_other' do
     let(:step_params) {{'cohabit_with_other' => 'anything'}}
+    let(:record) { double('Relationship', person: other_party) }
+    let(:other_party) { OtherParty.new }
 
     before do
-      allow(person).to receive(:reload).and_return(other_party)
+      allow(other_party).to receive(:reload).and_return(other_party)
     end
 
-    include_examples 'address lookup decision tree' do
-      let(:other_party) { OtherParty.new(cohabit_with_other: 'no') }
-      let(:person) { other_party }
-      let(:namespace) { 'other_party' }
-      let(:record) { double('Relationship', person: person) }
-    end
 
     context 'when cohabit_with_other is yes' do
       let(:other_party) { OtherParty.new(cohabit_with_other: 'yes') }
@@ -92,16 +87,24 @@ RSpec.describe C100App::OtherPartyDecisionTree do
         expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: other_party)
       end
     end
+
+    context 'when cohabit_with_other is no' do
+      let(:other_party) { OtherParty.new(cohabit_with_other: 'no') }
+
+      it 'goes to edit the personal_details page' do
+        expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: other_party)
+      end
+    end
   end
 
-  context 'when the step is `contact_details`' do
+  context 'when the step is `address_details`' do
     let(:step_params) {{'address_details' => 'anything'}}
 
     context 'when there are remaining parties' do
       let(:record) { double('OtherParty', id: 1) }
 
       it 'goes to edit the personal details of the next party' do
-        expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: 2)
+        expect(subject.destination).to eq(controller: '/steps/other_party/children_cohabit_other', action: :edit, id: 2)
       end
     end
 
