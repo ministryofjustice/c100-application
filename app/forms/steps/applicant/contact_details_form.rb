@@ -41,7 +41,7 @@ module Steps
         super().tap do |hsh|
           hsh[:email] = nil unless email_provided.yes?
           hsh[:mobile_phone] = nil unless mobile_provided.yes?
-          hsh[:mobile_not_provided_reason] = nil unless mobile_provided.yes?
+          hsh[:mobile_not_provided_reason] = nil if mobile_provided.yes?
         end
       end
 
