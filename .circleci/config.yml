@@ -242,17 +242,27 @@ workflows:
             - test
           filters:
             branches:
-              only: master
+              only:
+                - /^master$/
+                - /^RST-.*/
       - deploy_image_to_live:
           name: deploy-staging-live
           env_name: staging
           requires:
             - build-staging
+          filters:
+            branches:
+              only:
+                - /^master$/
+                - /^RST-.*/
       ### production ###
       - approve_production:
           type: approval
           requires:
             - deploy-staging-live
+          filters:
+            branches:
+              only: /^master$/
       - tag_production:
           env_name: staging
           requires:
@@ -262,3 +272,6 @@ workflows:
           env_name: production
           requires:
             - tag_production
+          filters:
+            branches:
+              only: /^master$/
