@@ -242,20 +242,32 @@ workflows:
               only: master
       - deploy_image_to_live:
           name: deploy-staging-live
+          filters:
+            branches:
+              only: master
           env_name: staging
           requires:
             - build-staging
       ### production ###
       - approve_production:
           type: approval
+          filters:
+            branches:
+              only: master
           requires:
             - deploy-staging-live
       - tag_production:
+          filters:
+            branches:
+              only: master
           env_name: staging
           requires:
             - approve_production
       - deploy_image_to_live_prod:
           name: deploy-production-live
+          filters:
+            branches:
+              only: master
           env_name: production
           requires:
             - tag_production
