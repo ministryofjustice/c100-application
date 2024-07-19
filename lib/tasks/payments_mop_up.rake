@@ -10,11 +10,11 @@ task payments_mop_up: [:stdout_environment] do
     Rails.logger.info "#{key}: #{value}"
   end
 
-  Rails.logger.info "Starting payments mop-up for intents older than #{mop_up_minutes_ago.iso8601}"
+  Rails.logger.info "1. Starting payments mop-up for intents older than #{mop_up_minutes_ago.iso8601}"
 
   PaymentsMopUpJob.run(mop_up_minutes_ago)
 
-  Rails.logger.info "Finished payments mop-up for intents older than #{mop_up_minutes_ago.iso8601}"
+  Rails.logger.info "2. Finished payments mop-up for intents older than #{mop_up_minutes_ago.iso8601}"
 end
 
 private
