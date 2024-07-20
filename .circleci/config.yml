@@ -79,7 +79,7 @@ jobs:
       #   name: run tests
       #   command: << parameters.test_command >>
     
-  build_and_push_image_setup:
+  build_and_push_image:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
     steps:
       # Checkout your repository
@@ -97,29 +97,6 @@ jobs:
           tag: ${CIRCLE_SHA1},latest
           region: $ECR_REGION # this will use the env var
           repo: $ECR_REPOSITORY # this will use the env var
-  build_and_push_image:
-    <<: *cloud_container
-    parameters:
-      env_name:
-        type: string
-    steps:
-      - checkout
-
-      - setup_remote_docker:
-          version: 20.10.11
-          docker_layer_caching: true
-
-      - run:
-          name: push docker image
-          command: |
-            aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
-
-            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
-
-            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
- 
   deploy_image_to_live:
     <<: *cloud_container
     parameters:
