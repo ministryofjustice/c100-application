@@ -93,8 +93,8 @@ jobs:
           aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
       # Build and push your Docker image
       - aws-ecr/build-image:
-          push-image: false
-          tag: ${CIRCLE_SHA1}
+          push-image: true
+          tag: ${CIRCLE_SHA1},latest
           region: $ECR_REGION # this will use the env var
           repo: $ECR_REPOSITORY # this will use the env var
   build_and_push_image:
@@ -219,20 +219,10 @@ workflows:
     jobs:
       - test
       ### staging ###
-      - build_and_push_image_setup:
-          name: build-staging-setup
-          requires:
-            - test
-          filters:
-            branches:
-              only:
-                - /^master$/
-                - /^RST-.*/
       - build_and_push_image:
           name: build-staging
-          env_name: staging
           requires:
-            - build-staging-setup
+            - test
           filters:
             branches:
               only:
