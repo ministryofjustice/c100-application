@@ -243,7 +243,6 @@ workflows:
             branches:
               only:
                 - /^master$/
-                - /^RST-.*/
       - deploy_image_to_live:
           name: deploy-staging-live
           env_name: staging
@@ -253,7 +252,6 @@ workflows:
             branches:
               only:
                 - /^master$/
-                - /^RST-.*/
       ### production ###
       - approve_production:
           type: approval
