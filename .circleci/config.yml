@@ -75,9 +75,9 @@ jobs:
       # so mutant only runs on modified files; refer to mutant.rake for more details
       - run: git remote set-branches origin master && git fetch
 
-      #- run:
-      #   name: run tests
-      #   command: << parameters.test_command >>
+      - run:
+         name: run tests
+         command: << parameters.test_command >>
     
   build_and_push_image:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
@@ -94,10 +94,9 @@ jobs:
       # Build and push your Docker image
       - aws-ecr/build-image:
           push-image: true
-          tag: ${CIRCLE_SHA1}
+          tag: ${CIRCLE_SHA1},staging.latest
           region: $ECR_REGION # this will use the env var
           repo: $ECR_REPOSITORY # this will use the env var
-
   build_image:
     <<: *cloud_container
     parameters:
@@ -242,23 +241,37 @@ workflows:
             - test
           filters:
             branches:
-              only: master
+              only:
+                - /^master$/
       - deploy_image_to_live:
           name: deploy-staging-live
           env_name: staging
           requires:
             - build-staging
+          filters:
+            branches:
+              only:
+                - /^master$/
       ### production ###
       - approve_production:
           type: approval
           requires:
             - deploy-staging-live
+          filters:
+            branches:
+              only: master
       - tag_production:
           env_name: staging
           requires:
             - approve_production
+          filters:
+            branches:
+              only: master
       - deploy_image_to_live_prod:
           name: deploy-production-live
           env_name: production
           requires:
             - tag_production
+          filters:
+            branches:
+              only: master
