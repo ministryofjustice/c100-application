@@ -4,6 +4,7 @@
 # Refer to `app/jobs/payments_mop_up_job.rb` for more details.
 #
 task payments_mop_up: [:stdout_environment] do
+
   Rails.logger.info "Starting payments mop-up for intents older than #{mop_up_minutes_ago.iso8601}"
 
   PaymentsMopUpJob.run(mop_up_minutes_ago)

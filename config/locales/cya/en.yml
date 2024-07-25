@@ -510,7 +510,7 @@ en:
     person_privacy_known:
       question: Do the other people named in this application (the respondents) know any of your contact details?
     person_contact_details_private:
-      question: Do you want to keep your contact details private from the other people named in the application (the respondents)?
+      question: Do you want to keep %{name} details private from the other people named in the application (the respondents)?
     refuge:
       question: Are you currently resident in a refuge?
     person_full_name:
