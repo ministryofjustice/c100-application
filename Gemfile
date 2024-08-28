@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
 gem 'puma', '< 6.0.0'
-gem 'rails', '7.1.0'
+gem 'rails', '7.1.3.1'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
 gem 'sentry-rails'
@@ -28,7 +28,7 @@ gem 'omniauth-rails_csrf_protection'
 
 # Caching and jobs processing
 gem 'redis'
-gem 'sidekiq', '~> 6.4'
+gem 'sidekiq', '~> 7.2.0'
 gem 'sidekiq_alive'
 
 # PDF generation
@@ -39,7 +39,7 @@ gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 # Amazon S3 blob storage
 gem 'aws-sdk-s3', '~> 1'
 gem 'clamby'
-gem 'sanitize', '~> 6.0'                        
+gem 'sanitize', '~> 6.0.2'
 
 group :development, :production do
   gem 'lograge'
