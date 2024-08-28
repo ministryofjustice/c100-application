@@ -69,7 +69,7 @@ RUN yarn
 
 # "chmod -R" is due to:
 # https://github.com/mileszs/wicked_pdf/issues/911
-RUN gem install bundler -v 2.3.17 && \
+RUN gem install bundler -v 2.5.15 && \
     bundle config set frozen 'true' && \
     bundle config without test:development && \
     bundle install --jobs 2 --retry 3 && \
