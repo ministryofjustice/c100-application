@@ -42,14 +42,17 @@ jobs:
     steps:
       - run: sudo apt-get update
       - browser-tools/install-chrome:
-          chrome-version: 128.0.6613.114
+          chrome-version: 113.0.5672.76 # TODO: remove when chromedriver downloads are fixed
+          #replace-existing: true # TODO: remove when: https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+            #      - run:
+            #          name: Remove chromedriver license # prevents checkout
+          #          command: |
+          #            rm LICENSE.chromedriver
       - checkout
       - run:
           name: Install ChromeDriver
           command: |
-            CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
-            CHROME_DRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-            wget https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+            wget https://chromedriver.storage.googleapis.com/113.0.5672.63/chromedriver_linux64.zip
             unzip chromedriver_linux64.zip
             sudo mv chromedriver /usr/local/bin/
             sudo chmod +x /usr/local/bin/chromedriver
