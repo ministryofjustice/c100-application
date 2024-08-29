@@ -79,7 +79,7 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'rubocop'
   gem 'rubocop-performance', require: false
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '>= 4.24.0'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'site_prism', '~> 3.7', '>= 3.7.1'

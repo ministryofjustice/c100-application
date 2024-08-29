@@ -2,6 +2,8 @@ GEM
   remote: https://gem.mutant.dev/
   specs:
     mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
+    rubyzip (2.3.2)
+    websocket (1.2.11)
 
 GEM
   remote: https://rubygems.org/
@@ -470,7 +472,6 @@ GEM
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
     ruby2_keywords (0.0.5)
-    rubyzip (2.3.2)
     sanitize (6.1.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -567,7 +568,6 @@ GEM
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
     webrick (1.8.1)
-    websocket (1.2.11)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -628,7 +628,7 @@ DEPENDENCIES
   rubocop-performance
   sanitize (~> 6.0)
   sass-rails (< 6.0.0)
-  selenium-webdriver
+  selenium-webdriver (>= 4.24.0)
   sentry-rails
   sidekiq (~> 6.4)
   sidekiq_alive
