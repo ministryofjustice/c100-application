@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby File.read('.ruby-version')
 
-gem 'devise', '~> 4.8.0'
+gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
 gem 'govuk_notify_rails', '~> 2.2.0'
 gem 'govuk-pay-ruby-client', '~> 1.0.2'
@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
 gem 'puma', '< 6.0.0'
-gem 'rails', '7.1.3.1'
+gem 'rails', '7.2.1'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
 gem 'sentry-rails'
@@ -59,7 +59,7 @@ source 'https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev' do
 end
 
 group :development, :test do
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '~> 3.1', '>= 3.1.2'
   gem 'mutant-rspec'
   gem 'pry-byebug'
   gem 'pry-rails'

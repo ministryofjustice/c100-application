@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CallbacksController, type: :controller do
   before do
-    allow(ENV).to receive(:[]).with('GOVUK_NOTIFY_BEARER_TOKEN').and_return('test-token')
+    allow(ENV).to receive(:fetch).with('GOVUK_NOTIFY_BEARER_TOKEN').and_return('test-token')
   end
 
   describe '#notify' do
