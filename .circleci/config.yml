@@ -42,13 +42,18 @@ jobs:
     steps:
       - run: sudo apt-get update
       - browser-tools/install-chrome:
-          chrome-version: 113.0.5672.76 # TODO: remove when chromedriver downloads are fixed
+          #chrome-version: 113.0.5672.76 # TODO: remove when chromedriver downloads are fixed
           #replace-existing: true # TODO: remove when: https://github.com/CircleCI-Public/browser-tools-orb/issues/75
             #      - run:
             #          name: Remove chromedriver license # prevents checkout
           #          command: |
           #            rm LICENSE.chromedriver
       - checkout
+      - run:
+          name: Install Google Chrome
+          command: |
+            wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_113.0.5672.76-1_amd64.deb
+            sudo apt-get install -y ./google-chrome-stable_113.0.5672.76-1_amd64.deb
       - run:
           name: Install ChromeDriver
           command: |
