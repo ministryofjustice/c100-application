@@ -43,7 +43,7 @@ jobs:
       - run: sudo apt-get update
       - browser-tools/install-chrome:
           chrome-version: 113.0.5672.76 # TODO: remove when chromedriver downloads are fixed
-          #replace-existing: true # TODO: remove when: https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+          replace-existing: true # TODO: remove when: https://github.com/CircleCI-Public/browser-tools-orb/issues/75
             #      - run:
             #          name: Remove chromedriver license # prevents checkout
           #          command: |
