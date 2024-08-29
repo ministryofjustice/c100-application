@@ -43,6 +43,7 @@ jobs:
       - run: sudo apt-get update
       - browser-tools/install-chrome:
           chrome-version: 128.0.6613.114
+      - checkout
       - run:
           name: Install ChromeDriver
           command: |
@@ -51,7 +52,6 @@ jobs:
             unzip chromedriver_linux64.zip
             sudo mv chromedriver /usr/local/bin/
             sudo chmod +x /usr/local/bin/chromedriver
-      - checkout
 
       # Download and cache dependencies
       - restore_cache:
