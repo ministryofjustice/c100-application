@@ -5,7 +5,7 @@ ruby File.read('.ruby-version')
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
-gem 'govuk_notify_rails', '~> 2.2.0'
+gem 'govuk_notify_rails', '~> 3.0.0'
 gem 'govuk-pay-ruby-client', '~> 1.0.2'
 gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
@@ -28,12 +28,12 @@ gem 'omniauth-rails_csrf_protection'
 
 # Caching and jobs processing
 gem 'redis'
-gem 'sidekiq', '~> 7.2.0'
+gem 'sidekiq', '~> 7.3.0'
 gem 'sidekiq_alive'
 
 # PDF generation
 gem 'combine_pdf', '~> 1.0'
-gem 'wicked_pdf', '~> 2.6.0'
+gem 'wicked_pdf', '~> 2.8.0'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
 # Amazon S3 blob storage
@@ -82,7 +82,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
-  gem 'site_prism', '~> 3.7', '>= 3.7.1'
+  gem 'site_prism', '~> 5.0.3', ' >= 5.0.0'
   gem 'webmock'
   gem 'database_cleaner'
   gem 'parallel_tests'
