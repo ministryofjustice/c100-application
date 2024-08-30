@@ -52,6 +52,8 @@ jobs:
             sudo mv chrome-linux64/chrome /usr/local/bin/
             sudo apt-get install -f
             sudo apt-get install libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libnss3 libxss1 libglib2.0-0 libgtk-3-0 libasound2 libatk-bridge2.0-0 libxrandr2 libgbm1 libu2f-udev
+            rm -rf ~/.config/google-chrome/Default
+            /usr/local/bin/chrome --no-sandbox --remote-debugging-port=9222
             
             wget https://storage.googleapis.com/chrome-for-testing-public/127.0.6533.119/linux64/chromedriver-linux64.zip
             unzip chromedriver-linux64.zip
