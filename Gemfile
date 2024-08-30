@@ -73,7 +73,7 @@ group :test do
   gem 'brakeman'
   gem 'capybara'
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.25'
-  gem 'cucumber', '< 8.0.1'
+  gem 'cucumber', '~> 9.2.0'
   gem 'cucumber-rails', require: false
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
