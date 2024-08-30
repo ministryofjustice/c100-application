@@ -47,7 +47,7 @@ jobs:
           command: |
             sudo apt-get remove google-chrome-stable
             sudo apt-get install -f
-            sudo apt-get install libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libnss3 libxss1 libglib2.0-0 libgtk-3-0 libasound2  
+            sudo apt-get install libicu-dev libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libnss3 libxss1 libglib2.0-0 libgtk-3-0 libasound2  
             wget https://storage.googleapis.com/chrome-for-testing-public/127.0.6533.119/linux64/chrome-linux64.zip
             unzip chrome-linux64.zip
             sudo chmod +x chrome-linux64/chrome
