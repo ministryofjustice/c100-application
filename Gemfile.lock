@@ -356,7 +356,7 @@ GEM
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
-    puma (5.6.5)
+    puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.9)
@@ -611,7 +611,7 @@ DEPENDENCIES
   pg (~> 1.1)
   pry-byebug
   pry-rails
-  puma (< 6.0.0)
+  puma (~> 6.4.0)
   rails (= 7.2.1)
   rails-controller-testing
   redis
