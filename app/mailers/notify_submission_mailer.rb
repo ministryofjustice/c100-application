@@ -27,9 +27,9 @@ class NotifySubmissionMailer < NotifyMailer
 
     set_personalisation(
       shared_personalisation.merge(
-        urgent: @c100_application.mark_as_urgent? ? 'yes' : 'no',
+        urgent: notify_boolean(@c100_application.mark_as_urgent?),
         safety_concerns: notify_boolean(@c100_application.has_safety_concerns?),
-        c8_included: @c100_application.confidentiality_enabled? ? 'yes' : 'no',
+        c8_included: notify_boolean(@c100_application.confidentiality_enabled?),
         link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
         link_to_pdf: prepare_upload(@documents[:bundle]),
         link_to_json: prepare_upload(@documents[:json_form]),
