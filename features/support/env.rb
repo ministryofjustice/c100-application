@@ -42,12 +42,6 @@ Capybara.register_driver :selenium_chrome_headless do |app|
   options.add_argument('--no-sandbox')
   options.add_argument('--disable-dev-shm-usage')
 
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :chrome,
-    options: options,
-    driver_path: '/usr/local/bin/chromedriver'
-  )
 end
 
 Capybara.default_driver = :selenium_chrome_headless
