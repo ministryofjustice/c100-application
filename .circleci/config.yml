@@ -48,7 +48,7 @@ jobs:
             sudo apt-get remove google-chrome-stable
             sudo apt-get install google-chrome-stable
             
-            wget https://storage.googleapis.com/chrome-for-testing-public/127.0.6533.119/linux64/chromedriver-linux64.zip
+            wget https://storage.googleapis.com/chrome-for-testing-public/128.0.6613.113/linux64/chromedriver-linux64.zip
             unzip chromedriver-linux64.zip
             sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
             sudo chmod +x /usr/local/bin/chromedriver
