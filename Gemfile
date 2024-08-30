@@ -23,7 +23,7 @@ gem 'tzinfo', '~> 2.0.5'
 gem 'timecop'
 
 # Back office
-gem 'omniauth-auth0'
+gem 'omniauth-auth0', '~> 3.1.0'
 gem 'omniauth-rails_csrf_protection'
 
 # Caching and jobs processing
@@ -55,7 +55,7 @@ group :development do
 end
 
 source 'https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev' do
-  gem 'mutant-license',                '0.1.1.2.1739399027284447558325915053311580324856.4'
+  gem 'mutant-license',                '0.1.1.2.1739399027284447558325915053311580324856.7'
 end
 
 group :development, :test do
