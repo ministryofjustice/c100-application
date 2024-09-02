@@ -61,11 +61,7 @@ module C100App
 
     def details_payload
       {
-        amount: if FeeIncrease.changes_apply?
-                  Rails.configuration.x.court_fee.new_amount_in_pence
-                else
-                  Rails.configuration.x.court_fee.amount_in_pence
-                end,
+        amount: Rails.configuration.x.court_fee.new_amount_in_pence,
         description: Rails.configuration.x.court_fee.description,
         reference: c100_application.reference_code,
         email: c100_application.receipt_email,

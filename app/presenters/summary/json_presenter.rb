@@ -53,11 +53,7 @@ module Summary
     private
 
     def fee_amount
-      amount = if FeeIncrease.changes_apply?
-                 format("%.2f", (Rails.configuration.x.court_fee.new_amount_in_pence / 100))
-               else
-                 format("%.2f", (Rails.configuration.x.court_fee.amount_in_pence / 100))
-               end
+      amount = format("%.2f", (Rails.configuration.x.court_fee.new_amount_in_pence / 100))
       "£#{amount}"
     end
   end
