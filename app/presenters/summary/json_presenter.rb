@@ -53,7 +53,7 @@ module Summary
     private
 
     def fee_amount
-      amount = format("%.2f", (Rails.configuration.x.court_fee.new_amount_in_pence / 100))
+      amount = format("%.2f", (Rails.configuration.x.court_fee.amount_in_pence / 100))
       "£#{amount}"
     end
   end
