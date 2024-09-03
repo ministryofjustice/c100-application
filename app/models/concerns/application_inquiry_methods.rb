@@ -36,7 +36,7 @@ module ApplicationInquiryMethods
   end
 
   def mark_as_urgent?
-    urgent_hearing == 'yes'
+    urgent_hearing == 'yes' || without_notice == 'yes'
   end
 
   def has_petition_orders?
