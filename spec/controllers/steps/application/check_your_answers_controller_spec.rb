@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Steps::Application::CheckYourAnswersController, type: :controller do
 
   before do
-    allow(MediationChange).to receive(:changes_apply?).and_return(false)
+    allow(controller).to receive(:check_exemption_file)
   end
 
   it_behaves_like 'an intermediate step controller', Steps::Application::DeclarationForm, C100App::ApplicationDecisionTree

@@ -1,6 +1,5 @@
 Feature: MIAM mediation change journey
   Background:
-    Given Mediation changes do apply
     Given I have started an application
     When I visit "steps/miam/acknowledgement"
     Then I should see "Have you previously been to mediation through the mediation voucher scheme?"
@@ -16,7 +15,6 @@ Feature: MIAM mediation change journey
 #    Then I should see "Have you got a document signed by the mediator?"
 #    And I choose "Yes"
 #    Then I should see "Upload your MIAM certificate"
-#    And the mediation changes end
 
   @unhappy_path
   Scenario: Applicant attended a MIAM but lacks the certificate
@@ -26,7 +24,6 @@ Feature: MIAM mediation change journey
     And I choose "No"
     Then I should see "You need to get a document from the mediator"
     Then I should see "Save and come back later"
-    And the mediation changes end
 
   @unhappy_path
   Scenario Outline: Applicant did not attend a MIAM and does not have a mediator’s exemption
@@ -35,7 +32,6 @@ Feature: MIAM mediation change journey
     Then I should see "Do you have a valid reason for not attending a MIAM?"
     And I choose "<has_valid_reason>"
     Then I should see "<outcome_page_header>"
-    And the mediation changes end
 
     Examples:
       | has_valid_reason | outcome_page_header                                       |
@@ -64,7 +60,6 @@ Feature: MIAM mediation change journey
     And I check "None of these"
     And I click the "Continue" button
     Then I should see "You must attend a MIAM"
-    And the mediation changes end
 
 
   @happy_path
@@ -103,7 +98,6 @@ Feature: MIAM mediation change journey
     Then I should see "You or the prospective respondents are under 18 years old"
     And I click the "Continue" link
     Then I should see "Safety concerns"
-    And the mediation changes end
 
   @happy_path
   Scenario: Test timeout for applicant attended a MIAM
@@ -112,7 +106,6 @@ Feature: MIAM mediation change journey
     Then I should see "Have you got a document signed by the mediator?"
     When I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
-    And the mediation changes end
 
   @unhappy_path
   Scenario: Test timeout for applicant attended a MIAM but lacks the certificate
@@ -121,7 +114,6 @@ Feature: MIAM mediation change journey
     Then I should see "Have you got a document signed by the mediator?"
     When I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
-    And the mediation changes end
 
   @unhappy_path
   Scenario: Test timeout for applicant did not attend a MIAM and does not have a mediator’s exemption
@@ -130,7 +122,6 @@ Feature: MIAM mediation change journey
     Then I should see "Do you have a valid reason for not attending a MIAM?"
     Then I wait and click the "Continue" button
     And I should see "Sorry, you'll have to start again"
-    And the mediation changes end
 
   @unhappy_path
   Scenario: Test timeout for applicant did not attend a MIAM and has not selected a valid reason
@@ -139,6 +130,5 @@ Feature: MIAM mediation change journey
     Then I should see "Do you have a valid reason for not attending a MIAM?"
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
-    And the mediation changes end
 
 

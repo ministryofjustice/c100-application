@@ -2,11 +2,9 @@ Feature: Opening Mediation Change
 
   Background: Navigating to the start page
     Given Opening changes do not apply
-    Given Mediation changes do apply
     When I visit "/"
     Then Page has title "What is required - Apply to court about child arrangements - GOV.UK"
     And I should see a "Back" link to "https://www.gov.uk/looking-after-children-divorce/apply-for-court-order"
-    And the mediation changes end
 
   @alternate_layout
   Scenario: Complete the opening (alternate page layout)
@@ -21,7 +19,6 @@ Feature: Opening Mediation Change
     And I should see a "Or return to a saved application" link to "/users/login"
     When I click the "Continue" link
     Then I should see "What kind of application do you want to make?"
-    And the mediation changes end
 
   @alternate_layout @happy_path
   Scenario: Complete the opening (alternate page layout)
@@ -36,7 +33,6 @@ Feature: Opening Mediation Change
     Then I should see "Citizen or solicitor applying on behalf of a citizen?"
     And I choose "I am applying as a citizen"
     And I click the "Continue" button
-    And the mediation changes end
 
   Scenario: Complete the opening
     When I should see "What you’ll need to complete your application"
@@ -55,7 +51,6 @@ Feature: Opening Mediation Change
     And I choose "No"
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I should see the save draft button
-    And the mediation changes end
 
   @happy_path
   Scenario: Testing application timeout (Should not trigger here)
@@ -74,7 +69,6 @@ Feature: Opening Mediation Change
     And I choose "No"
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I should see the save draft button
-    And the mediation changes end
 
   @alternate_layout
   Scenario: Research question with alternate application page layout
@@ -84,13 +78,11 @@ Feature: Opening Mediation Change
     Then I should see "Are you willing to be contacted to share your experience of using this service?"
     And I should not see the save draft button
     And I choose "No"
-    And the mediation changes end
 
   @happy_path
   Scenario: Testing the back button
     When I click the "Back" link
     Then I should see "Making child arrangements if you divorce or separate"
-    And the mediation changes end
 
   @happy_path
   Scenario: Checking the dropdown
@@ -99,7 +91,6 @@ Feature: Opening Mediation Change
     Then I should see "Where do the children live?"
     And I open the "If you do not know where the children live" summary details
     And I should see "If you do not know the children’s postcode please enter your own."
-    And the mediation changes end
 
   @happy_path
   Scenario: Postcode entry without a space
@@ -109,7 +100,6 @@ Feature: Opening Mediation Change
     When I fill in "Postcode" with "MK93DX"
     And I click the "Continue" button
     Then I should see "What kind of application do you want to make?"
-    And the mediation changes end
 
   Scenario: I don't fill out the postcode
     When I should see "What you’ll need to complete your application"
@@ -119,7 +109,6 @@ Feature: Opening Mediation Change
     When I click the "Continue" button
     Then Page has title "Where the children live - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter a full postcode, with or without a space" link to "#steps-opening-postcode-form-children-postcode-field-error"
-    And the mediation changes end
 
   @unhappy_path
   Scenario: Postcode not eligible
@@ -132,7 +121,6 @@ Feature: Opening Mediation Change
     Then Page has title "Where the children live - Apply to court about child arrangements - GOV.UK"
     And I should see "Something went wrong"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
-    And the mediation changes end
 
   @alternate_layout @unhappy_path
   Scenario: Postcode not eligible (alternate page layout)
@@ -142,7 +130,6 @@ Feature: Opening Mediation Change
 
     Then I should see "Sorry, you cannot apply online"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
-    And the mediation changes end
 
   @alternate_layout @unhappy_path
   Scenario: Postcode not recognised (alternate page layout)
@@ -153,4 +140,3 @@ Feature: Opening Mediation Change
     Then I should see "Something went wrong"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
     And I should see a "Go back and try again" link to "/steps/opening/postcode"
-    And the mediation changes end
