@@ -1,5 +1,5 @@
 module Summary
-  class C100Form < BasePdfForm # rubocop:disable Metrics/ClassLength
+  class C100Form < BasePdfForm
     def name
       'C100'
     end
