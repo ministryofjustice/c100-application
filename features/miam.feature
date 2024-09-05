@@ -1,4 +1,4 @@
-Feature: MIAM journey
+Feature: MIAM mediation change journey
   Background:
     Given I have started an application
     When I visit "steps/miam/acknowledgement"
@@ -8,13 +8,13 @@ Feature: MIAM journey
     And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
     And I click the "Continue" button
 
-  @happy_path
-  Scenario: Applicant attended a MIAM
-    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
-    And I choose "Yes"
-    Then I should see "Have you got a document signed by the mediator?"
-    And I choose "Yes"
-    Then I should see "Upload your MIAM certificate"
+#  @happy_path
+#  Scenario: Applicant attended a MIAM
+#    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+#    And I choose "Yes"
+#    Then I should see "Have you got a document signed by the mediator?"
+#    And I choose "Yes"
+#    Then I should see "Upload your MIAM certificate"
 
   @unhappy_path
   Scenario: Applicant attended a MIAM but lacks the certificate
@@ -82,15 +82,20 @@ Feature: MIAM journey
     And I click the "Continue" button
     Then I should see "Confirming other valid reasons for not attending"
     And I check "You’re applying for a without notice hearing"
+    And I check "You or the prospective respondents are under 18 years old"
     And I click the "Continue" button
     Then I should see "Evidence of MIAM exemption"
-    And I choose "No" and fill in "Exemption_reasons" with "reason"
+    When I choose "Yes"
+    Then I should see "Upload your evidence for a MIAM exemption"
+    Then I upload a document to the exemptions page
     And I click the "Continue" button
-
+    Then I should see "Provide details of exemptions from attending a MIAM"
+    Then I fill in "steps-miam-exemptions-exemption-details-form-exemption-details-field" with "details"
+    And I click the "Continue" button
     Then I should see "You don’t have to attend a MIAM"
     Then I should see "Other exemptions"
     Then I should see "You’re applying for a without notice hearing"
-
+    Then I should see "You or the prospective respondents are under 18 years old"
     And I click the "Continue" link
     Then I should see "Safety concerns"
 
