@@ -93,7 +93,6 @@ ENV AWS_S3_BUCKET=replace_this_at_build_time
 ENV RAILS_ENV=production
 ENV IS_DOCKER=true
 ENV PRL_OPENING=false
-ENV MEDIATION_DATE=29/04/2024
 ENV CONFIDENTIAL_OPTION_DATE=2025/07/09T00:00:00+1
 ENV PRIVACY_CHANGE=true
 RUN bundle exec rake assets:precompile
