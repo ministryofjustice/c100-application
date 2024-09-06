@@ -1,5 +1,5 @@
 module Summary
-  class C100Form < BasePdfForm # rubocop:disable Metrics/ClassLength
+  class C100Form < BasePdfForm
     def name
       'C100'
     end
@@ -44,23 +44,12 @@ module Summary
     end
 
     def miam_sections
-      if MediationChange.changes_apply?(c100_application)
-        [
-          Sections::SectionHeader.new(c100_application, name: :miam_requirement),
-          Sections::MiamRequirement.new(c100_application),
-          Sections::SectionHeader.new(c100_application, name: :miam_exemptions),
-          Sections::MiamExemptions.new(c100_application),
-        ]
-      else
-        [
-          Sections::SectionHeader.new(c100_application, name: :miam_requirement),
-          Sections::MiamRequirement.new(c100_application),
-          Sections::SectionHeader.new(c100_application, name: :miam_exemptions),
-          Sections::MiamExemptions.new(c100_application),
-          Sections::SectionHeader.new(c100_application, name: :mediator_certification),
-          Sections::MediatorCertification.new(c100_application),
-        ]
-      end
+      [
+        Sections::SectionHeader.new(c100_application, name: :miam_requirement),
+        Sections::MiamRequirement.new(c100_application),
+        Sections::SectionHeader.new(c100_application, name: :miam_exemptions),
+        Sections::MiamExemptions.new(c100_application),
+      ]
     end
 
     def application_reasons_sections
