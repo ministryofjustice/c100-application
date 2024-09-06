@@ -13,7 +13,7 @@ module C100App
       when :adr
         edit(:misc)
       when :misc
-        MediationChange.changes_apply?(c100_application) ? reasons_or_exit_page : playback_or_exit_page
+        reasons_or_exit_page
       when :exemption_details
         show(:reasons_playback)
       when :exemption_reasons

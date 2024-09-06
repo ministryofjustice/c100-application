@@ -1,20 +1,13 @@
 class DomesticExemptions < ValueObject
   VALUES = [
     GROUP_POLICE = new(:group_police),
-    POLICE_MU = [
+    POLICE = [
       new(:police_arrested),
       new(:police_caution),
       new(:police_ongoing_proceedings),
       new(:police_conviction),
       new(:police_dvpn),
       new(:police_dapn)
-    ].freeze,
-    POLICE = [
-      new(:police_arrested),
-      new(:police_caution),
-      new(:police_ongoing_proceedings),
-      new(:police_conviction),
-      new(:police_dvpn)
     ].freeze,
 
     GROUP_COURT = new(:group_court),
