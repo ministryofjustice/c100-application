@@ -55,7 +55,7 @@ Feature: Safety Concerns
     # Provoking validation error
     When I click the "Continue" button
     Then I should see a "Enter details of your concerns" link to "#steps-abduction-risk-details-form-risk-details-field-error"
-    And I should see a "Enter where the children are" link to "#steps-abduction-risk-details-form-current-location-field-error"
+    And I should see a "Enter where the children are now" link to "#steps-abduction-risk-details-form-current-location-field-error"
 
     # Fixing validation error
     When I fill in "Briefly explain your concerns about abduction" with "Own Concerns"

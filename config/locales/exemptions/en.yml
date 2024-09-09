@@ -1,7 +1,7 @@
 en:
   dictionary:
     select_all_that_apply_or_none: &select_all_that_apply_or_none "Select all that apply or ‘None of these’"
-    none_of_these: &none_of_these "None of these."
+    none_of_these: &none_of_these "None of these"
 
     ### LABELS ###
     DOMESTIC_EXEMPTIONS: &DOMESTIC_EXEMPTIONS
