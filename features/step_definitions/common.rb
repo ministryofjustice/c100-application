@@ -12,6 +12,11 @@ Then(/^I should be on "([^"]*)"$/) do |page_name|
 end
 
 Then(/^I should see "([^"]*)"$/) do |text|
+  expect(any_page.footer).to have_header
+  expect(page).to have_text(text)
+
+rescue Selenium::WebDriver::Error::UnknownError => e
+  sleep 1
   expect(page).to have_text(text)
 end
 
@@ -20,6 +25,9 @@ Then(/^I should not see "([^"]*)"$/) do |text|
 end
 
 Then(/^I should see a "([^"]*)" link to "([^"]*)"$/) do |text, href|
+  expect(page).to have_link(text, href: href)
+rescue Selenium::WebDriver::Error::UnknownError => e
+  sleep 1
   expect(page).to have_link(text, href: href)
 end
 
@@ -40,6 +48,10 @@ When(/^I open the "([^"]*)" summary details$/) do |text|
 end
 
 When(/^I click the "([^"]*)" button$/) do |text|
+  expect(page).to have_button("#{text}")
+  find_button("#{text}").click
+rescue Selenium::WebDriver::Error::UnknownError => e
+  sleep 1
   find_button("#{text}").click
 end
 
