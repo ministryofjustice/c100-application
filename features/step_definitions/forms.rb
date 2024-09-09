@@ -7,6 +7,8 @@ end
 
 And(/^I check "([^"]*)"$/) do |text|
   check(text, allow_label_click: true)
+rescue Capybara::ElementNotFound => e
+  find('label', text: text).click
 end
 
 When(/^I click the radio button "([^"]*)"$/) do |text|
