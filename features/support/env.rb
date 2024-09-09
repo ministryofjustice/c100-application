@@ -5,6 +5,8 @@
 # files.
 
 require 'cucumber/rails'
+require 'webmock'
+require 'cucumber/rspec/doubles'
 
 # frozen_string_literal: true
 
@@ -42,20 +44,20 @@ rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
 
-# You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
-# See the DatabaseCleaner documentation for details. Example:
-#
-#   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     # { except: [:widgets] } may not do what you expect here
-#     # as Cucumber::Rails::Database.javascript_strategy overrides
-#     # this setting.
-#     DatabaseCleaner.strategy = :truncation
-#   end
-#
-#   Before('not @no-txn', 'not @selenium', 'not @culerity', 'not @celerity', 'not @javascript') do
-#     DatabaseCleaner.strategy = :transaction
-#   end
-#
+Before do
+  objects = double('object', contents: [], empty?: true)
+  put_object = double('put_object', etag: 'filename')
+  s3_client = instance_double(Aws::S3::Client, list_objects: objects)
+  allow(Aws::S3::Client).to receive(:new).and_return s3_client
+  allow(s3_client).to receive(:put_object).and_return put_object
+
+  allow(Aws::AssumeRoleWebIdentityCredentials).to receive(:new).with(
+    role_arn: ENV['AWS_ROLE_ARN'],
+    web_identity_token_file: ENV['AWS_WEB_IDENTITY_TOKEN_FILE']
+  )
+
+end
+
 
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
