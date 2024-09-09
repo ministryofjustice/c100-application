@@ -21,8 +21,8 @@ references:
           EXTERNAL_URL: mocked_in_tests
           GOVUK_NOTIFY_API_KEY: mocked_in_tests
           AWS_S3_USE_PERMANENT_CREDENTIALS: 'true'
-          AWS_WEB_IDENTITY_TOKEN_FILE='just_for_test'
-          AWS_ROLE_ARN='just_for_test'
+          AWS_WEB_IDENTITY_TOKEN_FILE: 'just_for_test'
+          AWS_ROLE_ARN: 'just_for_test'
 
       - image: circleci/postgres:10.4
         environment:
