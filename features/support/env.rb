@@ -32,7 +32,7 @@ ActionController::Base.allow_rescue = false
 
 Capybara.server = :puma
 Selenium::WebDriver.logger.output = false
-Capybara.default_driver = :selenium_chrome_headless
+Capybara.default_driver = :selenium_chrome
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.

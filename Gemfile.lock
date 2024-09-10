@@ -1,7 +1,7 @@
 GEM
   remote: https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev/
   specs:
-    mutant-license (0.1.1.2.1739399027284447558325915053311580324856.4)
+    mutant-license (0.1.1.2.1739399027284447558325915053311580324856.7)
 
 GEM
   remote: https://rubygems.org/
@@ -230,8 +230,8 @@ GEM
       activemodel (>= 6.1)
       activesupport (>= 6.1)
       html-attributes-utils (~> 1)
-    govuk_notify_rails (2.2.0)
-      notifications-ruby-client (~> 5.1)
+    govuk_notify_rails (3.0.0)
+      notifications-ruby-client (~> 6.2)
       rails (>= 4.1.0)
     hashdiff (1.1.1)
     hashie (5.0.0)
@@ -311,7 +311,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
-    notifications-ruby-client (5.4.0)
+    notifications-ruby-client (6.2.0)
       jwt (>= 1.5, < 3)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -353,7 +353,7 @@ GEM
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
-    puma (5.6.5)
+    puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.9)
@@ -460,7 +460,7 @@ GEM
     ruby-rc4 (0.1.5)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    sanitize (6.0.2)
+    sanitize (6.1.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     sass (3.7.4)
@@ -591,23 +591,23 @@ DEPENDENCIES
   dotenv-rails (~> 3.1, >= 3.1.2)
   govuk-pay-ruby-client (~> 1.0.2)
   govuk_design_system_formbuilder
-  govuk_notify_rails (~> 2.2.0)
+  govuk_notify_rails (~> 3.0)
   i18n-debug
   jquery-rails
   listen
   lograge
   logstash-event
   mimemagic (~> 0.4.0)
-  mutant-license (= 0.1.1.2.1739399027284447558325915053311580324856.4)!
+  mutant-license (= 0.1.1.2.1739399027284447558325915053311580324856.7)!
   mutant-rspec
-  omniauth-auth0
+  omniauth-auth0 (~> 3.1.0)
   omniauth-rails_csrf_protection
   parallel_tests
   parser (~> 3.1, >= 3.1.1.0)
   pg (~> 1.1)
   pry-byebug
   pry-rails
-  puma (< 6.0.0)
+  puma (~> 6.4.0)
   rails (= 7.2.1)
   rails-controller-testing
   redis
@@ -616,7 +616,7 @@ DEPENDENCIES
   rspec_junit_formatter
   rubocop
   rubocop-performance
-  sanitize (~> 6.0.2)
+  sanitize (~> 6.1.0)
   sass-rails (< 6.0.0)
   selenium-webdriver
   sentry-rails
