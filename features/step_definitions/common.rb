@@ -12,11 +12,12 @@ Then(/^I should be on "([^"]*)"$/) do |page_name|
 end
 
 Then(/^I should see "([^"]*)"$/) do |text|
-  expect(any_page.footer).to have_header
+  # binding.pry if text == 'Do you have any concerns about drug, alcohol or substance abuse?'
+  find(:xpath, './/main', visible: true, wait: 5)
   expect(page).to have_text(text)
 
 rescue Selenium::WebDriver::Error::UnknownError => e
-  sleep 1
+  find(:xpath, './/main', visible: true, wait: 5)
   expect(page).to have_text(text)
 end
 
@@ -25,6 +26,7 @@ Then(/^I should not see "([^"]*)"$/) do |text|
 end
 
 Then(/^I should see a "([^"]*)" link to "([^"]*)"$/) do |text, href|
+  find(:xpath, './/main', visible: true, wait: 5)
   expect(page).to have_link(text, href: href)
 rescue Selenium::WebDriver::Error::UnknownError => e
   sleep 1
@@ -40,6 +42,9 @@ Then(/^I should not see the save draft button$/) do
 end
 
 When(/^I click the "([^"]*)" link$/) do |text|
+  find(:xpath, './/main', visible: true, wait: 5)
+  click_link(text, wait: true)
+rescue Selenium::WebDriver::Error::UnknownError => e
   click_link(text)
 end
 

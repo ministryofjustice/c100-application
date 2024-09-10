@@ -45,6 +45,8 @@ rescue NameError
 end
 
 Before do
+  DatabaseCleaner.clean
+
   objects = double('object', contents: [], empty?: true)
   put_object = double('put_object', etag: 'filename')
   s3_client = instance_double(Aws::S3::Client, list_objects: objects)
