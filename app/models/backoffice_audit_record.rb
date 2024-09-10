@@ -3,13 +3,13 @@ class BackofficeAuditRecord < ApplicationRecord
   # is maintained. Only add new actions when needed.
   #
   enum :action, {
-    :login=>'login',
-    :logout=>'logout',
-    :forbidden=>'forbidden',
-    :application_lookup=>'application_lookup',
-    :application_completed=>'application_completed',
-    :email_lookup=>'email_lookup',
-    :resend_email=>'resend_email',
+    login: 'login',
+    logout: 'logout',
+    forbidden: 'forbidden',
+    application_lookup: 'application_lookup',
+    application_completed: 'application_completed',
+    email_lookup: 'email_lookup',
+    resend_email: 'resend_email',
   }
 
   def self.log!(author:, action:, details: {})
