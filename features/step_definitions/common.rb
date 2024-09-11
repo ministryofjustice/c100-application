@@ -12,7 +12,6 @@ Then(/^I should be on "([^"]*)"$/) do |page_name|
 end
 
 Then(/^I should see "([^"]*)"$/) do |text|
-  # binding.pry if text == 'Do you have any concerns about drug, alcohol or substance abuse?'
   find(:xpath, './/main', visible: true, wait: 5)
   expect(page).to have_text(text)
 
@@ -29,7 +28,7 @@ Then(/^I should see a "([^"]*)" link to "([^"]*)"$/) do |text, href|
   find(:xpath, './/main', visible: true, wait: 5)
   expect(page).to have_link(text, href: href)
 rescue Selenium::WebDriver::Error::UnknownError => e
-  sleep 1
+  find(:xpath, './/main', visible: true, wait: 5)
   expect(page).to have_link(text, href: href)
 end
 
