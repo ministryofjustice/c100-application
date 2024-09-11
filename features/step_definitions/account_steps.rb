@@ -15,16 +15,17 @@ rescue Selenium::WebDriver::Error::UnknownError => e
 end
 
 def step_safety_concern
+  find(:xpath, './/main', visible: true, wait: 5)
   expect(page).to have_text "Safety concerns"
-  puts '5'
   click_link("Continue", wait: true)
 rescue Selenium::WebDriver::Error::UnknownError => e
-  sleep 1
+  find(:xpath, './/main', visible: true, wait: 5)
   expect(page).to have_text "Safety concerns"
   click_link("Continue", wait: true)
 end
 
 def upload_file
+  find(:xpath, './/main', visible: true, wait: 5)
   expect(page).to have_text "Upload the draft of your consent order"
   attach_file(Rails.root + 'features/support/sample_file/image.jpg')
   click_button "Continue"
