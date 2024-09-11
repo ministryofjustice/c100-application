@@ -5,7 +5,7 @@ When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   find(:xpath, './/main//form', visible: true, wait: 5)
   fill_in(field, with: value)
 rescue Selenium::WebDriver::Error::UnknownError => e
-  sleep 1
+  find(:xpath, './/main//form', visible: true, wait: 5)
   fill_in(field, with: value)
 end
 
