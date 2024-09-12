@@ -1,7 +1,6 @@
 #Feature: Testing C100 end to end
 #
 #  Background: Bypassing postcode page
-#    Given Mediation changes do apply
 #    Given Confidential changes do apply
 #    Given I have started an application
 #    Then I should see "What kind of application do you want to make?"
@@ -288,7 +287,6 @@
 #    And I should see the email for submitting an application to court is "john@gmail.com"
 #    And I should see the payment type "Help with fees"
 #    And I should see the HwF reference number is "HWF-123-456"
-#    And the mediation changes end
 #
 #  Scenario: Child arrangements order (MIAM) (path two: exemption with evidence upload)
 #    When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"

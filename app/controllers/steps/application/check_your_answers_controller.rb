@@ -4,7 +4,7 @@ module Steps
       include RemoveExemptionHelper
 
       before_action :set_presenter
-      before_action :check_exemption_file, if: -> { MediationChange.changes_apply?(current_c100_application) }
+      before_action :check_exemption_file
 
       def edit
         @form_object = DeclarationForm.build(current_c100_application)
