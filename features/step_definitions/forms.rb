@@ -12,7 +12,8 @@ end
 And(/^I check "([^"]*)"$/) do |text|
   find(:xpath, './/main//form', visible: true, wait: true)
   check(text, allow_label_click: true)
-rescue Capybara::ElementNotFound => e
+rescue Selenium::WebDriver::Error::UnknownError => e
+  find(:xpath, './/main//form', visible: true, wait: true)
   find('label', text: text).click
 end
 
