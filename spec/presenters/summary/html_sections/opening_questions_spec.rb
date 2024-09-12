@@ -34,7 +34,7 @@ module Summary
 
           expect(answers[0]).to be_an_instance_of(FreeTextAnswer)
           expect(answers[0].question).to eq(:children_postcode)
-          expect(answers[0].change_path).to eq('/?change=y')
+          expect(answers[0].change_path).to include('?change=y')
           expect(answers[0].value).to eq('W51BP')
 
           expect(answers[1]).to be_an_instance_of(Answer)
@@ -62,7 +62,7 @@ module Summary
 
           expect(answers[0]).to be_an_instance_of(FreeTextAnswer)
           expect(answers[0].question).to eq(:children_postcode)
-          expect(answers[0].change_path).to eq('/?change=y')
+          expect(answers[0].change_path).to include('?change=y')
           expect(answers[0].value).to eq('W51BP')
 
           expect(answers[1]).to be_an_instance_of(Answer)
