@@ -69,11 +69,11 @@ RUN yarn
 
 # "chmod -R" is due to:
 # https://github.com/mileszs/wicked_pdf/issues/911
-RUN gem install bundler -v 2.3.17 && \
+RUN gem install bundler -v 2.5.7 && \
     bundle config set frozen 'true' && \
     bundle config without test:development && \
     bundle install --jobs 2 --retry 3 && \
-    chmod -R 777 /usr/local/bundle/gems/wkhtmltopdf-binary-0.12.6.6/bin
+    chmod -R 777 /usr/local/bundle/gems/wkhtmltopdf-binary-0.12.6.8/bin
 
 COPY . .
 
