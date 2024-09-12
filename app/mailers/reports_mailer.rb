@@ -18,7 +18,6 @@ class ReportsMailer < NotifyMailer
     set_personalisation(
       link_to_report: Notifications.prepare_upload(
         StringIO.new(report_csv),
-        true
       )
     )
     @log.try(:update, mailer_personalised: true)

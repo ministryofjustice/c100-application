@@ -63,7 +63,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   # lets you preview action_mailer mails from the browser at:
   # /rails/mailers/(mailer name)/(method name)
-  config.action_mailer.preview_path = "#{Rails.root}/app/mailer_previews"
+  config.action_mailer.preview_paths=["#{Rails.root}/app/mailer_previews"]
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
