@@ -36,7 +36,7 @@ module Steps
       end
 
       def child_order
-        @_child_order ||= (record.child_order || record.build_child_order)
+        @_child_order ||= record.child_order || record.build_child_order
       end
     end
   end

@@ -115,13 +115,13 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           c8_included: 'no',
           link_to_c8_pdf: '',
           link_to_pdf: { 
-            file: 'YnVuZGxlIHBkZg==', 
-            is_csv: false,
+            file: 'YnVuZGxlIHBkZg==',
+            filename: nil,
             confirm_email_before_download: false,
             retention_period: nil },
           link_to_json: {
             file: 'dGVzdDI=',
-            is_csv: false,
+            filename: nil,
             confirm_email_before_download: false,
             retention_period: nil },
           has_attachments: true,
@@ -164,10 +164,10 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           urgent: 'yes',
           c8_included: 'no',
           link_to_c8_pdf: '',
-          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
+          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
             confirm_email_before_download: false,
             retention_period: nil },
-          link_to_json: { file: 'dGVzdDI=', is_csv: false,
+          link_to_json: { file: 'dGVzdDI=', filename: nil,
             confirm_email_before_download: false,
             retention_period: nil },
           has_attachments: false,
@@ -192,10 +192,10 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           mail.govuk_notify_personalisation
         ).to match(hash_including(
           c8_included: 'yes',
-          link_to_c8_pdf: { file: 'YzggZm9ybQ==', is_csv: false,
+          link_to_c8_pdf: { file: 'YzggZm9ybQ==', filename: nil,
           confirm_email_before_download: false,
           retention_period: nil },
-          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', is_csv: false,
+          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
           confirm_email_before_download: false,
           retention_period: nil },
         ))

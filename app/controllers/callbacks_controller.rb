@@ -4,7 +4,7 @@ class CallbacksController < BareApplicationController
   respond_to :json
 
   def notify
-    C100App::NotifyCallback.new(payload).process!
+    C100App::NotifyCallback.new(payload.to_h).process!
     head 200
   end
 
@@ -15,7 +15,7 @@ class CallbacksController < BareApplicationController
   #
   def authenticate
     authenticate_or_request_with_http_token do |token|
-      ActiveSupport::SecurityUtils.secure_compare(token, ENV['GOVUK_NOTIFY_BEARER_TOKEN'])
+      ActiveSupport::SecurityUtils.secure_compare(token, ENV.fetch('GOVUK_NOTIFY_BEARER_TOKEN'))
     end
   end
 

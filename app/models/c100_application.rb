@@ -3,14 +3,14 @@ class C100Application < ApplicationRecord
   include ApplicationReference
   include CourtRedirections
 
-  enum status: {
+  enum :status, {
     screening: 0,
     in_progress: 1,
     payment_in_progress: 8,
     completed: 10,
   }
 
-  enum reminder_status: {
+  enum :reminder_status, {
     first_reminder_sent: 'first_reminder_sent',
     last_reminder_sent: 'last_reminder_sent',
   }
