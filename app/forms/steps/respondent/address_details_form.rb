@@ -20,7 +20,8 @@ module Steps
 
       def residence_history_value
         return residence_history_no if residence_requirement_met&.no?
-        return residence_history_unknown if residence_requirement_met&.unknown?
+
+        residence_history_unknown if residence_requirement_met&.unknown?
       end
 
       private

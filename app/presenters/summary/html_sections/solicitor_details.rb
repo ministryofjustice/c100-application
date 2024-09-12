@@ -17,7 +17,7 @@ module Summary
       private
 
       def solicitor
-        @_solicitor ||= (c100_application.solicitor || Solicitor.new)
+        @_solicitor ||= c100_application.solicitor || Solicitor.new
       end
 
       def solicitor_personal_details

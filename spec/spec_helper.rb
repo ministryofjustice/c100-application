@@ -18,6 +18,8 @@ unless ENV['NOCOVERAGE']
   end
 end
 
+RSpec::Mocks.configuration.allow_message_expectations_on_nil = true
+
 Dir['./spec/support/**/*.rb'].each {|f| require f}
 
 RSpec.configure do |config|

@@ -44,7 +44,7 @@ RSpec.describe ReportsMailer, type: :mailer do
         service_name: 'Apply to court about child arrangements',
         link_to_report: { 
           file: "RGF0ZSwyMDIxLTEyLTIwXG5wY2QsMTA=",
-          is_csv: true,
+          filename: nil,
           confirm_email_before_download: nil,
           retention_period: nil
         },
