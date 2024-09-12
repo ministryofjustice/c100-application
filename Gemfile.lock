@@ -622,7 +622,7 @@ DEPENDENCIES
   rubocop-performance
   sanitize (~> 6.1.0)
   sass-rails (< 6.0.0)
-  selenium-webdriver
+  selenium-webdriver (>= 4.24.0)
   sentry-rails
   sidekiq (~> 7.2.0)
   sidekiq_alive
@@ -642,7 +642,7 @@ DEPENDENCIES
   wkhtmltopdf-binary (~> 0.12.6.5)
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.3.4p94
 
 BUNDLED WITH
    2.4.10
