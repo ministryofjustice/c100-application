@@ -2,10 +2,6 @@
 # Refer to that file for more details.
 #
 Sidekiq.configure_server do |config|
-  config.default_worker_options = {
-    backtrace: 3 # top 3 lines
-  }
-
   config.death_handlers << ->(job, ex) do
     Sentry.capture_exception(ex, level: 'error', tags: { job_class: job['class'], job_id: job['jid'] })
   end
