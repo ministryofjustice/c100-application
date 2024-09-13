@@ -40,7 +40,7 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
     it { is_expected.to have_destination(:exemption_details, :edit) }
   end
 
-  context 'when the step is `misc` and Mediation change is false' do
+  context 'when the step is `misc`' do
     let(:c100_application) { C100Application.new(attributes) }
     let(:step_params) { { misc: 'anything' } }
     let(:attributes) {
@@ -48,34 +48,6 @@ RSpec.describe C100App::MiamExemptionsDecisionTree do
         miam_exemption: nil,
       }
     }
-
-    before do
-      allow(MediationChange).to receive(:changes_apply?).and_return(false)
-    end
-
-    context 'when there are no MIAM exemptions' do
-      it { is_expected.to have_destination(:exit_page, :show) }
-    end
-
-    context 'when there are MIAM exemptions' do
-      let(:attributes) { super().merge(miam_exemption: MiamExemption.new(misc: ['applicant_under_age'])) }
-
-      it { is_expected.to have_destination(:reasons_playback, :show) }
-    end
-  end
-
-  context 'when the step is `misc` and Mediation change is true' do
-    let(:c100_application) { C100Application.new(attributes) }
-    let(:step_params) { { misc: 'anything' } }
-    let(:attributes) {
-      {
-        miam_exemption: nil,
-      }
-    }
-
-    before do
-      allow(MediationChange).to receive(:changes_apply?).and_return(true)
-    end
 
     context 'when there are no MIAM exemptions' do
       it { is_expected.to have_destination(:exit_page, :show) }

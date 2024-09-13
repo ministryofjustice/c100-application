@@ -5,10 +5,6 @@ module Summary
     let(:c100_application) { instance_double(C100Application, court_arrangement: court_arrangement) }
     let(:court_arrangement) { instance_double(CourtArrangement) }
 
-    before do
-      allow(MediationChange).to receive(:changes_apply?).and_return(false)
-    end
-
     subject { described_class.new(c100_application) }
 
     describe '#name' do
@@ -25,63 +21,6 @@ module Summary
 
     describe '#sections' do
       before do
-        allow_any_instance_of(Summary::Sections::BaseSectionPresenter).to receive(:show?).and_return(true)
-      end
-
-      it 'has the right sections in the right order' do
-        expect(subject.sections).to match_instances_array([
-          Sections::FormHeader,
-          Sections::C100CourtDetails,
-          Sections::HelpWithFees,
-          Sections::ApplicantRespondent,
-          Sections::NatureOfApplication,
-          Sections::RiskConcerns,
-          Sections::AdditionalInformation,
-          Sections::SectionHeader,
-          Sections::ChildrenDetails,
-          Sections::ChildrenRelationships,
-          Sections::ChildrenResidence,
-          Sections::PermissionQuestions,
-          Sections::SectionHeader,
-          Sections::MiamRequirement,
-          Sections::SectionHeader,
-          Sections::MiamExemptions,
-          Sections::SectionHeader,
-          Sections::MediatorCertification,
-          Sections::SectionHeader,
-          Sections::ApplicationReasons,
-          Sections::SectionHeader,
-          Sections::UrgentHearing,
-          Sections::WithoutNoticeHearing,
-          Sections::SectionHeader,
-          Sections::OtherCourtCases,
-          Sections::SectionHeader,
-          Sections::InternationalElement,
-          Sections::SectionHeader,
-          Sections::LitigationCapacity,
-          Sections::SectionHeader,
-          Sections::DomesticAbuseAct,
-          Sections::AttendingCourtV2,
-          Sections::SectionHeader,
-          Sections::ApplicantsDetails,
-          Sections::SectionHeader,
-          Sections::RespondentsDetails,
-          Sections::SectionHeader,
-          Sections::OtherPartiesDetails,
-          Sections::OtherChildrenDetails,
-          Sections::SectionHeader,
-          Sections::SolicitorDetails,
-          Sections::SectionHeader,
-          Sections::StatementOfTruth,
-          Sections::CourtFee,
-          Sections::ProcessingDetails,
-        ])
-      end
-    end
-
-    describe 'if the mediation changes are active' do
-      before do
-        allow(MediationChange).to receive(:changes_apply?).and_return(true)
         allow_any_instance_of(Summary::Sections::BaseSectionPresenter).to receive(:show?).and_return(true)
       end
 

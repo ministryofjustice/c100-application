@@ -19,6 +19,7 @@ RSpec.describe DomesticExemptions do
           police_ongoing_proceedings
           police_conviction
           police_dvpn
+          police_dapn
         ))
       end
     end

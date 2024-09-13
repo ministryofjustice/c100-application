@@ -69,11 +69,11 @@ RUN yarn
 
 # "chmod -R" is due to:
 # https://github.com/mileszs/wicked_pdf/issues/911
-RUN gem install bundler -v 2.3.17 && \
+RUN gem install bundler -v 2.5.7 && \
     bundle config set frozen 'true' && \
     bundle config without test:development && \
     bundle install --jobs 2 --retry 3 && \
-    chmod -R 777 /usr/local/bundle/gems/wkhtmltopdf-binary-0.12.6.6/bin
+    chmod -R 777 /usr/local/bundle/gems/wkhtmltopdf-binary-0.12.6.8/bin
 
 COPY . .
 
@@ -93,8 +93,6 @@ ENV AWS_S3_BUCKET=replace_this_at_build_time
 ENV RAILS_ENV=production
 ENV IS_DOCKER=true
 ENV PRL_OPENING=false
-ENV MEDIATION_DATE=29/04/2024
-ENV FEE_INCREASE_DATE=01/05/2024
 ENV CONFIDENTIAL_OPTION_DATE=2025/07/09T00:00:00+1
 ENV PRIVACY_CHANGE=true
 RUN bundle exec rake assets:precompile
