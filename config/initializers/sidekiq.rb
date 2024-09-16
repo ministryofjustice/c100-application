@@ -9,7 +9,7 @@ Sidekiq.configure_server do |config|
   Rails.logger = Sidekiq.logger
 
   if Rails.env.inquiry.production?
-    config.log_formatter = Sidekiq::Logger::Formatters::JSON.new
+    Sidekiq.logger.formatter = Sidekiq::Logger::Formatters::JSON.new
 
     # Level is `INFO`. If it is too noisy for prod, uncomment this line:
     # config.logger.level = Logger::WARN
