@@ -2,14 +2,23 @@
 include ActiveSupport::Testing::TimeHelpers
 
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
+  find(:xpath, './/main//form', visible: true, wait: true)
+  fill_in(field, with: value)
+rescue Selenium::WebDriver::Error::UnknownError => e
+  find(:xpath, './/main//form', visible: true, wait: true)
   fill_in(field, with: value)
 end
 
 And(/^I check "([^"]*)"$/) do |text|
+  find(:xpath, './/main//form', visible: true, wait: true)
   check(text, allow_label_click: true)
+rescue Selenium::WebDriver::Error::UnknownError => e
+  find(:xpath, './/main//form', visible: true, wait: true)
+  find('label', text: text).click
 end
 
 When(/^I click the radio button "([^"]*)"$/) do |text|
+  find(:xpath, './/main//form', visible: true, wait: true)
   find('label', text: text).click
 end
 
@@ -24,6 +33,7 @@ Then(/^I click "([^"]*)" for the radio button "([^"]*)"$/) do |text, legend|
 end
 
 When(/^I choose "([^"]*)"$/) do |text|
+  find(:xpath, './/main//form', visible: true, wait: true)
   step %[I click the radio button "#{text}"]
   find_button('Continue').click
 end

@@ -12,6 +12,11 @@ Then(/^I should be on "([^"]*)"$/) do |page_name|
 end
 
 Then(/^I should see "([^"]*)"$/) do |text|
+  find(:xpath, './/main', visible: true, wait: true)
+  expect(page).to have_text(text)
+
+rescue Selenium::WebDriver::Error::UnknownError => e
+  find(:xpath, './/main', visible: true, wait: true)
   expect(page).to have_text(text)
 end
 
@@ -20,6 +25,10 @@ Then(/^I should not see "([^"]*)"$/) do |text|
 end
 
 Then(/^I should see a "([^"]*)" link to "([^"]*)"$/) do |text, href|
+  find(:xpath, './/main', visible: true, wait: true)
+  expect(page).to have_link(text, href: href)
+rescue Selenium::WebDriver::Error::UnknownError => e
+  find(:xpath, './/main', visible: true, wait: true)
   expect(page).to have_link(text, href: href)
 end
 
@@ -32,6 +41,10 @@ Then(/^I should not see the save draft button$/) do
 end
 
 When(/^I click the "([^"]*)" link$/) do |text|
+  find(:xpath, './/main', visible: true, wait: true)
+  click_link(text, wait: true)
+rescue Selenium::WebDriver::Error::UnknownError => e
+  find(:xpath, './/main', visible: true, wait: true)
   click_link(text)
 end
 
@@ -40,6 +53,10 @@ When(/^I open the "([^"]*)" summary details$/) do |text|
 end
 
 When(/^I click the "([^"]*)" button$/) do |text|
+  expect(page).to have_button("#{text}")
+  find_button("#{text}").click
+rescue Selenium::WebDriver::Error::UnknownError => e
+  sleep 1
   find_button("#{text}").click
 end
 
