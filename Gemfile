@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby File.read('.ruby-version')
+ruby '3.3.4'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
@@ -41,6 +41,9 @@ gem 'aws-sdk-s3', '~> 1'
 gem 'clamby'
 gem 'sanitize', '~> 6.1.0'
 
+gem 'listen'
+
+
 group :development, :production do
   gem 'lograge'
   gem 'logstash-event'
@@ -50,7 +53,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'i18n-debug'
-  gem 'listen'
   gem "bundler-audit", "~> 0.9.1"
 end
 
