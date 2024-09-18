@@ -15,6 +15,10 @@ module C100
           notification_banner.has_content?(text: "You've set your cookie preferences")
         end
 
+        section :footer, '.govuk-footer' do
+          element :header, 'h2', text: 'Support links'
+        end
+
         section :notification_banner, '.govuk-notification-banner' do
           element :title, '.govuk-notification-banner__header.govuk-notification-banner__title'
           element :content, '.govuk-notification-banner__content .govuk-notification-banner__heading'

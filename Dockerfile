@@ -1,5 +1,5 @@
 #FROM hmctspublic.azurecr.io/imported/library/ruby:3.2.2-slim-buster
-FROM ruby:3.2.2-slim-buster
+FROM ruby:3.3.4-slim-buster
 
 # build dependencies:
 #   - ruby-full libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6 for wkhtmltopdf
@@ -69,7 +69,7 @@ RUN yarn
 
 # "chmod -R" is due to:
 # https://github.com/mileszs/wicked_pdf/issues/911
-RUN gem install bundler -v 2.5.7 && \
+RUN gem install bundler -v 2.5.15 && \
     bundle config set frozen 'true' && \
     bundle config without test:development && \
     bundle install --jobs 2 --retry 3 && \
