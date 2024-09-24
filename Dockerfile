@@ -46,11 +46,11 @@ RUN mkdir -p var/run/clamav && \
  chmod -R 777 /var/log/clamav && \
  mkdir -p var/lib/clamav
 
-RUN mkdir -p /home/app
-WORKDIR /home/app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-COPY Gemfile /home/app
-COPY Gemfile.lock /home/app
+COPY Gemfile /usr/src/app
+COPY Gemfile.lock /usr/src/app
 COPY --from=wkhtmltopdf /bin/wkhtmltopdf /bin/wkhtmltopdf
 
 RUN gem install bundler -v 2.5.15
@@ -62,7 +62,7 @@ RUN bundle install
 # running app as a servive
 ENV PHUSION true
 
-COPY . /home/app
+COPY . /usr/src/app
 RUN yarn install --check-files
 
 ENV RDS_COMBINED_CA_BUNDLE=/usr/src/app/config/rds-combined-ca-bundle.pem
@@ -77,4 +77,4 @@ RUN mkdir -p public/assets/govuk-frontend/govuk/assets/images
 RUN cp node_modules/govuk-frontend/govuk/assets/fonts/*  public/assets/govuk-frontend/govuk/assets/fonts
 RUN cp node_modules/govuk-frontend/govuk/assets/images/* public/assets/govuk-frontend/govuk/assets/images
 
-CMD ["sh ./run.sh"]
+CMD ["sh", "./run.sh"]
