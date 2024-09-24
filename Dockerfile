@@ -78,7 +78,7 @@ RUN cp node_modules/govuk-frontend/govuk/assets/fonts/*  public/assets/govuk-fro
 RUN cp node_modules/govuk-frontend/govuk/assets/images/* public/assets/govuk-frontend/govuk/assets/images
 
 RUN addgroup --gid 1000 --system appgroup && \
-    adduser --uid 1000 --system appuser --ingroup appgroup \
+    adduser --uid 1000 --system appuser --ingroup appgroup
 
 ENV APPUID=1000
 USER $APPUID
