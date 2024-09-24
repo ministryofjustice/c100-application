@@ -13,9 +13,6 @@ ENV APP_BUILD_DATE ${APP_BUILD_DATE}
 ENV APP_GIT_COMMIT ${APP_GIT_COMMIT}
 ENV APP_BUILD_TAG ${APP_BUILD_TAG}
 
-ENV APPUID=1000
-USER $APPUID
-
 ENV EXTERNAL_URL=replace_this_at_build_time
 ENV SECRET_KEY_BASE=replace_this_at_build_time
 ENV GOVUK_NOTIFY_API_KEY=replace_this_at_build_time
@@ -79,5 +76,11 @@ RUN mkdir -p public/assets/govuk-frontend/govuk/assets/fonts
 RUN mkdir -p public/assets/govuk-frontend/govuk/assets/images
 RUN cp node_modules/govuk-frontend/govuk/assets/fonts/*  public/assets/govuk-frontend/govuk/assets/fonts
 RUN cp node_modules/govuk-frontend/govuk/assets/images/* public/assets/govuk-frontend/govuk/assets/images
+
+RUN addgroup --gid 1000 --system appgroup && \
+    adduser --uid 1000 --system appuser --ingroup appgroup \
+
+ENV APPUID=1000
+USER $APPUID
 
 CMD ["sh", "./run.sh"]
