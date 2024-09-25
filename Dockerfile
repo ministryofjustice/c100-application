@@ -80,6 +80,8 @@ RUN cp node_modules/govuk-frontend/govuk/assets/images/* public/assets/govuk-fro
 RUN addgroup --gid 1000 --system appgroup && \
     adduser --uid 1000 --system appuser --ingroup appgroup
 
+RUN chown -R appuser:appgroup tmp db /var/lib/clamav /var/log/clamav /var/run/clamav /etc/clamav
+
 ENV APPUID=1000
 USER $APPUID
 
