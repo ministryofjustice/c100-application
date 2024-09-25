@@ -9,6 +9,22 @@ class ReportsMailer < NotifyMailer
     mail to: to_address
   end
 
+  def submitted_applications_report(report_csv, to_address:)
+    log 'Starting submitted_applications_report'
+    set_template(:submitted_applications_report)
+    log 'Setting personalisation'
+    set_personalisation(
+      link_to_report: Notifications.prepare_upload(
+        StringIO.new(report_csv),
+      )
+    )
+    log 'Sending mail'
+    mail(to: to_address)
+  rescue StandardError => e
+    log "#{e.class.name}: #{e.message}"
+    raise
+  end
+
   def payment_types_report(report_csv, to_address:, cc_address:)
     @log = PaymentReportLog.where('created_at > ?', 6.hours.ago).first
     log 'Starting payment_types_report'
