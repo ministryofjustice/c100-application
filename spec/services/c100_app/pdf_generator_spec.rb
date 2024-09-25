@@ -16,6 +16,7 @@ RSpec.describe C100App::PdfGenerator do
     before do
       allow(c100_application).to receive(:documents)
       allow(c100_application.documents(:exemption)).to receive(:none?).and_return(true)
+      allow(subject).to receive(:pdf_from_presenter).with(presenter).and_return 'test_pdf'
     end
 
     it 'can render the complete form' do
