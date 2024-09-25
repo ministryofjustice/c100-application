@@ -8,7 +8,9 @@
 #
 # https://github.com/mileszs/wicked_pdf/blob/master/README.md
 
-WickedPdf.config ||= {}
+WickedPdf.config ||= {
+  exe_path: '/usr/bin/wkhtmltopdf'
+}
 WickedPdf.config.merge!({
   encoding: 'utf-8',
   zoom: 1.3,

@@ -68,7 +68,6 @@ group :development, :test do
   gem 'spring', '~> 4.0'
   gem 'spring-commands-rspec'
   gem 'web-console'
-  gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 end
 
 group :test do
