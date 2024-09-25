@@ -7,6 +7,8 @@ module Reports
 
     class << self
       def run
+        return unless ENV.key?('PAYMENT_TYPE_REPORT_EMAIL')
+
         Rails.logger.info "Sending submitted applications report"
 
         begin
@@ -26,11 +28,10 @@ module Reports
 
       def report_data
         from = 1.day.ago.beginning_of_day + 6.hours
-        to = DateTime.today
-        C100Application
-          .completed
+        to = Date.today
+        CompletedApplicationsAudit
           .where(completed_at: from...to)
-          .count
+          .pluck(:reference_code, :completed_at)
       end
 
       def report_csv
@@ -41,11 +42,6 @@ module Reports
           csv << ['Total Applications', report_data.count]
         end
       end
-
-      ReportsMailer.submitted_applications_report(
-        report_csv,
-        to_address: ENV['PAYMENT_TYPE_REPORT_EMAIL'],
-      ).deliver_now
     end
   end
 end
