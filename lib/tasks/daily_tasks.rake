@@ -24,6 +24,8 @@ task daily_tasks: [:stdout_environment] do
 
   Rake::Task['reports:payment_types'].invoke
 
+  Rake::Task['reports:submitted_applications'].invoke
+
   log "Users count: #{User.count} / Applications count: #{C100Application.count}"
   log 'Finished daily tasks'
 end
@@ -90,6 +92,11 @@ namespace :reports do
   task payment_types: :environment do
     log "Running payment type report"
     Reports::PaymentTypesReport.run
+  end
+
+  task submitted_applications: :environment do
+    log "Running submitted applications report"
+    Reports::SubmittedApplicationsReport.run
   end
 end
 
