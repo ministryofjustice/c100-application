@@ -257,8 +257,8 @@ workflows:
     jobs:
       - test
       ### dev ###
-      - build_and_push_dev_image
-          name: build-development
+      - build_and_push_dev_image:
+          name: build-dev
           requires:
             - test
       ### staging ###
