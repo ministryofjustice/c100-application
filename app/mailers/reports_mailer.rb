@@ -32,6 +32,7 @@ class ReportsMailer < NotifyMailer
     log 'Setting personalisation'
     @log.try(:update, mailer_started: true)
     set_personalisation(
+      report_date: Date.parse(Date.today.to_s).strftime("%d/%m/%y"),
       link_to_report: Notifications.prepare_upload(
         StringIO.new(report_csv),
       )

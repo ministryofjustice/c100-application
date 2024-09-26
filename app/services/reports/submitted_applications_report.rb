@@ -27,8 +27,8 @@ module Reports
       end
 
       def report_data
-        from = 1.day.ago.beginning_of_day + 6.hours
-        to = Date.today
+        from = 1.day.ago.beginning_of_day
+        to = Date.today.beginning_of_day
         CompletedApplicationsAudit
           .where(completed_at: from...to)
           .pluck(:reference_code, :completed_at)
