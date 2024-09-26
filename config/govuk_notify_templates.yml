@@ -18,6 +18,7 @@ integration:
   draft_last_reminder: '8e622f55-4be8-49cc-8a94-0ab3fd868067'
   failed_emails_report: 'aa4409f8-7232-4052-bdad-e99e26186a79'
   payment_types_report: '3d3ac076-6d15-4f3d-b37a-c888d8a027aa'
+  submitted_applications_report: 'b6ece0af-4efd-4159-ae07-8e3d1615e454'
   payment_timeout: '24c139b3-1d4b-4340-b21c-785d94f080bd'
 
 production:
@@ -30,4 +31,5 @@ production:
   draft_last_reminder: '30dedd21-e7da-4794-b66c-94729cfa3180'
   failed_emails_report: 'ed7616f7-6d33-40b5-b6cc-95765c4e37e5'
   payment_types_report: '8079f7af-cdb8-46a3-931a-f3a44c7dd8d7'
+  submitted_applications_report: 'f412eebd-8417-4c43-85ab-b5946addc01c'
   payment_timeout: '8050e162-51cf-441b-b353-738ed2dacedd'
