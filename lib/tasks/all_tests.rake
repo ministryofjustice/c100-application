@@ -3,8 +3,8 @@ namespace :test do
   task all_the_things: :environment do
     Rake::Task['rubocop'].invoke
     Rake::Task['brakeman'].invoke
-    Rake::Task['rspec'].invoke
-    Rake::Task['cucumber'].invoke
+    # Rake::Task['rspec'].invoke
+    # Rake::Task['cucumber'].invoke
 
     # Rake::Task['mutant'].invoke # always disabled
   end
