@@ -114,10 +114,10 @@ jobs:
           name: Authenticate to LIVE cluster
           command: |
             echo -n ${KUBE_ENV_LIVE_DEV_CACERT} | base64 -d > ./ca.crt
-            kubectl config set-cluster ${KUBE_ENV_LIVE_DEV_NAME} --certificate-authority=./ca.crt --server=https://${KUBE_ENV_LIVE_DEV_NAME}
-            kubectl config set-credentials circleci --token=${KUBE_ENV_LIVE_DEV_TOKEN}
-            kubectl config set-context ${KUBE_ENV_LIVE_DEV_NAME} --cluster=${KUBE_ENV_LIVE_DEV_NAME} --user=circleci --namespace=${KUBE_ENV_LIVE_DEV_NAMESPACE}
-            kubectl config use-context ${KUBE_ENV_LIVE_DEV_NAME}
+            # kubectl config set-cluster ${KUBE_ENV_LIVE_DEV_NAME} --certificate-authority=./ca.crt --server=https://${KUBE_ENV_LIVE_DEV_NAME}
+            # kubectl config set-credentials circleci --token=${KUBE_ENV_LIVE_DEV_TOKEN}
+            # kubectl config set-context ${KUBE_ENV_LIVE_DEV_NAME} --cluster=${KUBE_ENV_LIVE_DEV_NAME} --user=circleci --namespace=${KUBE_ENV_LIVE_DEV_NAMESPACE}
+            # kubectl config use-context ${KUBE_ENV_LIVE_DEV_NAME}
 
       - deploy:
           name: rolling update image
