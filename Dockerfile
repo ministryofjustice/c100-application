@@ -72,6 +72,7 @@ RUN chmod +r $RDS_COMBINED_CA_BUNDLE
 CMD ["sh", "-c", "bundle exec rake assets:precompile RAILS_ENV=production SECRET_TOKEN=blah && \
      bundle exec rake static_pages:generate RAILS_ENV=production SECRET_TOKEN=blah"]
 
+RUN mkdir -p log
 RUN mkdir -p public/assets/govuk-frontend/govuk/assets/fonts
 RUN mkdir -p public/assets/govuk-frontend/govuk/assets/images
 RUN cp node_modules/govuk-frontend/govuk/assets/fonts/*  public/assets/govuk-frontend/govuk/assets/fonts
