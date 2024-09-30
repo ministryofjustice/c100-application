@@ -72,6 +72,7 @@ RUN chmod +r $RDS_COMBINED_CA_BUNDLE
 CMD ["sh", "-c", "bundle exec rake assets:precompile RAILS_ENV=production SECRET_TOKEN=blah && \
      bundle exec rake static_pages:generate RAILS_ENV=production SECRET_TOKEN=blah"]
 
+RUN mkdir -p log
 RUN mkdir -p public/assets/govuk-frontend/govuk/assets/fonts
 RUN mkdir -p public/assets/govuk-frontend/govuk/assets/images
 RUN cp node_modules/govuk-frontend/govuk/assets/fonts/*  public/assets/govuk-frontend/govuk/assets/fonts
@@ -80,7 +81,7 @@ RUN cp node_modules/govuk-frontend/govuk/assets/images/* public/assets/govuk-fro
 RUN addgroup --gid 1000 --system appgroup && \
     adduser --uid 1000 --system appuser --ingroup appgroup
 
-RUN chown -R appuser:appgroup tmp db /var/lib/clamav /var/log/clamav /var/run/clamav /etc/clamav
+RUN chown -R appuser:appgroup log tmp db /var/lib/clamav /var/log/clamav /var/run/clamav /etc/clamav
 
 ENV APPUID=1000
 USER $APPUID
