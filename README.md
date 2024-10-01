@@ -125,4 +125,3 @@ For more details on the ENV variables needed for CircleCI, refer to the [deploy 
 [k8s-staging]: https://c100-application-staging.apps.live-1.cloud-platform.service.justice.gov.uk
 
 Deploy trigger: 1
-
