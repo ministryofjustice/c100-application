@@ -84,7 +84,7 @@ jobs:
          command: << parameters.test_command >>
     
   build_and_push_dev_image:
-    machine:
+    docker:
       image: cimg/ruby:3.3.4-browsers
     steps:
       # Checkout your repository
