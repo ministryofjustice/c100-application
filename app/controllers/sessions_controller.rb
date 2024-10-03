@@ -38,6 +38,7 @@ class SessionsController < ApplicationController
       # if a value already exists we use it
       consent_order: c100_application.consent_order.presence || 'no',
       child_protection_cases: c100_application.child_protection_cases.presence || 'no',
+      orders: ['child_arrangements_home'],
     )
 
     redirect_to edit_steps_application_check_your_answers_path
