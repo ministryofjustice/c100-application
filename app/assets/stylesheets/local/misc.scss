@@ -55,11 +55,6 @@ ol.app-list--icon-steps {
     margin-bottom: 0.5em;
   }
 
-  @include govuk-if-ie8 {
-    list-style-type: decimal;
-    padding-left: 1em;
-  }
-
   & > li {
     background-position: 0 0.8em;
     background-repeat: no-repeat;
@@ -89,19 +84,6 @@ ol.app-list--icon-steps {
 
 ul.app-list--pros-cons {
   @extend .govuk-\!-font-size-16;
-
-  @include govuk-if-ie8 {
-    list-style-type: disc;
-    padding-left: 1em;
-  }
-
-  @include govuk-not-ie8 {
-    & > li {
-      padding-left: 1.4em;
-      padding-bottom: 0.3em;
-      background-repeat: no-repeat;
-    }
-  }
 
   & > li.app-list--item--pros {
     background-image: image-url('icon-tick.svg');

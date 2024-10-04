@@ -43,6 +43,10 @@
   <% if current_c100_application %>
     <%= render partial: 'layouts/timeout_modal' %>
   <% end %>
+
+  <script>
+      document.body.classList.add('govuk-frontend-supported');
+  </script>
 <% end %>
 
 <% content_for(:footer_links) do %>

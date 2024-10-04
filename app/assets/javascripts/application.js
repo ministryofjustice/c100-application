@@ -16,17 +16,8 @@
 // GOV.UK Frontend
 // https://github.com/alphagov/govuk-frontend/blob/master/docs/installation/installing-with-npm.md
 //
-//= require govuk-frontend/govuk/all
 
 //= require moj
 //= require_tree ./modules
 //= require_tree ./utils
 //= require_tree ./pages
-
-$(document).ready(function() {
-  // Initialize frontend toolkit
-  window.GOVUKFrontend.initAll();
-
-  // Initialize custom modules
-  moj.init();
-});
