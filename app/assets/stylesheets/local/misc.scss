@@ -115,12 +115,6 @@ ul.app-list--pros-cons {
   }
 }
 
-// Used in `javascripts/modules/password-toggle.js`
-.app-js--toggle-password {
-  @extend .govuk-\!-font-size-19;
-  margin-top: 5px;
-}
-
 // Used in `javascripts/modules/check-email-address.js`
 .app-js--email-confirmation-panel {
   @extend .govuk-inset-text;
