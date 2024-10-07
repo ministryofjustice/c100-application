@@ -73,10 +73,14 @@ CMD ["sh", "-c", "bundle exec rake assets:precompile RAILS_ENV=production SECRET
      bundle exec rake static_pages:generate RAILS_ENV=production SECRET_TOKEN=blah"]
 
 RUN mkdir -p log
-RUN mkdir -p public/assets/govuk-frontend/govuk/assets/fonts
-RUN mkdir -p public/assets/govuk-frontend/govuk/assets/images
-RUN cp node_modules/govuk-frontend/govuk/assets/fonts/*  public/assets/govuk-frontend/govuk/assets/fonts
-RUN cp node_modules/govuk-frontend/govuk/assets/images/* public/assets/govuk-frontend/govuk/assets/images
+
+RUN mkdir -p public/assets/govuk-frontend/dist/govuk/assets/fonts && \
+    cp node_modules/govuk-frontend/dist/govuk/assets/fonts/* public/assets/govuk-frontend/dist/govuk/assets/fonts/
+
+RUN mkdir -p public/assets/govuk-frontend/dist/govuk/assets/images && \
+    cp node_modules/govuk-frontend/dist/govuk/assets/images/* public/assets/govuk-frontend/dist/govuk/assets/images/
+
+RUN cp node_modules/govuk-frontend/dist/govuk/assets/images/favicon.ico public/favicon.ico
 
 RUN addgroup --gid 1000 --system appgroup && \
     adduser --uid 1000 --system appuser --ingroup appgroup
