@@ -210,11 +210,6 @@ module C100App
     def eligable_court
       c100_application.court.id.in? %w[
         swansea-civil-justice-centre
-        gloucester-and-cheltenham-county-and-family-court
-        coventry-combined-court-centre
-        newcastle-civil-family-courts-and-tribunals-centre
-        peterborough-combined-court-centre
-        east-london-family-court
       ]
     end
   end
