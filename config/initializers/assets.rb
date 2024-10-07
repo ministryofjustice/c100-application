@@ -11,12 +11,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
+Rails.application.config.assets.precompile += %w( govuk-frontend/dist/govuk/govuk-frontend.min.js )
+Rails.application.config.assets.precompile += %w( html5shiv-printshiv.js )
+
 Rails.application.config.assets.precompile << %r{fonts/[\w-]+\.(?:eot|svg|ttf|woff2?)$}
-Rails.application.config.assets.precompile << %r{images/[\w-]+\.(?:png|svg)$}
-Rails.application.config.assets.precompile << %w(
-  application-ie8.css
-  html5shiv-printshiv.js
-  apple-touch-icon.png
-  apple-touch-icon-180x180.png
-  apple-touch-icon-167x167.png
-)
+Rails.application.config.assets.precompile << %r{images/[\w-]+\.(?:png|svg|ico)$}

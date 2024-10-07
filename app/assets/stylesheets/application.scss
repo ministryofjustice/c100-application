@@ -3,9 +3,12 @@
 
 // Style paragraphs (`<p>`) and links (`<a>`) without explicitly having to apply `govuk-body` and `govuk-link` classes
 $govuk-global-styles: true;
+$govuk-new-typography-scale: true;
 
-$govuk-assets-path: '/assets/govuk-frontend/govuk/assets/';
-@import 'govuk-frontend/govuk/all';
+$govuk-fonts-path: 'govuk-frontend/dist/govuk/assets/fonts/';
+$govuk-images-path: 'govuk-frontend/dist/govuk/assets/images/';
+
+@import "govuk-frontend/dist/govuk/all";
 
 // App-specific custom styles and overrides
 @import 'local/all';

@@ -10,26 +10,16 @@
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<%= asset_path '/assets/govuk-frontend/govuk/assets/images/favicon.ico' %>" type="image/x-icon"/>
-  <link rel="mask-icon" href="<%= asset_path '/assets/govuk-frontend/govuk/assets/images/govuk-mask-icon.svg' %>" color="blue">
-  <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_path '/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-180x180.png' %>">
-  <link rel="apple-touch-icon" sizes="167x167" href="<%= asset_path '/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-167x167.png' %>">
-  <link rel="apple-touch-icon" sizes="152x152" href="<%= asset_path '/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-152x152.png' %>">
-  <link rel="apple-touch-icon" href="<%= asset_path '/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon.png' %>">
+  <link rel="icon" sizes="48x48" href="<%= asset_path 'govuk-frontend/dist/govuk/assets/images/favicon.ico' %>" />
+  <link rel="icon" sizes="any" href="<%= asset_path 'govuk-frontend/dist/govuk/assets/images/favicon.svg' %>" type="image/svg+xml">
+  <link rel="mask-icon" href="<%= asset_path '/assets/govuk-frontend/dist/govuk/assets/images/govuk-icon-mask.svg' %>" color="blue">
+  <link rel="apple-touch-icon" href="<%= asset_path 'govuk-frontend/dist/govuk/assets/images/govuk-icon-180.png' %>">
 
-  <meta property="og:image" content="<%= asset_path '/assets/govuk-frontend/govuk/assets/images/govuk-opengraph-image.png' %>">
+  <meta property="og:image" content="/assets/images/govuk-opengraph-image.png">
 
-  <!--[if !IE 8]><!-->
-  <%= stylesheet_link_tag 'application', media: 'all', integrity: true, crossorigin: 'anonymous' %>
-  <!--<![endif]-->
+  <%= stylesheet_link_tag 'application', media: 'all', integrity: true %>
 
-  <!--[if IE 8]>
-  <%= stylesheet_link_tag 'application-ie8', media: 'all', integrity: true, crossorigin: 'anonymous' %>
-  <![endif]-->
-
-  <!--[if lt IE 9]>
-  <%= javascript_include_tag 'html5shiv-printshiv', integrity: true, crossorigin: 'anonymous' %>
-  <![endif]-->
+  <%#= javascript_include_tag 'html5shiv-printshiv', integrity: true %>
 
   <%= yield :head %>
 </head>
@@ -101,6 +91,16 @@
     </div>
   </div>
 </footer>
+
+<script src="<%= asset_path 'govuk-frontend/dist/govuk/govuk-frontend.min.js' %>" type="module"></script>
+
+<script type="module">
+    import { initAll } from '<%= asset_path "govuk-frontend/dist/govuk/govuk-frontend.min.js" %>';
+
+    initAll();
+
+    window.moj.init();
+</script>
 
 <%= javascript_include_tag 'application', integrity: true, crossorigin: 'anonymous' %>
 
