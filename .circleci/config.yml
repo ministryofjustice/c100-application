@@ -299,7 +299,9 @@ workflows:
           name: build-dev
       - deploy_image_to_dev:
           name: deploy-dev-live
-          env_name: staging
+          env_name: dev
+          requires:
+            - build_and_push_dev_image
 
 
 
