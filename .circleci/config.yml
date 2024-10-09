@@ -301,7 +301,7 @@ workflows:
           name: deploy-dev-live
           env_name: dev
           requires:
-            - build_and_push_dev_image
+            - build-dev
 
 
 
