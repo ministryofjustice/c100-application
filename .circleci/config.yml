@@ -295,55 +295,55 @@ jobs:
 workflows:
   test-build-deploy:
     jobs:
+      - test
+      ### dev ###
       - build_and_push_dev_image:
           name: build-dev
+          requires:
+            - test
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev
           requires:
             - build-dev
-
-
-
-      # - test
-      # ### staging ###
-      # - build_and_push_image:
-      #     name: build-staging
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only:
-      #           - /^master$/
-      # - deploy_image_to_live:
-      #     name: deploy-staging-live
-      #     env_name: staging
-      #     requires:
-      #       - build-staging
-      #     filters:
-      #       branches:
-      #         only:
-      #           - /^master$/
-      # ### production ###
-      # - approve_production:
-      #     type: approval
-      #     requires:
-      #       - deploy-staging-live
-      #     filters:
-      #       branches:
-      #         only: master
-      # - tag_production:
-      #     env_name: staging
-      #     requires:
-      #       - approve_production
-      #     filters:
-      #       branches:
-      #         only: master
-      # - deploy_image_to_live_prod:
-      #     name: deploy-production-live
-      #     env_name: production
-      #     requires:
-      #       - tag_production
-      #     filters:
-      #       branches:
-      #         only: master
+      ### staging ###
+      - build_and_push_image:
+          name: build-staging
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - /^master$/
+      - deploy_image_to_live:
+          name: deploy-staging-live
+          env_name: staging
+          requires:
+            - build-staging
+          filters:
+            branches:
+              only:
+                - /^master$/
+      ### production ###
+      - approve_production:
+          type: approval
+          requires:
+            - deploy-staging-live
+          filters:
+            branches:
+              only: master
+      - tag_production:
+          env_name: staging
+          requires:
+            - approve_production
+          filters:
+            branches:
+              only: master
+      - deploy_image_to_live_prod:
+          name: deploy-production-live
+          env_name: production
+          requires:
+            - tag_production
+          filters:
+            branches:
+              only: master
