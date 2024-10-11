@@ -301,11 +301,19 @@ workflows:
           name: build-dev
           requires:
             - test
+          filters:
+            branches:
+              only:
+                - /^development$/
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev
           requires:
             - build-dev
+          filters:
+            branches:
+              only:
+                - /^development$/
       ### staging ###
       - build_and_push_image:
           name: build-staging
