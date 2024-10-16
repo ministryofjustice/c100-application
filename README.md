@@ -123,6 +123,7 @@ For more details on the ENV variables needed for CircleCI, refer to the [deploy 
 [taxtribs]: https://github.com/ministryofjustice/tax-tribunals-datacapture
 [deploy-repo]: https://github.com/ministryofjustice/c100-application-deploy
 [k8s-staging]: https://c100-application-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+[k8s-dev]: https://c100-application-dev.apps.live.cloud-platform.service.justice.gov.uk/
 
 ## Deployment to DEV environment
 The image needs to be build and pushed first. This is done in Circle CI.
@@ -144,7 +145,7 @@ filters:
 ```
 And push the changes. Wait until the build is green in Circle CI.
 Then open dev/k8s/deployment.yml from https://github.com/ministryofjustice/c100-application-deploy repository.
-Update the value of Trigger env i/e.:
+Update the value of Trigger env i.e.:
 from
 ```
 - name: TRIGGER
