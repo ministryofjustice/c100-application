@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
       declaration_signee: presence_or_default(c100_application.declaration_signee, 'name'),
       declaration_signee_capacity: presence_or_default(c100_application.declaration_signee_capacity, 'applicant'),
       declaration_confirmation: presence_or_default(c100_application.declaration_confirmation, 'applicant'),
-      orders: c100_application.orders.presence || ['child_arrangements_home'],
+      orders: presence_or_default(c100_application.orders, ['child_arrangements_home'])
     )
 
     redirect_to edit_steps_application_check_your_answers_path
