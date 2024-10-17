@@ -26,6 +26,7 @@ class SessionsController < ApplicationController
     redirect_to edit_steps_opening_consent_order_path
   end
 
+  # rubocop:disable Metrics/AbcSize
   def bypass_to_cya
     raise 'For development use only' unless helpers.dev_tools_enabled?
 
@@ -34,15 +35,19 @@ class SessionsController < ApplicationController
     c100_application.update(
       court: find_or_initialize_court,
       status: 1,
-      # fill out the first steps, so `save and return` button shows
-      # if a value already exists we use it
-      consent_order: c100_application.consent_order.presence || 'no',
-      child_protection_cases: c100_application.child_protection_cases.presence || 'no',
+      consent_order: presence_or_default(c100_application.consent_order, 'no'),
+      child_protection_cases: presence_or_default(c100_application.child_protection_cases, 'no'),
+      attach_evidence: presence_or_default(c100_application.attach_evidence, 'yes'),
+      payment_type: presence_or_default(c100_application.payment_type, 'online'),
+      declaration_signee: presence_or_default(c100_application.declaration_signee, 'name'),
+      declaration_signee_capacity: presence_or_default(c100_application.declaration_signee_capacity, 'applicant'),
+      declaration_confirmation: presence_or_default(c100_application.declaration_confirmation, 'applicant'),
       orders: c100_application.orders.presence || ['child_arrangements_home'],
     )
 
     redirect_to edit_steps_application_check_your_answers_path
   end
+  # rubocop:enable Metrics/AbcSize
   # :nocov:
 
   private
@@ -89,5 +94,10 @@ class SessionsController < ApplicationController
       },
     }
   end
+
+  def presence_or_default(attribute, default)
+    attribute.presence || default
+  end
+
   # :nocov:
 end
