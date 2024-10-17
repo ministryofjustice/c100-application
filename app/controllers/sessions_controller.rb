@@ -38,10 +38,11 @@ class SessionsController < ApplicationController
       consent_order: presence_or_default(c100_application.consent_order, 'no'),
       child_protection_cases: presence_or_default(c100_application.child_protection_cases, 'no'),
       attach_evidence: presence_or_default(c100_application.attach_evidence, 'yes'),
-      payment_type: presence_or_default(c100_application.payment_type, 'online'),
+      payment_type: presence_or_default(c100_application.payment_type, 'help_with_fees'),
       declaration_signee: presence_or_default(c100_application.declaration_signee, 'name'),
       declaration_signee_capacity: presence_or_default(c100_application.declaration_signee_capacity, 'applicant'),
       declaration_confirmation: presence_or_default(c100_application.declaration_confirmation, 'applicant'),
+      children_postcode: presence_or_default(c100_application.children_postcode, 'SW1H 9AJ'),
       orders: presence_or_default(c100_application.orders, ['child_arrangements_home'])
     )
 
