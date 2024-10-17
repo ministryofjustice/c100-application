@@ -123,5 +123,55 @@ For more details on the ENV variables needed for CircleCI, refer to the [deploy 
 [taxtribs]: https://github.com/ministryofjustice/tax-tribunals-datacapture
 [deploy-repo]: https://github.com/ministryofjustice/c100-application-deploy
 [k8s-staging]: https://c100-application-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+[k8s-dev]: https://c100-application-dev.apps.live.cloud-platform.service.justice.gov.uk/
+
+## Deployment to DEV environment
+The image needs to be build and pushed first. This is done in Circle CI.
+There is a section deploy_image_to_dev and build_and_push_dev_image in .circleci/config.yml.
+When you are in your branch, update the filter rules with your branch name i.e.
+from
+```
+filters:
+  branches:
+    only:
+      - /^development$/
+```
+to
+```
+filters:
+  branches:
+    only:
+      - /^rst-5889$/
+```
+And push the changes. Wait until the build is green in Circle CI.
+Then open dev/k8s/deployment.yml from https://github.com/ministryofjustice/c100-application-deploy repository.
+Update the value of Trigger env i.e.:
+from
+```
+- name: TRIGGER
+  value: "7"
+```
+to
+```
+- name: TRIGGER
+  value: "8"
+```
+
+save it. You don't have to commit.
+Then in the same repository (c100-application-deploy)
+run following command:
+```
+kubectl apply --filename dev/k8s/ --namespace c100-application-dev
+```
+This should pick the latest image build by CI.
+Run
+```
+kubectl get pods -n c100-application-dev
+```
+to check all pods are ready then you should be able to see your changes in dev URL:
+
+https://c100-application-dev.apps.live.cloud-platform.service.justice.gov.uk/
+
+There is a name and a password, ask other devs for more info.
 
 Deploy trigger: 7
