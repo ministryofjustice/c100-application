@@ -46,6 +46,8 @@ class SessionsController < ApplicationController
       orders: presence_or_default(c100_application.orders, ['child_arrangements_home'])
     )
 
+    upload_bypass_document(:miam_certificate)
+
     redirect_to edit_steps_application_check_your_answers_path
   end
   # rubocop:enable Metrics/AbcSize
@@ -98,6 +100,19 @@ class SessionsController < ApplicationController
 
   def presence_or_default(attribute, default)
     attribute.presence || default
+  end
+
+  def upload_bypass_document(document_key)
+    file_path = Rails.root.join('features/support/sample_file/image.jpg')
+
+    document = DocumentUpload.new(
+      File.open(file_path),
+      document_key:,
+      content_type: 'application/pdf',
+      filename: 'document.pdf',
+    )
+
+    document.upload!(document_key:, collection_ref: c100_application.files_collection_ref)
   end
 
   # :nocov:
