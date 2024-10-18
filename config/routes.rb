@@ -311,6 +311,9 @@ Rails.application.routes.draw do
       get :ping
       post :bypass_postcode
       post :bypass_to_cya
+      post :bypass_to_cya_consent
+      post :bypass_to_cya_miam_certificate
+      post :bypass_to_cya_miam_exemption
     end
   end
 

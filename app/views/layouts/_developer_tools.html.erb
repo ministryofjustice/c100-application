@@ -37,6 +37,18 @@
       <%= button_to bypass_to_cya_session_path,
                     class: 'govuk-button',
                     data: { module: 'govuk-button' } do; 'Bypass to CYA'; end %>
+
+      <%= button_to bypass_to_cya_consent_session_path,
+                    class: 'govuk-button',
+                    data: { module: 'govuk-button' } do; 'Bypass to CYA (Consent)'; end %>
+
+      <%= button_to bypass_to_cya_miam_certificate_session_path,
+                    class: 'govuk-button',
+                    data: { module: 'govuk-button' } do; 'Bypass to CYA (MIAM Certificate)'; end %>
+
+      <%= button_to bypass_to_cya_miam_exemption_session_path,
+                    class: 'govuk-button',
+                    data: { module: 'govuk-button' } do; 'Bypass to CYA (MIAM Exemption)'; end %>
     </div>
   </details>
 <% end %>
