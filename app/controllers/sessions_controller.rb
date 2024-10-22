@@ -52,7 +52,6 @@ class SessionsController < ApplicationController
     redirect_to edit_steps_application_check_your_answers_path
   end
 
-  # rubocop:disable Metrics/AbcSize
   def bypass_to_cya_consent
     raise 'For development use only' unless helpers.dev_tools_enabled?
 
@@ -131,23 +130,6 @@ class SessionsController < ApplicationController
     current_c100_application || initialize_c100_application(
       children_postcode: postcode_fixture
     )
-  end
-
-  def presence_or_default(attribute, default)
-    attribute.presence || default
-  end
-
-  def upload_bypass_document(document_key)
-    file_path = Rails.root.join('features/support/sample_file/image.jpg')
-
-    document = DocumentUpload.new(
-      File.open(file_path),
-      document_key:,
-      content_type: 'application/pdf',
-      filename: 'document.pdf',
-    )
-
-    document.upload!(document_key:, collection_ref: c100_application.files_collection_ref)
   end
 
   # If there is already a court assigned, we maintain it
