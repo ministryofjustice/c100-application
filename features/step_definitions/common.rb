@@ -167,7 +167,7 @@ end
 Given(/^I have completed an application$/) do
   step %[I visit "/"]
   step %[I open the "Developer Tools" summary details]
-  find('button', text: 'Bypass to CYA').click
+  find('button', text: 'Bypass to CYA', exact_text: true).click
 end
 
 When(/^I start the application$/) do
