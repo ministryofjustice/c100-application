@@ -112,10 +112,13 @@ class SessionsController < ApplicationController
       declaration_confirmation: presence_or_default(c100_application.declaration_confirmation, 'applicant'),
       payment_type: presence_or_default(c100_application.payment_type, 'help_with_fees'),
       miam_exemption_claim: presence_or_default(c100_application.miam_exemption_claim, 'yes'),
+      exemption_details: presence_or_default(c100_application.exemption_details, 'Some details about exemption'),
       attach_evidence: presence_or_default(c100_application.attach_evidence, 'yes'),
       children_postcode: presence_or_default(c100_application.children_postcode, 'SW1H 9AJ'),
-      orders: presence_or_default(c100_application.orders, ['child_arrangements_home'])
+      orders: presence_or_default(c100_application.orders, ['child_arrangements_home']),
     )
+
+    upload_bypass_document(:exemption)
 
     redirect_to edit_steps_application_check_your_answers_path
   end
