@@ -23,6 +23,8 @@ module C100App
         after_cohabit_with_other
       when :privacy_preferences
         after_privacy_preferences
+      when :refuge
+        after_refuge
       else
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
@@ -40,6 +42,14 @@ module C100App
     end
 
     def after_privacy_preferences
+      if ConfidentialOption.changes_apply? && record.person.reload.are_contact_details_private == 'yes'
+        edit(:refuge, id: record.person)
+      else
+        edit(:personal_details, id: record.person)
+      end
+    end
+
+    def after_refuge
       edit(:personal_details, id: record.person)
     end
 

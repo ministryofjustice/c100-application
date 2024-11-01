@@ -1,7 +1,7 @@
 Feature: Add a respondent to the application
   Background:
     # We need at least 1 child as a precondition for this journey
-    Given Confidential changes do not apply
+    Given Confidential changes do apply
     Given Privacy changes apply
     Given I have started an application
     And I have entered a child with first name "John" and last name "Doe Junior"
@@ -76,7 +76,7 @@ Feature: Add a respondent to the application
     When I click the "Continue" button
     Then Page has title "Error: Address lookup - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter the postcode" link to "#steps-address-lookup-form-postcode-field-error"
-    
+
     When I fill in "Current postcode" with "12345"
     And I click the "Continue" button
     Then Page has title "Error: Address lookup - Apply to court about child arrangements - GOV.UK"
@@ -129,7 +129,7 @@ Feature: Add a respondent to the application
     And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-respondent-contact-details-form-email-field-error"
     And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-respondent-contact-details-form-mobile-phone-field-error"
     And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-respondent-contact-details-form-home-phone-field-error"
-    
+
     When I check "I don't know their email"
     And I fill in "Email address" with "test@example.com"
     And I check "I don't know their home phone number"
@@ -142,7 +142,7 @@ Feature: Add a respondent to the application
     And I should see a "Cannot select 'I don't know their home phone number' and input 'Home phone'" link to "#steps-respondent-contact-details-form-home-phone-field-error"
     And I should see a "Cannot select 'I don't know their mobile number' and input 'Mobile phone'" link to "#steps-respondent-contact-details-form-mobile-phone-field-error"
 
-    # Fix validation errors and continue    
+    # Fix validation errors and continue
     When I click the "Back" link
     And I should see "Address details of Olivia Doe Senior"
     And I click the "Continue" button
@@ -185,7 +185,7 @@ Feature: Add a respondent to the application
     And I click the "Continue" button
     Then I should see a "Name must not contain special characters" link to "#steps-other-party-names-split-form-new-first-name-field-error"
     Then I should see a "Name must not contain special characters" link to "#steps-other-party-names-split-form-new-last-name-field-error"
-    
+
     # Fixing validation errors and continuing
     When I fill in "First name(s)" with "Thomas"
     And I fill in "Last name(s)" with "Other Doe"
@@ -212,7 +212,21 @@ Feature: Add a respondent to the application
     And I click the "Continue" button
     Then Page has title "Other person personal details - Apply to court about child arrangements - GOV.UK"
     And I should see "Provide details for Thomas Other Doe"
-    
+
+    # Go back and provoke Refuge page from yes
+    When I click the "Back" link
+    And I should see "Keeping Thomas Other Doe's details private"
+    And I choose "Yes"
+    And I click the "Continue" button
+    And I should see "Is Thomas Other Doe currently resident in a refuge?"
+
+    And I click the "Continue" button
+    Then Page has title "Error: Is currently resident in a refuge? - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Select yes if the other party is currently resident in a refuge" link to "#steps-other-party-refuge-form-refuge-field-error"
+
+    And I choose "No"
+    And I click the "Continue" button
+
     # Provoke validation errors
     When I click the "Continue" button
     Then Page has title "Error: Other person personal details - Apply to court about child arrangements - GOV.UK"
@@ -226,7 +240,7 @@ Feature: Add a respondent to the application
     And I click the "Continue" button
     Then Page has title "Error: Other person personal details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Date of birth is not valid" link to "#steps-other-party-personal-details-form-dob-field-error"
-    
+
     When I enter the date 20-10-2070
     And I click the "Continue" button
     Then Page has title "Error: Other person personal details - Apply to court about child arrangements - GOV.UK"
@@ -237,12 +251,12 @@ Feature: Add a respondent to the application
     And I click the "Continue" button
     Then Page has title "Other person relationship - Apply to court about child arrangements - GOV.UK"
     And I should see "What is Thomas Other Doe's relationship to John Doe Junior?"
-    
+
     # Provoke validation errors
     When I click the "Continue" button
     Then Page has title "Error: Other person relationship - Apply to court about child arrangements - GOV.UK"
     And I should see a "Select the relationship" link to "#steps-shared-relationship-form-relation-field-error"
-    
+
     When I choose "Other"
     Then Page has title "Error: Other person relationship - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter the relationship" link to "#steps-shared-relationship-form-relation-other-value-field-error"
@@ -256,7 +270,7 @@ Feature: Add a respondent to the application
     And I click the "Continue" button
     Then Page has title "Error: Address lookup - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter a valid postcode" link to "#steps-address-lookup-form-postcode-field-error"
-    
+
     # Fix this validation error and continue to different address input page
     When I click the "I don’t know their postcode or they live outside the UK" link
     And Page has title "Other person Address details - Apply to court about child arrangements - GOV.UK"
@@ -267,8 +281,8 @@ Feature: Add a respondent to the application
     Then Page has title "Error: Other person Address details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter the first line of the address or select if you don’t know where they live" link to "#steps-other-party-address-details-form-address-line-1-field-error"
     And I should see a "Enter the town or city or select if you don’t know where they live" link to "#steps-other-party-address-details-form-town-field-error"
-    
-    # (Fix validation errors) and continue 
+
+    # (Fix validation errors) and continue
     When I fill in "Building and street" with "Test street"
     And I fill in "Town or city" with "London"
     And I fill in "Country" with "United Kingdom"
@@ -309,7 +323,7 @@ Feature: Add a respondent to the application
     And I should see "Is there anyone else who should know about your application?"
     And I choose "No"
     Then I should see "Who does John Doe Junior currently live with?"
-    
+
   @happy_path
   Scenario: Test timeout on respondent details page
     When I should see "Enter the respondent’s name"

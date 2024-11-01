@@ -126,7 +126,7 @@ module Summary
       end
 
       def other_party_privacy_answers(person)
-        [
+        answers = [
           FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize),
                              change_path: edit_steps_other_party_children_cohabit_other_path(person),
                              i18n_opts: {name: person.full_name}),
@@ -135,6 +135,16 @@ module Summary
                              change_path: edit_steps_other_party_privacy_preferences_path(person),
                              i18n_opts: {name: person.full_name})
         ]
+
+        if ConfidentialOption.changes_apply? && person.are_contact_details_private == 'yes'
+          answers.push(
+            FreeTextAnswer.new(:other_party_refuge, person.refuge.try(:capitalize),
+                               change_path: edit_steps_other_party_refuge_path(person),
+                               i18n_opts: {name: person.full_name})
+          )
+        end
+
+        answers
       end
 
       def privacy_preferences_answer(person)
