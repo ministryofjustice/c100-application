@@ -3,7 +3,7 @@ module Steps
     class RefugeController < Steps::OtherPartyStepController
       def edit
         @form_object = RefugeForm.build(
-          current_record,
+          relationship_record,
           c100_application: current_c100_application
         )
       end
@@ -11,8 +11,14 @@ module Steps
       def update
         update_and_advance(
           RefugeForm,
-          record: current_record,
+          record: relationship_record,
           as: :refuge
+        )
+      end
+
+      def relationship_record
+        current_c100_application.relationships.find_or_initialize_by(
+          person: current_record
         )
       end
     end

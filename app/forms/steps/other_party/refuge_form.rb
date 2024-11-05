@@ -12,7 +12,7 @@ module Steps
       def persist!
         raise C100ApplicationNotFound unless c100_application
 
-        party = c100_application.other_parties.find_or_initialize_by(id: record.id)
+        party = c100_application.other_parties.find_or_initialize_by(id: record.person.id)
         party.update(attributes_map)
       end
     end
