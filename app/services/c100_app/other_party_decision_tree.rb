@@ -34,23 +34,23 @@ module C100App
     private
 
     def after_cohabit_with_other
-      if record.person.reload.cohabit_with_other == 'yes'
-        edit(:privacy_preferences, id: record.person)
+      if record.reload.cohabit_with_other == 'yes'
+        edit(:privacy_preferences, id: record)
       else
         after_privacy_preferences
       end
     end
 
     def after_privacy_preferences
-      if ConfidentialOption.changes_apply? && record.person.reload.are_contact_details_private == 'yes'
-        edit(:refuge, id: record.person)
+      if ConfidentialOption.changes_apply? && record.reload.are_contact_details_private == 'yes'
+        edit(:refuge, id: record)
       else
-        edit(:personal_details, id: record.person)
+        edit(:personal_details, id: record)
       end
     end
 
     def after_refuge
-      edit(:personal_details, id: record.person)
+      edit(:personal_details, id: record)
     end
 
     def after_address_details
