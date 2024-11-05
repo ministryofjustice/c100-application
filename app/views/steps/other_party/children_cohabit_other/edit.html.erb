@@ -1,4 +1,4 @@
-<% title t('.page_title', name: @form_object.record.person.full_name) %>
+<% title t('.page_title', name: @form_object.record.full_name) %>
 <% step_header %>
 
 <div class="govuk-grid-row">
@@ -7,7 +7,7 @@
 
     <%= step_form @form_object do |f| %>
       <%= f.govuk_collection_radio_buttons :cohabit_with_other, GenericYesNo.values, :value, nil,
-                                           legend: { text: t('.heading', name: @form_object.record.person.full_name) } %>
+                                           legend: { text: t('.heading', name: @form_object.record.full_name) } %>
       <%= f.continue_button %>
     <% end %>
   </div>

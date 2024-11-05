@@ -3,14 +3,14 @@ module Steps
     class ChildrenCohabitOtherController < Steps::OtherPartyStepController
       def edit
         @form_object = ChildrenCohabitOtherForm.build(
-          relationship_record, c100_application: current_c100_application
+          relationship_record.person, c100_application: current_c100_application
         )
       end
 
       def update
         update_and_advance(
           ChildrenCohabitOtherForm,
-          record: relationship_record,
+          record: relationship_record.person,
           as: :cohabit_with_other
         )
       end

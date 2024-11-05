@@ -76,9 +76,9 @@ RSpec.describe C100App::OtherPartyDecisionTree do
     let(:other_party) { OtherParty.new }
 
     before do
-      allow(other_party).to receive(:reload).and_return(other_party)
+      allow(record).to receive(:reload).and_return(other_party)
+      allow(record).to receive(:id).and_return(other_party)
     end
-
 
     context 'when cohabit_with_other is yes' do
       let(:other_party) { OtherParty.new(cohabit_with_other: 'yes') }
@@ -115,6 +115,72 @@ RSpec.describe C100App::OtherPartyDecisionTree do
       it 'goes to edit the residence of the first child' do
         expect(subject.destination).to eq(controller: '/steps/children/residence', action: :edit, id: 1)
       end
+    end
+  end
+
+
+
+
+
+
+
+  context 'when the step is `privacy_preferences`' do
+    let(:step_params) {{'privacy_preferences' => 'anything'}}
+    let(:record) { double('OtherParty', id: 1) }
+    let(:other_party) { OtherParty.new }
+
+    before do
+      allow(record).to receive(:reload).and_return(record)
+      allow(record).to receive(:id).and_return(record)
+      allow(record).to receive(:are_contact_details_private).and_return(record)
+    end
+
+    context 'When CONFIDENTIAL_OPTION_DATE is true' do
+
+      before do
+        allow(ConfidentialOption).to receive(:changes_apply?).and_return(true)
+      end
+
+      context 'when privacy_preferences is yes' do
+        let(:other_party) { OtherParty.new(are_contact_details_private: 'yes') }
+        it 'goes to edit the privacy preferences page' do
+          expect(subject.destination).to eq(controller: :refuge, action: :edit, id: record)
+        end
+      end
+
+      context 'when privacy_preferences is no' do
+        let(:other_party) { OtherParty.new(are_contact_details_private: 'no') }
+        it 'goes to edit the privacy preferences page' do
+          expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: record)
+        end
+      end
+    end
+
+    context 'When CONFIDENTIAL_OPTION_DATE is false' do
+
+      before do
+        allow(ConfidentialOption).to receive(:changes_apply?).and_return(false)
+      end
+
+      it 'goes to edit the privacy preferences page' do
+        expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: record)
+      end
+    end
+  end
+
+
+
+
+
+
+
+
+  context 'when the step is `refuge`' do
+    let(:step_params) {{'refuge' => 'anything'}}
+    let(:record) { double('OtherParty', id: 1) }
+
+    it 'goes to edit the refuge page' do
+      expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: 1)
     end
   end
 end
