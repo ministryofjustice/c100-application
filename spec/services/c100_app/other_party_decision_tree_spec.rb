@@ -84,7 +84,7 @@ RSpec.describe C100App::OtherPartyDecisionTree do
       let(:other_party) { OtherParty.new(cohabit_with_other: 'yes') }
 
       it 'goes to edit the privacy_preferences page' do
-        expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: other_party)
+        expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: record)
       end
     end
 
@@ -92,7 +92,7 @@ RSpec.describe C100App::OtherPartyDecisionTree do
       let(:other_party) { OtherParty.new(cohabit_with_other: 'no') }
 
       it 'goes to edit the personal_details page' do
-        expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: other_party)
+        expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: record)
       end
     end
   end
@@ -175,7 +175,7 @@ RSpec.describe C100App::OtherPartyDecisionTree do
     let(:record) { double('OtherParty', id: 1) }
 
     it 'goes to edit the refuge page' do
-      expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: 1)
+      expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: record)
     end
   end
 end
