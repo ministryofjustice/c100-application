@@ -118,16 +118,9 @@ RSpec.describe C100App::OtherPartyDecisionTree do
     end
   end
 
-
-
-
-
-
-
   context 'when the step is `privacy_preferences`' do
     let(:step_params) {{'privacy_preferences' => 'anything'}}
     let(:record) { double('OtherParty', id: 1) }
-    let(:other_party) { OtherParty.new }
 
     before do
       allow(record).to receive(:reload).and_return(record)
@@ -142,14 +135,23 @@ RSpec.describe C100App::OtherPartyDecisionTree do
       end
 
       context 'when privacy_preferences is yes' do
-        let(:other_party) { OtherParty.new(are_contact_details_private: 'yes') }
+        before do
+          allow(record).to receive(:are_contact_details_private).and_return('yes')
+        end
+
         it 'goes to edit the privacy preferences page' do
+          expect(ConfidentialOption.changes_apply?).to eq(true)
+
           expect(subject.destination).to eq(controller: :refuge, action: :edit, id: record)
         end
       end
 
       context 'when privacy_preferences is no' do
-        let(:other_party) { OtherParty.new(are_contact_details_private: 'no') }
+
+        before do
+          allow(record).to receive(:are_contact_details_private).and_return('no')
+        end
+
         it 'goes to edit the privacy preferences page' do
           expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: record)
         end
@@ -167,13 +169,6 @@ RSpec.describe C100App::OtherPartyDecisionTree do
       end
     end
   end
-
-
-
-
-
-
-
 
   context 'when the step is `refuge`' do
     let(:step_params) {{'refuge' => 'anything'}}
