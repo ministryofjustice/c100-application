@@ -48,6 +48,7 @@ module ErrorHandling
   # or controllers can skip the `check_c100_application_presence` callback.
   #
   def check_application_payment_status
-    redirect_to C100App::PaymentsFlowControl.new(current_c100_application).next_url, allow_other_host: true if current_c100_application.try(:payment_in_progress?)
+    redirect_to C100App::PaymentsFlowControl.new(current_c100_application).next_url,
+                allow_other_host: true if current_c100_application.try(:payment_in_progress?)
   end
 end
