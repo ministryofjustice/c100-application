@@ -9,7 +9,7 @@ module Auth0Secured
 
   # :nocov:
   def logged_in_using_omniauth?
-    redirect_to backoffice_path unless helpers.admin_signed_in?
+    redirect_to backoffice_path, allow_other_host: true unless helpers.admin_signed_in?
   end
   # :nocov:
 end

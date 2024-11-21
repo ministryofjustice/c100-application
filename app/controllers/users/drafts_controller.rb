@@ -25,7 +25,7 @@ module Users
 
     def destroy
       draft_from_params.destroy
-      redirect_to users_drafts_path
+      redirect_to users_drafts_path, allow_other_host: true
     end
 
     private
@@ -40,7 +40,7 @@ module Users
 
     def set_session_and_redirect(c100_application, path)
       session[:c100_application_id] = c100_application.id
-      redirect_to path
+      redirect_to path, allow_other_host: true
     end
   end
 end

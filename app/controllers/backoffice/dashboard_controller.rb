@@ -45,7 +45,7 @@ module Backoffice
 
       redirect_to backoffice_dashboard_index_path, flash: {
         alert: "Application #{c100_application.reference_code} has been completed and emails will be sent shortly."
-      }
+      }, allow_other_host: true
     end
 
     private

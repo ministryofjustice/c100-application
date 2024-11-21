@@ -30,12 +30,12 @@ class StepController < ApplicationController
       # Validations will not be run when saving a draft, and because there is
       # only a possible destination, we can also bypass the decision tree code.
       @form_object.save!
-      redirect_to new_user_registration_path
+      redirect_to new_user_registration_path, allow_other_host: true
     elsif @form_object.save
       if fast_forward_to_cya?
-        redirect_to edit_steps_application_check_your_answers_path
+        redirect_to edit_steps_application_check_your_answers_path, allow_other_host: true
       else
-        redirect_to destination(step_params: hash, opts:)
+        redirect_to destination(step_params: hash, opts:), allow_other_host: true
       end
     else
       render opts.fetch(:render, :edit)
