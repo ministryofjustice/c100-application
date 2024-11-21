@@ -11,7 +11,7 @@ class DocumentsController < ApplicationController
     )
 
     respond_to do |format|
-      format.html { redirect_to current_step_path }
+      format.html { redirect_to current_step_path, allow_other_host: true }
       format.json { head :no_content }
       format.js   { head :no_content }
     end
