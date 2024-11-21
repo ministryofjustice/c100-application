@@ -1,14 +1,14 @@
 module Backoffice
   class Auth0Controller < Backoffice::ApplicationController
     def index
-      redirect_to backoffice_dashboard_index_path if helpers.admin_signed_in?
+      redirect_to backoffice_dashboard_index_path, allow_other_host: true if helpers.admin_signed_in?
     end
 
     def logout
       audit!(action: :logout)
       session.delete(:backoffice_userinfo)
 
-      redirect_to helpers.admin_logout_url
+      redirect_to helpers.admin_logout_url, allow_other_host: true
     end
 
     def callback
@@ -19,7 +19,7 @@ module Backoffice
       #
       session[:backoffice_userinfo] = request.env['omniauth.auth']
 
-      redirect_to backoffice_dashboard_index_path
+      redirect_to backoffice_dashboard_index_path, allow_other_host: true
     end
 
     def local_auth
@@ -36,7 +36,7 @@ module Backoffice
         RuntimeError.new("Auth0 Error: #{error.message}")
       )
 
-      redirect_to backoffice_path, flash: { alert: error.message }
+      redirect_to backoffice_path, flash: { alert: error.message }, allow_other_host: true
     end
   end
 end
