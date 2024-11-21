@@ -1,5 +1,3 @@
-require 'c100_app/courtfinder_api'
-
 module C100App
   class CourtPostcodeChecker
     AREA_OF_LAW = "childcare-arrangements".freeze

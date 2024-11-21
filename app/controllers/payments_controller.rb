@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
 
     redirect_to C100App::PaymentsFlowControl.new(
       current_c100_application
-    ).next_url
+    ).next_url, allow_other_host: true
   end
 
   private

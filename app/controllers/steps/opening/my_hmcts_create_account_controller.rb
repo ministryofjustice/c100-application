@@ -5,7 +5,7 @@ module Steps
 
       def show
         redirect_to 'https://www.gov.uk/guidance/myhmcts-online-case-management-for-legal-professionals#create-a-myhmcts-account-for-your-organisation',
-                    status: 301
+                    status: 301, allow_other_host: true
       end
     end
   end
