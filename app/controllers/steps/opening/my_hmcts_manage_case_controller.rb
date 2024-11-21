@@ -4,7 +4,7 @@ module Steps
       skip_before_action :check_c100_application_presence, :update_navigation_stack
 
       def show
-        redirect_to 'https://manage-case.platform.hmcts.net/', status: 301
+        redirect_to 'https://manage-case.platform.hmcts.net/', status: 301, allow_other_host: true
       end
     end
   end

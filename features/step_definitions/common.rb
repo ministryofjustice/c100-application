@@ -1,4 +1,3 @@
-require 'c100_app/courtfinder_api'
 include ActiveSupport::Testing::TimeHelpers
 
 # General and frequently used navigation steps, handling of links and page expectations
