@@ -22,7 +22,7 @@ Bundler.require(*Rails.groups)
 module Application
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 7.1
 
     config.action_controller.default_protect_from_forgery = false
 
@@ -34,7 +34,7 @@ module Application
 
     config.active_job.queue_adapter = ENV.fetch('QUEUE_ADAPTER', :sidekiq).to_sym
 
-    config.surveys = {
+    config.gov_surveys = {
       success: 'https://c100.service.justice.gov.uk/survey',
       kickout: 'https://c100.service.justice.gov.uk/exit_survey',
     }
