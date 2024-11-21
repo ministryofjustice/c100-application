@@ -37,7 +37,7 @@ module Steps
         return
       end
 
-      redirect_to steps_opening_warning_path
+      redirect_to steps_opening_warning_path, allow_other_host: true
     end
   end
 end

@@ -28,7 +28,7 @@ module NamesCrudStep
 
   def destroy(uuid)
     @existing_records.destroy(uuid)
-    redirect_to action: :edit, id: nil
+    redirect_to url_for(action: :edit, id: nil, only_path: true), allow_other_host: true
   end
 
   def additional_permitted_params
