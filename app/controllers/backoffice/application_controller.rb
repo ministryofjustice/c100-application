@@ -9,7 +9,7 @@ module Backoffice
       raise if Rails.application.config.consider_all_requests_local
 
       Sentry.capture_exception(exception)
-      redirect_to unhandled_backoffice_errors_path
+      redirect_to unhandled_backoffice_errors_path, allow_other_host: true
     end
 
     private
