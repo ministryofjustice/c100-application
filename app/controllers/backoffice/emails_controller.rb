@@ -31,7 +31,7 @@ module Backoffice
 
       redirect_to backoffice_emails_path, flash: {
         alert: 'Email resend in progress.'
-      }
+      }, allow_other_host: true
     end
 
     private

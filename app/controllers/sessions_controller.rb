@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     reset_session
 
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_path, allow_other_host: true }
       format.json { render json: {} }
     end
   end
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       status: 1,
     )
 
-    redirect_to edit_steps_opening_consent_order_path
+    redirect_to edit_steps_opening_consent_order_path, allow_other_host: true
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -49,7 +49,7 @@ class SessionsController < ApplicationController
 
     upload_bypass_document(:miam_certificate)
 
-    redirect_to edit_steps_application_check_your_answers_path
+    redirect_to edit_steps_application_check_your_answers_path, allow_other_host: true
   end
 
   def bypass_to_cya_consent
@@ -71,7 +71,7 @@ class SessionsController < ApplicationController
 
     upload_bypass_document(:draft_consent_order)
 
-    redirect_to edit_steps_application_check_your_answers_path
+    redirect_to edit_steps_application_check_your_answers_path, allow_other_host: true
   end
 
   def bypass_to_cya_miam_certificate
@@ -95,7 +95,7 @@ class SessionsController < ApplicationController
 
     upload_bypass_document(:miam_certificate)
 
-    redirect_to edit_steps_application_check_your_answers_path
+    redirect_to edit_steps_application_check_your_answers_path, allow_other_host: true
   end
 
   def bypass_to_cya_miam_exemption
@@ -120,7 +120,7 @@ class SessionsController < ApplicationController
 
     upload_bypass_document(:exemption)
 
-    redirect_to edit_steps_application_check_your_answers_path
+    redirect_to edit_steps_application_check_your_answers_path, allow_other_host: true
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/ClassLength

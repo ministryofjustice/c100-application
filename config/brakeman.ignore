@@ -1,22 +1,6 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Information Disclosure",
-      "warning_code": 61,
-      "fingerprint": "081f5d87a244b41d3cf1d5994cb792d2cec639cd70e4e306ffe1eb8abf0f32f7",
-      "check_name": "DetailedExceptions",
-      "message": "Detailed exceptions are enabled in production",
-      "file": "config/environments/production.rb",
-      "line": null,
-      "link": "https://brakemanscanner.org/docs/warning_types/information_disclosure/",
-      "code": null,
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "High",
-      "note": "TEMPORARY JAN 24 2021 - REMOVE BEFORE RELEASE TO PROD"
-    },
-    {
       "warning_type": "Redirect",
       "warning_code": 18,
       "fingerprint": "087e6b1163a6e9df9d4b479280167af5650cfdab112fc84332ecd81b880b1503",
@@ -40,21 +24,25 @@
       "note": ""
     },
     {
-      "warning_type": "Unmaintained Dependency",
-      "warning_code": 123,
-      "fingerprint": "425dcb3af9624f11f12d777d6f9fe05995719975a155c30012baa6b9dc3487df",
-      "check_name": "EOLRuby",
-      "message": "Support for Ruby 2.7.7 ends on 2023-03-31",
-      "file": "Gemfile.lock",
-      "line": 347,
-      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
-      "code": null,
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "0b588ce4afa5e63fed334508244cd73ed17a59db2337be4ddf69368feedfc183",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/cookies_controller.rb",
+      "line": 14,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(path_only(params.dig(:cookie, :return_path)), :allow_other_host => true, :flash => ({ :cookie_banner_confirmation => t(\"cookie_banner.confirmation_message.#{cookie_form.usage}\") }))",
       "render_path": null,
-      "location": null,
-      "user_input": null,
+      "location": {
+        "type": "method",
+        "class": "CookiesController",
+        "method": "create"
+      },
+      "user_input": "params.dig(:cookie, :return_path)",
       "confidence": "Weak",
       "cwe_id": [
-        1104
+        601
       ],
       "note": ""
     },
@@ -103,67 +91,6 @@
       "note": "Already included"
     },
     {
-      "warning_type": "Redirect",
-      "warning_code": 18,
-      "fingerprint": "77bd79b7fd28a18a63e5bad7a646d1af1609fba0ff4a9675bd2dd83ab255222c",
-      "check_name": "Redirect",
-      "message": "Possible unprotected redirect",
-      "file": "app/controllers/cookies_controller.rb",
-      "line": 14,
-      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
-      "code": "redirect_to(path_only(params.dig(:cookie, :return_path)), :flash => ({ :cookie_banner_confirmation => t(\"cookie_banner.confirmation_message.#{cookie_form.usage}\") }))",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "CookiesController",
-        "method": "create"
-      },
-      "user_input": "params.dig(:cookie, :return_path)",
-      "confidence": "Weak",
-      "cwe_id": [
-        601
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Unmaintained Dependency",
-      "warning_code": 123,
-      "fingerprint": "870fa4a5cfd770898e1b7a159368b4210fe366634512563f9fb1c1cbbfef1d78",
-      "check_name": "EOLRuby",
-      "message": "Support for Ruby 2.7.6 ends on 2023-03-31",
-      "file": "Gemfile.lock",
-      "line": 350,
-      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
-      "code": null,
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        1104
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Unmaintained Dependency",
-      "warning_code": 121,
-      "fingerprint": "9a3951031616a07c8e02c86652f537e92c08685da97f5ec2b12d5d3602b55bb8",
-      "check_name": "EOLRuby",
-      "message": "Support for Ruby 2.7.6 ended on 2023-03-31",
-      "file": "Gemfile.lock",
-      "line": 350,
-      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
-      "code": null,
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "High",
-      "cwe_id": [
-        1104
-      ],
-      "note": ""
-    },
-    {
       "warning_type": "Cross-Site Request Forgery",
       "warning_code": 7,
       "fingerprint": "f242fb9c017a95e2e38d907553322a524ca99a62df1307c7d77eedd88122b880",
@@ -186,6 +113,6 @@
       "note": ""
     }
   ],
-  "updated": "2024-11-13 12:10:39 +0000",
+  "updated": "2024-11-21 14:18:09 +0000",
   "brakeman_version": "6.2.2"
 }
