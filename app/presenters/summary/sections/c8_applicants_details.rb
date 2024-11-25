@@ -43,12 +43,16 @@ module Summary
       private
 
       def residence_history(person)
-        value = confidential? && private?(person, ContactDetails::ADDRESS.to_s) && refuge?(person) ? person.residence_history : nil
+        value = if confidential? && private?(person, ContactDetails::ADDRESS.to_s) && refuge?(person)
+                  person.residence_history
+                end
         FreeTextAnswer.new(:person_residence_history, value)
       end
 
       def address(person)
-        value = confidential? && private?(person, ContactDetails::ADDRESS.to_s) && refuge?(person) ? person.full_address : nil
+        value = if confidential? && private?(person, ContactDetails::ADDRESS.to_s) && refuge?(person)
+                  person.full_address
+                end
         FreeTextAnswer.new(:person_address, value)
       end
 
@@ -58,7 +62,10 @@ module Summary
       end
 
       def person_home_phone(person)
-        value = confidential? && private?(person, ContactDetails::HOME_PHONE.to_s) && refuge?(person) ? person.home_phone : nil
+        value = if confidential? && private?(person, ContactDetails::HOME_PHONE.to_s) &&
+                   refuge?(person)
+                  person.home_phone
+                end
         FreeTextAnswer.new(:person_home_phone, value)
       end
 
