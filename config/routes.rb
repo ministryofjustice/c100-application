@@ -353,7 +353,7 @@ Rails.application.routes.draw do
   get 'about/miam_exemptions'
 
   # This route is used in court emails to point users to the survey
-  get :survey, to: redirect(Rails.configuration.surveys[:success], status: 302)
+  get :survey, to: redirect(Rails.configuration.gov_surveys[:success], status: 302)
 
   # Health and ping endpoints (`status` and `health` are alias)
   defaults format: :json do

@@ -1,6 +1,3 @@
-require 'payment_intent'
-require 'errors'
-
 module C100App
   class PaymentsFlowControl
     include Rails.application.routes.url_helpers
