@@ -10,4 +10,13 @@
 # As we can't rely only on JS, there is also a request-based check to expire
 # the session if the cookie is too old (see `/concerns/security_handling.rb`).
 #
-Rails.application.config.session_store :cookie_store, key: '_c100_application_session', secure: Rails.env.production?
+# Rails.application.config.session_store :mem_cache_store, key: '_c100_application_session', secure: Rails.env.production?
+if Rails.env.test?
+  Rails.application.config.session_store :cookie_store, key: '_c100_application_session', secure: Rails.env.production?
+else
+  redis_url = { url: ENV["REDIS_URL"] || "redis://localhost:6379/1" }
+  Rails.application.config.session_store :redis_store, url: redis_url,
+                                            key: '_c100_application_session',
+                                            secure: Rails.env.production?,
+                                            expire_after: 30.days
+end

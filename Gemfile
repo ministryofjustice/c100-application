@@ -28,6 +28,7 @@ gem 'omniauth-rails_csrf_protection'
 
 # Caching and jobs processing
 gem 'redis'
+gem "redis-actionpack"
 gem 'sidekiq', '~> 7.2.0'
 gem 'sidekiq_alive'
 
