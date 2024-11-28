@@ -22,6 +22,6 @@ module PersonWithPrivacy
   private
 
   def in_refuge?
-    refuge == 'yes'
+    refuge == GenericYesNo::YES.to_s
   end
 end

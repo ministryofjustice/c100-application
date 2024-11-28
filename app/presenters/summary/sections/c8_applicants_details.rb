@@ -108,7 +108,7 @@ module Summary
       end
 
       def in_refuge?(person)
-        person.refuge == 'yes'
+        person.refuge == GenericYesNo::YES.to_s
       end
     end
   end
