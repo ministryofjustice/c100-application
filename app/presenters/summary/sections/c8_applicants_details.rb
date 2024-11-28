@@ -90,8 +90,6 @@ module Summary
       end
 
       def private?(person, field)
-        return true if person.refuge.present? && person.refuge
-
         person.contact_details_private.include? field
       end
     end
