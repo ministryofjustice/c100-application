@@ -20,8 +20,7 @@ module Summary
                       mobile_phone: 'mobile_phone',
                       email: 'email',
                       voicemail_consent: 'yes',
-                      contact_details_private: contact_details_private,
-                      refuge: 'yes'
+                      contact_details_private: contact_details_private
       )
     }
 
@@ -116,14 +115,23 @@ module Summary
       end
 
       context "when no mobile and a reason given" do
+        before do
+          allow(applicant).to receive(:refuge).and_return('no')
+        end
+
         let(:mobile_not_provided_reason) { "No phone" }
         let(:mobile_provided) { 'no' }
+
         it "shows the reason" do
           expect(answers[5].value).to eq('No phone')
         end
       end
 
       context 'only one marked as private' do
+        before do
+          allow(applicant).to receive(:refuge).and_return('no')
+        end
+
         let(:applicant) {
           instance_double(Applicant,
                           full_name: 'fullname',
@@ -142,19 +150,6 @@ module Summary
       end
 
       context 'when refuge is no, only selected private details should be private' do
-        let(:applicant) {
-          instance_double(Applicant,
-                          full_name: 'fullname',
-                          residence_history: 'history',
-                          home_phone: 'home_phone',
-                          mobile_phone: 'mobile_phone',
-                          email: 'email',
-                          voicemail_consent: 'yes',
-                          contact_details_private: contact_details_private,
-                          refuge: 'no'
-          )
-        }
-
         let(:contact_details_private) { ['email', 'home_phone'] }
 
         before do

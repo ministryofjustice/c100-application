@@ -48,22 +48,36 @@ module Summary
       end
 
       def address(person)
-        value = confidential? && private?(person, ContactDetails::ADDRESS.to_s) ? person.full_address : nil
+        value = if in_refuge?(person)
+                  person.full_address
+                elsif confidential? && private?(person, ContactDetails::ADDRESS.to_s)
+                  person.full_address
+                end
         FreeTextAnswer.new(:person_address, value)
       end
 
       def person_email(person)
-        value = confidential? && private?(person, ContactDetails::EMAIL.to_s) ? person.email : nil
+        value = if in_refuge?(person)
+                  person.email
+                elsif confidential? && private?(person, ContactDetails::EMAIL.to_s)
+                  person.email
+                end
         FreeTextAnswer.new(:person_email, value)
       end
 
       def person_home_phone(person)
-        value = confidential? && private?(person, ContactDetails::HOME_PHONE.to_s) ? person.home_phone : nil
+        value = if in_refuge?(person)
+                  person.home_phone
+                elsif confidential? && private?(person, ContactDetails::HOME_PHONE.to_s)
+                  person.home_phone
+                end
         FreeTextAnswer.new(:person_home_phone, value)
       end
 
       def person_mobile_phone(person)
-        value = if confidential? && private?(person, ContactDetails::MOBILE.to_s)
+        value = if in_refuge?(person)
+                  person.mobile_phone
+                elsif confidential? && private?(person, ContactDetails::MOBILE.to_s)
                   mobile_phone_answer(person)
                 end
         FreeTextAnswer.new(:person_mobile_phone, value)
@@ -91,6 +105,10 @@ module Summary
 
       def private?(person, field)
         person.contact_details_private.include? field
+      end
+
+      def in_refuge?(person)
+        person.refuge == 'yes'
       end
     end
   end
