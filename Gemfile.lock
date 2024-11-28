@@ -656,7 +656,7 @@ DEPENDENCIES
   wicked_pdf (~> 2.6.0)
 
 RUBY VERSION
-   ruby 3.3.4p94
+   ruby 3.3.6p108
 
 BUNDLED WITH
-   2.5.15
+   2.5.23
