@@ -536,9 +536,6 @@ GEM
       hashie
       version_gem (~> 1.1, >= 1.1.1)
     sorbet-runtime (0.5.11672)
-    spring (4.2.1)
-    spring-commands-rspec (1.0.4)
-      spring (>= 0.9.1)
     sprockets (3.7.5)
       base64
       concurrent-ruby (~> 1.0)
@@ -653,8 +650,6 @@ DEPENDENCIES
   simplecov
   simplecov-rcov
   site_prism (~> 3.7, >= 3.7.1)
-  spring (~> 4.0)
-  spring-commands-rspec
   timecop
   tzinfo (~> 2.0.5)
   uglifier
