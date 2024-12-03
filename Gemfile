@@ -66,8 +66,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'spring', '~> 4.0'
-  gem 'spring-commands-rspec'
   gem 'web-console'
 end
 
