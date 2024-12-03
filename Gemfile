@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.4'
+ruby '3.3.6'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
@@ -10,7 +10,7 @@ gem 'govuk-pay-ruby-client', '~> 1.0.2'
 gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
-gem 'puma', '~> 6.4.0'
+gem 'puma', github: 'puma/puma', branch: 'master'
 gem 'rails', '7.2.1'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
@@ -66,8 +66,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'spring', '~> 4.0'
-  gem 'spring-commands-rspec'
   gem 'web-console'
 end
 
