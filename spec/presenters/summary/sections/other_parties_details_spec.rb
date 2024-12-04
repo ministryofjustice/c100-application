@@ -44,6 +44,7 @@ module Summary
       allow(other_party).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
       allow(other_party).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
       allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
+      allow(other_party).to receive(:refuge)
     end
 
     subject { described_class.new(c100_application) }
