@@ -33,7 +33,8 @@ module Summary
         privacy_known: privacy_known,
         are_contact_details_private: are_contact_details_private,
         contact_details_private: contact_details_private,
-        type: 'Applicant'
+        type: 'Applicant',
+        refuge: refuge
       )
     }
 
@@ -59,6 +60,7 @@ module Summary
     let(:previous_name) { nil }
     let(:privacy_known) { 'no' }
     let(:are_contact_details_private) { 'no' }
+    let(:refuge) { nil }
 
     let(:answers) { subject.answers }
 
@@ -221,6 +223,7 @@ module Summary
         let(:privacy_known) { nil }
         let(:are_contact_details_private) { nil }
         let(:contact_details_private) { [] }
+        let(:refuge) { nil }
 
         it 'has the correct number of rows' do
           expect(answers.count).to eq(15)
@@ -238,6 +241,7 @@ module Summary
         let(:privacy_known) { 'yes' }
         let(:are_contact_details_private) { 'yes' }
         let(:contact_details_private) { ['email', 'address', 'mobile', 'home_phone'] }
+        let(:refuge) { 'no' }
 
         it 'shows as private' do
           expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
@@ -270,6 +274,29 @@ module Summary
           expect(answers[13].value).to eq('[See C8]')
         end
       end
+
+      context 'when the applicant is in refuge' do
+        let(:refuge) { 'yes' }
+
+        it 'shows all contact details as private' do
+          expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[8].question).to eq(:person_address)
+          expect(answers[8].value).to eq('[See C8]')
+
+          expect(answers[11]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[11].question).to eq(:person_email)
+          expect(answers[11].value).to eq('[See C8]')
+
+          expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[12].question).to eq(:person_home_phone)
+          expect(answers[12].value).to eq('[See C8]')
+
+          expect(answers[13]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[13].question).to eq(:person_mobile_phone)
+          expect(answers[13].value).to eq('[See C8]')
+        end
+      end
+
     end
   end
 end
