@@ -48,38 +48,23 @@ module Summary
       end
 
       def address(person)
-        value = if in_refuge?(person)
-                  person.full_address
-                elsif confidential? && private?(person, ContactDetails::ADDRESS.to_s)
-                  person.full_address
-                end
+        value = person.full_address if in_refuge?(person) || (confidential? && private?(person, ContactDetails::ADDRESS.to_s))
         FreeTextAnswer.new(:person_address, value)
       end
 
       def person_email(person)
-        value = if in_refuge?(person)
-                  person.email
-                elsif confidential? && private?(person, ContactDetails::EMAIL.to_s)
-                  person.email
-                end
+        value = person.email if in_refuge?(person) || (confidential? && private?(person, ContactDetails::EMAIL.to_s))
         FreeTextAnswer.new(:person_email, value)
       end
 
       def person_home_phone(person)
-        value = if in_refuge?(person)
-                  person.home_phone
-                elsif confidential? && private?(person, ContactDetails::HOME_PHONE.to_s)
-                  person.home_phone
-                end
+        value = person.home_phone if in_refuge?(person) || (confidential? && private?(person, ContactDetails::HOME_PHONE.to_s))
         FreeTextAnswer.new(:person_home_phone, value)
       end
 
       def person_mobile_phone(person)
-        value = if in_refuge?(person)
-                  person.mobile_phone
-                elsif confidential? && private?(person, ContactDetails::MOBILE.to_s)
-                  mobile_phone_answer(person)
-                end
+        value = mobile_phone_answer(person) if in_refuge?(person) || (confidential? && private?(person,
+                                                                                                ContactDetails::MOBILE.to_s))
         FreeTextAnswer.new(:person_mobile_phone, value)
       end
 
