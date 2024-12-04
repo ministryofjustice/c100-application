@@ -434,6 +434,10 @@ en:
           heading: "Keeping %{name}'s details private"
           lead_text: The answers you give in your response will be shared with other people named in this application (the respondents). This will include your contact details.
           legend: "Do you want to keep %{name}'s details private from the other people named in the application (the respondents)?"
+      refuge:
+        edit:
+          page_title: Is currently resident in a refuge?
+          heading: "Is %{name} currently resident in a refuge?"
 
     address:
       lookup:
@@ -1655,6 +1659,9 @@ en:
         <<: *PERSONAL_ADDRESS_FIELDS
       steps_other_party_children_cohabit_other_form:
         cohabit_with_other_options:
+          <<: *YESNO
+      steps_other_party_refuge_form:
+        refuge_options:
           <<: *YESNO
       steps_other_party_privacy_preferences_form:
         are_contact_details_private_options:

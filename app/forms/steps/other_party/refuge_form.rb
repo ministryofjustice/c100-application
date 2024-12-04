@@ -1,12 +1,11 @@
 module Steps
   module OtherParty
-    class PrivacyPreferencesForm < BaseForm
+    class RefugeForm < BaseForm
       include ActiveModel::Validations::Callbacks
 
-      attribute :are_contact_details_private, YesNo
-      attribute :privacy_known, YesNo
+      attribute :refuge, YesNo
 
-      validates_inclusion_of :are_contact_details_private, in: GenericYesNo.values
+      validates_inclusion_of :refuge, in: GenericYesNo.values
 
       private
 
@@ -14,7 +13,7 @@ module Steps
         raise C100ApplicationNotFound unless c100_application
 
         party = c100_application.other_parties.find_or_initialize_by(id: record.id)
-        party.update({**attributes_map}.merge(privacy_known: 'yes'))
+        party.update(attributes_map)
       end
     end
   end
