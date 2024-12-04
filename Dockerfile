@@ -1,5 +1,5 @@
 FROM surnet/alpine-wkhtmltopdf:3.20.2-0.12.6-small as wkhtmltopdf
-FROM ruby:3.3.4-alpine3.20
+FROM ruby:3.3.6-alpine3.20
 
 # Adding argument support for ping.json
 ARG APPVERSION=unknown
@@ -24,7 +24,7 @@ ENV AWS_S3_BUCKET=replace_this_at_build_time
 ENV RAILS_ENV=production
 ENV IS_DOCKER=true
 ENV PRL_OPENING=false
-ENV CONFIDENTIAL_OPTION_DATE=2024/01/13T00:01:00
+ENV CONFIDENTIAL_OPTION_DATE=2025/01/13T00:01:00
 ENV PRIVACY_CHANGE=true
 
 
@@ -53,7 +53,7 @@ COPY Gemfile /usr/src/app
 COPY Gemfile.lock /usr/src/app
 COPY --from=wkhtmltopdf /bin/wkhtmltopdf /bin/wkhtmltopdf
 
-RUN gem install bundler -v 2.5.15
+RUN gem install bundler -v 2.5.23
 
 RUN bundle config set --local without 'test development'
 RUN bundle config set force_ruby_platform true
