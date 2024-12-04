@@ -274,6 +274,7 @@ Rails.application.routes.draw do
       end
       crud_step :children_cohabit_other, only: [:edit, :update]
       crud_step :privacy_preferences, only: [:edit, :update]
+      crud_step :refuge, only: [:edit, :update]
     end
     namespace :permission do
       namespace :question, path: ':question_name' do

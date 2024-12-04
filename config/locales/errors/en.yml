@@ -524,6 +524,10 @@ en:
         steps/other_party/address_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS
+        steps/other_party/refuge_form:
+          attributes:
+            refuge:
+              inclusion: Select yes if the other party is currently resident in a refuge
         steps/solicitor/personal_details_form:
           attributes:
             full_name:
