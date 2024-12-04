@@ -13,7 +13,7 @@ orbs:
 references:
   app_containers: &app_containers
     docker:
-      - image: cimg/ruby:3.3.4-browsers
+      - image: cimg/ruby:3.3.6-browsers
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -304,7 +304,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^rst-6963$/
+                - /^system/gem-updates$/
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev
@@ -313,7 +313,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^rst-6963$/
+                - /^system/gem-updates$/
       ### staging ###
       - build_and_push_image:
           name: build-staging
