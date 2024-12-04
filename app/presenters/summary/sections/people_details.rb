@@ -110,9 +110,12 @@ module Summary
       private
 
       def data_or_private(person, data, type)
+        return I18n.t('dictionary.c8_attached') if person.refuge == GenericYesNo::YES.to_s
+
         return I18n.t('dictionary.c8_attached') if
-          person.are_contact_details_private == 'yes' &&
+          person.are_contact_details_private == GenericYesNo::YES.to_s &&
           person.contact_details_private.include?(type)
+
         data
       end
 

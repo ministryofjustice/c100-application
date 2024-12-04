@@ -38,6 +38,7 @@ module Summary
       allow(respondent).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
       allow(respondent).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
       allow(respondent).to receive(:address_private?).and_return(contact_details_private.include?('address'))
+      allow(respondent).to receive(:refuge)
     end
 
 
