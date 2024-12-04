@@ -31,6 +31,7 @@ module Summary
               FreeTextAnswer.new(:person_full_name, person.full_name),
               FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize),
                                  i18n_opts: {name: person.full_name}),
+              Answer.new(:refuge, person.refuge),
               previous_name_answer(person),
               Answer.new(:person_sex, person.gender),
               DateAnswer.new(:person_dob, person.dob,
