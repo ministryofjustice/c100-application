@@ -1,13 +1,22 @@
-class ExemptionReasonsPage < AnyPage
-  include ActiveSupport::Testing::TimeHelpers
-  set_url '/steps/miam_exemptions/exemption_reasons'
+require_relative '../any_page'
+module C100
+  module Test
+    module PageObjects
+      module MiamExemptions
+        class ExemptionReasonsPage < AnyPage
+          include ActiveSupport::Testing::TimeHelpers
+          set_url '/steps/miam_exemptions/exemption_reasons'
 
-  section :content, '#main-content' do
-    element :header, 'h1', text: 'Evidence of MIAM exemption'
-    element :legend, 'h1', text: 'Are you able to attach the required evidence to support a MIAM exemption claim?'
-    element :yes, 'label', text: 'Yes'
-    element :no, 'label', text: 'No'
+          section :content, '#main-content' do
+            element :header, 'h1', text: 'Evidence of MIAM exemption'
+            element :legend, 'h1', text: 'Are you able to attach the required evidence to support a MIAM exemption claim?'
+            element :yes, 'label', text: 'Yes'
+            element :no, 'label', text: 'No'
 
-    element :continue_button, 'button', text: 'Continue'
+            element :continue_button, 'button', text: 'Continue'
+          end
+        end
+      end
+    end
   end
 end
