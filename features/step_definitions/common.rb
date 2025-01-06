@@ -31,14 +31,6 @@ rescue Selenium::WebDriver::Error::UnknownError => e
   expect(page).to have_link(text, href: href)
 end
 
-Then(/^I should see the save draft button$/) do
-  expect(page).to have_selector(:button, 'Save and come back later')
-end
-
-Then(/^I should not see the save draft button$/) do
-  expect(page).not_to have_selector(:button, 'Save and come back later')
-end
-
 When(/^I click the "([^"]*)" link$/) do |text|
   find(:xpath, './/main', visible: true, wait: true)
   click_link(text, wait: true)
@@ -113,14 +105,6 @@ When(/^I wait and click the postcode page "([^"]*)" button$/) do |text|
   end
 end
 
-When(/^I click the postcode page "([^"]*)" button with an invalid postcode$/) do |text|
-  RSpec::Mocks.with_temporary_scope do
-    C100App::CourtfinderAPI.any_instance.stub(:court_for).and_return({"courts"=>[]})
-
-    find_button("#{text}").click
-  end
-end
-
 When(/^I have started an application$/) do
   step %[I visit "/"]
   step %[I open the "Developer Tools" summary details]
@@ -147,16 +131,6 @@ end
 
 Then(/^google analytics cookies are allowed to be set$/) do
   expect(any_page).to have_google_analytics_enabled
-end
-
-Given("I stub fact api call") do
-  WebMock.enable!
-  WebMock.allow_net_connect!
-  WebMock::API.stub_request(:get, "https://www.find-court-tribunal.service.gov.uk/v2/proxy/search/postcode/TQ121XX/serviceArea/childcare-arrangements").
-    to_return(status: 200, body: "{}", headers: {})
-
-  WebMock::API.stub_request(:get, "https://www.find-court-tribunal.service.gov.uk/health").
-    to_return(status: 200, body: "{\"mapit-api\":{\"status\":\"UP\"}}", headers: {})
 end
 
 And(/^I wait for (\d+) minutes$/) do |arg|
@@ -342,10 +316,6 @@ end
 
 When(/^I should see "([^"]*)" error in the form$/) do |text|
   expect(page.find(".govuk-error-message")).to have_text(text)
-end
-
-When(/^"([^"]*)" has focus/) do |text|
-  expect(page.evaluate_script("document.activeElement.id")).to eq(text)
 end
 
 Then(/^The form markup should match "([^"]*)"$/) do |fixture|

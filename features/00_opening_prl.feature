@@ -68,13 +68,13 @@ Feature: Opening PRL
 
     Then I click the "Enter a full postcode, with or without a space" link
     And I should see "Enter a full postcode, with or without a space" error in the form
-    And "steps-opening-start-or-continue-form-children-postcode-field-error" has focus
+    And step has focus
 
   @unhappy_path
   Scenario: Postcode not eligible
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "TQ12 1FF"
-    And I click the postcode page "Continue" button with an invalid postcode
+    And I click the continue button with an invalid postcode
     Then I should see "Sorry, you cannot apply online"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
 
@@ -82,7 +82,7 @@ Feature: Opening PRL
   Scenario: Postcode not eligible (alternate page layout)
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "TQ12 1FF"
-    And I click the postcode page "Continue" button with an invalid postcode
+    And I click the continue button with an invalid postcode
 
     Then I should see "Sorry, you cannot apply online"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
