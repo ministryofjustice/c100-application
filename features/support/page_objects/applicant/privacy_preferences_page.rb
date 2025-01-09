@@ -5,7 +5,7 @@ module C100
       module Applicant
         class PrivacyPreferencesPage < AnyPage
           include ActiveSupport::Testing::TimeHelpers
-          set_url '/steps/applicant/privacy_preferences'
+          set_url '/steps/applicant/privacy_preferences/{id}'
 
           section :content, '#main-content' do
             element :header, 'h1', text: 'Keeping your contact details private'
@@ -21,8 +21,13 @@ module C100
             element :label_3, 'label', text: 'Mobile phone number'
             element :label_4, 'label', text: 'Home phone number'
             element :no, 'label', text: 'No'
+            element :error_link, 'a', text: 'Select an option'
 
             element :continue_button, 'button', text: 'Continue'
+          end
+
+          def error_title
+            'Error: Contact details confidentiality - Apply to court about child arrangements - GOV.UK'
           end
         end
       end

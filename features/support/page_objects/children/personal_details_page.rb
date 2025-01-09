@@ -5,7 +5,7 @@ module C100
       module Children
         class PersonalDetailsPage < AnyPage
           include ActiveSupport::Testing::TimeHelpers
-          set_url '/steps/other_party/refuge'
+          set_url '/steps/children/personal_details/{id}'
 
           section :content, '#main-content' do
             element :header, 'h1', text: /Provide details for .*?/
