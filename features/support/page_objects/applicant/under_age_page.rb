@@ -5,7 +5,7 @@ module C100
       module Applicant
         class UnderAgePage < AnyPage
           include ActiveSupport::Testing::TimeHelpers
-          set_url '/steps/applicant/under_age'
+          set_url '/steps/applicant/under_age/{id}'
 
           section :content, '#main-content' do
             element :header, 'h1', text: 'As the applicant is under 18'

@@ -124,15 +124,6 @@ And(/^Page has title "([^"]*)"/) do |text|
   expect(page).to have_title(text)
 end
 
-And(/^analytics cookies are NOT allowed to be set$/) do
-  expect(page.evaluate_script("window['ga-disable-#{Rails.application.config.x.analytics_tracking_id}']"))
-    .to be(true), 'Google analytics is enabled it should not be'
-end
-
-Then(/^google analytics cookies are allowed to be set$/) do
-  expect(any_page).to have_google_analytics_enabled
-end
-
 And(/^I wait for (\d+) minutes$/) do |arg|
   travel arg.minutes
 end
@@ -259,27 +250,6 @@ When(/^I have selected orders for the court to decide$/) do
   step %[I should see "This is known as a Child Arrangements Order"]
 end
 
-# Needed for the applicant and respondent journeys
-When(/^I have entered a child with first name "([^"]*)" and last name "([^"]*)"$/) do |first_name, last_name|
-  step %[I visit "steps/children/names"]
-  step %[I fill in "First name(s)" with "#{first_name}"]
-  step %[I fill in "Last name(s)" with "#{last_name}"]
-  step %[I click the "Continue" button]
-  step %[I should see "Provide details for #{first_name} #{last_name}"]
-end
-
-Then(/^the analytics cookies radio buttons are defaulted to '([^']*)'$/) do |value|
-  cookie_management_page.analytics_question.assert_value(value)
-end
-
-When(/^I select '([^']*)' for analytics cookies$/) do |value|
-  cookie_management_page.analytics_question.set(value)
-end
-
-And(/^a confirmation box will appear telling me that my cookie settings have been saved$/) do
-  expect(any_page).to have_cookie_preferences_updated_message
-end
-
 And(/^I choose "([^"]*)" for all options on this page$/) do |arg|
   options = page.all('label', text: arg)
   options.each do |radio_button|
@@ -341,4 +311,13 @@ Then(/^The form markup with errors should match "([^"]*)"$/) do |fixture|
 
   # Now check the markup with errors using the above step
   step %[The form markup should match "#{fixture}"]
+end
+
+# Needed for the applicant and respondent journeys
+When(/^I have entered a child with first name "([^"]*)" and last name "([^"]*)"$/) do |first_name, last_name|
+  step %[I visit "steps/children/names"]
+  step %[I fill in "First name(s)" with "#{first_name}"]
+  step %[I fill in "Last name(s)" with "#{last_name}"]
+  step %[I click the "Continue" button]
+  step %[I should see "Provide details for #{first_name} #{last_name}"]
 end

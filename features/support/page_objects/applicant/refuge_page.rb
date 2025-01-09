@@ -5,14 +5,19 @@ module C100
       module Applicant
         class RefugePage < AnyPage
           include ActiveSupport::Testing::TimeHelpers
-          set_url '/steps/applicant/refuge'
+          set_url '/steps/applicant/refuge/{id}'
 
           section :content, '#main-content' do
             element :header, 'h1', text: 'Are you currently resident in a refuge?'
             element :yes, 'label', text: 'Yes'
             element :no, 'label', text: 'No'
+            element :error_link, 'a', text: 'You must keep your current address private from the other people in this application if you are currently resident in a refuge. Select current address on the previous page if you are currently resident in a refuge'
 
             element :continue_button, 'button', text: 'Continue'
+          end
+
+          def error_title
+            'Error: Are you currently resident in a refuge? - Apply to court about child arrangements - GOV.UK'
           end
         end
       end

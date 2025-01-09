@@ -56,6 +56,11 @@ module C100
         AbuseConcerns::StartPage.new
       end
 
+      # Address pages
+      def address_lookup_page
+        Address::LookupPage.new
+      end
+
       # Alternatives pages
       def alternatives_collaborative_law_page
         Alternatives::CollaborativeLawPage.new
