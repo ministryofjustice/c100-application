@@ -51,6 +51,7 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
        edit_steps_miam_exemptions_exemption_reasons_path] unless record.attach_evidence.present? ||
                                                                  record.consent_order == 'yes' ||
                                                                  has_misc_skip_exemptions?(record) ||
+                                                                 has_other_skip_exemptions?(record) ||
                                                                  record.document(:miam_certificate) ||
                                                                  record.child_protection_cases == 'yes'
     }
@@ -62,6 +63,22 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
     return true if %w[misc_access misc_access2 misc_access3].any? { |misc| exemptions.include? misc }
     false
   end
+
+  # rubocop:disable Metrics/PerceivedComplexity
+  def has_other_skip_exemptions?(record)
+    return false unless record&.miam_exemption&.misc
+
+    exemptions = record.miam_exemption.misc
+    groups = [:protection, :urgency, :adr]
+
+    return true if %w[misc_access misc_access2 misc_access3].any? { |access| exemptions.include?(access) }
+    return true unless record.miam_exemption.domestic.include?("misc_domestic_none")
+    return true if groups.any? { |group| !record.miam_exemption.send(group).include?("misc_#{group}_none") }
+    return false if %w[misc_without_notice misc_applicant_under_age misc_access4].any? { |misc| exemptions.include?(misc) }
+
+    true
+  end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def additional_checks(record, checks, invert)
     checks.map { |check| record.send(check) }.send(invert ? :none? : :any?)
