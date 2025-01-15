@@ -23,8 +23,7 @@ module Summary
         address_unknown: address_unknown,
         residence_requirement_met: nil,
         residence_history: nil,
-        home_phone: nil,
-        mobile_phone: nil,
+        phone_number: nil,
         email: nil,
         relationships: [relationship],
         privacy_known: nil,
@@ -41,8 +40,7 @@ module Summary
       allow(subject).to receive(:contact_details_path).and_return(false)
       allow(other_party).to receive(:full_address).and_return('full address')
       allow(other_party).to receive(:email_private?).and_return(contact_details_private.include?('email'))
-      allow(other_party).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
-      allow(other_party).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(other_party).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 

@@ -4,44 +4,38 @@ module Steps
       include ActiveModel::Validations::Callbacks
 
       attribute :email, StrippedString
-      attribute :home_phone, StrippedString
-      attribute :mobile_phone, StrippedString
+      attribute :phone_number, StrippedString
       attribute :voicemail_consent, YesNo
       attribute :email_provided, YesNo
-      attribute :mobile_provided, YesNo
-      attribute :mobile_not_provided_reason, StrippedString
+      attribute :phone_number_provided, YesNo
+      attribute :phone_number_not_provided_reason, StrippedString
 
       # Note: we validate presence of these fields, but allow the applicant to enter
       # free text in case they do not want to disclose their phone or email address.
       # That is why we do not perform any further validation, other than presence
       # (do not validate the format of the phone or email, etc.)
       #
-      validates_inclusion_of :email_provided, in: GenericYesNo.values
 
+      validates_inclusion_of :email_provided, in: GenericYesNo.values
       validates :email, email: true, if: proc { |o| validate_email_value?(o) }
 
-      validates_inclusion_of :mobile_provided, in: GenericYesNo.values
+      validates_inclusion_of :phone_number_provided, in: GenericYesNo.values
+      validates_presence_of :phone_number, if: proc { |o| validate_phone_value?(o) }
+      validates :phone_number, phone_number: true, if: proc { |o| validate_phone_value?(o) }
 
-      validates_presence_of :mobile_phone, if: proc { |o| validate_mobile_value?(o) }
-      validates :mobile_phone, phone_number: true, if: proc { |o| validate_mobile_value?(o) }
+      validates_presence_of :phone_number_not_provided_reason,
+                            if: proc { |o| validate_phone_not_provided_reason?(o) }
 
-      validates_presence_of :mobile_not_provided_reason,
-                            if: proc { |o| validate_mobile_not_provided_reason?(o) }
-
-      validates :home_phone, phone_number: true, allow_blank: true
-
-      validates_inclusion_of :voicemail_consent, in: GenericYesNo.values, if: proc { |o| validate_mobile_value?(o) }
-
-      validates_presence_of :mobile_phone, if: proc { |o| validate_voicemail_mobile?(o) }
-      validates_presence_of :home_phone, if: proc { |o| validate_voicemail_home?(o) }
+      validates_inclusion_of :voicemail_consent, in: GenericYesNo.values, if: proc { |o| validate_phone_value?(o) }
+      validates_presence_of :phone_number, if: proc { |o| validate_voicemail_phone?(o) }
 
       private
 
       def attributes_map
         super().tap do |hsh|
           hsh[:email] = nil unless email_provided.yes?
-          hsh[:mobile_phone] = nil unless mobile_provided.yes?
-          hsh[:mobile_not_provided_reason] = nil if mobile_provided.yes?
+          hsh[:phone_number] = nil unless phone_number_provided.yes?
+          hsh[:phone_number_not_provided_reason] = nil if phone_number_provided.yes?
         end
       end
 
@@ -56,20 +50,18 @@ module Steps
         o.email_provided && GenericYesNo.new(o.email_provided).yes?
       end
 
-      def validate_mobile_value?(o)
-        o.mobile_provided && GenericYesNo.new(o.mobile_provided).yes?
+      def validate_phone_value?(o)
+        o.phone_number_provided && GenericYesNo.new(o.phone_number_provided).yes?
       end
 
-      def validate_mobile_not_provided_reason?(o)
-        o.mobile_provided && GenericYesNo.new(o.mobile_provided).no?
+      def validate_phone_not_provided_reason?(o)
+        o.phone_number_provided && GenericYesNo.new(o.phone_number_provided).no?
       end
 
-      def validate_voicemail_mobile?(o)
-        o.voicemail_consent && validate_mobile_value?(o) && GenericYesNo.new(o.voicemail_consent).yes? && o.home_phone == ""
-      end
-
-      def validate_voicemail_home?(o)
-        o.voicemail_consent && GenericYesNo.new(o.voicemail_consent).yes? && o.mobile_phone == ""
+      def validate_voicemail_phone?(o)
+        o.voicemail_consent &&
+          GenericYesNo.new(o.voicemail_consent).yes? &&
+          o.phone_number.blank?
       end
     end
   end

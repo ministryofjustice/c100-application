@@ -37,9 +37,9 @@ en:
       'yes': I can provide an email address
       'no': I cannot provide an email address
 
-    YESPROVIDEMOBILE: &YESPROVIDEMOBILE
-      'yes': I can provide a mobile phone number
-      'no': I cannot provide a mobile phone number
+    YESPROVIDEPHONE: &YESPROVIDEPHONE
+      'yes': I can provide a phone number
+      'no': I cannot provide a phone number
 
     RELATIONS: &RELATIONS
       mother: Mother
@@ -125,19 +125,16 @@ en:
 
     # This is a compilation of all possible fields shared between Applicants and Respondents (maybe others later)
     PERSONAL_CONTACT_FIELDS: &PERSONAL_CONTACT_FIELDS
-      home_phone: Home phone
-      mobile_phone: Mobile phone
-      mobile_phone_unknown: *dont_know
+      phone_number: Phone number
+      phone_number_unknown: *dont_know
       email: Email address
       email_unknown_options:
         'true': I don't know their email
-      home_phone_unknown_options:
-        'true': I don't know their home phone number
-      mobile_phone_unknown_options:
-        'true': I don't know their mobile number
-      mobile_provided_options:
-        <<: *YESPROVIDEMOBILE
-      mobile_not_provided_reason: Tell us why the court cannot phone you
+      phone_number_unknown_options:
+        'true': I don't know their phone number
+      phone_number_provided_options:
+        <<: *YESPROVIDEPHONE
+      phone_number_not_provided_reason: Tell us why the court cannot phone you
 
     PERSONAL_ADDRESS_FIELDS: &PERSONAL_ADDRESS_FIELDS
       address_line_1: Building and street
@@ -1615,8 +1612,7 @@ en:
         contact_details_private_options:
           address: Current address
           email: Email address
-          mobile: Mobile phone number
-          home_phone: Home phone number
+          phone_number: Phone number
       steps_applicant_refuge_form:
         refuge_options:
           'yes': 'Yes'
@@ -1626,9 +1622,8 @@ en:
         previous_name: Enter your previous name
       steps_applicant_contact_details_form:
         <<: *PERSONAL_CONTACT_FIELDS
-        home_phone: Your home phone
-        mobile_phone: Your mobile phone
         email: Your email address
+        phone_number: Your phone number
         email_provided_options:
           <<: *YESPROVIDEEMAIL
         voicemail_consent_options:

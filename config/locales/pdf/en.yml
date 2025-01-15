@@ -559,11 +559,8 @@ en:
     person_residence_history:
       question: Previous addresses
       absence_answer: *unknown
-    person_home_phone:
-      question: Home telephone number
-      absence_answer: *unknown
-    person_mobile_phone:
-      question: Mobile telephone number
+    person_phone_number:
+      question: Telephone number
       absence_answer: *unknown
     person_email:
       question: Email address
