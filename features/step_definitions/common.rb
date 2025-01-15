@@ -182,21 +182,27 @@ When(/^I fill in a postcode "([^"]*)" for the children$/) do |arg|
 end
 
 Given(/^Opening changes apply$/) do
-  ENV['PRL_OPENING'] = 'true'
+  @original_prl_date = Rails.application.config.prl_opening_date
+  Rails.application.config.prl_opening_date = Date.today - 1.day
 end
 
 Given(/^Opening changes do not apply$/) do
-  ENV['PRL_OPENING'] = 'false'
+  @original_prl_date = Rails.application.config.prl_opening_date
+  Rails.application.config.prl_opening_date = Date.today + 1.day
+end
+
+And('the opening changes end') do
+  Rails.application.config.prl_opening_date = @original_prl_date
 end
 
 Given(/^Confidential changes do apply$/) do
   @original_confidential_date = Rails.application.config.confidential_option_date
-  Rails.application.config.confidential_option_date= Date.today - 1.day
+  Rails.application.config.confidential_option_date = Date.today - 1.day
 end
 
 Given(/^Confidential changes do not apply$/) do
   @original_confidential_date = Rails.application.config.confidential_option_date
-  Rails.application.config.confidential_option_date= Date.today + 1.day
+  Rails.application.config.confidential_option_date = Date.today + 1.day
 end
 
 And('the confidential changes end') do
