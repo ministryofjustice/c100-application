@@ -304,7 +304,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7002$/
+                - /^RST-7081$/
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev

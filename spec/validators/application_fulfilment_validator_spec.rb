@@ -54,6 +54,8 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
 
   let(:record) { double('record') }
 
+  let(:validator) { described_class.new }
+
   before do
     allow(record).to receive(:miam_exemption)
     allow(record.miam_exemption).to receive(:misc).and_return(['misc_test'])
@@ -187,6 +189,122 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
       # end
     end
 
+  end
+
+  describe '#has_other_skip_exemptions?' do
+    let(:miam_exemption) { double('miam_exemption') }
+
+    context 'when miam_exemption is nil' do
+      before { allow(record).to receive(:miam_exemption).and_return(nil) }
+
+      it 'returns false' do
+        expect(validator.send(:has_other_skip_exemptions?, record)).to be false
+      end
+    end
+
+    context 'when miam_exemption.misc is nil' do
+      before { allow(miam_exemption).to receive(:misc).and_return(nil) }
+
+      it 'returns false' do
+        expect(validator.send(:has_other_skip_exemptions?, record)).to be false
+      end
+    end
+
+    context 'when domestic exemptions are not excluded' do
+      before do
+        allow(record).to receive(:miam_exemption).and_return(miam_exemption)
+        allow(miam_exemption).to receive(:misc).and_return(['misc_test'])
+        allow(miam_exemption).to receive(:domestic).and_return(['misc_domestic_test'])
+        allow(validator).to receive(:other_group_check).with(record).and_return(false)
+      end
+
+      it 'returns false' do
+        expect(validator.send(:has_other_skip_exemptions?, record)).to be false
+      end
+    end
+
+    context 'when specific misc exemptions are present and other_group_check passes' do
+      before do
+        allow(record).to receive(:miam_exemption).and_return(miam_exemption)
+        allow(miam_exemption).to receive(:misc).and_return(['misc_without_notice'])
+        allow(miam_exemption).to receive(:domestic).and_return(['misc_domestic_none'])
+        allow(validator).to receive(:other_group_check).with(record).and_return(true)
+      end
+
+      it 'returns false' do
+        expect(validator.send(:has_other_skip_exemptions?, record)).to be false
+      end
+    end
+
+    context 'when specific misc exemptions are present and other_group_check fails' do
+      before do
+        allow(record).to receive(:miam_exemption).and_return(miam_exemption)
+        allow(miam_exemption).to receive(:misc).and_return(['misc_without_notice'])
+        allow(miam_exemption).to receive(:domestic).and_return(['misc_domestic_none'])
+        allow(validator).to receive(:other_group_check).with(record).and_return(false)
+      end
+
+      it 'returns true' do
+        expect(validator.send(:has_other_skip_exemptions?, record)).to be true
+      end
+    end
+
+    context 'when all conditions for false are skipped and method returns true' do
+      before do
+        allow(record).to receive(:miam_exemption).and_return(miam_exemption)
+        allow(miam_exemption).to receive(:misc).and_return(['misc_other'])
+        allow(miam_exemption).to receive(:domestic).and_return(['misc_domestic_none'])
+        allow(validator).to receive(:other_group_check).with(record).and_return(false)
+      end
+
+      it 'returns true' do
+        expect(validator.send(:has_other_skip_exemptions?, record)).to be true
+      end
+    end
+  end
+
+  describe '#other_group_check' do
+    let(:miam_exemption) { double('miam_exemption') }
+
+    before do
+      allow(record).to receive(:miam_exemption).and_return(miam_exemption)
+    end
+
+    context 'when all groups include misc_<group>_none' do
+      before do
+        allow(miam_exemption).to receive(:protection).and_return(['misc_protection_none'])
+        allow(miam_exemption).to receive(:urgency).and_return(['misc_urgency_none'])
+        allow(miam_exemption).to receive(:adr).and_return(['misc_adr_none'])
+      end
+
+      it 'returns true' do
+        expect(validator.send(:other_group_check, record)).to be true
+      end
+    end
+
+    context 'when one group does not include "misc_<group>_none"' do
+      before do
+        allow(miam_exemption).to receive(:protection).and_return(['misc_protection_none'])
+        allow(miam_exemption).to receive(:urgency).and_return(['misc_urgency_present'])
+        allow(miam_exemption).to receive(:adr).and_return(['misc_adr_none'])
+      end
+
+      it 'returns false' do
+        expect(validator.send(:other_group_check, record)).to be false
+      end
+    end
+
+    context 'when all groups are empty' do
+      before do
+        allow(miam_exemption).to receive(:protection).and_return([])
+        allow(miam_exemption).to receive(:urgency).and_return([])
+        allow(miam_exemption).to receive(:adr).and_return([])
+      end
+
+      it 'returns false' do
+        expect(validator.send(:other_group_check, record)).to be false
+      end
+    end
   end
 
   context 'generate_document_validation' do
