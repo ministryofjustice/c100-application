@@ -57,8 +57,12 @@ module Summary
       end
 
       def person_phone_number(person)
-        value = phone_number_answer(person) if in_refuge?(person) || (confidential? && private?(person,
-                                                                                                ContactDetails::PHONE_NUMBER.to_s))
+        value = phone_number_answer(person) if in_refuge?(person) || (
+          confidential? && private?(
+            person,
+            ContactDetails::PHONE_NUMBER.to_s
+          )
+        )
         FreeTextAnswer.new(:person_phone_number, value)
       end
 
