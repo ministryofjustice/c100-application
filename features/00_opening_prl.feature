@@ -14,6 +14,7 @@ Feature: Opening PRL
     And I click the "Continue" link
     Then I should see "What kind of application do you want to make?"
     And I should not see the save draft button
+    And the opening changes end
 
   @happy_path
   Scenario: Testing application timeout (Should not trigger here)
@@ -32,30 +33,33 @@ Feature: Opening PRL
     And I choose "No"
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I should see the save draft button
-
+    And the opening changes end
 
   Scenario: Research question with alternate application page layout
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK9 3DX"
     And I click the "Continue" button
+    And the opening changes end
 
   @happy_path
   Scenario: Testing the back button
     When I click the "Back" link
     Then I should see "Making child arrangements if you divorce or separate"
+    And the opening changes end
 
   @happy_path
   Scenario: Checking the dropdown
     When I open the "If you do not know where the children live, or they live at different addresses" summary details
     Then I should see "If you do not know where the children live, enter your own postcode."
+    And the opening changes end
 
   @happy_path
   Scenario: Postcode entry without a space
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK93DX"
     And I click the "Continue" button
-
     Then I should see "What you’ll need to complete your application"
+    And the opening changes end
 
   Scenario: I don't fill out the postcode
     When I click the radio button "Start a new application"
@@ -69,6 +73,7 @@ Feature: Opening PRL
     Then I click the "Enter a full postcode, with or without a space" link
     And I should see "Enter a full postcode, with or without a space" error in the form
     And "steps-opening-start-or-continue-form-children-postcode-field-error" has focus
+    And the opening changes end
 
   @unhappy_path
   Scenario: Postcode not eligible
@@ -77,6 +82,7 @@ Feature: Opening PRL
     And I click the postcode page "Continue" button with an invalid postcode
     Then I should see "Sorry, you cannot apply online"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
+    And the opening changes end
 
   @unhappy_path
   Scenario: Postcode not eligible (alternate page layout)
@@ -86,6 +92,7 @@ Feature: Opening PRL
 
     Then I should see "Sorry, you cannot apply online"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
+    And the opening changes end
 
   @unhappy_path
   Scenario: Postcode not recognised (alternate page layout)
@@ -97,3 +104,4 @@ Feature: Opening PRL
     Then I should see "Something went wrong"
     And I should see a "Download the form (PDF)" link to "https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf"
     And I should see a "Go back and try again" link to "/steps/opening/start_or_continue"
+    And the opening changes end

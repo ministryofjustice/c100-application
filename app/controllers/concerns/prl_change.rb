@@ -2,6 +2,6 @@ module PrlChange
   extend ActiveSupport::Concern
 
   def self.changes_apply?
-    ENV["PRL_OPENING"] == "true"
+    Time.zone.now.in_time_zone('London') >= Rails.application.config.prl_opening_date
   end
 end
