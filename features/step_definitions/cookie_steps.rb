@@ -53,3 +53,24 @@ end
 And(/^I can click a link to the cookie page from the cookie confirmation banner$/) do
   expect(any_page.cookie_confirmation_banner).to have_change_cookie_settings_link
 end
+
+And(/^analytics cookies are NOT allowed to be set$/) do
+  expect(page.evaluate_script("window['ga-disable-#{Rails.application.config.x.analytics_tracking_id}']"))
+    .to be(true), 'Google analytics is enabled it should not be'
+end
+
+Then(/^google analytics cookies are allowed to be set$/) do
+  expect(any_page).to have_google_analytics_enabled
+end
+
+Then(/^the analytics cookies radio buttons are defaulted to '([^']*)'$/) do |value|
+  cookie_management_page.analytics_question.assert_value(value)
+end
+
+When(/^I select '([^']*)' for analytics cookies$/) do |value|
+  cookie_management_page.analytics_question.set(value)
+end
+
+And(/^a confirmation box will appear telling me that my cookie settings have been saved$/) do
+  expect(any_page).to have_cookie_preferences_updated_message
+end
