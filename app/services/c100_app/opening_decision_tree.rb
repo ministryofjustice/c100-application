@@ -210,6 +210,7 @@ module C100App
     def eligable_court
       c100_application.court.id.in? %w[
         swansea-civil-justice-centre
+        kingston-upon-hull-combined-court-centre
       ]
     end
   end
