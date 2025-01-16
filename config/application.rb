@@ -91,5 +91,6 @@ module Application
     config.maintenance_allowed_ips = ENV.fetch('MAINTENANCE_ALLOWED_IPS', '').split(',').map(&:strip)
 
     config.confidential_option_date = DateTime.parse(ENV.fetch("CONFIDENTIAL_OPTION_DATE", "08/05/2024"))
+    config.prl_opening_date = DateTime.parse(ENV.fetch("PRL_OPENING", "13/02/2025"))
   end
 end
