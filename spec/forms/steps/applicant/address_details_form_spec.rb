@@ -89,6 +89,24 @@ RSpec.describe Steps::Applicant::AddressDetailsForm do
       it { should_not validate_presence_of(:postcode) }
     end
 
+    context 'for too long address details' do
+      let(:address_line_1) { "a" * 36 }
+      let(:address_line_2) { "a" * 36 }
+      let(:address_line_3) { "a" * 36 }
+      let(:town) { "a" * 36 }
+      let(:country) { "a" * 36 }
+
+      it 'has a validation error on the address fields' do
+        expect(subject.save).to be(false)
+
+        expect(subject.errors[:address_line_1]).to_not be_empty
+        expect(subject.errors[:address_line_2]).to_not be_empty
+        expect(subject.errors[:address_line_3]).to_not be_empty
+        expect(subject.errors[:town]).to_not be_empty
+        expect(subject.errors[:country]).to_not be_empty
+      end
+    end
+
     context 'for valid details' do
       let(:expected_attributes) {
         {
