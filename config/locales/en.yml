@@ -679,6 +679,7 @@ en:
       certification_upload:
         edit:
           page_title: Upload your MIAM certificate
+          help_text: This must be the certificate provided by the mediator and not just an email confirmation.
           lead_text_html: |
             <p>If you are uploading documents from a computer, name the files clearly. For example, miam-certificate.pdf</p>
             <p>Files must end with JPG, BMP, PNG, TIF, PDF, DOC or DOCX</p>

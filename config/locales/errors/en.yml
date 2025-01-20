@@ -53,10 +53,17 @@ en:
         blank: Enter their place of birth
       address_line_1:
         blank: Enter the first line of the address or select if you don’t know where they live
+        too_long: Enter no more than 35 characters, including spaces
+      address_line_2:
+        too_long: Enter no more than 35 characters, including spaces
+      address_line_3:
+        too_long: Enter no more than 35 characters, including spaces
       town:
         blank: Enter the town or city or select if you don’t know where they live
+        too_long: Enter no more than 35 characters, including spaces
       country:
         blank: Enter the country
+        too_long: Enter no more than 35 characters, including spaces
       residence_requirement_met:
         inclusion: Select yes if they’ve lived at the address for more than 5 years
       residence_history:
@@ -469,8 +476,10 @@ en:
               inclusion: Select yes if you’ve lived at the address for more than 5 years
             address_line_1:
               blank: Enter the first line of the address
+              too_long: Enter no more than 35 characters, including spaces
             town:
               blank: Enter the town or city
+              too_long: Enter no more than 35 characters, including spaces
         steps/applicant/contact_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS
