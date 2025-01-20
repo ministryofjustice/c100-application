@@ -211,6 +211,7 @@ module C100App
       c100_application.court.id.in? %w[
         swansea-civil-justice-centre
         kingston-upon-hull-combined-court-centre
+        great-grimsby-combined-court-centre
       ]
     end
   end
