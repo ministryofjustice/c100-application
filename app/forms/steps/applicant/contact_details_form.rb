@@ -59,9 +59,7 @@ module Steps
       end
 
       def validate_voicemail_phone?(o)
-        o.voicemail_consent &&
-          GenericYesNo.new(o.voicemail_consent).yes? &&
-          o.phone_number.blank?
+        o.voicemail_consent && GenericYesNo.new(o.voicemail_consent).yes? && o.phone_number.blank?
       end
     end
   end
