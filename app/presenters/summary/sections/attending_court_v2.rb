@@ -28,10 +28,15 @@ module Summary
         @_arrangement ||= c100.court_arrangement
       end
 
+      def clean_answer(value)
+        return I18n.t('dictionary.not_needed') if value.blank?
+        value
+      end
+
       def intermediary
         [
           Separator.new(:intermediary),
-          Answer.new(:intermediary_help, arrangement.intermediary_help),
+          Answer.new(:intermediary_help, clean_answer(arrangement.intermediary_help)),
           FreeTextAnswer.new(:intermediary_help_details, arrangement.intermediary_help_details),
         ]
       end
@@ -48,19 +53,19 @@ module Summary
 
           Answer.new(
             :language_interpreter,
-            arrangement.language_options.include?(LanguageHelp::LANGUAGE_INTERPRETER.to_s).to_s
+            clean_answer(arrangement.language_options.include?(LanguageHelp::LANGUAGE_INTERPRETER.to_s).to_s)
           ),
           FreeTextAnswer.new(:language_interpreter_details, arrangement.language_interpreter_details),
 
           Answer.new(
             :sign_language_interpreter,
-            arrangement.language_options.include?(LanguageHelp::SIGN_LANGUAGE_INTERPRETER.to_s).to_s
+            clean_answer(arrangement.language_options.include?(LanguageHelp::SIGN_LANGUAGE_INTERPRETER.to_s).to_s)
           ),
           FreeTextAnswer.new(:sign_language_interpreter_details, arrangement.sign_language_interpreter_details),
 
           Answer.new(
             :welsh_language,
-            arrangement.language_options.include?(LanguageHelp::WELSH_LANGUAGE.to_s).to_s
+            clean_answer(arrangement.language_options.include?(LanguageHelp::WELSH_LANGUAGE.to_s).to_s)
           ),
           FreeTextAnswer.new(:welsh_language_details, arrangement.welsh_language_details),
         ]
@@ -70,7 +75,7 @@ module Summary
       def special_arrangements
         [
           Separator.new(:special_arrangements),
-          MultiAnswer.new(:special_arrangements, arrangement.special_arrangements, show: true),
+          MultiAnswer.new(:special_arrangements, clean_answer(arrangement.special_arrangements), show: true),
           FreeTextAnswer.new(:special_arrangements_details, arrangement.special_arrangements_details),
         ]
       end
@@ -78,7 +83,7 @@ module Summary
       def special_assistance
         [
           Separator.new(:special_assistance),
-          MultiAnswer.new(:special_assistance, arrangement.special_assistance, show: true),
+          MultiAnswer.new(:special_assistance, clean_answer(arrangement.special_assistance), show: true),
           FreeTextAnswer.new(:special_assistance_details, arrangement.special_assistance_details),
         ]
       end

@@ -151,7 +151,7 @@ module Summary
         # Note it only shows the multi answer, not the free text because it is empty
         expect(answers[11]).to be_an_instance_of(MultiAnswer)
         expect(answers[11].question).to eq(:special_arrangements)
-        expect(answers[11].value).to eq([])
+        expect(answers[11].value).to eq('Not needed')
       end
     end
 
@@ -165,7 +165,7 @@ module Summary
         # Note it only shows the multi answer, not the free text because it is empty
         expect(answers[14]).to be_an_instance_of(MultiAnswer)
         expect(answers[14].question).to eq(:special_assistance)
-        expect(answers[14].value).to eq([])
+        expect(answers[14].value).to eq('Not needed')
       end
     end
   end
