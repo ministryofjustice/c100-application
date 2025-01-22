@@ -26,8 +26,7 @@ module Summary
 
       def arrangement
         @_arrangement ||= begin
-          arrangement = c100.court_arrangement
-          arrangement.intermediary_help ||= GenericYesNo::NO if arrangement.present?
+          arrangement = c100.court_arrangement || CourtArrangement.new
           arrangement
         end
       end
@@ -52,19 +51,19 @@ module Summary
 
           Answer.new(
             :language_interpreter,
-            arrangement.language_options.include?(LanguageHelp::LANGUAGE_INTERPRETER.to_s).to_s
+            arrangement.language_options&.include?(LanguageHelp::LANGUAGE_INTERPRETER.to_s).to_s
           ),
           FreeTextAnswer.new(:language_interpreter_details, arrangement.language_interpreter_details),
 
           Answer.new(
             :sign_language_interpreter,
-            arrangement.language_options.include?(LanguageHelp::SIGN_LANGUAGE_INTERPRETER.to_s).to_s
+            arrangement.language_options&.include?(LanguageHelp::SIGN_LANGUAGE_INTERPRETER.to_s).to_s
           ),
           FreeTextAnswer.new(:sign_language_interpreter_details, arrangement.sign_language_interpreter_details),
 
           Answer.new(
             :welsh_language,
-            arrangement.language_options.include?(LanguageHelp::WELSH_LANGUAGE.to_s).to_s
+            arrangement.language_options&.include?(LanguageHelp::WELSH_LANGUAGE.to_s).to_s
           ),
           FreeTextAnswer.new(:welsh_language_details, arrangement.welsh_language_details),
         ]

@@ -44,8 +44,8 @@ module Summary
       context 'when not using the new special court arrangement details' do
         let(:court_arrangement) { nil }
 
-        it 'returns true (we use this class, `AttendingCourt`)' do
-          expect(subject.show?).to eq(false)
+        it 'returns true when no arrangements are needed' do
+          expect(subject.show?).to eq(true)
         end
       end
 
