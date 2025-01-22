@@ -21,6 +21,7 @@ module Summary
 
     describe '#sections' do
       before do
+        allow(court_arrangement).to receive(:intermediary_help).and_return('No')
         allow_any_instance_of(Summary::Sections::BaseSectionPresenter).to receive(:show?).and_return(true)
       end
 
