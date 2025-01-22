@@ -84,7 +84,7 @@ module Summary
 
       def intermediary_help
         arrangement = c100_application.court_arrangement
-        return 'No' if arrangement.blank? || arrangement.intermediary_help.blank?
+        return 'No' if arrangement.blank?
         arrangement.intermediary_help
       end
     end

@@ -25,7 +25,11 @@ module Summary
       private
 
       def arrangement
-        @_arrangement ||= c100.court_arrangement
+        @_arrangement ||= begin
+          arrangement = c100.court_arrangement
+          arrangement.intermediary_help ||= GenericYesNo::NO if arrangement.present?
+          arrangement
+        end
       end
 
       def intermediary
