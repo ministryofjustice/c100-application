@@ -10,7 +10,7 @@ module Summary
       end
 
       def show?
-        !arrangement.nil? && super
+        arrangement.present? && super
       end
 
       def answers
