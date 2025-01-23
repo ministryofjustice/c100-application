@@ -25,10 +25,21 @@ module Summary
       private
 
       def arrangement
-        @_arrangement ||= begin
-          arrangement = c100.court_arrangement || CourtArrangement.new
-          arrangement
-        end
+        @_arrangement ||= c100.court_arrangement || no_arrangement
+      end
+
+      def no_arrangement
+        arrangement = CourtArrangement.new
+
+        arrangement.intermediary_help ||= GenericYesNo::NO
+        arrangement.language_options ||= []
+        arrangement.language_interpreter_details ||= I18n.t('dictionary.not_needed')
+        arrangement.sign_language_interpreter_details ||= I18n.t('dictionary.not_needed')
+        arrangement.welsh_language_details ||= I18n.t('dictionary.not_needed')
+        arrangement.special_arrangements ||= I18n.t('dictionary.not_needed')
+        arrangement.special_assistance ||= I18n.t('dictionary.not_needed')
+
+        arrangement
       end
 
       def intermediary
