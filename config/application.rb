@@ -92,5 +92,6 @@ module Application
 
     config.confidential_option_date = DateTime.parse(ENV.fetch("CONFIDENTIAL_OPTION_DATE", "08/05/2024"))
     config.prl_opening_date = DateTime.parse(ENV.fetch("PRL_OPENING", "13/02/2025"))
+    config.toggle_test = DateTime.parse(ENV.fetch("TOGGLE_TEST", "14/01/2025"))
   end
 end
