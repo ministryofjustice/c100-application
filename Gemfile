@@ -42,7 +42,8 @@ gem 'clamby'
 gem 'sanitize', '~> 6.1.0'
 
 gem 'listen'
-
+gem 'ostruct'
+gem 'csv'
 
 group :development, :production do
   gem 'lograge'
