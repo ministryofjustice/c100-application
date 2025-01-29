@@ -14,27 +14,25 @@ module Summary
       instance_double(Applicant,
                       full_name: 'fullname',
                       residence_history: 'history',
-                      home_phone: 'home_phone',
-                      mobile_provided: mobile_provided,
-                      mobile_not_provided_reason: mobile_not_provided_reason,
-                      mobile_phone: 'mobile_phone',
+                      phone_number: 'phone_number',
+                      phone_number_provided: phone_number_provided,
+                      phone_number_not_provided_reason: phone_number_not_provided_reason,
                       email: 'email',
                       voicemail_consent: 'yes',
                       contact_details_private: contact_details_private
       )
     }
 
-    let(:mobile_provided) { nil }
-    let(:mobile_not_provided_reason) { nil }
+    let(:phone_number_provided) { nil }
+    let(:phone_number_not_provided_reason) { nil }
 
-    let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
+    let(:contact_details_private) { ['email', 'address', 'phone_number'] }
 
     before do
       allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(applicant).to receive(:full_address).and_return('full address')
       allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))
-      allow(applicant).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
-      allow(applicant).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(applicant).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(applicant).to receive(:address_private?).and_return(contact_details_private.include?('address'))
       allow(applicant).to receive(:refuge).and_return('yes')
     end
@@ -60,7 +58,7 @@ module Summary
 
     describe '#answers' do
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(11)
+        expect(answers.count).to eq(10)
       end
 
       it 'has the correct rows in the right order' do
@@ -81,49 +79,44 @@ module Summary
         expect(answers[3].value).to eq('email')
 
         expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[4].question).to eq(:person_home_phone)
-        expect(answers[4].value).to eq('home_phone')
+        expect(answers[4].question).to eq(:person_phone_number)
+        expect(answers[4].value).to eq('phone_number')
 
-        expect(answers[5]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[5].question).to eq(:person_mobile_phone)
-        expect(answers[5].value).to eq('mobile_phone')
+        expect(answers[5]).to be_an_instance_of(Answer)
+        expect(answers[5].question).to eq(:person_voicemail_consent)
+        expect(answers[5].value).to eq('yes')
 
         expect(answers[6]).to be_an_instance_of(Answer)
-        expect(answers[6].question).to eq(:person_voicemail_consent)
+        expect(answers[6].question).to eq(:refuge)
         expect(answers[6].value).to eq('yes')
 
-        expect(answers[7]).to be_an_instance_of(Answer)
-        expect(answers[7].question).to eq(:refuge)
-        expect(answers[7].value).to eq('yes')
+        expect(answers[7]).to be_an_instance_of(Partial)
+        expect(answers[7].name).to eq(:row_blank_space)
 
-        expect(answers[8]).to be_an_instance_of(Partial)
-        expect(answers[8].name).to eq(:row_blank_space)
+        expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[8].question).to eq(:person_residence_history)
+        expect(answers[8].value).to eq('history')
 
-        expect(answers[9]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[9].question).to eq(:person_residence_history)
-        expect(answers[9].value).to eq('history')
-
-        expect(answers[10]).to be_an_instance_of(Partial)
-        expect(answers[10].name).to eq(:row_blank_space)
+        expect(answers[9]).to be_an_instance_of(Partial)
+        expect(answers[9].name).to eq(:row_blank_space)
       end
 
       it 'marks all private contact details correctly' do
         expect(applicant.email_private?).to be(true)
-        expect(applicant.home_phone_private?).to be(true)
-        expect(applicant.mobile_private?).to be(true)
+        expect(applicant.phone_number_private?).to be(true)
         expect(applicant.address_private?).to be(true)
       end
 
-      context "when no mobile and a reason given" do
+      context "when no phone number and a reason given" do
         before do
           allow(applicant).to receive(:refuge).and_return('no')
         end
 
-        let(:mobile_not_provided_reason) { "No phone" }
-        let(:mobile_provided) { 'no' }
+        let(:phone_number_not_provided_reason) { "No phone" }
+        let(:phone_number_provided) { 'no' }
 
         it "shows the reason" do
-          expect(answers[5].value).to eq('No phone')
+          expect(answers[4].value).to eq('No phone')
         end
       end
 
@@ -136,8 +129,7 @@ module Summary
           instance_double(Applicant,
                           full_name: 'fullname',
                           residence_history: 'history',
-                          home_phone: 'home_phone',
-                          mobile_phone: 'mobile_phone',
+                          phone_number: 'phone_number',
                           email: 'email',
                           voicemail_consent: 'yes',
                           contact_details_private: contact_details_private
@@ -150,7 +142,7 @@ module Summary
       end
 
       context 'when refuge is no, only selected private details should be private' do
-        let(:contact_details_private) { ['email', 'home_phone'] }
+        let(:contact_details_private) { ['email', 'phone_number'] }
 
         before do
           allow(applicant).to receive(:refuge).and_return('no')
@@ -158,8 +150,7 @@ module Summary
 
         it 'marks only the selected private details as private' do
           expect(applicant.email_private?).to be(true)
-          expect(applicant.home_phone_private?).to be(true)
-          expect(applicant.mobile_private?).to be(false)
+          expect(applicant.phone_number_private?).to be(true)
           expect(applicant.address_private?).to be(false)
         end
 
@@ -181,8 +172,8 @@ module Summary
           expect(answers[2].value).to eq('email')
 
           expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[3].question).to eq(:person_home_phone)
-          expect(answers[3].value).to eq('home_phone')
+          expect(answers[3].question).to eq(:person_phone_number)
+          expect(answers[3].value).to eq('phone_number')
 
           expect(answers[4]).to be_an_instance_of(Answer)
           expect(answers[4].question).to eq(:person_voicemail_consent)

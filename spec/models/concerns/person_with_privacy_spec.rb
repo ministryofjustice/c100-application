@@ -22,32 +22,17 @@ RSpec.describe PersonWithPrivacy do
     end
   end
 
-  describe '#home_phone_private?' do
+  describe '#phone_number_private?' do
     context 'when private' do
-      let(:contact_details_private) { ['home_phone'] }
+      let(:contact_details_private) { ['phone_number'] }
       it 'is private' do
-        expect(subject.home_phone_private?).to be_truthy
+        expect(subject.phone_number_private?).to be_truthy
       end
     end
     context 'when not private' do
       let(:contact_details_private) { [] }
       it 'is not private' do
-        expect(subject.home_phone_private?).to be_falsey
-      end
-    end
-  end
-
-  describe '#mobile_private?' do
-    context 'when private' do
-      let(:contact_details_private) { ['mobile'] }
-      it 'is private' do
-        expect(subject.mobile_private?).to be_truthy
-      end
-    end
-    context 'when not private' do
-      let(:contact_details_private) { [] }
-      it 'is not private' do
-        expect(subject.mobile_private?).to be_falsey
+        expect(subject.phone_number_private?).to be_falsey
       end
     end
   end

@@ -118,37 +118,30 @@ Feature: Add a respondent to the application
     When I click the "Continue" button
     Then Page has title "Error: Respondent contact details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-respondent-contact-details-form-email-field-error"
-    And I should see a "Enter an answer" link to "#steps-respondent-contact-details-form-home-phone-field-error"
-    And I should see a "Enter an answer" link to "#steps-respondent-contact-details-form-mobile-phone-field-error"
+    And I should see a "Enter an answer" link to "#steps-respondent-contact-details-form-phone-number-field-error"
 
     When I fill in "Email address" with "¡€#"
-    And I fill in "Home phone" with "¢∞§"
-    And I fill in "Mobile phone" with "¶•ª"
+    And I fill in "Phone number" with "¢∞§"
     And I click the "Continue" button
     Then Page has title "Error: Respondent contact details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-respondent-contact-details-form-email-field-error"
-    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-respondent-contact-details-form-mobile-phone-field-error"
-    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-respondent-contact-details-form-home-phone-field-error"
+    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-respondent-contact-details-form-phone-number-field-error"
 
     When I check "I don't know their email"
     And I fill in "Email address" with "test@example.com"
-    And I check "I don't know their home phone number"
-    And I fill in "Home phone" with "07777777777"
-    And I check "I don't know their mobile number"
-    And I fill in "Mobile phone" with "07777777777"
+    And I check "I don't know their phone number"
+    And I fill in "Phone number" with "07777777777"
     And I click the "Continue" button
     Then Page has title "Error: Respondent contact details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Cannot select 'I don't know their email' and input 'Email address'" link to "#steps-respondent-contact-details-form-email-field-error"
-    And I should see a "Cannot select 'I don't know their home phone number' and input 'Home phone'" link to "#steps-respondent-contact-details-form-home-phone-field-error"
-    And I should see a "Cannot select 'I don't know their mobile number' and input 'Mobile phone'" link to "#steps-respondent-contact-details-form-mobile-phone-field-error"
+    And I should see a "Cannot select 'I don't know their phone number' and input 'Phone number'" link to "#steps-respondent-contact-details-form-phone-number-field-error"
 
     # Fix validation errors and continue
     When I click the "Back" link
     And I should see "Address details of Olivia Doe Senior"
     And I click the "Continue" button
     And I fill in "Email address" with "test@example.com"
-    And I fill in "Home phone" with "07777777777"
-    And I fill in "Mobile phone" with "07777777777"
+    And I fill in "Phone number" with "07777777777"
 
     When I click the "Continue" button
     Then I should see "Is there anyone else who should know about your application?"
