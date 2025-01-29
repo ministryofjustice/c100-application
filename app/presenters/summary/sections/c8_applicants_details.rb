@@ -28,7 +28,8 @@ module Summary
               FreeTextAnswer.new(:person_full_name, person.full_name),
               address(person),
               person_email(person),
-              person_phone_number(person),
+              person_home_phone(person),
+              person_mobile_phone(person),
               Answer.new(:person_voicemail_consent, person.voicemail_consent),
               Answer.new(:refuge, person.refuge),
               Partial.row_blank_space,
@@ -56,28 +57,30 @@ module Summary
         FreeTextAnswer.new(:person_email, value)
       end
 
-      def person_phone_number(person)
-        value = phone_number_answer(person) if in_refuge?(person) || (
-          confidential? && private?(
-            person,
-            ContactDetails::PHONE_NUMBER.to_s
-          )
-        )
-        FreeTextAnswer.new(:person_phone_number, value)
+      def person_home_phone(person)
+        value = person.home_phone if in_refuge?(person) || (confidential? && private?(person, ContactDetails::HOME_PHONE.to_s))
+        FreeTextAnswer.new(:person_home_phone, value)
       end
 
-      def phone_number_answer(person)
-        if person.phone_number_provided == GenericYesNo::NO.to_s
-          person.phone_number_not_provided_reason
+      def person_mobile_phone(person)
+        value = mobile_phone_answer(person) if in_refuge?(person) || (confidential? && private?(person,
+                                                                                                ContactDetails::MOBILE.to_s))
+        FreeTextAnswer.new(:person_mobile_phone, value)
+      end
+
+      def mobile_phone_answer(person)
+        if person.mobile_provided == GenericYesNo::NO.to_s
+          person.mobile_not_provided_reason
         else
-          person.phone_number
+          person.mobile_phone
         end
       end
 
       def empty_data?(person)
         address(person).value.nil? &&
           person_email(person).value.nil? &&
-          person_phone_number(person).value.nil? &&
+          person_home_phone(person).value.nil? &&
+          person_mobile_phone(person).value.nil? &&
           residence_history(person).value.nil?
       end
 

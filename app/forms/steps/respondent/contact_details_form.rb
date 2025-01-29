@@ -3,15 +3,20 @@ module Steps
     class ContactDetailsForm < BaseForm
       attribute :email, NormalisedEmail
       attribute :email_unknown, Boolean
-      attribute :phone_number, StrippedString
-      attribute :phone_number_unknown, Boolean
+      attribute :home_phone, StrippedString
+      attribute :home_phone_unknown, Boolean
+      attribute :mobile_phone, StrippedString
+      attribute :mobile_phone_unknown, Boolean
 
       validates :email, email: true, unless: :email_unknown?
       validates_presence_of  :email, unless: :email_unknown?
-      validates_presence_of  :phone_number, unless: :phone_number_unknown?
-      validates :phone_number, phone_number: true, unless: :phone_number_unknown?
+      validates_presence_of  :mobile_phone, unless: :mobile_phone_unknown?
+      validates :mobile_phone, phone_number: true, unless: :mobile_phone_unknown?
+      validates_presence_of  :home_phone, unless: :home_phone_unknown?
+      validates :home_phone, phone_number: true, unless: :home_phone_unknown?
       validates :email, unknown_respondent_input: true, if: :email_unknown?
-      validates :phone_number, unknown_respondent_input: true, if: :phone_number_unknown?
+      validates :home_phone, unknown_respondent_input: true, if: :home_phone_unknown?
+      validates :mobile_phone, unknown_respondent_input: true, if: :mobile_phone_unknown?
 
       private
 

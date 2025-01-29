@@ -11,8 +11,10 @@ class Minor < Person
     birthplace
     has_previous_name
     previous_name
-    phone_number
-    phone_number_unknown
+    home_phone
+    home_phone_unknown
+    mobile_phone
+    mobile_phone_unknown
     email
     email_unknown
     residence_requirement_met

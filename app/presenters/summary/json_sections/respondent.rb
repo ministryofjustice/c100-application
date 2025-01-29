@@ -29,7 +29,7 @@ module Summary
           isDateOfBirthKnown: yes_no(respondent.dob.present?),
           gender: respondent.gender,
           email: respondent.email,
-          phoneNumber: respondent.phone_number,
+          phoneNumber: respondent.mobile_phone,
           isPlaceOfBirthKnown: yes_no(respondent.birthplace.present?),
           placeOfBirth: respondent.birthplace,
           isCurrentAddressKnown: yes_no(respondent.address_data.present?),
@@ -37,7 +37,7 @@ module Summary
           isAtAddressLessThan5Years: "No",
           addressLivedLessThan5YearsDetails: nil,
           isAddressConfidential: respondent.residence_keep_private,
-          canYouProvidePhoneNumber: yes_no(!respondent.phone_keep_private),
+          canYouProvidePhoneNumber: yes_no(!respondent.mobile_keep_private),
           canYouProvideEmailAddress: yes_no(!respondent.email_keep_private)
         }
       end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_15_101721) do
+ActiveRecord::Schema[7.2].define(version: 2024_05_22_144034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -345,8 +345,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_15_101721) do
     t.string "age_estimate"
     t.string "birthplace"
     t.boolean "address_unknown", default: false
-    t.string "phone_number"
-    t.boolean "phone_number_unknown", default: false
+    t.string "home_phone"
+    t.boolean "home_phone_unknown", default: false
+    t.string "mobile_phone"
+    t.boolean "mobile_phone_unknown", default: false
     t.string "email"
     t.boolean "email_unknown", default: false
     t.string "residence_requirement_met"
@@ -360,10 +362,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_15_101721) do
     t.string "residence_keep_private"
     t.string "email_keep_private"
     t.string "phone_keep_private"
+    t.string "mobile_keep_private"
     t.boolean "birthplace_unknown", default: false
     t.date "dob_estimate"
-    t.string "phone_number_provided"
-    t.string "phone_number_not_provided_reason"
+    t.string "mobile_provided"
+    t.string "mobile_not_provided_reason"
     t.string "parental_responsibility"
     t.string "privacy_known"
     t.string "contact_details_private", default: [], array: true

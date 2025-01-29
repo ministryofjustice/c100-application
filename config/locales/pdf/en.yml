@@ -559,8 +559,11 @@ en:
     person_residence_history:
       question: Previous addresses
       absence_answer: *unknown
-    person_phone_number:
-      question: Phone number
+    person_home_phone:
+      question: Home telephone number
+      absence_answer: *unknown
+    person_mobile_phone:
+      question: Mobile telephone number
       absence_answer: *unknown
     person_email:
       question: Email address
@@ -589,7 +592,7 @@ en:
     solicitor_address:
       question: Address
     solicitor_phone_number:
-      question: Phone number
+      question: Telephone number
     solicitor_dx_number:
       question: DX number
     solicitor_reference:

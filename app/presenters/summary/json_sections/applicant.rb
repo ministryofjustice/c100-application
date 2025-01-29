@@ -28,13 +28,13 @@ module Summary
           dateOfBirth: applicant.dob.to_fs(:db),
           gender: applicant.gender,
           email: applicant.email,
-          phoneNumber: applicant.phone_number,
+          phoneNumber: applicant.mobile_phone,
           placeOfBirth: applicant.birthplace,
           address: map_address_data(applicant.address_data),
           isAtAddressLessThan5Years: "No",
           addressLivedLessThan5YearsDetails: nil,
           isAddressConfidential: applicant.residence_keep_private,
-          isPhoneNumberConfidential: yes_no(applicant.phone_keep_private),
+          isPhoneNumberConfidential: yes_no(applicant.mobile_keep_private),
           isEmailAddressConfidential: yes_no(applicant.email_keep_private)
         }
       end
