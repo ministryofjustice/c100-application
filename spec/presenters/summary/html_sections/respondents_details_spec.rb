@@ -23,11 +23,9 @@ module Summary
         address_unknown: address_unknown,
         residence_requirement_met: 'yes',
         residence_history: 'history',
-        home_phone: 'home_phone',
-        home_phone_unknown: false,
-        mobile_provided: nil,
-        mobile_phone: 'mobile_phone',
-        mobile_phone_unknown: false,
+        phone_number_provided: nil,
+        phone_number: 'phone_number',
+        phone_number_unknown: false,
         voicemail_consent: nil,
         email_provided: nil,
         email: 'email',
@@ -45,8 +43,7 @@ module Summary
       allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(respondent).to receive(:full_address).and_return('full address')
       allow(respondent).to receive(:email_private?).and_return(contact_details_private.include?('email'))
-      allow(respondent).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
-      allow(respondent).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(respondent).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(respondent).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
@@ -155,7 +152,7 @@ module Summary
         expect(answers[5]).to be_an_instance_of(AnswersGroup)
         expect(answers[5].name).to eq(:person_contact_details)
         expect(answers[5].change_path).to eq('/steps/respondent/contact_details/uuid-123')
-        expect(answers[5].answers.count).to eq(3)
+        expect(answers[5].answers.count).to eq(2)
 
           details = answers[5].answers
 
@@ -164,12 +161,8 @@ module Summary
           expect(details[0].value).to eq('email')
 
           expect(details[1]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[1].question).to eq(:person_home_phone)
-          expect(details[1].value).to eq('home_phone')
-
-          expect(details[2]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[2].question).to eq(:person_mobile_phone)
-          expect(details[2].value).to eq('mobile_phone')
+          expect(details[1].question).to eq(:person_phone_number)
+          expect(details[1].value).to eq('phone_number')
 
       end
 

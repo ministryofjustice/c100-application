@@ -2,8 +2,7 @@ class ContactDetails < ValueObject
   VALUES = [
     ADDRESS = new(:address),
     EMAIL = new(:email),
-    MOBILE = new(:mobile),
-    HOME_PHONE = new(:home_phone),
+    PHONE_NUMBER = new(:phone_number),
   ].freeze
 
   def self.values
@@ -14,8 +13,7 @@ class ContactDetails < ValueObject
     {
       address: 'Current address',
       email: 'Email',
-      mobile: 'Mobile phone number',
-      home_phone: 'Home phone number'
+      phone_number: 'Phone number',
     }[to_sym]
   end
 end
