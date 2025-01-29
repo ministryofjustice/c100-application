@@ -4,12 +4,13 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
   let(:arguments) { {
     c100_application: c100_application,
     record: record,
-    phone_number: phone_number,
+    home_phone: home_phone,
+    mobile_phone: mobile_phone,
     email: email,
     voicemail_consent: voicemail_consent,
     email_provided: email_provided,
-    phone_number_provided: phone_number_provided,
-    phone_number_not_provided_reason: phone_number_not_provided_reason,
+    mobile_provided: mobile_provided,
+    mobile_not_provided_reason: mobile_not_provided_reason,
     contact_details_private: contact_details_private
   } }
 
@@ -24,12 +25,13 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
   let(:confidentiality_enabled?) { false }
 
   let(:record) { nil }
-  let(:phone_number) { '12345' }
+  let(:home_phone) { nil }
+  let(:mobile_phone) { '12345' }
   let(:email) { 'test@example.com' }
   let(:voicemail_consent) { 'yes' }
   let(:email_provided) { 'yes' }
-  let(:phone_number_provided) { 'yes' }
-  let(:phone_number_not_provided_reason ) { nil }
+  let(:mobile_provided) { 'yes' }
+  let(:mobile_not_provided_reason ) { nil }
   let(:contact_details_private) { [] }
 
   before { allow(applicants_collection).to receive(:find_or_initialize_by).and_return applicant }
@@ -47,42 +49,51 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
     context 'applicant.are_contact_details_private set to yes' do
       let(:are_contact_details_private) { 'yes' }
       let(:confidentiality_enabled?) { true }
-      let(:contact_details_private) { [ContactDetails::EMAIL.to_s, ContactDetails::PHONE_NUMBER.to_s] }
+      let(:contact_details_private) { [ContactDetails::EMAIL.to_s, ContactDetails::MOBILE.to_s] }
 
-      context 'phone number presence' do
-        let(:phone_number) { nil }
+      context 'mobile phone presence' do
+        let(:mobile_phone) { nil }
 
         it 'has a validation error on the field if not present' do
           expect(subject).to_not be_valid
-          expect(subject.errors.added?(:phone_number, :blank)).to eq(true)
+          expect(subject.errors.added?(:mobile_phone, :blank)).to eq(true)
         end
       end
 
-      context 'phone number validation' do
-        let(:phone_number) { '3123 abc' }
+      context 'mobile phone validation' do
+        let(:mobile_phone) { '3123 abc' }
 
         it 'has a validation error on the field if not valid' do
           expect(subject).to_not be_valid
-          expect(subject.errors.added?(:phone_number, :invalid)).to eq(true)
+          expect(subject.errors.added?(:mobile_phone, :invalid)).to eq(true)
         end
       end
 
-      context 'phone number not provided' do
-        let(:phone_number_provided) { 'no' }
-        let(:voicemail_consent) { nil }
-        let(:phone_number) { nil }
+      context 'mobile not provided' do
+        let(:mobile_provided) { 'no' }
+        let(:mobile_phone) { nil }
 
         context 'reason is present' do
-          let(:phone_number_not_provided_reason) { 'No phone' }
+          let(:home_phone) { '12345' }
+          let(:mobile_not_provided_reason) { 'No phone' }
           it 'is valid' do
             expect(subject).to be_valid
           end
         end
         context 'reason not present' do
-          let(:phone_number_not_provided_reason) { '' }
+          let(:mobile_not_provided_reason) { '' }
           it 'is not valid' do
             expect(subject).not_to be_valid
           end
+        end
+      end
+
+      context 'home phone validation' do
+        let(:home_phone) { '3123 abc' }
+
+        it 'has a validation error on the field if not valid' do
+          expect(subject).to_not be_valid
+          expect(subject.errors.added?(:home_phone, :invalid)).to eq(true)
         end
       end
 
@@ -125,40 +136,49 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       let(:are_contact_details_private) { 'no' }
       let(:confidentiality_enabled?) { false }
 
-      context 'phone number presence' do
-        let(:phone_number) { nil }
+      context 'mobile phone presence' do
+        let(:mobile_phone) { nil }
 
         it 'has a validation error on the field if not present' do
           expect(subject).to_not be_valid
-          expect(subject.errors.added?(:phone_number, :blank)).to eq(true)
+          expect(subject.errors.added?(:mobile_phone, :blank)).to eq(true)
         end
       end
 
-      context 'phone number validation' do
-        let(:phone_number) { '3123 abc' }
+      context 'mobile phone validation' do
+        let(:mobile_phone) { '3123 abc' }
 
         it 'has a validation error on the field if not valid' do
           expect(subject).to_not be_valid
-          expect(subject.errors.added?(:phone_number, :invalid)).to eq(true)
+          expect(subject.errors.added?(:mobile_phone, :invalid)).to eq(true)
         end
       end
 
-      context 'phone number not provided' do
-        let(:phone_number_provided) { 'no' }
-        let(:voicemail_consent) { nil }
-        let(:phone_number) { nil }
+      context 'mobile not provided' do
+        let(:mobile_provided) { 'no' }
+        let(:mobile_phone) { nil }
 
         context 'reason is present' do
-          let(:phone_number_not_provided_reason) { 'No phone' }
+          let(:home_phone) { '12345' }
+          let(:mobile_not_provided_reason) { 'No phone' }
           it 'is valid' do
             expect(subject).to be_valid
           end
         end
         context 'reason not present' do
-          let(:phone_number_not_provided_reason) { '' }
+          let(:mobile_not_provided_reason) { '' }
           it 'is not valid' do
             expect(subject).not_to be_valid
           end
+        end
+      end
+
+      context 'home phone validation' do
+        let(:home_phone) { '3123 abc' }
+
+        it 'has a validation error on the field if not valid' do
+          expect(subject).to_not be_valid
+          expect(subject.errors.added?(:home_phone, :invalid)).to eq(true)
         end
       end
 
@@ -198,10 +218,11 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
     end
 
     context 'voicemail consent validation' do
-      context 'when phone number not provided' do
-        let(:phone_number_provided) { 'no' }
+      context 'when mobile not provided' do
+        let(:home_phone) { '12345' }
+        let(:mobile_provided) { 'no' }
         let(:voicemail_consent) { nil }
-        let(:phone_number_not_provided_reason) { 'No phone' }
+        let(:mobile_not_provided_reason) { 'No phone' }
 
         it 'is valid' do
           expect(subject).to be_valid
@@ -236,17 +257,36 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
 
       context 'when voicemail consent is true it makes sure there is a contact number' do
         let(:voicemail_consent) { 'yes' }
-        let(:phone_number) { nil }
-        let(:phone_number_provided) { 'no' }
-        let(:phone_number_not_provided_reason) { 'No Phone' }
+        let(:mobile_phone) { nil }
+        let(:mobile_provided) { 'no' }
+        let(:mobile_not_provided_reason) { 'No Phone' }
+        let(:home_phone) { nil }
 
         it 'has a validation error' do
           expect(subject).to_not be_valid
         end
 
-        context 'when given a phone number' do
-          let(:phone_number) { '1234' }
-          let(:phone_number_provided) { 'yes' }
+        context 'when given a mobile number' do
+          let(:mobile_phone) { '1234' }
+          let(:mobile_provided) { 'yes' }
+
+          it 'is valid' do
+            expect(subject).to be_valid
+          end
+        end
+
+        context 'when given a home number' do
+          let(:home_phone) { '12345' }
+
+          it 'is valid' do
+            expect(subject).to be_valid
+          end
+        end
+
+        context 'when given both numbers' do
+          let(:mobile_phone) { '1234' }
+          let(:mobile_provided) { 'yes' }
+          let(:home_phone) { '12345' }
 
           it 'is valid' do
             expect(subject).to be_valid
@@ -259,11 +299,12 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
       let(:expected_attributes) {
         {
           email: 'test@example.com',
-          phone_number: '12345',
+          home_phone: '',
+          mobile_phone: '12345',
           voicemail_consent: GenericYesNo::YES,
           email_provided: GenericYesNo::YES,
-          phone_number_not_provided_reason: nil,
-          phone_number_provided: GenericYesNo::YES
+          mobile_not_provided_reason: nil,
+          mobile_provided: GenericYesNo::YES
         }
       }
 

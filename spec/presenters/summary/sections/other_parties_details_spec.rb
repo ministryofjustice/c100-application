@@ -20,11 +20,13 @@ module Summary
         birthplace: nil,
         residence_requirement_met: nil,
         residence_history: nil,
-        phone_number_provided: nil,
-        phone_number: nil,
+        home_phone: nil,
+        mobile_provided: nil,
+        mobile_phone: nil,
         email: nil,
         voicemail_consent: nil,
-        phone_number_unknown: nil,
+        mobile_phone_unknown: nil,
+        home_phone_unknown: nil,
         email_unknown: nil,
         privacy_known: nil,
         are_contact_details_private: are_contact_details_private,
@@ -39,7 +41,8 @@ module Summary
       allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(other_party).to receive(:full_address).and_return('full address')
       allow(other_party).to receive(:email_private?).and_return(contact_details_private.include?('email'))
-      allow(other_party).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
+      allow(other_party).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
+      allow(other_party).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
       allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
       allow(other_party).to receive(:refuge)
     end

@@ -59,8 +59,10 @@ module Summary
           Answer.new(:person_email_provided, person.email_provided),
           FreeTextAnswer.new(:person_email, person.email, { show: true }),
           Answer.new(:email_keep_private, person.email_private? && (person.email_private? ? 'yes' : 'no')),
-          FreeTextAnswer.new(:person_phone_number, phone_answer(person), { show: true }),
-          Answer.new(:phone_keep_private, person.phone_number_private? && (person.phone_number_private? ? 'yes' : 'no')),
+          FreeTextAnswer.new(:person_home_phone, person.home_phone, { show: true }),
+          Answer.new(:phone_keep_private, person.home_phone_private? && (person.home_phone_private? ? 'yes' : 'no')),
+          FreeTextAnswer.new(:person_mobile_phone, mobile_phone_answer(person), { show: true }),
+          Answer.new(:mobile_keep_private, person.mobile_private? && (person.mobile_private? ? 'yes' : 'no')),
           Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
         ]
       end
@@ -229,11 +231,11 @@ module Summary
         Relationship::PERMISSION_ATTRIBUTES
       end
 
-      def phone_answer(person)
-        if person.phone_number_provided == GenericYesNo::NO.to_s
-          person.phone_number_not_provided_reason
+      def mobile_phone_answer(person)
+        if person.mobile_provided == GenericYesNo::NO.to_s
+          person.mobile_not_provided_reason
         else
-          person.phone_number
+          person.mobile_phone
         end
       end
     end

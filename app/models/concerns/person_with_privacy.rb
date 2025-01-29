@@ -5,8 +5,12 @@ module PersonWithPrivacy
     in_refuge? || contact_details_private.include?(ContactDetails::EMAIL.to_s)
   end
 
-  def phone_number_private?
-    in_refuge? || contact_details_private.include?(ContactDetails::PHONE_NUMBER.to_s)
+  def home_phone_private?
+    in_refuge? || contact_details_private.include?(ContactDetails::HOME_PHONE.to_s)
+  end
+
+  def mobile_private?
+    in_refuge? || contact_details_private.include?(ContactDetails::MOBILE.to_s)
   end
 
   def address_private?

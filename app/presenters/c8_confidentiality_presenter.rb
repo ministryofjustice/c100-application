@@ -20,8 +20,10 @@ class C8ConfidentialityPresenter < SimpleDelegator
     case attribute
     when :full_address, :residence_history
       contact_details_private.include? ContactDetails::ADDRESS.to_s
-    when :phone_number
-      contact_details_private.include? ContactDetails::PHONE_NUMBER.to_s
+    when :home_phone
+      contact_details_private.include? ContactDetails::HOME_PHONE.to_s
+    when :mobile_phone
+      contact_details_private.include? ContactDetails::MOBILE.to_s
     when :email
       contact_details_private.include? ContactDetails::EMAIL.to_s
     end

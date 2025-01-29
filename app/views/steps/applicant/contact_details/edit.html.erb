@@ -15,12 +15,14 @@
         <%= f.govuk_radio_button :email_provided, GenericYesNo::NO %>
       <% end %>
 
-      <%= f.govuk_radio_buttons_fieldset :phone_number_provided, legend: nil do %>
-        <%= f.govuk_radio_button :phone_number_provided, GenericYesNo::YES, link_errors: true do %>
-          <%= f.govuk_phone_field :phone_number, width: 'one-half' %>
+      <%= f.govuk_phone_field :home_phone, width: 'one-half' %>
+
+      <%= f.govuk_radio_buttons_fieldset :mobile_provided, legend: nil do %>
+        <%= f.govuk_radio_button :mobile_provided, GenericYesNo::YES, link_errors: true do %>
+          <%= f.govuk_phone_field :mobile_phone, width: 'one-half' %>
         <% end %>
-        <%= f.govuk_radio_button :phone_number_provided, GenericYesNo::NO do %>
-          <%= f.govuk_text_field :phone_number_not_provided_reason, width: 'two-thirds' %>
+        <%= f.govuk_radio_button :mobile_provided, GenericYesNo::NO do %>
+          <%= f.govuk_text_field :mobile_not_provided_reason, width: 'two-thirds' %>
         <% end %>
 
       <% end %>

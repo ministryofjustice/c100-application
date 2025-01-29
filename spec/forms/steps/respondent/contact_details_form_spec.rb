@@ -4,8 +4,10 @@ RSpec.describe Steps::Respondent::ContactDetailsForm do
   let(:arguments) { {
     c100_application: c100_application,
     record: record,
-    phone_number: phone_number,
-    phone_number_unknown: phone_number_unknown,
+    home_phone: home_phone,
+    home_phone_unknown: home_phone_unknown,
+    mobile_phone: mobile_phone,
+    mobile_phone_unknown: mobile_phone_unknown,
     email: email,
     email_unknown: email_unknown
   } }
@@ -15,8 +17,10 @@ RSpec.describe Steps::Respondent::ContactDetailsForm do
   let(:respondent) { double('Respondent', id: 'ae4ed69e-bcb3-49cc-b19e-7287b1f2abe6') }
 
   let(:record) { nil }
-  let(:phone_number) { '07777777777' }
-  let(:phone_number_unknown) { nil }
+  let(:home_phone) { '07777777777' }
+  let(:home_phone_unknown) { nil }
+  let(:mobile_phone) { '07777777777' }
+  let(:mobile_phone_unknown) { nil }
   let(:email_unknown) { nil }
   let(:email) { 'test@test.com' }
 
@@ -69,40 +73,42 @@ RSpec.describe Steps::Respondent::ContactDetailsForm do
       end
     end
 
-    context 'phone validation' do
-      context 'with phone_number' do
-        context 'number is present is valid' do
-          let(:phone_number) { '07777777777' }
-          it { expect(subject).to be_valid }
-        end
+    context 'phone validation' do      
+      [:home_phone, :mobile_phone].each do |phone_type|
+        context "with #{phone_type}" do
+          context 'number is present is valid' do
+            let(phone_type) { '07777777777' }
+            it { expect(subject).to be_valid }
+          end
 
-        context 'invalid number is invalid' do
-          let(:phone_number) { '07777abc777777' }
-          it { expect(subject).not_to be_valid }
-        end
+          context 'invalid number is invalid' do
+            let(phone_type) { '07777abc777777' }
+            it { expect(subject).not_to be_valid }
+          end
 
-        context 'number is unknown is valid' do
-          let(:phone_number) { nil }
-          let(:phone_number_unknown) { true }
-          it { expect(subject).to be_valid }
-        end
+          context 'number is unknown is valid' do
+            let(phone_type) { nil }
+            let( "#{phone_type}_unknown".to_sym) { true }
+            it { expect(subject).to be_valid }
+          end
 
-        context 'no input from user is invalid' do
-          let(:phone_number) { nil }
-          let(:phone_number_unknown) { false }
-          it {
-            expect(subject).not_to be_valid
-            expect(subject.errors[:phone_number]).to_not be_empty
-          }
-        end
+          context 'no input from user is invalid' do
+            let(phone_type) { nil }
+            let( "#{phone_type}_unknown".to_sym) { false }
+            it {
+              expect(subject).not_to be_valid
+              expect(subject.errors[phone_type]).to_not be_empty
+            }
+          end
 
-        context 'should be blank if unknown box is checked' do
-          let(:phone_number) { '07777777777' }
-          let(:phone_number_unknown) { true }
-          it {
-            expect(subject).not_to be_valid
-            expect(subject.errors[:phone_number]).to_not be_empty
-          }
+          context 'should be blank if unknown box is checked' do
+            let(phone_type) { '07777777777' }
+            let( "#{phone_type}_unknown".to_sym) { true }
+            it {
+              expect(subject).not_to be_valid
+              expect(subject.errors[phone_type]).to_not be_empty
+            }
+          end
         end
       end
     end
@@ -111,8 +117,10 @@ RSpec.describe Steps::Respondent::ContactDetailsForm do
       let(:expected_attributes) {
         {
           email: 'test@test.com',
-          phone_number: '07777777777',
-          phone_number_unknown: nil,
+          home_phone: '07777777777',
+          mobile_phone: '07777777777',
+          home_phone_unknown: nil,
+          mobile_phone_unknown: nil,
           email_unknown: nil
         }
       }

@@ -203,10 +203,20 @@ And(/^I should see the applicant has provided an email "([^"]*)"$/) do |arg|
   end
 end
 
-And(/^I should see the applicant has provided a phone number "([^"]*)"$/) do |arg|
+And(/^I should see the applicant has provided a home telephone number "([^"]*)"$/) do |arg|
   within('#applicants_details') do
     within('#person_contact_details') do
-      within('#person_phone_number') do
+      within('#person_home_phone') do
+        expect(page).to have_content(arg)
+      end
+    end
+  end
+end
+
+And(/^I should see the applicant has provided a mobile number "([^"]*)"$/) do |arg|
+  within('#applicants_details') do
+    within('#person_contact_details') do
+      within('#person_mobile_phone') do
         expect(page).to have_content(arg)
       end
     end
@@ -372,10 +382,10 @@ And(/^I should see the respondent's email is "([^"]*)"$/) do |arg|
   end
 end
 
-And(/^I should see the respondent's phone number is "([^"]*)"$/) do |arg|
+And(/^I should see the respondent's mobile phone number is "([^"]*)"$/) do |arg|
   within('#respondents_details') do
     within('#person_contact_details') do
-      within('#person_phone_number') do
+      within('#person_mobile_phone') do
         expect(page).to have_content(arg)
       end
     end

@@ -192,13 +192,13 @@ RSpec.describe Summary::JsonPresenter do
         gender: "female",
         dob: Date.parse('30 Nov 1980'),
         birthplace: "cirencester",
-        phone_number: "123456987",
+        mobile_phone: "123456987",
         email: "kate@holmes.com",
         address_data: address,
         residence_requirement_met: "yes",
         residence_history: '',
         email_keep_private: nil,
-        phone_keep_private: nil,
+        mobile_keep_private: nil,
         residence_keep_private: 'Yes',
         c100_application: c100_application
       )
@@ -212,13 +212,13 @@ RSpec.describe Summary::JsonPresenter do
         gender: "female",
         dob: Date.parse('30 Nov 1940'),
         birthplace: "cirencester",
-        phone_number: "123456987",
+        mobile_phone: "123456987",
         email: "",
         address_data: address,
         residence_requirement_met: "yes",
         residence_history: '',
         email_keep_private: nil,
-        phone_keep_private: nil,
+        mobile_keep_private: nil,
         residence_keep_private: 'Yes',
         c100_application: c100_application
       )
@@ -265,13 +265,13 @@ RSpec.describe Summary::JsonPresenter do
         gender: "male",
         dob: nil,
         birthplace: nil,
-        phone_number: "003456987",
+        mobile_phone: "003456987",
         email: "tom@holmes.com",
         address_data: address,
         residence_requirement_met: "yes",
         residence_history: '',
         email_keep_private: true,
-        phone_keep_private: true,
+        mobile_keep_private: true,
         residence_keep_private: 'Yes',
         c100_application: c100_application
       )

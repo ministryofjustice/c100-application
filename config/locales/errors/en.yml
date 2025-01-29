@@ -483,20 +483,25 @@ en:
         steps/applicant/contact_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS
-            phone_number:
-              blank: Enter a phone number or tell us why the court cannot phone you
+            mobile_phone:
+              blank: Enter a mobile number or tell us why the court cannot phone you
               invalid: *phone_numeric_error
-            phone_number_not_provided_reason:
-              blank: Enter a phone number or tell us why the court cannot phone you
+            mobile_not_provided_reason:
+              blank: Enter a mobile number or tell us why the court cannot phone you
+            home_phone:
+              blank: *phone_numeric_error
+              invalid: *phone_numeric_error
             email:
               blank: Enter an email address or tell us why the court cannot email you
-            phone_number_provided:
-              inclusion: Enter a phone number or tell us why the court cannot phone you
+            mobile_provided:
+              inclusion: Enter a mobile number or tell us why the court cannot phone you
             voicemail_consent:
               inclusion: Select yes if the court can leave you a voicemail
             email_keep_private:
               inclusion: *yes_no_error
             phone_keep_private:
+              inclusion: *yes_no_error
+            mobile_keep_private:
               inclusion: *yes_no_error
         steps/applicant/refuge_form:
           attributes:
@@ -509,7 +514,9 @@ en:
         steps/respondent/contact_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS
-            phone_number:
+            mobile_phone:
+              invalid: *phone_numeric_error
+            home_phone:
               invalid: *phone_numeric_error
         steps/respondent/address_details_form:
           attributes:

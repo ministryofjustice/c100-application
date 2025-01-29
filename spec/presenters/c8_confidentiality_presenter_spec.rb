@@ -4,7 +4,7 @@ RSpec.describe C8ConfidentialityPresenter do
   let(:person) {
     instance_double(Applicant, full_address: 'real full address', residence_history: nil,
       contact_details_private: contact_details_private,
-      email: 'mail', phone_number: '11335566', gender: 'male',
+      email: 'mail', home_phone: '12233445566', mobile_phone: '11335566', gender: 'male',
       c100_application: c100_application_one
       )
   }
@@ -14,12 +14,13 @@ RSpec.describe C8ConfidentialityPresenter do
   let(:person_two) {
     instance_double(Applicant, full_address: 'real full address', residence_history: nil, 
       contact_details_private: [],
-      email: 'mail', phone_number: '11335566', gender: 'male', c100_application: c100_application_two)
+      email: 'mail', home_phone: '12233445566', mobile_phone: '11335566', gender: 'male', c100_application: c100_application_two)
   }
   let(:contact_details_private) { [
     ContactDetails::ADDRESS.to_s,
     ContactDetails::EMAIL.to_s,
-    ContactDetails::PHONE_NUMBER.to_s
+    ContactDetails::HOME_PHONE.to_s,
+    ContactDetails::MOBILE.to_s
   ] }
   
   subject { described_class.new(person) }
@@ -55,7 +56,11 @@ RSpec.describe C8ConfidentialityPresenter do
     end
 
     it 'returns the replacement answer when confidentiality applies' do
-      expect(subject.phone_number).not_to eq('[See C8]')
+      expect(subject.home_phone).not_to eq('[See C8]')
+    end
+
+    it 'returns the replacement answer when confidentiality applies' do
+      expect(subject.mobile_phone).not_to eq('[See C8]')
     end
   end
 
@@ -70,8 +75,12 @@ RSpec.describe C8ConfidentialityPresenter do
       expect(subject.email).not_to eq('[See C8]')
     end
 
-    it 'returns the real value for phone_number' do
-      expect(subject.phone_number).not_to eq('[See C8]')
+    it 'returns the real value for home_phone' do
+      expect(subject.home_phone).not_to eq('[See C8]')
+    end
+
+    it 'returns the real value for mobile_phone' do
+      expect(subject.mobile_phone).not_to eq('[See C8]')
     end
 
     # it 'returns the replacement answer when confidentiality applies' do

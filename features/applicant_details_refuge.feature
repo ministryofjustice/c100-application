@@ -133,20 +133,23 @@ Feature: Add an applicant to the application
     When I click the "Continue" button
     Then Page has title "Error: Applicant contact details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Select an option" link to "#steps-applicant-contact-details-form-email-provided-field-error"
-    And I should see a "Enter a phone number or tell us why the court cannot phone you" link to "#steps-applicant-contact-details-form-phone-number-provided-field-error"
+    And I should see a "Enter a mobile number or tell us why the court cannot phone you" link to "#steps-applicant-contact-details-form-mobile-provided-field-error"
 
     When I choose "I can provide an email address"
-    And I choose "I can provide a phone number"
+    And I choose "I can provide a mobile phone number"
     And I fill in "Your email address" with "01234567890"
-    And I fill in "Your phone number" with "abcdefghijklmnopqrstuvwxyz"
+    And I fill in "Your home phone" with "abcdefghijklmnopqrstuvwxyz"
+    And I fill in "Your mobile phone" with "abcdefghijklmnopqrstuvwxyz"
     And I choose "Yes, the court can leave me a voicemail"
     Then Page has title "Error: Applicant contact details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-applicant-contact-details-form-email-field-error"
-    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-applicant-contact-details-form-phone-number-field-error"
+    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-applicant-contact-details-form-mobile-phone-field-error"
+    And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-applicant-contact-details-form-home-phone-field-error"
 
    # Fix validation errors and continue
     When I fill in "Your email address" with "john@email.com"
-    And I fill in "Your phone number" with "00000000000"
+    And I fill in "Your home phone" with "00000000000"
+    And I fill in "Your mobile phone" with "00000000000"
     And I choose "Yes, the court can leave me a voicemail"
     And I click the "Continue" button
     Then I should see "Will you be legally represented by a solicitor in these proceedings?"
