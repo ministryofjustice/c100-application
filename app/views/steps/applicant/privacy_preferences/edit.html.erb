@@ -17,8 +17,7 @@
           } do %>
             <%= f.govuk_check_box :contact_details_private, ContactDetails::ADDRESS.to_s %>
             <%= f.govuk_check_box :contact_details_private, ContactDetails::EMAIL.to_s %>
-            <%= f.govuk_check_box :contact_details_private, ContactDetails::MOBILE.to_s %>
-            <%= f.govuk_check_box :contact_details_private, ContactDetails::HOME_PHONE.to_s %>
+            <%= f.govuk_check_box :contact_details_private, ContactDetails::PHONE_NUMBER.to_s %>
           <% end %>
         <% end %>
         <%= f.govuk_radio_button :are_contact_details_private, GenericYesNo::NO %>
