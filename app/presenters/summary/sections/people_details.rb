@@ -47,13 +47,9 @@ module Summary
                                    show: person.residence_requirement_met == 'no'),
                 FreeTextAnswer.new(:person_email,
                                    data_or_private(person, email_answer(person), ContactDetails::EMAIL.to_s)),
-                FreeTextAnswer.new(:person_home_phone,
-                                   data_or_private(person,
-                                                   home_phone_answer(person),
-                                                   ContactDetails::HOME_PHONE.to_s)),
-                FreeTextAnswer.new(:person_mobile_phone,
+                FreeTextAnswer.new(:person_phone_number,
                                    data_or_private(
-                                     person, mobile_phone_answer(person), ContactDetails::MOBILE.to_s
+                                     person, phone_number_answer(person), ContactDetails::PHONE_NUMBER.to_s
                                    )),
                 Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
                 FreeTextAnswer.new(
@@ -85,13 +81,9 @@ module Summary
                                  show: person.residence_requirement_met == 'no'),
               FreeTextAnswer.new(:person_email,
                                  data_or_private(person, email_answer(person), ContactDetails::EMAIL.to_s)),
-              FreeTextAnswer.new(:person_home_phone,
-                                 data_or_private(person,
-                                                 home_phone_answer(person),
-                                                 ContactDetails::HOME_PHONE.to_s)),
-              FreeTextAnswer.new(:person_mobile_phone,
+              FreeTextAnswer.new(:person_phone_number,
                                  data_or_private(
-                                   person, mobile_phone_answer(person), ContactDetails::MOBILE.to_s
+                                   person, phone_number_answer(person), ContactDetails::PHONE_NUMBER.to_s
                                  )),
               Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
               FreeTextAnswer.new(
@@ -162,24 +154,19 @@ module Summary
         end
       end
 
-      def mobile_phone_answer(person)
-        if person.mobile_provided == GenericYesNo::NO.to_s
-          person.mobile_not_provided_reason
-        elsif person.mobile_phone_unknown
+      def phone_number_answer(person)
+        if person.phone_number_provided == GenericYesNo::NO.to_s
+          person.phone_number_not_provided_reason
+        elsif person.phone_number_unknown
           I18n.t('dictionary.unknown')
         else
-          person.mobile_phone
+          person.phone_number
         end
       end
 
       def email_answer(person)
         return I18n.t('dictionary.unknown') if person.email_unknown
         person.email
-      end
-
-      def home_phone_answer(person)
-        return I18n.t('dictionary.unknown') if person.home_phone_unknown
-        person.home_phone
       end
 
       def respondents_only

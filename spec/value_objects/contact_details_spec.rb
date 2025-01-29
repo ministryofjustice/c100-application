@@ -6,7 +6,7 @@ RSpec.describe ContactDetails do
 
   describe '.values' do
     it 'returns all possible values' do
-      expect(described_class.values.map(&:to_s)).to eq(%w(address email mobile home_phone))
+      expect(described_class.values.map(&:to_s)).to eq(%w(address email phone_number))
     end
   end
 end
