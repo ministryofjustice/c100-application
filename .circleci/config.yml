@@ -304,7 +304,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7101$/
+                - /^RST-7077b$/
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev
@@ -313,7 +313,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7101$/
+                - /^RST-7077b$/
       ### staging ###
       - build_and_push_image:
           name: build-staging
