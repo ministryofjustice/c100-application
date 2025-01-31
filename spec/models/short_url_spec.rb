@@ -97,7 +97,7 @@ RSpec.describe ShortUrl, type: :model do
       let(:path) { 'foobar' }
 
       it 'initialises a new short URL' do
-        expect(described_class).to receive(:new).with(path: 'foobar').and_call_original
+        expect(described_class).to receive(:new).with({path: 'foobar'}).and_call_original
         resolved_url
       end
 
