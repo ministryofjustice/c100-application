@@ -552,24 +552,17 @@ en:
     person_residence_history:
       question: Previous addresses
       absence_answer: *unknown
-    person_home_phone:
-      question: Home telephone number
+    person_phone_number:
+      question: Phone number
       absence_answer: *unknown
     email_keep_private:
       question: Keep the email address private
       answers:
         <<: *YESNO
     phone_keep_private:
-      question: Keep the home phone number private
+      question: Keep the phone number private
       answers:
         <<: *YESNO
-    mobile_keep_private:
-      question: Keep the mobile phone number private
-      answers:
-        <<: *YESNO
-    person_mobile_phone:
-      question: Mobile telephone number
-      absence_answer: *unknown
     person_email_provided:
       question: Email provided
       answers:
@@ -763,4 +756,4 @@ en:
     solicitor_email:
       question: Email address
     solicitor_phone_number:
-      question: Phone number
+      question: Telephone number

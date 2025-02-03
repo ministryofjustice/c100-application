@@ -21,14 +21,12 @@ module Summary
         birthplace: 'birthplace',
         residence_requirement_met: 'yes',
         residence_history: 'history',
-        home_phone: 'home_phone',
-        mobile_provided: mobile_provided,
-        mobile_phone: mobile_phone,
-        mobile_not_provided_reason: mobile_not_provided_reason,
+        phone_number_provided: phone_number_provided,
+        phone_number: phone_number,
+        phone_number_not_provided_reason: phone_number_not_provided_reason,
         email: 'email',
         voicemail_consent: 'yes',
-        mobile_phone_unknown: nil,
-        home_phone_unknown: nil,
+        phone_number_unknown: nil,
         email_unknown: nil,
         privacy_known: privacy_known,
         are_contact_details_private: are_contact_details_private,
@@ -38,23 +36,22 @@ module Summary
       )
     }
 
-    let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
+    let(:contact_details_private) { ['email', 'address', 'phone_number'] }
 
     before do
       allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(applicant).to receive(:instance_of?).and_return(Applicant)
       allow(applicant).to receive(:full_address).and_return('full address')
       allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))
-      allow(applicant).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
-      allow(applicant).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(applicant).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(applicant).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
     subject { described_class.new(c100_application) }
 
-    let(:mobile_phone) { 'mobile_phone' }
-    let(:mobile_provided) { 'yes' }
-    let(:mobile_not_provided_reason) { nil }
+    let(:phone_number) { 'phone_number' }
+    let(:phone_number_provided) { 'yes' }
+    let(:phone_number_not_provided_reason) { nil }
 
     let(:has_previous_name) { 'no' }
     let(:previous_name) { nil }
@@ -98,7 +95,7 @@ module Summary
       end
 
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(17)
+        expect(answers.count).to eq(16)
       end
 
       it 'has the correct rows in the right order' do
@@ -154,52 +151,48 @@ module Summary
         expect(answers[11].value).to eq('email')
 
         expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[12].question).to eq(:person_home_phone)
-        expect(answers[12].value).to eq('home_phone')
+        expect(answers[12].question).to eq(:person_phone_number)
+        expect(answers[12].value).to eq('phone_number')
 
-        expect(answers[13]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[13].question).to eq(:person_mobile_phone)
-        expect(answers[13].value).to eq('mobile_phone')
+        expect(answers[13]).to be_an_instance_of(Answer)
+        expect(answers[13].question).to eq(:person_voicemail_consent)
+        expect(answers[13].value).to eq('yes')
 
-        expect(answers[14]).to be_an_instance_of(Answer)
-        expect(answers[14].question).to eq(:person_voicemail_consent)
-        expect(answers[14].value).to eq('yes')
+        expect(answers[14]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[14].question).to eq(:person_relationship_to_children)
+        expect(answers[14].value).to eq('relationships')
 
-        expect(answers[15]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[15].question).to eq(:person_relationship_to_children)
-        expect(answers[15].value).to eq('relationships')
-
-        expect(answers[16]).to be_an_instance_of(Partial)
-        expect(answers[16].name).to eq(:row_blank_space)
+        expect(answers[15]).to be_an_instance_of(Partial)
+        expect(answers[15].name).to eq(:row_blank_space)
       end
 
 
-      context 'when mobile phone' do
+      context 'when phone number' do
         context 'has not selected whether to give or not' do
-          let(:mobile_phone) { 'mobile_phone' }
-          let(:mobile_provided) { nil }
-          let(:mobile_not_provided_reason) { nil }
+          let(:phone_number) { 'phone_number' }
+          let(:phone_number_provided) { nil }
+          let(:phone_number_not_provided_reason) { nil }
 
           it 'shows the phone number' do
-            expect(answers[13].value).to eq('mobile_phone')
+            expect(answers[12].value).to eq('phone_number')
           end
         end
         context 'is given' do
-          let(:mobile_phone) { 'mobile_phone' }
-          let(:mobile_provided) { 'yes' }
-          let(:mobile_not_provided_reason) { nil }
+          let(:phone_number) { 'phone_number' }
+          let(:phone_number_provided) { 'yes' }
+          let(:phone_number_not_provided_reason) { nil }
 
           it 'shows the phone number' do
-            expect(answers[13].value).to eq('mobile_phone')
+            expect(answers[12].value).to eq('phone_number')
           end
         end
         context 'is not given with a reason' do
-          let(:mobile_phone) { nil }
-          let(:mobile_provided) { 'no' }
-          let(:mobile_not_provided_reason) { 'no phone' }
+          let(:phone_number) { nil }
+          let(:phone_number_provided) { 'no' }
+          let(:phone_number_not_provided_reason) { 'no phone' }
 
           it 'shows the reason' do
-            expect(answers[13].value).to eq('no phone')
+            expect(answers[12].value).to eq('no phone')
           end
         end
       end
@@ -209,7 +202,7 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(17)
+          expect(answers.count).to eq(16)
         end
 
         it 'renders the previous name' do
@@ -226,7 +219,7 @@ module Summary
         let(:refuge) { nil }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(15)
+          expect(answers.count).to eq(14)
         end
 
         it 'renders the previous name' do
@@ -240,7 +233,7 @@ module Summary
       context 'when contact details kept private' do
         let(:privacy_known) { 'yes' }
         let(:are_contact_details_private) { 'yes' }
-        let(:contact_details_private) { ['email', 'address', 'mobile', 'home_phone'] }
+        let(:contact_details_private) { ['email', 'address', 'phone_number'] }
         let(:refuge) { 'no' }
 
         it 'shows as private' do
@@ -252,7 +245,7 @@ module Summary
           expect(answers[3].name).to eq(:privacy_preferences)
           expect(answers[3].ivar).to eq({
             are_contact_details_private: 'yes',
-            contact_details_private: ['email', 'address', 'mobile', 'home_phone']
+            contact_details_private: ['email', 'address', 'phone_number']
           })
         end
 
@@ -266,12 +259,8 @@ module Summary
           expect(answers[11].value).to eq('[See C8]')
 
           expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[12].question).to eq(:person_home_phone)
+          expect(answers[12].question).to eq(:person_phone_number)
           expect(answers[12].value).to eq('[See C8]')
-
-          expect(answers[13]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[13].question).to eq(:person_mobile_phone)
-          expect(answers[13].value).to eq('[See C8]')
         end
       end
 
@@ -288,15 +277,10 @@ module Summary
           expect(answers[11].value).to eq('[See C8]')
 
           expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[12].question).to eq(:person_home_phone)
+          expect(answers[12].question).to eq(:person_phone_number)
           expect(answers[12].value).to eq('[See C8]')
-
-          expect(answers[13]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[13].question).to eq(:person_mobile_phone)
-          expect(answers[13].value).to eq('[See C8]')
         end
       end
-
     end
   end
 end

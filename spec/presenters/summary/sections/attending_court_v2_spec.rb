@@ -44,8 +44,8 @@ module Summary
       context 'when not using the new special court arrangement details' do
         let(:court_arrangement) { nil }
 
-        it 'returns true (we use this class, `AttendingCourt`)' do
-          expect(subject.show?).to eq(false)
+        it 'returns true when no arrangements are needed' do
+          expect(subject.show?).to eq(true)
         end
       end
 
@@ -166,6 +166,50 @@ module Summary
         expect(answers[14]).to be_an_instance_of(MultiAnswer)
         expect(answers[14].question).to eq(:special_assistance)
         expect(answers[14].value).to eq([])
+      end
+    end
+
+    describe 'when court_arrangement is nil' do
+      let(:court_arrangement) { nil }
+
+      it 'shows no arrangements are required' do
+        expect(answers.count).to eq(10)
+
+        expect(answers[0]).to be_an_instance_of(Separator)
+        expect(answers[0].title).to eq(:intermediary)
+
+        expect(answers[1]).to be_an_instance_of(Answer)
+        expect(answers[1].question).to eq(:intermediary_help)
+        expect(answers[1].value).to eq('no')
+
+        expect(answers[2]).to be_an_instance_of(Separator)
+        expect(answers[2].title).to eq(:language_assistance)
+
+        expect(answers[3]).to be_an_instance_of(Answer)
+        expect(answers[3].question).to eq(:language_interpreter)
+        expect(answers[3].value).to eq('false')
+
+        expect(answers[4]).to be_an_instance_of(Answer)
+        expect(answers[4].question).to eq(:sign_language_interpreter)
+        expect(answers[4].value).to eq('false')
+
+        expect(answers[5]).to be_an_instance_of(Answer)
+        expect(answers[5].question).to eq(:welsh_language)
+        expect(answers[5].value).to eq('false')
+
+        expect(answers[6]).to be_an_instance_of(Separator)
+        expect(answers[6].title).to eq(:special_arrangements)
+
+        expect(answers[7]).to be_an_instance_of(MultiAnswer)
+        expect(answers[7].question).to eq(:special_arrangements)
+        expect(answers[7].value).to eq(nil)
+
+        expect(answers[8]).to be_an_instance_of(Separator)
+        expect(answers[8].title).to eq(:special_assistance)
+
+        expect(answers[9]).to be_an_instance_of(MultiAnswer)
+        expect(answers[9].question).to eq(:special_assistance)
+        expect(answers[9].value).to eq(nil)
       end
     end
   end
