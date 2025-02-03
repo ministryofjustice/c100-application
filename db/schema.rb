@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_05_22_144034) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_30_131546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -345,8 +345,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_22_144034) do
     t.string "age_estimate"
     t.string "birthplace"
     t.boolean "address_unknown", default: false
-    t.string "home_phone"
-    t.boolean "home_phone_unknown", default: false
     t.string "mobile_phone"
     t.boolean "mobile_phone_unknown", default: false
     t.string "email"
@@ -362,7 +360,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_22_144034) do
     t.string "residence_keep_private"
     t.string "email_keep_private"
     t.string "phone_keep_private"
-    t.string "mobile_keep_private"
     t.boolean "birthplace_unknown", default: false
     t.date "dob_estimate"
     t.string "mobile_provided"
@@ -373,6 +370,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_22_144034) do
     t.string "are_contact_details_private"
     t.string "refuge"
     t.string "cohabit_with_other"
+    t.string "mobile_keep_private"
+    t.boolean "home_phone_unknown", default: false
+    t.string "home_phone"
+    t.string "phone_number"
+    t.boolean "phone_number_unknown", default: false
+    t.string "phone_number_provided"
+    t.string "phone_number_not_provided_reason"
     t.index ["c100_application_id"], name: "index_people_on_c100_application_id"
   end
 

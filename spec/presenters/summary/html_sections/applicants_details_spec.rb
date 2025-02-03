@@ -22,10 +22,9 @@ module Summary
         address_unknown: false, # for applicants this can only be `false`
         residence_requirement_met: 'yes',
         residence_history: 'history',
-        home_phone: 'home_phone',
-        mobile_provided: mobile_provided,
-        mobile_phone: mobile_phone,
-        mobile_not_provided_reason: mobile_not_provided_reason,
+        phone_number_provided: phone_number_provided,
+        phone_number: phone_number,
+        phone_number_not_provided_reason: phone_number_not_provided_reason,
         email_provided: 'yes',
         email: 'email',
         voicemail_consent: 'yes',
@@ -38,11 +37,11 @@ module Summary
       )
     }
 
-    let(:mobile_phone) { 'mobile_phone' }
-    let(:mobile_provided) { 'yes' }
-    let(:mobile_not_provided_reason) { nil }
+    let(:phone_number) { 'phone_number' }
+    let(:phone_number_provided) { 'yes' }
+    let(:phone_number_not_provided_reason) { nil }
     let(:are_contact_details_private) { 'yes' }
-    let(:contact_details_private) { ['email', 'address', 'home_phone', 'mobile'] }
+    let(:contact_details_private) { ['email', 'address', 'phone_number'] }
 
     before do
       allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
@@ -50,8 +49,7 @@ module Summary
       allow(applicant).to receive(:full_address).and_return('full address')
       allow(relationship).to receive(:person).and_return(applicant)
       allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))
-      allow(applicant).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
-      allow(applicant).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(applicant).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(applicant).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
@@ -112,7 +110,7 @@ module Summary
         expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
         expect(answers[3].question).to eq(:person_contact_details_private)
         expect(answers[3].change_path).to eq('/steps/applicant/privacy_preferences/uuid-123')
-        expect(answers[3].value).to eq('Email, Current address, Home phone number, Mobile phone number')
+        expect(answers[3].value).to eq('Email, Current address, Phone number')
 
         expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
         expect(answers[4].question).to eq(:refuge)
@@ -177,7 +175,7 @@ module Summary
         expect(answers[8]).to be_an_instance_of(AnswersGroup)
         expect(answers[8].name).to eq(:person_contact_details)
         expect(answers[8].change_path).to eq('/steps/applicant/contact_details/uuid-123')
-        expect(answers[8].answers.count).to eq(8)
+        expect(answers[8].answers.count).to eq(6)
 
           # contact details group answers ###
           details = answers[8].answers
@@ -195,53 +193,44 @@ module Summary
           expect(details[2].value).to eq('yes')
 
           expect(details[3]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[3].question).to eq(:person_home_phone)
-          expect(details[3].value).to eq('home_phone')
+          expect(details[3].question).to eq(:person_phone_number)
+          expect(details[3].value).to eq('phone_number')
 
           expect(details[4]).to be_an_instance_of(Answer)
           expect(details[4].question).to eq(:phone_keep_private)
           expect(details[4].value).to eq('yes')
 
-          expect(details[5]).to be_an_instance_of(FreeTextAnswer)
-          expect(details[5].question).to eq(:person_mobile_phone)
-          expect(details[5].value).to eq('mobile_phone')
-
-          expect(details[6]).to be_an_instance_of(Answer)
-          expect(details[6].question).to eq(:mobile_keep_private)
-          expect(details[6].value).to eq('yes')
-
-          expect(details[7]).to be_an_instance_of(Answer)
-          expect(details[7].question).to eq(:person_voicemail_consent)
-          expect(details[7].value).to eq('yes')
-
+          expect(details[5]).to be_an_instance_of(Answer)
+          expect(details[5].question).to eq(:person_voicemail_consent)
+          expect(details[5].value).to eq('yes')
       end
 
-      context 'when mobile phone' do
+      context 'when phone number' do
         context 'has not selected whether to give or not' do
-          let(:mobile_phone) { 'mobile_phone' }
-          let(:mobile_provided) { nil }
-          let(:mobile_not_provided_reason) { nil }
+          let(:phone_number) { 'phone_number' }
+          let(:phone_number_provided) { nil }
+          let(:phone_number_not_provided_reason) { nil }
 
           it 'shows the phone number' do
-            expect(answers[8].answers[5].value).to eq('mobile_phone')
+            expect(answers[8].answers[3].value).to eq('phone_number')
           end
         end
         context 'is given' do
-          let(:mobile_phone) { 'mobile_phone' }
-          let(:mobile_provided) { 'yes' }
-          let(:mobile_not_provided_reason) { nil }
+          let(:phone_number) { 'phone_number' }
+          let(:phone_number_provided) { 'yes' }
+          let(:phone_number_not_provided_reason) { nil }
 
           it 'shows the phone number' do
-            expect(answers[8].answers[5].value).to eq('mobile_phone')
+            expect(answers[8].answers[3].value).to eq('phone_number')
           end
         end
         context 'is not given with a reason' do
-          let(:mobile_phone) { nil }
-          let(:mobile_provided) { 'no' }
-          let(:mobile_not_provided_reason) { 'no phone' }
+          let(:phone_number) { nil }
+          let(:phone_number_provided) { 'no' }
+          let(:phone_number_not_provided_reason) { 'no phone' }
 
           it 'shows the reason' do
-            expect(answers[8].answers[5].value).to eq('no phone')
+            expect(answers[8].answers[3].value).to eq('no phone')
           end
         end
       end

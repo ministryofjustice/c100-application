@@ -15,12 +15,10 @@ module Summary
         birthplace: 'birthplace',
         residence_requirement_met: 'yes',
         residence_history: 'history',
-        home_phone: 'home_phone',
-        mobile_provided: nil,
-        mobile_phone: 'mobile_phone',
+        phone_number_provided: nil,
+        phone_number: 'phone_number',
         email: 'email',
-        mobile_phone_unknown: mobile_phone_unknown,
-        home_phone_unknown: home_phone_unknown,
+        phone_number_unknown: phone_number_unknown,
         email_unknown: email_unknown,
         voicemail_consent: nil,
         privacy_known: nil,
@@ -35,8 +33,7 @@ module Summary
       allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(respondent).to receive(:full_address).and_return('full address')
       allow(respondent).to receive(:email_private?).and_return(contact_details_private.include?('email'))
-      allow(respondent).to receive(:mobile_private?).and_return(contact_details_private.include?('mobile'))
-      allow(respondent).to receive(:home_phone_private?).and_return(contact_details_private.include?('home_phone'))
+      allow(respondent).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(respondent).to receive(:address_private?).and_return(contact_details_private.include?('address'))
       allow(respondent).to receive(:refuge)
     end
@@ -48,8 +45,7 @@ module Summary
     let(:previous_name) { nil }
     let(:dob) { Date.new(2018, 1, 20) }
     let(:dob_estimate) { nil }
-    let(:mobile_phone_unknown) { nil }
-    let(:home_phone_unknown) { nil }
+    let(:phone_number_unknown) { nil }
     let(:email_unknown) { nil }
 
     let(:answers) { subject.answers }
@@ -88,7 +84,7 @@ module Summary
       end
 
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(14)
+        expect(answers.count).to eq(13)
       end
 
       it 'has the correct rows in the right order' do
@@ -133,19 +129,15 @@ module Summary
         expect(answers[9].value).to eq('email')
 
         expect(answers[10]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[10].question).to eq(:person_home_phone)
-        expect(answers[10].value).to eq('home_phone')
+        expect(answers[10].question).to eq(:person_phone_number)
+        expect(answers[10].value).to eq('phone_number')
 
         expect(answers[11]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[11].question).to eq(:person_mobile_phone)
-        expect(answers[11].value).to eq('mobile_phone')
+        expect(answers[11].question).to eq(:person_relationship_to_children)
+        expect(answers[11].value).to eq('relationships')
 
-        expect(answers[12]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[12].question).to eq(:person_relationship_to_children)
-        expect(answers[12].value).to eq('relationships')
-
-        expect(answers[13]).to be_an_instance_of(Partial)
-        expect(answers[13].name).to eq(:row_blank_space)
+        expect(answers[12]).to be_an_instance_of(Partial)
+        expect(answers[12].name).to eq(:row_blank_space)
       end
 
       context 'for existing previous name' do
@@ -153,7 +145,7 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(14)
+          expect(answers.count).to eq(13)
         end
 
         it 'renders the previous name' do
@@ -168,7 +160,7 @@ module Summary
         let(:dob_estimate) { Date.today }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(14)
+          expect(answers.count).to eq(13)
         end
 
         it 'uses the dob estimate' do
@@ -183,7 +175,7 @@ module Summary
         let(:dob_estimate) { nil }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(14)
+          expect(answers.count).to eq(13)
         end
 
         it 'provides a nil dob' do
@@ -194,8 +186,7 @@ module Summary
       end
 
       context 'when contact details not known' do
-        let(:mobile_phone_unknown) { true }
-        let(:home_phone_unknown) { true }
+        let(:phone_number_unknown) { true }
         let(:email_unknown) { true }
 
         it 'shows that they are not known' do
@@ -204,12 +195,8 @@ module Summary
           expect(answers[9].value).to eq("Don't know")
 
           expect(answers[10]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[10].question).to eq(:person_home_phone)
+          expect(answers[10].question).to eq(:person_phone_number)
           expect(answers[10].value).to eq("Don't know")
-
-          expect(answers[11]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[11].question).to eq(:person_mobile_phone)
-          expect(answers[11].value).to eq("Don't know")
         end
       end
     end
