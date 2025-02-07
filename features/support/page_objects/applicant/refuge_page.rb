@@ -12,8 +12,17 @@ module C100
             element :yes, 'label', text: 'Yes'
             element :no, 'label', text: 'No'
             element :error_link, 'a', text: 'You must keep your current address private from the other people in this application if you are currently resident in a refuge. Select current address on the previous page if you are currently resident in a refuge'
-
             element :continue_button, 'button', text: 'Continue'
+          end
+
+          def submit_yes
+            content.yes.click
+            content.continue_button.click
+          end
+
+          def submit_no
+            content.no.click
+            content.continue_button.click
           end
 
           def error_title

@@ -13,18 +13,25 @@ module C100
             element :inset_text_2, 'p', text: 'The other people who will receive this application are known as the respondents. We will ask for their details later.'
             element :legend, 'span', text: 'Enter a new name'
             element :label_1, 'label', text: 'First name(s)'
-            element :first_name, '#steps-applicant-names-split-form-new-first-name-field'
-            element :first_name_error, '#steps-applicant-names-split-form-new-first-name-field-error'
+            element :first_name, '[id^="steps-applicant-names-split-form-new-first-name-field"]'
             element :hint, 'div', text: 'Include all middle names here'
             element :label_2, 'label', text: 'Last name(s)'
-            element :last_name, '#steps-applicant-names-split-form-new-last-name-field'
-            element :last_name_error, '#steps-applicant-names-split-form-new-last-name-field-error'
+            element :last_name, '[id^="steps-applicant-names-split-form-new-last-name-field"]'
             element :error_link_1, 'a', text: 'Enter the first name'
             element :error_link_2, 'a', text: 'Enter the last name'
             element :error_link_3, 'a', text: 'Name must not contain special characters'
-
             element :add_button, 'button', text: 'Add another applicant'
             element :continue_button, 'button', text: 'Continue'
+          end
+
+          def submit_full_name
+            content.first_name.set('John')
+            content.last_name.set('Doe Senior')
+          end
+
+          def submit_invalid_full_name
+            content.first_name.set('!@£')
+            content.last_name.set('$%^')
           end
 
           def error_title
