@@ -206,7 +206,7 @@ end
 When(/^I choose "([^"]*)"$/) do |text|
   find(:xpath, './/main//form', visible: true, wait: true)
   step %[I click the radio button "#{text}"]
-  find_button('Continue').click
+  # find_button('Continue').click
 end
 
 And(/^I choose "([^"]*)" and fill in "([^"]*)" with "([^"]*)"$/) do |text, field, value|

@@ -14,12 +14,12 @@ Feature: Add an applicant to the application
     When I click the "Continue" button
     Then Page shows empty applicant names error
 
-    When I fill in applicant name with first name "!@£" and last name "$%^"
+    When I enter invalid applicant name
     And I click the "Continue" button
     Then Page shows special character applicant names error
 
     # Fix validation errors and continue
-    Then I fill in applicant name with first name "John" and last name "Doe Senior"
+    Then I enter valid applicant name
     When I click the "Continue" button
     Then I should see the applicant privacy known page
 
@@ -47,6 +47,7 @@ Feature: Add an applicant to the application
     # Fix refuge validation error and continue
     And I select "No" for applicant refuge options
     Then I should see a not private privacy summary for applicant
+    And I click the "Continue" button
     Then I should see the applicant personal details page
 
     # Provoke validation errors

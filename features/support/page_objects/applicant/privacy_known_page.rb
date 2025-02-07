@@ -18,6 +18,21 @@ module C100
             element :continue_button, 'button', text: 'Continue'
           end
 
+          def submit_yes
+            content.yes.click
+            content.continue_button.click
+          end
+
+          def submit_no
+            content.no.click
+            content.continue_button.click
+          end
+
+          def submit_not_known
+            content.not_known.click
+            content.continue_button.click
+          end
+
           def error_title
             'Error: Contact details confidentiality - Apply to court about child arrangements - GOV.UK'
           end

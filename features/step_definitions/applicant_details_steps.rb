@@ -1,11 +1,3 @@
-Then('I should see the applicant names page') do
-  expect(applicant_names_page.content).to have_header
-end
-
-Then('I should see the applicant privacy known page') do
-  expect(applicant_privacy_known_page).to be_displayed
-end
-
 And('I submitted a name for children names') do
   visit 'steps/children/names'
   children_names_page.content.first_name.set 'John'
@@ -14,16 +6,26 @@ And('I submitted a name for children names') do
   expect(children_personal_details_page).to be_displayed
 end
 
+Then('I should see the applicant names page') do
+  expect(applicant_names_page).to be_displayed
+end
+
+Then('I should see the applicant privacy known page') do
+  expect(applicant_privacy_known_page).to be_displayed
+end
+
+And('I enter invalid applicant name') do
+  applicant_names_page.submit_invalid_full_name
+end
+
+And('I enter valid applicant name') do
+  applicant_names_page.submit_full_name
+end
 
 Then('Page shows empty applicant names error') do
   expect(applicant_names_page).to have_title(applicant_names_page.error_title)
   expect(applicant_names_page.content).to have_error_link_1
   expect(applicant_names_page.content).to have_error_link_2
-end
-
-When(/I fill in applicant name with first name "([^"]*)" and last name "([^"]*)"/) do |first_name, last_name|
-  applicant_names_page.content.first_name_error.set first_name
-  applicant_names_page.content.last_name_error.set last_name
 end
 
 Then('Page shows special character applicant names error') do
@@ -39,13 +41,12 @@ end
 And(/I select "([^"]*)" for applicant privacy known options/) do |option|
   case option
   when 'Yes'
-    applicant_privacy_known_page.content.yes.click
+    applicant_privacy_known_page.submit_yes
   when 'No'
-    applicant_privacy_known_page.content.no.click
+    applicant_privacy_known_page.submit_no
   when 'I don\'t know'
-    applicant_privacy_known_page.content.not_known.click
+    applicant_privacy_known_page.submit_not_known
   end
-  applicant_privacy_known_page.content.continue_button.click
 end
 
 Then('I should see the applicant privacy preferences page') do
@@ -60,11 +61,10 @@ end
 And(/I select "([^"]*)" for applicant privacy preferences/) do |option|
   case option
   when 'Yes'
-    applicant_privacy_preferences_page.content.yes.click
+    applicant_privacy_preferences_page.submit_yes
   when 'No'
-    applicant_privacy_preferences_page.content.no.click
+    applicant_privacy_preferences_page.submit_no
   end
-  applicant_privacy_preferences_page.content.continue_button.click
 end
 
 Then('I should see the applicant refuge page') do
@@ -74,11 +74,10 @@ end
 And(/I select "([^"]*)" for applicant refuge options/) do |option|
   case option
   when 'Yes'
-    applicant_refuge_page.content.yes.click
+    applicant_refuge_page.submit_yes
   when 'No'
-    applicant_refuge_page.content.no.click
+    applicant_refuge_page.submit_no
   end
-  applicant_refuge_page.content.continue_button.click
 end
 
 Then('Page shows applicant refuge errors') do
@@ -88,6 +87,7 @@ end
 
 Then('I should see a not private privacy summary for applicant') do
   expect(applicant_privacy_summary_page.content).to have_header
+  expect(applicant_privacy_summary_page.content).to have_p
   applicant_privacy_summary_page.content.continue_link.click
 end
 

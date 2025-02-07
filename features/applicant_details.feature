@@ -8,8 +8,7 @@ Feature: Add an applicant to the application
 
   @happy_path
   Scenario: Applicant personal details
-    Then I should see "Enter your name"
-    And I should see "Enter a new name"
+    Then I should see the applicant names page
 
     # Provoke validation errors
     When I click the "Continue" button
