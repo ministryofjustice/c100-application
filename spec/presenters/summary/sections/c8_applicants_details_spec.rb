@@ -66,28 +66,28 @@ module Summary
         expect(answers[0].title).to eq('c8_applicants_details_index_title')
         expect(answers[0].i18n_opts).to eq({index: 1})
 
-        expect(answers[1]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[1].question).to eq(:person_full_name)
-        expect(answers[1].value).to eq('fullname')
+        expect(answers[1]).to be_an_instance_of(Answer)
+        expect(answers[1].question).to eq(:refuge)
+        expect(answers[1].value).to eq('yes')
 
         expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[2].question).to eq(:person_address)
-        expect(answers[2].value).to eq('full address')
+        expect(answers[2].question).to eq(:person_full_name)
+        expect(answers[2].value).to eq('fullname')
 
         expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[3].question).to eq(:person_email)
-        expect(answers[3].value).to eq('email')
+        expect(answers[3].question).to eq(:person_address)
+        expect(answers[3].value).to eq('full address')
 
         expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[4].question).to eq(:person_phone_number)
-        expect(answers[4].value).to eq('phone_number')
+        expect(answers[4].question).to eq(:person_email)
+        expect(answers[4].value).to eq('email')
 
-        expect(answers[5]).to be_an_instance_of(Answer)
-        expect(answers[5].question).to eq(:person_voicemail_consent)
-        expect(answers[5].value).to eq('yes')
+        expect(answers[5]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[5].question).to eq(:person_phone_number)
+        expect(answers[5].value).to eq('phone_number')
 
         expect(answers[6]).to be_an_instance_of(Answer)
-        expect(answers[6].question).to eq(:refuge)
+        expect(answers[6].question).to eq(:person_voicemail_consent)
         expect(answers[6].value).to eq('yes')
 
         expect(answers[7]).to be_an_instance_of(Partial)
@@ -116,7 +116,7 @@ module Summary
         let(:phone_number_provided) { 'no' }
 
         it "shows the reason" do
-          expect(answers[4].value).to eq('No phone')
+          expect(answers[5].value).to eq('No phone')
         end
       end
 
@@ -163,25 +163,25 @@ module Summary
           expect(answers[0].title).to eq('c8_applicants_details_index_title')
           expect(answers[0].i18n_opts).to eq({index: 1})
 
-          expect(answers[1]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[1].question).to eq(:person_full_name)
-          expect(answers[1].value).to eq('fullname')
+          expect(answers[1]).to be_an_instance_of(Answer)
+          expect(answers[1].question).to eq(:refuge)
+          expect(answers[1].value).to eq('no')
 
           expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[2].question).to eq(:person_email)
-          expect(answers[2].value).to eq('email')
+          expect(answers[2].question).to eq(:person_full_name)
+          expect(answers[2].value).to eq('fullname')
 
           expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[3].question).to eq(:person_phone_number)
-          expect(answers[3].value).to eq('phone_number')
+          expect(answers[3].question).to eq(:person_email)
+          expect(answers[3].value).to eq('email')
 
-          expect(answers[4]).to be_an_instance_of(Answer)
-          expect(answers[4].question).to eq(:person_voicemail_consent)
-          expect(answers[4].value).to eq('yes')
+          expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[4].question).to eq(:person_phone_number)
+          expect(answers[4].value).to eq('phone_number')
 
           expect(answers[5]).to be_an_instance_of(Answer)
-          expect(answers[5].question).to eq(:refuge)
-          expect(answers[5].value).to eq('no')
+          expect(answers[5].question).to eq(:person_voicemail_consent)
+          expect(answers[5].value).to eq('yes')
 
           expect(answers[6]).to be_an_instance_of(Partial)
           expect(answers[6].name).to eq(:row_blank_space)
