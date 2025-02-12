@@ -154,6 +154,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
+    csv (3.3.2)
     cucumber (9.2.1)
       builder (~> 3.2)
       cucumber-ci-environment (> 9, < 11)
@@ -357,6 +358,7 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
+    ostruct (0.6.1)
     parallel (1.26.3)
     parallel_tests (4.9.0)
       parallel
@@ -618,6 +620,7 @@ DEPENDENCIES
   capybara-screenshot (~> 1.0, >= 1.0.25)
   clamby
   combine_pdf (~> 1.0)
+  csv
   cucumber (~> 9.2.0)
   cucumber-rails
   database_cleaner
@@ -636,6 +639,7 @@ DEPENDENCIES
   mutant-rspec
   omniauth-auth0 (~> 3.1.0)
   omniauth-rails_csrf_protection
+  ostruct
   parallel_tests
   parser (~> 3.1, >= 3.1.1.0)
   pg (~> 1.1)
@@ -670,7 +674,7 @@ DEPENDENCIES
   wicked_pdf (~> 2.6.0)
 
 RUBY VERSION
-   ruby 3.3.6p108
+   ruby 3.4.1p0
 
 BUNDLED WITH
    2.5.23
