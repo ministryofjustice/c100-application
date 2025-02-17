@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.6'
+ruby '3.4.1'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
@@ -42,7 +42,8 @@ gem 'clamby'
 gem 'sanitize', '~> 6.1.0'
 
 gem 'listen'
-
+gem 'ostruct'
+gem 'csv'
 
 group :development, :production do
   gem 'lograge'
