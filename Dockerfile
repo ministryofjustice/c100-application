@@ -1,4 +1,3 @@
-FROM surnet/alpine-wkhtmltopdf:3.20.2-0.12.6-small AS wkhtmltopdf
 FROM ruby:3.4.2-alpine3.21
 
 # Adding argument support for ping.json
@@ -27,15 +26,14 @@ ENV PRL_OPENING=2025/02/12T10:30:00
 ENV CONFIDENTIAL_OPTION_DATE=2025/01/13T00:01:00
 ENV PRIVACY_CHANGE=true
 
-
 # fix to address http://tzinfo.github.io/datasourcenotfound - PET ONLY
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apk update && apk add --no-cache libc6-compat && \
-    apk add --no-cache --virtual .build-tools git build-base curl-dev nodejs yarn npm libpq-dev postgresql-client tzdata && \
+    apk add --no-cache --virtual .build-tools git build-base curl-dev nodejs yarn libpq-dev postgresql-client tzdata && \
     apk add --no-cache xvfb fluxbox x11vnc st shared-mime-info clamav clamav-daemon freshclam fontconfig libffi-dev yaml-dev
 
-
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 ENV PUMA_PORT=3000
 EXPOSE $PUMA_PORT
 
@@ -51,7 +49,6 @@ WORKDIR /usr/src/app
 
 COPY Gemfile /usr/src/app
 COPY Gemfile.lock /usr/src/app
-COPY --from=wkhtmltopdf /bin/wkhtmltopdf /bin/wkhtmltopdf
 
 RUN gem install bundler -v 2.6.2
 
