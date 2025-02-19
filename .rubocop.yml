@@ -1,10 +1,10 @@
-require:
+plugins:
   - rubocop-performance
 
 AllCops:
   SuggestExtensions: false
   NewCops: disable
-  TargetRubyVersion: 3.2.2
+  TargetRubyVersion: 3.4.2
   Exclude:
     - './*'
     - 'db/**/*'

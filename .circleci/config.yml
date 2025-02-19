@@ -4,7 +4,7 @@
 #
 version: 2.1
 
-# orbs: 
+# orbs:
 orbs:
   browser-tools: circleci/browser-tools@1.4.4
   aws-cli: circleci/aws-cli@4.0.0 # use v4 of this orb
@@ -13,7 +13,7 @@ orbs:
 references:
   app_containers: &app_containers
     docker:
-      - image: cimg/ruby:3.4.1-browsers
+      - image: cimg/ruby:3.4.2-browsers
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -82,7 +82,7 @@ jobs:
       - run:
          name: run tests
          command: << parameters.test_command >>
-    
+
     # DEV image build
   build_and_push_dev_image:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
@@ -197,7 +197,7 @@ jobs:
 
             docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
             docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:<< parameters.env_name >>.latest"
- 
+
   deploy_image_to_live:
     <<: *cloud_container
     parameters:
@@ -266,7 +266,7 @@ jobs:
 
             kubectl annotate -n c100-application-<< parameters.env_name >> \
                     deployment/c100-application-deployment-<< parameters.env_name >> \
-                    kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"                   
+                    kubernetes.io/change-cause="${BUILD_DATE} set image ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} via CircleCI"
   tag_production:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
     parameters:
