@@ -35,6 +35,7 @@ gem 'sidekiq_alive'
 # PDF generation
 gem 'combine_pdf', '~> 1.0'
 gem 'wicked_pdf', '~> 2.6.0'
+gem 'grover'
 
 # Amazon S3 blob storage
 gem 'aws-sdk-s3', '~> 1'
