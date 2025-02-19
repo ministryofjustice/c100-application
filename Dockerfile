@@ -1,5 +1,5 @@
-FROM surnet/alpine-wkhtmltopdf:3.20.2-0.12.6-small as wkhtmltopdf
-FROM ruby:3.4.1-alpine3.21
+FROM surnet/alpine-wkhtmltopdf:3.20.2-0.12.6-small AS wkhtmltopdf
+FROM ruby:3.4.2-alpine3.21
 
 # Adding argument support for ping.json
 ARG APPVERSION=unknown
@@ -8,10 +8,10 @@ ARG APP_GIT_COMMIT=unknown
 ARG APP_BUILD_TAG=unknown
 
 # Setting up ping.json variables
-ENV APPVERSION ${APPVERSION}
-ENV APP_BUILD_DATE ${APP_BUILD_DATE}
-ENV APP_GIT_COMMIT ${APP_GIT_COMMIT}
-ENV APP_BUILD_TAG ${APP_BUILD_TAG}
+ENV APPVERSION=${APPVERSION}
+ENV APP_BUILD_DATE=${APP_BUILD_DATE}
+ENV APP_GIT_COMMIT=${APP_GIT_COMMIT}
+ENV APP_BUILD_TAG=${APP_BUILD_TAG}
 
 ENV EXTERNAL_URL=replace_this_at_build_time
 ENV SECRET_KEY_BASE=replace_this_at_build_time
@@ -60,7 +60,7 @@ RUN bundle config set force_ruby_platform true
 RUN bundle install
 
 # running app as a servive
-ENV PHUSION true
+ENV PHUSION=true
 
 COPY . /usr/src/app
 RUN yarn install --check-files
