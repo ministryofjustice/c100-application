@@ -29,11 +29,9 @@ RSpec.describe C100App::PdfGenerator do
 
   context 'when mocking libraries' do
 
-    let(:wicked_pdf) { instance_double(WickedPdf) }
     let(:combiner)   { [] }
 
     before do
-      allow(WickedPdf).to receive(:new).and_return(wicked_pdf)
       allow(CombinePDF).to receive(:new).and_return(combiner)
     end
 
@@ -53,9 +51,17 @@ RSpec.describe C100App::PdfGenerator do
       }
       let(:document)  { 'a form document' }
       let(:raw_file_path) { nil }
+      let(:footer) { '<footer>' }
 
       before do
         allow(c100_application).to receive(:reference_code).and_return('12345/XYZ')
+        allow_any_instance_of(C100App::PdfGenerator).to receive(:footer_line).and_return(footer)
+      end
+
+      it 'generates a PDF document via Grover' do
+        allow_any_instance_of(C100App::PdfGenerator).to receive(:render).and_return('html to render')
+        expect(Grover).to receive(:new).with('html to render', footer_template: footer).and_return(double(to_pdf: document))
+        subject.generate(presenter, copies: 0)
       end
 
       it 'renders a form using a presenter' do
@@ -65,10 +71,7 @@ RSpec.describe C100App::PdfGenerator do
           locals: { presenter: presenter }
         ).and_return(document)
 
-        expect(wicked_pdf).to receive(:pdf_from_string).with(
-          document, { footer: { right: '12345/XYZ   Test   [xx]/[yy]' }, extra: '--enable-forms' }
-        ).and_return(document)
-
+        allow(Grover).to receive(:new).and_return(double(to_pdf: document))
         # Using 0 copies just to make this test scenario simpler to mock,
         # as we want to test here only the call to `pdf_from_presenter`
         subject.generate(presenter, copies: 0)
@@ -99,10 +102,10 @@ RSpec.describe C100App::PdfGenerator do
     end
 
     describe '#to_pdf' do
-      let(:combiner) { double('Combiner', forms_data: forms_data) }
+      let(:combiner) { double('Combiner', objects: combiner_object) }
 
       context 'there is data in the combiner' do
-        let(:forms_data) { {whatever: 'xyz'} }
+        let(:combiner_object) { [{Producer: 'Ruby CombinePDF'}, {pdf_page: 'pdf data'}] }
 
         it 'delegates to the combiner' do
           expect(combiner).to receive(:to_pdf)
@@ -111,7 +114,7 @@ RSpec.describe C100App::PdfGenerator do
       end
 
       context 'there is no data yet in the combiner' do
-        let(:forms_data) { nil }
+        let(:combiner_object) { [] }
 
         it 'returns an empty string without calling the combiner' do
           expect(combiner).not_to receive(:to_pdf)
@@ -120,17 +123,22 @@ RSpec.describe C100App::PdfGenerator do
       end
     end
 
-    describe '#has_forms_data?' do
-      let(:combiner) { double('Combiner', forms_data: forms_data) }
+    describe '#pdf_data_rendered?' do
+      let(:combiner) { double('Combiner', objects: combiner_object) }
 
       context 'there is data in the combiner' do
-        let(:forms_data) { {whatever: 'xyz'} }
-        it { expect(subject.has_forms_data?).to eq(true) }
+        let(:combiner_object) { [{Producer: 'Ruby CombinePDF'}, {pdf_page: 'pdf data'}] }
+        it { expect(subject.pdf_data_rendered?).to eq(true) }
       end
 
       context 'there is no data yet in the combiner' do
-        let(:forms_data) { nil }
-        it { expect(subject.has_forms_data?).to eq(false) }
+        let(:combiner_object) { [{Producer: 'Ruby CombinePDF'}] }
+        it { expect(subject.pdf_data_rendered?).to eq(false) }
+      end
+
+      context 'there is no combiner haeader' do
+        let(:combiner_object) { [{Producer: 'something else'}, {pdf_page: 'pdf data'}] }
+        it { expect(subject.pdf_data_rendered?).to eq(false) }
       end
     end
   end
