@@ -31,7 +31,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apk update && apk add --no-cache libc6-compat && \
     apk add --no-cache --virtual .build-tools git build-base curl-dev nodejs yarn libpq-dev postgresql-client tzdata && \
-    apk add --no-cache xvfb fluxbox x11vnc st shared-mime-info clamav clamav-daemon freshclam fontconfig libffi-dev yaml-dev
+    apk add --no-cache xvfb fluxbox x11vnc st shared-mime-info clamav clamav-daemon freshclam fontconfig libffi-dev yaml-dev chromium
 
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 ENV PUMA_PORT=3000
