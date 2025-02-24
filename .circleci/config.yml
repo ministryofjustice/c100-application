@@ -83,7 +83,7 @@ jobs:
          name: run tests
          command: << parameters.test_command >>
 
-    # DEV image build
+  # DEV image build
   build_and_push_dev_image:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
     steps:
@@ -304,7 +304,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7103$/
+                - /^rst-7088-grover-pdf$/
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev
@@ -313,7 +313,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7103$/
+                - /^rst-7088-grover-pdf$/
       ### staging ###
       - build_and_push_image:
           name: build-staging

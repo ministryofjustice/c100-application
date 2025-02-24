@@ -10,23 +10,25 @@ module C100App
       end
     end
 
-    def has_forms_data?
-      combiner.forms_data.present?
+    def pdf_data_rendered?
+      combiner.objects.size >= 2 &&
+        combiner.objects[0][:Producer].include?('Ruby CombinePDF')
     end
 
     def to_pdf
-      return '' unless has_forms_data?
+      return '' unless pdf_data_rendered?
       combiner.to_pdf
     end
 
     private
 
     def pdf_from_presenter(presenter)
-      producer.pdf_from_string(
-        render(presenter),
-        footer: { right: footer_line(presenter) },
-        extra: '--enable-forms',
-      )
+      html = render(presenter)
+      grover_options = {
+        footer_template: footer_line(presenter),
+      }
+
+      Grover.new(html, **grover_options).to_pdf
     end
 
     def render(presenter)
@@ -38,15 +40,17 @@ module C100App
     end
 
     def footer_line(presenter)
-      [
-        presenter.c100_application.reference_code,
-        presenter.name,
-        presenter.page_number,
-      ].join('   ')
+      reference_code = presenter.c100_application.reference_code
+      name = presenter.name
+      "<h1 style='font-size:18px;font-weight:normal;text-align:right;width: 100%'>
+      <span style='padding:15px'>#{reference_code}</span>
+      <span style='padding:15px'>#{name}</span>
+      <span class='pageNumber'></span>/<span class='totalPages' style='padding-right: 57px'></span>
+      </h1>"
     end
 
     def producer
-      @_producer ||= WickedPdf.new
+      @_producer ||= Grover.new
     end
 
     def combiner
