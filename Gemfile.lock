@@ -248,6 +248,8 @@ GEM
     govuk_notify_rails (3.0.0)
       notifications-ruby-client (~> 6.2)
       rails (>= 4.1.0)
+    grover (1.2.3)
+      nokogiri (~> 1)
     gserver (0.0.1)
     hashdiff (1.1.2)
     hashie (5.0.0)
@@ -600,8 +602,6 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked_pdf (2.6.3)
-      activesupport
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.1)
@@ -632,6 +632,7 @@ DEPENDENCIES
   govuk-pay-ruby-client (~> 1.0.2)
   govuk_design_system_formbuilder
   govuk_notify_rails (~> 3.0)
+  grover
   i18n-debug
   jquery-rails
   listen
@@ -674,7 +675,6 @@ DEPENDENCIES
   virtus
   web-console
   webmock
-  wicked_pdf (~> 2.6.0)
 
 RUBY VERSION
    ruby 3.4.2p28
