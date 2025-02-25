@@ -5,7 +5,7 @@ module Summary
     attr_reader :c100_application
     attr_reader :pdf_generator
 
-    delegate :to_pdf, :has_forms_data?, to: :pdf_generator
+    delegate :to_pdf, :pdf_data_rendered?, to: :pdf_generator
 
     def initialize(c100_application, generator = C100App::PdfGenerator.new)
       @c100_application = c100_application
@@ -72,7 +72,7 @@ module Summary
     def add_blank_page_if_needed
       pdf_generator.generate(
         Summary::BlankPage.new(c100_application), copies: 1
-      ) if has_forms_data?
+      ) if pdf_data_rendered?
     end
   end
 end
