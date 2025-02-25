@@ -33,7 +33,7 @@ describe Summary::PdfPresenter do
 
   describe '#generate' do
     before do
-      allow(generator).to receive(:has_forms_data?).and_return(true)
+      allow(generator).to receive(:pdf_data_rendered?).and_return(true)
     end
 
     it 'generates the C100 form' do
@@ -142,7 +142,7 @@ describe Summary::PdfPresenter do
 
       context 'blank pages' do
         before do
-          expect(generator).to receive(:has_forms_data?).and_return(false)
+          expect(generator).to receive(:pdf_data_rendered?).and_return(false)
           Applicant.create(c100_application: c100_application,
                            are_contact_details_private: are_contact_details_private)
         end
@@ -173,10 +173,10 @@ describe Summary::PdfPresenter do
     end
   end
 
-  describe '#has_forms_data?' do
+  describe '#pdf_data_rendered?' do
     it 'delegates method to the generator' do
-      expect(generator).to receive(:has_forms_data?)
-      subject.has_forms_data?
+      expect(generator).to receive(:pdf_data_rendered?)
+      subject.pdf_data_rendered?
     end
   end
 
