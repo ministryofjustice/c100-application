@@ -14,7 +14,12 @@ gem 'puma', github: 'puma/puma', branch: 'master'
 gem 'rails', '~> 8.0.0'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
-gem 'sentry-rails'
+
+# Sentry
+gem "stackprof"
+gem "sentry-ruby"
+gem "sentry-rails"
+
 gem 'uglifier'
 gem 'uk_postcode'
 gem 'virtus'
