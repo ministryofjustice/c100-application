@@ -3,6 +3,9 @@ EXCLUDE_PATHS = ['/ping', '/ping.json', '/health', '/health.json'].freeze
 # Will use SENTRY_DSN environment variable if set
 Sentry.init do |config|
   config.dsn = ENV['SENTRY_DSN']
+  config.breadcrumbs_logger = [:active_support_logger, :http_logger]
+  config.traces_sample_rate = 1.0
+  config.profiles_sample_rate = 1.0
 
   config.async = ->(event) { SentryJob.perform_later(event) }
 
@@ -26,4 +29,3 @@ Sentry.init do |config|
   #   end
   # end
 end
-
