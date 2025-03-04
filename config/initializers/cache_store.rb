@@ -4,7 +4,7 @@ if ENV.key?('REDIS_URL')
     read_timeout: 0.3,
     write_timeout: 0.3,
 
-    error_handler: -> (method:, returning:, exception:) {
+    error_handler: lambda { |method:, returning:, exception:|
       Sentry.capture_exception(exception, level: 'warning', tags: { method: method, returning: returning })
     }
   }
