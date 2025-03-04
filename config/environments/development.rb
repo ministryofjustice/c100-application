@@ -16,18 +16,18 @@ Rails.application.configure do
 
   # Settings specified here will take precedence over those in config/application.rb.
   config.log_level = :info
-  config.lograge.logger = ActiveSupport::Logger.new(STDOUT)
+  config.lograge.logger = ActiveSupport::Logger.new($stdout)
   config.lograge.enabled = true
   config.lograge.formatter = Lograge::Formatters::Logstash.new
   config.action_view.logger = nil
   config.lograge.custom_options = lambda do |event|
-    exceptions = %w(controller action format id)
+    exceptions = %w[controller action format id]
     {
       host: event.payload[:host],
       params: event.payload[:params].except(*exceptions),
       referrer: event.payload[:referrer],
       session_id: event.payload[:session_id],
-      tags: %w{c100-application},
+      tags: %w[c100-application],
       user_agent: event.payload[:user_agent],
       ip: event.payload[:ip]
     }
@@ -71,7 +71,7 @@ Rails.application.configure do
 
   # lets you preview action_mailer mails from the browser at:
   # /rails/mailers/(mailer name)/(method name)
-  config.action_mailer.preview_paths=["#{Rails.root}/app/mailer_previews"]
+  config.action_mailer.preview_paths = ["#{Rails.root}/app/mailer_previews"]
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

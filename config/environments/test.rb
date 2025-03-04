@@ -11,7 +11,7 @@ class Pa11yciHeader
   def initialize(app, opts = {}, &blk)
     @app = app
     @blk = blk
-    @header_name = ['HTTP_', (opts[:header_name] || DEFAULT_NAME)].join
+    @header_name = ['HTTP_', opts[:header_name] || DEFAULT_NAME].join
   end
 
   attr_reader :app, :header_name, :blk
