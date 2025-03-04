@@ -8,6 +8,8 @@ class String
   include StringExtension
 end
 
-module ActiveRecord::Querying
-  include RelationExtension
+module ActiveRecord
+  module Querying
+    include RelationExtension
+  end
 end

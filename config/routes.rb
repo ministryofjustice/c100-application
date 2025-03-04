@@ -1,30 +1,34 @@
 # :nocov:
-class ActionDispatch::Routing::Mapper
-  def edit_step(name, opts = {}, &block)
-    resource name,
-             only:       opts.fetch(:only, [:edit, :update]),
-             controller: name,
-             path_names: { edit: '' } do; block.call if block_given?; end
-  end
+module ActionDispatch
+  module Routing
+    class Mapper
+      def edit_step(name, opts = {})
+        resource name,
+                 only:       opts.fetch(:only, [:edit, :update]),
+                 controller: name,
+                 path_names: { edit: '' } do; yield if block_given?; end
+      end
 
-  def crud_step(name, opts = {})
-    edit_step name, opts do
-      resources only: opts.fetch(:only, [:edit, :update, :destroy]),
-                controller: name,
-                path_names: { edit: '' }
+      def crud_step(name, opts = {})
+        edit_step name, opts do
+          resources only: opts.fetch(:only, [:edit, :update, :destroy]),
+                    controller: name,
+                    path_names: { edit: '' }
+        end
+      end
+
+      def show_step(name)
+        resource name,
+                 only:       [:show],
+                 controller: name
+      end
+
+      def edit_routes(path)
+        get   path, action: :edit
+        put   path, action: :update
+        patch path, action: :update
+      end
     end
-  end
-
-  def show_step(name)
-    resource name,
-             only:       [:show],
-             controller: name
-  end
-
-  def edit_routes(path)
-    get   path, action: :edit
-    put   path, action: :update
-    patch path, action: :update
   end
 end
 # :nocov:
@@ -57,7 +61,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:index] do
-      get :exists, on: :member, constraints: { id: /[^\/]+/ }
+      get :exists, on: :member, constraints: { id: %r{[^/]+} }
     end
 
     resource :errors, only: [] do
@@ -342,7 +346,6 @@ Rails.application.routes.draw do
            path_names: { edit: '/' },
            only: [:edit, :update, :create]
 
-
   root 'steps/opening#root'
 
   get 'about/accessibility'
@@ -365,6 +368,6 @@ Rails.application.routes.draw do
   # catch-all route
   # :nocov:
   match '*path', to: 'errors#not_found', via: :all, constraints:
-    lambda { |_request| !Rails.application.config.consider_all_requests_local }
+    ->(_request) { !Rails.application.config.consider_all_requests_local }
   # :nocov:
 end
