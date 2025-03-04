@@ -1,5 +1,6 @@
 require "active_support/core_ext/integer/time"
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -124,3 +125,4 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "localhost" }
   config.default_url_options = { host: "localhost" }
 end
+# rubocop:enable Metrics/BlockLength
