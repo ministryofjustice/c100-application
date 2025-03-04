@@ -1,5 +1,6 @@
 require "active_support/core_ext/integer/time"
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.log_level = :info
@@ -121,3 +122,4 @@ Rails.application.configure do
     }
   end
 end
+# rubocop:enable Metrics/BlockLength
