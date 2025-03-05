@@ -8,8 +8,10 @@ module PresentCollection
   # :nocov:
 end
 
-class ActiveRecord::Relation
-  include PresentCollection
+module ActiveRecord
+  class Relation
+    include PresentCollection
+  end
 end
 
 class Array

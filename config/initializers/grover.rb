@@ -10,6 +10,6 @@ Grover.configure do |config|
       right: '40px',
       bottom: '70px'
     },
-    launch_args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu','--font-render-hinting=medium'],
+    launch_args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--font-render-hinting=medium'],
   }
 end
