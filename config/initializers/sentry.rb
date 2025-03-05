@@ -1,6 +1,6 @@
 ## DEV SENTRY DSN
 Sentry.init do |config|
-  config.dsn = 'https://f168dda92204441a989748004329686b@o345774.ingest.us.sentry.io/4504156978020352'
+  config.dsn = ENV['SENTRY_DSN']
   config.breadcrumbs_logger = [:active_support_logger, :http_logger]
 
   # Add data like request headers and IP for users,
