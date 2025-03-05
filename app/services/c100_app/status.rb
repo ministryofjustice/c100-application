@@ -43,8 +43,7 @@ module C100App
 
       # If the connection check fails, try to execute a raw SQL to get more details.
       begin
-        result = ActiveRecord::Base.connection.execute("SELECT 1")
-        Sentry.capture_message("Database connection active check failed, but raw SQL executed successfully: #{result.to_a}")
+        ActiveRecord::Base.connection.execute("SELECT 1")
       rescue StandardError => e
         Sentry.capture_exception(e)
         Rails.logger.error("Database check failed: #{e.message}")
