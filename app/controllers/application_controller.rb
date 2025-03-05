@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_c100_application
+    return nil if session[:c100_application_id].blank?
     @_current_c100_application ||= C100Application.find_by_id(session[:c100_application_id])
   end
   helper_method :current_c100_application

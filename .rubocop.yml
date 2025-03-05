@@ -9,12 +9,12 @@ AllCops:
     - './*'
     - 'db/**/*'
     - 'bin/**/*'
-    - 'config/**/*'
     - 'lib/tasks/**/*'
     - 'lib/generators/**/*'
     - 'features/**/*'
     - 'spec/**/*'
     - 'vendor/**/*'
+    - 'config/routes.rb'
 
 
 ####################################

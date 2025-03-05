@@ -11,7 +11,7 @@ class Pa11yciHeader
   def initialize(app, opts = {}, &blk)
     @app = app
     @blk = blk
-    @header_name = ['HTTP_', (opts[:header_name] || DEFAULT_NAME)].join
+    @header_name = ['HTTP_', opts[:header_name] || DEFAULT_NAME].join
   end
 
   attr_reader :app, :header_name, :blk
@@ -23,6 +23,7 @@ class Pa11yciHeader
   end
 end
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Configure 'rails notes' to inspect Cucumber files
   config.annotations.register_directories('features')
@@ -101,3 +102,4 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions.
   # config.action_controller.raise_on_missing_callback_actions = true
 end
+# rubocop:enable Metrics/BlockLength
