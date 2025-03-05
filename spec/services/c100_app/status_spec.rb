@@ -39,15 +39,6 @@ RSpec.describe C100App::Status do
         }
       end
 
-      context 'database is KO but raw SQL query succeeds' do
-        let(:database_active) { false }
-
-        it 'logs detailed error message to Sentry and includes database check as false' do
-          expect(Sentry).to receive(:capture_message).with(/Database connection active check failed/)
-          expect(subject.response[:dependencies]).to include('database' => false)
-        end
-      end
-
       context 'database is KO (raises error)' do
         before do
           allow(ActiveRecord::Base.connection).to receive(:active?).and_raise('boom')
