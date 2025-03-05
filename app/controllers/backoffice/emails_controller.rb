@@ -11,7 +11,9 @@ module Backoffice
       @form = Backoffice::LookupForm.new(form_params)
       @report = []
 
+      # rubocop:disable Lint/LiteralAsCondition
       render :lookup && return if @form.invalid?
+      # rubocop:enable Lint/LiteralAsCondition
 
       @report = EmailSubmissionsAudit.find_records(@form.reference_code, @form.email_address)
       @submission = email_submission_details(@form.reference_code, @form.email_address)

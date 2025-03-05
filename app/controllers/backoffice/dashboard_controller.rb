@@ -13,7 +13,9 @@ module Backoffice
       @form = Backoffice::LookupForm.new(form_params)
       @report = []
 
+      # rubocop:disable Lint/LiteralAsCondition
       render :lookup && return if @form.invalid?
+      # rubocop:enable Lint/LiteralAsCondition
 
       if @form.reference_code.present?
         search_by_reference_code
