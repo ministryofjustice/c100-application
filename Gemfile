@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.6'
+ruby '3.4.2'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
@@ -11,10 +11,15 @@ gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
 gem 'puma', github: 'puma/puma', branch: 'master'
-gem 'rails', '7.2.2'
+gem 'rails', '~> 8.0.0'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
-gem 'sentry-rails'
+
+# Sentry
+gem "stackprof"
+gem "sentry-ruby"
+gem "sentry-rails"
+
 gem 'uglifier'
 gem 'uk_postcode'
 gem 'virtus'
@@ -34,7 +39,7 @@ gem 'sidekiq_alive'
 
 # PDF generation
 gem 'combine_pdf', '~> 1.0'
-gem 'wicked_pdf', '~> 2.6.0'
+gem 'grover'
 
 # Amazon S3 blob storage
 gem 'aws-sdk-s3', '~> 1'
@@ -42,7 +47,8 @@ gem 'clamby'
 gem 'sanitize', '~> 6.1.0'
 
 gem 'listen'
-
+gem 'ostruct'
+gem 'csv'
 
 group :development, :production do
   gem 'lograge'

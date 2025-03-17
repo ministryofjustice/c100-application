@@ -2,9 +2,9 @@
 # Refer to that file for more details.
 #
 Sidekiq.configure_server do |config|
-  config.death_handlers << ->(job, ex) do
+  config.death_handlers << lambda { |job, ex|
     Sentry.capture_exception(ex, level: 'error', tags: { job_class: job['class'], job_id: job['jid'] })
-  end
+  }
 
   Rails.logger = Sidekiq.logger
 

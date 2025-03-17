@@ -25,12 +25,12 @@ module Summary
           else
             [
               Separator.new("#{name}_index_title", index:),
+              Answer.new(:refuge, person.refuge),
               FreeTextAnswer.new(:person_full_name, person.full_name),
               address(person),
               person_email(person),
               person_phone_number(person),
               Answer.new(:person_voicemail_consent, person.voicemail_consent),
-              Answer.new(:refuge, person.refuge),
               Partial.row_blank_space,
               residence_history(person),
               Partial.row_blank_space,
