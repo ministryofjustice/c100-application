@@ -1,29 +1,22 @@
-EXCLUDE_PATHS = ['/ping', '/ping.json', '/health', '/health.json'].freeze
-
-# Will use SENTRY_DSN environment variable if set
+## DEV SENTRY DSN
 Sentry.init do |config|
   config.dsn = ENV['SENTRY_DSN']
+  config.breadcrumbs_logger = [:active_support_logger, :http_logger]
 
-  config.async = ->(event) { SentryJob.perform_later(event) }
+  # Add data like request headers and IP for users,
+  # see https://docs.sentry.io/platforms/ruby/data-management/data-collected/ for more info
+  config.send_default_pii = true
 
-  # Convert to regex, otherwise Sentry will threat them as words
-  # https://github.com/getsentry/raven-ruby/blob/master/lib/raven/processor/sanitizedata.rb
-  # config.sanitize_fields = Rails.application.config.filter_parameters.map { |w| "#{w}+" }
-
-  config.traces_sampler = lambda do |sampling_context|
-    transaction_context = sampling_context[:transaction_context]
-    transaction_name = transaction_context[:name]
-
-    transaction_name.in?(EXCLUDE_PATHS) ? 0.0 : 0.01
+  # Set traces_sample_rate to 1.0 to capture 100%
+  # of transactions for tracing.
+  # We recommend adjusting this value in production.
+  config.traces_sample_rate = 1.0
+  # or
+  config.traces_sampler = lambda do |_context|
+    true
   end
-
-  # config.before_send = lambda do |event, hint|
-  #   # NOTE: hint[:exception] would be a String if you use async callback
-  #   if hint[:exception].is_a?(Puma::HttpParserError)
-  #     nil
-  #   else
-  #     event
-  #   end
-  # end
+  # Set profiles_sample_rate to profile 100%
+  # of sampled transactions.
+  # We recommend adjusting this value in production.
+  config.profiles_sample_rate = 1.0
 end
-

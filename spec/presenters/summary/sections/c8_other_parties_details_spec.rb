@@ -89,17 +89,17 @@ module Summary
         expect(answers[0].title).to eq('c8_other_parties_details_index_title')
         expect(answers[0].i18n_opts).to eq({index: 1})
 
-        expect(answers[1]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[1].question).to eq(:person_full_name)
-        expect(answers[1].value).to eq('fullname')
+        expect(answers[1]).to be_an_instance_of(Answer)
+        expect(answers[1].question).to eq(:refuge)
+        expect(answers[1].value).to eq('yes')
 
         expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[2].question).to eq(:person_cohabit_other)
-        expect(answers[2].value).to eq('Yes')
+        expect(answers[2].question).to eq(:person_full_name)
+        expect(answers[2].value).to eq('fullname')
 
-        expect(answers[3]).to be_an_instance_of(Answer)
-        expect(answers[3].question).to eq(:refuge)
-        expect(answers[3].value).to eq('yes')
+        expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[3].question).to eq(:person_cohabit_other)
+        expect(answers[3].value).to eq('Yes')
 
         expect(answers[4]).to be_an_instance_of(Answer)
         expect(answers[4].question).to eq(:person_previous_name)

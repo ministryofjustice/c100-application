@@ -6,7 +6,8 @@ if ENV["IS_DOCKER"].blank?
       region: ENV["AWS_S3_REGION"],
       credentials: Aws::Credentials.new(
         ENV["AWS_S3_ACCESS_KEY_ID"],
-        ENV["AWS_S3_SECRET_ACCESS_KEY"])
+        ENV["AWS_S3_SECRET_ACCESS_KEY"]
+      )
     )
   else
     Aws.config.update(
