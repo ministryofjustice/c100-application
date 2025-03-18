@@ -61,6 +61,8 @@ RSpec.describe C100App::OnlinePayments do
       allow(
         PaymentsApi::Requests::CreateCardPayment
       ).to receive(:new).with(payload).and_return(response_double)
+
+      allow(FeeIncrease).to receive(:changes_apply?).and_return(false)
     end
 
     context 'payment intent' do
