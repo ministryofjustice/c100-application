@@ -73,6 +73,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'web-console'
+  gem 'mutex_m'
 end
 
 group :test do

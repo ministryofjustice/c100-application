@@ -210,6 +210,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       allow(I18n).to receive(:translate!).with(
         'foobar_payment', scope: [:notify_submission_mailer, :payment_instructions], fee: '£255'
       ).and_return('payment instructions from locales')
+      allow(FeeIncrease).to receive(:changes_apply?).and_return(false)
     end
 
     # We don't send the PDF to the applicant anymore, so this hash is empty
