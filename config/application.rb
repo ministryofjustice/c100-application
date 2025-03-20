@@ -95,6 +95,7 @@ module Application
     # Court fee configuration.
     # Not using Fee Register for now as we only have 1 fee, but might be used in the future.
     config.x.court_fee.amount_in_pence = 255_00
+    config.x.court_fee.new_amount_in_pence = 263_00
     config.x.court_fee.description = 'Court fee for a child arrangements application (C100)'
     config.x.analytics_tracking_id = ENV['GA_TRACKING_ID']
     config.x.cookie_expiry = 1.year
@@ -102,6 +103,7 @@ module Application
     config.maintenance_enabled = ENV.fetch('MAINTENANCE_ENABLED', 'false').downcase == 'true'
     config.maintenance_allowed_ips = ENV.fetch('MAINTENANCE_ALLOWED_IPS', '').split(',').map(&:strip)
 
+    config.fee_increase_date = DateTime.parse(ENV.fetch("FEE_INCREASE_DATE", "08/04/2025"))
     config.confidential_option_date = DateTime.parse(ENV.fetch("CONFIDENTIAL_OPTION_DATE", "08/05/2024"))
     config.prl_opening_date = DateTime.parse(ENV.fetch("PRL_OPENING", "13/02/2025"))
   end
