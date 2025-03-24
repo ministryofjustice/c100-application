@@ -10,9 +10,10 @@
 
 <div class="govuk-grid-row uploader-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= form.govuk_file_field(field_name, label: { text: t('shared.file_upload.select_file') }, class: 'govuk-file-upload single-file-upload', accept: DocumentUpload::ALLOWED_CONTENT_TYPES.join(','), src: 'camera',
-      onchange: "validateFiles(this);",
-      data: { max_file_size: 20.megabytes }) %>
+    <div class="govuk-drop-zone" data-module="govuk-file-upload">
+      <%= form.govuk_file_field(field_name, label: { text: t('shared.file_upload.select_file') }, class: 'govuk-file-upload single-file-upload', accept: DocumentUpload::ALLOWED_CONTENT_TYPES.join(','), src: 'camera',
+        onchange: "validateFiles(this);",
+        data: { max_file_size: 20.megabytes }) %
   </div>
 </div>
 
