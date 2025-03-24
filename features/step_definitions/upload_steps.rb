@@ -1,17 +1,7 @@
-When(/^I upload a document to the MIAM certificate page$/) do
-  identifier  = 'steps-miam-certification-upload-form-miam-certificate-document-field'
+Then(/^I upload a document using the file uploader$/) do
   filename    = 'features/support/sample_file/image.jpg'
-  attach_file(identifier, filename)
-end
 
-Then(/^I upload a document to the consent order page$/) do
-  identifier  = 'steps-opening-consent-order-upload-form-draft-consent-order-document-field'
-  filename    = 'features/support/sample_file/image.jpg'
-  attach_file(identifier, filename)
-end
-
-Then(/^I upload a document to the exemptions page$/) do
-  identifier  = 'steps-miam-exemptions-exemption-upload-form-exemption-document-field'
-  filename    = 'features/support/sample_file/image.jpg'
-  attach_file(identifier, filename)
+  within(".govuk-drop-zone") do
+    find('input[type="file"]', visible: false).attach_file(filename)
+  end
 end
