@@ -48,7 +48,8 @@ end
 def upload_file
   find(:xpath, './/main', visible: true, wait: true)
   expect(page).to have_text "Upload the draft of your consent order"
-  attach_file(Rails.root + 'features/support/sample_file/image.jpg')
+  file_input = find('input[type="file"]', visible: false)
+  file_input.attach_file(Rails.root.join('features/support/sample_file/image.jpg'))
   click_button "Continue"
 end
 
