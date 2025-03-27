@@ -1,5 +1,7 @@
 <%= form_tag documents_url(document_key: document_key), multipart: true do %>
-  <%= file_field_tag :document, class: 'govuk-file-upload' %>
+  <div class="govuk-drop-zone" data-module="govuk-file-upload">
+    <%= file_field_tag :document, class: 'govuk-file-upload' %>
+  </div>
   <%= submit_tag 'Upload', class: 'govuk-button' %>
 <% end %>
 

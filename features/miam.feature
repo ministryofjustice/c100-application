@@ -87,7 +87,7 @@ Feature: MIAM mediation change journey
     Then I should see "Evidence of MIAM exemption"
     When I choose "Yes"
     Then I should see "Upload your evidence for a MIAM exemption"
-    Then I upload a document to the exemptions page
+    Then I upload a document using the file uploader
     And I click the "Continue" button
     Then I should see "Provide details of exemptions from attending a MIAM"
     Then I fill in "steps-miam-exemptions-exemption-details-form-exemption-details-field" with "details"
