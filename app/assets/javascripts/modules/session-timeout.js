@@ -107,13 +107,13 @@ moj.Modules.sessionTimeout = {
   extend: function() {
     var self = this;
 
-    $.get(self.config.pingUrl).done(function() {
+    // $.get(self.config.pingUrl).done(function() {
       // Queue up another warning for when the session is due to expire again
-      self.startTimer();
-    }).fail(function() {
+    self.startTimer();
+    // }).fail(function() {
       // Assume session has expired if we cannot ping
-      window.location.href = self.config.expiredUrl; 
-    });
+      // window.location.href = self.config.expiredUrl;
+    // });
 
     self.hideModal();
   },
