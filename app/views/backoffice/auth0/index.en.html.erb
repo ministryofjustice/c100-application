@@ -6,6 +6,6 @@
 
     <p class="govuk-body-l">You need to authenticate in order to access the back office.</p>
 
-    <%= button_to 'Login', admin_auth_url, method: :post, class: 'govuk-button', data: { module: 'govuk-button' } %>
+    <%= button_to 'Login', admin_auth_url, method: :post, class: 'govuk-button', data: { module: 'govuk-button', turbo: false } %>
   </div>
 </div>

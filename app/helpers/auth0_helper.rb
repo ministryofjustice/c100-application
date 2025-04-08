@@ -8,7 +8,7 @@ module Auth0Helper
   end
 
   def admin_auth_url
-    auth0_bypass_in_local? ? backoffice_auth0_local_auth_path : 'auth/auth0'
+    auth0_bypass_in_local? ? backoffice_auth0_local_auth_path : '/auth/auth0'
   end
 
   def admin_logout_url
