@@ -29,8 +29,8 @@ module C100App
         js: false,
         emulate_media: 'screen',
         print_background: true,
-        launch_args: %w[--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-accelerated-2d-canvas
-                        --disable-gpu --no-zygote --single-process]
+        launch_args: %w[--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu]
+
       }
 
       Grover.new(html, **grover_options).to_pdf
