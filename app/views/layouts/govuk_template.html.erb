@@ -94,15 +94,17 @@
 
 <script src="<%= asset_path 'govuk-frontend/dist/govuk/govuk-frontend.min.js' %>" type="module"></script>
 
-<%= javascript_include_tag 'application', integrity: true, crossorigin: 'anonymous' %>
-
 <script type="module">
     import { initAll } from '<%= asset_path "govuk-frontend/dist/govuk/govuk-frontend.min.js" %>';
 
-    initAll();
+    $(document).ready(function() {
+        initAll();
 
-    window.moj.init();
+        window.moj.init();
+    });
 </script>
+
+<%= javascript_include_tag 'application', integrity: true, crossorigin: 'anonymous' %>
 
 <%= yield :body_end %>
 </body>
