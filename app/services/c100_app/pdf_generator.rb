@@ -29,6 +29,7 @@ module C100App
         js: false,
         emulate_media: 'screen',
         print_background: true,
+        timeout: 60_000,
         launch_args: %w[--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu]
 
       }
