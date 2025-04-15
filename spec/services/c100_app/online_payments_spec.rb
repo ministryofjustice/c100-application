@@ -41,7 +41,7 @@ RSpec.describe C100App::OnlinePayments do
 
     let(:payload) do
       {
-        amount: 255_00,
+        amount: 263_00,
         description: 'Court fee for a child arrangements application (C100)',
         reference: '1970/01/449362AF',
         email: 'applicant@test.com',
@@ -61,8 +61,6 @@ RSpec.describe C100App::OnlinePayments do
       allow(
         PaymentsApi::Requests::CreateCardPayment
       ).to receive(:new).with(payload).and_return(response_double)
-
-      allow(FeeIncrease).to receive(:changes_apply?).and_return(false)
     end
 
     context 'payment intent' do
