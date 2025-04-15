@@ -2,23 +2,8 @@ require 'rails_helper'
 
 RSpec.describe FeesHelper, type: :helper do
   describe '#fee_amount' do
-    before do
-      allow(FeeIncrease).to receive(:changes_apply?).and_return(false)
-    end
     it 'returns the localised version of the court fee' do
-      expect(helper.fee_amount).to eq('£255')
-    end
-  end
-
-  describe '#fee_amount' do
-    context 'when the fee increase is enabled' do
-      before do
-        allow(FeeIncrease).to receive(:changes_apply?).and_return(true)
-      end
-
-      it 'returns the localised version of the court fee' do
-        expect(helper.fee_amount).to eq('£263')
-      end
+      expect(helper.fee_amount).to eq('£263')
     end
   end
 
