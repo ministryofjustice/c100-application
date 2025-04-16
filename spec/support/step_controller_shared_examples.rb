@@ -500,11 +500,13 @@ RSpec.shared_examples 'a summary step controller' do
           allow(Summary::PdfPresenter).to receive(:new).and_return(pdf_presenter)
         end
 
-        it 'generates and renders the PDF' do
-          get :show, format: :pdf, session: { c100_application_id: existing_case.id }
+        it 'renders the PDF from the cache' do
+          allow(Rails.cache).to receive(:read).and_return('a majestic pdf')
+
+          get :show, format: :pdf, session: { c100_application_id: existing_case.id }, params: { type: 'completed' }
 
           expect(response.body).to eq('a majestic pdf')
-          expect(response.headers['Content-Disposition']).to eq('attachment; filename="test.pdf"; filename*=UTF-8\'\'test.pdf')
+          expect(response.headers['Content-Disposition']).to include('attachment; filename="C100 child arrangements application.pdf"')
         end
       end
     end
