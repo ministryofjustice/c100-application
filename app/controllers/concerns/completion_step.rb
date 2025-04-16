@@ -20,6 +20,7 @@ module CompletionStep
   end
 
   def generate_pdf
+    Rails.cache.delete("C100_Application_#{current_c100_application.id}_completed")
     PdfGenerationJob.perform_later(application_id: current_c100_application.id, type: 'completed')
   end
 end

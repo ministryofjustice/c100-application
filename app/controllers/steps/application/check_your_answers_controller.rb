@@ -28,6 +28,7 @@ module Steps
       end
 
       def generate_pdf
+        Rails.cache.delete("C100_Application_#{current_c100_application.id}_draft")
         PdfGenerationJob.perform_later(application_id: current_c100_application.id, type: 'draft')
       end
     end

@@ -24,7 +24,6 @@ module Steps
 
         type = params[:type]
         key = "C100_Application_#{current_c100_application.id}_#{type}"
-        Rails.logger.info "Reading cache key: C100_Application_#{current_c100_application.id}_#{params[:type]}"
         pdf_data = Rails.cache.read(key)
 
         if pdf_data
