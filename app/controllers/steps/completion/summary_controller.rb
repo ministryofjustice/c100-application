@@ -20,7 +20,8 @@ module Steps
       end
 
       def check_pdf_status
-        expires_now
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+
         type = params[:type]
         key = "C100_Application_#{current_c100_application.id}_#{type}"
         pdf_data = Rails.cache.read(key)
