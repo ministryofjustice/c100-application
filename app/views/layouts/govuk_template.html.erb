@@ -96,11 +96,8 @@
 
 <script type="module">
     import { initAll } from '<%= asset_path "govuk-frontend/dist/govuk/govuk-frontend.min.js" %>';
-    initAll();
 
-    if (window.moj && typeof window.moj.init === 'function') {
-        window.moj.init();
-    }
+    initAll();
 </script>
 
 <%= javascript_include_tag 'application', integrity: true, crossorigin: 'anonymous' %>

@@ -1,4 +1,6 @@
+// console.log('<-- PdfStatus loaded -->');
 // $(document).ready(function () {
+//     console.log('<-- PdfStatus running -->');
 //     const setups = [
 //         {
 //             type: 'draft',

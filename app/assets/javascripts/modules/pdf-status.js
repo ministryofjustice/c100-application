@@ -1,6 +1,6 @@
 'use strict';
-
-window.moj.Modules.PdfStatus = {
+console.log('<-- PdfStatus loaded -->');
+moj.Modules.PdfStatus = {
     init: function () {
         console.log('[PdfStatus] running');
 

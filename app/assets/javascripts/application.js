@@ -22,5 +22,7 @@
 //= require_tree ./utils
 //= require_tree ./pages
 
-import {createAll, FileUpload} from 'govuk-frontend'
+import {createAll, FileUpload} from 'govuk-frontend';
+
+moj.init();
 createAll(FileUpload)
