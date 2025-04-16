@@ -20,6 +20,6 @@ module CompletionStep
   end
 
   def generate_pdf
-    PdfGenerationJob.perform_now(application_id: current_c100_application.id, type: 'completed')
+    PdfGenerationJob.perform_later(application_id: current_c100_application.id, type: 'completed')
   end
 end
