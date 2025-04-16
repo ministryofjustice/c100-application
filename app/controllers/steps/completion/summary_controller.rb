@@ -20,6 +20,7 @@ module Steps
       end
 
       def check_pdf_status
+        expires_now
         type = params[:type]
         key = "C100_Application_#{current_c100_application.id}_#{type}"
         pdf_data = Rails.cache.read(key)
