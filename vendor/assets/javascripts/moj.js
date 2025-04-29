@@ -1,7 +1,5 @@
-console.log('<-- moj.js loaded -->');
 (function () {
   'use strict';
-  console.log('<-- moj.js executed -->');
   var moj = {
 
     Modules: {},
