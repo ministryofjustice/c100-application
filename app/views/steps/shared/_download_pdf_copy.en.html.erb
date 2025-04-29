@@ -12,15 +12,7 @@
 <p id="completedGeneratingMessage">
   <%= t('.generating_message') %>
 </p>
-<%= link_button 'Download your application',
-                steps_completion_summary_path(format: :pdf, type: 'completed'),
-                class: 'govuk-button govuk-button--disabled',
-                id: 'completedDownloadButton',
-                role: 'button',
-                download: '',
-                'aria-disabled': 'true',
-                data: {
-                  module: 'govuk-button',
-                  ga_category: 'completion',
-                  ga_label: 'download application'
-                } %>
+
+<%= link_to 'Download your application',
+            steps_completion_summary_path(format: :pdf, type: 'completed'),
+            class: 'govuk-button govuk-button--disabled', id: 'completedDownloadButton' %>
