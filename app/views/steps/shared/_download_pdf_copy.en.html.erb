@@ -13,6 +13,6 @@
   <%= t('.generating_message') %>
 </p>
 
-<%= link_to 'Download your application',
-            steps_completion_summary_path(format: :pdf, type: 'completed'),
-            class: 'govuk-button govuk-button--disabled', id: 'completedDownloadButton' %>
+<%= link_button 'Download your application', steps_completion_summary_path(format: :pdf, type: 'completed'),
+            class: 'govuk-button--disabled', id: 'completedDownloadButton',
+            data: { ga_category: 'check your answers', ga_label: 'download draft' } %>
