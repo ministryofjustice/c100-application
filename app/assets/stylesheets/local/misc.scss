@@ -191,3 +191,9 @@ dl.app-description-list {
     }
   }
 }
+
+a.govuk-button.govuk-button--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
