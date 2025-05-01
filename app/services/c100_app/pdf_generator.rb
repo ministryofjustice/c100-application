@@ -26,6 +26,12 @@ module C100App
       html = render(presenter)
       grover_options = {
         footer_template: footer_line(presenter),
+        js: false,
+        emulate_media: 'screen',
+        print_background: true,
+        timeout: 60_000,
+        launch_args: %w[--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu]
+
       }
 
       Grover.new(html, **grover_options).to_pdf

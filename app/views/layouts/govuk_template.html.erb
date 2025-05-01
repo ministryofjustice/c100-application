@@ -95,11 +95,10 @@
 <script src="<%= asset_path 'govuk-frontend/dist/govuk/govuk-frontend.min.js' %>" type="module"></script>
 
 <script type="module">
-    import { initAll } from '<%= asset_path "govuk-frontend/dist/govuk/govuk-frontend.min.js" %>';
+    import { initAll, createAll, FileUpload } from '<%= asset_path "govuk-frontend/dist/govuk/govuk-frontend.min.js" %>';
 
     initAll();
-
-    window.moj.init();
+    createAll(FileUpload);
 </script>
 
 <%= javascript_include_tag 'application', integrity: true, crossorigin: 'anonymous' %>
