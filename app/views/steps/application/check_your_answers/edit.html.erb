@@ -53,12 +53,10 @@
       </summary>
       <div class="govuk-details__text">
         <%=t '.details.text_html' %>
-        <p id="draftGeneratingMessage">
-          <%= t('.details.generating_message') %>
-        </p>
-        <%= link_button t('.details.download_draft_button'), steps_completion_summary_path(format: :pdf, type: 'draft'),
-                    class: 'govuk-button--secondary govuk-button--disabled', id: 'draftDownloadButton',
-                    data: { ga_category: 'check your answers', ga_label: 'download draft' } %>
+        <%= link_button t('.details.download_draft_button'), steps_completion_summary_path(format: :pdf),
+                        class: 'ga-pageLink govuk-button--secondary', download: '',
+                        data: { module: 'govuk-button', ga_category: 'check your answers', ga_label: 'download draft' } %>
+
       </div>
     </details>
   </div>
