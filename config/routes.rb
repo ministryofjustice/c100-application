@@ -296,7 +296,6 @@ Rails.application.routes.draw do
       show_step :confirmation
       show_step :what_next
       show_step :summary
-      get 'summary/check_pdf_status'
       # The following is an alias of the `what_next` route, for analytics tracking
       get :how_to_submit, to: 'what_next#show'
     end

@@ -196,9 +196,7 @@ en:
         heading: "Provide details for %{name}"
       document_upload:
         current_document:
-          previous_document_html: "<strong>Previously attached document:</strong><br>%{file_name}"
-      download_pdf_copy:
-        generating_message: Generating PDF...
+          previous_document_html: "<strong>Previously attached document:</strong><br>%{file_name}"      
 
     # BEGIN - Non-parents journey
     # We use the approach of one single controller-view.
@@ -883,7 +881,6 @@ en:
                 Please note this draft is for your records. Only the completed application will be admitted in court.
               </p>
             download_draft_button: Download draft application
-            generating_message: Generating PDF...
         resume:
           page_title: Resume application
           heading: Resume application
