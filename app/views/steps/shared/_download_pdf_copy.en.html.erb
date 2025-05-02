@@ -9,10 +9,5 @@
   </div>
 <% end %>
 
-<p id="completedGeneratingMessage">
-  <%= t('.generating_message') %>
-</p>
-
-<%= link_button 'Download your application', steps_completion_summary_path(format: :pdf, type: 'completed'),
-            class: 'govuk-button--disabled', id: 'completedDownloadButton',
-            data: { ga_category: 'check your answers', ga_label: 'download draft' } %>
+<%= link_button 'Download your application', steps_completion_summary_path(format: :pdf), class: 'ga-pageLink', download: '',
+                data: { module: 'govuk-button', ga_category: 'completion', ga_label: 'download application' } %>
