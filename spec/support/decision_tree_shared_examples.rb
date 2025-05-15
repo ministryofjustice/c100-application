@@ -3,7 +3,6 @@ RSpec.shared_examples 'a decision tree' do
     let(:step_params) { {ungueltig: { waschmaschine: 'nein' }} }
 
     it 'raises an error' do
-      # binding.pry
       expect { subject.destination }.to raise_error(
         BaseDecisionTree::InvalidStep, "Invalid step '{ungueltig: {waschmaschine: \"nein\"}}'"
       )

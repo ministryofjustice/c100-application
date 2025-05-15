@@ -32,10 +32,42 @@ require 'cucumber/rspec/doubles'
 #
 ActionController::Base.allow_rescue = false
 
-Capybara.server = :puma
-Selenium::WebDriver.logger.output = false
-Capybara.default_driver = :selenium_chrome_headless
-Capybara.default_max_wait_time = 10
+# Capybara.server = :puma
+# Selenium::WebDriver.logger.output = false
+# Capybara.default_driver = :selenium_chrome_headless
+# Capybara.default_max_wait_time = 10
+
+
+###### TEST SETUP ######
+
+Capybara.configure do |config|
+  driver = ENV['DRIVER']&.to_sym || :firefox
+  config.default_driver = driver
+  config.default_max_wait_time = 10
+  config.default_normalize_ws = true
+  config.match = :prefer_exact
+  config.exact = true
+  config.visible_text_only = true
+end
+
+# Temporary fix for "Unable to find latest point release version for 115.0.5790." error
+# Webdrivers::Chromedriver.required_version = "114.0.5735.90"
+
+Capybara.register_driver :headless do |app|
+  chrome_options = Selenium::WebDriver::Chrome::Options.new(args: ['headless', 'disable-gpu'])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
+end
+
+Capybara.register_driver :firefox do |app|
+  options = Selenium::WebDriver::Firefox::Options.new
+  options.args << '--headless'
+  options.args << '--disable-gpu'
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
+end
+###### TEST SETUP ######
+
+
+
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
