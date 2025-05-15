@@ -304,16 +304,17 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7266$/
+                - /^gem-updates-v9$/
       - deploy_image_to_dev:
           name: deploy-dev-live
+
           env_name: dev
           requires:
             - build-dev
           filters:
             branches:
               only:
-                - /^RST-7266$/
+                - /^gem-updates-v9$/
       ### staging ###
       - build_and_push_image:
           name: build-staging
