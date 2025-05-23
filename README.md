@@ -9,8 +9,6 @@ This is a Rails application to enable citizens to complete the C100 form. It wil
 * Copy `.env.example` to `.env` and replace with suitable values. e.g. `cp .env.example .env`
 You don't need to configure Notify or Auth0 at this point.
 
-* Create a new file: config/initializers/s3_web_identity_token_file_placeholder.txt and get the token from staging or a team member.
-
 * `yarn install` # will pull [GOV.UK Frontend](https://design-system.service.gov.uk)
 * `bundle install`
 * `bundle exec rails db:setup`
