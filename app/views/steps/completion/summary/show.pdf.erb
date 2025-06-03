@@ -1,3 +1,9 @@
+<% if request.format.html? %>
+  <title><%= t('.draft_application_title') %></title>
+  <link rel="icon" sizes="48x48" href="<%= asset_path 'govuk-frontend/dist/govuk/assets/images/favicon.ico' %>" />
+  <link rel="icon" sizes="any" href="<%= asset_path 'govuk-frontend/dist/govuk/assets/images/favicon.svg' %>" type="image/svg+xml">
+<% end %>
+
 <!doctype html>
 <html lang="en">
   <head>

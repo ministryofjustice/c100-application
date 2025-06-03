@@ -873,16 +873,12 @@ en:
             online_payment_html: <p>Once you submit your application, you cannot make any further changes. Please select 'Save and come back later' to save your application before selecting 'Continue' to complete your online application.</p><p>You will be able to download a copy of your submitted application after you have paid the %{fee} court fee.</p>
             print_and_post_html: <p>Once you continue, you cannot make any further changes. Please select 'Save and come back later' to save your application before selecting 'Continue' to complete your online application.</p><p>You can download a copy of your completed application on the next page.</p>
           details:
-            summary: Download a draft of your application (PDF)
+            summary: View a draft of your application (opens a new tab)
             text_html: |
-              <p class="govuk-body">
-                If you cannot open the PDF file after downloading, download and install
-                <a href="https://get.adobe.com/uk/reader/" class="govuk-link" rel="external" target="_blank">Adobe Acrobat Reader</a> to try again.
-              </p>
               <p class="govuk-body">
                 Please note this draft is for your records. Only the completed application will be admitted in court.
               </p>
-            download_draft_button: Download draft application
+            download_draft_button: View draft application
             generating_message: Generating PDF...
         resume:
           page_title: Resume application
@@ -1164,6 +1160,10 @@ en:
           lead_signed_off: You can resume your current application so you don't lose your progress, or you can start a new application.
           resume_link: Resume application
           restart_link: Start a new application
+    completion:
+      summary:
+        show:
+          draft_application_title: Draft Application - Apply to court about child arrangements - GOV.UK
   home:
     index:
       heading: Start here
