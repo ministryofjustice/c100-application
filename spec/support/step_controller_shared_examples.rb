@@ -507,6 +507,28 @@ RSpec.shared_examples 'a summary step controller' do
           expect(response.headers['Content-Disposition']).to eq('attachment; filename="test.pdf"; filename*=UTF-8\'\'test.pdf')
         end
       end
+      context 'HTML format' do
+        let(:html_form) {
+          instance_double(Summary::C100Form, sections: [])
+        }
+
+        let(:pdf_generator) {
+          instance_double(C100App::PdfGenerator)
+        }
+
+        before do
+          allow(Summary::C100Form).to receive(:new).and_return(html_form)
+          allow(C100App::PdfGenerator).to receive(:new).and_return(pdf_generator)
+          allow(pdf_generator).to receive(:send).with(:render, anything).and_return('<html>Mock HTML</html>')
+        end
+
+        it 'renders the HTML summary' do
+          get :show, format: :html, session: { c100_application_id: existing_case.id }
+
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include('Mock HTML')
+        end
+      end
     end
   end
 end
