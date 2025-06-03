@@ -304,7 +304,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7334$/
+                - /^RST-7334-pdf-render$/
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev
@@ -313,7 +313,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7334$/
+                - /^RST-7334-pdf-render$/
       ### staging ###
       - build_and_push_image:
           name: build-staging
