@@ -34,11 +34,7 @@ module Summary
     private
 
     def generate_c100_form(mode = :pdf)
-      if mode == :pdf
-        pdf_generator.generate(Summary::C100Form.new(c100_application), copies: 1)
-      else
-        @collected_forms << Summary::C100Form.new(c100_application)
-      end
+      process_form(Summary::C100Form.new(c100_application), mode)
     end
 
     def has_abuse_concerns_data?
@@ -50,12 +46,7 @@ module Summary
       return unless has_abuse_concerns_data?
 
       add_blank_page_if_needed(mode)
-
-      if mode == :pdf
-        pdf_generator.generate(Summary::C1aForm.new(c100_application), copies: 1)
-      else
-        @collected_forms << Summary::C1aForm.new(c100_application)
-      end
+      process_form(Summary::C1aForm.new(c100_application), mode)
     end
 
     def generate_c8_form(mode = :pdf)
@@ -66,12 +57,7 @@ module Summary
       end
 
       add_blank_page_if_needed(mode)
-
-      if mode == :pdf
-        pdf_generator.generate(Summary::C8Form.new(c100_application), copies: 1)
-      else
-        @collected_forms << Summary::C8Form.new(c100_application)
-      end
+      process_form(Summary::C8Form.new(c100_application), mode)
     end
 
     # Avoid adding unnecessary blank pages if there are no preceding forms,
@@ -81,9 +67,16 @@ module Summary
     def add_blank_page_if_needed(mode)
       if mode == :pdf
         return unless pdf_data_rendered?
-        pdf_generator.generate(Summary::BlankPage.new(c100_application), copies: 1)
+      end
+
+      process_form(Summary::BlankPage.new(c100_application), mode)
+    end
+
+    def process_form(form, mode)
+      if mode == :pdf
+        pdf_generator.generate(form, copies: 1)
       else
-        @collected_forms << Summary::BlankPage.new(c100_application)
+        @collected_forms << form
       end
     end
   end

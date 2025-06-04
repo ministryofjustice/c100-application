@@ -16,7 +16,7 @@ module Steps
             presenter.generate(mode: :html)
             html = presenter.collected_forms.map do |form|
               C100App::PdfGenerator.new.send(:render, form)
-            end.join("\n").html_safe
+            end.join.html_safe
 
             render html: html
           end
