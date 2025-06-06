@@ -13,6 +13,7 @@
   </head>
 
   <body id="application-details-pdf" class="status-<%= presenter.c100_application.status %>">
+    <p class="draft-watermark"><%= t('.watermark') %></p>
     <%= render presenter.sections %>
   </body>
 </html>

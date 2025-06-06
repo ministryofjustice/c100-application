@@ -1,6 +1,15 @@
-body:not(.status-completed) {
-  background-image: asset-data-url('draft-watermark.png');
-  background-repeat: repeat-y;
+.draft-watermark {
+  display: none;
+}
+
+body:not(.status-completed) .draft-watermark {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg) scale(16);
+  font-weight: 1000;
+  color: rgba(0, 0, 0, 0.05);
 }
 
 #application-details-pdf {
