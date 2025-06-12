@@ -25,6 +25,7 @@ ENV IS_DOCKER=true
 ENV PRL_OPENING=2025/02/12T10:30:00
 ENV CONFIDENTIAL_OPTION_DATE=2025/01/13T00:01:00
 ENV PRIVACY_CHANGE=true
+ENV NEW_BRANDING_DATE=2025/06/25T00:01:00
 
 # fix to address http://tzinfo.github.io/datasourcenotfound - PET ONLY
 ARG DEBIAN_FRONTEND=noninteractive
@@ -74,10 +75,14 @@ RUN mkdir -p log
 RUN mkdir -p public/assets/govuk-frontend/dist/govuk/assets/fonts && \
     cp node_modules/govuk-frontend/dist/govuk/assets/fonts/* public/assets/govuk-frontend/dist/govuk/assets/fonts/
 
+# Old branding
 RUN mkdir -p public/assets/govuk-frontend/dist/govuk/assets/images && \
-    cp node_modules/govuk-frontend/dist/govuk/assets/images/* public/assets/govuk-frontend/dist/govuk/assets/images/
+    cp -r node_modules/govuk-frontend/dist/govuk/assets/images/* public/assets/govuk-frontend/dist/govuk/assets/images/
 
-RUN cp node_modules/govuk-frontend/dist/govuk/assets/images/favicon.ico public/favicon.ico
+RUN mkdir -p public/assets/govuk-frontend/dist/govuk/assets/rebrand/images && \
+    cp node_modules/govuk-frontend/dist/govuk/assets/rebrand/images/* public/assets/govuk-frontend/dist/govuk/assets/rebrand/images/
+
+RUN cp node_modules/govuk-frontend/dist/govuk/assets/rebrand/images/favicon.ico public/favicon.ico
 
 RUN addgroup --gid 1000 --system appgroup && \
     adduser --uid 1000 --system appuser --ingroup appgroup
