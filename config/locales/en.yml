@@ -850,6 +850,22 @@ en:
         edit:
           page_title: Payment type
           lead_text: The court fee is %{fee}. Only the person applying to court (the applicant) or their solicitor needs to pay.
+          interim_content_html: |
+            <p class="govuk-body"><Strong>If you have applied for Help With Fees because you are in receipt of benefits</Strong></p>
+            <p class="govuk-body">In order to progress your C100 application, we will need to receive evidence from you that you are receiving one of the benefits that make you automatically eligible for Help with Fees.Please email the evidence to <a href="mailto:C100applications@justice.gov.uk">C100applications@justice.gov.uk</a></p>
+            <p class="govuk-body">The benefits are:</p>
+            <ul class="govuk-list govuk-list--bullet">
+            <li>Income-based Jobseeker’s Allowance (JSA)</li>
+            <li>Income-related Employment and Support Allowance (ESA)</li>
+            <li>Income Support</li>
+            <li>Universal Credit (and you earn less than £6,000)</li>
+            <li>Pension Credit (guarantee credit)</li>
+            </ul>
+            <p class="govuk-body">You will need to provide a full breakdown letter from the Department for Work and Pensions confirming the benefit currently received by you and the income DWP considered (if applicable).</p>
+            <p class="govuk-body">Screenshots or photos of this information are acceptable. If the benefit is received jointly but is in your partner’s name, evidence should also be provided that they share your address. You (and your partner if applicable) must be clearly identifiable on everything you send. Also clearly provide the reference number which will be provided once you submit your application.</p>
+            <p class="govuk-body">Before sending, please check on your DWP paperwork that you receive the specific benefits mentioned above and not similarly named ones (such as contribution based Job Seekers Allowance, contribution-based Employment and Support Allowance and Pension Credit (savings credit). If you receive Universal Credit, please check that your annual earnings before tax and National insurance are less than £6,000.</p>
+            <p class="govuk-body">If you have declared your benefit status incorrectly, and you still believe you are eligible for Help with Fees, you should reapply on the basis of income, including all benefit payments as income, unless they are explicitly excluded.</p>
+            <p class="govuk-body">You can find more guidance on applying for Help with Fees here: <a href="https://www.gov.uk/get-help-with-court-fees" class="govuk-link" rel="external" target="_blank">https://www.gov.uk/get-help-with-court-fees</a></p>
       submission:
         edit:
           page_title: Submitting your application to court
