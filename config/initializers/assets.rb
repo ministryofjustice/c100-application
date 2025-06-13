@@ -13,7 +13,6 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 Rails.application.config.assets.precompile += %w[govuk-frontend/dist/govuk/govuk-frontend.min.js]
 Rails.application.config.assets.precompile += %w[html5shiv-printshiv.js]
-Rails.application.config.assets.precompile += %w[local/pdf_summary.css]
 
 Rails.application.config.assets.precompile << %r{fonts/[\w-]+\.(?:eot|svg|ttf|woff2?)$}
 Rails.application.config.assets.precompile << %r{images/[\w-]+\.(?:png|svg|ico)$}

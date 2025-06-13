@@ -10,6 +10,7 @@ body:not(.status-completed) .draft-watermark {
   transform: translate(-50%, -50%) rotate(-30deg) scale(16);
   font-weight: 1000;
   color: rgba(0, 0, 0, 0.05);
+  pointer-events: none;
 }
 
 #application-details-pdf {
@@ -116,6 +117,7 @@ body:not(.status-completed) .draft-watermark {
     font-size: $questions-font-size;
     border-bottom: 1px solid $light-grey;
     margin: 0;
+    text-rendering: optimizeLegibility;
   }
 
   td.question,
