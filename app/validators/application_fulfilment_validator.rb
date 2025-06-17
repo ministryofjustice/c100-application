@@ -71,8 +71,8 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
   def has_misc_skip_exemptions?(record)
     return false unless record&.miam_exemption&.misc
     exemptions = record.miam_exemption.misc
-    return false if %w[misc_access misc_access2 misc_access3].any? { |misc| exemptions.include? misc }
-    true
+    return true if %w[misc_access misc_access2 misc_access3].any? { |misc| exemptions.include? misc }
+    false
   end
 
   def has_other_skip_exemptions?(record)
