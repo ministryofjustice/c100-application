@@ -208,11 +208,20 @@ module C100App
     end
 
     def eligable_court
-      c100_application.court.id.in? %w[
-        swansea-civil-justice-centre
-        kingston-upon-hull-combined-court-centre
-        great-grimsby-combined-court-centre
-      ]
+      if PrlWolverhamptonRollout.changes_apply?
+        c100_application.court.id.in? %w[
+          swansea-civil-justice-centre
+          kingston-upon-hull-combined-court-centre
+          great-grimsby-combined-court-centre
+          wolverhampton-combined-court-centre
+        ]
+      else
+        c100_application.court.id.in? %w[
+          swansea-civil-justice-centre
+          kingston-upon-hull-combined-court-centre
+          great-grimsby-combined-court-centre
+        ]
+      end
     end
   end
 end
