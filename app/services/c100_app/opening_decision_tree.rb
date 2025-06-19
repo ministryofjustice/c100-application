@@ -207,7 +207,7 @@ module C100App
       )
     end
 
-    def eligable_court
+    def eligable_court # rubocop:disable Metrics/MethodLength
       return c100_application.court.id.in? %w[
         swansea-civil-justice-centre
         kingston-upon-hull-combined-court-centre
@@ -239,6 +239,6 @@ module C100App
           great-grimsby-combined-court-centre
         ]
       end
-    end
+    end # rubocop:enable Metrics/MethodLength
   end
 end
