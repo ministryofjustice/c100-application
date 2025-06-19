@@ -208,7 +208,7 @@ module C100App
     end
 
     def eligable_court
-      if PrlCourtRollout.changes_apply?
+      if PrlChelmsfordRollout.changes_apply?
         c100_application.court.id.in? %w[
           swansea-civil-justice-centre
           kingston-upon-hull-combined-court-centre
