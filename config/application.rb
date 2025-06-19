@@ -104,6 +104,7 @@ module Application
 
     config.confidential_option_date = DateTime.parse(ENV.fetch("CONFIDENTIAL_OPTION_DATE", "08/05/2024"))
     config.prl_opening_date = DateTime.parse(ENV.fetch("PRL_OPENING", "13/02/2025"))
+    config.prl_wolverhampton_date = DateTime.parse(ENV.fetch("PRL_WOLVERHAMPTON", "07/08/2025"))
     config.prl_chelmsford_rollout = DateTime.parse(ENV.fetch("PRL_CHELMSFORD_ROLLOUT", "08/07/2025"))
   end
 end

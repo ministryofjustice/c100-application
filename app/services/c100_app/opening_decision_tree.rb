@@ -207,8 +207,24 @@ module C100App
       )
     end
 
-    def eligable_court
-      if PrlChelmsfordRollout.changes_apply?
+    def eligable_court # rubocop:disable Metrics/MethodLength
+      return c100_application.court.id.in? %w[
+        swansea-civil-justice-centre
+        kingston-upon-hull-combined-court-centre
+        great-grimsby-combined-court-centre
+        wolverhampton-combined-court-centre
+        chelmsford-county-and-family-court
+        chelmsford-magistrates-court-and-family-court
+      ] if PrlWolverhamptonRollout.changes_apply? && PrlChelmsfordRollout.changes_apply?
+
+      if PrlWolverhamptonRollout.changes_apply?
+        c100_application.court.id.in? %w[
+          swansea-civil-justice-centre
+          kingston-upon-hull-combined-court-centre
+          great-grimsby-combined-court-centre
+          wolverhampton-combined-court-centre
+        ]
+      elsif PrlChelmsfordRollout.changes_apply?
         c100_application.court.id.in? %w[
           swansea-civil-justice-centre
           kingston-upon-hull-combined-court-centre
@@ -223,6 +239,6 @@ module C100App
           great-grimsby-combined-court-centre
         ]
       end
-    end
+    end # rubocop:enable Metrics/MethodLength
   end
 end
