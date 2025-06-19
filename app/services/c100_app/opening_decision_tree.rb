@@ -209,14 +209,14 @@ module C100App
 
     def eligable_court
       return c100_application.court.id.in? %w[
-          swansea-civil-justice-centre
-          kingston-upon-hull-combined-court-centre
-          great-grimsby-combined-court-centre
-          wolverhampton-combined-court-centre
-          chelmsford-county-and-family-court
-          chelmsford-magistrates-court-and-family-court
-        ] if PrlWolverhamptonRollout.changes_apply? && PrlChelmsfordRollout.changes_apply?
-      
+        swansea-civil-justice-centre
+        kingston-upon-hull-combined-court-centre
+        great-grimsby-combined-court-centre
+        wolverhampton-combined-court-centre
+        chelmsford-county-and-family-court
+        chelmsford-magistrates-court-and-family-court
+      ] if PrlWolverhamptonRollout.changes_apply? && PrlChelmsfordRollout.changes_apply?
+
       if PrlWolverhamptonRollout.changes_apply?
         c100_application.court.id.in? %w[
           swansea-civil-justice-centre
