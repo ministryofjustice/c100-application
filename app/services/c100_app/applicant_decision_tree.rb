@@ -1,6 +1,6 @@
 module C100App
   class ApplicantDecisionTree < PeopleDecisionTree
-    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/AbcSize
+    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength
     def destination
       return next_step if next_step
 
@@ -12,7 +12,7 @@ module C100App
       when :privacy_known
         edit(:privacy_preferences)
       when :privacy_preferences
-        ConfidentialOption.changes_apply? ? edit(:refuge) : show(:privacy_summary)
+        edit(:refuge)
       when :refuge
         show(:privacy_summary)
       when :privacy_summary
@@ -33,7 +33,7 @@ module C100App
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
     end
-    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength,  Metrics/AbcSize
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength
 
     private
 

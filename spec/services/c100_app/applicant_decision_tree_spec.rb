@@ -43,10 +43,6 @@ RSpec.describe C100App::ApplicantDecisionTree do
   end
 
   context 'when the step is `privacy_preferences`' do
-    before do
-      allow(ConfidentialOption).to receive(:changes_apply?).and_return(true)
-    end
-
     let(:step_params) {{'privacy_preferences' => 'anything'}}
     it 'goes to ask if applicant is currently resident in refuge' do
       expect(subject.destination).to eq(controller: :refuge, action: :edit)
