@@ -6,7 +6,7 @@ module C100App
       return nil if scotland_or_ni(postcode)
 
       possible_courts = CourtfinderAPI.new.court_for(AREA_OF_LAW, postcode)
-      return nil unless possible_courts.has_key?('courts') || possible_courts.blank?
+      return nil unless possible_courts.key?('courts') || possible_courts.blank?
 
       candidate_court = court_lookup(possible_courts['courts'])
 
