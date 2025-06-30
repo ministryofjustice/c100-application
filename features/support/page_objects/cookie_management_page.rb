@@ -5,16 +5,19 @@ module C100
       class CookieManagementPage < AnyPage
         set_url '/about/cookies'
 
-        section :analytics_question, :xpath, XPath.generate { |x| x.descendant(:div)[x.attr(:class).contains_word('govuk-form-group') & x.child(:fieldset)[x.child(:legend)[x.string.n.equals('Do you want to accept analytics cookies?')]]] } do
-          def assert_value(expected_value)
-            root_element.assert_selector(:radio_button, expected_value, visible: false, checked: true)
-          end
-
-          def set(value)
-            root_element.find(:radio_button, value, visible: false).click
-          end
+        section :content, '#main-content' do
+          element :header, 'h1', text: 'Cookies'
+          element :yes_radio_button, 'label', text: 'Yes', visible: false
+          element :no_radio_button, 'label', text: 'No', visible: false
+          element :save_cookie_settings_button, 'button', text: 'Save cookie settings'
+          element :notification_banner, '.govuk-notification-banner', text: "You've set your cookie preferences"
         end
+
+        def click_save_cookie_settings
+          content.save_cookie_settings_button.click
+        end
+
       end
     end
   end
-end
+  end

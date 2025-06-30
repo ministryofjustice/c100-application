@@ -11,10 +11,6 @@ module C100
           end
         end
 
-        def has_cookie_preferences_updated_message?
-          notification_banner.has_content?(text: "You've set your cookie preferences")
-        end
-
         section :footer, '.govuk-footer' do
           element :header, 'h2', text: 'Support links'
         end
