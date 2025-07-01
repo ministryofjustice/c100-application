@@ -60,18 +60,21 @@ class ApplicationFulfilmentValidator < ActiveModel::Validator
   def generate_miam_validation_details
     lambda { |record|
       [:attach_evidence, :blank,
-       edit_steps_miam_exemptions_exemption_details_path] unless record.attach_evidence.present? ||
-                                                                 record.consent_order == 'yes' ||
-                                                                 has_misc_skip_exemptions?(record) ||
-                                                                 record.document(:miam_certificate) ||
-                                                                 record.child_protection_cases == 'yes'
+       edit_steps_miam_exemptions_exemption_details_path] if record.miam_exemption_claim == 'yes' &&
+                                                             record.exemption_details.blank? &&
+                                                             has_domestic_or_only_misc(record)
     }
   end
 
-  def has_misc_skip_exemptions?(record)
-    return false unless record&.miam_exemption&.misc
-    exemptions = record.miam_exemption.misc
-    return true if %w[misc_access misc_access2 misc_access3].any? { |misc| exemptions.include? misc }
+  def has_domestic_or_only_misc(record)
+    return true if record.miam_exemption.domestic.exclude?("misc_domestic_none")
+    return true if %w[misc_access misc_access2 misc_access3].any? do |misc|
+      record.miam_exemption.misc.include?(misc)
+    end
+    return true if %w[misc_without_notice misc_applicant_under_age misc_access4].any? do |misc|
+      record.miam_exemption.misc.include?(misc)
+    end && other_group_check(record)
+
     false
   end
 
