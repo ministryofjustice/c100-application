@@ -10,6 +10,7 @@ module Test
     :attach_evidence,
     :consent_order,
     :miam_exemption,
+    :miam_exemption_claim,
     keyword_init: true
   ) do
     include ActiveModel::Validations
@@ -39,6 +40,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
       has_petition_orders: has_petition_orders,
       consent_order: consent_order,
       attach_evidence: attach_evidence,
+      miam_exemption_claim: miam_exemption_claim
     }
   end
 
@@ -48,6 +50,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
   let(:has_petition_orders) { true }
   let(:attach_evidence) { 'yes' }
   let(:consent_order) { 'no' }
+  let(:miam_exemption_claim) { 'no' }
 
   let(:submission_type) { 'submission_type' }
   let(:payment_type)    { 'payment_type' }
@@ -193,6 +196,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
 
   describe '#has_other_skip_exemptions?' do
     let(:miam_exemption) { double('miam_exemption') }
+    let(:miam_exemption_claim) { 'yes' }
 
     context 'when miam_exemption is nil' do
       before { allow(record).to receive(:miam_exemption).and_return(nil) }
@@ -265,6 +269,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
 
   describe '#other_group_check' do
     let(:miam_exemption) { double('miam_exemption') }
+    let(:miam_exemption_claim) { 'yes' }
 
     before do
       allow(record).to receive(:miam_exemption).and_return(miam_exemption)
