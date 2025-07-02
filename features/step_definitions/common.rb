@@ -203,3 +203,9 @@ end
 Given(/^Privacy changes apply$/) do
   ENV['PRIVACY_CHANGE'] = 'true'
 end
+
+When('court finder raises an error') do
+  courtfinder_mock = instance_double(C100App::CourtfinderAPI, is_ok?: false)
+  allow(C100App::CourtfinderAPI).to receive(:new).and_return(courtfinder_mock)
+  allow(courtfinder_mock).to receive(:court_for).and_raise(StandardError.new('Courtfinder API error'))
+end
