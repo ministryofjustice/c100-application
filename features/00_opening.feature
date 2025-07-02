@@ -126,6 +126,7 @@ Feature: Opening
     Then I should see "Where do the children live?"
 
     When I fill in "Postcode" with "TQ12 1FF"
+    And court finder raises an error
     And I click the "Continue" button
     Then Page has title "Where the children live - Apply to court about child arrangements - GOV.UK"
     And I should see "Something went wrong"
