@@ -186,20 +186,6 @@ And('the opening changes end') do
   Rails.application.config.prl_opening_date = @original_prl_date
 end
 
-Given(/^Confidential changes do apply$/) do
-  @original_confidential_date = Rails.application.config.confidential_option_date
-  Rails.application.config.confidential_option_date = Date.today - 1.day
-end
-
-Given(/^Confidential changes do not apply$/) do
-  @original_confidential_date = Rails.application.config.confidential_option_date
-  Rails.application.config.confidential_option_date = Date.today + 1.day
-end
-
-And('the confidential changes end') do
-  Rails.application.config.confidential_option_date = @original_confidential_date
-end
-
 Given(/^Privacy changes apply$/) do
   ENV['PRIVACY_CHANGE'] = 'true'
 end

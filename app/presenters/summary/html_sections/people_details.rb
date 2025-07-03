@@ -100,27 +100,16 @@ module Summary
       end
 
       def applicant_privacy_answers(person)
-        if ConfidentialOption.changes_apply?
-          [
-            FreeTextAnswer.new(:person_privacy_known, person.privacy_known.try(:capitalize),
-                               change_path: edit_steps_applicant_privacy_known_path(person)),
-            FreeTextAnswer.new(:person_contact_details_private,
-                               privacy_preferences_answer(person),
-                               change_path: edit_steps_applicant_privacy_preferences_path(person),
-                               i18n_opts: {name: "your contact"}),
-            FreeTextAnswer.new(:refuge, person.refuge.try(:capitalize),
-                               change_path: edit_steps_applicant_refuge_path(person)),
-          ]
-        else
-          [
-            FreeTextAnswer.new(:person_privacy_known, person.privacy_known.try(:capitalize),
-                               change_path: edit_steps_applicant_privacy_known_path(person)),
-            FreeTextAnswer.new(:person_contact_details_private,
-                               privacy_preferences_answer(person),
-                               change_path: edit_steps_applicant_privacy_preferences_path(person),
-                               i18n_opts: {name: "your contact"})
-          ]
-        end
+        [
+          FreeTextAnswer.new(:person_privacy_known, person.privacy_known.try(:capitalize),
+                             change_path: edit_steps_applicant_privacy_known_path(person)),
+          FreeTextAnswer.new(:person_contact_details_private,
+                             privacy_preferences_answer(person),
+                             change_path: edit_steps_applicant_privacy_preferences_path(person),
+                             i18n_opts: {name: "your contact"}),
+          FreeTextAnswer.new(:refuge, person.refuge.try(:capitalize),
+                             change_path: edit_steps_applicant_refuge_path(person)),
+        ]
       end
 
       def other_party_privacy_answers(person)
@@ -134,7 +123,7 @@ module Summary
                              i18n_opts: {name: person.full_name})
         ]
 
-        if ConfidentialOption.changes_apply? && person.are_contact_details_private == 'yes'
+        if person.are_contact_details_private == 'yes'
           answers.push(
             FreeTextAnswer.new(:other_party_refuge, person.refuge.try(:capitalize),
                                change_path: edit_steps_other_party_refuge_path(person),

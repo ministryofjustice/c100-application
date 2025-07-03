@@ -42,7 +42,7 @@ module C100App
     end
 
     def after_privacy_preferences
-      if ConfidentialOption.changes_apply? && record.reload.are_contact_details_private == 'yes'
+      if record.reload.are_contact_details_private == 'yes'
         edit(:refuge, id: record)
       else
         edit(:personal_details, id: record)
