@@ -7,8 +7,13 @@
 require 'cucumber/rails'
 require 'webmock'
 require 'cucumber/rspec/doubles'
+require_relative './page_objects/base_page'
+Dir[File.dirname(__FILE__) + '/page_objects/**/*.rb'].each { |f| require f }
 
 # frozen_string_literal: true
+
+# Add time travel support
+World(ActiveSupport::Testing::TimeHelpers)
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
