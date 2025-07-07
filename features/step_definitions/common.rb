@@ -221,7 +221,8 @@ When('I navigate to the Safety concerns from consent order page') do
 end
 
 When('I let session to expire') do
-  Timecop.freeze(61.minutes.from_now) do
+  travel_to 61.minutes.from_now do
+    # save_and_open_page
     expect(page).to have_text("Sorry, you'll have to start again")
   end
 end
