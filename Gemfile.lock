@@ -497,6 +497,8 @@ GEM
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1, < 2.0)
       rubocop-ast (>= 1.38.0, < 2.0)
+    ruby-prof (1.7.2)
+      base64
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
     ruby2_keywords (0.0.5)
@@ -528,6 +530,9 @@ GEM
     sentry-ruby (5.23.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+    sentry-sidekiq (5.23.0)
+      sentry-ruby (~> 5.23.0)
+      sidekiq (>= 3.0)
     sidekiq (7.2.4)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
@@ -583,6 +588,7 @@ GEM
       parser (>= 3.3.0)
     uri (1.0.3)
     useragent (0.16.11)
+    vernier (1.8.0)
     version_gem (1.1.6)
     virtus (2.0.0)
       axiom-types (~> 0.1)
@@ -663,11 +669,13 @@ DEPENDENCIES
   rspec_junit_formatter
   rubocop
   rubocop-performance
+  ruby-prof
   sanitize (~> 6.1.0)
   sass-rails (< 6.0.0)
   selenium-webdriver (>= 4.24.0)
   sentry-rails
   sentry-ruby
+  sentry-sidekiq
   sidekiq (~> 7.2.0)
   sidekiq_alive
   simplecov
@@ -678,6 +686,7 @@ DEPENDENCIES
   tzinfo (~> 2.0.5)
   uglifier
   uk_postcode
+  vernier
   virtus
   web-console
   webmock
