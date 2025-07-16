@@ -28,8 +28,6 @@ module Steps
         end
       end
 
-
-
       def document_key
         :benefits_evidence
       end
