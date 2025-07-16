@@ -19,6 +19,9 @@ gem 'sass-rails', '< 6.0.0'
 gem "stackprof"
 gem "sentry-ruby"
 gem "sentry-rails"
+gem "sentry-sidekiq"
+gem 'vernier'
+
 
 gem 'uglifier'
 gem 'uk_postcode'
@@ -72,6 +75,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'ruby-prof'
   gem 'web-console'
   gem 'mutex_m'
 end
