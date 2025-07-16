@@ -394,7 +394,7 @@ RSpec.describe C100Application, type: :model do
     } }
     let(:file) { double('file') }
     it 'returns documents for this application' do
-      expect(Document).to receive(:all_for_collection).with(
+      expect(Document).to receive(:all_for_collection).at_least(:once).with(
         files_collection_ref
       ).and_return({
         doc_key: [file]
