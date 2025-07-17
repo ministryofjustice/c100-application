@@ -18,7 +18,7 @@ class C8ConfidentialityPresenter < SimpleDelegator
   def confidential_detail?(attribute, value)
     return unless value.present?
     case attribute
-    when :full_address, :residence_history
+    when :full_address
       contact_details_private.include? ContactDetails::ADDRESS.to_s
     when :phone_number
       contact_details_private.include? ContactDetails::PHONE_NUMBER.to_s

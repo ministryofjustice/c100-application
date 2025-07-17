@@ -32,7 +32,6 @@ module Summary
               person_phone_number(person),
               Answer.new(:person_voicemail_consent, person.voicemail_consent),
               Partial.row_blank_space,
-              residence_history(person),
               Partial.row_blank_space,
             ]
           end
@@ -40,11 +39,6 @@ module Summary
       end
 
       private
-
-      def residence_history(person)
-        value = confidential? && private?(person, ContactDetails::ADDRESS.to_s) ? person.residence_history : nil
-        FreeTextAnswer.new(:person_residence_history, value)
-      end
 
       def address(person)
         value = person.full_address if in_refuge?(person) || (confidential? && private?(person, ContactDetails::ADDRESS.to_s))
@@ -77,8 +71,7 @@ module Summary
       def empty_data?(person)
         address(person).value.nil? &&
           person_email(person).value.nil? &&
-          person_phone_number(person).value.nil? &&
-          residence_history(person).value.nil?
+          person_phone_number(person).value.nil?
       end
 
       def confidential?
