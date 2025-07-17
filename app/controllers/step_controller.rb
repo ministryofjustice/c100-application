@@ -32,7 +32,9 @@ class StepController < ApplicationController
       @form_object.save!
       redirect_to new_user_registration_path, allow_other_host: true
     elsif @form_object.save
-      if fast_forward_to_cya?
+      if block_given?
+        yield
+      elsif fast_forward_to_cya?
         redirect_to edit_steps_application_check_your_answers_path, allow_other_host: true
       else
         redirect_to destination(step_params: hash, opts:), allow_other_host: true

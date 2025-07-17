@@ -30,6 +30,8 @@ module C100App
       when :submission
         after_submission_type
       when :payment
+        after_payment
+      when :benefits_upload
         edit(:check_your_answers)
       when :declaration
         proceed_to_payment
@@ -88,6 +90,14 @@ module C100App
         show(:receipt_email_check)
       else
         edit(:payment)
+      end
+    end
+
+    def after_payment
+      if c100_application.payment_type.eql?(PaymentType::HELP_WITH_FEES.to_s)
+        edit(:benefits_upload)
+      else
+        edit(:check_your_answers)
       end
     end
 
