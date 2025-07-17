@@ -90,6 +90,12 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         name: exemption_file_key,
         collection_ref: '123'
       }) }
+      let(:benefits_evidence_key) { '39d2bFDf912fas3gDa' }
+      let(:benefits_evidence) { Document.new({
+         name: benefits_evidence_key,
+         collection_ref: '123'
+      }) }
+
       before do
         allow_any_instance_of(C100Application).to receive(
           :reference_code
@@ -98,7 +104,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           to receive(:all_for_collection).
           and_return({ miam_certificate: [miam_certificate],
                        draft_consent_order: [draft_consent_order],
-                       exemption: [exemption]
+                       exemption: [exemption],
+                       benefits_evidence: [benefits_evidence],
                      })
       end
 
@@ -137,6 +144,10 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_exemption:
             download_token_url(c100_application.download_tokens.find_by(
               key: exemption_file_key).token),
+          has_benefits_evidence: true,
+          link_to_benefits_evidence:
+            download_token_url(c100_application.download_tokens.find_by(
+              key: benefits_evidence_key).token),
         })
       end
     end
@@ -177,6 +188,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_miam_certificate: '',
           has_exemption: false,
           link_to_exemption: '',
+          has_benefits_evidence: false,
+          link_to_benefits_evidence: '',
         })
       end
     end
