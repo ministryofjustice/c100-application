@@ -7,7 +7,7 @@ RSpec.shared_examples 'a relationship step controller' do |form_class, decision_
   let(:child)         { double('Child') }
   let(:relationship)  { Relationship.new }
 
-  let(:existing_case) { instance_double(C100Application, relationships: relationships, minors: minors) }
+  let(:existing_case) { instance_double(C100Application, relationships: relationships, minors: minors, id: rand(10000)) }
 
   # This is a side effect of everything being a double, we have to do a lot of 'setup', but all this
   # is not part of these tests and we don't need to test the functionality, just trust it.
@@ -19,7 +19,7 @@ RSpec.shared_examples 'a relationship step controller' do |form_class, decision_
   end
 
   describe '#update' do
-    let(:form_object) { instance_double(form_class, attributes: { foo: double }) }
+    let(:form_object) { instance_double(form_class, attributes: { foo: double }, c100_application: existing_case) }
     let(:form_class_params_name) { form_class.name.underscore }
     let(:expected_params) { { form_class_params_name => { foo: 'bar' }, id: '123', child_id: '123' } }
 
