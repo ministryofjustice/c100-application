@@ -44,6 +44,8 @@ class ApplicationController < ActionController::Base
   end
 
   def initialize_c100_application(attributes = {})
+    return C100Application.new if attributes.blank?
+
     C100Application.create(attributes).tap do |c100_application|
       session[:c100_application_id] = c100_application.id
     end

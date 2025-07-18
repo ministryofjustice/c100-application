@@ -37,7 +37,7 @@ RSpec.describe Steps::Opening::StartOrContinueController, type: :controller do
   describe '#update' do
     let(:form_class) { Steps::Opening::StartOrContinueForm }
     let(:decision_tree_class) { C100App::OpeningDecisionTree }
-    let(:form_object) { instance_double(form_class, attributes: { foo: double }) }
+    let(:form_object) { instance_double(form_class, attributes: { foo: double }, c100_application: existing_case) }
     let(:form_class_params_name) { form_class.name.underscore }
     let(:expected_params) { { form_class_params_name => { foo: 'bar' } } }
 
