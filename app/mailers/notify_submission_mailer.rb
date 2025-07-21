@@ -81,8 +81,8 @@ class NotifySubmissionMailer < NotifyMailer
       links = docs.map do |doc|
         token = doc.generate_download_token(@c100_application).token
         download_token_url(token)
-      end.first
-      instance_variable_set("@link_to_#{key}", links)
+      end
+      instance_variable_set("@link_to_#{key}", key == :benefits_evidence ? links.join(', ') : links.first)
       instance_variable_set("@has_#{key}", true)
     else
       instance_variable_set("@link_to_#{key}", '')
