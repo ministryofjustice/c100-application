@@ -129,7 +129,7 @@ For more details on the ENV variables needed for CircleCI, refer to the [deploy 
 [k8s-staging]: https://c100-application-staging.apps.live-1.cloud-platform.service.justice.gov.uk
 [k8s-dev]: https://c100-application-dev.apps.live.cloud-platform.service.justice.gov.uk/
 
-## Deployment to DEV environment
+## Deployment to DEV/DEMO environment
 The image needs to be build and pushed first. This is done in Circle CI.
 There is a section deploy_image_to_dev and build_and_push_dev_image in .circleci/config.yml.
 When you are in your branch, update the filter rules with your branch name i.e.
