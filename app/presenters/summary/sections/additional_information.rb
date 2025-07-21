@@ -41,7 +41,7 @@ module Summary
       def language_assistance_value
         return if arrangement.nil?
 
-        GenericYesNo::YES if (LanguageHelp.string_values & arrangement.language_options).any?
+        GenericYesNo::YES if (LanguageHelp.string_values & (arrangement.language_options || [])).any?
       end
 
       def default_value
