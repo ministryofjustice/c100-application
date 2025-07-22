@@ -304,7 +304,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^rst-7484-new-application-refactor$/
+                - /^grover-refactor-test$/
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev
