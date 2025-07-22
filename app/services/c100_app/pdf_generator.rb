@@ -23,21 +23,56 @@ module C100App
     private
 
     def pdf_from_presenter(presenter)
+      start_time = Time.current
+      Rails.logger.info "[PDF] Starting PDF generation for #{presenter.name}"
+      
       html = render(presenter)
+      html_size = html.bytesize
+      Rails.logger.info "[PDF] HTML rendered (#{html_size} bytes) in #{Time.current - start_time}s"
+      
+      # Allow timeout override via environment variable
+      timeout_minutes = ENV.fetch('PDF_TIMEOUT_MINUTES', '15').to_i
+      timeout_ms = timeout_minutes * 60 * 1000
+      
       grover_options = {
         footer_template: footer_line(presenter),
-        timeout: (15 * 60 * 1000) # 15 minutes max timeout
+        timeout: timeout_ms,
+        debug: Rails.env.development?
       }
-
-      Grover.new(html, **grover_options).to_pdf
+      
+      # Log Chrome options for debugging
+      Rails.logger.info "[PDF] Grover options: #{grover_options.inspect}"
+      
+      grover_start = Time.current
+      grover = Grover.new(html, **grover_options)
+      pdf_data = grover.to_pdf
+      grover_time = Time.current - grover_start
+      
+      Rails.logger.info "[PDF] Grover PDF generation completed in #{grover_time}s (#{pdf_data.bytesize} bytes)"
+      Rails.logger.info "[PDF] Total PDF generation time: #{Time.current - start_time}s"
+      
+      pdf_data
+    rescue => e
+      Rails.logger.error "[PDF] PDF generation failed after #{Time.current - start_time}s: #{e.class} - #{e.message}"
+      Rails.logger.error "[PDF] Backtrace: #{e.backtrace.first(5).join('\n')}"
+      raise
     end
 
     def render(presenter)
-      ApplicationController.render(
+      html = ApplicationController.render(
         template: presenter.template.gsub(/\.pdf$/, ''),
         format: :pdf,
         locals: { presenter: }
       )
+      
+      # Save HTML for debugging in development
+      if Rails.env.development?
+        debug_html_path = Rails.root.join('tmp', 'pdf_debug_output.html')
+        File.write(debug_html_path, html)
+        Rails.logger.info "[PDF] Debug HTML saved to: #{debug_html_path}"
+      end
+      
+      html
     end
 
     def footer_line(presenter)
