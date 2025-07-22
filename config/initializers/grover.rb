@@ -2,7 +2,7 @@ Grover.configure do |config|
   # Minimal, stable launch args for Grover 1.2.3
   launch_args = [
     '--no-sandbox',
-    '--disable-setuid-sandbox', 
+    '--disable-setuid-sandbox',
     '--disable-gpu',
     '--font-render-hinting=medium'
   ]
@@ -14,7 +14,7 @@ Grover.configure do |config|
     header_template: '.',
     margin: {
       top: '40px',
-      left: '40px', 
+      left: '40px',
       right: '40px',
       bottom: '70px'
     },

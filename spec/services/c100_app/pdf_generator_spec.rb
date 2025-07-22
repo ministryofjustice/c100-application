@@ -2,14 +2,17 @@ require 'rails_helper'
 
 RSpec.describe C100App::PdfGenerator do
   context 'when performing end to end test' do
-    let(:c100_application) { C100Application.new(
-      status: :completed,
-      court: Court.new(
-        slug: 'slug',
-        name: 'name',
-        cci_code: '123'),
-      created_at: Time.now
-    ) }
+    let(:c100_application) do
+      C100Application.new(
+        status: :completed,
+        court: Court.new(
+          slug: 'slug',
+          name: 'name',
+          cci_code: '123'
+        ),
+        created_at: Time.now
+      )
+    end
 
     let(:presenter) { Summary::C100Form.new(c100_application) }
 
@@ -21,25 +24,23 @@ RSpec.describe C100App::PdfGenerator do
 
     it 'can render the complete form' do
       allow_any_instance_of(C100Application).to receive(:id).and_return('123-456')
-      expect {
+      expect do
         subject.generate(presenter, copies: 0)
-      }.not_to raise_error
+      end.not_to raise_error
     end
   end
 
   context 'when mocking libraries' do
-
-    let(:combiner)   { [] }
+    let(:combiner) { [] }
 
     before do
       allow(CombinePDF).to receive(:new).and_return(combiner)
     end
 
-
     describe '#generate' do
       let(:c100_application) { double('c100_application') }
 
-      let(:presenter) {
+      let(:presenter) do
         double(
           'Presenter',
           name: 'Test',
@@ -48,8 +49,8 @@ RSpec.describe C100App::PdfGenerator do
           raw_file_path: raw_file_path,
           c100_application: c100_application,
         )
-      }
-      let(:document)  { 'a form document' }
+      end
+      let(:document) { 'a form document' }
       let(:raw_file_path) { nil }
       let(:footer) { '<footer>' }
 
@@ -60,7 +61,9 @@ RSpec.describe C100App::PdfGenerator do
 
       it 'generates a PDF document via Grover' do
         allow_any_instance_of(C100App::PdfGenerator).to receive(:render).and_return('html to render')
-        expect(Grover).to receive(:new).with('html to render', { footer_template: footer, timeout: 900000, debug: false }).and_return(double(to_pdf: document))
+        expect(Grover).to receive(:new).with('html to render',
+                                             { footer_template: footer, format: 'A4',
+timeout: 900_000 }).and_return(double(to_pdf: document))
         subject.generate(presenter, copies: 0)
       end
 

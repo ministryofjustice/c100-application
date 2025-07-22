@@ -5,7 +5,7 @@ class DebugController < ApplicationController
   def pdf_html
     # Serve the most recent debug HTML file
     debug_html_path = Rails.root.join('tmp', 'pdf_debug_output.html')
-    
+
     if File.exist?(debug_html_path)
       html_content = File.read(debug_html_path)
       render html: html_content.html_safe
@@ -16,32 +16,31 @@ class DebugController < ApplicationController
 
   def pdf_preview
     application = C100Application.find(params[:id])
-    
+
     # Generate the HTML that would be sent to Grover
     presenter = Summary::C100Form.new(application)
-    
+
     html = ApplicationController.render(
       template: presenter.template.gsub(/\.pdf$/, ''),
       format: :pdf,
       locals: { presenter: presenter }
     )
-    
+
     # Save for debugging
     debug_html_path = Rails.root.join('tmp', "pdf_debug_#{params[:id]}.html")
     File.write(debug_html_path, html)
-    
+
     render html: html.html_safe
   rescue ActiveRecord::RecordNotFound
     render html: '<h1>Application not found</h1>'.html_safe
-  rescue => e
+  rescue StandardError => e
     render html: "<h1>Error generating PDF preview</h1><p>#{e.message}</p>".html_safe
   end
 
   private
 
   def ensure_development
-    unless Rails.env.development?
-      head :not_found
-    end
+    return if Rails.env.development?
+    head :not_found
   end
 end
