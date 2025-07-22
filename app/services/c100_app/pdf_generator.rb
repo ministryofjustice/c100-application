@@ -27,29 +27,82 @@ module C100App
       Rails.logger.info "[PDF] Starting PDF generation for #{presenter.name}"
       
       html = render(presenter)
-      html_size = html.bytesize
+      html_size = html&.bytesize || 0
       Rails.logger.info "[PDF] HTML rendered (#{html_size} bytes) in #{Time.current - start_time}s"
+      
+      if html.blank?
+        Rails.logger.error "[PDF] HTML rendering returned nil/empty content"
+        raise "HTML rendering failed - no content generated"
+      end
       
       # Allow timeout override via environment variable
       timeout_minutes = ENV.fetch('PDF_TIMEOUT_MINUTES', '15').to_i
       timeout_ms = timeout_minutes * 60 * 1000
       
+      # Build options gradually to identify problematic ones
       grover_options = {
-        footer_template: footer_line(presenter),
-        timeout: timeout_ms,
-        debug: Rails.env.development?
+        format: 'A4',
+        timeout: timeout_ms
       }
+      
+      # Add footer template (this might be the culprit)
+      unless ENV['PDF_SKIP_FOOTER'] == 'true'
+        begin
+          footer_content = footer_line(presenter)
+          if footer_content&.length && footer_content.length < 1000  # Reasonable size check
+            grover_options[:footer_template] = footer_content
+          else
+            Rails.logger.warn "[PDF] Skipping footer - too large or invalid: #{footer_content&.length} chars"
+          end
+        rescue => footer_error
+          Rails.logger.error "[PDF] Footer generation failed: #{footer_error.message}"
+        end
+      end
       
       # Log Chrome options for debugging
       Rails.logger.info "[PDF] Grover options: #{grover_options.inspect}"
       
       grover_start = Time.current
-      grover = Grover.new(html, **grover_options)
-      pdf_data = grover.to_pdf
+      Rails.logger.info "[PDF] Creating Grover instance with HTML length: #{html.length}"
+      
+      # Test with minimal HTML if environment variable is set
+      if ENV['PDF_TEST_MINIMAL'] == 'true'
+        Rails.logger.info "[PDF] Using minimal HTML for testing"
+        html = "<html><body><h1>Test PDF</h1><p>This is a test PDF generation.</p></body></html>"
+      end
+      
+      begin
+        # Try configured options first, fall back to minimal if they fail
+        Rails.logger.info "[PDF] Attempting PDF generation with configured options"
+        grover = Grover.new(html, **grover_options)
+        pdf_data = grover.to_pdf
+        
+        # If configured options return nil, fall back to minimal
+        if pdf_data.nil? || pdf_data.empty?
+          Rails.logger.warn "[PDF] Configured options failed, falling back to minimal options"
+          minimal_grover = Grover.new(html, format: 'A4')
+          pdf_data = minimal_grover.to_pdf
+          Rails.logger.info "[PDF] Fallback successful, PDF size: #{pdf_data&.bytesize || 0} bytes"
+        else
+          Rails.logger.info "[PDF] Configured options successful, PDF size: #{pdf_data.bytesize} bytes"
+        end
+        
+      rescue => grover_error
+        Rails.logger.error "[PDF] Grover error: #{grover_error.class} - #{grover_error.message}"
+        Rails.logger.error "[PDF] Grover backtrace: #{grover_error.backtrace.first(3).join('\n')}"
+        raise grover_error
+      end
+      
       grover_time = Time.current - grover_start
       
-      Rails.logger.info "[PDF] Grover PDF generation completed in #{grover_time}s (#{pdf_data.bytesize} bytes)"
+      pdf_size = pdf_data&.bytesize || 0
+      Rails.logger.info "[PDF] Grover PDF generation completed in #{grover_time}s (#{pdf_size} bytes)"
       Rails.logger.info "[PDF] Total PDF generation time: #{Time.current - start_time}s"
+      
+      if pdf_data.blank?
+        Rails.logger.error "[PDF] Grover returned nil/empty PDF data"
+        raise "PDF generation failed - no PDF data returned from Grover"
+      end
       
       pdf_data
     rescue => e
