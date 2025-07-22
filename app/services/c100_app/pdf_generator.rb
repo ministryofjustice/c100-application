@@ -1,4 +1,5 @@
 module C100App
+  # rubocop:disable Metrics/ClassLength
   class PdfGenerator
     def generate(presenter, copies:)
       main_doc = pdf_from_presenter(presenter)
@@ -22,6 +23,7 @@ module C100App
 
     private
 
+    # rubocop:disable Metrics/AbcSize
     def pdf_from_presenter(presenter)
       start_time = Time.current
       Rails.logger.info "[PDF] Starting PDF generation for #{presenter.name}"
@@ -39,6 +41,7 @@ module C100App
       Rails.logger.error "[PDF] Backtrace: #{e.backtrace.first(5).join('\n')}"
       raise
     end
+    # rubocop:enable Metrics/AbcSize
 
     def render(presenter)
       html = ApplicationController.render(
@@ -124,6 +127,7 @@ module C100App
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def generate_pdf_with_fallback(html, grover_options, _start_time)
       Rails.logger.info "[PDF] Creating Grover instance with HTML length: #{html.length}"
 
@@ -148,6 +152,7 @@ module C100App
 
       pdf_data
     end
+    # rubocop:enable Metrics/AbcSize
 
     def validate_pdf_data(pdf_data)
       return unless pdf_data.blank?
@@ -156,4 +161,5 @@ module C100App
       raise "PDF generation failed - no PDF data returned from Grover"
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end
