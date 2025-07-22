@@ -60,7 +60,7 @@ RSpec.describe C100App::PdfGenerator do
 
       it 'generates a PDF document via Grover' do
         allow_any_instance_of(C100App::PdfGenerator).to receive(:render).and_return('html to render')
-        expect(Grover).to receive(:new).with('html to render', footer_template: footer).and_return(double(to_pdf: document))
+        expect(Grover).to receive(:new).with('html to render', { footer_template: footer, timeout: 900000 }).and_return(double(to_pdf: document))
         subject.generate(presenter, copies: 0)
       end
 
