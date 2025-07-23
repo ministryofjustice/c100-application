@@ -134,20 +134,20 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           has_attachments: true,
           has_draft_consent_order: true,
           link_to_draft_consent_order:
-            download_token_url(c100_application.download_tokens.find_by(
-              key: draft_consent_order_file_key).token),
+            [download_token_url(c100_application.download_tokens.find_by(
+              key: draft_consent_order_file_key).token)],
           has_miam_certificate: true,
           link_to_miam_certificate:
-            download_token_url(c100_application.download_tokens.find_by(
-              key: miam_certificate_file_key).token),
+            [download_token_url(c100_application.download_tokens.find_by(
+              key: miam_certificate_file_key).token)],
           has_exemption: true,
           link_to_exemption:
-            download_token_url(c100_application.download_tokens.find_by(
-              key: exemption_file_key).token),
+            [download_token_url(c100_application.download_tokens.find_by(
+              key: exemption_file_key).token)],
           has_benefits_evidence: true,
           link_to_benefits_evidence:
-            download_token_url(c100_application.download_tokens.find_by(
-              key: benefits_evidence_key).token),
+            [download_token_url(c100_application.download_tokens.find_by(
+              key: benefits_evidence_key).token)],
         })
       end
     end

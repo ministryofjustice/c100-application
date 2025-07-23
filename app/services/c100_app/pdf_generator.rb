@@ -26,6 +26,7 @@ module C100App
       html = render(presenter)
       grover_options = {
         footer_template: footer_line(presenter),
+        timeout: (15 * 60 * 1000) # 15 minutes max timeout
       }
 
       Grover.new(html, **grover_options).to_pdf
