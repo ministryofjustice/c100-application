@@ -32,6 +32,7 @@ class StepController < ApplicationController
       @form_object.save!
       redirect_to new_user_registration_path, allow_other_host: true
     elsif @form_object.save
+      session[:c100_application_id] = @form_object.c100_application.id
       if block_given?
         yield
       elsif fast_forward_to_cya?
