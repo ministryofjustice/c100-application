@@ -339,10 +339,9 @@ Rails.application.routes.draw do
   end
 
   # PDF debugging routes (development only)
-  if Rails.env.development?
-    get 'debug/pdf_html', to: 'debug#pdf_html'
-    get 'debug/pdf_preview/:id', to: 'debug#pdf_preview'
-  end
+  get 'debug/pdf_html', to: 'debug#pdf_html'
+  get 'debug/pdf_preview/:id', to: 'debug#pdf_preview'
+
 
   resource :cookies,
            path: '/about/cookies',
