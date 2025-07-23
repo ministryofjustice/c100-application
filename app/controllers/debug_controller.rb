@@ -26,8 +26,10 @@ class DebugController < ApplicationController
       locals: { presenter: presenter }
     )
 
-    # Save for debugging
-    debug_html_path = Rails.root.join('tmp', "pdf_debug_#{params[:id]}.html")
+    # Save for debugging using secure filename with timestamp
+    timestamp = Time.current.strftime('%Y%m%d_%H%M%S')
+    debug_html_filename = "pdf_debug_#{timestamp}.html"
+    debug_html_path = Rails.root.join('tmp', debug_html_filename)
     File.write(debug_html_path, html)
 
     render html: html.html_safe
