@@ -60,7 +60,41 @@ RSpec.describe C100App::PdfGenerator do
 
       it 'generates a PDF document via Grover' do
         allow_any_instance_of(C100App::PdfGenerator).to receive(:render).and_return('html to render')
-        expect(Grover).to receive(:new).with('html to render', { footer_template: footer, timeout: 900000 }).and_return(double(to_pdf: document))
+        optimized_args = [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-gpu',
+          '--disable-dev-shm-usage',
+          '--disable-background-networking',
+          '--disable-background-timer-throttling',
+          '--disable-backgrounding-occluded-windows',
+          '--disable-breakpad',
+          '--disable-component-update',
+          '--disable-default-apps',
+          '--disable-domain-reliability',
+          '--disable-extensions',
+          '--disable-features=AudioServiceOutOfProcess,IsolateOrigins',
+          '--disable-hang-monitor',
+          '--disable-ipc-flooding-protection',
+          '--disable-notifications',
+          '--disable-popup-blocking',
+          '--disable-print-preview',
+          '--disable-prompt-on-repost',
+          '--disable-renderer-backgrounding',
+          '--disable-site-isolation-trials',
+          '--font-render-hinting=medium'
+        ]
+        expected_options = {
+          footer_template: footer,
+          timeout: 900000,
+          format: 'A4',
+          print_background: true,
+          prefer_css_page_size: true,
+          wait_until: 'domcontentloaded',
+          cache: false,
+          launch_args: optimized_args
+        }
+        expect(Grover).to receive(:new).with('html to render', expected_options).and_return(double(to_pdf: document))
         subject.generate(presenter, copies: 0)
       end
 

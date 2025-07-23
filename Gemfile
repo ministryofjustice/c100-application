@@ -61,7 +61,6 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'i18n-debug'
   gem "bundler-audit", "~> 0.9.1"
 end
 

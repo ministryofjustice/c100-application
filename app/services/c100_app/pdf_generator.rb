@@ -26,7 +26,13 @@ module C100App
       html = render(presenter)
       grover_options = {
         footer_template: footer_line(presenter),
-        timeout: (15 * 60 * 1000) # 15 minutes max timeout
+        timeout: (15 * 60 * 1000), # 15 minutes max timeout
+        format: 'A4',
+        print_background: true,
+        prefer_css_page_size: true,
+        wait_until: 'domcontentloaded', # Faster than 'networkidle0'
+        cache: false, # Disable cache for consistent results
+        launch_args: optimized_launch_args
       }
 
       Grover.new(html, **grover_options).to_pdf
@@ -57,5 +63,34 @@ module C100App
     def combiner
       @_combiner ||= CombinePDF.new
     end
+
+    # rubocop:disable Metrics/MethodLength
+    def optimized_launch_args
+      [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+        '--disable-background-networking',
+        '--disable-background-timer-throttling',
+        '--disable-backgrounding-occluded-windows',
+        '--disable-breakpad',
+        '--disable-component-update',
+        '--disable-default-apps',
+        '--disable-domain-reliability',
+        '--disable-extensions',
+        '--disable-features=AudioServiceOutOfProcess,IsolateOrigins',
+        '--disable-hang-monitor',
+        '--disable-ipc-flooding-protection',
+        '--disable-notifications',
+        '--disable-popup-blocking',
+        '--disable-print-preview',
+        '--disable-prompt-on-repost',
+        '--disable-renderer-backgrounding',
+        '--disable-site-isolation-trials',
+        '--font-render-hinting=medium'
+      ]
+    end
+    # rubocop:enable Metrics/MethodLength
   end
 end

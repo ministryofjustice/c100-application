@@ -258,8 +258,6 @@ GEM
       activesupport (>= 6.1.4.4)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    i18n-debug (1.2.0)
-      i18n (< 2)
     ice_nine (0.11.2)
     io-console (0.8.0)
     irb (1.15.1)
@@ -642,7 +640,6 @@ DEPENDENCIES
   govuk_design_system_formbuilder
   govuk_notify_rails (~> 3.0)
   grover
-  i18n-debug
   jquery-rails
   listen
   lograge
