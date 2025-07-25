@@ -17,7 +17,10 @@ class ApplicationController < ActionController::Base
 
   def current_c100_application
     return nil if session[:c100_application_id].blank?
-    @_current_c100_application ||= C100Application.find_by_id(session[:c100_application_id])
+    @_current_c100_application ||= C100Application.includes(
+      :people, :relationships, :abuse_concerns, :minors,
+      children: :child_residence
+    ).find_by_id(session[:c100_application_id])
   end
   helper_method :current_c100_application
 
