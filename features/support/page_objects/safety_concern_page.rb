@@ -7,6 +7,6 @@ class SafetyConcernPage < BasePage
   end
 
   def continue_to_next_step
-    content.continue.click
+    content.continue_button.click
   end
 end
