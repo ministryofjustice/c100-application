@@ -7,6 +7,7 @@
 require 'cucumber/rails'
 require 'webmock'
 require 'cucumber/rspec/doubles'
+require 'database_cleaner/active_record'
 require_relative './page_objects/base_page'
 Dir[File.dirname(__FILE__) + '/page_objects/**/*.rb'].each { |f| require f }
 
@@ -45,7 +46,7 @@ Capybara.default_max_wait_time = 10
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
-  DatabaseCleaner.strategy = :transaction
+  DatabaseCleaner.strategy = :truncation
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
