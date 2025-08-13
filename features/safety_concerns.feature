@@ -1,30 +1,29 @@
 Feature: Safety Concerns
   Background:
     Given I have started an application
-    When I visit "steps/safety_questions/start"
-    Then I should see "Safety concerns"
+    When I navigate to the Safety concerns from consent order page
     And I click the "Continue" link
 
   @happy_path
   Scenario: Children Safety Concerns
     Then I should see "Are the children at risk of being abducted?"
-    
+
     # Provoke validation error
     Then I click the "Continue" button
     And I should see a "Select yes if the children are at risk of being abducted" link to "#steps-safety-questions-risk-of-abduction-form-risk-of-abduction-field-error"
-    
+
     # Fixing validation error
     When I choose "Yes"
     Then I should see "Have the police been notified?"
-    
+
     # Provoke validation error
     When I click the "Continue" button
     Then I should see a "Select yes if the police have been notified" link to "#steps-abduction-international-form-passport-office-notified-field-error"
-    
+
     # Fixing validation error
     When I choose "Yes"
     Then I should see "Do any of the children have a passport?"
-    
+
     # Provoke validation error
     When I click the "Continue" button
     Then I should see a "Select yes if the children have a passport" link to "#steps-abduction-children-have-passport-form-children-have-passport-field-error"
@@ -33,7 +32,7 @@ Feature: Safety Concerns
     When I choose "Yes"
     Then I should see "Provide details of the children’s passports"
     And I should see "Do the children have more than one passport?"
-    
+
     # Provoking validation error
     When I click the "Continue" button
     Then I should see a "Select yes if they have more than one passport" link to "#steps-abduction-passport-details-form-children-multiple-passports-field-error"
@@ -74,7 +73,7 @@ Feature: Safety Concerns
     Then I should see "The children’s safety"
     And I click the "Continue" link
     Then I should see "Have the children ever been sexually abused by the respondent?"
-    
+
     # Provoking validation error
     When I click the "Continue" button
     Then I should see a "Select yes if this safety concern applies" link to "#steps-abuse-concerns-question-form-answer-field-error"
@@ -220,5 +219,6 @@ Feature: Safety Concerns
   @happy_path
   Scenario: Testing timeout on children safety concerns
     Then I should see "Are the children at risk of being abducted?"
-    And I wait and click the "Continue" button
+    And I choose "Yes"
+    Then I let session to expire
     Then I should see "Sorry, you'll have to start again"

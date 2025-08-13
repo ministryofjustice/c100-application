@@ -122,10 +122,15 @@ When(/^I click the postcode page "([^"]*)" button with an invalid postcode$/) do
 end
 
 When(/^I have started an application$/) do
-  step %[I visit "/"]
-  step %[I open the "Developer Tools" summary details]
-  find('button', text: 'Bypass postcode').click
-  step %[I should be on "/steps/opening/consent_order"]
+  # replacing the override passcode link with normal way
+  visit '/'
+  expect(home_page.content).to have_header
+  home_page.submit_postcode('MK93DX')
+
+  expect(what_you_need_page.content).to have_header
+  what_you_need_page.continue_to_next_step
+
+  expect(consent_order_page.content).to have_header
 end
 
 When(/^I am on the home page$/) do
@@ -194,4 +199,30 @@ When('court finder raises an error') do
   courtfinder_mock = instance_double(C100App::CourtfinderAPI, is_ok?: false)
   allow(C100App::CourtfinderAPI).to receive(:new).and_return(courtfinder_mock)
   allow(courtfinder_mock).to receive(:court_for).and_raise(StandardError.new('Courtfinder API error'))
+end
+
+Given('stub court finder responses') do
+  courtfinder_mock = instance_double(C100App::CourtfinderAPI, is_ok?: false)
+  allow(C100App::CourtfinderAPI).to receive(:new).and_return(courtfinder_mock)
+end
+
+Given('debugger') do
+  binding.pry
+  :a
+end
+
+When('I navigate to the Safety concerns from consent order page') do
+  consent_order_page.submit_without_consent_order
+  child_protection_case_page.submit_yes
+  expect(miam_page.content).to have_text('You do not have to attend a MIAM')
+
+  miam_page.continue_to_next_step
+  expect(safety_concern_page.content).to have_header
+end
+
+When('I let session to expire') do
+  travel_to 61.minutes.from_now do
+    # save_and_open_page
+    expect(page).to have_text("Sorry, you'll have to start again")
+  end
 end
