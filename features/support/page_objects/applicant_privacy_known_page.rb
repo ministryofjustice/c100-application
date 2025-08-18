@@ -3,7 +3,7 @@ class ApplicantPrivacyKnownPage < BasePage
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Do the other people named in this application (the respondents) know any of your contact details?'
-    element :answer_yes, "input#steps-applicant-privacy-known-form-privacy-known-yes-field", visible: false
+    element :answer_yes, "input[name='steps_applicant_privacy_known_form[privacy_known]'][value='yes']", visible: false
     element :answer_no, "input#steps-applicant-privacy-known-form-privacy-known-no-field", visible: false
     element :continue_button, "button", text: "Continue"
   end

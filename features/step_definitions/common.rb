@@ -40,6 +40,9 @@ Then(/^I should not see the save draft button$/) do
 end
 
 When(/^I click the "([^"]*)" link$/) do |text|
+  binding.pry if text == 'Back'
+  puts 'AAAAAAAA'
+  puts find('.govuk-back-link')[:href]
   find(:xpath, './/main', visible: true, wait: true)
   click_link(text, wait: true)
 rescue Selenium::WebDriver::Error::UnknownError => e
@@ -243,15 +246,15 @@ end
 When('I complete the applicant details journey') do
   # Add a child first
   children_names_page.add_child('John', 'Doe Junior')
-  
+
   # Navigate to applicant names
   applicant_names_page.submit_names('John', 'Doe Senior')
-  
+
   # Privacy questions
   applicant_privacy_known_page.submit_yes
   applicant_privacy_preferences_page.submit_no
   applicant_refuge_page.submit_no
-  
+
   # Personal details
   applicant_personal_details_page.submit_personal_details(
     has_previous_name: 'no',
@@ -261,10 +264,10 @@ When('I complete the applicant details journey') do
     year: '1998',
     birthplace: 'Manchester'
   )
-  
+
   # Relationship
   applicant_relationship_page.submit_relationship('Father')
-  
+
   # Address
   address_lookup_page.click_outside_uk
   applicant_address_details_page.submit_address_details(
@@ -273,14 +276,14 @@ When('I complete the applicant details journey') do
     country: 'United Kingdom',
     residence_5_years: 'yes'
   )
-  
+
   # Contact details
   applicant_contact_details_page.submit_contact_details(
     email: 'john@email.com',
     phone: '00000000000',
     voicemail_consent: 'yes'
   )
-  
+
   # Solicitor
   applicant_has_solicitor_page.submit_no
 end
