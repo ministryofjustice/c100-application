@@ -48,7 +48,7 @@ Style/SymbolArray:
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 
-Naming/PredicateName:
+Naming/PredicatePrefix:
   Enabled: false
 
 Style/MultilineIfModifier:
