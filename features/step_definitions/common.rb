@@ -125,7 +125,9 @@ When(/^I have started an application$/) do
   step %[I visit "/"]
   step %[I open the "Developer Tools" summary details]
   find('button', text: 'Bypass postcode').click
-  step %[I should be on "/steps/opening/consent_order"]
+  # binding.pry
+  expect(page).to have_current_path("/steps/opening/consent_order")
+  # step %[I should be on "/steps/opening/consent_order"]
 end
 
 When(/^I am on the home page$/) do
@@ -194,4 +196,9 @@ When('court finder raises an error') do
   courtfinder_mock = instance_double(C100App::CourtfinderAPI, is_ok?: false)
   allow(C100App::CourtfinderAPI).to receive(:new).and_return(courtfinder_mock)
   allow(courtfinder_mock).to receive(:court_for).and_raise(StandardError.new('Courtfinder API error'))
+end
+
+Then('debugger') do
+  require 'pry'
+  binding.pry
 end
