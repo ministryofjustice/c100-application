@@ -18,18 +18,21 @@ begin
       t.binary = vendored_cucumber_bin # If nil, the gem's binary is used.
       t.fork = true # You may get faster startup if you set this to false
       t.profile = 'default'
+      t.cucumber_opts = '--fail-fast'
     end
 
     Cucumber::Rake::Task.new({wip: 'test:prepare'}, 'Run features that are being worked on') do |t|
       t.binary = vendored_cucumber_bin
       t.fork = true # You may get faster startup if you set this to false
       t.profile = 'wip'
+      t.cucumber_opts = '--fail-fast'
     end
 
     Cucumber::Rake::Task.new({rerun: 'test:prepare'}, 'Record failing features and run only them if any exist') do |t|
       t.binary = vendored_cucumber_bin
       t.fork = true # You may get faster startup if you set this to false
       t.profile = 'rerun'
+      t.cucumber_opts = '--fail-fast'
     end
 
     desc 'Run all features'
@@ -40,7 +43,7 @@ begin
       ::STATS_DIRECTORIES << %w(Cucumber\ features features) if File.exist?('features')
       ::CodeStatistics::TEST_TYPES << "Cucumber features" if File.exist?('features')
     end
-    
+
   end
 
   desc 'Alias for cucumber:ok'
@@ -58,7 +61,7 @@ begin
 
   task stats: 'cucumber:statsetup'
 
-  
+
 rescue LoadError
   desc 'cucumber rake task not available (cucumber not installed)'
   task :cucumber do
