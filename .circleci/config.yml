@@ -47,9 +47,6 @@ jobs:
       - run: sudo apt-get update
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      - run:
-          name: Remove chromedriver license # prevents checkout
-          command: rm LICENSE.chromedriver
       - checkout
 
       # Download and cache dependencies
