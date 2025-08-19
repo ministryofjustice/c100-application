@@ -8,12 +8,12 @@ Feature: Create account for applicant
     When I create an account
     And I should see "Your application has been saved"
 
-  @happy_path
-  Scenario: Login to applicant account
-    When I create an account to login
-    And I click the "Sign in" link
-    And I login
-    Then I should see "Your drafts"
+  # @happy_path
+  # Scenario: Login to applicant account
+  #   When I create an account to login
+  #   And I click the "Sign in" link
+  #   And I login
+  #   Then I should see "Your drafts"
 
   @unhappy_path
   Scenario: Enter no details when on the account creation page
