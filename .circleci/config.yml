@@ -45,13 +45,15 @@ jobs:
     resource_class: medium+
     steps:
       - run: sudo apt-get update
-      - browser-tools/install-chrome:
-          chrome-version: 128.0.6613.114 # TODO: remove when chromedriver downloads are fixed
-#          replace-existing: true # TODO: remove when: https://github.com/CircleCI-Public/browser-tools-orb/issues/75
-#      - run:
-#          name: Remove chromedriver license # prevents checkout
-#          command: |
-#            rm LICENSE.chromedriver
+      - browser-tools/install_chrome:
+        replace_existing: true
+        timeout: 1m
+      - browser-tools/install_chromedriver:
+        timeout: 1m
+      - run:
+        name: Remove chromedriver license # prevents checkout
+        command: |
+          rm LICENSE.chromedriver
       - checkout
 
       # Download and cache dependencies
