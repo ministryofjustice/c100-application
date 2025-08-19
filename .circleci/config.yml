@@ -45,15 +45,11 @@ jobs:
     resource_class: medium+
     steps:
       - run: sudo apt-get update
-      - browser-tools/install_chrome:
-        replace_existing: true
-        timeout: 1m
-      - browser-tools/install_chromedriver:
-        timeout: 1m
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
-        name: Remove chromedriver license # prevents checkout
-        command: |
-          rm LICENSE.chromedriver
+          name: Remove chromedriver license # prevents checkout
+          command: rm LICENSE.chromedriver
       - checkout
 
       # Download and cache dependencies
