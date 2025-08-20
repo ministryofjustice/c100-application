@@ -60,13 +60,16 @@ rescue Selenium::WebDriver::Error::UnknownError => e
 end
 
 When(/^I wait and click the "([^"]*)" button$/) do |text|
-  travel 61.minutes do
-    begin
-      find_button("#{text}").click
-    rescue
-      click_link(text)
-    end
+  travel_to 61.minutes.from_now
+  begin
+    find_button("#{text}").click
+  rescue
+    click_link(text)
   end
+end
+
+Then('the time goes back to normal') do
+  travel_back
 end
 
 When(/^I click the postcode page "([^"]*)" button$/) do |text|
@@ -199,4 +202,5 @@ end
 Then('debugger') do
   require 'pry'
   binding.pry
+  :a
 end
