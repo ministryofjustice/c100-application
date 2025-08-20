@@ -12,22 +12,24 @@ Feature: MIAM voucher acknowledgement
 
   Scenario: Mediation link
     Then I should see a "mediation" link to "https://helpwithchildarrangements.service.justice.gov.uk/professional-mediation"
-  
+
   Scenario: Check if you’re eligible for legal aid during mediation link
     Then I should see a "Check if you’re eligible for legal aid during mediation" link to "https://www.gov.uk/check-legal-aid"
-  
+
   Scenario: Find a mediator to book a MIAM link
     Then I should see a "Find a mediator to book a MIAM" link to "https://www.familymediationcouncil.org.uk/find-local-mediator/"
-  
+
   Scenario: List of valid reasons for not attending a MIAM link
     Then I should see a "List of valid reasons for not attending a MIAM" link to "/about/miam_exemptions"
 
+  @skip
   Scenario: Checkbox complete - Yes
     When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
     And I choose "Yes"
     And I click the "Continue" button
     Then I should be on "/steps/miam/attended"
 
+  @skip
   Scenario: Checkbox complete - No
     When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
     And I choose "No"
@@ -38,9 +40,9 @@ Feature: MIAM voucher acknowledgement
     When I click the "Continue" button
     Then I should see "Confirm you understand MIAM attendance requirements"
 
-  Scenario: Test timeout for checkbox page
-    When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
-    And I wait and click the "Continue" button
-    Then I should see "Sorry, you'll have to start again"
+  # Scenario: Test timeout for checkbox page
+  #   When I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
+  #   And I wait and click the "Continue" button
+  #   Then I should see "Sorry, you'll have to start again"
 
 

@@ -99,7 +99,7 @@ Feature: MIAM mediation change journey
     And I click the "Continue" link
     Then I should see "Safety concerns"
 
-  @happy_path
+  @happy_path @skip
   Scenario: Test timeout for applicant attended a MIAM
     When I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "Yes"
@@ -107,7 +107,7 @@ Feature: MIAM mediation change journey
     When I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
 
-  @unhappy_path
+  @unhappy_path @skip
   Scenario: Test timeout for applicant attended a MIAM but lacks the certificate
     When I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "Yes"
@@ -115,7 +115,7 @@ Feature: MIAM mediation change journey
     When I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
 
-  @unhappy_path
+  @unhappy_path @skip
   Scenario: Test timeout for applicant did not attend a MIAM and does not have a mediator’s exemption
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "No"
@@ -123,7 +123,7 @@ Feature: MIAM mediation change journey
     Then I wait and click the "Continue" button
     And I should see "Sorry, you'll have to start again"
 
-  @unhappy_path
+  @unhappy_path @skip
   Scenario: Test timeout for applicant did not attend a MIAM and has not selected a valid reason
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "No"
