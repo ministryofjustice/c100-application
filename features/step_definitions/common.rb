@@ -125,9 +125,7 @@ When(/^I have started an application$/) do
   step %[I visit "/"]
   step %[I open the "Developer Tools" summary details]
   find('button', text: 'Bypass postcode').click
-  # binding.pry
   expect(page).to have_current_path("/steps/opening/consent_order")
-  # step %[I should be on "/steps/opening/consent_order"]
 end
 
 When(/^I am on the home page$/) do
