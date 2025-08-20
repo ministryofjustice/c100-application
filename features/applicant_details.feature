@@ -229,14 +229,14 @@ Feature: Add an applicant to the application
     And I click the "Continue" button
     Then Page has title "Respondent names - Apply to court about child arrangements - GOV.UK"
 
-  @happy_path @skip
+  @happy_path
   Scenario: Test timeout on applicant personal details
     When I should see "Enter your name"
     And I should see "Enter a new name"
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
 
-  @happy_path @skip
+  @happy_path
   Scenario: Test timeout on solicitor representative details journey
     When I visit "steps/solicitor/personal_details"
     And I should see "Details of solicitor"

@@ -108,7 +108,7 @@ Feature: MIAM mediation change journey
     Then I should see "Sorry, you'll have to start again"
     And the time goes back to normal
 
-  @unhappy_path @skip
+  @unhappy_path
   Scenario: Test timeout for applicant attended a MIAM but lacks the certificate
     When I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "Yes"
@@ -117,7 +117,7 @@ Feature: MIAM mediation change journey
     Then I should see "Sorry, you'll have to start again"
     And the time goes back to normal
 
-  @unhappy_path @skip
+  @unhappy_path
   Scenario: Test timeout for applicant did not attend a MIAM and does not have a mediator’s exemption
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "No"
@@ -126,7 +126,7 @@ Feature: MIAM mediation change journey
     And I should see "Sorry, you'll have to start again"
     And the time goes back to normal
 
-  @unhappy_path @skip
+  @unhappy_path
   Scenario: Test timeout for applicant did not attend a MIAM and has not selected a valid reason
     Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "No"

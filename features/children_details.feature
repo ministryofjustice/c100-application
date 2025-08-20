@@ -189,7 +189,7 @@ Feature: Add children to the application
     Then I click the "Remove child 1" button
     And I click the "Back" link
 
-  @happy_path @skip
+  @happy_path
   Scenario: Test timeout on children personal details page
     When I should see "Enter the names of the children"
     And I should see "Enter a new name"
@@ -197,7 +197,7 @@ Feature: Add children to the application
     Then I should see "Sorry, you'll have to start again"
     And the time goes back to normal
 
-  @happy_path @skip
+  @happy_path
   Scenario: Test timeout on other children details page
     When I visit "steps/children/has_other_children"
     And I should see "Do you or any respondents have other children who are not part of this application?"
