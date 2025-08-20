@@ -217,8 +217,8 @@ Feature: Safety Concerns
     Then I submit the form details for "Other concerns about the children"
     And I should see "Your safety"
 
-  # @happy_path
-  # Scenario: Testing timeout on children safety concerns
-  #   Then I should see "Are the children at risk of being abducted?"
-  #   And I wait and click the "Continue" button
-  #   Then I should see "Sorry, you'll have to start again"
+  @happy_path @skip
+  Scenario: Testing timeout on children safety concerns
+    Then I should see "Are the children at risk of being abducted?"
+    And I wait and click the "Continue" button
+    Then I should see "Sorry, you'll have to start again"
