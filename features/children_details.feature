@@ -195,6 +195,7 @@ Feature: Add children to the application
     And I should see "Enter a new name"
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
+    And the time goes back to normal
 
   @happy_path @skip
   Scenario: Test timeout on other children details page
@@ -202,3 +203,4 @@ Feature: Add children to the application
     And I should see "Do you or any respondents have other children who are not part of this application?"
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
+    And the time goes back to normal

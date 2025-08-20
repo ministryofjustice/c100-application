@@ -322,6 +322,7 @@ Feature: Add a respondent to the application
     And I should see "Enter a new name"
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
+    And the time goes back to normal
 
   @happy_path @skip
   Scenario: Testing timeout on addition of exterior person to application
@@ -331,3 +332,4 @@ Feature: Add a respondent to the application
     Then I should see "Enter the other person’s name"
     Then I wait and click the "Continue" button
     And I should see "Sorry, you'll have to start again"
+    And the time goes back to normal
