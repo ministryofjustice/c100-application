@@ -41,7 +41,7 @@ end
 
 When(/^I click the "([^"]*)" link$/) do |text|
   find(:xpath, './/main', visible: true, wait: true)
-  click_link(text, wait: true)
+  find(:css, 'a', text: text).click
 rescue Selenium::WebDriver::Error::UnknownError => e
   find(:xpath, './/main', visible: true, wait: true)
   click_link(text)
@@ -133,6 +133,7 @@ end
 
 When(/^I am on the home page$/) do
   step %[I visit "/"]
+  find(:css, 'h1', text: 'What you’ll need to complete your application')
 end
 
 When(/^I pause for "([^"]*)" seconds$/) do |seconds|
