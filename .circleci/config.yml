@@ -24,7 +24,7 @@ references:
           AWS_WEB_IDENTITY_TOKEN_FILE: 'just_for_test'
           AWS_ROLE_ARN: 'just_for_test'
 
-      - image: circleci/postgres:10.4
+      - image: circleci/postgres:14.17
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: c100-application-test
