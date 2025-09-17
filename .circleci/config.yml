@@ -24,10 +24,11 @@ references:
           AWS_WEB_IDENTITY_TOKEN_FILE: 'just_for_test'
           AWS_ROLE_ARN: 'just_for_test'
 
-      - image: circleci/postgres:10.4
+      - image: cimg/postgres:14.13
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: c100-application-test
+          POSTGRES_HOST_AUTH_METHOD: trust
   cloud_container: &cloud_container
     docker:
       - image: ministryofjustice/cloud-platform-tools:1.24
@@ -68,8 +69,8 @@ jobs:
           key: v1.1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup
-      # - run: bundle exec rake db:create
-      # - run: bundle exec rake db:schema:load
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
 
       # so mutant only runs on modified files; refer to mutant.rake for more details
       - run: git remote set-branches origin master && git fetch
