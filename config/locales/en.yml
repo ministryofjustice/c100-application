@@ -548,7 +548,7 @@ en:
               <<: *ABUSE_CONCERNS
               sexual_html: |
                 <p class="govuk-body">A child is sexually abused when they are forced or persuaded to take part in sexual activities, including online. It may not necessarily involve a high level of violence, and the child may or may not be aware of what's happening.</p>
-                <p class="govuk-body">There are 2 types of child sexual abuse:</p>
+                <p class="govuk-body">There are two types of child sexual abuse:</p>
                 <ul class="govuk-list govuk-list--bullet">
                   <li>contact abuse (where an abuser makes physical contact)</li>
                   <li>non-contact abuse (for example grooming or exploitation)</li>
