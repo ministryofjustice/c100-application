@@ -105,5 +105,6 @@ module Application
     config.prl_opening_date = DateTime.parse(ENV.fetch("PRL_OPENING", "13/02/2025"))
     config.prl_wolverhampton_date = DateTime.parse(ENV.fetch("PRL_WOLVERHAMPTON", "07/08/2025"))
     config.prl_chelmsford_rollout = DateTime.parse(ENV.fetch("PRL_CHELMSFORD_ROLLOUT", "08/07/2025"))
+    config.laa_change_date = DateTime.parse(ENV.fetch("LAA_CHANGE", "01/01/2026"))
   end
 end

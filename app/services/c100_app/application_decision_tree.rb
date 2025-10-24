@@ -94,7 +94,7 @@ module C100App
     end
 
     def after_payment
-      if c100_application.payment_type.eql?(PaymentType::HELP_WITH_FEES.to_s)
+      if c100_application.payment_type.eql?(PaymentType::HELP_WITH_FEES.to_s) && !LaaChange.changes_apply?
         edit(:benefits_upload)
       else
         edit(:check_your_answers)
