@@ -139,6 +139,10 @@ RSpec.describe C100App::ApplicationDecisionTree do
   context 'when the step is `payment`' do
     let(:step_params) { { payment: 'anything' } }
 
+    before do
+      allow(LaaChange).to receive(:changes_apply?).and_return(false)
+    end
+
     context 'and payment type is HWF' do
       let(:c100_application) { instance_double(C100Application, payment_type: PaymentType::HELP_WITH_FEES.to_s) }
 
