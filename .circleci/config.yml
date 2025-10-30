@@ -300,7 +300,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^gem-updates-v5$/
+                - /^RST-7594$/
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev
@@ -309,7 +309,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^gem-updates-v5$/
+                - /^RST-7594$/
       ### staging ###
       - build_and_push_image:
           name: build-staging
