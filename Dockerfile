@@ -1,4 +1,4 @@
-FROM ruby:3.4.5-alpine3.21
+FROM ruby:3.4.7-alpine3.21
 
 # Adding argument support for ping.json
 ARG APPVERSION=unknown
@@ -26,6 +26,7 @@ ENV PRL_OPENING=2025/02/12T10:30:00
 ENV PRIVACY_CHANGE=true
 ENV PRL_WOLVERHAMPTON=2025/08/06T9:45:00
 ENV PRL_CHELMSFORD_ROLLOUT=2025/07/08T8:45:00
+ENV LAA_CHANGE=2026/01/01T9:00:00
 
 # fix to address http://tzinfo.github.io/datasourcenotfound - PET ONLY
 ARG DEBIAN_FRONTEND=noninteractive

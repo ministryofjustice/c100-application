@@ -22,7 +22,9 @@
 
         <% if @form_object.choices.include?(PaymentType::HELP_WITH_FEES) %>
           <%= f.govuk_radio_button :payment_type, PaymentType::HELP_WITH_FEES do %>
-            <%=t '.interim_content_html' %>
+            <% unless LaaChange.changes_apply? %>
+              <%=t '.interim_content_html' %>
+            <% end %>
             <%= f.govuk_text_field :hwf_reference_number, width: 'one-half', label: { size: 's' } %>
           <% end %>
         <% end %>
