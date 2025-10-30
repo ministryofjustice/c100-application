@@ -2225,7 +2225,7 @@ en:
       title: "Get in touch"
       text_1: "If you'd like to report a problem or have a suggestion to help improve this service for others, get in touch by sending an email to:"
       link: C100applications@justice.gov.uk
-      text_2_html: "This email should only be used for feedback on the digital service. We cannot answer any questions about applications that have been submitted. You can <a target='_blank' href='https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/childcare-arrangements/nearest/search-by-postcode'>contact the relevant court</a> if you need to discuss your case."
+      text_2_html: "This email should only be used for feedback on the digital service. We cannot answer any questions about applications that have been submitted. You can <a target='_blank' href='https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/childcare-arrangements/nearest/search-by-postcode'>contact the relevant court (opens in a new tab)</a> if you need to discuss your case."
 
   session:
     note:
