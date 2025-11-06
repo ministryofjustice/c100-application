@@ -24,7 +24,6 @@ module Summary
         HtmlSections::ApplicationReasons.new(c100_application),
         *litigation_and_assistance_sections,
         *submission_and_payment_sections,
-        HtmlSections::BenefitsUpload.new(c100_application),
       ].flatten.select(&:show?)
     end
     # rubocop:enable Metrics/AbcSize

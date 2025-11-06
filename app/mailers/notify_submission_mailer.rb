@@ -60,7 +60,7 @@ class NotifySubmissionMailer < NotifyMailer
   private
 
   def build_document_variables
-    keys = %i[draft_consent_order miam_certificate exemption benefits_evidence]
+    keys = %i[draft_consent_order miam_certificate exemption]
     keys.each { |key| build_variables_for_document(key) }
 
     personalisation = {}
@@ -75,18 +75,14 @@ class NotifySubmissionMailer < NotifyMailer
   end
 
   def build_variables_for_document(key)
-    docs = @c100_application.documents(key)
-
-    if docs.any?
-      links = docs.map do |doc|
-        token = doc.generate_download_token(@c100_application).token
-        download_token_url(token)
-      end
-      instance_variable_set("@link_to_#{key}", links)
-      instance_variable_set("@has_#{key}", true)
+    if (draft = @c100_application.document(key))
+      download_token = draft.generate_download_token(@c100_application)
+      instance_variable_set "@link_to_#{key}",
+                            download_token_url(download_token.token)
+      instance_variable_set "@has_#{key}", true
     else
-      instance_variable_set("@link_to_#{key}", '')
-      instance_variable_set("@has_#{key}", false)
+      instance_variable_set "@link_to_#{key}", ''
+      instance_variable_set "@has_#{key}", false
     end
   end
 

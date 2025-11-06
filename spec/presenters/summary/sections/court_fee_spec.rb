@@ -7,7 +7,6 @@ module Summary
         C100Application,
         payment_type: payment_type,
         hwf_reference_number: hwf_reference_number,
-        documents: documents,
         solicitor_account_number: solicitor_account_number,
       )
     }
@@ -15,7 +14,6 @@ module Summary
     let(:payment_type) { 'whatever' }
     let(:hwf_reference_number) { nil }
     let(:solicitor_account_number) { nil }
-    let(:documents) { nil }
 
     subject { described_class.new(c100_application) }
 
@@ -40,10 +38,9 @@ module Summary
 
       context 'help with fees payment' do
         let(:hwf_reference_number) { '12345' }
-        let(:documents) { [double(name: 'file.jpg')] }
 
         it 'has the correct rows' do
-          expect(answers.count).to eq(3)
+          expect(answers.count).to eq(2)
 
           expect(answers[0]).to be_an_instance_of(Answer)
           expect(answers[0].question).to eq(:payment_type)
@@ -52,10 +49,6 @@ module Summary
           expect(answers[1]).to be_an_instance_of(FreeTextAnswer)
           expect(answers[1].question).to eq(:hwf_reference_number)
           expect(answers[1].value).to eq('12345')
-
-          expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[2].question).to eq(:benefits_upload)
-          expect(answers[2].value).to eq('[ File(s) uploaded with application ]')
         end
       end
 
