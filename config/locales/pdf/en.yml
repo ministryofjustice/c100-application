@@ -178,9 +178,6 @@ en:
     hwf_reference_number:
       question: Reference number
       absence_answer: *not_applicable
-    benefits_upload:
-      question: *details
-      answer: "[ File(s) uploaded with application ]"
     applicants_full_name:
       question: Full name of applicant(s)
     respondents_full_name:

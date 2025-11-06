@@ -14,13 +14,9 @@ class Uploader
         document_key: @document_key
       ).call
       return unless files.contents.length
-      if @document_key == :benefits_evidence
-        files.contents.map { |file| Uploader::File.new(file.key) }
-      else
-        file = files.contents[0]
-        return unless file
-        Uploader::File.new(file.key)
-      end
+      file = files.contents[0]
+      return unless file
+      Uploader::File.new(file.key)
     end
   end
 end
