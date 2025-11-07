@@ -87,7 +87,6 @@ describe Summary::HtmlPresenter do
         Summary::HtmlSections::AttendingCourtV2,
         Summary::HtmlSections::Submission,
         Summary::HtmlSections::Payment,
-        Summary::HtmlSections::BenefitsUpload,
       ])
     end
 

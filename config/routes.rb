@@ -147,7 +147,6 @@ Rails.application.routes.draw do
       edit_step :submission
       show_step :receipt_email_check
       edit_step :payment
-      edit_step :benefits_upload
       edit_step :check_your_answers do
         get :resume, action: :resume
       end
