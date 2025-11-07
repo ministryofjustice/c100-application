@@ -755,7 +755,3 @@ en:
               inclusion: Select the statement that applies to confirm the Statement of Truth
             c100_application:
               invalid: Some information is missing # fulfilment validation error
-        steps/application/benefits_upload_form:
-          attributes:
-            benefits_evidence_document:
-              blank: You must choose a file to upload

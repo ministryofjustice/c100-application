@@ -138,22 +138,7 @@ RSpec.describe C100App::ApplicationDecisionTree do
 
   context 'when the step is `payment`' do
     let(:step_params) { { payment: 'anything' } }
-
-    before do
-      allow(LaaChange).to receive(:changes_apply?).and_return(false)
-    end
-
-    context 'and payment type is HWF' do
-      let(:c100_application) { instance_double(C100Application, payment_type: PaymentType::HELP_WITH_FEES.to_s) }
-
-      it { is_expected.to have_destination(:benefits_upload, :edit) }
-    end
-
-    context 'and payment type is not HWF' do
-      let(:c100_application) { instance_double(C100Application, payment_type: PaymentType::ONLINE.to_s) }
-
-      it { is_expected.to have_destination(:check_your_answers, :edit) }
-    end
+    it { is_expected.to have_destination(:check_your_answers, :edit) }
   end
 
   context 'when the step is `declaration`' do
