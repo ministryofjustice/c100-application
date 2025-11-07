@@ -15,18 +15,6 @@ module DocumentUploadHelper
       }
     )
   end
-
-  def multi_document_upload_field(form, document_key, label_text:, paragraph_text:)
-    render(
-      partial: 'steps/shared/document_upload/document_upload_field',
-      locals: {
-        form:,
-        field_name: document_field(document_key),
-        label_text:,
-        paragraph_text:
-      }
-    )
-  end
   # If a document has been uploaded already, display its name and a 'remove' button
   # (used outside the form tag itself as `UrlHelper#button_to` generates a form of its own)
   def display_current_document(document_key)
@@ -41,28 +29,12 @@ module DocumentUploadHelper
     )
   end
 
-  def display_current_documents(document_key)
-    return unless uploaded_document?(document_key)
-
-    render(
-      partial: 'steps/shared/document_upload/current_documents',
-      locals: {
-        current_documents: uploaded_documents(document_key),
-        document_key:
-      }
-    )
-  end
-
   def uploaded_document?(document_key)
     uploaded_document(document_key).present?
   end
 
   def uploaded_document(document_key)
     current_c100_application.documents(document_key).first
-  end
-
-  def uploaded_documents(document_key)
-    current_c100_application.documents(document_key)
   end
 
   def document_field(document_key)

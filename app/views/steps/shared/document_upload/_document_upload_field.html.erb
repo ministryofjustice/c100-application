@@ -16,7 +16,7 @@
         <%= form.govuk_file_field(field_name, label: nil, class: 'govuk-file-upload single-file-upload',
                                   accept: DocumentUpload::ALLOWED_CONTENT_TYPES.join(','),
                                   src: 'camera',
-                                  onchange: "validateFiles(this); handleFileUpload(this);",
+                                  onchange: "validateFiles(this);",
                                   id: "#{field_name}_input",
                                   'aria-labelledby': "#{field_name}_input",
                                   data: { max_file_size: 20.megabytes }) %>

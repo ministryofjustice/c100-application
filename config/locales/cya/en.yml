@@ -91,7 +91,6 @@ en:
       attending_court: Attending court
       help_with_fees: Help with fees
       payment: How will you pay the application fee?
-      benefits_upload: ''
       submission: Submitting your application to court
       solicitor_details: Details of legal representative
     groups:
@@ -731,8 +730,6 @@ en:
         help_with_fees: Help with fees
         solicitor: Through a solicitor’s fee account
         self_payment_card: Over the phone
-    benefits_upload:
-      question: Evidence of benefits
     submission_type:
       question: ''
     submission_receipt_email:

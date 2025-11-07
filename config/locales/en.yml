@@ -548,7 +548,7 @@ en:
               <<: *ABUSE_CONCERNS
               sexual_html: |
                 <p class="govuk-body">A child is sexually abused when they are forced or persuaded to take part in sexual activities, including online. It may not necessarily involve a high level of violence, and the child may or may not be aware of what's happening.</p>
-                <p class="govuk-body">There are 2 types of child sexual abuse:</p>
+                <p class="govuk-body">There are two types of child sexual abuse:</p>
                 <ul class="govuk-list govuk-list--bullet">
                   <li>contact abuse (where an abuser makes physical contact)</li>
                   <li>non-contact abuse (for example grooming or exploitation)</li>
@@ -850,58 +850,6 @@ en:
         edit:
           page_title: Payment type
           lead_text: The court fee is %{fee}. Only the person applying to court (the applicant) or their solicitor needs to pay.
-          interim_content_html: |
-            <p class="govuk-body"><Strong><u>If you have applied for Help With Fees because you are in receipt of benefits:</u></Strong></p>
-            <p class="govuk-body">In order to progress your C100 application, you will need to upload evidence from that you are receiving one of the benefits that make you automatically eligible for Help with Fees.</p>
-            <ul class="govuk-list govuk-list--bullet">
-            <li>Income-based Jobseeker’s Allowance (JSA)</li>
-            <li>Income-related Employment and Support Allowance (ESA)</li>
-            <li>Income Support</li>
-            <li>Universal Credit (and you earn less than £6,000)</li>
-            <li>Pension Credit (guarantee credit)</li>
-            </ul>
-            <p class="govuk-body">Eligibility guidelines can be found via:- <a href="https://www.gov.uk/government/publications/apply-for-help-with-court-and-tribunal-fees/how-to-apply-for-help-with-fees-ex160a-for-applications-made-or-fees-paid-on-or-after-27-november-2023" class="govuk-link" rel="external" target="_blank">EX160A</a></p>
-            <p class="govuk-body"><Strong><u>What you need to provide:</u></Strong></p>
-            <p class="govuk-body">You will need to provide your most recent statement/letter from the DWP outlining your entitlement and any breakdown of your benefit entitlement.</p>
-            <p class="govuk-body"><Strong>If you have access to digital statements and/or the Universal Credit (UC) online portal</Strong>, you can obtain a copy of your UC statement by logging in and selecting 'Payments'. Locate the most recent statement, then select the option to 'print this statement' on the top right-hand side. This will generate a PDF copy of the full statement.</p>
-            <p class="govuk-body" style="color:red"><Strong>You can send screenshots as your evidence, but you will need to ensure the whole statement is included.</Strong></p>
-            <p class="govuk-body"><Strong>If you only have access to paper statements/letters</Strong>, you can send photographs or a scanned copy of your letter via email. You must send every page of the letter and it must be dated within the last 3 months. If you do not have a copy dated within 3 months, you will need to contact the DWP to request one.</p>
-            <ul class="govuk-list govuk-list--bullet">
-            <li>All evidence must clearly show your name and address</li>
-            <ul class="govuk-list govuk-list--bullet">
-            <li>If the benefit is in your partner's name, include evidence that they share your address</li>
-            </ul>
-            <li>Include all pages that are connected to the document. All text must be visible and legible</li>
-            <li>Missing pages or unclear information will invalidate the evidence, and we may request it again or reject your application</li>
-            </ul>
-            <p class="govuk-body"><Strong><u>Important</u></Strong></p>
-            <p class="govuk-body">Please ensure you receive one of the specific benefits listed above, not similarly named ones such as:</p>
-            <ul class="govuk-list govuk-list--bullet">
-            <li>Contribution-based JSA or ESA</li>
-            <li>Pension Credit (savings credit)</li>
-            <li>Income Support</li>
-            <li>If you receive Universal Credit, your annual earnings before tax and NI must be under £6,000 (equivalent to £500/month)</li>
-            </ul>
-            <p class="govuk-body">If you have declared your benefit status incorrectly, and you still believe you are eligible for Help with Fees, you should reapply on the basis of income, including all benefit payments as income, unless they are explicitly excluded.</p>
-            <p class="govuk-body">You can find more guidance on applying for Help with Fees here: <a href="https://www.gov.uk/get-help-with-court-fees" class="govuk-link" rel="external" target="_blank">https://www.gov.uk/get-help-with-court-fees</a></p>
-      benefits_upload:
-        edit:
-          page_title: Upload your evidence of benefits
-          lead_text_html: |
-            <p class="govuk-body">If you are uploading documents from a computer, name the files clearly. For example, For example, benefits-evidence.pdf</p>
-            <p class="govuk-body">Files must end with JPG, BMP, PNG, TIF, PDF, DOC or DOCX</p>
-          dropdown_header: How to take a picture of a document on your phone and upload it
-          dropdown_content_html: |
-            <ol>
-              <li>Place your document on a flat service in a well-lit room. Use a flash if you need to.</li>
-              <li>Take a picture of the whole document. You should be able to see its edges.</li>
-              <li>Check you can read all the writing, including the handwriting.</li>
-              <li>Email or send the photo or scan to the device you are using now.</li>
-              <li>Upload it here.</li>
-            </ol>
-          attach_document_html: "<strong>Select document to upload</strong>"
-          upload_explanation_html: |
-            <p class="govuk-body">Your document will upload when you click 'Continue'.</p>
       submission:
         edit:
           page_title: Submitting your application to court
@@ -2180,7 +2128,7 @@ en:
       safety_content_html: |
         <p class="govuk-body">The court needs to know if any of the other people in this application, or anyone connected to them who has contact with the children, poses a risk to the safety of the children.</p>
         <p class="govuk-body">If you provide information about this now, it will make it easier for the court and Cafcass to make sure your case is dealt with appropriately at the earliest opportunity. If you do not want to provide details of the abuse at this stage, you will be able to do so when you speak to Cafcass or at a later stage in the court proceedings.</p>
-        <p class="govuk-body">The <a href="https://www.cafcass.gov.uk/" class="govuk-link" rel="external" target="_blank">Children and Family Court Advisory and Support Service (Cafcass)</a>, in England, and <a href="https://cafcass.gov.wales/" class="govuk-link" rel="external" target="_blank">Cafcass Cymru</a>, in Wales, protect and promote the interests of children involved in family court cases. An advisor from Cafcass or Cafcass Cymru will look at your answers as part of their safeguarding checks, and may need to ask you further questions.</p>
+        <p class="govuk-body">The <a href="https://www.cafcass.gov.uk/" class="govuk-link" rel="external" target="_blank">Children and Family Court Advisory and Support Service (Cafcass)</a>, in England, and <a href="https://cafcass.gov.wales/" class="govuk-link" rel="external" target="_blank" lang="cy">Cafcass Cymru</a>, in Wales, protect and promote the interests of children involved in family court cases. An advisor from Cafcass or Cafcass Cymru will look at your answers as part of their safeguarding checks, and may need to ask you further questions.</p>
         <p class="govuk-body">As part of their enquiries they will contact organisations such as the police and local authorities for any relevant information about you, any other person and the children.</p>
         <p class="govuk-body">They will submit information to the court before your first hearing. Their assessment helps the judge make a decision that is in the best interests of the children.</p>
         <p class="govuk-body">The information you provide in this section will also be shared with the respondents so that they have the opportunity to respond to your allegations.</p>
