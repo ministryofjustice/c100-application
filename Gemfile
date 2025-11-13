@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
-gem 'rails', '~> 8.0.0'
+gem 'rails', '~> 8.1'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
 
