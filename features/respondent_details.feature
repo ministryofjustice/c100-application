@@ -316,14 +316,15 @@ Feature: Add a respondent to the application
     And I choose "No"
     Then I should see "Who does John Doe Junior currently live with?"
 
-  @happy_path @skip
+  @happy_path
   Scenario: Test timeout on respondent details page
     When I should see "Enter the respondent’s name"
     And I should see "Enter a new name"
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
+    And the time goes back to normal
 
-  @happy_path @skip
+  @happy_path
   Scenario: Testing timeout on addition of exterior person to application
     When I visit "/steps/respondent/has_other_parties"
     And I should see "Is there anyone else who should know about your application?"
@@ -331,3 +332,4 @@ Feature: Add a respondent to the application
     Then I should see "Enter the other person’s name"
     Then I wait and click the "Continue" button
     And I should see "Sorry, you'll have to start again"
+    And the time goes back to normal
