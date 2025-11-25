@@ -12,11 +12,11 @@ class MarkupNormaliser
 
   def normalise!
     @markup1 = remove_blank_children(
-      Nokogiri::HTML.fragment(markup1)
+      Nokogiri::HTML.fragment(markup1, 'UTF-8')
     ).to_html
 
     @markup2 = remove_blank_children(
-      Nokogiri::HTML.fragment(markup2)
+      Nokogiri::HTML.fragment(markup2, 'UTF-8')
     ).to_html
   end
 
