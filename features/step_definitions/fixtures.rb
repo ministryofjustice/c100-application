@@ -7,7 +7,7 @@ Then(/^The form markup should match "([^"]*)"$/) do |fixture|
     File.join('features', 'fixtures', 'files', "#{fixture}.html")
   ).read
 
-  normaliser = MarkupNormaliser.new(raw_markup, raw_fixture)
+  normaliser = MarkupNormaliser.new(raw_markup.to_s.encode('UTF-8'), raw_fixture.to_s.encode('UTF-8'))
   expect(
     normaliser.markup1
   ).to eq(
