@@ -5,22 +5,22 @@ module ErrorHandling
     rescue_from Exception do |exception|
       case exception
       when Errors::InvalidSession, ActionController::InvalidAuthenticityToken
-        redirect_to invalid_session_errors_path
+        redirect_to invalid_session_errors_path, allow_other_host: true
       when Errors::ApplicationNotFound
-        redirect_to application_not_found_errors_path
+        redirect_to application_not_found_errors_path, allow_other_host: true
       when Errors::ApplicationScreening
-        redirect_to application_screening_errors_path
+        redirect_to application_screening_errors_path, allow_other_host: true
       when Errors::ApplicationCompleted
-        redirect_to application_completed_errors_path
+        redirect_to application_completed_errors_path, allow_other_host: true
       when Errors::PaymentError
         # Payment errors are reported to Sentry as it is important to know
         Sentry.capture_exception(exception, tags: { c100_application_id: session[:c100_application_id] })
-        redirect_to payment_error_errors_path
+        redirect_to payment_error_errors_path, allow_other_host: true
       else
         raise if Rails.application.config.consider_all_requests_local
 
         Sentry.capture_exception(exception)
-        redirect_to unhandled_errors_path
+        redirect_to unhandled_errors_path, allow_other_host: true
       end
     end
   end
