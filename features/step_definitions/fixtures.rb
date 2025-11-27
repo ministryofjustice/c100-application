@@ -17,7 +17,10 @@ end
 
 Then(/^The form markup with errors should match "([^"]*)"$/) do |fixture|
   # Click continue without filling anything, to trigger validation errors
-  step %[I click the "Continue" button]
+  form = page.find(:css, 'form:has(.govuk-form-group)')
+  form.native.submit
+
+  expect(page).to have_css('.govuk-error-message')
 
   # Now check the markup with errors using the above step
   step %[The form markup should match "#{fixture}"]
