@@ -348,13 +348,13 @@ RSpec.shared_examples 'a controller that checks the application payment status' 
 
     context 'with a `payment_in_progress` status' do
       let(:status) { 'payment_in_progress' }
-      let(:flow_control) { double(next_url: 'whatever/path') }
+      let(:flow_control) { double(next_url: 'https://whatever/path') }
 
       it 'calls the PaymentsFlowControl service object' do
         expect(C100App::PaymentsFlowControl).to receive(:new).with(existing_case).and_return(flow_control)
 
         get action
-        expect(response).to redirect_to('whatever/path')
+        expect(response).to redirect_to('https://whatever/path')
       end
     end
   end

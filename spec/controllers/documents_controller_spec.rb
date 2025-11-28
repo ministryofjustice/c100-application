@@ -27,7 +27,7 @@ RSpec.describe DocumentsController, type: :controller do
 
   before do
     allow(subject).to receive(:current_c100_application).and_return(current_c100_application)
-    session[:current_step_path] = 'step/to/redirect'
+    session[:current_step_path] = 'https://step/to/redirect'
   end
 
   context 'with DocumentUpload mock' do
@@ -52,7 +52,7 @@ RSpec.describe DocumentsController, type: :controller do
         context 'HTML format' do
           it 'should delete the file and redirect to the step' do
             delete :destroy, params: params
-            expect(subject).to redirect_to('step/to/redirect')
+            expect(subject).to redirect_to('https://step/to/redirect')
           end
         end
 

@@ -12,16 +12,24 @@ RSpec.describe ApplicationController do
   end
 
   before do
-    allow(Rails.application).to receive_message_chain(:config, :consider_all_requests_local).and_return(false)
-    allow(Rails.application).to receive_message_chain(:config, :maintenance_enabled).and_return(nil)
+    allow(Rails.application.config).to receive(:consider_all_requests_local).and_return(false)
+    allow(Rails.application.config).to receive(:maintenance_enabled).and_return(nil)
     allow(Rails.configuration).to receive_message_chain(:x, :session, :expires_in_minutes).and_return(1)
+
+    # Set up test routes
+    routes.draw do
+      root to: 'anonymous#root'
+      get 'my_url' => 'anonymous#my_url'
+      get 'invalid_session' => 'anonymous#invalid_session'
+      get 'application_not_found' => 'anonymous#application_not_found'
+      get 'application_completed' => 'anonymous#application_completed'
+      get 'application_screening' => 'anonymous#application_screening'
+      get 'payment_error' => 'anonymous#payment_error'
+      get 'another_exception' => 'anonymous#another_exception'
+    end
   end
 
   context 'Security handling' do
-    before do
-      routes.draw { get 'my_url' => 'anonymous#my_url' }
-    end
-
     context '#drop_dangerous_headers!' do
       it 'removes dangerous headers' do
         request.headers.merge!('HTTP_X_FORWARDED_HOST' => 'foobar.com')
@@ -46,15 +54,11 @@ RSpec.describe ApplicationController do
 
       context 'when cookie is not present' do
         it 'sets the `last_seen` value' do
-          routes.draw { get 'my_url' => 'anonymous#my_url' }
-
           get :my_url
           expect(session[:last_seen]).to eq(555555)
         end
 
         it 'does not reset the session' do
-          routes.draw { get 'my_url' => 'anonymous#my_url' }
-
           expect(controller).not_to receive(:reset_session)
           get :my_url
         end
@@ -66,15 +70,11 @@ RSpec.describe ApplicationController do
         end
 
         it 'sets the `last_seen` value' do
-          routes.draw { get 'my_url' => 'anonymous#my_url' }
-
           get :my_url
           expect(session[:last_seen]).to eq(555555)
         end
 
         it 'does not reset the session' do
-          routes.draw { get 'my_url' => 'anonymous#my_url' }
-
           expect(controller).not_to receive(:reset_session)
           get :my_url
         end
@@ -86,16 +86,12 @@ RSpec.describe ApplicationController do
         end
 
         it 'sets the `last_seen` value' do
-          routes.draw { get 'my_url' => 'anonymous#my_url' }
-
           expect(session[:last_seen]).to eq(555400)
           get :my_url
           expect(session[:last_seen]).to eq(555555)
         end
 
         it 'resets the session' do
-          routes.draw { get 'my_url' => 'anonymous#my_url' }
-
           expect(controller).to receive(:reset_session)
           get :my_url
         end
@@ -106,69 +102,57 @@ RSpec.describe ApplicationController do
   context 'Exceptions handling' do
     context 'Errors::InvalidSession' do
       it 'should not report the exception, and redirect to the error page' do
-        routes.draw { get 'invalid_session' => 'anonymous#invalid_session' }
-
         expect(Sentry).not_to receive(:capture_exception)
 
         get :invalid_session
-        expect(response).to redirect_to(invalid_session_errors_path)
+        expect(response).to redirect_to('/errors/invalid_session')
       end
     end
 
     context 'Errors::ApplicationNotFound' do
       it 'should not report the exception, and redirect to the error page' do
-        routes.draw { get 'application_not_found' => 'anonymous#application_not_found' }
-
         expect(Sentry).not_to receive(:capture_exception)
 
         get :application_not_found
-        expect(response).to redirect_to(application_not_found_errors_path)
+        expect(response).to redirect_to('/errors/application_not_found')
       end
     end
 
     context 'Errors::ApplicationScreening' do
       it 'should not report the exception, and redirect to the error page' do
-        routes.draw { get 'application_screening' => 'anonymous#application_screening' }
-
         expect(Sentry).not_to receive(:capture_exception)
 
         get :application_screening
-        expect(response).to redirect_to(application_screening_errors_path)
+        expect(response).to redirect_to('/errors/application_screening')
       end
     end
 
     context 'Errors::ApplicationCompleted' do
       it 'should not report the exception, and redirect to the error page' do
-        routes.draw { get 'application_completed' => 'anonymous#application_completed' }
-
         expect(Sentry).not_to receive(:capture_exception)
 
         get :application_completed
-        expect(response).to redirect_to(application_completed_errors_path)
+        expect(response).to redirect_to('/errors/application_completed')
       end
     end
 
     context 'Errors::PaymentError' do
       it 'should report the exception, and redirect to the payment error page' do
-        routes.draw { get 'payment_error' => 'anonymous#payment_error' }
-
         expect(Sentry).to receive(:capture_exception).with(
           Errors::PaymentError, tags: { c100_application_id: nil }
         )
 
         get :payment_error
-        expect(response).to redirect_to(payment_error_errors_path)
+        expect(response).to redirect_to('/errors/payment_error')
       end
     end
 
     context 'Other exceptions' do
       it 'should report the exception, and redirect to the error page' do
-        routes.draw { get 'another_exception' => 'anonymous#another_exception' }
-
         expect(Sentry).to receive(:capture_exception)
 
         get :another_exception
-        expect(response).to redirect_to(unhandled_errors_path)
+        expect(response).to redirect_to('/errors/unhandled')
       end
     end
   end
