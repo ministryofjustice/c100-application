@@ -7,6 +7,7 @@
 require 'cucumber/rails'
 require 'webmock'
 require 'cucumber/rspec/doubles'
+require "capybara/cuprite"
 
 # frozen_string_literal: true
 
@@ -34,7 +35,18 @@ ActionController::Base.allow_rescue = false
 
 Capybara.server = :puma
 Selenium::WebDriver.logger.output = false
-Capybara.default_driver = :selenium_chrome_headless
+Capybara.default_driver = :cuprite
+Capybara.javascript_driver = :cuprite
+
+Capybara.register_driver(:cuprite) do |app|
+  Capybara::Cuprite::Driver.new(
+    app,
+    window_size: [1400, 1400],
+    headless: true,
+    inspector: true
+  )
+end
+
 Capybara.default_max_wait_time = 10
 
 # Remove/comment out the lines below if your app doesn't have a database.

@@ -62,6 +62,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem "bundler-audit", "~> 0.9.1"
+  gem 'openssl'
 end
 
 source 'https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev' do
@@ -96,4 +97,5 @@ group :test do
   gem 'webmock'
   gem 'database_cleaner'
   gem 'parallel_tests'
+  gem 'cuprite'
 end
