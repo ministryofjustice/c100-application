@@ -242,6 +242,8 @@ RSpec.describe Steps::Applicant::ContactDetailsForm do
 
         it 'has a validation error' do
           expect(subject).to_not be_valid
+          expect(subject.errors.added?(:voicemail_consent, :conflict)).to eq(true)
+
         end
 
         context 'when given a phone number' do
