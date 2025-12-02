@@ -43,7 +43,8 @@ Capybara.register_driver(:cuprite) do |app|
     app,
     window_size: [1400, 1400],
     headless: true,
-    inspector: true
+    inspector: true,
+    pending_connection_errors: false
   )
 end
 
