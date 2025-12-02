@@ -11,13 +11,17 @@ class MarkupNormaliser
   private
 
   def normalise!
-    @markup1 = remove_blank_children(
-      Nokogiri::HTML.fragment(markup1)
-    ).to_html
+    doc1 = Nokogiri::HTMl.fragment(markup1, 'UTF-8')
+    doc2 = Nokogiri::HTMl.fragment(markup2, 'UTF-8')
 
-    @markup2 = remove_blank_children(
-      Nokogiri::HTML.fragment(markup2)
-    ).to_html
+    doc1 = remove_blank_children(doc1)
+    doc2 = remove_blank_children(doc2)
+
+    strip_autocomplete!(doc1)
+    strip_autocomplete!(doc2)
+
+    @markup1 = doc1.to_html
+    @markup2 = doc2.to_html
   end
 
   def remove_blank_children(element)
@@ -31,5 +35,15 @@ class MarkupNormaliser
     end
 
     element
+  end
+
+  def strip_autocomplete!(doc)
+    doc.traverse do |element|
+      next unless element.element?
+
+      if element.name == "input" && element["type"] == "hidden"
+        element.remove_attribute("autocomplete")
+      end
+    end
   end
 end
