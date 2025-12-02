@@ -11,8 +11,8 @@ class MarkupNormaliser
   private
 
   def normalise!
-    doc1 = Nokogiri::HTMl.fragment(markup1, 'UTF-8')
-    doc2 = Nokogiri::HTMl.fragment(markup2, 'UTF-8')
+    doc1 = Nokogiri::HTML.fragment(markup1, 'UTF-8')
+    doc2 = Nokogiri::HTML.fragment(markup2, 'UTF-8')
 
     doc1 = remove_blank_children(doc1)
     doc2 = remove_blank_children(doc2)
