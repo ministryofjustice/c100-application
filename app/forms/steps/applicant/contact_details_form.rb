@@ -27,7 +27,7 @@ module Steps
                             if: proc { |o| validate_phone_not_provided_reason?(o) }
 
       validates_inclusion_of :voicemail_consent, in: GenericYesNo.values, if: proc { |o| validate_phone_value?(o) }
-      validates_presence_of :phone_number, if: proc { |o| validate_voicemail_phone?(o) }
+      validate :voicemail_without_phone
 
       private
 
@@ -46,6 +46,10 @@ module Steps
         applicant.update(attributes_map)
       end
 
+      def voicemail_without_phone
+        errors.add(:voicemail_consent, :conflict) if voicemail_consent&.yes? && phone_number_provided&.no?
+      end
+
       def validate_email_value?(o)
         o.email_provided && GenericYesNo.new(o.email_provided).yes?
       end
@@ -56,10 +60,6 @@ module Steps
 
       def validate_phone_not_provided_reason?(o)
         o.phone_number_provided && GenericYesNo.new(o.phone_number_provided).no?
-      end
-
-      def validate_voicemail_phone?(o)
-        o.voicemail_consent && GenericYesNo.new(o.voicemail_consent).yes? && o.phone_number.blank?
       end
     end
   end

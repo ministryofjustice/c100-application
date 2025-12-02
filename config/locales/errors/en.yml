@@ -494,6 +494,7 @@ en:
               inclusion: Enter a phone number or tell us why the court cannot phone you
             voicemail_consent:
               inclusion: Select yes if the court can leave you a voicemail
+              conflict: You must provide a phone number for the court to leave you a voicemail
             email_keep_private:
               inclusion: *yes_no_error
             phone_keep_private:
