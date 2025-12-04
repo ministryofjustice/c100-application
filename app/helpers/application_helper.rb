@@ -103,12 +103,11 @@ module ApplicationHelper
     current_c100_application.confidentiality_enabled? == true
   end
 
-  def translate(key, **options)
-    super.tap do |result|
-      document = Nokogiri::HTML(result)
-      node = document.css('span.translation_missing')
-      next if node.nil?
-
+  def translate(key, **options) # rubocop:disable Metrics/MethodLength
+    result = super
+    document = Nokogiri::HTML(result)
+    node = document.css('span.translation_missing').first
+    if node
       parts = node.attr('title').to_s.gsub(/translation missing: /, '').split('.')
       locale = parts.shift
       missing_key = parts.join('.')
@@ -116,11 +115,20 @@ module ApplicationHelper
       Sentry.with_scope do |scope|
         scope.set_tags({
                          locale: locale.to_sym,
-          scope: nil,
-          key: missing_key
+                         key: missing_key
                        })
       end
       Sentry.capture_exception(I18n::MissingTranslationData.new(locale, key, options))
     end
-  end
+
+    result
+  rescue I18n::MissingTranslationData => e
+    Sentry.with_scope do |scope|
+      scope.set_tags({
+                       locale: e.locale,
+                       key: key
+                     })
+    end
+    Sentry.capture_exception(e)
+  end # rubocop:enable Metrics/MethodLength
 end
