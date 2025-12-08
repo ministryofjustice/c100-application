@@ -134,7 +134,6 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect_any_instance_of(Sentry::Scope).to receive(:set_tags).with(
         {
           locale: :en,
-          scope: nil,
           key: 'a_missing_key_here'
         }
       )

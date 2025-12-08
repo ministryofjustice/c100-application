@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
-gem 'rails', '~> 8.0.0'
+gem 'rails', '~> 8.1'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
 
@@ -62,6 +62,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem "bundler-audit", "~> 0.9.1"
+  gem 'openssl'
 end
 
 source 'https://oss:Q7U7p2q2XlpY45kwqjCpXLIPf122rjkR@gem.mutant.dev' do
@@ -96,4 +97,5 @@ group :test do
   gem 'webmock'
   gem 'database_cleaner'
   gem 'parallel_tests'
+  gem 'cuprite'
 end

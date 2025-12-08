@@ -8,13 +8,13 @@ RSpec.describe DownloadTokensController, type: :controller do
 
   before do
     allow_any_instance_of(DownloadToken).to(
-      receive(:url).and_return('www.example.com'))
+      receive(:url).and_return('https://www.example.com'))
   end
 
   describe '#show' do
     it 'redirects' do
       get :show, params: { token: download_token.token }
-      expect(response).to redirect_to('www.example.com')
+      expect(response).to redirect_to('https://www.example.com')
     end
 
     it 'redirects to file_not_found if not found' do

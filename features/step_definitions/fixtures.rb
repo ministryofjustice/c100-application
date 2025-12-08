@@ -7,7 +7,7 @@ Then(/^The form markup should match "([^"]*)"$/) do |fixture|
     File.join('features', 'fixtures', 'files', "#{fixture}.html")
   ).read
 
-  normaliser = MarkupNormaliser.new(raw_markup, raw_fixture)
+  normaliser = MarkupNormaliser.new(raw_markup.to_s.encode('UTF-8'), raw_fixture.to_s.encode('UTF-8'))
   expect(
     normaliser.markup1
   ).to eq(
@@ -17,7 +17,10 @@ end
 
 Then(/^The form markup with errors should match "([^"]*)"$/) do |fixture|
   # Click continue without filling anything, to trigger validation errors
-  step %[I click the "Continue" button]
+  form = page.find(:css, 'form:has(.govuk-form-group)')
+  page.execute_script("arguments[0].submit()", form)
+
+  expect(page).to have_css('.govuk-error-message')
 
   # Now check the markup with errors using the above step
   step %[The form markup should match "#{fixture}"]
