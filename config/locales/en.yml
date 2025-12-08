@@ -1060,6 +1060,7 @@ en:
         edit:
           page_title: Start or continue an application
           heading: Start or continue an application
+
           details:
             summary: If you do not know where the children live, or they live at different addresses
             text_html: <p>If you do not know where the children live, enter your own postcode.</p><p>If the children live at different addresses, enter the postcode of the eldest child who is part of the application.</p>
