@@ -20,7 +20,7 @@ module C100App
         return false if is_other_child?
         return false if special_guardianship_order?
 
-        other_relationship?
+        other_relationship? || grandparent?
       end
 
       private
@@ -42,6 +42,12 @@ module C100App
       def other_relationship?
         relationship.relation.eql?(
           Relation::OTHER.to_s
+        )
+      end
+
+      def grandparent?
+        relationship.relation.eql?(
+          Relation::GRAND_PARENT.to_s
         )
       end
 

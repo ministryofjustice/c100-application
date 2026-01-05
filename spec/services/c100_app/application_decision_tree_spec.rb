@@ -10,6 +10,13 @@ RSpec.describe C100App::ApplicationDecisionTree do
 
   it_behaves_like 'a decision tree'
 
+  let(:person) { instance_double("Person", type: "Applicant") }
+  let(:relationship) { instance_double("Relationship", person: person, relation: "something") }
+
+  before do
+    allow(c100_application).to receive_message_chain(:relationships, :find).and_return(relationship)
+  end
+
   describe 'when the step is `previous_proceedings`' do
     let(:c100_application) { instance_double(C100Application, children_previous_proceedings: answer) }
     let(:step_params) { { previous_proceedings: 'whatever' } }
@@ -23,12 +30,26 @@ RSpec.describe C100App::ApplicationDecisionTree do
       let(:answer) { 'no' }
       it { is_expected.to have_destination(:urgent_hearing, :edit) }
     end
+
+    context 'when relation is other' do
+      let(:relationship) { instance_double("Relationship", person: person, relation: Relation::OTHER.to_s) }
+      let(:answer) { 'no' }
+
+      it { is_expected.to have_destination(:permission_sought, :edit) }
+    end
   end
 
   context 'when the step is `court_proceedings`' do
     let(:step_params) { { court_proceedings: 'anything' } }
 
     it { is_expected.to have_destination(:urgent_hearing, :edit) }
+  end
+
+  context 'when relation is court_proceedings with other relation' do
+    let(:relationship) { instance_double("Relationship", person: person, relation: Relation::OTHER.to_s) }
+    let(:step_params) { { court_proceedings: 'anything' } }
+
+    it { is_expected.to have_destination(:permission_sought, :edit) }
   end
 
   context 'when the step is `urgent_hearing`' do
@@ -64,11 +85,25 @@ RSpec.describe C100App::ApplicationDecisionTree do
       let(:answer) { 'no' }
       it { is_expected.to have_destination('/steps/international/resident', :edit) }
     end
+
+    context 'when relation is other' do
+      let(:relationship) { instance_double("Relationship", person: person, relation: Relation::OTHER.to_s) }
+      let(:answer) { 'no' }
+
+      it { is_expected.to have_destination(:litigation_capacity, :edit) }
+    end
   end
 
   context 'when the step is `without_notice_details`' do
     let(:step_params) { { without_notice_details: 'anything' } }
     it { is_expected.to have_destination('/steps/international/resident', :edit) }
+  end
+
+  context 'when the step is `without_notice_details` with other relation' do
+    let(:relationship) { instance_double("Relationship", person: person, relation: Relation::OTHER.to_s) }
+    let(:step_params) { { without_notice_details: 'anything' } }
+
+    it { is_expected.to have_destination(:litigation_capacity, :edit) }
   end
 
   context 'when the step is `permission_sought`' do
@@ -94,6 +129,13 @@ RSpec.describe C100App::ApplicationDecisionTree do
   context 'when the step is `application_details`' do
     let(:step_params) { { application_details: 'anything' } }
     it { is_expected.to have_destination(:litigation_capacity, :edit) }
+  end
+
+  context 'when the step is `application_details` with other relation' do
+    let(:relationship) { instance_double("Relationship", person: person, relation: Relation::OTHER.to_s) }
+    let(:step_params) { { application_details: 'anything' } }
+
+    it { is_expected.to have_destination(:urgent_hearing, :edit) }
   end
 
   context 'when the step is `litigation_capacity`' do
