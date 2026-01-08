@@ -32,7 +32,7 @@ module Summary
       it 'has the correct rows in the right order' do
         expect(answers[0]).to be_an_instance_of(Answer)
         expect(answers[0].question).to eq(:c1a_abuse_physical)
-        expect(answers[0].value).to eq(abuse_concerns_resultset)
+        expect(answers[0].value).to be GenericYesNo::NO
 
         check_finder_received(abuse_list)
 
