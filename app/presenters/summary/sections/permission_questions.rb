@@ -30,7 +30,7 @@ module Summary
               i18n_opts: { applicant_name: relationship.person.full_name, child_name: relationship.minor.full_name }
             )
           end
-        end.flatten.compact
+        end.flatten.compact.select(&:show?)
       end
 
       def permission_relationships
