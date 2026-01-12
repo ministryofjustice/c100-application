@@ -157,6 +157,10 @@ RSpec.describe C100App::PermissionDecisionTree do
     let(:step_params) { { consent: 'anything' } }
     let(:record) { instance_double(Relationship, consent: value) }
 
+    before do
+      allow(record).to receive(:relation).and_return(Relation::GRAND_PARENT.to_s)
+    end
+
     context 'and the answer is `yes`' do
       let(:value) { 'yes' }
 
@@ -169,8 +173,20 @@ RSpec.describe C100App::PermissionDecisionTree do
     context 'and the answer is `no`' do
       let(:value) { 'no' }
 
-      it 'exists the journey' do
-        expect(subject.destination).to eq(controller: :question, action: :edit, question_name: :family, relationship_id: record)
+      context 'and the relation is GRANDPARENT' do
+        it 'exists the journey' do
+          expect(subject.destination).to eq(controller: :question, action: :edit, question_name: :local_authority, relationship_id: record)
+        end
+      end
+
+      context 'and the relation is not GRANDPARENT' do
+        before do
+          allow(record).to receive(:relation).and_return(Relation::MOTHER.to_s)
+        end
+
+        it 'exists the journey' do
+          expect(subject.destination).to eq(controller: :question, action: :edit, question_name: :family, relationship_id: record)
+        end
       end
     end
   end
@@ -201,6 +217,10 @@ RSpec.describe C100App::PermissionDecisionTree do
     let(:step_params) { { local_authority: 'anything' } }
     let(:record) { instance_double(Relationship, local_authority: value) }
 
+    before do
+      allow(record).to receive(:relation).and_return(Relation::GRAND_PARENT.to_s)
+    end
+
     context 'and the answer is `yes`' do
       let(:value) { 'yes' }
 
@@ -213,8 +233,21 @@ RSpec.describe C100App::PermissionDecisionTree do
     context 'and the answer is `no`' do
       let(:value) { 'no' }
 
-      it 'exists the journey' do
-        expect(subject.destination).to eq(controller: :question, action: :edit, question_name: :relative, relationship_id: record)
+      context 'and the relation is GRANDPARENT' do
+        it 'exists the journey' do
+          expect(subject).to receive(:exit_journey)
+          subject.destination
+        end
+      end
+
+      context 'and the relation is not GRANDPARENT' do
+        before do
+          allow(record).to receive(:relation).and_return(Relation::MOTHER.to_s)
+        end
+
+        it 'exists the journey' do
+          expect(subject.destination).to eq(controller: :question, action: :edit, question_name: :relative, relationship_id: record)
+        end
       end
     end
   end

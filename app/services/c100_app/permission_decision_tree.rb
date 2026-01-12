@@ -1,6 +1,6 @@
 module C100App
   class PermissionDecisionTree < BaseDecisionTree
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
     def destination
       return next_step if next_step
 
@@ -16,18 +16,18 @@ module C100App
       when :living_arrangement
         advance_or_exit_journey(next_question: :consent)
       when :consent
-        advance_or_exit_journey(next_question: :family)
+        advance_or_exit_journey(next_question: record.relation.eql?(Relation::GRAND_PARENT.to_s) ? :local_authority : :family)
       when :family
         advance_or_exit_journey(next_question: :local_authority)
       when :local_authority
-        advance_or_exit_journey(next_question: :relative)
+        record.relation.eql?(Relation::GRAND_PARENT.to_s) ? exit_journey : advance_or_exit_journey(next_question: :relative)
       when :relative
         exit_journey
       else
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
     end
-    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
 
     private
 

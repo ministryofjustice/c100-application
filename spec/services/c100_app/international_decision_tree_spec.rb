@@ -30,7 +30,27 @@ RSpec.describe C100App::InternationalDecisionTree do
 
     context 'when permission to apply is needed' do
       let(:rule_result) { true }
-      it { is_expected.to have_destination('/steps/application/permission_sought', :edit) }
+      context 'and relation is OTHER' do
+        before do
+          applicant_person = double("Person", type: "Applicant")
+          relationship = double("Relationship", person: applicant_person, relation: Relation::OTHER.to_s)
+          allow(c100_application).to receive(:relationships).and_return([relationship])
+        end
+
+        it { is_expected.to have_destination('/steps/application/urgent_hearing', :edit) }
+
+      end
+
+      context 'and relation is not OTHER' do
+        before do
+          applicant_person = double("Person", type: "Applicant")
+          relationship = double("Relationship", person: applicant_person, relation: Relation::MOTHER.to_s)
+          allow(c100_application).to receive(:relationships).and_return([relationship])
+        end
+
+        it { is_expected.to have_destination('/steps/application/permission_sought', :edit) }
+      end
+
     end
 
     context 'when permission to apply is not needed' do

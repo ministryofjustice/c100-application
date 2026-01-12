@@ -19,9 +19,9 @@ module Summary
         *people_sections,
         HtmlSections::ChildrenResidence.new(c100_application),
         HtmlSections::OtherCourtCases.new(c100_application),
+        HtmlSections::ApplicationReasons.new(c100_application),
         *urgent_and_without_notice_sections,
         HtmlSections::InternationalElement.new(c100_application),
-        HtmlSections::ApplicationReasons.new(c100_application),
         *litigation_and_assistance_sections,
         *submission_and_payment_sections,
       ].flatten.select(&:show?)

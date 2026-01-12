@@ -84,7 +84,7 @@ module C100App
           )
 
           # Following checks are based on the orders selected for this child
-          child_orders = relationship.minor.child_order.orders
+          child_orders = relationship.minor&.child_order&.orders
 
           next if can_apply_for?(
             CAO_ORDERS, relationship:, child_orders:

@@ -63,7 +63,7 @@ module C100App
       if child_id
         edit(:residence, id: child_id)
       else
-        edit('/steps/application/previous_proceedings')
+        edit('/steps/application/previous_proceedings', record:)
       end
     end
 

@@ -1,6 +1,6 @@
 module C100App
   class ApplicationDecisionTree < BaseDecisionTree
-    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     def destination
       return next_step if next_step
 
@@ -8,7 +8,7 @@ module C100App
       when :previous_proceedings
         after_previous_proceedings
       when :court_proceedings
-        edit(:urgent_hearing)
+        record.relation.eql?(Relation::OTHER.to_s) ? edit(:permission_sought) : edit(:urgent_hearing)
       when :urgent_hearing
         after_urgent_hearing
       when :urgent_hearing_details
@@ -16,13 +16,13 @@ module C100App
       when :without_notice
         after_without_notice
       when :without_notice_details
-        start_international_journey
+        record.relation.eql?(Relation::OTHER.to_s) ? edit(:litigation_capacity) : start_international_journey
       when :permission_sought
         after_permission_sought
       when :permission_details
         edit(:details)
       when :application_details
-        edit(:litigation_capacity)
+        record.relation.eql?(Relation::OTHER.to_s) ? edit(:urgent_hearing) : edit(:litigation_capacity)
       when :litigation_capacity
         after_litigation_capacity
       when :litigation_capacity_details
@@ -37,7 +37,7 @@ module C100App
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
     end
-    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
     private
 
@@ -45,7 +45,7 @@ module C100App
       if question(:children_previous_proceedings).yes?
         edit(:court_proceedings)
       else
-        edit(:urgent_hearing)
+        record.relation.eql?(Relation::OTHER.to_s) ? edit(:permission_sought) : edit(:urgent_hearing)
       end
     end
 
@@ -61,7 +61,7 @@ module C100App
       if question(:without_notice).yes?
         edit(:without_notice_details)
       else
-        start_international_journey
+        record.relation.eql?(Relation::OTHER.to_s) ? edit(:litigation_capacity) : start_international_journey
       end
     end
 
@@ -101,6 +101,10 @@ module C100App
 
     def proceed_to_payment
       PaymentsFlowControl.new(c100_application).payment_url
+    end
+
+    def record
+      @record || c100_application.relationships.find { |r| r.person.type == "Applicant" }
     end
   end
 end

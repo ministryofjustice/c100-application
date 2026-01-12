@@ -22,11 +22,19 @@ module C100App
 
       # Non-parents - permission to apply
       if rules.permission_needed?
-        edit('/steps/application/permission_sought')
+        if record.relation.eql?(Relation::OTHER.to_s)
+          edit('/steps/application/urgent_hearing')
+        else
+          edit('/steps/application/permission_sought')
+        end
       else
         rules.reset_permission_details!
         edit('/steps/application/details')
       end
+    end
+
+    def record
+      @record || c100_application.relationships.find { |r| r.person.type == "Applicant" }
     end
   end
 end
