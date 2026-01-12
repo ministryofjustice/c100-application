@@ -13,7 +13,7 @@ orbs:
 references:
   app_containers: &app_containers
     docker:
-      - image: cimg/ruby:3.4.7-browsers
+      - image: cimg/ruby:3.4.8-browsers
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -60,7 +60,8 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bundle config set --local path 'vendor/bundle'
+            bundle install --jobs=4 --retry=3
             npm install
 
       - save_cache:
