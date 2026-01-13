@@ -123,10 +123,6 @@ When(/^I choose "([^"]*)" from radiobutton options$/) do |text|
     find(:xpath, ".//input[@id='cart_payment_type_cash_pay']").choose
   end
 
-# When(/^I choose No from the radio button options$/) do
-#   find("label[for='steps-applicant-privacy-preferences-form-are-contact-details-private-no-field']").click
-# end
-
 When(/^I choose (Yes|No) from the radio button options$/) do |option|
   labels = {
     "Yes" => "steps-applicant-privacy-preferences-form-are-contact-details-private-yes-field",
