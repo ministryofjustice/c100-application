@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.8'
+ruby '4.0.0'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
@@ -72,8 +72,7 @@ end
 group :development, :test do
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.2'
   gem 'mutant-rspec'
-  gem 'pry-byebug'
-  gem 'pry-rails'
+  gem 'pry'
   gem 'rspec-rails'
   gem 'ruby-prof'
   gem 'web-console'
