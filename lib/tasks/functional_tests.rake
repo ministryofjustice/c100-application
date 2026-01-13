@@ -2,9 +2,9 @@ desc "Tests to check applications works at runtime"
 namespace :test do
   task :functional do
     if system "bundle exec cucumber features/  --tags @end-to-end"
-      puts "Smoke test passed"
+      puts "Functional tests passed"
     else
-      raise "Smoke tests failed"
+      raise "Functional tests failed"
       end
   end
 end
