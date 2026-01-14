@@ -52,6 +52,7 @@ gem 'sanitize', '~> 6.1.0'
 gem 'listen'
 gem 'ostruct'
 gem 'csv'
+gem 'cgi', '~> 0.5.1'
 
 group :development, :production do
   gem 'lograge'

@@ -134,6 +134,7 @@ GEM
     capybara-screenshot (1.0.26)
       capybara (>= 1.0, < 4)
       launchy
+    cgi (0.5.1)
     childprocess (5.1.0)
       logger (~> 1.5)
     clamby (1.6.11)
@@ -307,7 +308,6 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.1.5)
-    mini_portile2 (2.8.9)
     minitest (6.0.1)
       prism (~> 1.5)
     multi_test (1.1.0)
@@ -335,9 +335,6 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.5)
-    nokogiri (1.19.0)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
     nokogiri (1.19.0-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.19.0-x86_64-darwin)
@@ -634,7 +631,6 @@ GEM
 PLATFORMS
   arm64-darwin-22
   arm64-darwin-23
-  ruby
   x86_64-darwin-22
   x86_64-linux
 
@@ -646,6 +642,7 @@ DEPENDENCIES
   bundler-audit (~> 0.9.1)
   capybara
   capybara-screenshot (~> 1.0, >= 1.0.25)
+  cgi (~> 0.5.1)
   clamby
   combine_pdf (~> 1.0)
   csv
