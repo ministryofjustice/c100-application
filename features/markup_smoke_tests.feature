@@ -2,7 +2,6 @@ Feature: High level form markup smoke tests
   Background:
     Given I have started an application
 
-  @smoketest
   Scenario Outline: Markup in a sample of forms should be correct
     When I visit "<step_path>"
 
