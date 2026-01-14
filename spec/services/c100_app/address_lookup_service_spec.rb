@@ -21,6 +21,7 @@ RSpec.describe C100App::AddressLookupService do
 
   describe '#result' do
     before do
+      allow(ENV).to receive(:fetch).and_call_original
       allow(ENV).to receive(:fetch).with('ORDNANCE_SURVEY_API_KEY').and_return('test-token')
     end
 
@@ -160,7 +161,7 @@ RSpec.describe C100App::AddressLookupService do
     end
 
     context 'when there are more than 1 result' do
-      let(:results) { %w(result1 result2) }
+      let(:results) { %w[result1 result2] }
       it { expect(subject.address_lines).to eq('2 addresses found') }
       it { expect(subject.tokenized_value).to be_nil }
     end
