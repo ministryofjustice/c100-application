@@ -55,6 +55,7 @@ When(/^I click the "([^"]*)" button$/) do |text|
   expect(page).to have_button("#{text}")
   find_button("#{text}").click
 rescue Selenium::WebDriver::Error::UnknownError => e
+  sleep 1
   find_button("#{text}").click
 end
 
