@@ -200,7 +200,7 @@ RSpec.describe DocumentUpload do
         let(:uploaded_files) { [double(
             key: 'foo/123/image.',
             last_modified: 'Wed, 13 Apr 2022 11:03:21 +0000')] }
-        it { expect(subject.file_name).to eq('image.(1).') }
+        it { expect(subject.file_name).to eq('image(1).') }
       end
 
       context 'existing `.image`, uploading `.image`' do

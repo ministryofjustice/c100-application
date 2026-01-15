@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.7'
+ruby '4.0.0'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
 gem 'govuk_notify_rails', '~> 3.0'
-gem 'govuk-pay-ruby-client', '~> 1.0.2'
+gem 'govuk-pay-ruby-client', github: 'ministryofjustice/govuk-pay-ruby-client', tag: 'v1.0.3'
 gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
@@ -52,6 +52,8 @@ gem 'sanitize', '~> 6.1.0'
 gem 'listen'
 gem 'ostruct'
 gem 'csv'
+gem 'cgi', '~> 0.5.1'
+gem 'mutex_m'
 
 group :development, :production do
   gem 'lograge'
@@ -72,12 +74,11 @@ end
 group :development, :test do
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.2'
   gem 'mutant-rspec'
-  gem 'pry-byebug'
-  gem 'pry-rails'
+  gem 'pry'
+  gem 'debug'
   gem 'rspec-rails'
   gem 'ruby-prof'
   gem 'web-console'
-  gem 'mutex_m'
 end
 
 group :test do
