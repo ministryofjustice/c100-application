@@ -6,7 +6,7 @@ ruby '4.0.0'
 gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
 gem 'govuk_notify_rails', '~> 3.0'
-gem 'govuk-pay-ruby-client', github: 'ministryofjustice/govuk-pay-ruby-client', branch: 'ruby-update-v1'
+gem 'govuk-pay-ruby-client', github: 'ministryofjustice/govuk-pay-ruby-client', tag: 'v1.0.3'
 gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
@@ -53,6 +53,7 @@ gem 'listen'
 gem 'ostruct'
 gem 'csv'
 gem 'cgi', '~> 0.5.1'
+gem 'mutex_m'
 
 group :development, :production do
   gem 'lograge'
@@ -78,7 +79,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'ruby-prof'
   gem 'web-console'
-  gem 'mutex_m'
 end
 
 group :test do

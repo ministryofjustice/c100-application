@@ -55,6 +55,7 @@ RUN gem install bundler -v 4.0.3
 
 RUN bundle config set --local without 'test development'
 RUN bundle config set force_ruby_platform true
+RUN bundle config set --local frozen true
 RUN bundle install
 
 # running app as a servive
