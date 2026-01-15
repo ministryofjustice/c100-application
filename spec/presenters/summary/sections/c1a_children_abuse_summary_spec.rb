@@ -6,7 +6,6 @@ module Summary
     let(:abuse_concerns_resultset) { double('abuse_concerns_resultset').as_null_object }
     let(:abuse_list) { [AbuseType::PHYSICAL, AbuseType::EMOTIONAL, AbuseType::PSYCHOLOGICAL, AbuseType::SEXUAL, AbuseType::FINANCIAL] }
 
-
     subject { described_class.new(c100_application) }
 
     let(:answers) { subject.answers }
@@ -33,8 +32,7 @@ module Summary
       it 'has the correct rows in the right order' do
         expect(answers[0]).to be_an_instance_of(Answer)
         expect(answers[0].question).to eq(:c1a_abuse_physical)
-        expect(answers[0].value).to be GenericYesNo::NO
-
+        expect(answers[0].value).to eq(abuse_concerns_resultset)
 
         check_finder_received(abuse_list)
 

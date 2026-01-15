@@ -60,8 +60,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            bundle config set --local path 'vendor/bundle'
-            bundle install --jobs=4 --retry=3
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
             npm install
 
       - save_cache:
