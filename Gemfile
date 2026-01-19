@@ -37,7 +37,7 @@ gem 'omniauth-rails_csrf_protection'
 # Caching and jobs processing
 gem 'redis'
 gem "redis-actionpack"
-gem 'sidekiq', '~> 7.2.0'
+gem 'sidekiq', '7.3.10'
 gem 'sidekiq_alive'
 
 # PDF generation
@@ -62,7 +62,6 @@ end
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller'
   gem "bundler-audit", "~> 0.9.1"
   gem 'openssl'
 end
