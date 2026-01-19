@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "govuk-frontend": "5.13.0",
-    "puppeteer": "^24.24.0"
+    "govuk-frontend": "5.14.0",
+    "puppeteer": "^24.35.0"
   }
 }
