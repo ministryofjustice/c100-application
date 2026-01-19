@@ -7,13 +7,17 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
 gem 'govuk_notify_rails', '~> 3.0'
 gem 'govuk-pay-ruby-client', github: 'ministryofjustice/govuk-pay-ruby-client', tag: 'v1.0.3'
-gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rails', '~> 8.1'
 gem 'responders'
-gem 'sass-rails', '< 6.0.0'
+
+# frontend assets management
+gem 'propshaft'
+gem 'cssbundling-rails'
+gem 'jsbundling-rails'
+
 
 # Sentry
 gem "stackprof"

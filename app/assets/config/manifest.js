@@ -1,3 +1,4 @@
+//= link_tree ../builds
 //= link_tree ../images
-//= link_directory ../javascripts .js
-//= link_directory ../stylesheets .css
+//= link govuk-frontend/dist/govuk/govuk-frontend.min.js
+//= link_tree govuk-frontend/dist/govuk/assets

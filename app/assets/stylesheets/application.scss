@@ -6,8 +6,9 @@ $govuk-global-styles: true;
 $govuk-new-typography-scale: true;
 $govuk-new-organisation-colours: true;
 
-$govuk-fonts-path: 'govuk-frontend/dist/govuk/assets/fonts/';
-$govuk-images-path: 'govuk-frontend/dist/govuk/assets/rebrand/images/';
+// Asset paths for Propshaft - full logical path from node_modules
+$govuk-fonts-path: '/assets/govuk-frontend/dist/govuk/assets/fonts/';
+$govuk-images-path: '/assets/govuk-frontend/dist/govuk/assets/rebrand/images/';
 
 @import "govuk-frontend/dist/govuk/index";
 
