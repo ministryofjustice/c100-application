@@ -19,11 +19,11 @@ class C8ConfidentialityPresenter < SimpleDelegator
     return unless value.present?
     case attribute
     when :full_address
-      contact_details_private.include? ContactDetails::ADDRESS.to_s
+      contact_details_private.include?(ContactDetails::ADDRESS.to_s) || refuge?
     when :phone_number
-      contact_details_private.include? ContactDetails::PHONE_NUMBER.to_s
+      contact_details_private.include?(ContactDetails::PHONE_NUMBER.to_s) || refuge?
     when :email
-      contact_details_private.include? ContactDetails::EMAIL.to_s
+      contact_details_private.include?(ContactDetails::EMAIL.to_s) || refuge?
     end
   end
 
