@@ -54,7 +54,6 @@ COPY Gemfile.lock /usr/src/app
 RUN gem install bundler -v 4.0.3
 
 RUN bundle config set --local without 'test development'
-RUN bundle config set force_ruby_platform true
 RUN bundle config set --local frozen true
 RUN bundle install
 
@@ -68,8 +67,7 @@ ENV RDS_COMBINED_CA_BUNDLE=/usr/src/app/config/rds-combined-ca-bundle.pem
 ADD https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem $RDS_COMBINED_CA_BUNDLE
 RUN chmod +r $RDS_COMBINED_CA_BUNDLE
 
-CMD ["sh", "-c", "bundle exec rake assets:precompile RAILS_ENV=production SECRET_TOKEN=blah && \
-     bundle exec rake static_pages:generate RAILS_ENV=production SECRET_TOKEN=blah"]
+RUN bundle exec rake assets:precompile RAILS_ENV=production SECRET_TOKEN=blah
 
 RUN mkdir -p log
 

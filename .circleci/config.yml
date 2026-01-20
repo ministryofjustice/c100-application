@@ -62,7 +62,8 @@ jobs:
           command: |
             bundle config set --local path 'vendor/bundle'
             bundle install --jobs=4 --retry=3
-            npm install
+            yarn install --check-files
+            bundle exec rails assets:precompile
 
       - save_cache:
           paths:
