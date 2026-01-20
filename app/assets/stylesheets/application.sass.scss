@@ -6,9 +6,15 @@ $govuk-global-styles: true;
 $govuk-new-typography-scale: true;
 $govuk-new-organisation-colours: true;
 
-// Asset paths for Propshaft - full logical path from node_modules
-$govuk-fonts-path: '/assets/govuk-frontend/dist/govuk/assets/fonts/';
-$govuk-images-path: '/assets/govuk-frontend/dist/govuk/assets/rebrand/images/';
+// Asset paths - fonts and images copied from govuk-frontend to app/assets/
+$govuk-fonts-path: 'govuk-frontend/dist/govuk/assets/fonts/';
+$govuk-images-path: 'govuk-frontend/dist/govuk/assets/images/';
+
+
+// Custom function to replace sass-rails image-url helper
+// @function image-url($filename) {
+//   @return url('/assets/' + $filename);
+// }
 
 @import "govuk-frontend/dist/govuk/index";
 
