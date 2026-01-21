@@ -602,8 +602,7 @@ GEM
     zeitwerk (2.7.4)
 
 PLATFORMS
-  aarch64-linux-musl
-  arm64-darwin-25
+  ruby
 
 DEPENDENCIES
   aws-sdk-s3 (~> 1)
