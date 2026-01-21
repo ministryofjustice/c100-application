@@ -5,7 +5,7 @@ RSpec.describe C8ConfidentialityPresenter do
     instance_double(Applicant, full_address: 'real full address', residence_history: nil,
       contact_details_private: contact_details_private,
       email: 'mail', phone_number: '11335566', gender: 'male',
-      c100_application: c100_application_one
+      c100_application: c100_application_one, refuge?: false
       )
   }
   let(:c100_application_one) { instance_double('C100Application', confidentiality_enabled?: true)}
@@ -14,8 +14,15 @@ RSpec.describe C8ConfidentialityPresenter do
   let(:person_two) {
     instance_double(Applicant, full_address: 'real full address', residence_history: nil, 
       contact_details_private: [],
-      email: 'mail', phone_number: '11335566', gender: 'male', c100_application: c100_application_two)
+      email: 'mail', phone_number: '11335566', gender: 'male', c100_application: c100_application_two, refuge?: false)
   }
+
+  let(:person_three) {
+    instance_double(Applicant, full_address: 'real full address', residence_history: nil,
+                    contact_details_private: [],
+                    email: 'mail', phone_number: '11335566', gender: 'male', c100_application: c100_application_two, refuge?: true)
+  }
+
   let(:contact_details_private) { [
     ContactDetails::ADDRESS.to_s,
     ContactDetails::EMAIL.to_s,
@@ -80,6 +87,22 @@ RSpec.describe C8ConfidentialityPresenter do
     # it 'returns the replacement answer when confidentiality applies' do
     #   expect(subject.full_address).not_to eq('[See C8]')
     # end
+  end
+
+  context 'no private attribute present but with refuge' do
+    subject { described_class.new(person_three) }
+
+    it 'returns the real value for full_address' do
+      expect(subject.full_address).to eq('[See C8]')
+    end
+
+    it 'returns the real value for email' do
+      expect(subject.email).to eq('[See C8]')
+    end
+
+    it 'returns the real value for phone_number' do
+      expect(subject.phone_number).to eq('[See C8]')
+    end
   end
 
   it 'returns the original answer when confidentiality does not apply' do
