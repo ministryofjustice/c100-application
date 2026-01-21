@@ -16,8 +16,8 @@ module C100
         end
 
         section :notification_banner, '.govuk-notification-banner' do
-          element :title, '.govuk-notification-banner__header.govuk-notification-banner__title'
-          element :content, '.govuk-notification-banner__content .govuk-notification-banner__heading'
+          element :banner_title, '.govuk-notification-banner__header.govuk-notification-banner__title'
+          element :banner_content, '.govuk-notification-banner__content .govuk-notification-banner__heading'
         end
 
         section :cookie_banner, '.govuk-cookie-banner' do

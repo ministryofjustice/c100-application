@@ -97,7 +97,7 @@ group :test do
   gem 'selenium-webdriver', '>= 4.24.0'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
-  gem 'site_prism', '~> 3.7', '>= 3.7.1'
+  gem 'site_prism'
   gem 'webmock'
   gem 'database_cleaner'
   gem 'parallel_tests'
