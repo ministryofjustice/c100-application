@@ -61,6 +61,7 @@ jobs:
           name: install dependencies
           command: |
             bundle config set --local path 'vendor/bundle'
+            bundle config set --local frozen true
             bundle install --jobs=4 --retry=3
             yarn install --check-files
             bundle exec rails assets:precompile
