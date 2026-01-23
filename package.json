@@ -4,7 +4,17 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "govuk-frontend": "5.13.0",
-    "puppeteer": "^24.24.0"
+    "govuk-frontend": "5.14.0",
+    "jquery": "^3.7.1",
+    "puppeteer": "^24.35.0"
+  },
+  "devDependencies": {
+    "sass": "^1.86.0",
+    "webpack": "^5.99.0",
+    "webpack-cli": "^6.0.0"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules && sass ./app/assets/stylesheets/local/pdf_summary.scss:./app/assets/builds/pdf_summary.css --no-source-map"
   }
 }

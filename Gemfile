@@ -7,13 +7,17 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'govuk_design_system_formbuilder'
 gem 'govuk_notify_rails', '~> 3.0'
 gem 'govuk-pay-ruby-client', github: 'ministryofjustice/govuk-pay-ruby-client', tag: 'v1.0.3'
-gem 'jquery-rails'
 gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rails', '~> 8.1'
 gem 'responders'
-gem 'sass-rails', '< 6.0.0'
+
+# frontend assets management
+gem 'propshaft'
+gem 'cssbundling-rails'
+gem 'jsbundling-rails'
+
 
 # Sentry
 gem "stackprof"
@@ -37,7 +41,7 @@ gem 'omniauth-rails_csrf_protection'
 # Caching and jobs processing
 gem 'redis'
 gem "redis-actionpack"
-gem 'sidekiq', '7.3.10'
+gem 'sidekiq', '~> 8.1'
 gem 'sidekiq_alive'
 
 # PDF generation
@@ -93,7 +97,7 @@ group :test do
   gem 'selenium-webdriver', '>= 4.24.0'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
-  gem 'site_prism', '~> 3.7', '>= 3.7.1'
+  gem 'site_prism'
   gem 'webmock'
   gem 'database_cleaner'
   gem 'parallel_tests'

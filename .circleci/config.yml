@@ -61,8 +61,10 @@ jobs:
           name: install dependencies
           command: |
             bundle config set --local path 'vendor/bundle'
+            bundle config set --local frozen true
             bundle install --jobs=4 --retry=3
-            npm install
+            yarn install --check-files
+            bundle exec rails assets:precompile
 
       - save_cache:
           paths:
@@ -301,7 +303,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7795$/
+                - /^rst-7829-updating-frontend$/
       - deploy_image_to_dev:
           name: deploy-dev-live
           env_name: dev
@@ -310,7 +312,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^RST-7795$/
+                - /^rst-7829-updating-frontend$/
       ### staging ###
       - build_and_push_image:
           name: build-staging

@@ -15,6 +15,19 @@ You don't need to configure Notify or Auth0 at this point.
 * `bundle exec rails db:migrate`
 * `bundle exec rails server`
 
+## Update existing frontend libraries
+```
+yarn upgrade --latest
+```
+
+## CSS + JS updates
+We are now using propshaft, cssbundling-rails and jsbundling-rails. You will need to run
+```
+yarn build:css --watch
+yarn build --watch
+```
+to build your assets you localhost for the first time. Then everytime you are toding any changes to JS or CSS.
+
 ### PDF generating
 Grover and Puppeteer handle this, so we are not relying on the deprecated wkthmltopdf library.
 Ensure the Puppeteer is installed via js packaging manager and not via image in docker to avoid version discrepancies between chromium and Puppeteer.
