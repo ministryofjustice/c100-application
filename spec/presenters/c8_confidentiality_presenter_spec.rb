@@ -5,7 +5,7 @@ RSpec.describe C8ConfidentialityPresenter do
     instance_double(Applicant, full_address: 'real full address', residence_history: nil,
       contact_details_private: contact_details_private,
       email: 'mail', phone_number: '11335566', gender: 'male',
-      c100_application: c100_application_one, refuge?: false
+      c100_application: c100_application_one, refuge: GenericYesNo::NO.to_s
       )
   }
   let(:c100_application_one) { instance_double('C100Application', confidentiality_enabled?: true)}
@@ -14,13 +14,13 @@ RSpec.describe C8ConfidentialityPresenter do
   let(:person_two) {
     instance_double(Applicant, full_address: 'real full address', residence_history: nil, 
       contact_details_private: [],
-      email: 'mail', phone_number: '11335566', gender: 'male', c100_application: c100_application_two, refuge?: false)
+      email: 'mail', phone_number: '11335566', gender: 'male', c100_application: c100_application_two, refuge: GenericYesNo::NO.to_s)
   }
 
   let(:person_three) {
     instance_double(Applicant, full_address: 'real full address', residence_history: nil,
                     contact_details_private: [],
-                    email: 'mail', phone_number: '11335566', gender: 'male', c100_application: c100_application_two, refuge?: true)
+                    email: 'mail', phone_number: '11335566', gender: 'male', c100_application: c100_application_two, refuge: GenericYesNo::YES.to_s)
   }
 
   let(:contact_details_private) { [
