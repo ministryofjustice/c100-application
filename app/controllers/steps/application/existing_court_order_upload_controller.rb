@@ -1,6 +1,9 @@
 module Steps
   module Application
     class ExistingCourtOrderUploadController < Steps::ApplicationStepController
+
+      before_action :store_step_path_in_session, only: [:edit, :update]
+
       def edit
         @form_object = ExistingCourtOrderUploadForm.new(
           c100_application: current_c100_application

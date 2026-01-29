@@ -9,7 +9,7 @@ module Steps
       validates_presence_of :court_order_case_number, if: -> { existing_court_order&.yes? }
       validates_presence_of :input_court_order_expiry_date, if: -> { existing_court_order&.yes? }
       validates_presence_of :court_order_expiry_date, unless: :date_entered?
-      validates :court_order_expiry_date, sensible_date: true, if: -> { existing_court_order&.yes? }
+      validates :court_order_expiry_date, date: true, if: -> { existing_court_order&.yes? }
       validates :input_court_order_expiry_date, date: true, if: -> { existing_court_order&.yes? }
 
       attr_accessor :input_court_order_expiry_date
