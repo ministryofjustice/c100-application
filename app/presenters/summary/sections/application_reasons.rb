@@ -26,7 +26,6 @@ module Summary
       private
 
       def existing_court_order_document_answer
-        puts 'c100.existing_court_order_uploadable: ' + c100.existing_court_order_uploadable.to_s
         return I18n.t('check_answers.existing_court_order_upload.absence_answer') if c100.existing_court_order_uploadable == GenericYesNo::NO.to_s
 
         c100.documents(:existing_court_order).any? &&
