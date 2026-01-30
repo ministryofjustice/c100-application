@@ -1,6 +1,6 @@
 module RemoveExistingCourtOrderHelper
   def remove_file_if_no_uploadable(c100_application)
-    return unless c100_application.document(:existing_court_order) && c100_application.existing_court_order_uploadable == 'no'
+    return unless c100_application.document(:existing_court_order) && c100_application.existing_court_order_uploadable == GenericYesNo::NO.to_s
 
     document = c100_application.document(:existing_court_order)
     Uploader.delete_file(

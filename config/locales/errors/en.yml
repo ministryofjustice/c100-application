@@ -661,6 +661,7 @@ en:
               blank: Enter a case number
             court_order_expiry_date:
               blank: Enter a date in the correct format, for example, 04 03 2026
+              invalid: Enter a date in the correct format, for example, 04 03 2026
         steps/application/existing_court_order_upload_form:
           attributes:
             existing_court_order_document:
