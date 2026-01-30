@@ -60,7 +60,7 @@ class NotifySubmissionMailer < NotifyMailer
   private
 
   def build_document_variables
-    keys = %i[draft_consent_order miam_certificate exemption]
+    keys = %i[draft_consent_order miam_certificate exemption existing_court_order]
     keys.each { |key| build_variables_for_document(key) }
 
     personalisation = {}
