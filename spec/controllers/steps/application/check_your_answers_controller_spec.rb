@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Steps::Application::CheckYourAnswersController, type: :controller do
 
   before do
-    allow(controller).to receive(:check_exemption_file)
+    allow(controller).to receive(:check_remove_files)
   end
 
   it_behaves_like 'an intermediate step controller', Steps::Application::DeclarationForm, C100App::ApplicationDecisionTree
