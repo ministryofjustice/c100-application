@@ -189,7 +189,7 @@
 #    Then I should see "Are you asking for a without notice hearing?"
 #    And I click the radio button "No"
 #    And I click the "Continue" button
-#    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+#    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
 #    And I click the radio button "No"
 #    And I click the "Continue" button
 #    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
@@ -505,7 +505,7 @@
 #    Then I should see "Are you asking for a without notice hearing?"
 #    And I click the radio button "No"
 #    And I click the "Continue" button
-#    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+#    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
 #    And I click the radio button "No"
 #    And I click the "Continue" button
 #    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
@@ -761,7 +761,7 @@
 #    Then I should see "Are you asking for a without notice hearing?"
 #    And I click the radio button "No"
 #    And I click the "Continue" button
-#    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+#    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
 #    And I click the radio button "No"
 #    And I click the "Continue" button
 #    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
@@ -1146,7 +1146,7 @@
 #    And I choose "No"
 #    Then I should see "Are you asking for a without notice hearing?"
 #    And I choose "No"
-#    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+#    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
 #    And I click the radio button "Yes"
 #    And I fill in "Provide details" with "Emily's maternal grandparents are in Austria"
 #    And I click the "Continue" button
@@ -1412,7 +1412,7 @@
 #    Then I should see "Are you asking for a without notice hearing?"
 #    And I click the radio button "No"
 #    And I click the "Continue" button
-#    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+#    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
 #    And I click the radio button "No"
 #    And I click the "Continue" button
 #    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
@@ -1778,7 +1778,7 @@
 #    And I fill in "Give details of why you’re asking for a without notice hearing" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
 #    And I choose "No" for all options on this page
 #    And I click the "Continue" button
-#    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+#    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
 #    And I choose "No"
 #    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
 #    And I choose "No"
@@ -1796,7 +1796,7 @@
 #    And I fill in "Provide details" with "I need someone to communicate between me and the respondent"
 #    And I click the "Continue" button
 #    Then I should see "Does anyone in this application have special language requirements?"
-#    And I check "To speak Welsh at a court hearing, or read court documents in Welsh"
+#    And I check "Wants to speak Welsh at a court hearing, or wants to read court documents in Welsh"
 #    And I fill in "Give details of who needs to speak or read in Welsh" with "Needed for Jake Gyllenhaal"
 #    And I click the "Continue" button
 #    Then I should see "Do you or the children need specific safety arrangements at court?"
