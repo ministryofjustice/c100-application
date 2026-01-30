@@ -90,6 +90,11 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         name: exemption_file_key,
         collection_ref: '123'
       }) }
+      let(:existing_court_order_file_key) { '39d2bFDf912gas3gD' }
+      let(:existing_court_order) { Document.new({
+        name: existing_court_order_file_key,
+        collection_ref: '123'
+      }) }
 
       before do
         allow_any_instance_of(C100Application).to receive(
@@ -99,7 +104,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           to receive(:all_for_collection).
           and_return({ miam_certificate: [miam_certificate],
                        draft_consent_order: [draft_consent_order],
-                       exemption: [exemption]
+                       exemption: [exemption],
+                       existing_court_order: [existing_court_order]
                      })
       end
 
@@ -138,6 +144,10 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_exemption:
             download_token_url(c100_application.download_tokens.find_by(
               key: exemption_file_key).token),
+          has_existing_court_order: true,
+          link_to_existing_court_order:
+            download_token_url(c100_application.download_tokens.find_by(
+              key: existing_court_order_file_key).token),
         })
       end
     end
@@ -178,6 +188,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           link_to_miam_certificate: '',
           has_exemption: false,
           link_to_exemption: '',
+          has_existing_court_order: false,
+          link_to_existing_court_order: '',
         })
       end
     end
