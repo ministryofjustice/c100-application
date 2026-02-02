@@ -653,6 +653,19 @@ en:
               blank: Enter name of court
             order_types:
               blank: Enter type of proceedings
+        steps/application/existing_court_order_form:
+          attributes:
+            existing_court_order:
+              inclusion: You must make a selection
+            court_order_case_number:
+              blank: Enter a case number
+            court_order_expiry_date:
+              blank: Enter a date in the correct format, for example, 04 03 2026
+              invalid: Enter a date in the correct format, for example, 04 03 2026
+        steps/application/existing_court_order_upload_form:
+          attributes:
+            existing_court_order_document:
+              <<: *DOCUMENT_UPLOAD_ERRORS
         steps/application/urgent_hearing_form:
           attributes:
             urgent_hearing:

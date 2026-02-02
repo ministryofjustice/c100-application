@@ -1,0 +1,21 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_radio_buttons_fieldset :existing_court_order, legend: {text: t(".heading"), size: "xl"} do %>
+        <%= f.govuk_radio_button :existing_court_order, GenericYesNo::YES, link_errors: true do %>
+          <%= f.govuk_text_field :court_order_case_number, width: 'one-half', label: { size: 's' } %>
+          <%= f.govuk_date_field :court_order_expiry_date, width: 'one-half', label: { size: 's' }, hint: { text: t('helpers.label.steps_application_existing_court_order_form.court_order_expiry_date_hint') }, legend: { tag: 'span', size: 's', text: t('helpers.label.steps_application_existing_court_order_form.court_order_expiry_date') } %>
+        <% end %>
+        <%= f.govuk_radio_button :existing_court_order, GenericYesNo::NO, link_errors: true %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+
+  </div>
+</div>
