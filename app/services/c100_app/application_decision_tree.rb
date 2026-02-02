@@ -1,5 +1,5 @@
 module C100App
-  class ApplicationDecisionTree < BaseDecisionTree # rubocop:disable Metrics/ClassLength
+  class ApplicationDecisionTree < BaseDecisionTree
     # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     def destination
       return next_step if next_step
@@ -8,13 +8,7 @@ module C100App
       when :previous_proceedings
         after_previous_proceedings
       when :court_proceedings
-        record.relation.eql?(Relation::OTHER.to_s) ? edit(:permission_sought) : edit(:existing_court_order)
-      when :existing_court_order
-        after_existing_court_order
-      when :existing_court_order_uploadable
-        after_existing_court_order_uploadable
-      when :existing_court_order_upload
-        edit(:urgent_hearing)
+        record.relation.eql?(Relation::OTHER.to_s) ? edit(:permission_sought) : edit(:urgent_hearing)
       when :urgent_hearing
         after_urgent_hearing
       when :urgent_hearing_details
@@ -28,7 +22,7 @@ module C100App
       when :permission_details
         edit(:details)
       when :application_details
-        record.relation.eql?(Relation::OTHER.to_s) ? edit(:existing_court_order) : edit(:litigation_capacity)
+        record.relation.eql?(Relation::OTHER.to_s) ? edit(:urgent_hearing) : edit(:litigation_capacity)
       when :litigation_capacity
         after_litigation_capacity
       when :litigation_capacity_details
@@ -51,23 +45,7 @@ module C100App
       if question(:children_previous_proceedings).yes?
         edit(:court_proceedings)
       else
-        record.relation.eql?(Relation::OTHER.to_s) ? edit(:permission_sought) : edit(:existing_court_order)
-      end
-    end
-
-    def after_existing_court_order
-      if question(:existing_court_order).yes?
-        edit(:existing_court_order_uploadable)
-      else
-        edit(:urgent_hearing)
-      end
-    end
-
-    def after_existing_court_order_uploadable
-      if question(:existing_court_order_uploadable).yes?
-        edit(:existing_court_order_upload)
-      else
-        edit(:urgent_hearing)
+        record.relation.eql?(Relation::OTHER.to_s) ? edit(:permission_sought) : edit(:urgent_hearing)
       end
     end
 
@@ -128,5 +106,5 @@ module C100App
     def record
       @record || c100_application.relationships.find { |r| r.person.type == "Applicant" }
     end
-  end # rubocop:enable Metrics/ClassLength
+  end
 end
