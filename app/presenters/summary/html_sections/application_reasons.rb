@@ -5,7 +5,7 @@ module Summary
         :application_reasons
       end
 
-      def answers # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def answers
         [
           Answer.new(
             :permission_sought,
@@ -22,42 +22,7 @@ module Summary
             c100.application_details,
             change_path: edit_steps_application_details_path
           ),
-          AnswersGroup.new(
-            :existing_court_order,
-            existing_court_order_questions,
-            change_path: edit_steps_application_existing_court_order_path
-          ),
-          Answer.new(
-            :existing_court_order_uploadable,
-            c100.existing_court_order_uploadable,
-            change_path: edit_steps_application_existing_court_order_uploadable_path
-          ),
-          FileAnswer.new(:existing_court_order_upload,
-                         Uploader.get_file(
-                           collection_ref: c100.files_collection_ref,
-                           document_key: :existing_court_order
-                         ).try(:name),
-                         change_path: edit_steps_application_existing_court_order_upload_path)
         ].select(&:show?)
-      end # rubocop:enable Metrics/AbcSize, Metrics/MethodLength:
-
-      private
-
-      def existing_court_order_questions
-        [
-          FreeTextAnswer.new(
-            :existing_court_order,
-            c100.existing_court_order.try(:capitalize),
-          ),
-          FreeTextAnswer.new(
-            :court_order_case_number,
-            c100.court_order_case_number,
-          ),
-          FreeTextAnswer.new(
-            :court_order_expiry_date,
-            c100.court_order_expiry_date,
-          ),
-        ]
       end
     end
   end

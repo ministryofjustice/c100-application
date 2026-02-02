@@ -421,20 +421,7 @@ en:
       question: Reasons for permission
     application_details:
       question: Reasons for application
-    existing_court_order:
-      question: 'Is there a court order under section 91(14) Children Act 1989, which means you need permission to make this application?'
-    court_order_case_number:
-      question: 'Case number'
-    court_order_expiry_date:
-      question: 'Order expiry date'
-    existing_court_order_uploadable:
-      question: 'Existing court order uploaded?'
-      answers:
-        <<: *YESNO
-    existing_court_order_upload:
-      question: 'Existing court order'
-      answer: "[ File(s) uploaded with application ]"
-      absence_answer: *not_applicable
+
     urgent_hearing:
       question: *details
       answers:
