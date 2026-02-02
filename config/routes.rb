@@ -135,6 +135,9 @@ Rails.application.routes.draw do
     namespace :application do
       edit_step :previous_proceedings
       edit_step :court_proceedings
+      edit_step :existing_court_order
+      edit_step :existing_court_order_uploadable
+      edit_step :existing_court_order_upload
       edit_step :urgent_hearing
       edit_step :urgent_hearing_details
       edit_step :without_notice
