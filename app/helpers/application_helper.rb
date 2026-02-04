@@ -43,6 +43,37 @@ module ApplicationHelper
     end
   end
 
+  def govuk_file_upload_error_summary(form_object = @form_object) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    file_upload_errors = form_object.errors.attribute_names.select { |attr| attr.to_s.end_with?('_document') }
+
+    return if file_upload_errors.empty?
+
+    # Prepend page title for screen readers
+    content_for(:page_title, flush: true) do
+      content_for(:page_title).insert(0, t('errors.page_title_prefix'))
+    end
+
+    list_items = file_upload_errors.flat_map do |attr|
+      form_object.errors[attr].map do |msg|
+        content_tag(:li, link_to(msg, "##{attr}_input", data: { turbo: "false" }))
+      end
+    end.join.html_safe
+
+    content_tag(
+      :div,
+      class: "govuk-error-summary",
+      data: { module: "govuk-error-summary", "govuk-error-summary-init": "" },
+      tabindex: "-1"
+    ) do
+      content_tag(:div, role: "alert") do
+        content_tag(:h2, t('errors.error_summary.heading'), class: "govuk-error-summary__title") +
+          content_tag(:div, class: "govuk-error-summary__body") do
+            content_tag(:ul, list_items, class: "govuk-list govuk-error-summary__list")
+          end
+      end
+    end
+  end
+
   def analytics_tracking_id
     Rails.application.config.x.analytics_tracking_id
   end
