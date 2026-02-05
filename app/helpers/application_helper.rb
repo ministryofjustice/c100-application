@@ -1,4 +1,4 @@
-module ApplicationHelper
+module ApplicationHelper # rubocop:disable Metrics/ModuleLength
   # Render a form_for tag pointing to the update action of the current controller
   def step_form(record, options = {}, &block)
     opts = {
