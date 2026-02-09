@@ -1,4 +1,4 @@
-module ApplicationHelper
+module ApplicationHelper # rubocop:disable Metrics/ModuleLength
   # Render a form_for tag pointing to the update action of the current controller
   def step_form(record, options = {}, &block)
     opts = {
@@ -40,6 +40,37 @@ module ApplicationHelper
 
     fields_for(form_object, form_object) do |f|
       f.govuk_error_summary t('errors.error_summary.heading')
+    end
+  end
+
+  def govuk_file_upload_error_summary(form_object = @form_object) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    file_upload_errors = form_object.errors.attribute_names.select { |attr| attr.to_s.end_with?('_document') }
+
+    return if file_upload_errors.empty?
+
+    # Prepend page title for screen readers
+    content_for(:page_title, flush: true) do
+      content_for(:page_title).insert(0, t('errors.page_title_prefix'))
+    end
+
+    list_items = file_upload_errors.flat_map do |attr|
+      form_object.errors[attr].map do |msg|
+        content_tag(:li, link_to(msg, "##{attr}_input", data: { turbo: "false" }))
+      end
+    end.join.html_safe
+
+    content_tag(
+      :div,
+      class: "govuk-error-summary",
+      tabindex: "-1",
+      data: { module: "govuk-error-summary" }
+    ) do
+      content_tag(:div, role: "alert") do
+        content_tag(:h2, t('errors.error_summary.heading'), class: "govuk-error-summary__title") +
+          content_tag(:div, class: "govuk-error-summary__body") do
+            content_tag(:ul, list_items, class: "govuk-list govuk-error-summary__list")
+          end
+      end
     end
   end
 
