@@ -62,8 +62,8 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
     content_tag(
       :div,
       class: "govuk-error-summary",
-      data: { module: "govuk-error-summary", "govuk-error-summary-init": "" },
-      tabindex: "-1"
+      tabindex: "-1",
+      data: { module: "govuk-error-summary" }
     ) do
       content_tag(:div, role: "alert") do
         content_tag(:h2, t('errors.error_summary.heading'), class: "govuk-error-summary__title") +
