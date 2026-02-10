@@ -28,7 +28,7 @@ RSpec.describe C100App::ApplicationDecisionTree do
 
     context 'when answer is `no`' do
       let(:answer) { 'no' }
-      it { is_expected.to have_destination(:existing_court_order, :edit) }
+      it { is_expected.to have_destination(:urgent_hearing, :edit) }
     end
 
     context 'when relation is other' do
@@ -42,7 +42,7 @@ RSpec.describe C100App::ApplicationDecisionTree do
   context 'when the step is `court_proceedings`' do
     let(:step_params) { { court_proceedings: 'anything' } }
 
-    it { is_expected.to have_destination(:existing_court_order, :edit) }
+    it { is_expected.to have_destination(:urgent_hearing, :edit) }
   end
 
   context 'when relation is court_proceedings with other relation' do
@@ -50,42 +50,6 @@ RSpec.describe C100App::ApplicationDecisionTree do
     let(:step_params) { { court_proceedings: 'anything' } }
 
     it { is_expected.to have_destination(:permission_sought, :edit) }
-  end
-
-  context 'when the step is `existing_court_order`' do
-    let(:c100_application) { instance_double(C100Application, existing_court_order: answer) }
-    let(:step_params) { { existing_court_order: 'whatever' } }
-
-    context 'and the answer is `yes`' do
-      let(:answer) { 'yes' }
-      it { is_expected.to have_destination(:existing_court_order_uploadable, :edit) }
-    end
-
-    context 'and the answer is `no`' do
-      let(:answer) { 'no' }
-      it { is_expected.to have_destination(:urgent_hearing, :edit) }
-    end
-  end
-
-  context 'when the step is `existing_court_order_uploadable`' do
-    let(:c100_application) { instance_double(C100Application, existing_court_order_uploadable: answer) }
-    let(:step_params) { { existing_court_order_uploadable: 'whatever' } }
-
-    context 'and the answer is `yes`' do
-      let(:answer) { 'yes' }
-      it { is_expected.to have_destination(:existing_court_order_upload, :edit) }
-    end
-
-    context 'and the answer is `no`' do
-      let(:answer) { 'no' }
-      it { is_expected.to have_destination(:urgent_hearing, :edit) }
-    end
-  end
-
-  context 'when the step is `existing_court_order_upload`' do
-    let(:step_params) { { existing_court_order_upload: 'whatever' } }
-
-    it { is_expected.to have_destination(:urgent_hearing, :edit) }
   end
 
   context 'when the step is `urgent_hearing`' do
@@ -171,7 +135,7 @@ RSpec.describe C100App::ApplicationDecisionTree do
     let(:relationship) { instance_double("Relationship", person: person, relation: Relation::OTHER.to_s) }
     let(:step_params) { { application_details: 'anything' } }
 
-    it { is_expected.to have_destination(:existing_court_order, :edit) }
+    it { is_expected.to have_destination(:urgent_hearing, :edit) }
   end
 
   context 'when the step is `litigation_capacity`' do

@@ -105,7 +105,6 @@ en:
       person_contact_details: Contact details
       person_address_details: Address details
       other_court_cases_details: Other proceedings details
-      existing_court_order: Is there a court order under section 91(14) Children Act 1989, which means you need permission to make this application?
       urgent_hearing_details: Urgent hearing details
       without_notice_hearing_details: Without notice hearing details
       international_resident: Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?
@@ -651,18 +650,6 @@ en:
       question: ''
     application_details:
       question: 'Why are you making this application?'
-    existing_court_order:
-      question: ''
-    court_order_case_number:
-      question: 'Case number'
-    court_order_expiry_date:
-      question: 'Order expiry date'
-    existing_court_order_uploadable:
-      question: 'Can you upload your existing court order?'
-      answers:
-        <<: *YESNO
-    existing_court_order_upload:
-      question: 'Existing court order'
     permission_sought:
       question: Have you applied to the court for permission to make this application?
       answers:
