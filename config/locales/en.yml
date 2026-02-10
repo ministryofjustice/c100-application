@@ -1534,7 +1534,7 @@ en:
         language_options_options:
           language_interpreter: An interpreter
           sign_language_interpreter: A sign language interpreter
-          welsh_language: To speak Welsh at a court hearing, or read court documents in Welsh
+          welsh_language: Wants to speak Welsh at a court hearing, or wants to read court documents in Welsh
         language_interpreter_details: Give details of who needs an interpreter and the language they require (including dialect, if applicable)
         sign_language_interpreter_details: Give details of who needs a British Sign Language interpreter
         welsh_language_details: Give details of who needs to speak or read in Welsh
@@ -2068,7 +2068,7 @@ en:
       steps_international_request_form:
         international_request: Has a request for information or other assistance involving the children been made to or by another country?
       steps_international_resident_form:
-        international_resident: Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?
+        international_resident: Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?
 
       # Submission and payment steps
       steps_application_submission_form:
