@@ -49,6 +49,7 @@ Capybara.register_driver(:cuprite) do |app|
   )
 end
 
+Capybara.default_normalize_ws = true
 Capybara.default_max_wait_time = 10
 
 # Remove/comment out the lines below if your app doesn't have a database.
