@@ -117,3 +117,17 @@ When(/^I specify they are "(\d+)" years of age$/) do |age|
   step %[I fill in "Month" with "#{date_of_birth.month}"]
   step %[I fill in "Year" with "#{date_of_birth.year}"]
 end
+
+When(/^I choose "([^"]*)" from radiobutton options$/) do |text|
+  within(:xpath)
+    find(:xpath, ".//input[@id='cart_payment_type_cash_pay']").choose
+  end
+
+When(/^I choose (Yes|No) from the radio button options$/) do |option|
+  labels = {
+    "Yes" => "steps-applicant-privacy-preferences-form-are-contact-details-private-yes-field",
+    "No"  => "steps-applicant-privacy-preferences-form-are-contact-details-private-no-field"
+  }
+
+  find("label[for='#{labels[option]}']").click
+end
