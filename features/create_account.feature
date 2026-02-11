@@ -24,6 +24,6 @@ Feature: Create account for applicant
   @unhappy_path @skip
   Scenario: Login to applicant account with no details entered
     When I create an account to login
-    And I click the "Sign in to an existing account" link
+    And I click the "Sign in" link
     And I click the "Continue" button
     Then I should see "Please enter a valid email and password"
