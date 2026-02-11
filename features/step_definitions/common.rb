@@ -41,7 +41,7 @@ end
 
 When(/^I click the "([^"]*)" link$/) do |text|
   find(:xpath, './/main', visible: true, wait: true)
-  click_link(text, wait: true)
+  find(:css, 'a', text: text).click
 rescue Selenium::WebDriver::Error::UnknownError => e
   find(:xpath, './/main', visible: true, wait: true)
   click_link(text)
@@ -59,13 +59,16 @@ rescue Selenium::WebDriver::Error::UnknownError => e
 end
 
 When(/^I wait and click the "([^"]*)" button$/) do |text|
-  travel 61.minutes do
-    begin
-      find_button("#{text}").click
-    rescue
-      click_link(text)
-    end
+  travel_to 61.minutes.from_now
+  begin
+    find_button("#{text}").click
+  rescue
+    click_link(text)
   end
+end
+
+Then('the time goes back to normal') do
+  travel_back
 end
 
 When(/^I click the postcode page "([^"]*)" button$/) do |text|
@@ -129,6 +132,7 @@ end
 
 When(/^I am on the home page$/) do
   step %[I visit "/"]
+  find(:css, 'h1', text: 'What you’ll need to complete your application')
 end
 
 When(/^I pause for "([^"]*)" seconds$/) do |seconds|
@@ -198,4 +202,5 @@ end
 Then('debugger') do
   require 'pry'
   binding.pry
+  :a
 end
