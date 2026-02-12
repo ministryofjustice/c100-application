@@ -9,7 +9,7 @@ Feature: Opening PRL
   Scenario: Complete the opening
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK9 3DX"
-    And I click the postcode page "Continue" button
+    And I click the "Continue" button
     Then I should see "What you’ll need to complete your application"
     And I click the "Continue" link
     Then I should see "What kind of application do you want to make?"
@@ -20,7 +20,7 @@ Feature: Opening PRL
   Scenario: Testing application timeout (Should not trigger here)
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK9 3DX"
-    And I click the postcode page "Continue" button
+    And I click the "Continue" button
 
     Then I should see "What you’ll need to complete your application"
     And I click the "Continue" link
@@ -38,7 +38,7 @@ Feature: Opening PRL
   Scenario: Research question with alternate application page layout
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK9 3DX"
-    And I click the postcode page "Continue" button
+    And I click the "Continue" button
     And the opening changes end
 
   @happy_path
@@ -57,7 +57,7 @@ Feature: Opening PRL
   Scenario: Postcode entry without a space
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK93DX"
-    And I click the postcode page "Continue" button
+    And I click the "Continue" button
     Then I should see "What you’ll need to complete your application"
     And the opening changes end
 
