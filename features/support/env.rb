@@ -8,6 +8,7 @@ require 'cucumber/rails'
 require 'webmock'
 require 'cucumber/rspec/doubles'
 require "capybara/cuprite"
+require 'database_cleaner/active_record'
 
 # frozen_string_literal: true
 
@@ -49,6 +50,7 @@ Capybara.register_driver(:cuprite) do |app|
   )
 end
 
+Capybara.default_normalize_ws = true
 Capybara.default_max_wait_time = 10
 
 # Remove/comment out the lines below if your app doesn't have a database.
@@ -59,9 +61,17 @@ rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
 
-Before do
-  DatabaseCleaner.clean
+Around do |scenario, block|
+  DatabaseCleaner.cleaning(&block)
+end
 
+After do
+  # in case we forget to set time back
+  travel_back
+  Rails.application.config.prl_opening_date = Date.today + 1.day
+end
+
+Before do
   objects = double('object', contents: [], empty?: true)
   put_object = double('put_object', etag: 'filename')
   s3_client = instance_double(Aws::S3::Client, list_objects: objects)

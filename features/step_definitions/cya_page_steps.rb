@@ -617,6 +617,18 @@ And(/^I should see the reason for application is "([^"]*)"$/) do |arg|
   end
 end
 
+And(/^I should see there "(is|isn't)" a court order requiring permission to make this application$/) do |arg|
+  within('#application_reasons') do
+    within('.app-cya--answers-group#existing_court_order') do
+      if arg == "is"
+        expect(page).to have_content('Yes')
+      elsif arg == "isn't"
+        expect(page).to have_content('No')
+      end
+    end
+  end
+end
+
 And(/^I should see there "(are|aren't)" factors that may affect any adult in this application taking part in the court proceedings$/) do |arg|
   within('#litigation_capacity') do
     within('#reduced_litigation_capacity') do
