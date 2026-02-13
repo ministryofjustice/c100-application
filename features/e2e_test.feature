@@ -183,13 +183,16 @@ Feature: Testing C100 end to end
     And I fill in "Type of proceedings" with "Legal hearing"
     And I fill in "Add details of any other previous family case" with "Lasted for weeks"
     And I click the "Continue" button
+    Then I should see "Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?"
+    And I click the radio button "No"
+    And I click the "Continue" button
     Then I should see "Do you need an urgent hearing?"
     And I click the radio button "No"
     And I click the "Continue" button
     Then I should see "Are you asking for a without notice hearing?"
     And I click the radio button "No"
     And I click the "Continue" button
-    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
     And I click the radio button "No"
     And I click the "Continue" button
     Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
@@ -277,6 +280,7 @@ Feature: Testing C100 end to end
     And I should see another person in this application "could" apply for an order outside the UK
     And I should see a request for information involving the children "hasn't" been made outside the UK
     And I should see the reason for application is "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And I should see there "isn't" a court order requiring permission to make this application
     And I should see there "aren't" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "aren't" people who need an intermediary to help them in court
     And I should see there "aren't" special language requirements
@@ -507,13 +511,16 @@ Feature: Testing C100 end to end
     Then I should see "Have any of the children in this application been involved in other family court proceedings?"
     And I click the radio button "No"
     And I click the "Continue" button
+    Then I should see "Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?"
+    And I click the radio button "No"
+    And I click the "Continue" button
     Then I should see "Do you need an urgent hearing?"
     And I click the radio button "No"
     And I click the "Continue" button
     Then I should see "Are you asking for a without notice hearing?"
     And I click the radio button "No"
     And I click the "Continue" button
-    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
     And I click the radio button "No"
     And I click the "Continue" button
     Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
@@ -589,6 +596,7 @@ Feature: Testing C100 end to end
     And I should see another person in this application "couldn't" apply for an order outside the UK
     And I should see a request for information involving the children "hasn't" been made outside the UK
     And I should see the reason for application is "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And I should see there "isn't" a court order requiring permission to make this application
     And I should see there "aren't" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "aren't" people who need an intermediary to help them in court
     And I should see there "aren't" special language requirements
@@ -768,13 +776,16 @@ Feature: Testing C100 end to end
     And I fill in "Type of proceedings" with "Legal hearing"
     And I fill in "Add details of any other previous family case" with "Lasted for weeks"
     And I click the "Continue" button
+    Then I should see "Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?"
+    And I click the radio button "No"
+    And I click the "Continue" button
     Then I should see "Do you need an urgent hearing?"
     And I click the radio button "No"
     And I click the "Continue" button
     Then I should see "Are you asking for a without notice hearing?"
     And I click the radio button "No"
     And I click the "Continue" button
-    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
     And I click the radio button "No"
     And I click the "Continue" button
     Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
@@ -863,6 +874,7 @@ Feature: Testing C100 end to end
     And I should see another person in this application "could" apply for an order outside the UK
     And I should see a request for information involving the children "hasn't" been made outside the UK
     And I should see the reason for application is "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And I should see there "isn't" a court order requiring permission to make this application
     And I should see there "aren't" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "aren't" people who need an intermediary to help them in court
     And I should see there "aren't" special language requirements
@@ -875,7 +887,7 @@ Feature: Testing C100 end to end
     And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
     And I fill in "Enter your full name" with "John Doe"
     And I click the radio button "I am the applicant and I believe that the facts stated in this application are true."
-#    And I click the radio button "I am the solicitor. The applicant believes that the facts stated in this application are true and I have been given the authority to make this declaration."
+#    And I click the radio button "I am the solicitor. The applicant believes that the facts stated in this application are true and I have been given the authority to make this declaration.c"
     And I click the "Submit application" button
 #    Then I should see "Your application has been submitted"
 #    And I should see "Your reference code is:"
@@ -1166,11 +1178,14 @@ Feature: Testing C100 end to end
     And I fill in "Type of proceedings" with "Care order"
     And I fill in "Add details of any other previous family case" with "Emily Doe was involved in a care order which took place at Aylesbury court"
     And I click the "Continue" button
+    Then I should see "Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?"
+    And I click the radio button "No"
+    And I click the "Continue" button
     Then I should see "Do you need an urgent hearing?"
     And I choose "No"
     Then I should see "Are you asking for a without notice hearing?"
     And I choose "No"
-    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
     And I click the radio button "Yes"
     And I fill in "Provide details" with "Emily's maternal grandparents are in Austria"
     And I click the "Continue" button
@@ -1267,6 +1282,7 @@ Feature: Testing C100 end to end
     And I should see another person in this application "couldn't" apply for an order outside the UK
     And I should see a request for information involving the children "hasn't" been made outside the UK
     And I should see the reason for application is "I fear for Emily & John's safety, but particularly Emily's"
+    And I should see there "isn't" a court order requiring permission to make this application
     And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "are" people who need an intermediary to help them in court
     And I should see the details provided for the intermediary are "Needed for the respondent"
@@ -1430,13 +1446,16 @@ Feature: Testing C100 end to end
     And I fill in "Type of proceedings" with "Legal hearing"
     And I fill in "Add details of any other previous family case" with "Lasted for weeks"
     And I click the "Continue" button
+    Then I should see "Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?"
+    And I click the radio button "No"
+    And I click the "Continue" button
     Then I should see "Do you need an urgent hearing?"
     And I click the radio button "No"
     And I click the "Continue" button
     Then I should see "Are you asking for a without notice hearing?"
     And I click the radio button "No"
     And I click the "Continue" button
-    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
     And I click the radio button "No"
     And I click the "Continue" button
     Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
@@ -1522,6 +1541,7 @@ Feature: Testing C100 end to end
     And I should see another person in this application "could" apply for an order outside the UK
     And I should see a request for information involving the children "hasn't" been made outside the UK
     And I should see the reason for application is "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And I should see there "isn't" a court order requiring permission to make this application
     And I should see there "aren't" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "aren't" people who need an intermediary to help them in court
     And I should see there "aren't" special language requirements
@@ -1795,6 +1815,9 @@ Feature: Testing C100 end to end
     And I click the "Continue" button
     Then I should see "Have any of the children in this application been involved in other family court proceedings?"
     And I choose "No"
+    Then I should see "Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?"
+    And I click the radio button "No"
+    And I click the "Continue" button
     Then I should see "Do you need an urgent hearing"
     And I choose "Yes"
     Then I should see "Details of urgent hearing"
@@ -1808,7 +1831,7 @@ Feature: Testing C100 end to end
     And I fill in "Give details of why you’re asking for a without notice hearing" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
     And I choose "No" for all options on this page
     And I click the "Continue" button
-    Then I should see "Is the life of the child or children, a parent, or anyone significant to the children mainly based in a country outside England or Wales?"
+    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
     And I choose "No"
     Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
     And I choose "No"
@@ -1826,7 +1849,7 @@ Feature: Testing C100 end to end
     And I fill in "Provide details" with "I need someone to communicate between me and the respondent"
     And I click the "Continue" button
     Then I should see "Does anyone in this application have special language requirements?"
-    And I check "To speak Welsh at a court hearing, or read court documents in Welsh"
+    And I check "Wants to speak Welsh at a court hearing, or wants to read court documents in Welsh"
     And I fill in "Give details of who needs to speak or read in Welsh" with "Needed for Jake Gyllenhaal"
     And I click the "Continue" button
     Then I should see "Do you or the children need specific safety arrangements at court?"
@@ -1905,6 +1928,7 @@ Feature: Testing C100 end to end
     And I should see another person in this application "couldn't" apply for an order outside the UK
     And I should see a request for information involving the children "hasn't" been made outside the UK
     And I should see the reason for application is "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And I should see there "isn't" a court order requiring permission to make this application
     And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "are" people who need an intermediary to help them in court
     And I should see the details provided for the intermediary are "I need someone to communicate between me and the respondent"
