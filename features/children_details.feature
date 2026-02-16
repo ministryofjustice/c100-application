@@ -4,7 +4,7 @@ Feature: Add children to the application
     And I have selected orders for the court to decide
     When I visit "steps/children/names"
 
-  @happy_path @skip
+  @happy_path
   Scenario: Children personal details
     Then I should see "Enter the names of the children"
     And I should see "Enter a new name"

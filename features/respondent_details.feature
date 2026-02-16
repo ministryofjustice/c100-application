@@ -6,7 +6,7 @@ Feature: Add a respondent to the application
     And I have entered a child with first name "John" and last name "Doe Junior"
     Then I visit "steps/respondent/names"
 
-  @happy_path @skip
+  @happy_path
   Scenario: Respondent personal details
     Then I should see "Enter the respondent’s name"
     And I should see "Enter a new name"
@@ -159,7 +159,7 @@ Feature: Add a respondent to the application
     # Finalise here as we exit the `people` journeys
     Then I should see "Have any of the children in this application been involved in other family court proceedings?"
 
-  @happy_path @skip
+  @happy_path
   Scenario: Testing addition of exterior person to application
     When I visit "/steps/respondent/has_other_parties"
     And I should see "Is there anyone else who should know about your application?"

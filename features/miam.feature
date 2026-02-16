@@ -99,7 +99,7 @@ Feature: MIAM mediation change journey
     And I click the "Continue" link
     Then I should see "Safety concerns"
 
-  @happy_path @skip
+  @happy_path
   Scenario: Test timeout for applicant attended a MIAM
     When I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
     And I choose "Yes"
