@@ -629,6 +629,34 @@ And(/^I should see there "(is|isn't)" a court order requiring permission to make
   end
 end
 
+And(/^I should see the case number of the court order is "([^"]*)"$/) do |arg|
+  within('#application_reasons') do
+    within('#court_order_case_number') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see the expiry date of the court order is "([^"]*)"$/) do |arg|
+  within('#application_reasons') do
+    within('#court_order_expiry_date') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see they "(have|haven't)" uploaded their existing court order$/) do |arg|
+  within('#application_reasons') do
+    within('#existing_court_order_uploadable') do
+      if arg == "have"
+        expect(page).to have_content('Yes')
+      elsif arg == "haven't"
+        expect(page).to have_content('No')
+      end
+    end
+  end
+end
+
 And(/^I should see there "(are|aren't)" factors that may affect any adult in this application taking part in the court proceedings$/) do |arg|
   within('#litigation_capacity') do
     within('#reduced_litigation_capacity') do
