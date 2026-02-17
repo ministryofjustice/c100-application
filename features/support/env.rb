@@ -78,13 +78,14 @@ Before do
   allow(Aws::S3::Client).to receive(:new).and_return s3_client
 
   allow(s3_client).to receive(:put_object) do |args|
-    put_object = double('put_object', etag: 'filename', key: args[:key], last_modified: Time.now)
+    put_object = double('put_object', etag: 'filename', key: args[:key], last_modified: Time.current)
     uploaded_files << put_object
     put_object
   end
 
-  allow(s3_client).to receive(:list_objects) do
-    double('object', contents: uploaded_files, empty?: uploaded_files.empty?)
+  allow(s3_client).to receive(:list_objects) do |args|
+    matches = uploaded_files.select { |file| file.key.start_with?(args[:prefix]) }
+    double('object', contents: matches, empty?: matches.empty?)
   end
 
   allow(Aws::AssumeRoleWebIdentityCredentials).to receive(:new).with(
