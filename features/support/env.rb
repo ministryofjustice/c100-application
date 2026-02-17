@@ -43,7 +43,7 @@ Capybara.register_driver(:cuprite) do |app|
   Capybara::Cuprite::Driver.new(
     app,
     timeout: 10,
-    window_size: [1400, 1400],
+    window_size: [1920, 1080],
     headless: ENV['SHOW_BROWSER'].nil?,
     inspector: true,
     pending_connection_errors: false
@@ -72,11 +72,20 @@ After do
 end
 
 Before do
-  objects = double('object', contents: [], empty?: true)
-  put_object = double('put_object', etag: 'filename')
-  s3_client = instance_double(Aws::S3::Client, list_objects: objects)
+  uploaded_files = []
+
+  s3_client = instance_double(Aws::S3::Client)
   allow(Aws::S3::Client).to receive(:new).and_return s3_client
-  allow(s3_client).to receive(:put_object).and_return put_object
+
+  allow(s3_client).to receive(:put_object) do |args|
+    put_object = double('put_object', etag: 'filename', key: args[:key], last_modified: Time.now)
+    uploaded_files << put_object
+    put_object
+  end
+
+  allow(s3_client).to receive(:list_objects) do
+    double('object', contents: uploaded_files, empty?: uploaded_files.empty?)
+  end
 
   allow(Aws::AssumeRoleWebIdentityCredentials).to receive(:new).with(
     role_arn: ENV['AWS_ROLE_ARN'],
