@@ -254,7 +254,7 @@ en:
         <<: *YESNO
 
     international_resident:
-      question: Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another state?
+      question: Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?
       answers:
         <<: *YESNO
     international_resident_details:
@@ -422,7 +422,7 @@ en:
     application_details:
       question: Reasons for application
     existing_court_order:
-      question: 'Is there a court order under section 91(14) Children Act 1989, which means you need permission to make this application?'
+      question: 'Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?'
     court_order_case_number:
       question: 'Case number'
     court_order_expiry_date:
