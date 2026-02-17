@@ -884,15 +884,14 @@ Feature: Testing C100 end to end
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
     And I should see the statement of truth
-    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
-    And I fill in "Enter your full name" with "John Doe"
-    And I click the radio button "I am the applicant and I believe that the facts stated in this application are true."
-#    And I click the radio button "I am the solicitor. The applicant believes that the facts stated in this application are true and I have been given the authority to make this declaration.c"
+    And I click the radio button "The applicant believes that the facts stated in this form and any continuation sheets are true. I am authorised by the applicant to sign this statement. This option should only selected if the legal representative is signing the form on behalf of the applicant."
+    And I fill in "Enter your full name" with "Annalise Keating"
+    And I click the radio button "I am the solicitor. The applicant believes that the facts stated in this application are true and I have been given the authority to make this declaration."
     And I click the "Submit application" button
-#    Then I should see "Your application has been submitted"
-#    And I should see "Your reference code is:"
-#    And I should see "Download a copy of your application"
-#    And I should see "Download your application"
+    Then I should see "Your application has been submitted"
+    And I should see "Your reference code is:"
+    And I should see "Download a copy of your application"
+    And I should see "Download your application"
 
   Scenario: Child arrangements order (MIAM) (path four: 'Yes' to 'Have you attended a MIAM?')
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -917,7 +916,6 @@ Feature: Testing C100 end to end
     And I click the "Back" link
     And I choose "Yes"
     Then I should see "Upload your MIAM certificate"
-#    When I upload a document to the MIAM certificate page
     When I upload a document using the file uploader
     And I click the "Continue" button
     Then I should see "Safety concerns"
@@ -1071,8 +1069,6 @@ Feature: Testing C100 end to end
     When I choose "I don't know"
     Then I should see "Keeping your contact details private"
     When I choose Yes from the radio button options
-#     When I click the radio button "Yes"
-#    When I click "yes" for the radio button "Do you want to keep your contact details private from the other people named in the application (the respondents)?"
     Then I should see "Which contact details do you want to keep private from the other people in this application?"
     And I check "Current address"
     And I click the "Continue" button
@@ -1295,6 +1291,11 @@ Feature: Testing C100 end to end
     And I should see the statement of truth
     And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
     And I fill in "Enter your full name" with "John Doe"
+    And I click the "Submit application" button
+    Then I should see "Your application has been submitted"
+    And I should see "Your reference code is:"
+    And I should see "Download a copy of your application"
+    And I should see "Download your application"
 
   Scenario: Skip child arrangements order (MIAM) (path five)
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -1942,6 +1943,11 @@ Feature: Testing C100 end to end
     And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
     And I fill in "Enter your full name" with "June Doe"
     And I click the radio button "I am the applicant and I believe that the facts stated in this application are true."
+    And I click the "Submit application" button
+    Then I should see "Your application has been submitted"
+    And I should see "Your reference code is:"
+    And I should see "Download a copy of your application"
+    And I should see "Download your application"
 
   Scenario: Existing Court Order (path seven: 'Yes' to 'Have you attended a MIAM?)
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
@@ -2188,9 +2194,8 @@ Feature: Testing C100 end to end
     And I should see the statement of truth
     And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
     And I fill in "Enter your full name" with "John Doe"
-    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
     And I click the "Submit application" button
-#    Then I should see "Your application has been submitted"
-#    And I should see "Your reference code is:"
-#    And I should see "Download a copy of your application"
-#    And I should see "Download your application"
+    Then I should see "Your application has been submitted"
+    And I should see "Your reference code is:"
+    And I should see "Download a copy of your application"
+    And I should see "Download your application"
