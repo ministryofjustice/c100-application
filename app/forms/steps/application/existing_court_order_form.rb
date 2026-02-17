@@ -6,9 +6,7 @@ module Steps
       attribute :court_order_expiry_date, MultiParamDate
 
       validates_inclusion_of :existing_court_order, in: GenericYesNo.values
-      validates_presence_of :court_order_case_number, if: -> { existing_court_order&.yes? }
-      validates_presence_of :input_court_order_expiry_date, if: -> { existing_court_order&.yes? }
-      validates_presence_of :court_order_expiry_date, unless: :date_entered?
+      validates_presence_of :court_order_expiry_date, if: :date_entered?
       validates :court_order_expiry_date, date: true, if: -> { existing_court_order&.yes? }
       validates :input_court_order_expiry_date, date: true, if: -> { existing_court_order&.yes? }
 
@@ -22,8 +20,8 @@ module Steps
       private
 
       def date_entered?
-        return true if existing_court_order.blank? || existing_court_order.no?
-        return false if input_court_order_expiry_date.nil?
+        return false unless existing_court_order&.yes?
+        return false if input_court_order_expiry_date[1..3].all? { |v| v.is_a?(Numeric) && v.zero? }
 
         set_values = input_court_order_expiry_date.values_at(1, 2, 3)
         return false if set_values.all?(&:zero?)
