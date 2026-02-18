@@ -81,11 +81,9 @@ end
 
 # Needed for the applicant and respondent journeys
 When(/^I have entered a child with first name "([^"]*)" and last name "([^"]*)"$/) do |first_name, last_name|
-  step %[I visit "steps/children/names"]
-  step %[I fill in "First name(s)" with "#{first_name}"]
-  step %[I fill in "Last name(s)" with "#{last_name}"]
-  step %[I click the "Continue" button]
-  step %[I should see "Provide details for #{first_name} #{last_name}"]
+  visit '/steps/children/names'
+  children_names_page.add_child(first_name, last_name)
+  expect(page).to have_text("Provide details for #{first_name} #{last_name}")
 end
 
 And(/^I choose "([^"]*)" for all options on this page$/) do |arg|
@@ -130,4 +128,84 @@ When(/^I choose (Yes|No) from the radio button options$/) do |option|
   }
 
   find("label[for='#{labels[option]}']").click
+end
+
+# Applicant page object step definitions
+When(/^applicant names page I submit names "([^"]*)" and "([^"]*)"$/) do |first_name, last_name|
+  applicant_names_page.submit_names(first_name, last_name)
+end
+
+When(/^applicant privacy known page I submit "([^"]*)"$/) do |answer|
+  applicant_privacy_known_page.submit(answer)
+end
+
+When(/^applicant privacy preferences page I submit "([^"]*)"$/) do |answer|
+  applicant_privacy_preferences_page.submit(answer)
+end
+
+When(/^applicant refuge page I submit "([^"]*)"$/) do |answer|
+  applicant_refuge_page.submit(answer)
+end
+
+When(/^applicant personal details page I submit details with has_previous_name "([^"]*)", gender "([^"]*)", day "([^"]*)", month "([^"]*)", year "([^"]*)", birthplace "([^"]*)"$/) do |has_previous_name, gender, day, month, year, birthplace|
+  binding.pry if year == '1998'
+  applicant_personal_details_page.submit_personal_details(
+    has_previous_name: has_previous_name,
+    gender: gender,
+    day: day,
+    month: month,
+    year: year,
+    birthplace: birthplace
+  )
+end
+
+When(/^applicant relationship page I submit "([^"]*)"$/) do |relationship|
+  applicant_relationship_page.submit(relationship)
+end
+
+When(/^address lookup page I click outside uk$/) do
+  address_lookup_page.click_outside_uk
+end
+
+When(/^applicant address details page I continue without filling$/) do
+  applicant_address_details_page.continue_without_filling
+end
+
+When(/^applicant address details page I submit address with address_line_1 "([^"]*)", town "([^"]*)", country "([^"]*)", residence_5_years "([^"]*)"$/) do |address_line_1, town, country, residence_5_years|
+  applicant_address_details_page.submit_address_details(
+    address_line_1: address_line_1,
+    town: town,
+    country: country,
+    residence_5_years: residence_5_years
+  )
+end
+
+When(/^applicant contact details page I submit contact with email "([^"]*)", phone "([^"]*)", voicemail_consent "([^"]*)"$/) do |email, phone, voicemail_consent|
+  applicant_contact_details_page.submit_contact_details(
+    email: email,
+    phone: phone,
+    voicemail_consent: voicemail_consent
+  )
+end
+
+When(/^applicant has solicitor page I submit "([^"]*)"$/) do |answer|
+  applicant_has_solicitor_page.submit(answer)
+end
+
+# Solicitor page object step definitions
+When(/^solicitor personal details page I submit details with full_name "([^"]*)", firm_name "([^"]*)"$/) do |full_name, firm_name|
+  solicitor_personal_details_page.submit_personal_details(full_name, firm_name)
+end
+
+When(/^solicitor address details page I submit address with address_line_1 "([^"]*)", town "([^"]*)", country "([^"]*)", postcode "([^"]*)"$/) do |address_line_1, town, country, postcode|
+  solicitor_address_details_page.submit_address_details(
+    address_line_1: address_line_1,
+    town: town,
+    country: country,
+    postcode: postcode
+  )
+end
+
+When(/^solicitor contact details page I submit contact with email "([^"]*)", phone "([^"]*)", dx_number "([^"]*)"$/) do |email, phone, dx_number|
+  solicitor_contact_details_page.submit_contact_details(email, phone, dx_number)
 end

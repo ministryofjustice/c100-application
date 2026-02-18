@@ -40,6 +40,9 @@ Then(/^I should not see the save draft button$/) do
 end
 
 When(/^I click the "([^"]*)" link$/) do |text|
+  binding.pry if text == 'Back'
+  puts 'AAAAAAAA'
+  puts find('.govuk-back-link')[:href]
   find(:xpath, './/main', visible: true, wait: true)
   find(:css, 'a', text: text).click
 rescue Selenium::WebDriver::Error::UnknownError => e
@@ -124,10 +127,15 @@ When(/^I click the postcode page "([^"]*)" button with an invalid postcode$/) do
 end
 
 When(/^I have started an application$/) do
-  step %[I visit "/"]
-  step %[I open the "Developer Tools" summary details]
-  find('button', text: 'Bypass postcode').click
-  expect(page).to have_current_path("/steps/opening/consent_order")
+  # replacing the override passcode link with normal way
+  visit '/'
+  expect(home_page.content).to have_header
+  home_page.submit_postcode('MK93DX')
+
+  expect(what_you_need_page.content).to have_header
+  what_you_need_page.continue_to_next_step
+
+  expect(consent_order_page.content).to have_header
 end
 
 When(/^I am on the home page$/) do
@@ -199,8 +207,86 @@ When('court finder raises an error') do
   allow(courtfinder_mock).to receive(:court_for).and_raise(StandardError.new('Courtfinder API error'))
 end
 
-Then('debugger') do
-  require 'pry'
+Given('stub court finder responses') do
+  courtfinder_mock = instance_double(C100App::CourtfinderAPI, is_ok?: false)
+  allow(C100App::CourtfinderAPI).to receive(:new).and_return(courtfinder_mock)
+end
+
+Given('debugger') do
   binding.pry
   :a
+end
+
+When('I navigate to the Safety concerns from consent order page') do
+  consent_order_page.submit_without_consent_order
+  child_protection_case_page.submit_yes
+  expect(miam_page.content).to have_text('You do not have to attend a MIAM')
+
+  miam_page.continue_to_next_step
+  expect(safety_concern_page.content).to have_header
+end
+
+When('I let session to expire') do
+  travel_to 61.minutes.from_now do
+    # save_and_open_page
+    expect(page).to have_text("Sorry, you'll have to start again")
+  end
+end
+
+When('I navigate to applicant names page from consent order') do
+  consent_order_page.submit_without_consent_order
+  child_protection_case_page.submit_yes
+  expect(miam_page.content).to have_text('You do not have to attend a MIAM')
+
+  miam_page.continue_to_next_step
+  expect(safety_concern_page.content).to have_header
+
+  safety_concern_page.continue_to_next_step
+  # Navigate through safety questions to get to applicant names
+  # This is a simplified path - in reality may need more steps
+end
+
+When('I complete the applicant details journey') do
+  # Add a child first
+  children_names_page.add_child('John', 'Doe Junior')
+
+  # Navigate to applicant names
+  applicant_names_page.submit_names('John', 'Doe Senior')
+
+  # Privacy questions
+  applicant_privacy_known_page.submit_yes
+  applicant_privacy_preferences_page.submit_no
+  applicant_refuge_page.submit_no
+
+  # Personal details
+  applicant_personal_details_page.submit_personal_details(
+    has_previous_name: 'no',
+    gender: 'male',
+    day: '25',
+    month: '05',
+    year: '1998',
+    birthplace: 'Manchester'
+  )
+
+  # Relationship
+  applicant_relationship_page.submit_relationship('Father')
+
+  # Address
+  address_lookup_page.click_outside_uk
+  applicant_address_details_page.submit_address_details(
+    address_line_1: 'Test street',
+    town: 'London',
+    country: 'United Kingdom',
+    residence_5_years: 'yes'
+  )
+
+  # Contact details
+  applicant_contact_details_page.submit_contact_details(
+    email: 'john@email.com',
+    phone: '00000000000',
+    voicemail_consent: 'yes'
+  )
+
+  # Solicitor
+  applicant_has_solicitor_page.submit_no
 end

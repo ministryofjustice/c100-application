@@ -1,8 +1,7 @@
 Feature: Safety Concerns
   Background:
     Given I have started an application
-    When I visit "steps/safety_questions/start"
-    Then I should see "Safety concerns"
+    When I navigate to the Safety concerns from consent order page
     And I click the "Continue" link
 
   @happy_path
@@ -221,6 +220,7 @@ Feature: Safety Concerns
   @happy_path
   Scenario: Testing timeout on children safety concerns
     Then I should see "Are the children at risk of being abducted?"
-    And I wait and click the "Continue" button
+    And I choose "Yes"
+    Then I let session to expire
     Then I should see "Sorry, you'll have to start again"
     And the time goes back to normal

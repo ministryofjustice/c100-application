@@ -9,8 +9,13 @@ require 'webmock'
 require 'cucumber/rspec/doubles'
 require "capybara/cuprite"
 require 'database_cleaner/active_record'
+require_relative './page_objects/base_page'
+Dir[File.dirname(__FILE__) + '/page_objects/**/*.rb'].each { |f| require f }
 
 # frozen_string_literal: true
+
+# Add time travel support
+World(ActiveSupport::Testing::TimeHelpers)
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -56,7 +61,7 @@ Capybara.default_max_wait_time = 10
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
-  DatabaseCleaner.strategy = :transaction
+  DatabaseCleaner.strategy = :truncation
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
