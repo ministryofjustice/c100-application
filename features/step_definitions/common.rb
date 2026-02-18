@@ -40,8 +40,8 @@ Then(/^I should not see the save draft button$/) do
 end
 
 When(/^I click the "([^"]*)" link$/) do |text|
-  binding.pry if text == 'Back'
-  puts 'AAAAAAAA'
+  # binding.pry if text == 'Back'
+  # puts 'AAAAAAAA'
   puts find('.govuk-back-link')[:href]
   find(:xpath, './/main', visible: true, wait: true)
   find(:css, 'a', text: text).click

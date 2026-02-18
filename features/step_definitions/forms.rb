@@ -148,7 +148,7 @@ When(/^applicant refuge page I submit "([^"]*)"$/) do |answer|
 end
 
 When(/^applicant personal details page I submit details with has_previous_name "([^"]*)", gender "([^"]*)", day "([^"]*)", month "([^"]*)", year "([^"]*)", birthplace "([^"]*)"$/) do |has_previous_name, gender, day, month, year, birthplace|
-  binding.pry if year == '1998'
+  # binding.pry if year == '1998'
   applicant_personal_details_page.submit_personal_details(
     has_previous_name: has_previous_name,
     gender: gender,
