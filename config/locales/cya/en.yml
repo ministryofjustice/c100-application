@@ -105,7 +105,7 @@ en:
       person_contact_details: Contact details
       person_address_details: Address details
       other_court_cases_details: Other proceedings details
-      existing_court_order: Is there a court order under section 91(14) Children Act 1989, which means you need permission to make this application?
+      existing_court_order: Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?
       urgent_hearing_details: Urgent hearing details
       without_notice_hearing_details: Without notice hearing details
       international_resident: Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?
