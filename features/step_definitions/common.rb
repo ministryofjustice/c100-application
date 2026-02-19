@@ -42,7 +42,7 @@ end
 When(/^I click the "([^"]*)" link$/) do |text|
   # binding.pry if text == 'Back'
   # puts 'AAAAAAAA'
-  puts find('.govuk-back-link')[:href]
+  # puts find('.govuk-back-link')[:href]
   find(:xpath, './/main', visible: true, wait: true)
   find(:css, 'a', text: text).click
 rescue Selenium::WebDriver::Error::UnknownError => e
@@ -117,8 +117,8 @@ When(/^I have started an application$/) do
 end
 
 When(/^I am on the home page$/) do
-  step %[I visit "/"]
-  find(:css, 'h1', text: 'What you’ll need to complete your application')
+  visit '/'
+  expect(home_page.content).to have_header
 end
 
 When(/^I pause for "([^"]*)" seconds$/) do |seconds|
