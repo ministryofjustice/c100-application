@@ -73,7 +73,7 @@ end
 After do
   # in case we forget to set time back
   travel_back
-  Rails.application.config.prl_opening_date = Date.today + 1.day
+  # Rails.application.config.prl_opening_date = Date.today + 1.day
 end
 
 Before do
