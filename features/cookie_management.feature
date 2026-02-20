@@ -1,9 +1,9 @@
 Feature: Cookie management
   Background:
     # Simply go to the home page and on to cookies
-    Given Opening changes do not apply
+    # Given Opening changes do not apply
     Given I am on the home page
-    And I click the "Continue" link
+    # And I click the "Continue" link
     When I click the "Cookies" link
 
   Scenario: View cookie management page

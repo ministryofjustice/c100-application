@@ -86,6 +86,10 @@ def solicitor_contact_details_page
   @solicitor_contact_details_page ||= SolicitorContactDetailsPage.new
 end
 
+def cookie_management_page
+  @cookie_management_page ||= CookieManagementPage.new
+end
+
 def stub_courtfinder_api
   stub_resp = {
     "slug"=>"childcare-arrangements",
