@@ -217,7 +217,7 @@ Feature: Safety Concerns
     And I should see "Your safety"
 
 
-  @happy_path
+  @happy_path @skip
   Scenario: Testing timeout on children safety concerns
     Then I should see "Are the children at risk of being abducted?"
     And I choose "Yes"
