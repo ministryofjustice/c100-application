@@ -6,8 +6,8 @@ class ApplicantAddressDetailsPage < BasePage
     element :address_line_1_field, "input[name='steps_applicant_address_details_form[address_line_1]']"
     element :town_field, "input[name='steps_applicant_address_details_form[town]']"
     element :country_field, "input[name='steps_applicant_address_details_form[country]']"
-    element :residence_requirement_yes, "input#steps-applicant-address-details-form-residence-requirement-met-yes-field", visible: false
-    element :residence_requirement_no, "input#steps-applicant-address-details-form-residence-requirement-met-no-field", visible: false
+    element :residence_requirement_yes, "input[name='steps_applicant_address_details_form[residence_requirement_met]'][value='yes']", visible: false
+    element :residence_requirement_no, "input[name='steps_applicant_address_details_form[residence_requirement_met]'][value='no']", visible: false
     element :continue_button, "button", text: "Continue"
   end
 

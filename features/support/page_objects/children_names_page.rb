@@ -3,8 +3,8 @@ class ChildrenNamesPage < BasePage
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Enter the names of the children'
-    element :first_name_field, "input[name='steps_children_names_split_form[first_name]']"
-    element :last_name_field, "input[name='steps_children_names_split_form[last_name]']"
+    element :first_name_field, "input[name='steps_children_names_split_form[new_first_name]']"
+    element :last_name_field, "input[name='steps_children_names_split_form[new_last_name]']"
     element :continue_button, "button", text: "Continue"
   end
 
