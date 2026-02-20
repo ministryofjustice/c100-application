@@ -73,6 +73,7 @@ Feature: Opening
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I should see the save draft button
     And the opening changes end
+    And the time goes back to normal
 
   @alternate_layout
   Scenario: Research question with alternate application page layout

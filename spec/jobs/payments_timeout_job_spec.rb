@@ -3,12 +3,10 @@
 RSpec.describe PaymentsTimeoutJob, type: :job do
   before do
     allow(Rails).to receive(:logger).and_return(logger)
-    Timecop.freeze
+
   end
 
-  after do
-    Timecop.return
-  end
+
 
   let(:logger) { instance_double(Logger, info: true) }
 
@@ -26,17 +24,19 @@ RSpec.describe PaymentsTimeoutJob, type: :job do
     end
 
     it 'finds any pending payment intents and sends an email' do
-      expect(finder_double).to receive(:where).with("(payment_intents.state ->> 'status' = 'submitted') OR
+      freeze_time do
+        expect(finder_double).to receive(:where).with("(payment_intents.state ->> 'status' = 'submitted') OR
               (payment_intents.state ->> 'status' = 'failed') OR
               (payment_intents.state ->> 'finished' = 'false')").and_return(finder_double)
-      expect(finder_double).to receive(:where).
-        with("payment_intents.created_at >= :start AND payment_intents.created_at < :ending",
-              start: start, ending: ending).and_return(finder_double)
+        expect(finder_double).to receive(:where).
+          with("payment_intents.created_at >= :start AND payment_intents.created_at < :ending",
+                start: start, ending: ending).and_return(finder_double)
 
-      expect(finder_double).to receive(:each).and_yield(c100_application)
-      expect(NotifyMailer).to receive(:payment_timeout).with(c100_application).and_return(payment_timeout)
+        expect(finder_double).to receive(:each).and_yield(c100_application)
+        expect(NotifyMailer).to receive(:payment_timeout).with(c100_application).and_return(payment_timeout)
 
-      described_class.run
+        described_class.run
+      end
     end
   end
 

@@ -8,8 +8,14 @@ require 'cucumber/rails'
 require 'webmock'
 require 'cucumber/rspec/doubles'
 require "capybara/cuprite"
+require 'database_cleaner/active_record'
+require_relative './page_objects/base_page'
+Dir[File.dirname(__FILE__) + '/page_objects/**/*.rb'].each { |f| require f }
 
 # frozen_string_literal: true
+
+# Add time travel support
+World(ActiveSupport::Testing::TimeHelpers)
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -42,13 +48,14 @@ Capybara.register_driver(:cuprite) do |app|
   Capybara::Cuprite::Driver.new(
     app,
     timeout: 10,
-    window_size: [1400, 1400],
-    headless: true,
+    window_size: [1920, 1080],
+    headless: ENV['SHOW_BROWSER'].nil?,
     inspector: true,
     pending_connection_errors: false
   )
 end
 
+Capybara.default_normalize_ws = true
 Capybara.default_max_wait_time = 10
 
 # Remove/comment out the lines below if your app doesn't have a database.
@@ -59,14 +66,32 @@ rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
 
-Before do
-  DatabaseCleaner.clean
+Around do |scenario, block|
+  DatabaseCleaner.cleaning(&block)
+end
 
-  objects = double('object', contents: [], empty?: true)
-  put_object = double('put_object', etag: 'filename')
-  s3_client = instance_double(Aws::S3::Client, list_objects: objects)
+After do
+  # in case we forget to set time back
+  travel_back
+  # Rails.application.config.prl_opening_date = Date.today + 1.day
+end
+
+Before do
+  uploaded_files = []
+
+  s3_client = instance_double(Aws::S3::Client)
   allow(Aws::S3::Client).to receive(:new).and_return s3_client
-  allow(s3_client).to receive(:put_object).and_return put_object
+
+  allow(s3_client).to receive(:put_object) do |args|
+    put_object = double('put_object', etag: 'filename', key: args[:key], last_modified: Time.current)
+    uploaded_files << put_object
+    put_object
+  end
+
+  allow(s3_client).to receive(:list_objects) do |args|
+    matches = uploaded_files.select { |file| file.key.start_with?(args[:prefix]) }
+    double('object', contents: matches, empty?: matches.empty?)
+  end
 
   allow(Aws::AssumeRoleWebIdentityCredentials).to receive(:new).with(
     role_arn: ENV['AWS_ROLE_ARN'],
