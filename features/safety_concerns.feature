@@ -217,10 +217,9 @@ Feature: Safety Concerns
     And I should see "Your safety"
 
 
-  @happy_path @skip
+  @happy_path
   Scenario: Testing timeout on children safety concerns
     Then I should see "Are the children at risk of being abducted?"
-    And I choose "Yes"
-    Then I let session to expire
+    And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
     And the time goes back to normal
