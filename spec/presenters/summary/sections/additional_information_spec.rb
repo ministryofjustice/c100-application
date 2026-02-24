@@ -25,7 +25,6 @@ module Summary
       it 'has the correct rows in the right order' do
         expect(answers[0]).to be_an_instance_of(Answer)
         expect(answers[0].question).to eq(:asking_for_permission)
-        expect(c100_application).to have_received(:permission_sought) # The values of this are tested separated
 
         expect(answers[1]).to be_an_instance_of(Answer)
         expect(answers[1].question).to eq(:urgent_or_without_notice)
@@ -55,22 +54,52 @@ module Summary
 
     describe 'asking for permission' do
       before do
-        expect(c100_application).to receive(:permission_sought).and_return(permission_sought)
+        allow(c100_application).to receive(:permission_sought).and_return(permission_sought)
+        allow(c100_application).to receive(:existing_court_order).and_return(existing_court_order)
       end
 
-      context 'permission sought is `nil`' do
+      context 'both are `nil`' do
         let(:permission_sought) { nil }
+        let(:existing_court_order) { nil }
 
         it 'returns the default value' do
           expect(answers[0].value).to eq(:not_required)
         end
       end
 
-      context 'permission sought is not `nil`' do
+      context 'permission sought is `yes`' do
         let(:permission_sought) { 'yes' }
+        let(:existing_court_order) { nil }
 
-        it 'returns the question value' do
+        it 'returns yes' do
           expect(answers[0].value).to eq('yes')
+        end
+      end
+
+      context 'existing court order is `yes`' do
+        let(:permission_sought) { 'no' }
+        let(:existing_court_order) { 'yes' }
+
+        it 'returns yes' do
+          expect(answers[0].value).to eq('yes')
+        end
+      end
+
+      context 'permission sought is `nil` but existing court order is `yes`' do
+        let(:permission_sought) { nil }
+        let(:existing_court_order) { 'yes' }
+
+        it 'returns yes' do
+          expect(answers[0].value).to eq('yes')
+        end
+      end
+
+      context 'both are `no`' do
+        let(:permission_sought) { 'no' }
+        let(:existing_court_order) { 'no' }
+
+        it 'returns no' do
+          expect(answers[0].value).to eq('no')
         end
       end
     end

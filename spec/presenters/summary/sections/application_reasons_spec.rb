@@ -55,7 +55,7 @@ module Summary
           expect(answers[1].question).to eq(:application_details)
           expect(answers[1].value).to eq(application_details)
 
-          expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[2]).to be_an_instance_of(Answer)
           expect(answers[2].question).to eq(:existing_court_order)
           expect(answers[2].value).to eq(existing_court_order)
         end
@@ -115,7 +115,7 @@ module Summary
           expect(answers[1].question).to eq(:application_details)
           expect(answers[1].value).to eq(application_details)
 
-          expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[2]).to be_an_instance_of(Answer)
           expect(answers[2].question).to eq(:existing_court_order)
           expect(answers[2].value).to eq(existing_court_order)
 
@@ -158,7 +158,7 @@ module Summary
           expect(answers[1].question).to eq(:application_details)
           expect(answers[1].value).to eq(application_details)
 
-          expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[2]).to be_an_instance_of(Answer)
           expect(answers[2].question).to eq(:existing_court_order)
           expect(answers[2].value).to eq(existing_court_order)
 

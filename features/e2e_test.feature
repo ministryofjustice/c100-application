@@ -1797,7 +1797,7 @@
 #    And I click the "Continue" button
 #    Then I should see "Does anyone in this application have special language requirements?"
 #    And I check "Wants to speak Welsh at a court hearing, or wants to read court documents in Welsh"
-#    And I fill in "Give details of who needs to speak or read in Welsh" with "Needed for Jake Gyllenhaal"
+#    And I fill in "Give details of who wants to speak or read in Welsh" with "Needed for Jake Gyllenhaal"
 #    And I click the "Continue" button
 #    Then I should see "Do you or the children need specific safety arrangements at court?"
 #    And I check "Separate waiting rooms"
