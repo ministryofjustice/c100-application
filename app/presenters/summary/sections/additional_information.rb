@@ -7,7 +7,7 @@ module Summary
 
       def answers
         [
-          Answer.new(:asking_for_permission,         c100.permission_sought,             default: :not_required),
+          Answer.new(:asking_for_permission, asking_for_permission_value, default: :not_required),
           Answer.new(:urgent_or_without_notice,      urgent_or_without_notice_value,     default: default_value),
           Answer.new(:children_previous_proceedings, c100.children_previous_proceedings, default: default_value),
           Answer.new(:consent_order,                 c100.consent_order,                 default: default_value),
@@ -18,6 +18,19 @@ module Summary
       end
 
       private
+
+      def asking_for_permission_value
+        permission_sought = c100.permission_sought
+        existing_court_order = c100.existing_court_order
+
+        return nil if permission_sought.nil? && existing_court_order.nil?
+
+        if permission_sought.eql?(GenericYesNo::YES.to_s) || existing_court_order.eql?(GenericYesNo::YES.to_s)
+          GenericYesNo::YES.to_s
+        else
+          GenericYesNo::NO.to_s
+        end
+      end
 
       def arrangement
         @_arrangement ||= c100.court_arrangement
