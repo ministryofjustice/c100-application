@@ -419,6 +419,8 @@ en:
       question: Reasons for application
     existing_court_order:
       question: 'Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?'
+      answers:
+        <<: *YESNO
     court_order_case_number:
       question: 'Case number'
     court_order_expiry_date:
