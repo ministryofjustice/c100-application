@@ -19,7 +19,7 @@ module Summary
     let(:permission_sought) { nil }
     let(:permission_details) { nil }
     let(:application_details) { 'application details' }
-    let(:existing_court_order) { 'No' }
+    let(:existing_court_order) { 'no' }
     let(:court_order_case_number) { nil }
     let(:court_order_expiry_date) { nil }
     let(:existing_court_order_uploadable) { nil }
@@ -98,8 +98,20 @@ module Summary
         end
       end
 
+      context 'when permission sought is `no` and existing_court_order is `yes`' do
+        let(:permission_sought) { 'no' }
+        let(:existing_court_order) { 'yes' }
+        let(:permission_details) { 'permission details' }
+
+        it 'returns :not_granted for permission_sought' do
+          expect(answers[0]).to be_an_instance_of(Answer)
+          expect(answers[0].question).to eq(:permission_sought)
+          expect(answers[0].value).to eq(:not_granted)
+        end
+      end
+
       context 'when existing_court_order is yes and no file' do
-        let(:existing_court_order) { 'Yes' }
+        let(:existing_court_order) { 'yes' }
         let(:court_order_case_number) { '123' }
         let(:court_order_expiry_date) { Date.new(2026, 1, 2) }
         let(:existing_court_order_uploadable) { 'no' }
@@ -109,7 +121,7 @@ module Summary
 
           expect(answers[0]).to be_an_instance_of(Answer)
           expect(answers[0].question).to eq(:permission_sought)
-          expect(answers[0].value).to eq(:not_required)
+          expect(answers[0].value).to eq(:not_granted)
 
           expect(answers[1]).to be_an_instance_of(FreeTextAnswer)
           expect(answers[1].question).to eq(:application_details)
@@ -138,10 +150,10 @@ module Summary
       end
 
       context 'when existing_court_order is yes and yes file' do
-        let(:existing_court_order) { 'Yes' }
+        let(:existing_court_order) { 'yes' }
         let(:court_order_case_number) { '123' }
         let(:court_order_expiry_date) { Date.new(2026, 1, 2) }
-        let(:existing_court_order_uploadable) { 'Yes' }
+        let(:existing_court_order_uploadable) { 'yes' }
 
         before do
           allow(c100_application.documents(:existing_court_order)).to receive(:any?).and_return(true)
@@ -152,7 +164,7 @@ module Summary
 
           expect(answers[0]).to be_an_instance_of(Answer)
           expect(answers[0].question).to eq(:permission_sought)
-          expect(answers[0].value).to eq(:not_required)
+          expect(answers[0].value).to eq(:not_granted)
 
           expect(answers[1]).to be_an_instance_of(FreeTextAnswer)
           expect(answers[1].question).to eq(:application_details)

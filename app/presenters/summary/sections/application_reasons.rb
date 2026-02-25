@@ -11,7 +11,7 @@ module Summary
 
       def answers
         [
-          Answer.new(:permission_sought, c100.permission_sought, default: :not_required),
+          Answer.new(:permission_sought, permission_sought_value, default: :not_required),
           FreeTextAnswer.new(:permission_details, c100.permission_details),
           FreeTextAnswer.new(:application_details, c100.application_details),
           Answer.new(:existing_court_order, c100.existing_court_order),
@@ -24,6 +24,16 @@ module Summary
       end
 
       private
+
+      def permission_sought_value
+        if c100.permission_sought.eql?(GenericYesNo::YES.to_s)
+          GenericYesNo::YES.to_s
+        elsif c100.existing_court_order.eql?(GenericYesNo::YES.to_s)
+          :not_granted
+        elsif c100.permission_sought.eql?(GenericYesNo::NO.to_s)
+          GenericYesNo::NO.to_s
+        end
+      end
 
       def existing_court_order_document_answer
         return I18n.t('check_answers.existing_court_order_upload.absence_answer') if c100.existing_court_order_uploadable == GenericYesNo::NO.to_s
