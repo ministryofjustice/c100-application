@@ -10,6 +10,7 @@ require 'cucumber/rspec/doubles'
 require "capybara/cuprite"
 require 'database_cleaner/active_record'
 require_relative './page_objects/base_page'
+require_relative './page_objects/yes_no_page'
 Dir[File.dirname(__FILE__) + '/page_objects/**/*.rb'].each { |f| require f }
 
 # frozen_string_literal: true

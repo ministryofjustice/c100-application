@@ -30,8 +30,72 @@ def safety_concern_page
   @safety_concern_page ||= SafetyConcernPage.new
 end
 
+def safety_concern_abduction_page
+  @safety_concern_abduction_page ||= SafetyConcernAbductionPage.new
+end
+
+def safety_concern_substance_page
+  @safety_concern_substance_page ||= SafetyConcernSubstancePage.new
+end
+
+def safety_concern_abuse_page
+  @safety_concern_abuse_page ||= SafetyConcernAbusePage.new
+end
+
+def safety_concern_domestic_page
+  @safety_concern_domestic_page ||= SafetyConcernDomesticPage.new
+end
+
+def safety_concern_other_page
+  @safety_concern_other_page ||= SafetyConcernOtherPage.new
+end
+
+def alternative_page
+  @alternative_page ||= AlternativePage.new
+end
+
+def alternative_negotiation_page
+  @alternative_negotiation_page ||= AlternativeNegotiationPage.new
+end
+
+def alternative_mediation_page
+  @alternative_mediation_page ||= AlternativeMediationPage.new
+end
+
+def alternative_lawyer_page
+  @alternative_lawyer_page ||= AlternativeLawyerPage.new
+end
+
+def alternative_collaborative_law_page
+  @alternative_collaborative_law_page ||= AlternativeCollaborativeLawPage.new
+end
+
 def children_names_page
   @children_names_page ||= ChildrenNamesPage.new
+end
+
+def child_personal_details_page
+  @child_personal_details_page ||= ChildPersonalDetailsPage.new
+end
+
+def child_orders_page
+  @child_orders_page ||= ChildOrdersPage.new
+end
+
+def special_guardianship_page
+  @special_guardianship_page ||= SpecialGuardianshipPage.new
+end
+
+def parental_responsibility_page
+  @parental_responsibility_page ||= ParentalResponsibilityPage.new
+end
+
+def child_additional_details_page
+  @child_additional_details_page ||= ChildAdditionalDetailsPage.new
+end
+
+def has_other_children_page
+  @has_other_children_page ||= HasOtherChildrenPage.new
 end
 
 def applicant_names_page
@@ -44,6 +108,10 @@ end
 
 def applicant_privacy_preferences_page
   @applicant_privacy_preferences_page ||= ApplicantPrivacyPreferencesPage.new
+end
+
+def applicant_privacy_summary_page
+  @applicant_privacy_summary_page ||= ApplicantPrivacySummaryPage.new
 end
 
 def applicant_refuge_page
@@ -84,6 +152,30 @@ end
 
 def solicitor_contact_details_page
   @solicitor_contact_details_page ||= SolicitorContactDetailsPage.new
+end
+
+def respondent_names_page
+  @respondent_names_page ||= RespondentNamesPage.new
+end
+
+def respondent_personal_details_page
+  @respondent_personal_details_page ||= RespondentPersonalDetailsPage.new
+end
+
+def respondent_relationship_page
+  @respondent_relationship_page ||= RespondentRelationshipPage.new
+end
+
+def respondent_address_lookup_page
+  @respondent_address_lookup_page ||= RespondentAddressLookupPage.new
+end
+
+def respondent_address_details_page
+  @respondent_address_details_page ||= RespondentAddressDetailsPage.new
+end
+
+def respondent_contact_details_page
+  @respondent_contact_details_page ||= RespondentContactDetailsPage.new
 end
 
 def cookie_management_page

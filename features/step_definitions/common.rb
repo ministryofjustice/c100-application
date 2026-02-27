@@ -219,9 +219,6 @@ When('I navigate to applicant names page from consent order') do
 end
 
 When('I complete the applicant details journey') do
-  # Add a child first
-  children_names_page.add_child('John', 'Doe Junior')
-
   # Navigate to applicant names
   applicant_names_page.submit_names('John', 'Doe Senior')
 
@@ -229,6 +226,7 @@ When('I complete the applicant details journey') do
   applicant_privacy_known_page.submit_yes
   applicant_privacy_preferences_page.submit_no
   applicant_refuge_page.submit_no
+  applicant_privacy_summary_page.continue_to_next_step
 
   # Personal details
   applicant_personal_details_page.submit_personal_details(
@@ -258,7 +256,4 @@ When('I complete the applicant details journey') do
     phone: '00000000000',
     voicemail_consent: 'yes'
   )
-
-  # Solicitor
-  applicant_has_solicitor_page.submit_no
 end

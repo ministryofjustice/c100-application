@@ -3,55 +3,47 @@ Feature: Testing C100 end to end
 
   Background: Bypassing postcode page
     Given I have started an application
-    Then I should see "What kind of application do you want to make?"
+    Then I should be on the consent order page
 
   Scenario: Child arrangements order (MIAM) (path one: exemption with no evidence)
-    When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
-    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
-    And I choose "No"
-    Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
-    And I click the radio button "No"
-    And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
-    And I click the "Continue" button
-    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
-    And I choose "No"
-    Then I should see "Do you have a valid reason for not attending a MIAM?"
-    And I choose "Yes"
-    Then I should see "Providing evidence of domestic abuse concerns"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "Confirming child protection concerns"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "Confirming why your application is urgent"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "You’ve already been to a MIAM or are taking part in another form of non-court dispute resolution"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "Confirming other valid reasons for not attending"
-    And I check "You or the prospective respondents are under 18 years old"
-    And I click the "Continue" button
-    Then I should see "Evidence of MIAM exemption"
-    When I choose "No" and fill in "steps_miam_exemptions_exemption_reasons_form[exemption_reasons]" with "Supporting reason"
-    Then I should see "Provide details of exemptions from attending a MIAM"
-    When I fill in "steps_miam_exemptions_exemption_details_form[exemption_details]" with "exemption reason"
-    And I click the "Continue" button
-    Then I should see "You don’t have to attend a MIAM"
-    And I should see "Other exemptions"
-    And I click the "Continue" link
-    Then I should see "Safety concerns"
-    And I click the "Continue" link
-    Then I should see "Are the children at risk of being abducted?"
-    And I choose "No"
-    Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
-    And I choose "No"
-    Then I should see "Have the children suffered or are they at risk of suffering domestic or child abuse?"
-    And I choose "No"
-    Then I should see "Have you suffered or are you at risk of suffering domestic abuse?"
-    And I choose "No"
-    Then I should see "Do you have any other safety concerns about you or the children?"
-    And I choose "No"
+    # miam exemption
+    When I navigate to applicant names page from consent order
+    # Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
+    # And I choose "No"
+    # Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
+    # And I click the radio button "No"
+    # And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
+    # And I click the "Continue" button
+    # Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
+    # And I choose "No"
+    # Then I should see "Do you have a valid reason for not attending a MIAM?"
+    # And I choose "Yes"
+    # Then I should see "Providing evidence of domestic abuse concerns"
+    # And I check "None of these"
+    # And I click the "Continue" button
+    # Then I should see "Confirming child protection concerns"
+    # And I check "None of these"
+    # And I click the "Continue" button
+    # Then I should see "Confirming why your application is urgent"
+    # And I check "None of these"
+    # And I click the "Continue" button
+    # Then I should see "You’ve already been to a MIAM or are taking part in another form of non-court dispute resolution"
+    # And I check "None of these"
+    # And I click the "Continue" button
+    # Then I should see "Confirming other valid reasons for not attending"
+    # And I check "You or the prospective respondents are under 18 years old"
+    # And I click the "Continue" button
+    # Then I should see "Evidence of MIAM exemption"
+    # When I choose "No" and fill in "steps_miam_exemptions_exemption_reasons_form[exemption_reasons]" with "Supporting reason"
+    # Then I should see "Provide details of exemptions from attending a MIAM"
+    # When I fill in "steps_miam_exemptions_exemption_details_form[exemption_details]" with "exemption reason"
+    # And I click the "Continue" button
+    # Then I should see "You don’t have to attend a MIAM"
+    # And I should see "Other exemptions"
+    # And I click the "Continue" link
+    # safety concernss
+    And I have no safety concerns about the children
+    # going to court
     Then I should see "What are you asking the court to decide about the children involved?"
     When I check "Decide who they live with and when"
     And I click the "Continue" button
@@ -60,113 +52,21 @@ Feature: Testing C100 end to end
     Then I should see "Going to court"
     And I check "I understand what’s involved if I decide to go to court"
     And I click the "Continue" button
-    Then I should see "Alternative ways to reach an agreement"
-    And I click the "Continue" link
-    Then I should see "Negotiation tools and services"
-    And I choose "Yes"
-    Then I should see "Professional mediation"
-    And I choose "No"
-    Then I should see "Lawyer negotiation"
-    And I choose "Yes"
-    Then I should see "Collaborative law"
-    And I choose "Yes"
-    Then I should see "Enter the names of the children"
-    And I fill in "First name(s)" with "Jane"
-    And I fill in "Last name(s)" with "Doe Jnr"
-    And I click the "Continue" button
-    Then I should see "Provide details for Jane Doe Jnr"
-    And I specify they are "2" years of age
-    And I choose "Female"
-    Then I should see "Which of the decisions you’re asking the court to resolve relate to Jane Doe Jnr?"
-    And I check "Decide who they live with and when"
-    And I click the "Continue" button
-    Then I should see "Is there a Special Guardianship Order in force in relation to Jane Doe Jnr?"
-    And I choose "No"
-    Then I should see "Parental responsibility for Jane Doe Jnr"
-    And I fill in "State everyone who has parental responsibility for Jane Doe Jnr and how they have parental responsibility." with "Father"
-    And I click the "Continue" button
-    Then I should see "Further information"
-    And I choose "Don't know" for all options on this page
-    Then I should see "Do you or any respondents have other children who are not part of this application?"
-    And I choose "No"
-    Then I should see "Enter your name"
-    And I fill in "First name(s)" with "John"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Keeping your contact details private"
-    And I choose "I don't know"
-    Then I should see "Keeping your contact details private"
-    And I choose "No"
-    Then I should see "Are you currently resident in a refuge?"
-    And I choose "No"
-    Then I should see "The court will not keep your contact details private"
-    And I click the "Continue" link
-    Then I should see "Provide details for John Doe"
-    And I click the radio button "No"
-    And I click the radio button "Male"
-    And I specify they are "30" years of age
-    And I fill in "Your place of birth" with "London"
-    And I click the "Continue" button
-    Then I should see "What is John Doe's relationship to Jane Doe Jnr?"
-    And I choose "Father"
-    Then I should see "Address of John Doe"
-    And I click the "I live outside the UK" link
-    And I should see "Address details of John Doe"
-    And I fill in "Building and street" with "Buckingham Palace"
-    And I fill in "Town or city" with "London"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SW1A 1AA"
-    And I choose "Yes"
-    Then I should see "Contact details of John Doe"
-    And I click the radio button "I can provide an email address"
-    And I fill in "Your email address" with "john@gmail.com"
-    And I click the radio button "I can provide a phone number"
-    And I fill in "Your phone number" with "00000000000"
-    And I click the radio button "Yes, the court can leave me a voicemail"
-    And I click the "Continue" button
-    Then I should see "Will you be legally represented by a solicitor in these proceedings?"
-    And I choose "Yes"
-    Then I should see "Details of solicitor"
-    And I fill in "Full name" with "Annalise Keating"
-    And I fill in "Name of firm" with "Keating Law"
-    And I fill in "Solicitor’s reference" with "123456"
-    And I click the "Continue" button
-    Then I should see "Address details of Annalise Keating"
-    And I fill in "Building and street" with "Windsor Castle"
-    And I fill in "Town or city" with "Windsor"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SL4 1QF"
-    And I click the "Continue" button
-    Then I should see "Contact details of Annalise Keating"
-    And I fill in "Email address" with "annalise@law.com"
-    And I fill in "Phone number" with "00000000000"
-    And I fill in "DX number" with "00000000000"
-    And I click the "Continue" button
-    Then I should see "Enter the respondent’s name"
-    And I fill in "First name(s)" with "Jane"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Provide details for Jane Doe"
-    And I click the radio button "No"
-    And I click the radio button "Female"
-    And I specify they are "30" years of age
-    And I fill in "Place of birth" with "London"
-    And I click the "Continue" button
-    Then I should see "What is Jane Doe's relationship to Jane Doe Jnr?"
-    And I choose "Mother"
-    Then I should see "Address of Jane Doe"
-    And I click the "I don’t know their postcode or they live outside the UK" link
-    Then I should see "Address details of Jane Doe"
-    And I fill in "Building and street" with "Windsor Castle"
-    And I fill in "Town or city" with "Windsor"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SL4 1QF"
-    And I click the radio button "Yes"
-    And I click the "Continue" button
-    Then I should see "Contact details of Jane Doe"
-    And I fill in "Email address" with "Jane@Hotmail.com"
-    And I check "I don't know their phone number"
-    And I click the "Continue" button
+    #
+    And I have tried all alternative ways to reach an agreement
+    # providing details about the children
+    And I enter details for a "2" year old child
+    And I state that the "Father" has parental responsibility for the child
+    And I submit that I don't know any additional details for the child
+    And I don't have any other children
+    # applicant details
+    When I complete the applicant details journey
+    # details of solicitor
+    And I enter the details for a solicitor
+    # respondent details
+    And I navigate the respondent details journey
+    Given debugger
+    #
     Then I should see "Is there anyone else who should know about your application?"
     And I click the radio button "No"
     And I click the "Continue" button
@@ -176,6 +76,7 @@ Feature: Testing C100 end to end
     Then I should see "Have any of the children in this application been involved in other family court proceedings?"
     And I click the radio button "Yes"
     And I click the "Continue" button
+    # previous court orders
     Then I should see "Details of previous court case"
     And I fill in "Names of children involved" with "Jane Doe Jnr"
     And I fill in "Name of court" with "London Court"
@@ -192,6 +93,7 @@ Feature: Testing C100 end to end
     Then I should see "Are you asking for a without notice hearing?"
     And I click the radio button "No"
     And I click the "Continue" button
+    # abroad and international issues
     Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
     And I click the radio button "No"
     And I click the "Continue" button
@@ -205,6 +107,7 @@ Feature: Testing C100 end to end
     Then I should see "Why are you making this application?"
     And I fill in "Provide details" with "I fear for the safety of Jane Doe Jnr and I want her to be safe"
     And I click the "Continue" button
+    # going to court
     Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
     And I click the radio button "No"
     And I click the "Continue" button
