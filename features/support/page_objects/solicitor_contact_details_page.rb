@@ -9,7 +9,7 @@ class SolicitorContactDetailsPage < BasePage
     element :continue_button, "button", text: "Continue"
   end
 
-  def submit_contact_details(email, phone, dx_number)
+  def submit_contact_details(email:, phone:, dx_number:)
     content.email_field.set email
     content.phone_number_field.set phone
     content.dx_number_field.set dx_number
