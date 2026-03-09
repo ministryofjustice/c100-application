@@ -43,7 +43,7 @@ Feature: Testing C100 end to end
     # And I click the "Continue" link
     # safety concernss
     And I have no safety concerns about the children
-    # going to court
+    #
     Then I should see "What are you asking the court to decide about the children involved?"
     When I check "Decide who they live with and when"
     And I click the "Continue" button
@@ -54,83 +54,25 @@ Feature: Testing C100 end to end
     And I click the "Continue" button
     #
     And I have tried all alternative ways to reach an agreement
-    # providing details about the children
     And I enter details for a "2" year old child
     And I state that the "Father" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
     And I don't have any other children
-    # applicant details
     When I complete the applicant details journey
-    # details of solicitor
     And I enter the details for a solicitor
-    # respondent details
     And I navigate the respondent details journey
-    Given debugger
+    And there are no other people who should know about the application
+    And the child lives with "John Doe Senior"
+    And I enter details of previous court proceedings
+    And there "isn't" a court order requiring permission to make this application
+    And I am not asking for an urgent or without notice hearing
+    And I navigate the international issues journey
+    And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
+    And I have no issues attending court
+    And I submit the application with email "john@gmail.com"
+    And I pay using Help With Fees with reference "HWF-123-456"
     #
-    Then I should see "Is there anyone else who should know about your application?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Who does Jane Doe Jnr currently live with?"
-    And I check "John Doe"
-    And I click the "Continue" button
-    Then I should see "Have any of the children in this application been involved in other family court proceedings?"
-    And I click the radio button "Yes"
-    And I click the "Continue" button
-    # previous court orders
-    Then I should see "Details of previous court case"
-    And I fill in "Names of children involved" with "Jane Doe Jnr"
-    And I fill in "Name of court" with "London Court"
-    And I fill in "Date/year" with "2020"
-    And I fill in "Type of proceedings" with "Legal hearing"
-    And I fill in "Add details of any other previous family case" with "Lasted for weeks"
-    And I click the "Continue" button
-    Then I should see "Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Do you need an urgent hearing?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Are you asking for a without notice hearing?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    # abroad and international issues
-    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
-    And I click the radio button "Yes"
-    And I fill in "Provide details" with "Details"
-    And I click the "Continue" button
-    Then I should see "Has a request for information or other assistance involving the children been made to or by another country?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Why are you making this application?"
-    And I fill in "Provide details" with "I fear for the safety of Jane Doe Jnr and I want her to be safe"
-    And I click the "Continue" button
-    # going to court
-    Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Does anyone in this application need an intermediary to help them in court?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Does anyone in this application have special language requirements?"
-    And I click the "Continue" button
-    Then I should see "Do you or the children need specific safety arrangements at court?"
-    And I click the "Continue" button
-    Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
-    And I fill in "You can add more detail if necessary" with "We need lots of light"
-    And I click the "Continue" button
-    Then I should see "Submitting your application to court"
-    And I fill in "Enter an email address if you would like to get a confirmation" with "John@Gmail.com"
-    And I click the "Continue" button
-    Then I should see "Is this email address correct?"
-    And I should see "john@gmail.com"
-    And I click the "Yes, continue" link
-    Then I should see "How will you pay the application fee?"
-    And I click the radio button "Pay with ‘Help with fees’"
-    And I fill in "Reference number" with "HWF-123-456"
-    And I click the "Continue" button
     Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
     And I should see "Do you have a solicitor? Yes"
     And I should see "Full name Jane Doe"

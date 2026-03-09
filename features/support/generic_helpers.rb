@@ -178,6 +178,82 @@ def respondent_contact_details_page
   @respondent_contact_details_page ||= RespondentContactDetailsPage.new
 end
 
+def has_other_parties_page
+  @has_other_parties_page ||= HasOtherPartiesPage.new
+end
+
+def child_residence_page
+  @child_residence_page ||= ChildResidencePage.new
+end
+
+def previous_proceedings_page
+  @previous_proceedings_page ||= PreviousProceedingsPage.new
+end
+
+def previous_court_proceedings_page
+  @previous_court_proceedings_page ||= PreviousCourtProceedingsPage.new
+end
+
+def existing_court_order_page
+  @existing_court_order_page ||= ExistingCourtOrderPage.new
+end
+
+def urgent_hearing_page
+  @urgent_hearing_page ||= UrgentHearingPage.new
+end
+
+def without_notice_page
+  @without_notice_page ||= WithoutNoticePage.new
+end
+
+def international_resident_page
+  @international_resident_page ||= InternationalResidentPage.new
+end
+
+def international_jurisdiction_page
+  @international_jurisdiction_page ||= InternationalJurisdictionPage.new
+end
+
+def international_request_page
+  @international_request_page ||= InternationalRequestPage.new
+end
+
+def application_details_page
+  @application_details_page ||= ApplicationDetailsPage.new
+end
+
+def litigation_capacity_page
+  @litigation_capacity_page ||= LitigationCapacityPage.new
+end
+
+def attending_court_intermediary_page
+  @attending_court_intermediary_page ||= AttendingCourtIntermediaryPage.new
+end
+
+def attending_court_language_page
+  @attending_court_language_page ||= AttendingCourtLanguagePage.new
+end
+
+def attending_court_special_arrangements_page
+  @attending_court_special_arrangements_page ||= AttendingCourtSpecialArrangementsPage.new
+end
+
+def attending_court_special_assistance_page
+  @attending_court_special_assistance_page ||= AttendingCourtSpecialAssistancePage.new
+end
+
+def submission_page
+  @submission_page ||= SubmissionPage.new
+end
+
+def submission_email_check_page
+  @submission_email_check_page ||= SubmissionEmailCheckPage.new
+end
+
+def application_payment_page
+  @application_payment_page ||= ApplicationPaymentPage.new
+end
+
 def cookie_management_page
   @cookie_management_page ||= CookieManagementPage.new
 end

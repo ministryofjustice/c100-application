@@ -129,3 +129,91 @@ And("I navigate the respondent details journey") do
     phone: '00000000000'
   )
 end
+
+And("there are no other people who should know about the application") do
+  expect(has_other_parties_page).to be_displayed
+  has_other_parties_page.submit_no
+end
+
+And("the child lives with {string}") do |person|
+  expect(child_residence_page).to be_displayed
+  child_residence_page.submit_residence(person)
+end
+
+And("I enter details of previous court proceedings") do
+  expect(previous_proceedings_page).to be_displayed
+  previous_proceedings_page.submit_yes
+
+  expect(previous_court_proceedings_page).to be_displayed
+  previous_court_proceedings_page.submit_previous_proceedings(
+    children_names: 'John Doe Jnr',
+    court_name: 'London Court',
+    proceedings_date: '2020',
+    proceedings_type: 'Legal hearing',
+    details: 'Lasted for weeks'
+  )
+end
+
+And(/^there "(is|isn't)" a court order requiring permission to make this application$/) do |arg|
+  expect(existing_court_order_page).to be_displayed
+  existing_court_order_page.submit(arg == 'is' ? 'yes' : 'no')
+end
+
+And("I am not asking for an urgent or without notice hearing") do
+  expect(urgent_hearing_page).to be_displayed
+  urgent_hearing_page.submit_no
+
+  expect(without_notice_page).to be_displayed
+  without_notice_page.submit_no
+end
+
+And("I navigate the international issues journey") do
+  expect(international_resident_page).to be_displayed
+  international_resident_page.submit_no
+
+  expect(international_jurisdiction_page).to be_displayed
+  international_jurisdiction_page.submit_yes('Details')
+
+  expect(international_request_page).to be_displayed
+  international_request_page.submit_no
+end
+
+And("I give my reason for the application as {string}") do |reason|
+  expect(application_details_page).to be_displayed
+  application_details_page.submit_details(reason)
+end
+
+And(/^there "(are|aren't)" factors that may affect any adult in this application taking part in the court proceedings$/) do |arg|
+  expect(litigation_capacity_page).to be_displayed
+  litigation_capacity_page.submit(arg == 'are' ? 'yes' : 'no')
+end
+
+And("I have no issues attending court") do
+  expect(attending_court_intermediary_page).to be_displayed
+  attending_court_intermediary_page.submit_no
+
+  expect(attending_court_language_page).to be_displayed
+  attending_court_language_page.continue_without_filling
+
+  expect(attending_court_special_arrangements_page).to be_displayed
+  attending_court_special_arrangements_page.continue_without_filling
+
+  expect(attending_court_special_assistance_page).to be_displayed
+  attending_court_special_assistance_page.submit_special_assistance(
+    special_assistance_details: 'We need lots of light'
+  )
+end
+
+And("I submit the application with email {string}") do |email|
+  expect(submission_page).to be_displayed
+  submission_page.submit_receipt_email(email)
+
+  expect(submission_email_check_page).to be_displayed
+  submission_email = submission_email_check_page.content.receipt_email.text
+  expect(submission_email).to include(email)
+  submission_email_check_page.submit_yes
+end
+
+And("I pay using Help With Fees with reference {string}") do |reference|
+  application_payment_page.pay_by_help_with_fees(reference)
+end
