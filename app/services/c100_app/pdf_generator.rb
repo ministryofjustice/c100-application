@@ -23,7 +23,7 @@ module C100App
     private
 
     def pdf_from_presenter(presenter)
-      html = render(presenter)
+      html = sanitize_html(render(presenter))
       grover_options = {
         footer_template: footer_line(presenter),
         timeout: (15 * 60 * 1000), # 15 minutes max timeout
@@ -36,6 +36,13 @@ module C100App
       }
 
       Grover.new(html, **grover_options).to_pdf
+    end
+
+    # clean HTML from: null, vert tab, form feed, control char, DEL, tab, new line, return
+    def sanitize_html(html)
+      html
+        .encode('UTF-8', invalid: :replace, undef: :replace, replace: '')
+        .gsub(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/, '')
     end
 
     def render(presenter)
