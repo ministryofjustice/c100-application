@@ -38,11 +38,11 @@ module C100App
       Grover.new(html, **grover_options).to_pdf
     end
 
-    # clean HTML from: null, vert tab, form feed, control char, DEL, tab, new line, return
+    # clean HTML from: null, vert tab, form feed, control char, DEL, tab, new line, return, bullet points
     def sanitize_html(html)
       html
         .encode('UTF-8', invalid: :replace, undef: :replace, replace: '')
-        .gsub(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/, '')
+        .gsub(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\u2028\u2029]/, '')
     end
 
     def render(presenter)
