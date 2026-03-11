@@ -27,6 +27,20 @@ And('I have no safety concerns about the children') do
   safety_concern_other_page.submit_no
 end
 
+And('I ask the court to decide who the children live with and when') do
+  expect(petition_orders_page).to be_displayed
+  petition_orders_page.select_issue_home
+  petition_orders_page.submit
+
+  expect(petition_playback_page).to be_displayed
+  expect(petition_playback_page.content.child_arrangements_order).to be_visible
+  expect(petition_playback_page.content.child_arrangements_home).to be_visible
+  petition_playback_page.continue_to_next_step
+
+  expect(alternative_court_page).to be_displayed
+  alternative_court_page.acknowledge_and_continue
+end
+
 And('I have tried all alternative ways to reach an agreement') do
   expect(alternative_page).to be_displayed
   alternative_page.continue_to_next_step

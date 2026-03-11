@@ -41,18 +41,8 @@ Feature: Testing C100 end to end
     # Then I should see "You don’t have to attend a MIAM"
     # And I should see "Other exemptions"
     # And I click the "Continue" link
-    # safety concernss
     And I have no safety concerns about the children
-    #
-    Then I should see "What are you asking the court to decide about the children involved?"
-    When I check "Decide who they live with and when"
-    And I click the "Continue" button
-    Then I should see "What you’re asking the court to decide about the children"
-    And I click the "Continue" link
-    Then I should see "Going to court"
-    And I check "I understand what’s involved if I decide to go to court"
-    And I click the "Continue" button
-    #
+    And I ask the court to decide who the children live with and when
     And I have tried all alternative ways to reach an agreement
     And I enter details for a "2" year old child
     And I state that the "Father" has parental responsibility for the child
@@ -73,6 +63,7 @@ Feature: Testing C100 end to end
     And I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
     #
+    Given debugger
     Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
     And I should see "Do you have a solicitor? Yes"
     And I should see "Full name Jane Doe"

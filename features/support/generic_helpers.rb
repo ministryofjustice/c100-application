@@ -50,6 +50,18 @@ def safety_concern_other_page
   @safety_concern_other_page ||= SafetyConcernOtherPage.new
 end
 
+def petition_orders_page
+  @petition_orders_page ||= PetitionOrdersPage.new
+end
+
+def petition_playback_page
+  @petition_playback_page ||= PetitionPlaybackPage.new
+end
+
+def alternative_court_page
+  @alternative_court_page ||= AlternativeCourtPage.new
+end
+
 def alternative_page
   @alternative_page ||= AlternativePage.new
 end
