@@ -64,6 +64,36 @@ class BasePage < SitePrism::Page
     end
   end
 
+  class CYASummaryListRow < SitePrism::Section
+    element :key, 'dt.govuk-summary-list__key'
+    element :value, 'dd.govuk-summary-list__value'
+    element :change, 'dd.govuk-summary-list__actions a'
+
+    def question
+      key.text
+    end
+
+    def answer
+      value.text
+    end
+
+    def yes?
+      answer == 'Yes'
+    end
+
+    def no?
+      answer == 'No'
+    end
+
+    def not_applicable?
+      answer == '[Not applicable in this case]' 
+    end
+
+    def dont_know?
+      answer == '[Don\'t know]' 
+    end
+  end
+
   private
 
   def google_analytics_enabled

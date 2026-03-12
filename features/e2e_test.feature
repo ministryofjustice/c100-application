@@ -63,6 +63,7 @@ Feature: Testing C100 end to end
     And I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
     #
+    And I should see the check your answers page
     Given debugger
     Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
     And I should see "Do you have a solicitor? Yes"

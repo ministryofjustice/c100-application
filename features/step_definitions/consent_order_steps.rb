@@ -231,3 +231,47 @@ end
 And("I pay using Help With Fees with reference {string}") do |reference|
   application_payment_page.pay_by_help_with_fees(reference)
 end
+
+And("I should see the check your answers page") do
+  expect(cya_page).to be_displayed
+  expect(cya_page.content).to have_header
+
+  # opening questions
+  expect(cya_page.opening_questions.children_postcode.answer).to eq('MK9 2DT')
+  expect(cya_page.opening_questions.consent_order_application.answer).to eq('Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order')
+  expect(cya_page.opening_questions.child_protection_cases).to be_yes
+  
+  # miam exemptions
+  expect(cya_page.miam_exemptions.exemption_details).to be_not_applicable
+  expect(cya_page.miam_exemptions.exemption).to be_not_applicable
+
+  # safety concerns
+  expect(cya_page.safety_concerns.risk_of_abduction).to be_no
+  expect(cya_page.safety_concerns.substance_abuse).to be_no
+  expect(cya_page.safety_concerns.children_abuse).to be_no
+  expect(cya_page.safety_concerns.domestic_abuse).to be_no
+  expect(cya_page.safety_concerns.other_abuse).to be_no
+
+  # nature of application
+  expect(cya_page.nature_of_application.child_arrangements_orders.answer).to eq('Decide who they live with and when')
+
+  # alternatives
+  expect(cya_page.alternatives.alternative_negotiation_tools).to be_yes
+  expect(cya_page.alternatives.alternative_mediation).to be_no
+  expect(cya_page.alternatives.alternative_lawyer_negotiation).to be_yes
+  expect(cya_page.alternatives.alternative_collaborative_law).to be_yes
+
+  # children details
+  expect(cya_page.children_details.children.count).to eq(1) # 1 child only
+  expect(cya_page.children_details.full_name[0].answer).to eq('John Smith Jr')
+  expect(cya_page.children_details.personal_details[0].dob).to eq('11-03-2024')
+  expect(cya_page.children_details.personal_details[0].sex).to eq('Male')
+  expect(cya_page.children_details.child_orders[0].answer).to eq('Child Arrangements Order')
+  expect(cya_page.children_details.special_guardianship_order[0]).to be_no
+  expect(cya_page.children_details.parental_responsibility[0].answer).to eq('Father')
+
+  # children further information
+  expect(cya_page.children_further_information.known_to_authorities).to be_dont_know
+  expect(cya_page.children_further_information.protection_plan).to be_dont_know
+  expect(cya_page.children_further_information.other_details).to be_no
+end

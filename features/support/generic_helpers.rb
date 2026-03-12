@@ -266,6 +266,10 @@ def application_payment_page
   @application_payment_page ||= ApplicationPaymentPage.new
 end
 
+def cya_page
+  @cya_page ||= CYAPage.new
+end
+
 def cookie_management_page
   @cookie_management_page ||= CookieManagementPage.new
 end
