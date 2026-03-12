@@ -43,7 +43,7 @@ module C100App
       html
         .encode('UTF-8', invalid: :replace, undef: :replace, replace: '')
         .gsub(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\u2028\u2029]/, '')
-        .gsub(/^\s*(?:[-\u2022\u2023\u25E6\u25CF\u2219*]|\d+[.)])\s+/m, '')
+        .gsub(/^\s*(?:[-\u2022\u2023\u25E6\u25CF\u2219*])\s+/m, '')
     end
 
     def render(presenter)
