@@ -52,7 +52,7 @@ moj.Modules.checkEmail = {
 
     self.$emailField.closest('.govuk-form-group').after(
         '<div class="' + self.confirmation_panel_class + '">' +
-        '<p class="govuk-hint">' + moj.Modules.emailConfirmationText + '</p>' +
+        '<p class="govuk-hint">An email will be sent to:</p>' +
         '<p class="govuk-body"></p>' +
         '</div>'
     );
