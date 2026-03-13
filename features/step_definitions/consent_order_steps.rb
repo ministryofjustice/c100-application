@@ -238,7 +238,8 @@ And("I should see the check your answers page") do
 
   # opening questions
   expect(cya_page.opening_questions.children_postcode.answer).to eq('MK9 2DT')
-  expect(cya_page.opening_questions.consent_order_application.answer).to eq('Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order')
+  child_arrangements_order = 'Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order'
+  expect(cya_page.opening_questions.consent_order_application.answer).to eq(child_arrangements_order)
   expect(cya_page.opening_questions.child_protection_cases).to be_yes
   
   # miam exemptions
@@ -264,14 +265,91 @@ And("I should see the check your answers page") do
   # children details
   expect(cya_page.children_details.children.count).to eq(1) # 1 child only
   expect(cya_page.children_details.full_name[0].answer).to eq('John Smith Jr')
-  expect(cya_page.children_details.personal_details[0].dob).to eq('11-03-2024')
+  expect(cya_page.children_details.personal_details[0].dob).to eq('13-03-2024')
   expect(cya_page.children_details.personal_details[0].sex).to eq('Male')
   expect(cya_page.children_details.child_orders[0].answer).to eq('Child Arrangements Order')
   expect(cya_page.children_details.special_guardianship_order[0]).to be_no
   expect(cya_page.children_details.parental_responsibility[0].answer).to eq('Father')
 
   # children further information
-  expect(cya_page.children_further_information.known_to_authorities).to be_dont_know
-  expect(cya_page.children_further_information.protection_plan).to be_dont_know
-  expect(cya_page.children_further_information.other_details).to be_no
+  expect(cya_page.children_further_info.known_to_authorities).to be_dont_know
+  expect(cya_page.children_further_info.protection_plan).to be_dont_know
+  expect(cya_page.children_further_info.has_other_children).to be_no
+
+  # applicants details
+  expect(cya_page.applicants_details.applicants.count).to eq(1) # 1 applicant only
+  expect(cya_page.applicants_details.privacy_known[0]).to be_yes
+  expect(cya_page.applicants_details.contact_details_private[0]).to be_no
+  expect(cya_page.applicants_details.refuge[0]).to be_no
+  expect(cya_page.applicants_details.full_name[0].answer).to eq('John Doe Senior')
+  expect(cya_page.applicants_details.personal_details[0].dob).to eq('25-05-1998')
+  expect(cya_page.applicants_details.personal_details[0].sex).to eq('Male')
+  expect(cya_page.applicants_details.personal_details[0].birthplace).to eq('Manchester')
+  expect(cya_page.applicants_details.relationship_to_child[0].answer).to eq('Father')
+  expect(cya_page.applicants_details.address_details[0].address.answer).to eq('Test street, London, United Kingdom')
+  expect(cya_page.applicants_details.address_details[0].lived_at_5_years).to be_yes
+  expect(cya_page.applicants_details.contact_details[0].email_provided).to be_yes
+  expect(cya_page.applicants_details.contact_details[0].email.answer).to eq('john@email.com')
+  expect(cya_page.applicants_details.contact_details[0].phone_number.answer).to eq('00000000000')
+  expect(cya_page.applicants_details.contact_details[0].voicemail_consent.answer).to eq('Yes, the court can leave a voicemail')
+
+  # solicitor details
+  expect(cya_page.solicitor_details.has_solicitor).to be_yes
+  expect(cya_page.solicitor_details.personal_details.full_name.answer).to eq('Annalise Keating')
+  expect(cya_page.solicitor_details.personal_details.firm_name.answer).to eq('Keating Law Firm')
+  expect(cya_page.solicitor_details.address_details.address.answer).to eq('Windsor Castle, Windsor, United Kingdom, SL4 1QF')
+  expect(cya_page.solicitor_details.contact_details.email.answer).to eq('annalise@law.com')
+  expect(cya_page.solicitor_details.contact_details.phone_number.answer).to eq('00000000000')
+  expect(cya_page.solicitor_details.contact_details.dx_number.answer).to eq('00000000000')
+
+  # other parties details
+  expect(cya_page.other_parties_details.has_other_parties).to be_no
+
+  # children residence
+  expect(cya_page.children_residence.child[0].child_name).to eq('John Smith Jr')
+  expect(cya_page.children_residence.child[0].residence).to eq('John Doe Senior')
+
+  # other court cases
+  expect(cya_page.other_court_cases.has_other_court_cases).to be_yes
+  expect(cya_page.other_court_cases.details.children_names.answer).to eq('John Doe Jnr')
+  expect(cya_page.other_court_cases.details.court_name.answer).to eq('London Court')
+  expect(cya_page.other_court_cases.details.proceedings_date.answer).to eq('2020')
+  expect(cya_page.other_court_cases.details.order_types.answer).to eq('Legal hearing')
+  expect(cya_page.other_court_cases.details.previous_details.answer).to eq('Lasted for weeks')
+
+  # application reasons
+  expect(cya_page.application_reasons.details.answer).to eq('I fear for the safety of Jane Doe Jnr and I want her to be safe')
+  expect(cya_page.application_reasons.has_existing_court_order).to be_no
+
+  # urgent hearing
+  expect(cya_page.urgent_hearing.needs_urgent_hearing).to be_no
+
+  # without notice hearing
+  expect(cya_page.without_notice_hearing.asking_for_without_notice_hearing).to be_no
+
+  # international element
+  expect(cya_page.international_info.international_resident).to be_no
+  expect(cya_page.international_info.international_jurisdiction.can_apply_outside_en_cy).to be_yes
+  expect(cya_page.international_info.international_jurisdiction.details.answer).to eq('Details')
+  expect(cya_page.international_info.international_request).to be_no
+
+  # litigation capacity
+  expect(cya_page.litigation_capacity.reduced_litigation_capacity).to be_no
+
+  # attending court
+  expect(cya_page.attending_court.requires_intermediary_help).to be_no
+  expect(cya_page.attending_court.language_requirements.interpreter).to be_not_needed
+  expect(cya_page.attending_court.language_requirements.sign_language_interpreter).to be_not_needed
+  expect(cya_page.attending_court.language_requirements.welsh_language).to be_not_needed
+  expect(cya_page.attending_court.safety_arrangements).to be_none_selected
+  expect(cya_page.attending_court.special_assistance.details).to be_none_selected
+  expect(cya_page.attending_court.special_assistance.additional_details.answer).to eq('We need lots of light')
+
+  # submission
+  expect(cya_page.submission.email.answer).to eq('john@gmail.com')
+
+  # payment
+  expect(cya_page.payment.payment_method.type.answer).to eq('Help with fees')
+  expect(cya_page.payment.payment_method.hwf_ref_no.answer).to eq('HWF-123-456')
+
 end

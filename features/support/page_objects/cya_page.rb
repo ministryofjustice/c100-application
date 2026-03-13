@@ -3,73 +3,181 @@ class CYAPage < BasePage
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Check your answers'
+    element :submit_application, 'button', text: 'Submit application'
+    element :save_and_come_back, 'button', text: 'Save and come back later'
   end
 
-  section :opening_questions, 'dl#opening_questions' do
-    section :children_postcode, CYASummaryListRow, '#children_postcode'
-    section :consent_order_application, CYASummaryListRow, '#consent_order_application'
-    section :child_protection_cases, CYASummaryListRow, '#child_protection_cases'
+  section :opening_questions, CYAGroup, 'dl#opening_questions' do
+    row :children_postcode, '#children_postcode'
+    row :consent_order_application, '#consent_order_application'
+    row :child_protection_cases, '#child_protection_cases'
   end
 
-  section :miam_exemptions, 'dl#miam_exemptions' do
-    section :exemption_details, CYASummaryListRow, '#exemption_details'
-    section :exemption, CYASummaryListRow, '#exemption'
+  section :miam_exemptions, CYAGroup, 'dl#miam_exemptions' do
+    row :exemption_details, '#exemption_details'
+    row :exemption, '#exemption'
   end
 
-  section :safety_concerns, 'dl#safety_concerns' do
-    section :risk_of_abduction, CYASummaryListRow, '#risk_of_abduction'
-    section :children_abuse, CYASummaryListRow, '#children_abuse'
-    section :domestic_abuse, CYASummaryListRow, '#domestic_abuse'
-    section :other_abuse, CYASummaryListRow, '#other_abuse'
-    section :substance_abuse, CYASummaryListRow, '.app-cya--answers-group#substance_abuse' do
-      section :substance_abuse_details, CYASummaryListRow, '#substance_abuse'
-      def answer
-        substance_abuse_details.answer
-      end
-    end
+  section :safety_concerns, CYAGroup, 'dl#safety_concerns' do
+    row :risk_of_abduction, '#risk_of_abduction'
+    row :children_abuse, '#children_abuse'
+    row :domestic_abuse, '#domestic_abuse'
+    row :other_abuse, '#other_abuse'
+    section :substance_abuse, CYANestedSummaryRow, '.app-cya--answers-group#substance_abuse'
   end
 
-  section :nature_of_application, 'dl#nature_of_application' do
-    section :child_arrangements_orders, CYASummaryListRow, '#child_arrangements_orders'
+  section :nature_of_application, CYAGroup, 'dl#nature_of_application' do
+    row :child_arrangements_orders, '#child_arrangements_orders'
   end
 
-  section :alternatives, 'dl#alternatives' do
-    section :alternative_negotiation_tools, CYASummaryListRow, '#alternative_negotiation_tools'
-    section :alternative_mediation, CYASummaryListRow, '#alternative_mediation'
-    section :alternative_lawyer_negotiation, CYASummaryListRow, '#alternative_lawyer_negotiation'
-    section :alternative_collaborative_law, CYASummaryListRow, '#alternative_collaborative_law'
+  section :alternatives, CYAGroup, 'dl#alternatives' do
+    row :alternative_negotiation_tools, '#alternative_negotiation_tools'
+    row :alternative_mediation, '#alternative_mediation'
+    row :alternative_lawyer_negotiation, '#alternative_lawyer_negotiation'
+    row :alternative_collaborative_law, '#alternative_collaborative_law'
   end
 
-  section :children_details, 'dl#children_details' do
+  section :children_details, CYAGroup, 'dl#children_details' do
     elements :children, 'h3'
-    sections :full_name, CYASummaryListRow, '#person_full_name'
-    sections :child_orders, CYASummaryListRow, '#child_orders'
-    sections :special_guardianship_order, CYASummaryListRow, '#special_guardianship_order'
-    sections :parental_responsibility, CYASummaryListRow, '#parental_responsibility'
-    sections :personal_details, CYASummaryListRow, '#person_personal_details' do
-      section :date_of_birth, CYASummaryListRow, '#person_dob'
-      section :person_sex, CYASummaryListRow, '#person_sex'
-      def dob
-        date_of_birth.answer
-      end
-
-      def sex
-        person_sex.answer
-      end
-    end
-    sections :child_orders, CYASummaryListRow, '#child_orders' do
-      elements :order, 'li'
+    rows :full_name, '#person_full_name'
+    rows :special_guardianship_order, '#special_guardianship_order'
+    rows :parental_responsibility, '#parental_responsibility'
+    sections :personal_details, CYAPersonalDetails, '#person_personal_details'
+    rows :child_orders, '#child_orders' do
+      elements :orders, 'li'
       def answer
-        order.map(&:text).join(', ')
+        orders.map(&:text).join(', ')
       end
     end
   end
 
-  section :children_further_information, 'dl#children_further_information' do
-    section :known_to_authorities, CYASummaryListRow, '#children_known_to_authorities'
-    section :protection_plan, CYASummaryListRow, '#children_protection_plan'
-    section :has_other_children, CYASummaryListRow, '#has_other_children'
+  section :children_further_info, CYAGroup, 'dl#children_further_information' do
+    row :known_to_authorities, '#children_known_to_authorities'
+    row :protection_plan, '#children_protection_plan'
+    row :has_other_children, '#has_other_children'
   end
 
+  section :applicants_details, CYAGroup, 'dl#applicants_details' do
+    elements :applicants, 'h3'
+    sections :full_name, CYASummaryListRow, '#person_full_name'
+    sections :privacy_known, CYASummaryListRow, '#person_privacy_known'
+    sections :contact_details_private, CYASummaryListRow, '#person_contact_details_private'
+    sections :refuge, CYASummaryListRow, '#refuge'
+    sections :personal_details, CYAPersonalDetails, '#person_personal_details'
+    sections :relationship_to_child, CYASummaryListRow, '#relationship_to_child'
+    
+    sections :address_details, CYAGroup, '#person_address_details' do
+      row :address, '#person_address'
+      row :lived_at_5_years, '#person_residence_requirement_met'
+    end
 
+    sections :contact_details, CYAGroup, '#person_contact_details' do
+      row :email_provided, '#person_email_provided'
+      row :email, '#person_email'
+      row :phone_number, '#person_phone_number'
+      row :voicemail_consent, '#person_voicemail_consent'
+    end
+  end
+
+  section :solicitor_details, CYAGroup, 'dl#solicitor_details' do
+    row :has_solicitor, '#has_solicitor'
+    section :personal_details, CYAGroup, '#solicitor_personal_details' do
+      row :full_name, '#solicitor_full_name'
+      row :firm_name, '#solicitor_firm_name'
+    end
+    section :address_details, CYAGroup, '#solicitor_address_details' do
+      row :address, '#solicitor_address'
+    end
+    section :contact_details, CYAGroup, '#solicitor_contact_details' do
+      row :email, '#solicitor_email'
+      row :phone_number, '#solicitor_phone_number'
+      row :dx_number, '#solicitor_dx_number'
+    end
+  end
+
+  section :other_parties_details, CYAGroup, 'dl#other_parties_details' do
+    row :has_other_parties, '#has_other_parties'
+  end
+
+  section :children_residence, CYAGroup, 'dl#children_residence' do
+    sections :child, CYASummaryListRow, '#child_residence' do
+      def child_name
+        question
+      end
+      
+      def residence
+        answer
+      end
+    end
+  end
+
+  section :other_court_cases, CYAGroup, 'dl#other_court_cases' do
+    row :has_other_court_cases, '#has_other_court_cases'
+    section :details, CYAGroup, '#other_court_cases_details' do
+      row :children_names, '#court_proceeding_children_names'
+      row :court_name, '#court_proceeding_court_name'
+      row :proceedings_date, '#court_proceeding_proceedings_date'
+      row :order_types, '#court_proceeding_order_types'
+      row :previous_details, '#court_proceeding_previous_details'
+    end
+  end
+
+  section :application_reasons, CYAGroup, 'dl#application_reasons' do
+    row :details, '#application_details'
+    section :has_existing_court_order, CYANestedSummaryRow, '.app-cya--answers-group#existing_court_order'
+  end
+
+  section :urgent_hearing, CYAGroup, 'dl#urgent_hearing' do
+    row :needs_urgent_hearing, '#urgent_hearing'
+  end
+
+  section :without_notice_hearing, CYAGroup, 'dl#without_notice_hearing' do
+    row :asking_for_without_notice_hearing, '#without_notice_hearing'
+  end
+
+  section :international_info, CYAGroup, 'dl#international_element' do
+    section :international_resident, CYANestedSummaryRow, '.app-cya--answers-group#international_resident'
+    section :international_jurisdiction, CYAGroup, '.app-cya--answers-group#international_jurisdiction' do
+      row :can_apply_outside_en_cy, '#international_jurisdiction'
+      row :details, '#international_jurisdiction_details'
+    end
+    section :international_request, CYANestedSummaryRow, '.app-cya--answers-group#international_request'
+  end
+
+  section :litigation_capacity, CYAGroup, 'dl#litigation_capacity' do
+    row :reduced_litigation_capacity, '#reduced_litigation_capacity'
+  end
+
+  section :attending_court, CYAGroup, 'dl#attending_court' do
+    row :requires_intermediary_help, '#intermediary_help'
+    section :language_requirements, CYAGroup, '.app-cya--answers-group#language_interpreter' do
+      row :interpreter, '#language_interpreter'
+      row :sign_language_interpreter, '#sign_language_interpreter'
+      row :welsh_language, '#welsh_language'
+    end
+    section :safety_arrangements, CYANestedSummaryRow, '.app-cya--answers-group#special_arrangements'
+    section :special_assistance, CYAGroup, '.app-cya--answers-group#special_assistance' do
+      row :details, '#special_assistance'
+      row :additional_details, '#special_assistance_details'
+    end
+  end
+
+  section :submission, CYAGroup, 'dl#submission' do
+    section :email, CYANestedSummaryRow, '.app-cya--answers-group#submission_type'
+  end
+
+  section :payment, CYAGroup, 'dl#payment' do
+    section :payment_method, CYAGroup, '.app-cya--answers-group#payment_type' do
+      row :type, '#payment_type'
+      row :hwf_ref_no, '#hwf_reference_number'
+    end
+  end
+
+  section :declaration_form, '#new_steps_application_declaration_form' do
+    element :applicant_confirmation, '#steps-application-declaration-form-declaration-confirmation-applicant-field'
+    element :representative_confirmation, '#steps-application-declaration-form-declaration-confirmation-representative-field'
+    element :signee_name, '#steps-application-declaration-form-declaration-signee-field'
+    element :applicant_capacity, '#steps-application-declaration-form-declaration-signee-capacity-applicant-field'
+    element :representative_capacity, '#steps-application-declaration-form-declaration-signee-capacity-representative-field'
+  end
 end

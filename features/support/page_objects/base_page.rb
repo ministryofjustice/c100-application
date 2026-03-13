@@ -90,8 +90,53 @@ class BasePage < SitePrism::Page
     end
 
     def dont_know?
-      answer == '[Don\'t know]' 
+      answer == 'Don\'t know' 
     end
+
+    def not_needed?
+      answer == 'Not needed'
+    end
+
+    def none_selected?
+      answer == 'None selected'
+    end
+  end
+
+  class CYAPersonalDetails < SitePrism::Section
+    section :person_previous_name, CYASummaryListRow, '#person_previous_name'
+    section :date_of_birth, CYASummaryListRow, '#person_dob'
+    section :person_sex, CYASummaryListRow, '#person_sex'
+    section :person_birthplace, CYASummaryListRow, '#person_birthplace'
+
+    def previous_name
+      person_previous_name.answer
+    end
+
+    def birthplace
+      person_birthplace.answer
+    end
+
+    def dob
+      date_of_birth.answer
+    end
+
+    def sex
+      person_sex.answer
+    end
+  end
+
+  class CYAGroup < SitePrism::Section
+    def self.row(name, id)
+      section name, CYASummaryListRow, id
+    end
+    
+    def self.rows(name, id)
+      sections name, CYASummaryListRow, id
+    end
+  end
+
+  class CYANestedSummaryRow < CYASummaryListRow
+    element :value, 'dd.govuk-summary-list__value:not(:has(dl))'
   end
 
   private
