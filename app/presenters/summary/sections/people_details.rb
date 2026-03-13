@@ -85,7 +85,10 @@ module Summary
                                  data_or_private(
                                    person, phone_number_answer(person), ContactDetails::PHONE_NUMBER.to_s
                                  )),
-              Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
+              FreeTextAnswer.new(:person_voicemail_consent,
+                                 data_or_private(
+                                   person, person.voicemail_consent, ContactDetails::PHONE_NUMBER.to_s
+                                 )),
               FreeTextAnswer.new(
                 :person_relationship_to_children,
                 RelationshipsPresenter.new(c100_application).relationship_to_children(

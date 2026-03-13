@@ -30,7 +30,7 @@ module Summary
               address(person),
               person_email(person),
               person_phone_number(person),
-              Answer.new(:person_voicemail_consent, person.voicemail_consent),
+              person_voicemail(person),
               Partial.row_blank_space,
               Partial.row_blank_space,
             ]
@@ -58,6 +58,16 @@ module Summary
           )
         )
         FreeTextAnswer.new(:person_phone_number, value)
+      end
+
+      def person_voicemail(person)
+        value = person.voicemail_consent if in_refuge?(person) || (
+          confidential? && private?(
+            person,
+            ContactDetails::PHONE_NUMBER.to_s
+          )
+        )
+        Answer.new(:person_voicemail_consent, value)
       end
 
       def phone_number_answer(person)

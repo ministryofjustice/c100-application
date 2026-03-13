@@ -222,12 +222,8 @@ en:
     asking_for_permission:
       question: Asking for permission to make this application, where that is required?
       answers:
-        # Note: the stored yes-no values here correspond to the question:
-        # `Have you already applied to the court for permission to make this application?`
-        # so a `no` = `permission now sought`, and a `yes` or `nil` = `not required`
         not_required: 'No'
-        'yes': 'No'
-        'no': 'Yes'
+        <<: *YESNO
     urgent_or_without_notice:
       question: An urgent hearing or without notice hearing required?
       answers:
@@ -417,12 +413,15 @@ en:
         'yes': 'Yes'
         'no': No - permission now sought
         not_required: No - permission not required
+        not_granted: 'No'
     permission_details:
       question: Reasons for permission
     application_details:
       question: Reasons for application
     existing_court_order:
       question: 'Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?'
+      answers:
+        <<: *YESNO
     court_order_case_number:
       question: 'Case number'
     court_order_expiry_date:
