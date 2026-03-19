@@ -100,6 +100,10 @@ class BasePage < SitePrism::Page
     def none_selected?
       answer == 'None selected'
     end
+
+    def yes_voicemail?
+      answer == 'Yes, the court can leave a voicemail'
+    end
   end
 
   class CYAPersonalDetails < SitePrism::Section
@@ -126,12 +130,12 @@ class BasePage < SitePrism::Page
   end
 
   class CYAGroup < SitePrism::Section
-    def self.row(name, id)
-      section name, CYASummaryListRow, id
+    def self.row(name, klass = CYASummaryListRow, id)
+      section name, klass, id
     end
     
-    def self.rows(name, id)
-      sections name, CYASummaryListRow, id
+    def self.rows(name, klass = CYASummaryListRow, id)
+      sections name, klass, id
     end
   end
 

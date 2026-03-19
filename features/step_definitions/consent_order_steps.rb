@@ -265,7 +265,7 @@ And("I should see the check your answers page") do
   # children details
   expect(cya_page.children_details.children.count).to eq(1) # 1 child only
   expect(cya_page.children_details.full_name[0].answer).to eq('John Smith Jr')
-  expect(cya_page.children_details.personal_details[0].dob).to eq('13-03-2024')
+  expect(cya_page.children_details.personal_details[0].dob).to eq('17-03-2024')
   expect(cya_page.children_details.personal_details[0].sex).to eq('Male')
   expect(cya_page.children_details.child_orders[0].answer).to eq('Child Arrangements Order')
   expect(cya_page.children_details.special_guardianship_order[0]).to be_no
@@ -301,6 +301,9 @@ And("I should see the check your answers page") do
   expect(cya_page.solicitor_details.contact_details.email.answer).to eq('annalise@law.com')
   expect(cya_page.solicitor_details.contact_details.phone_number.answer).to eq('00000000000')
   expect(cya_page.solicitor_details.contact_details.dx_number.answer).to eq('00000000000')
+
+  # respondent details
+  expect(cya_page.respondent_details.full_name.answer).to eq('Jane Doe')
 
   # other parties details
   expect(cya_page.other_parties_details.has_other_parties).to be_no

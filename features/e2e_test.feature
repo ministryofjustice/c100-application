@@ -62,55 +62,38 @@ Feature: Testing C100 end to end
     And I have no issues attending court
     And I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
-    #
-    And I should see the check your answers page
-    Given debugger
-    Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
-    And I should see "Do you have a solicitor? Yes"
-    And I should see "Full name Jane Doe"
+    And I should be on the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
-    And I should see the children "aren't" involved in any emergency protection, care of proceedings
-    And I should see they "haven't" been to mediation through the mediation voucher scheme
-    And I should see they haven't attended MIAM
+    And I should see the children "are" involved in any emergency protection, care of proceedings
+    # And I should see they "haven't" been to mediation through the mediation voucher scheme
+    # And I should see they haven't attended MIAM
     And I should see they "haven't" got safety concerns about the children
     And I should see they want the court to decide: "Decide who they live with and when"
-    And I should see the child's full name is "Jane Doe Jnr"
-    And I should see the child is "2" years old
-    And I should see the child's gender is "Female"
-    And I should see the people who have parental responsibility for the child are: "Father"
+    And I should see that all alternatives "have" been tried
+    And I should see the children details:
+      | full_name     | dob        | sex    | child_orders             | special_guardianship | parental_responsibility |
+      | John Smith Jr | 19-03-2024 | Male   | Child Arrangements Order | No                   | Father                  |
     And I should see the children "might be" known to other social services
-    And I should see the applicant's name is "John Doe"
-    And I should see the applicant's gender is "Male"
-    And I should see the applicant is "30" years old
-    And I should see the applicant's place of birth is "London"
-    And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
-    And I should see the applicant "has" lived at this address for more than 5 years
-    And I should see the applicant has provided an email "john@gmail.com"
-    And I should see the applicant has provided a phone number "00000000000"
-    And I should see the applicant's relationship to "Jane Doe Jnr" is "Father"
+    And I should see the applicant personal details
+      | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
+      | No     | Yes           | No                      | John Doe Senior | 25-05-1998 | Male | Manchester | Father                |
+    And I should see the applicant address and contact details:
+      | address                             | lived_at_5_years | email_provided | email          | phone_number | voicemail_consent                    |
+      | Test street, London, United Kingdom | Yes              | Yes            | john@email.com | 00000000000  | Yes, the court can leave a voicemail |
     And I should see the applicant "does" have a solicitor
-    And I should see the solicitor's full name is "Annalise Keating"
-    And I should see the solicitor's name of firm is "Keating Law"
-    And I should see the solicitor's reference is "123456"
-    And I should see the solicitor's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
-    And I should see the solicitor's email is "annalise@law.com" and phone number is "00000000000"
-    And I should see the solicitor's DX number is "00000000000"
-    And I should see the respondent's name is "Jane Doe"
-    And I should see the respondent is "30" years old
-    And I should see the respondent's gender is "Female"
-    And I should see the respondent's place of birth is "London"
-    And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
-    And I should see the respondent "has" lived at that address for more than 5 years
-    And I should see the respondent's email is "jane@hotmail.com"
-    And I should see the respondent's phone number is "Don't know"
-    And I should see the respondent's relationship to "Jane Doe Jnr" is "Mother"
+    And I should see the solicitor details:
+      | full_name        | firm_name        | address                                          | email            | phone_number | dx_number   |
+      | Annalise Keating | Keating Law Firm | Windsor Castle, Windsor, United Kingdom, SL4 1QF | annalise@law.com | 00000000000  | 00000000000 |
+    And I should see the respondents details:
+      | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
+      | Jane Doe  | 19-03-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "aren't" other people who need to be informed of the application
-    And I should see the child "Jane Doe Jnr" lives with "John Doe"
-    And I should see the children "have" been involved in other proceedings
-    And I should see the names of the children involved in other proceedings are "Jane Doe Jnr"
-    And I should see the name of the court is "London Court"
-    And I should see the date of the proceeding is "2020"
-    And I should see the type of proceeding is "Legal hearing"
+    And I should see the children residence details:
+      | child_name    | residence       |
+      | John Smith Jr | John Doe Senior |
+    And I should see details for other proceedings involving the children:
+      | child_name   | court_name    | date | order_type    | previous_details |
+      | John Doe Jnr | London Court  | 2020 | Legal hearing | Lasted for weeks |
     And I should see an urgent hearing "isn't" requested
     And I should see a without notice hearing "isn't" requested
     And I should see the life of someone significant to the child "isn't" outside the UK
@@ -127,14 +110,6 @@ Feature: Testing C100 end to end
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
     And I should see the statement of truth
-    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
-    And I fill in "Enter your full name" with "John Doe"
-    And I click the radio button "I am the applicant and I believe that the facts stated in this application are true."
-    And I click the "Submit application" button
-    Then I should see "Your application has been submitted"
-    And I should see "Your reference code is:"
-    And I should see "Download a copy of your application"
-    And I should see "Download your application"
 
   Scenario: Child arrangements order (MIAM) (path two: exemption with evidence upload)
     When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"

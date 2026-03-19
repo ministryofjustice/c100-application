@@ -23,7 +23,7 @@ class CYAPage < BasePage
     row :children_abuse, '#children_abuse'
     row :domestic_abuse, '#domestic_abuse'
     row :other_abuse, '#other_abuse'
-    section :substance_abuse, CYANestedSummaryRow, '.app-cya--answers-group#substance_abuse'
+    row :substance_abuse, CYANestedSummaryRow, '.app-cya--answers-group#substance_abuse'
   end
 
   section :nature_of_application, CYAGroup, 'dl#nature_of_application' do
@@ -42,7 +42,7 @@ class CYAPage < BasePage
     rows :full_name, '#person_full_name'
     rows :special_guardianship_order, '#special_guardianship_order'
     rows :parental_responsibility, '#parental_responsibility'
-    sections :personal_details, CYAPersonalDetails, '#person_personal_details'
+    rows :personal_details, CYAPersonalDetails, '#person_personal_details'
     rows :child_orders, '#child_orders' do
       elements :orders, 'li'
       def answer
@@ -59,12 +59,12 @@ class CYAPage < BasePage
 
   section :applicants_details, CYAGroup, 'dl#applicants_details' do
     elements :applicants, 'h3'
-    sections :full_name, CYASummaryListRow, '#person_full_name'
-    sections :privacy_known, CYASummaryListRow, '#person_privacy_known'
-    sections :contact_details_private, CYASummaryListRow, '#person_contact_details_private'
-    sections :refuge, CYASummaryListRow, '#refuge'
-    sections :personal_details, CYAPersonalDetails, '#person_personal_details'
-    sections :relationship_to_child, CYASummaryListRow, '#relationship_to_child'
+    rows :full_name, '#person_full_name'
+    rows :privacy_known, '#person_privacy_known'
+    rows :contact_details_private, '#person_contact_details_private'
+    rows :refuge, '#refuge'
+    rows :personal_details, CYAPersonalDetails, '#person_personal_details'
+    rows :relationship_to_child, '#relationship_to_child'
     
     sections :address_details, CYAGroup, '#person_address_details' do
       row :address, '#person_address'
@@ -95,6 +95,21 @@ class CYAPage < BasePage
     end
   end
 
+  section :respondents_details, CYAGroup, 'dl#respondents_details' do
+    elements :respondents, 'h3'
+    rows :full_name, '#person_full_name'
+    rows :personal_details, CYAPersonalDetails, '#person_personal_details'
+    rows :relationship_to_child, '#relationship_to_child'
+    sections :address_details, CYAGroup, '#person_address_details' do
+      row :address, '#person_address'
+      row :lived_at_5_years, '#person_residence_requirement_met'
+    end
+    sections :contact_details, CYAGroup, '#person_contact_details' do
+      row :email, '#person_email'
+      row :phone_number, '#person_phone_number'
+    end
+  end
+
   section :other_parties_details, CYAGroup, 'dl#other_parties_details' do
     row :has_other_parties, '#has_other_parties'
   end
@@ -102,11 +117,11 @@ class CYAPage < BasePage
   section :children_residence, CYAGroup, 'dl#children_residence' do
     sections :child, CYASummaryListRow, '#child_residence' do
       def child_name
-        question
+        key.text
       end
       
       def residence
-        answer
+        value.text
       end
     end
   end
@@ -124,7 +139,7 @@ class CYAPage < BasePage
 
   section :application_reasons, CYAGroup, 'dl#application_reasons' do
     row :details, '#application_details'
-    section :has_existing_court_order, CYANestedSummaryRow, '.app-cya--answers-group#existing_court_order'
+    row :has_existing_court_order, CYANestedSummaryRow, '.app-cya--answers-group#existing_court_order'
   end
 
   section :urgent_hearing, CYAGroup, 'dl#urgent_hearing' do
@@ -136,12 +151,12 @@ class CYAPage < BasePage
   end
 
   section :international_info, CYAGroup, 'dl#international_element' do
-    section :international_resident, CYANestedSummaryRow, '.app-cya--answers-group#international_resident'
+    row :international_resident, CYANestedSummaryRow, '.app-cya--answers-group#international_resident'
     section :international_jurisdiction, CYAGroup, '.app-cya--answers-group#international_jurisdiction' do
       row :can_apply_outside_en_cy, '#international_jurisdiction'
       row :details, '#international_jurisdiction_details'
     end
-    section :international_request, CYANestedSummaryRow, '.app-cya--answers-group#international_request'
+    row :international_request, CYANestedSummaryRow, '.app-cya--answers-group#international_request'
   end
 
   section :litigation_capacity, CYAGroup, 'dl#litigation_capacity' do
@@ -155,7 +170,7 @@ class CYAPage < BasePage
       row :sign_language_interpreter, '#sign_language_interpreter'
       row :welsh_language, '#welsh_language'
     end
-    section :safety_arrangements, CYANestedSummaryRow, '.app-cya--answers-group#special_arrangements'
+    row :safety_arrangements, CYANestedSummaryRow, '.app-cya--answers-group#special_arrangements'
     section :special_assistance, CYAGroup, '.app-cya--answers-group#special_assistance' do
       row :details, '#special_assistance'
       row :additional_details, '#special_assistance_details'
