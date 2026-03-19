@@ -37,7 +37,7 @@
 <header class="govuk-header" role="banner" data-module="govuk-header">
   <div class="govuk-header__container govuk-width-container">
     <div class="govuk-header__logo">
-      <a href="#" class="govuk-header__link govuk-header__link--homepage">
+      <a href="#" class="govuk-header__homepage-link">
         <svg
           focusable="false"
           role="img"
@@ -65,13 +65,23 @@
         </svg>
       </a>
     </div>
-
-    <div class="govuk-header__content">
-      <%= yield(:service_name) %>
-      <%= yield(:header_navigation) %>
-    </div>
   </div>
 </header>
+
+<section aria-label="Service information" class="govuk-service-navigation" data-module="govuk-service-navigation">
+  <div class="govuk-width-container">
+    <div class="govuk-service-navigation__container">
+      <span class="govuk-service-navigation__service-name">
+        <%= yield(:service_name) %>
+      </span>
+      <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+        <ul class="govuk-service-navigation__list">
+          <%= yield(:header_navigation) %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
 
 <div class="govuk-width-container app-width-container--wide">
   <%= yield(:phase_banner) %>
