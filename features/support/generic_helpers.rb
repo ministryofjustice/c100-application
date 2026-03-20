@@ -22,6 +22,50 @@ def child_protection_case_page
   @child_protection_case_page ||= ChildProtectionCasePage.new
 end
 
+def miam_acknowledgement_page
+  @miam_acknowledgement_page ||= MiamAcknowledgementPage.new
+end
+
+def miam_attended_page
+  @miam_attended_page ||= MiamAttendedPage.new
+end
+
+def miam_exemption_claim_page
+  @miam_exemption_claim_page ||= MiamExemptionClaimPage.new
+end
+
+def miam_exemptions_adr_page
+  @miam_exemptions_adr_page ||= MiamExemptionsAdrPage.new
+end
+
+def miam_exemptions_details_page
+  @miam_exemptions_details_page ||= MiamExemptionsDetailsPage.new
+end
+
+def miam_exemptions_domestic_page
+  @miam_exemptions_domestic_page ||= MiamExemptionsDomesticPage.new
+end
+
+def miam_exemptions_misc_page
+  @miam_exemptions_misc_page ||= MiamExemptionsMiscPage.new
+end
+
+def miam_exemptions_protection_page
+  @miam_exemptions_protection_page ||= MiamExemptionsProtectionPage.new
+end
+
+def miam_exemptions_reasons_page
+  @miam_exemptions_reasons_page ||= MiamExemptionsReasonsPage.new
+end
+
+def miam_exemptions_reasons_playback_page
+  @miam_exemptions_reasons_playback_page ||= MiamExemptionsReasonsPlaybackPage.new
+end
+
+def miam_exemptions_urgency_page
+  @miam_exemptions_urgency_page ||= MiamExemptionsUrgencyPage.new
+end
+
 def miam_page
   @miam_page ||= MiamPage.new
 end

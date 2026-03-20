@@ -6,41 +6,7 @@ Feature: Testing C100 end to end
     Then I should be on the consent order page
 
   Scenario: Child arrangements order (MIAM) (path one: exemption with no evidence)
-    # miam exemption
-    When I navigate to applicant names page from consent order
-    # Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
-    # And I choose "No"
-    # Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
-    # And I click the radio button "No"
-    # And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
-    # And I click the "Continue" button
-    # Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
-    # And I choose "No"
-    # Then I should see "Do you have a valid reason for not attending a MIAM?"
-    # And I choose "Yes"
-    # Then I should see "Providing evidence of domestic abuse concerns"
-    # And I check "None of these"
-    # And I click the "Continue" button
-    # Then I should see "Confirming child protection concerns"
-    # And I check "None of these"
-    # And I click the "Continue" button
-    # Then I should see "Confirming why your application is urgent"
-    # And I check "None of these"
-    # And I click the "Continue" button
-    # Then I should see "You’ve already been to a MIAM or are taking part in another form of non-court dispute resolution"
-    # And I check "None of these"
-    # And I click the "Continue" button
-    # Then I should see "Confirming other valid reasons for not attending"
-    # And I check "You or the prospective respondents are under 18 years old"
-    # And I click the "Continue" button
-    # Then I should see "Evidence of MIAM exemption"
-    # When I choose "No" and fill in "steps_miam_exemptions_exemption_reasons_form[exemption_reasons]" with "Supporting reason"
-    # Then I should see "Provide details of exemptions from attending a MIAM"
-    # When I fill in "steps_miam_exemptions_exemption_details_form[exemption_details]" with "exemption reason"
-    # And I click the "Continue" button
-    # Then I should see "You don’t have to attend a MIAM"
-    # And I should see "Other exemptions"
-    # And I click the "Continue" link
+    When I navigate the MIAM exemption journey
     And I have no safety concerns about the children
     And I ask the court to decide who the children live with and when
     And I have tried all alternative ways to reach an agreement
@@ -64,7 +30,7 @@ Feature: Testing C100 end to end
     And I pay using Help With Fees with reference "HWF-123-456"
     And I should be on the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
-    And I should see the children "are" involved in any emergency protection, care of proceedings
+    And I should see the children "aren't" involved in any emergency protection, care of proceedings
     # And I should see they "haven't" been to mediation through the mediation voucher scheme
     # And I should see they haven't attended MIAM
     And I should see they "haven't" got safety concerns about the children
@@ -72,7 +38,7 @@ Feature: Testing C100 end to end
     And I should see that all alternatives "have" been tried
     And I should see the children details:
       | full_name     | dob        | sex    | child_orders             | special_guardianship | parental_responsibility |
-      | John Smith Jr | 19-03-2024 | Male   | Child Arrangements Order | No                   | Father                  |
+      | John Smith Jr | 20-03-2024 | Male   | Child Arrangements Order | No                   | Father                  |
     And I should see the children "might be" known to other social services
     And I should see the applicant personal details
       | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
@@ -86,7 +52,7 @@ Feature: Testing C100 end to end
       | Annalise Keating | Keating Law Firm | Windsor Castle, Windsor, United Kingdom, SL4 1QF | annalise@law.com | 00000000000  | 00000000000 |
     And I should see the respondents details:
       | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
-      | Jane Doe  | 19-03-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
+      | Jane Doe  | 20-03-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "aren't" other people who need to be informed of the application
     And I should see the children residence details:
       | child_name    | residence       |

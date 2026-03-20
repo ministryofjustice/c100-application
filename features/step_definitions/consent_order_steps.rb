@@ -1,3 +1,44 @@
+When(/^I navigate the MIAM exemption journey$/) do
+  expect(consent_order_page).to be_displayed
+  consent_order_page.submit_without_consent_order
+
+  expect(child_protection_case_page).to be_displayed
+  child_protection_case_page.submit_no
+
+  expect(miam_acknowledgement_page).to be_displayed
+  miam_acknowledgement_page.submit_voucher_scheme_no
+
+  expect(miam_attended_page).to be_displayed
+  miam_attended_page.submit_no
+
+  expect(miam_exemption_claim_page).to be_displayed
+  miam_exemption_claim_page.submit_yes
+
+  expect(miam_exemptions_domestic_page).to be_displayed
+  miam_exemptions_domestic_page.submit_none_of_these
+
+  expect(miam_exemptions_protection_page).to be_displayed
+  miam_exemptions_protection_page.submit_none_of_these
+
+  expect(miam_exemptions_urgency_page).to be_displayed
+  miam_exemptions_urgency_page.submit_none_of_these
+
+  expect(miam_exemptions_adr_page).to be_displayed
+  miam_exemptions_adr_page.submit_none_of_these
+
+  expect(miam_exemptions_misc_page).to be_displayed
+  miam_exemptions_misc_page.submit_applicant_respondent_under_age
+
+  expect(miam_exemptions_reasons_page).to be_displayed
+  miam_exemptions_reasons_page.submit_no_exemption_reasons('Supporting reason')
+
+  expect(miam_exemptions_details_page).to be_displayed
+  miam_exemptions_details_page.submit_exemption_details('exemption details')
+
+  expect(miam_exemptions_reasons_playback_page).to be_displayed
+  miam_exemptions_reasons_playback_page.continue
+end
+
 Then('I should be on the consent order page') do
   expect(consent_order_page).to be_displayed
 end
@@ -11,6 +52,9 @@ And('I submit the consent order form without an existing consent order') do
 end
 
 And('I have no safety concerns about the children') do
+  expect(safety_concern_page).to be_displayed
+  safety_concern_page.continue_to_next_step
+
   expect(safety_concern_abduction_page).to be_displayed
   safety_concern_abduction_page.submit_no
 
