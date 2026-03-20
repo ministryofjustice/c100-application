@@ -78,10 +78,7 @@ RUN mkdir -p public/assets/govuk-frontend/dist/govuk/assets/fonts && \
 RUN mkdir -p public/assets/govuk-frontend/dist/govuk/assets/images && \
     cp -r node_modules/govuk-frontend/dist/govuk/assets/images/* public/assets/govuk-frontend/dist/govuk/assets/images/
 
-RUN mkdir -p public/assets/govuk-frontend/dist/govuk/assets/rebrand/images && \
-    cp node_modules/govuk-frontend/dist/govuk/assets/rebrand/images/* public/assets/govuk-frontend/dist/govuk/assets/rebrand/images/
-
-RUN cp node_modules/govuk-frontend/dist/govuk/assets/rebrand/images/favicon.ico public/favicon.ico
+RUN cp node_modules/govuk-frontend/dist/govuk/assets/images/favicon.ico public/favicon.ico
 
 RUN addgroup --gid 1000 --system appgroup && \
     adduser --uid 1000 --system appuser --ingroup appgroup

@@ -14,7 +14,7 @@
 }
 
 .app-sidebar-grey {
-  background: govuk-colour("light-grey");
+  background: govuk-colour("black", $variant: "tint-95");
   margin-bottom: govuk-spacing(5);
 }
 
