@@ -8,6 +8,7 @@ require 'cucumber/rails'
 require 'webmock'
 require 'cucumber/rspec/doubles'
 require "capybara/cuprite"
+include ActiveSupport::Testing::TimeHelpers
 
 # frozen_string_literal: true
 

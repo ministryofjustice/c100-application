@@ -3,11 +3,11 @@
 RSpec.describe PaymentsTimeoutJob, type: :job do
   before do
     allow(Rails).to receive(:logger).and_return(logger)
-    Timecop.freeze
+    freeze_time
   end
 
   after do
-    Timecop.return
+    travel_back
   end
 
   let(:logger) { instance_double(Logger, info: true) }

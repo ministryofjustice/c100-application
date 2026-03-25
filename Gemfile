@@ -32,7 +32,6 @@ gem 'uk_postcode'
 gem 'virtus'
 gem 'parser', '~> 3.1', '>= 3.1.1.0'
 gem 'tzinfo', '~> 2.0.5'
-gem 'timecop'
 
 # Back office
 gem 'omniauth-auth0', '~> 3.1.0'
