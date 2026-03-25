@@ -120,7 +120,7 @@ jobs:
             kubectl config set-context ${KUBE_ENV_LIVE_DEV_NAME} --cluster=${KUBE_ENV_LIVE_DEV_NAME} --user=circleci --namespace=${KUBE_ENV_LIVE_DEV_NAMESPACE}
             kubectl config use-context ${KUBE_ENV_LIVE_DEV_NAME}
 
-      - deploy:
+      - run:
           name: rolling update image
           command: |
             export BUILD_DATE=$(date -Is) >> $BASH_ENV
@@ -214,7 +214,7 @@ jobs:
             kubectl config set-context ${KUBE_ENV_LIVE_STAGING_NAME} --cluster=${KUBE_ENV_LIVE_STAGING_NAME} --user=circleci --namespace=${KUBE_ENV_LIVE_STAGING_NAMESPACE}
             kubectl config use-context ${KUBE_ENV_LIVE_STAGING_NAME}
 
-      - deploy:
+      - run:
           name: rolling update image
           command: |
             export BUILD_DATE=$(date -Is) >> $BASH_ENV
@@ -249,7 +249,7 @@ jobs:
             kubectl config set-context ${KUBE_ENV_LIVE_PRODUCTION_NAME} --cluster=${KUBE_ENV_LIVE_PRODUCTION_NAME} --user=circleci --namespace=${KUBE_ENV_LIVE_PRODUCTION_NAMESPACE}
             kubectl config use-context ${KUBE_ENV_LIVE_PRODUCTION_NAME}
 
-      - deploy:
+      - run:
           name: rolling update image
           command: |
             export BUILD_DATE=$(date -Is) >> $BASH_ENV
