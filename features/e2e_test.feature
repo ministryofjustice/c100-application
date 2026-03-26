@@ -7,6 +7,7 @@ Feature: Testing C100 end to end
 
   Scenario: Child arrangements order (MIAM) (path one: exemption with no evidence)
     When I navigate the MIAM exemption journey
+    And evidence "isn't" provided for the MIAM exemption
     And I have no safety concerns about the children
     And I ask the court to decide who the children live with and when
     And I have tried all alternative ways to reach an agreement

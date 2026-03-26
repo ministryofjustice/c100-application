@@ -28,12 +28,21 @@ When(/^I navigate the MIAM exemption journey$/) do
 
   expect(miam_exemptions_misc_page).to be_displayed
   miam_exemptions_misc_page.submit_applicant_respondent_under_age
+end
 
+And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
   expect(miam_exemptions_reasons_page).to be_displayed
-  miam_exemptions_reasons_page.submit_no_exemption_reasons('Supporting reason')
+  if arg == 'is'
+    miam_exemptions_reasons_page.submit_yes
 
+    expect(miam_exemptions_exemption_upload_page).to be_displayed
+    file_path = File.absolute_path('features/support/sample_file/image.jpg')
+    miam_exemptions_exemption_upload_page.upload_file(file_path)
+  else
+    miam_exemptions_reasons_page.submit_no_exemption_reasons('Supporting reason')
+  end
   expect(miam_exemptions_details_page).to be_displayed
-  miam_exemptions_details_page.submit_exemption_details('exemption details')
+  miam_exemptions_details_page.continue_without_filling
 
   expect(miam_exemptions_reasons_playback_page).to be_displayed
   miam_exemptions_reasons_playback_page.continue

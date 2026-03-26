@@ -58,6 +58,10 @@ def miam_exemptions_reasons_page
   @miam_exemptions_reasons_page ||= MiamExemptionsReasonsPage.new
 end
 
+def miam_exemptions_exemption_upload_page
+  @miam_exemptions_exemption_upload_page ||= MiamExemptionsExemptionUploadPage.new
+end
+
 def miam_exemptions_reasons_playback_page
   @miam_exemptions_reasons_playback_page ||= MiamExemptionsReasonsPlaybackPage.new
 end

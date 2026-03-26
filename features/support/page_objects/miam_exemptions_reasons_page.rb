@@ -14,7 +14,7 @@ class MiamExemptionsReasonsPage < YesNoPage
     content.continue_button.click
   end
 
-  def submit_exemption_reason
+  def submit_yes
     selection_area.answer_yes.click
     content.continue_button.click
   end
