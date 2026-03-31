@@ -1,8 +1,8 @@
 module Steps
   module Applicant
     class AddressDetailsForm < AddressBaseForm
-      attribute :residence_requirement_met, YesNo
-      attribute :residence_history, String
+      attribute :residence_requirement_met, :yes_no
+      attribute :residence_history, :string
 
       validates_presence_of :country
 

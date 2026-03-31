@@ -1,8 +1,8 @@
 module Steps
   module MiamExemptions
     class ExemptionReasonsForm < BaseForm
-      attribute :exemption_reasons, String
-      attribute :attach_evidence, YesNo
+      attribute :exemption_reasons, :string
+      attribute :attach_evidence, :yes_no
 
       validates_inclusion_of :attach_evidence, in: GenericYesNo.values
       validates_presence_of :exemption_reasons, if: -> { attach_evidence == GenericYesNo::NO }

@@ -1,8 +1,8 @@
 module Steps
   module Shared
     class RelationshipForm < BaseForm
-      attribute :relation, String
-      attribute :relation_other_value, String
+      attribute :relation, :string
+      attribute :relation_other_value, :string
 
       def self.choices
         Relation.string_values

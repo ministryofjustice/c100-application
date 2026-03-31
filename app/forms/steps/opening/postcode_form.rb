@@ -1,7 +1,7 @@
 module Steps
   module Opening
     class PostcodeForm < BaseForm
-      attribute :children_postcode, StrippedString
+      attribute :children_postcode, :stripped_string
       validates :children_postcode, presence: true, full_uk_postcode: true
 
       private

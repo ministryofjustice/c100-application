@@ -1,10 +1,10 @@
 module Steps
   module Respondent
     class AddressDetailsForm < AddressBaseForm
-      attribute :residence_requirement_met, YesNoUnknown
-      attribute :residence_history, String
-      attribute :residence_history_no, String
-      attribute :residence_history_unknown, String
+      attribute :residence_requirement_met, :yes_no_unknown
+      attribute :residence_history, :string
+      attribute :residence_history_no, :string
+      attribute :residence_history_unknown, :string
 
       validates_presence_of :country, unless: :address_unknown?
 

@@ -1,7 +1,7 @@
 module Steps
   module Application
     class PermissionDetailsForm < BaseForm
-      attribute :permission_details, String
+      attribute :permission_details, :string
 
       validates_presence_of :permission_details
 

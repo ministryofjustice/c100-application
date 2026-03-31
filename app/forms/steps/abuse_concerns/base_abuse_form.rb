@@ -1,8 +1,8 @@
 module Steps
   module AbuseConcerns
     class BaseAbuseForm < BaseForm
-      attribute :subject, String
-      attribute :kind, String
+      attribute :subject, :string
+      attribute :kind, :string
 
       # This ensures no tampering with the values
       validates_inclusion_of :subject, in: AbuseSubject.string_values

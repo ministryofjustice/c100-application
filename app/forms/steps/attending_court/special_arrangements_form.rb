@@ -5,7 +5,7 @@ module Steps
       setup_attributes_for SpecialArrangements, attribute_name: :special_arrangements
 
       # any other attributes
-      attribute :special_arrangements_details, String
+      attribute :special_arrangements_details, :string
     end
   end
 end

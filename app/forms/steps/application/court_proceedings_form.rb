@@ -5,13 +5,13 @@ module Steps
 
       has_one_association :court_proceeding
 
-      attribute :children_names, String
-      attribute :court_name, StrippedString
-      attribute :case_number, StrippedString
-      attribute :proceedings_date, String
-      attribute :cafcass_details, String
-      attribute :order_types, String
-      attribute :previous_details, String
+      attribute :children_names, :string
+      attribute :court_name, :stripped_string
+      attribute :case_number, :stripped_string
+      attribute :proceedings_date, :string
+      attribute :cafcass_details, :string
+      attribute :order_types, :string
+      attribute :previous_details, :string
 
       validates_presence_of :children_names,
                             :court_name,

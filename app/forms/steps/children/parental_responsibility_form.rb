@@ -1,7 +1,7 @@
 module Steps
   module Children
     class ParentalResponsibilityForm < BaseForm
-      attribute :parental_responsibility, String
+      attribute :parental_responsibility, :string
 
       validates_presence_of :parental_responsibility
 

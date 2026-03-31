@@ -1,10 +1,10 @@
 module Steps
   module Opening
     class StartOrContinueForm < BaseForm
-      attribute :start_or_continue, StrippedString
-      attribute :children_postcode, StrippedString
-      attribute :children_postcode_continue, StrippedString
-      attribute :is_legal_representative, Boolean
+      attribute :start_or_continue, :stripped_string
+      attribute :children_postcode, :stripped_string
+      attribute :children_postcode_continue, :stripped_string
+      attribute :is_legal_representative, :boolean
 
       validates_inclusion_of :start_or_continue, in: ApplicationIntent.values.map(&:to_s)
       validates :start_or_continue, presence: true

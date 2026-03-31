@@ -1,9 +1,9 @@
 module Steps
   module Children
     class AdditionalDetailsForm < BaseForm
-      attribute :children_known_to_authorities, YesNoUnknown
-      attribute :children_known_to_authorities_details, String
-      attribute :children_protection_plan, YesNoUnknown
+      attribute :children_known_to_authorities, :yes_no_unknown
+      attribute :children_known_to_authorities_details, :string
+      attribute :children_protection_plan, :yes_no_unknown
 
       validates_inclusion_of :children_known_to_authorities, in: GenericYesNoUnknown.values
       validates_inclusion_of :children_protection_plan,      in: GenericYesNoUnknown.values

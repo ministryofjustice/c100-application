@@ -1,7 +1,7 @@
 module Steps
   module Address
     class ResultsForm < BaseForm
-      attribute :selected_address, SplitAddress
+      attribute :selected_address, :split_address
       validates_presence_of :selected_address
 
       private

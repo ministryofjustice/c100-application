@@ -1,7 +1,7 @@
 module Steps
   module Application
     class DetailsForm < BaseForm
-      attribute :application_details, String
+      attribute :application_details, :string
 
       validates_presence_of :application_details
 

@@ -3,8 +3,8 @@ module Steps
     class PrivacyPreferencesForm < BaseForm
       include ActiveModel::Validations::Callbacks
 
-      attribute :are_contact_details_private, YesNo
-      attribute :privacy_known, YesNo
+      attribute :are_contact_details_private, :yes_no
+      attribute :privacy_known, :yes_no
 
       validates_inclusion_of :are_contact_details_private, in: GenericYesNo.values
 

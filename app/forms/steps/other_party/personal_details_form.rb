@@ -1,12 +1,12 @@
 module Steps
   module OtherParty
     class PersonalDetailsForm < BaseForm
-      attribute :has_previous_name, YesNoUnknown
-      attribute :previous_name, StrippedString
-      attribute :gender, GenderAttribute
-      attribute :dob, MultiParamDate
-      attribute :dob_unknown, Boolean
-      attribute :dob_estimate, MultiParamDate
+      attribute :has_previous_name, :yes_no_unknown
+      attribute :previous_name, :stripped_string
+      attribute :gender, :gender_attribute
+      attribute :dob, :multi_param_date
+      attribute :dob_unknown, :boolean
+      attribute :dob_estimate, :multi_param_date
 
       validates_inclusion_of :has_previous_name, in: GenericYesNoUnknown.values
       validates_presence_of  :previous_name, if: -> { has_previous_name&.yes? }

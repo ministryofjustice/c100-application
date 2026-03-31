@@ -7,7 +7,7 @@ module SingleQuestionForm
     private
 
     def yes_no_attribute(name, reset_when_yes: [], reset_when_no: [])
-      attribute name, YesNo
+      attribute name, :yes_no
       validates_inclusion_of name, in: GenericYesNo.values
 
       self.reset_attributes = {
@@ -18,7 +18,7 @@ module SingleQuestionForm
 
     def expand_attributes(attributes)
       attributes.map do |obj|
-        obj.is_a?(Symbol) ? obj : obj.attribute_names
+        obj.is_a?(:symbol) ? obj : obj.attribute_names
       end.flatten.uniq
     end
   end

@@ -6,7 +6,7 @@ module Steps
       yes_no_attribute :international_jurisdiction,
                        reset_when_no: [:international_jurisdiction_details]
 
-      attribute :international_jurisdiction_details, String
+      attribute :international_jurisdiction_details, :string
 
       validates_presence_of :international_jurisdiction_details, if: -> { international_jurisdiction&.yes? }
     end

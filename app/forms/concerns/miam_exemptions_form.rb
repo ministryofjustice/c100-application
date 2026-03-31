@@ -15,8 +15,8 @@ module MiamExemptionsForm
       self.attribute_name = attribute_name
       self.allowed_values = value_object.string_values
 
-      attribute attribute_name, Array[String]
-      attribute :exemptions_collection, Array[String]
+      attribute attribute_name, :string_array
+      attribute :exemptions_collection, :string_array
     end
   end
 

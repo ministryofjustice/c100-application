@@ -1,9 +1,9 @@
 module Steps
   module Application
     class DeclarationForm < BaseForm
-      attribute :declaration_signee, StrippedString
-      attribute :declaration_confirmation, StrippedString
-      attribute :declaration_signee_capacity, String
+      attribute :declaration_signee, :stripped_string
+      attribute :declaration_confirmation, :stripped_string
+      attribute :declaration_signee_capacity, :string
 
       validates_presence_of  :declaration_signee
       validates_inclusion_of :declaration_signee_capacity, in: UserType.string_values

@@ -1,14 +1,14 @@
 module Steps
   module AbuseConcerns
     class DetailsForm < BaseAbuseForm
-      attribute :behaviour_description, String
-      attribute :behaviour_start, String
-      attribute :behaviour_ongoing, YesNo
-      attribute :behaviour_stop, String
-      attribute :asked_for_help, YesNo
-      attribute :help_party, String
-      attribute :help_provided, YesNo
-      attribute :help_description, String
+      attribute :behaviour_description, :string
+      attribute :behaviour_start, :string
+      attribute :behaviour_ongoing, :yes_no
+      attribute :behaviour_stop, :string
+      attribute :asked_for_help, :yes_no
+      attribute :help_party, :string
+      attribute :help_provided, :yes_no
+      attribute :help_description, :string
 
       validates_presence_of :behaviour_description, :behaviour_start,
                             :behaviour_ongoing, :asked_for_help,

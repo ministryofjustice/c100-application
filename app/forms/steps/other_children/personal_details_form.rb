@@ -1,10 +1,10 @@
 module Steps
   module OtherChildren
     class PersonalDetailsForm < BaseForm
-      attribute :gender, GenderAttribute
-      attribute :dob, MultiParamDate
-      attribute :dob_unknown, Boolean
-      attribute :dob_estimate, MultiParamDate
+      attribute :gender, :gender_attribute
+      attribute :dob, :multi_param_date
+      attribute :dob_unknown, :boolean
+      attribute :dob_estimate, :multi_param_date
 
       validates_inclusion_of :gender, in: Gender.values
 

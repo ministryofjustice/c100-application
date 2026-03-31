@@ -6,9 +6,9 @@ module Steps
       has_one_association :solicitor
 
       attribute :email, NormalisedEmail
-      attribute :phone_number, StrippedString
-      attribute :dx_number, StrippedString
-      attribute :email_provided, YesNo
+      attribute :phone_number, :stripped_string
+      attribute :dx_number, :stripped_string
+      attribute :email_provided, :yes_no
 
       validates :email, email: true, allow_blank: true
       validates :phone_number, phone_number: true

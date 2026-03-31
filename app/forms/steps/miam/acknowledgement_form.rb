@@ -1,8 +1,8 @@
 module Steps
   module Miam
     class AcknowledgementForm < BaseForm
-      attribute :miam_acknowledgement, Boolean
-      attribute :mediation_voucher_scheme, YesNo
+      attribute :miam_acknowledgement, :boolean
+      attribute :mediation_voucher_scheme, :yes_no
 
       validates_presence_of :miam_acknowledgement
       validates_inclusion_of :mediation_voucher_scheme, in: GenericYesNo.values
