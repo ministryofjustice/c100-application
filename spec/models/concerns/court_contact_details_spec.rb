@@ -162,7 +162,7 @@ RSpec.describe CourtContactDetails do
 
       context 'and new email rolled out' do
         before do
-          allow(EmailRollout).to receive(:changes_apply?).and_return(false)
+          allow(EmailRollout).to receive(:changes_apply?).and_return(true)
         end
         it 'returns the central hub email address' do
           expect(subject.documents_email).to eq('PrLawTeamLeader@Justice.gov.uk')
