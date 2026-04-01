@@ -6,6 +6,7 @@ module CourtContactDetails
   FACT_COURT_BASE_URL = 'https://www.find-court-tribunal.service.gov.uk/courts/'.freeze
 
   CENTRAL_HUB_EMAIL = 'C100applications@justice.gov.uk'.freeze
+  CENTRAL_HUB_EMAIL2 = 'PrLawTeamLeader@Justice.gov.uk'.freeze
 
   def centralised?
     centralised_slugs.include?(slug)
@@ -27,7 +28,11 @@ module CourtContactDetails
   end
 
   def documents_email
-    return CENTRAL_HUB_EMAIL if centralised?
+    if centralised?
+      return CENTRAL_HUB_EMAIL2 if EmailRollout.changes_apply?
+
+      return CENTRAL_HUB_EMAIL
+    end
 
     # If the court is not yet centralised we default to its email address
     email
