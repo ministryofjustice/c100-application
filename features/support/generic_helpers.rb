@@ -82,6 +82,30 @@ def safety_concern_abduction_page
   @safety_concern_abduction_page ||= SafetyConcernAbductionPage.new
 end
 
+def abduction_children_have_passport_page
+  @abduction_children_have_passport_page ||= AbductionChildrenHavePassportPage.new
+end
+
+def abduction_international_page
+  @abduction_international_page ||= AbductionInternationalPage.new
+end
+
+def abduction_passport_details_page
+  @abduction_passport_details_page ||= AbductionPassportDetailsPage.new
+end
+
+def abduction_previous_attempt_details_page
+  @abduction_previous_attempt_details_page ||= AbductionPreviousAttemptDetailsPage.new
+end
+
+def abduction_previous_attempt_page
+  @abduction_previous_attempt_page ||= AbductionPreviousAttemptPage.new
+end
+
+def abduction_risk_details_page
+  @abduction_risk_details_page ||= AbductionRiskDetailsPage.new
+end
+
 def safety_concern_substance_page
   @safety_concern_substance_page ||= SafetyConcernSubstancePage.new
 end

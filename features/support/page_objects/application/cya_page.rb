@@ -14,6 +14,7 @@ class CYAPage < BasePage
   end
 
   section :miam_exemptions, CYAGroup, 'dl#miam_exemptions' do
+    row :exemptions_misc, '#miam_exemptions_misc'
     row :exemption_details, '#exemption_details'
     row :exemption, '#exemption'
   end
@@ -24,6 +25,12 @@ class CYAPage < BasePage
     row :domestic_abuse, '#domestic_abuse'
     row :other_abuse, '#other_abuse'
     row :substance_abuse, CYANestedSummaryRow, '.app-cya--answers-group#substance_abuse'
+  end
+
+  section :abduction, CYAGroup, 'dl#abduction' do
+  end
+
+  section :children_abuse_details, CYAGroup, 'dl#children_abuse_details' do
   end
 
   section :nature_of_application, CYAGroup, 'dl#nature_of_application' do

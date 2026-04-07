@@ -709,9 +709,7 @@ And(/^I should see the other party is "([^"]*)" years of age$/) do |age|
 end
 
 And(/^I should see they have got a valid exemption: "([^"]*)"$/) do |arg|
-  within('#miam_exemptions') do
-    expect(page).to have_content(arg)
-  end
+  expect(cya_page.miam_exemptions.exemptions_misc.answer).to eq(arg)
 end
 
 And(/^I should see the details provided for the exemption are "([^"]*)"$/) do |arg|

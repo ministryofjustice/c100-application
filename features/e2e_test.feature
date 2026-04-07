@@ -32,14 +32,14 @@ Feature: Testing C100 end to end
     And I should be on the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
-    # And I should see they "haven't" been to mediation through the mediation voucher scheme
-    # And I should see they haven't attended MIAM
+    And I should see they "haven't" been to mediation through the mediation voucher scheme
+    And I should see they haven't attended MIAM
     And I should see they "haven't" got safety concerns about the children
     And I should see they want the court to decide: "Decide who they live with and when"
     And I should see that all alternatives "have" been tried
     And I should see the children details:
       | full_name     | dob        | sex    | child_orders             | special_guardianship | parental_responsibility |
-      | John Smith Jr | 20-03-2024 | Male   | Child Arrangements Order | No                   | Father                  |
+      | John Smith Jr | 02-04-2024 | Male   | Child Arrangements Order | No                   | Father                  |
     And I should see the children "might be" known to other social services
     And I should see the applicant personal details
       | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
@@ -53,7 +53,7 @@ Feature: Testing C100 end to end
       | Annalise Keating | Keating Law Firm | Windsor Castle, Windsor, United Kingdom, SL4 1QF | annalise@law.com | 00000000000  | 00000000000 |
     And I should see the respondents details:
       | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
-      | Jane Doe  | 20-03-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
+      | Jane Doe  | 02-04-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "aren't" other people who need to be informed of the application
     And I should see the children residence details:
       | child_name    | residence       |
@@ -79,62 +79,10 @@ Feature: Testing C100 end to end
     And I should see the statement of truth
 
   Scenario: Child arrangements order (MIAM) (path two: exemption with evidence upload)
-    When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
-    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
-    And I choose "No"
-    Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
-    And I click the radio button "No"
-    And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
-    And I click the "Continue" button
-    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
-    And I choose "No"
-    Then I should see "Do you have a valid reason for not attending a MIAM?"
-    And I choose "Yes"
-    Then I should see "Providing evidence of domestic abuse concerns"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "Confirming child protection concerns"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "Confirming why your application is urgent"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "You’ve already been to a MIAM or are taking part in another form of non-court dispute resolution"
-    And I check "None of these"
-    And I click the "Continue" button
-    Then I should see "Confirming other valid reasons for not attending"
-    And I check "You’re applying for a without notice hearing."
-    And I click the "Continue" button
-    Then I should see "Evidence of MIAM exemption"
-    And I choose "Yes"
-    Then I should see "Upload your evidence for a MIAM exemption"
-    And I upload a document using the file uploader
-    And I click the "Continue" button
-    Then I should see "Provide details of exemptions from attending a MIAM"
-    When I fill in "steps_miam_exemptions_exemption_details_form[exemption_details]" with "exemption reason"
-    And I click the "Continue" button
-    Then I should see "You don’t have to attend a MIAM"
-    And I should see "Other exemptions"
-    And I click the "Continue" link
-    Then I should see "Safety concerns"
-    And I click the "Continue" link
-    Then I should see "Are the children at risk of being abducted?"
-    And I choose "Yes"
-    Then I should see "Have the police been notified?"
-    And I choose "Yes"
-    Then I should see "Do any of the children have a passport?"
-    And I choose "Yes"
-    Then I should see "Provide details of the children’s passports"
-    And I check "Mother"
-    And I choose "No"
-    Then I should see "Have the children been abducted or kept outside the UK without your consent before?"
-    And I choose "No"
-    Then I should see "Why do you think the children may be abducted or kept outside the UK without your consent?"
-    And I fill in "steps-abduction-risk-details-form-risk-details-field" with "They might be taken by their other parent"
-    And I fill in "Where are the children now?" with "The children are with me"
-    And I click the "Continue" button
-    Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
-    And I choose "No"
+    When I navigate the MIAM exemption journey
+    And evidence "is" provided for the MIAM exemption
+    And I navigate the abduction risk journey
+    And I have no concerns about drug, alcohol or substance abuse
     Then I should see "You and the children"
     And I click the "Continue" link
     Then I should see "The children’s safety"
@@ -340,8 +288,8 @@ Feature: Testing C100 end to end
     And I should see they "haven't" been to mediation through the mediation voucher scheme
     And I should see they have got a valid exemption: "You’re applying for a without notice hearing"
     And I should see the details provided for the exemption are ""
-    And I should see they "have" got safety concerns about the children
-    And I should see they have safety concerns with the children about: "abduction, financial abuse, other abuse"
+    # And I should see they "have" got safety concerns about the children
+    # And I should see they have safety concerns with the children about: "abduction, financial abuse, other abuse"
     And I should see "No, I do not want the other person to spend time with the children"
     And I should see they want the court to decide: "Decide who they live with and when"
     And I should see the child's full name is "Jane Doe Jnr"

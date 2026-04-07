@@ -27,7 +27,7 @@ When(/^I navigate the MIAM exemption journey$/) do
   miam_exemptions_adr_page.submit_none_of_these
 
   expect(miam_exemptions_misc_page).to be_displayed
-  miam_exemptions_misc_page.submit_applicant_respondent_under_age
+  miam_exemptions_misc_page.submit_without_notice_hearing
 end
 
 And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
@@ -38,11 +38,15 @@ And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
     expect(miam_exemptions_exemption_upload_page).to be_displayed
     file_path = File.absolute_path('features/support/sample_file/image.jpg')
     miam_exemptions_exemption_upload_page.upload_file(file_path)
+
+    expect(miam_exemptions_details_page).to be_displayed
+    miam_exemptions_details_page.submit_exemption_details('exemption reason')
   else
     miam_exemptions_reasons_page.submit_no_exemption_reasons('Supporting reason')
+
+    expect(miam_exemptions_details_page).to be_displayed
+    miam_exemptions_details_page.continue_without_filling
   end
-  expect(miam_exemptions_details_page).to be_displayed
-  miam_exemptions_details_page.continue_without_filling
 
   expect(miam_exemptions_reasons_playback_page).to be_displayed
   miam_exemptions_reasons_playback_page.continue
@@ -78,6 +82,36 @@ And('I have no safety concerns about the children') do
 
   expect(safety_concern_other_page).to be_displayed
   safety_concern_other_page.submit_no
+end
+
+And('I navigate the abduction risk journey') do
+  expect(safety_concern_page).to be_displayed
+  safety_concern_page.continue_to_next_step
+
+  expect(safety_concern_abduction_page).to be_displayed
+  safety_concern_abduction_page.submit_yes
+
+  expect(abduction_international_page).to be_displayed
+  abduction_international_page.submit_yes
+
+  expect(abduction_children_have_passport_page).to be_displayed
+  abduction_children_have_passport_page.submit_yes
+
+  expect(abduction_passport_details_page).to be_displayed
+  abduction_passport_details_page.submit_no_multiple_passports
+  abduction_passport_details_page.submit_passport_possession('mother')
+  abduction_passport_details_page.continue_to_next_step
+
+  expect(abduction_previous_attempt_page).to be_displayed
+  abduction_previous_attempt_page.submit_no
+
+  expect(abduction_risk_details_page).to be_displayed
+  abduction_risk_details_page.submit_risk_details('They might be taken by their other parent', 'The children are with me')
+end
+
+And('I have no concerns about drug, alcohol or substance abuse') do
+  expect(safety_concern_substance_page).to be_displayed
+  safety_concern_substance_page.submit_no
 end
 
 And('I ask the court to decide who the children live with and when') do
