@@ -150,7 +150,6 @@ RSpec.describe CourtContactDetails do
   describe '#documents_email' do
     before do
       allow(subject).to receive(:centralised?).and_return(centralised)
-      allow(EmailRollout).to receive(:changes_apply?).and_return(false)
     end
 
     context 'for a centralised court' do
@@ -158,15 +157,6 @@ RSpec.describe CourtContactDetails do
 
       it 'returns the central hub email address' do
         expect(subject.documents_email).to eq('C100applications@justice.gov.uk')
-      end
-
-      context 'and new email rolled out' do
-        before do
-          allow(EmailRollout).to receive(:changes_apply?).and_return(true)
-        end
-        it 'returns the central hub email address' do
-          expect(subject.documents_email).to eq('PrLawTeamLeader@Justice.gov.uk')
-        end
       end
     end
 

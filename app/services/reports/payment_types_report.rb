@@ -7,7 +7,6 @@ module Reports
 
     class << self
       def run
-        return unless ENV.key?('PAYMENT_TYPE_REPORT_EMAIL')
         return unless ENV.key?('PAYMENT_TYPE_REPORT_EMAIL2')
 
         Rails.logger.info "Sending payment types report"
@@ -21,7 +20,7 @@ module Reports
           @log.update(csv_generated: true)
           ReportsMailer.payment_types_report(
             report_csv,
-            to_address: to_email,
+            to_address: ENV['PAYMENT_TYPE_REPORT_EMAIL2'],
             cc_address: ENV['PAYMENT_TYPE_REPORT_EMAIL_CC'],
           ).deliver_later
         rescue PG::ConnectionBad => e
@@ -30,10 +29,6 @@ module Reports
           Sentry.capture_exception(e)
           raise # Reraises PG::ConnectionBad if still failing
         end
-      end
-
-      def to_email
-        EmailRollout.changes_apply? ? ENV['PAYMENT_TYPE_REPORT_EMAIL2'] : ENV['PAYMENT_TYPE_REPORT_EMAIL']
       end
 
       def report_data
