@@ -5,7 +5,7 @@ module Steps
 
       has_one_association :solicitor
 
-      attribute :email, NormalisedEmail
+      attribute :email, :normalised_email
       attribute :phone_number, :stripped_string
       attribute :dx_number, :stripped_string
       attribute :email_provided, :yes_no

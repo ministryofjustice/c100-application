@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe YesNo do
-  subject { described_class.build(YesNo) }
+RSpec.describe YesNoType do
+  subject { described_class.new }
 
-  let(:coerced_value) { subject.coerce(value) }
+  let(:coerced_value) { subject.cast(value) }
 
   describe 'when value is `nil`' do
     let(:value) { nil }

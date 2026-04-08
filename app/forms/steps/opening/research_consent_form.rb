@@ -5,7 +5,7 @@ module Steps
 
       yes_no_attribute :research_consent, reset_when_no: [:research_consent_email]
 
-      attribute :research_consent_email, NormalisedEmail
+      attribute :research_consent_email, :normalised_email
 
       validates_presence_of :research_consent_email, if: -> { research_consent&.yes? }
       validates :research_consent_email, email: true, allow_blank: true, if: -> { research_consent&.yes? }

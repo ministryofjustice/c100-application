@@ -24,10 +24,12 @@ end
 class YesNoType < ActiveModel::Type::Value
   def cast(value)
     case value
-    when :string, :symbol
+    when String, Symbol
       GenericYesNo.new(value)
     when GenericYesNo
       value
+    else
+      nil
     end
   end
 end
@@ -35,10 +37,12 @@ end
 class YesNoUnknownType < ActiveModel::Type::Value
   def cast(value)
     case value
-    when :string, :symbol
+    when String, Symbol
       GenericYesNoUnknown.new(value)
     when GenericYesNoUnknown
       value
+    else
+      nil
     end
   end
 end
@@ -106,6 +110,27 @@ class MultiParamDateType < ActiveModel::Type::Date
   end
 end
 
+class NormalisedEmailType < ActiveRecord::Type::String
+  # https://www.cs.sfu.ca/~ggbaker/reference/characters/#single
+  UNICODE_QUOTES = "\u0060\u2018\u2019\u2032".freeze
+  APOSTROPHE = "'".freeze
+
+  # https://www.cs.sfu.ca/~ggbaker/reference/characters/#dash
+  UNICODE_HYPHENS = "\u2010-\u2015".freeze
+  HYPHEN = "-".freeze
+
+  def cast(value)
+    super(normalise(value))
+  end
+
+  private
+
+  def normalise(value)
+    value.to_s.strip.downcase
+         .gsub(/[#{UNICODE_QUOTES}]/,  APOSTROPHE)
+         .gsub(/[#{UNICODE_HYPHENS}]/, HYPHEN)
+  end
+end
 
 ActiveModel::Type.register(:hash_value, HashValueType)
 ActiveModel::Type.register(:boolean, StrictBooleanType)
@@ -117,3 +142,4 @@ ActiveModel::Type.register(:stripped_string, StrippedStringType)
 ActiveModel::Type.register(:split_address, SplitAddressType)
 ActiveModel::Type.register(:gender_attribute, GenderAttributeType)
 ActiveModel::Type.register(:multi_param_date, MultiParamDateType)
+ActiveModel::Type.register(:normalised_email, NormalisedEmailType)

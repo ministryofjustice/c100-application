@@ -1,15 +1,14 @@
 class DocumentUpload
-  include Virtus.model
+  include ActiveModel::Model
+  include ActiveModel::Attributes
   extend ActiveModel::Naming
   extend ActiveModel::Translation
 
-  attribute :tempfile, Object
-  attribute :content_type, String
-  attribute :original_filename, String
-  attribute :collection_ref, String
-  attribute :document_key, String
-
-  attr_accessor :errors
+  attribute :tempfile
+  attribute :content_type, :string
+  attribute :original_filename, :string
+  attribute :collection_ref, :string
+  attribute :document_key, :string
 
   # TODO: decide on the final allowed max size and content types
   #
@@ -28,12 +27,13 @@ class DocumentUpload
   def initialize(obj, document_key: nil, content_type: nil, filename: nil, collection_ref: nil)
     raise ArgumentError, 'Must receive an IO object' unless obj.respond_to?(:read)
 
+    super()
+
     self.tempfile = obj.respond_to?(:tempfile) ? obj.tempfile : obj
     self.content_type = content_type || obj.content_type
     self.original_filename = filename || obj.original_filename
     self.collection_ref = collection_ref
     self.document_key = document_key
-    self.errors = ActiveModel::Errors.new(self)
   end
 
   def upload!(collection_ref: nil, document_key: nil)

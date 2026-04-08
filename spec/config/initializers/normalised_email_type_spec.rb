@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe NormalisedEmailType do
+  subject { described_class.new }
+
   let(:coerced_value) { subject.cast(value) }
   let(:replacement_char) { coerced_value.split.uniq }
 
