@@ -28,8 +28,6 @@ class YesNoType < ActiveModel::Type::Value
       GenericYesNo.new(value)
     when GenericYesNo
       value
-    else
-      nil
     end
   end
 end
@@ -41,8 +39,6 @@ class YesNoUnknownType < ActiveModel::Type::Value
       GenericYesNoUnknown.new(value)
     when GenericYesNoUnknown
       value
-    else
-      nil
     end
   end
 end
