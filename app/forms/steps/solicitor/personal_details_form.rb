@@ -5,9 +5,9 @@ module Steps
 
       has_one_association :solicitor
 
-      attribute :full_name, StrippedString
-      attribute :firm_name, StrippedString
-      attribute :reference, StrippedString
+      attribute :full_name, :stripped_string
+      attribute :firm_name, :stripped_string
+      attribute :reference, :stripped_string
 
       validates_presence_of :full_name, :firm_name
 

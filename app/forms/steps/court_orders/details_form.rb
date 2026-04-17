@@ -6,57 +6,57 @@ module Steps
       has_one_association :court_order
 
       NON_MOLESTATION_ATTRIBUTES = {
-        non_molestation: YesNo,
-        non_molestation_case_number: String,
-        non_molestation_issue_date: MultiParamDate,
-        non_molestation_length: String,
-        non_molestation_is_current: YesNo,
-        non_molestation_court_name: String
+        non_molestation: :yes_no,
+        non_molestation_case_number: :string,
+        non_molestation_issue_date: :multi_param_date,
+        non_molestation_length: :string,
+        non_molestation_is_current: :yes_no,
+        non_molestation_court_name: :string
       }.freeze.each { |name, type| attribute(name, type) }
 
       OCCUPATION_ATTRIBUTES = {
-        occupation: YesNo,
-        occupation_case_number: String,
-        occupation_issue_date: MultiParamDate,
-        occupation_length: String,
-        occupation_is_current: YesNo,
-        occupation_court_name: String
+        occupation: :yes_no,
+        occupation_case_number: :string,
+        occupation_issue_date: :multi_param_date,
+        occupation_length: :string,
+        occupation_is_current: :yes_no,
+        occupation_court_name: :string
       }.freeze.each { |name, type| attribute(name, type) }
 
       FORCED_MARRIAGE_PROTECTION_ATTRIBUTES = {
-        forced_marriage_protection: YesNo,
-        forced_marriage_protection_case_number: String,
-        forced_marriage_protection_issue_date: MultiParamDate,
-        forced_marriage_protection_length: String,
-        forced_marriage_protection_is_current: YesNo,
-        forced_marriage_protection_court_name: String
+        forced_marriage_protection: :yes_no,
+        forced_marriage_protection_case_number: :string,
+        forced_marriage_protection_issue_date: :multi_param_date,
+        forced_marriage_protection_length: :string,
+        forced_marriage_protection_is_current: :yes_no,
+        forced_marriage_protection_court_name: :string
       }.freeze.each { |name, type| attribute(name, type) }
 
       RESTRAINING_ATTRIBUTES = {
-        restraining: YesNo,
-        restraining_case_number: String,
-        restraining_issue_date: MultiParamDate,
-        restraining_length: String,
-        restraining_is_current: YesNo,
-        restraining_court_name: String
+        restraining: :yes_no,
+        restraining_case_number: :string,
+        restraining_issue_date: :multi_param_date,
+        restraining_length: :string,
+        restraining_is_current: :yes_no,
+        restraining_court_name: :string
       }.freeze.each { |name, type| attribute(name, type) }
 
       INJUNCTIVE_ATTRIBUTES = {
-        injunctive: YesNo,
-        injunctive_case_number: String,
-        injunctive_issue_date: MultiParamDate,
-        injunctive_length: String,
-        injunctive_is_current: YesNo,
-        injunctive_court_name: String
+        injunctive: :yes_no,
+        injunctive_case_number: :string,
+        injunctive_issue_date: :multi_param_date,
+        injunctive_length: :string,
+        injunctive_is_current: :yes_no,
+        injunctive_court_name: :string
       }.freeze.each { |name, type| attribute(name, type) }
 
       UNDERTAKING_ATTRIBUTES = {
-        undertaking: YesNo,
-        undertaking_case_number: String,
-        undertaking_issue_date: MultiParamDate,
-        undertaking_length: String,
-        undertaking_is_current: YesNo,
-        undertaking_court_name: String
+        undertaking: :yes_no,
+        undertaking_case_number: :string,
+        undertaking_issue_date: :multi_param_date,
+        undertaking_length: :string,
+        undertaking_is_current: :yes_no,
+        undertaking_court_name: :string
       }.freeze.each { |name, type| attribute(name, type) }
 
       # rubocop:disable Lint/AmbiguousOperator

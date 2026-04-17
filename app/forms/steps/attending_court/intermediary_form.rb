@@ -7,7 +7,7 @@ module Steps
       has_one_association :court_arrangement
       yes_no_attribute :intermediary_help, reset_when_no: [:intermediary_help_details]
 
-      attribute :intermediary_help_details, String
+      attribute :intermediary_help_details, :string
 
       validates_presence_of :intermediary_help_details, if: -> { intermediary_help&.yes? }
     end

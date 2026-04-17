@@ -1,7 +1,7 @@
 module Steps
   module OtherParty
     class ChildrenCohabitOtherForm < BaseForm
-      attribute :cohabit_with_other, YesNo
+      attribute :cohabit_with_other, :yes_no
 
       validates_inclusion_of :cohabit_with_other, in: GenericYesNo.values
 

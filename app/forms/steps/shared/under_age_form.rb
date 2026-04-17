@@ -1,7 +1,7 @@
 module Steps
   module Shared
     class UnderAgeForm < BaseForm
-      attribute :under_age, Boolean
+      attribute :under_age, :boolean
 
       validates_presence_of :under_age
 

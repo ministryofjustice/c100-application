@@ -15,8 +15,8 @@ module MiamExemptionsForm
       self.attribute_name = attribute_name
       self.allowed_values = value_object.string_values
 
-      attribute attribute_name, Array[String]
-      attribute :exemptions_collection, Array[String]
+      attribute attribute_name, :string_array
+      attribute :exemptions_collection, :string_array
     end
   end
 
@@ -25,7 +25,7 @@ module MiamExemptionsForm
   # Needed to make the revealing check boxes work nice with errors, etc.
   #
   def exemptions_collection
-    super | public_send(self.class.attribute_name)
+    Array(super) | Array(public_send(self.class.attribute_name))
   end
 
   def exemptions_collection=(values)
@@ -47,7 +47,12 @@ module MiamExemptionsForm
   end
 
   def selected_options
-    exemptions_collection & self.class.allowed_values
+    puts "exemptions_collection: #{exemptions_collection.inspect}"
+    puts "allowed_values: #{self.class.allowed_values.inspect}"
+
+    puts exemptions_collection.map(&:class)
+    puts self.class.allowed_values.map(&:class)
+    exemptions_collection & Array(self.class.allowed_values)
   end
 
   def filtered_groups

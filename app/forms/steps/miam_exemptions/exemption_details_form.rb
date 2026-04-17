@@ -1,7 +1,7 @@
 module Steps
   module MiamExemptions
     class ExemptionDetailsForm < BaseForm
-      attribute :exemption_details, String
+      attribute :exemption_details, :string
 
       private
 

@@ -5,7 +5,7 @@ module Steps
 
       yes_no_attribute :protection_orders, reset_when_no: [:protection_orders_details]
 
-      attribute :protection_orders_details, String
+      attribute :protection_orders_details, :string
 
       validates_presence_of :protection_orders_details, if: -> { protection_orders&.yes? }
     end

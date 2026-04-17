@@ -1,9 +1,9 @@
 module Steps
   module Application
     class ExistingCourtOrderForm < BaseForm
-      attribute :existing_court_order, YesNo
-      attribute :court_order_case_number, String
-      attribute :court_order_expiry_date, MultiParamDate
+      attribute :existing_court_order, :yes_no
+      attribute :court_order_case_number, :string
+      attribute :court_order_expiry_date, :multi_param_date
 
       validates_inclusion_of :existing_court_order, in: GenericYesNo.values
       validates_presence_of :court_order_expiry_date, if: :date_entered?

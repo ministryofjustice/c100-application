@@ -1,9 +1,9 @@
 module Steps
   module Application
     class PaymentForm < BaseForm
-      attribute :payment_type, String
-      attribute :hwf_reference_number, StrippedString
-      attribute :solicitor_account_number, StrippedString
+      attribute :payment_type, :string
+      attribute :hwf_reference_number, :stripped_string
+      attribute :solicitor_account_number, :stripped_string
 
       validates_inclusion_of :payment_type, in: :choices, if: :c100_application
 

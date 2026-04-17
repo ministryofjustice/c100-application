@@ -6,7 +6,7 @@ module Steps
       yes_no_attribute :international_request,
                        reset_when_no: [:international_request_details]
 
-      attribute :international_request_details, String
+      attribute :international_request_details, :string
 
       validates_presence_of :international_request_details, if: -> { international_request&.yes? }
     end

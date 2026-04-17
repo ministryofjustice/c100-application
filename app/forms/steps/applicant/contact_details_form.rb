@@ -3,12 +3,12 @@ module Steps
     class ContactDetailsForm < BaseForm
       include ActiveModel::Validations::Callbacks
 
-      attribute :email, StrippedString
-      attribute :phone_number, StrippedString
-      attribute :voicemail_consent, YesNo
-      attribute :email_provided, YesNo
-      attribute :phone_number_provided, YesNo
-      attribute :phone_number_not_provided_reason, StrippedString
+      attribute :email, :stripped_string
+      attribute :phone_number, :stripped_string
+      attribute :voicemail_consent, :yes_no
+      attribute :email_provided, :yes_no
+      attribute :phone_number_provided, :yes_no
+      attribute :phone_number_not_provided_reason, :stripped_string
 
       # Note: we validate presence of these fields, but allow the applicant to enter
       # free text in case they do not want to disclose their phone or email address.

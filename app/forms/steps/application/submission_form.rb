@@ -1,8 +1,8 @@
 module Steps
   module Application
     class SubmissionForm < BaseForm
-      attribute :submission_type, String
-      attribute :receipt_email, NormalisedEmail
+      attribute :submission_type, :string
+      attribute :receipt_email, :normalised_email
 
       validates :receipt_email, email: true, allow_blank: true
 

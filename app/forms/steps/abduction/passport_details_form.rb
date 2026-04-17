@@ -5,9 +5,9 @@ module Steps
 
       has_one_association :abduction_detail
 
-      attribute :children_multiple_passports, YesNo
-      attribute :passport_possession, Array[String]
-      attribute :passport_possession_other_details, String
+      attribute :children_multiple_passports, :yes_no
+      attribute :passport_possession, :string_array
+      attribute :passport_possession_other_details, :string
 
       validates_inclusion_of :children_multiple_passports, in: GenericYesNo.values
       validates_presence_of  :passport_possession_other_details, if: :passport_possession_other?

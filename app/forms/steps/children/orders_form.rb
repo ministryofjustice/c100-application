@@ -1,7 +1,7 @@
 module Steps
   module Children
     class OrdersForm < BaseForm
-      attribute :orders, Array[String]
+      attribute :orders, :string_array
 
       validate :at_least_one_order_validation
 

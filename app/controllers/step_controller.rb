@@ -78,12 +78,11 @@ class StepController < ApplicationController
   end
 
   def form_attribute_names(form_class)
-    form_class.attribute_set.map do |attr|
-      attr_name = attr.name
-      primitive = attr.primitive.to_s
+    form_class.attribute_names.map do |attr_name|
+      type = form_class.attribute_types[attr_name]
 
       # Avoid having to declare collection attributes `Array[String]` in permitted params.
-      case primitive
+      case type.to_s
       when 'Array'
         [attr_name, attr_name => []]
       else

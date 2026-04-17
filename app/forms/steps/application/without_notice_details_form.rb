@@ -1,11 +1,11 @@
 module Steps
   module Application
     class WithoutNoticeDetailsForm < BaseForm
-      attribute :without_notice_details, String
-      attribute :without_notice_frustrate, YesNo
-      attribute :without_notice_frustrate_details, String
-      attribute :without_notice_impossible, YesNo
-      attribute :without_notice_impossible_details, String
+      attribute :without_notice_details, :string
+      attribute :without_notice_frustrate, :yes_no
+      attribute :without_notice_frustrate_details, :string
+      attribute :without_notice_impossible, :yes_no
+      attribute :without_notice_impossible_details, :string
 
       validates_presence_of  :without_notice_details
 

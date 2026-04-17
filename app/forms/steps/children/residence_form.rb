@@ -1,7 +1,7 @@
 module Steps
   module Children
     class ResidenceForm < BaseForm
-      attribute :person_ids, Array[String]
+      attribute :person_ids, :string_array
 
       validate :at_least_one_person_validation
 

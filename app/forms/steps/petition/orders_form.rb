@@ -1,8 +1,8 @@
 module Steps
   module Petition
     class OrdersForm < BaseForm
-      attribute :orders, Array[String]
-      attribute :orders_collection, Array[String]
+      attribute :orders, :string_array
+      attribute :orders_collection, :string_array
 
       validate :at_least_one_order_validation
       validate :at_least_one_prohibited_step, if: lambda {

@@ -1,10 +1,10 @@
 module Steps
   module Application
     class UrgentHearingDetailsForm < BaseForm
-      attribute :urgent_hearing_details, String
-      attribute :urgent_hearing_when, String
-      attribute :urgent_hearing_short_notice, YesNo
-      attribute :urgent_hearing_short_notice_details, String
+      attribute :urgent_hearing_details, :string
+      attribute :urgent_hearing_when, :string
+      attribute :urgent_hearing_short_notice, :yes_no
+      attribute :urgent_hearing_short_notice_details, :string
 
       validates_presence_of :urgent_hearing_details,
                             :urgent_hearing_when

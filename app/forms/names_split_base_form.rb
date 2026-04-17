@@ -1,7 +1,7 @@
 class NamesSplitBaseForm < BaseForm
-  attribute :names_attributes, Hash
-  attribute :new_first_name, StrippedString
-  attribute :new_last_name, StrippedString
+  attribute :names_attributes, :hash_value
+  attribute :new_first_name, :stripped_string
+  attribute :new_last_name, :stripped_string
 
   validates_presence_of :new_first_name, :new_last_name, if: :first_record?
 

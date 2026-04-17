@@ -3,7 +3,7 @@ module Steps
     class PrivacyKnownForm < BaseForm
       include ActiveModel::Validations::Callbacks
 
-      attribute :privacy_known, YesNoUnknown
+      attribute :privacy_known, :yes_no_unknown
 
       validates_inclusion_of :privacy_known, in: GenericYesNoUnknown.values
 

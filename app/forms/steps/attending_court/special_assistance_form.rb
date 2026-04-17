@@ -5,7 +5,7 @@ module Steps
       setup_attributes_for SpecialAssistance, attribute_name: :special_assistance
 
       # any other attributes
-      attribute :special_assistance_details, String
+      attribute :special_assistance_details, :string
     end
   end
 end

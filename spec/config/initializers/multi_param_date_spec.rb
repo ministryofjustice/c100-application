@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe MultiParamDate do
-  subject { described_class.build(MultiParamDate) }
+RSpec.describe MultiParamDateType do
+  subject { described_class.new }
 
-  let(:coerced_value) { subject.coerce(value) }
+  let(:coerced_value) { subject.cast(value) }
 
   describe 'when value is already a date' do
     let(:value) { Date.yesterday }

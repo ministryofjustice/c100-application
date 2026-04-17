@@ -1,7 +1,7 @@
 module Steps
   module AbuseConcerns
     class QuestionForm < BaseAbuseForm
-      attribute :answer, YesNo
+      attribute :answer, :yes_no
 
       validates_inclusion_of :answer, in: GenericYesNo.values
 

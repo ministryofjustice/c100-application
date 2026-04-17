@@ -5,9 +5,9 @@ module Steps
 
       has_one_association :abduction_detail
 
-      attribute :previous_attempt_details, String
-      attribute :previous_attempt_agency_involved, YesNo
-      attribute :previous_attempt_agency_details, String
+      attribute :previous_attempt_details, :string
+      attribute :previous_attempt_agency_involved, :yes_no
+      attribute :previous_attempt_agency_details, :string
 
       validates_presence_of  :previous_attempt_details
       validates_presence_of  :previous_attempt_agency_details, if: -> { previous_attempt_agency_involved&.yes? }

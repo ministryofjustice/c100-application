@@ -6,7 +6,7 @@ module Steps
       yes_no_attribute :international_resident,
                        reset_when_no: [:international_resident_details]
 
-      attribute :international_resident_details, String
+      attribute :international_resident_details, :string
 
       validates_presence_of :international_resident_details, if: -> { international_resident&.yes? }
     end

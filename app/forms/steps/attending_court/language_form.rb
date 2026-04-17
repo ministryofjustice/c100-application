@@ -5,9 +5,9 @@ module Steps
       setup_attributes_for LanguageHelp, attribute_name: :language_options
 
       # any other attributes
-      attribute :language_interpreter_details, String
-      attribute :sign_language_interpreter_details, String
-      attribute :welsh_language_details, String
+      attribute :language_interpreter_details, :string
+      attribute :sign_language_interpreter_details, :string
+      attribute :welsh_language_details, :string
 
       validates_presence_of :language_interpreter_details,
                             if: :language_interpreter?

@@ -1,7 +1,7 @@
 module Steps
   module Opening
     class ContinueApplicationForm < BaseForm
-      attribute :platform, StrippedString
+      attribute :platform, :stripped_string
 
       validates_inclusion_of :platform, in: ApplicationPlatform.values.map(&:to_s), if: -> { PrlChange.changes_apply? }
       validates :platform, presence: true,  unless: -> { PrlChange.changes_apply? }

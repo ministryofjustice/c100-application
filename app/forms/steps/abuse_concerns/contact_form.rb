@@ -1,8 +1,8 @@
 module Steps
   module AbuseConcerns
     class ContactForm < BaseForm
-      attribute :concerns_contact_type, String
-      attribute :concerns_contact_other, YesNo
+      attribute :concerns_contact_type, :string
+      attribute :concerns_contact_other, :yes_no
 
       def self.choices
         ConcernsContactType.string_values

@@ -1,11 +1,11 @@
 module Steps
   module Applicant
     class PersonalDetailsForm < BaseForm
-      attribute :has_previous_name, YesNo
-      attribute :previous_name, StrippedString
-      attribute :gender, GenderAttribute
-      attribute :dob, MultiParamDate
-      attribute :birthplace, StrippedString
+      attribute :has_previous_name, :yes_no
+      attribute :previous_name, :stripped_string
+      attribute :gender, :gender_attribute
+      attribute :dob, :multi_param_date
+      attribute :birthplace, :stripped_string
 
       validates_inclusion_of :has_previous_name, in: GenericYesNo.values
       validates_presence_of  :previous_name, if: -> { has_previous_name&.yes? }
