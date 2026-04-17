@@ -1,9 +1,12 @@
 class BaseForm
   class C100ApplicationNotFound < RuntimeError; end
 
+  include ActiveModel::Model
+  include ActiveModel::Attributes
   include ActiveModel::Validations
   include FormAttributeMethods
   extend ActiveModel::Callbacks
+  include NullifyBlank
 
   attr_accessor :c100_application
   attr_accessor :record
@@ -12,8 +15,11 @@ class BaseForm
   # and is needed for some functionality to work, i.e. acts_as_gov_uk_date
   define_model_callbacks :initialize
 
-  def initialize(*)
-    run_callbacks(:initialize) { super }
+  def initialize(attributes = {})
+    run_callbacks(:initialize) do
+      super()
+      assign_attributes(attributes || {})
+    end
   end
 
   # Initialize a new form object given an AR model, setting its attributes
@@ -55,6 +61,10 @@ class BaseForm
 
   def new_record?
     true
+  end
+
+  def attributes
+    attributes_map
   end
 
   private

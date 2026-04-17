@@ -1,7 +1,7 @@
 module Steps
   module Alternatives
     class CourtForm < BaseForm
-      attribute :court_acknowledgement, Boolean
+      attribute :court_acknowledgement, :boolean
 
       validates_presence_of :court_acknowledgement
 

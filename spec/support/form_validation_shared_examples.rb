@@ -149,6 +149,9 @@ RSpec.shared_examples 'a permission yes-no question form' do |options|
       end
 
       it 'is equal to the yes-no attribute' do
+        puts "subject: #{subject.question_name.inspect}"
+        puts "question_attribute: #{question_attribute.inspect}"
+        puts "attributes: #{subject.attributes.inspect}"
         expect(subject.question_name).to eq(question_attribute)
       end
     end

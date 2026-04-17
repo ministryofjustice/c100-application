@@ -35,6 +35,10 @@ module Steps
 
       private
 
+      def dob_unknown?
+        !!dob_unknown
+      end
+
       def date_entered?
         return false if input_dob.nil?
 

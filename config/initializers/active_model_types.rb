@@ -5,13 +5,17 @@ class HashValueType < ActiveModel::Type::Value
 end
 
 class StrictBooleanType < ActiveModel::Type::Boolean
+  TRUTHY = [true, "true", "1", 1, "yes", :yes].freeze
+  FALSY  = [false, "false", "0", 0, "no", :no].freeze
+
   def cast(value)
-    case value
-    when true, "true", "1", 1
-      true
-    when false, "false", "0", 0
-      false
-    end
+    return true  if TRUTHY.include?(value)
+    return false if FALSY.include?(value)
+    nil
+  end
+
+  def cast_value(value)
+    cast(value)
   end
 end
 
@@ -94,13 +98,24 @@ end
 
 class MultiParamDateType < ActiveModel::Type::Date
   def cast(value)
-    return value unless value.is_a?(Array)
+    case value
+    when Hash
+      parts = value.values_at(1, 2, 3) || value.values_at("1", "2", "3")
+      return if parts.any?(&:blank?)
+      return if parts.map(&:to_i).all?(&:zero?)
 
-    set_values = value.values_at(1, 2, 3)
-    return if set_values.any?(&:nil?)
-    return if set_values.all?(&:zero?)
+      Date.new(*parts.map(&:to_i))
 
-    Date.new(*set_values)
+    when Array
+      parts = value.values_at(1, 2, 3)
+      return if parts.any?(&:nil?)
+      return if parts.all?(&:zero?)
+
+      Date.new(*parts)
+
+    else
+      value
+    end
   rescue ArgumentError
     nil
   end

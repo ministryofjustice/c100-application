@@ -18,7 +18,7 @@ module SingleQuestionForm
 
     def expand_attributes(attributes)
       attributes.map do |obj|
-        obj.is_a?(:symbol) ? obj : obj.attribute_names
+        obj.is_a?(Symbol) ? obj : obj.attribute_names
       end.flatten.uniq
     end
   end

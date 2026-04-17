@@ -34,7 +34,8 @@ module Steps
       end
 
       def convert_to_boolean(value)
-        [true, 't'].include?(value) ? 'yes' : 'no'
+        puts "value: #{value}"
+        [true, 't', 'yes'].include?(value) ? 'yes' : 'no'
       end
     end
   end
