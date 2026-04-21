@@ -106,6 +106,82 @@ def abduction_risk_details_page
   @abduction_risk_details_page ||= AbductionRiskDetailsPage.new
 end
 
+def abuse_concerns_page
+  @abuse_concerns_page ||= AbuseConcernsPage.new
+end
+
+def abuse_concerns_children_info_page
+  @abuse_concerns_children_info_page ||= AbuseConcernsChildrenInfoPage.new
+end
+
+def abuse_concerns_question_page
+  @abuse_concerns_question_page ||= AbuseConcernsQuestionPage.new
+end
+
+def abuse_concerns_physical_page
+  @abuse_concerns_physical_page ||= AbuseConcernsPhysicalPage.new
+end
+
+def abuse_concerns_financial_page
+  @abuse_concerns_financial_page ||= AbuseConcernsFinancialPage.new
+end
+
+def abuse_concerns_financial_details_page
+  @abuse_concerns_financial_details_page ||= AbuseConcernsFinancialDetailsPage.new
+end
+
+def abuse_concerns_psychological_page
+  @abuse_concerns_psychological_page ||= AbuseConcernsPsychologicalPage.new
+end
+
+def abuse_concerns_emotional_page
+  @abuse_concerns_emotional_page ||= AbuseConcernsEmotionalPage.new
+end
+
+def abuse_concerns_children_other_page
+  @abuse_concerns_children_other_page ||= AbuseConcernsChildrenOtherPage.new
+end
+
+def abuse_concerns_children_other_details_page
+  @abuse_concerns_children_other_details_page ||= AbuseConcernsChildrenOtherDetailsPage.new
+end
+
+def abuse_concerns_applicant_info_page
+  @abuse_concerns_applicant_info_page ||= AbuseConcernsApplicantInfoPage.new
+end
+
+def abuse_concerns_applicant_question_page
+  @abuse_concerns_applicant_question_page ||= AbuseConcernsApplicantQuestionPage.new
+end
+
+def abuse_concerns_applicant_physical_page
+  @abuse_concerns_applicant_physical_page ||= AbuseConcernsApplicantPhysicalPage.new
+end
+
+def abuse_concerns_applicant_financial_page
+  @abuse_concerns_applicant_financial_page ||= AbuseConcernsApplicantFinancialPage.new
+end
+
+def abuse_concerns_applicant_psychological_page
+  @abuse_concerns_applicant_psychological_page ||= AbuseConcernsApplicantPsychologicalPage.new
+end
+
+def abuse_concerns_applicant_emotional_page
+  @abuse_concerns_applicant_emotional_page ||= AbuseConcernsApplicantEmotionalPage.new
+end
+
+def abuse_concerns_applicant_other_page
+  @abuse_concerns_applicant_other_page ||= AbuseConcernsApplicantOtherPage.new
+end
+
+def applicant_has_protection_court_order_page
+  @applicant_has_protection_court_order_page ||= ApplicantHasProtectionCourtOrderPage.new
+end
+
+def abuse_concerns_contact_page
+  @abuse_concerns_contact_page ||= AbuseConcernsContactPage.new
+end
+
 def safety_concern_substance_page
   @safety_concern_substance_page ||= SafetyConcernSubstancePage.new
 end
@@ -128,6 +204,10 @@ end
 
 def petition_playback_page
   @petition_playback_page ||= PetitionPlaybackPage.new
+end
+
+def petition_protection_page
+  @petition_protection_page ||= PetitionProtectionPage.new
 end
 
 def alternative_court_page

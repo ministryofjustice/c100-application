@@ -10,6 +10,7 @@ Feature: Testing C100 end to end
     And evidence "isn't" provided for the MIAM exemption
     And I have no safety concerns about the children
     And I ask the court to decide who the children live with and when
+    And I understand the process of going to court
     And I have tried all alternative ways to reach an agreement
     And I enter details for a "2" year old child
     And I state that the "Father" has parental responsibility for the child
@@ -83,71 +84,16 @@ Feature: Testing C100 end to end
     And evidence "is" provided for the MIAM exemption
     And I navigate the abduction risk journey
     And I have no concerns about drug, alcohol or substance abuse
-    Then I should see "You and the children"
-    And I click the "Continue" link
-    Then I should see "The children’s safety"
-    And I click the "Continue" link
-    Then I should see "Have the children ever been sexually abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have the children ever been physically abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have the children ever been financially abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the children’s financial abuse"
-    And I fill in "steps-abuse-concerns-details-form-behaviour-description-field" with "Details of the abuse"
-    And I fill in "steps-abuse-concerns-details-form-behaviour-start-field" with "It started a year ago"
-    And I choose "No" for all options on this page without continuing
-    And I fill in "steps-abuse-concerns-details-form-behaviour-stop-field" with "It stopped earlier this month"
-    And I click the "Continue" button
-    Then I should see "Have the children ever been psychologically abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have the children ever been emotionally abused by the respondent?"
-    And I choose "No"
-    Then I should see "Do you have any other safety or welfare concerns about the children?"
-    And I choose "Yes"
-    Then I should see "Other concerns about the children"
-    And I fill in "steps-abuse-concerns-details-form-behaviour-description-field" with "Description of safety concerns I have"
-    And I fill in "steps-abuse-concerns-details-form-behaviour-start-field" with "This started about a year ago"
-    And I choose "No" for all options on this page without continuing
-    And I fill in "steps-abuse-concerns-details-form-behaviour-stop-field" with "It stopped earlier this month"
-    And I click the "Continue" button
-    Then I should see "Your safety"
-    And I click the "Continue" link
-    Then I should see "Have you ever been sexually abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have you ever been physically abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have you ever been financially abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have you ever been psychologically abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have you ever been emotionally abused by the respondent?"
-    And I choose "No"
-    Then I should see "Do you have any other concerns about your welfare?"
-    And I choose "No"
-    Then I should see "Have you had or do you currently have any court orders made for your protection?"
-    And I choose "No"
-    Then I should see "Contact between the children and the other people in this application"
-    And I choose "No" for all options on this page
-    Then I should see "What are you asking the court to decide about the children involved?"
-    And I check "Decide who they live with and when"
-    And I click the "Continue" button
-    Then I should see "What you’re asking the court to decide about the children"
-    And I should see "You would like the court to:"
-    And I should see "Decide who they live with and when"
-    And I should see "This is known as a Child Arrangements Order."
-    And I click the "Continue" link
-    Then I should see "Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?"
-    And I click the radio button "Yes"
-    And I fill in "steps-petition-protection-form-protection-orders-details-field" with "This is what I want resolved"
-    And I click the "Continue" button
-    Then I should see "Going to court"
-    And I should see "What happens at court"
-    And I should see "Changing or enforcing an order"
-    And I should see "Representing yourself in court"
-    And I should see "Domestic abuse and child abuse"
-    And I check "I understand what’s involved if I decide to go to court"
-    And I click the "Continue" button
+    And I have no abuse or physical abuse concerns about the children
+    And I do have financial concerns about the children
+    And I have no psychological or emotional abuse concerns about the children
+    And I do have other abuse concerns about the children
+    And I don't have any safety concerns about myself
+    And I ask the court to decide who the children live with and when
+    And I ask the court to also decide "This is what I want resolved"
+    And I understand the process of going to court
+    And I enter details for a "2" year old child
+    Given debugger
     Then I should see "Enter the names of the children"
     And I fill in "First name(s)" with "Jane"
     And I fill in "Last name(s)" with "Doe Jnr"

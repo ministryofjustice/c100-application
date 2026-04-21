@@ -30,6 +30,92 @@ When(/^I navigate the MIAM exemption journey$/) do
   miam_exemptions_misc_page.submit_without_notice_hearing
 end
 
+And(/^I have no abuse or physical abuse concerns about the children$/) do
+  expect(abuse_concerns_page).to be_displayed
+  abuse_concerns_page.continue_to_next_step
+
+  expect(abuse_concerns_children_info_page).to be_displayed
+  abuse_concerns_children_info_page.continue_to_next_step
+
+  expect(abuse_concerns_question_page).to be_displayed
+  abuse_concerns_question_page.submit_no
+
+  expect(abuse_concerns_physical_page).to be_displayed
+  abuse_concerns_physical_page.submit_no
+end
+
+And(/^I do have financial concerns about the children$/) do
+  expect(abuse_concerns_financial_page).to be_displayed
+  abuse_concerns_financial_page.submit_yes
+
+  expect(abuse_concerns_financial_details_page).to be_displayed
+  abuse_concerns_financial_details_page.submit_concern_details(
+    concern_details: 'Details of the abuse',
+    behaviour_start: 'It started a year ago',
+    behaviour_stop: 'It stopped earlier this month',
+    asked_for_help: false,
+  )
+end
+
+And(/^I have no psychological or emotional abuse concerns about the children$/) do
+  expect(abuse_concerns_psychological_page).to be_displayed
+  abuse_concerns_psychological_page.submit_no
+
+  expect(abuse_concerns_emotional_page).to be_displayed
+  abuse_concerns_emotional_page.submit_no
+end
+
+And(/^I do have other abuse concerns about the children$/) do
+  expect(abuse_concerns_children_other_page).to be_displayed
+  abuse_concerns_children_other_page.submit_yes
+
+  expect(abuse_concerns_children_other_details_page).to be_displayed
+  abuse_concerns_children_other_details_page.submit_concern_details(
+    concern_details: 'Description of safety concerns I have',
+    behaviour_start: 'This started about a year ago',
+    behaviour_stop: 'It stopped earlier this month',
+    asked_for_help: false
+  )
+end
+
+And(/^I don't have any safety concerns about myself$/) do
+  expect(abuse_concerns_applicant_info_page).to be_displayed
+  abuse_concerns_applicant_info_page.continue_to_next_step
+
+  expect(abuse_concerns_applicant_question_page).to be_displayed
+  abuse_concerns_applicant_question_page.submit_no
+
+  expect(abuse_concerns_applicant_physical_page).to be_displayed
+  abuse_concerns_applicant_physical_page.submit_no
+
+  expect(abuse_concerns_applicant_financial_page).to be_displayed
+  abuse_concerns_applicant_financial_page.submit_no
+
+  expect(abuse_concerns_applicant_psychological_page).to be_displayed
+  abuse_concerns_applicant_psychological_page.submit_no
+
+  expect(abuse_concerns_applicant_emotional_page).to be_displayed
+  abuse_concerns_applicant_emotional_page.submit_no
+
+  expect(abuse_concerns_applicant_other_page).to be_displayed
+  abuse_concerns_applicant_other_page.submit_no
+
+  expect(applicant_has_protection_court_order_page).to be_displayed
+  applicant_has_protection_court_order_page.submit_no
+
+  expect(abuse_concerns_contact_page).to be_displayed
+  abuse_concerns_contact_page.submit_contact_details(
+    contact_type: 'no',
+    being_in_touch: 'no'
+  )
+end
+
+And(/^I ask the court to also decide "(.*)"$/) do |arg|
+  expect(petition_protection_page).to be_displayed
+  petition_protection_page.submit_yes(details: arg)
+end
+
+
 And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
   expect(miam_exemptions_reasons_page).to be_displayed
   if arg == 'is'
@@ -123,7 +209,9 @@ And('I ask the court to decide who the children live with and when') do
   expect(petition_playback_page.content.child_arrangements_order).to be_visible
   expect(petition_playback_page.content.child_arrangements_home).to be_visible
   petition_playback_page.continue_to_next_step
+end
 
+And('I understand the process of going to court') do
   expect(alternative_court_page).to be_displayed
   alternative_court_page.acknowledge_and_continue
 end
