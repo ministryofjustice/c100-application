@@ -329,6 +329,16 @@ en:
           body_info: The other people who will receive this application are known as the respondents.
           record_index: "Respondent %{index}"
           btn_add_another: Add another respondent
+      privacy_preferences:
+        edit:
+          page_title: "Keeping %{name}'s contact details private"
+          heading: "Keeping %{name}'s contact details private"
+          hint: For example, if you believe that the other people in the case pose a risk to you, to your children or to another person in the case.
+          lead_text: "Do you want to keep %{name}'s contact details private from the other people named in the application?"
+      refuge:
+        edit:
+          page_title: Is currently resident in a refuge?
+          heading: "Is %{name} currently resident in a refuge?"
       personal_details:
         edit:
           page_title: Respondent personal details
@@ -1677,6 +1687,12 @@ en:
         residence_history: Provide details and dates of all previous addresses for the last 5 years
       steps_applicant_has_solicitor_form:
         has_solicitor_options:
+          <<: *YESNO
+      steps_respondent_privacy_preferences_form:
+        are_contact_details_private_options:
+          <<: *YESNO
+      steps_respondent_refuge_form:
+        refuge_options:
           <<: *YESNO
       steps_respondent_personal_details_form:
         <<: *PERSONAL_DETAILS_FIELDS

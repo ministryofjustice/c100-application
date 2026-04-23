@@ -27,15 +27,32 @@ RSpec.describe C100App::RespondentDecisionTree do
   end
 
   context 'when the step is `names_finished`' do
-    let(:step_params) {{'names_finished' => 'anything'}}
+    let(:step_params) { { 'names_finished' => 'anything' } }
 
-    it 'goes to edit the details of the first respondent' do
-      expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: 1)
+    it 'goes to edit privacy preferences of the first respondent' do
+      expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: 1)
+    end
+
+    context 'when there is only one respondent' do
+      let(:c100_application) { instance_double(C100Application, respondent_ids: [1]) }
+
+      it 'goes to refuge step' do
+        expect(subject.destination).to eq(controller: :refuge, action: :edit, id: 1)
+      end
+    end
+  end
+
+  context 'when the step is `privacy_preferences`' do
+    let(:step_params) { { 'privacy_preferences' => 'anything' } }
+    let(:record) { 1 }
+
+    it 'goes to refuge step for the same respondent' do
+      expect(subject.destination).to eq(controller: :refuge, action: :edit, id: 1)
     end
   end
 
   context 'when the step is `personal_details`' do
-    let(:step_params) {{'personal_details' => 'anything'}}
+    let(:step_params) { { 'personal_details' => 'anything' } }
     let(:record) { double('Respondent', id: 1) }
 
     it 'goes to edit the first child relationship for the current record' do
@@ -44,7 +61,7 @@ RSpec.describe C100App::RespondentDecisionTree do
   end
 
   context 'when the step is `relationship`' do
-    let(:step_params) {{'relationship' => 'anything'}}
+    let(:step_params) { { 'relationship' => 'anything' } }
     let(:record) { double('Relationship', person: respondent, minor: child) }
 
     let(:respondent) { Respondent.new }
@@ -77,13 +94,13 @@ RSpec.describe C100App::RespondentDecisionTree do
   end
 
   context 'when the step is `contact_details`' do
-    let(:step_params) {{'contact_details' => 'anything'}}
+    let(:step_params) { { 'contact_details' => 'anything' } }
 
     context 'when there are remaining respondents' do
       let(:record) { double('Respondent', id: 1) }
 
-      it 'goes to edit the personal details of the next respondent' do
-        expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: 2)
+      it 'goes to edit the privacy preferences of the next respondent' do
+        expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: 2)
       end
     end
 

@@ -26,6 +26,42 @@ module Summary
                 Separator.new("#{name}_index_title", index:),
                 Separator.new(:c8_attached)
               ]
+            elsif person.are_contact_details_private == GenericYesNo::YES.to_s && person.type == 'Respondent'
+              [
+                Separator.new("#{name}_index_title", index:),
+                FreeTextAnswer.new(:person_full_name, person.full_name),
+                contact_details_privacy_preferences(person),
+                previous_name_answer(person),
+                Answer.new(:person_sex, person.gender),
+                DateAnswer.new(:person_dob, person.dob,
+                               show: respondents_only && person.dob_estimate.blank?),
+                DateAnswer.new(:person_dob_estimate, person.dob_estimate),
+                FreeTextAnswer.new(:person_birthplace, person.birthplace),
+                FreeTextAnswer.new(:person_address,
+                                   data_or_private(person, person.full_address, ContactDetails::ADDRESS.to_s),
+                                   show: true),
+                FreeTextAnswer.new(:person_residence_requirement_met, data_or_private(person, person.residence_requirement_met, ContactDetails::ADDRESS.to_s)),
+                FreeTextAnswer.new(
+                  :person_residence_history,
+                  person.residence_history.present? ? data_or_private(person, person.residence_history,
+                                                                      ContactDetails::ADDRESS.to_s) : nil,
+                  show: person.residence_requirement_met == 'no'
+                ),
+                FreeTextAnswer.new(:person_email,
+                                   data_or_private(person, email_answer(person), ContactDetails::EMAIL.to_s)),
+                FreeTextAnswer.new(:person_phone_number,
+                                   data_or_private(
+                                     person, phone_number_answer(person), ContactDetails::PHONE_NUMBER.to_s
+                                   )),
+                Answer.new(:person_voicemail_consent, person.voicemail_consent),
+                FreeTextAnswer.new(
+                  :person_relationship_to_children,
+                  RelationshipsPresenter.new(c100_application).relationship_to_children(
+                    person, show_person_name: false
+                  )
+                ),
+                Partial.row_blank_space,
+              ]
             else
               [
                 Separator.new("#{name}_index_title", index:),
@@ -109,7 +145,7 @@ module Summary
 
         return I18n.t('dictionary.c8_attached') if
           person.are_contact_details_private == GenericYesNo::YES.to_s &&
-          person.contact_details_private.include?(type)
+          (person.type != 'Applicant' || person.contact_details_private.include?(type))
 
         data
       end
@@ -124,7 +160,7 @@ module Summary
         return [] unless person.are_contact_details_private.present?
 
         if PrivacyChange.changes_apply?
-          if person.type == 'OtherParty'
+          if %w[OtherParty Respondent].include?(person.type)
             [
               FreeTextAnswer.new(:person_contact_details_private,
                                  person.are_contact_details_private.try(:capitalize))

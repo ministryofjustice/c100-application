@@ -51,7 +51,8 @@ module Summary
 
     def generate_c8_form(mode = :pdf)
       if PrivacyChange.changes_apply?
-        return unless c100_application.confidentiality_enabled? || c100_application.other_confidentiality_enabled?
+        return unless c100_application.confidentiality_enabled? || c100_application.other_confidentiality_enabled? ||
+                      c100_application.respondent_confidentiality_enabled?
       else
         return unless c100_application.confidentiality_enabled?
       end

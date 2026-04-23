@@ -7,7 +7,15 @@ module C100App
       when :add_another_name
         edit(:names)
       when :names_finished
-        edit(:personal_details, id: next_respondent_id)
+        if c100_application.respondent_ids.count > 1
+          edit(:privacy_preferences, id: next_respondent_id)
+        else
+          edit(:refuge, id: next_respondent_id)
+        end
+      when :privacy_preferences
+        edit(:refuge, id: record)
+      when :refuge
+        edit(:personal_details, id: record)
       when :personal_details
         edit_first_child_relationships
       when :relationship
@@ -27,7 +35,7 @@ module C100App
 
     def after_contact_details
       if next_respondent_id
-        edit(:personal_details, id: next_respondent_id)
+        edit(:privacy_preferences, id: next_respondent_id)
       else
         edit(:has_other_parties)
       end
