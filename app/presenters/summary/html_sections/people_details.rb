@@ -120,8 +120,7 @@ module Summary
                              person.are_contact_details_private.try(:capitalize),
                              change_path: edit_steps_respondent_privacy_preferences_path(person),
                              i18n_opts: {name: person.full_name}),
-          Answer.new(:respondent_refuge, person.refuge,
-                             change_path: edit_steps_respondent_refuge_path(person)),
+          Answer.new(:respondent_refuge, person.refuge, change_path: edit_steps_respondent_refuge_path(person)),
         ]
       end
 

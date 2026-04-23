@@ -1,7 +1,6 @@
 module Steps
   module Respondent
     class PrivacyPreferencesForm < BaseForm
-
       attribute :are_contact_details_private, YesNo
 
       validates_inclusion_of :are_contact_details_private, in: GenericYesNo.values
