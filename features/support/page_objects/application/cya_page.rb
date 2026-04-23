@@ -13,9 +13,19 @@ class CYAPage < BasePage
     row :child_protection_cases, '#child_protection_cases'
   end
 
+  section :mediation_voucher, CYAGroup, 'dl#mediation_voucher' do
+    row :voucher_scheme, '#mediation_voucher_scheme'
+  end
+
+  section :miam_requirement, CYAGroup, 'dl#miam_requirement' do
+    row :miam_attended, '#miam_attended'
+    row :miam_exemption_claim, '#miam_exemption_claim'
+  end
+
   section :miam_exemptions, CYAGroup, 'dl#miam_exemptions' do
     row :exemptions_misc, '#miam_exemptions_misc'
     row :exemption_details, '#exemption_details'
+    row :attach_evidence, '#attach_evidence'
     row :exemption, '#exemption'
   end
 
@@ -31,6 +41,12 @@ class CYAPage < BasePage
   end
 
   section :children_abuse_details, CYAGroup, 'dl#children_abuse_details' do
+    row :abuse_sexual, '#abuse_sexual'
+    row :abuse_physical, '#abuse_physical'
+    row :abuse_financial, '#abuse_financial'
+    row :abuse_psychological, '#abuse_psychological'
+    row :abuse_emotional, '#abuse_emotional'
+    row :abuse_other, '#abuse_other'
   end
 
   section :nature_of_application, CYAGroup, 'dl#nature_of_application' do

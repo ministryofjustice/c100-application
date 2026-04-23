@@ -265,6 +265,16 @@ And("I don't have any other children") do
   has_other_children_page.submit_no
 end
 
+And(/^I "(do|don't)" have a solicitor$/) do |arg|
+  expect(applicant_has_solicitor_page).to be_displayed
+
+  if arg == 'do'
+    applicant_has_solicitor_page.submit_yes
+  else
+    applicant_has_solicitor_page.submit_no
+  end
+end
+
 And("I enter the details for a solicitor") do
   expect(applicant_has_solicitor_page).to be_displayed
   applicant_has_solicitor_page.submit_yes
@@ -329,6 +339,11 @@ And("the child lives with {string}") do |person|
   child_residence_page.submit_residence(person)
 end
 
+And(/^there "(has|hasn't)" been any court proceedings about the children$/) do |arg|
+  expect(previous_proceedings_page).to be_displayed
+  previous_proceedings_page.submit(arg == 'has' ? 'yes' : 'no')
+end
+
 And("I enter details of previous court proceedings") do
   expect(previous_proceedings_page).to be_displayed
   previous_proceedings_page.submit_yes
@@ -367,6 +382,17 @@ And("I navigate the international issues journey") do
   international_request_page.submit_no
 end
 
+And(/^there isn't any international issues in this application$/) do
+  expect(international_resident_page).to be_displayed
+  international_resident_page.submit_no
+
+  expect(international_jurisdiction_page).to be_displayed
+  international_jurisdiction_page.submit_no
+
+  expect(international_request_page).to be_displayed
+  international_request_page.submit_no
+end
+
 And("I give my reason for the application as {string}") do |reason|
   expect(application_details_page).to be_displayed
   application_details_page.submit_details(reason)
@@ -386,10 +412,17 @@ And("I have no issues attending court") do
 
   expect(attending_court_special_arrangements_page).to be_displayed
   attending_court_special_arrangements_page.continue_without_filling
+end
 
+And(/^I don't require special assistance when attending court$/) do
+  expect(attending_court_special_assistance_page).to be_displayed
+  attending_court_special_assistance_page.continue_without_filling
+end
+
+And(/^I require special assistance when attending court "(.*)"$/) do |arg|
   expect(attending_court_special_assistance_page).to be_displayed
   attending_court_special_assistance_page.submit_special_assistance(
-    special_assistance_details: 'We need lots of light'
+    special_assistance_details: arg
   )
 end
 

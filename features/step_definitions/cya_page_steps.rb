@@ -4,15 +4,8 @@ And(/^I should see the children "(are|aren't)" involved in any emergency protect
 end
 
 And(/^I should see they "(have|haven't)" been to mediation through the mediation voucher scheme$/) do |arg|
-  within('#mediation_voucher') do
-    within('#mediation_voucher_scheme') do
-      if arg == "haven't"
-        expect(page).to have_content("No")
-      elsif arg == "have"
-        expect(page).to have_content("Yes")
-      end
-    end
-  end
+  answer = (arg == "have" ? "Yes" : "No")
+  expect(cya_page.mediation_voucher.voucher_scheme.answer).to eq(answer)
 end
 
 And(/^I should see they haven't attended MIAM$/) do
@@ -25,6 +18,11 @@ And(/^I should see they have attended MIAM$/) do
   within('#miam_attended') do
     expect(page).to have_content("Have you attended a Mediation Information and Assessment Meeting (MIAM)? Yes")
   end
+end
+
+And(/^I should see they "(have|haven't)" attended a MIAM$/) do |arg|
+  answer = (arg == "have" ? "Yes" : "No")
+  expect(cya_page.miam_requirement.miam_attended.answer).to eq(answer)
 end
 
 And(/^I should see they have a document signed by the mediator$/) do
@@ -42,18 +40,37 @@ And(/^I should see they "(have|haven't)" got safety concerns about the children$
   expect(cya_page.safety_concerns.other_abuse.answer).to eq(answer)
 end
 
-And(/^I should see they have safety concerns with the children about: "([^"]*)"$/) do |list|
-  concerns = list.downcase.split(',').map(&:strip)
-
-  within('#children_abuse_details') do
-    all("dt.govuk-summary-list__key").each do |dt_element|
-      concern_text = dt_element.text.downcase
-      next unless concerns.any? { |concern| concern_text.include?(concern) }
-
-      dd_element = dt_element.sibling("dd.govuk-summary-list__value", visible: :all)
-      expect(dd_element).to have_text(/#{Regexp.escape('yes')}/i)
-    end
+def check_safety_concerns(expected_yes_concerns, safety_concerns)
+  # Check that the provided answers equal "Yes"
+  expected_yes_concerns.each do |expected_concern|
+    matching_concern = safety_concerns.keys.find { |question| question.include?(expected_concern) }
+    expect(safety_concerns[matching_concern]).to eq("Yes"), "Expected concern does not equal 'Yes': #{expected_concern}"
   end
+
+  # Check that all remaining concerns equal "No"
+  safety_concerns.each do |question, answer|
+    next if expected_yes_concerns.include?(question)
+    expect(answer).to eq("No"), "Expected concern does not equal 'No': #{question}"
+  end
+end
+
+
+And(/^I should see they have safety concerns with the children about: "([^"]*)"$/) do |list|
+  expected_yes_concerns = list.downcase.split(',').map(&:strip)
+  concern = cya_page.children_abuse_details
+
+  safety_concerns = {
+    "abduction" => cya_page.safety_concerns.risk_of_abduction.answer,
+    "drug, alcohol or substance abuse" => cya_page.safety_concerns.substance_abuse.answer,
+    concern.abuse_sexual.question.downcase => concern.abuse_sexual.answer,
+    concern.abuse_physical.question.downcase => concern.abuse_physical.answer,
+    concern.abuse_financial.question.downcase => concern.abuse_financial.answer,
+    concern.abuse_psychological.question.downcase => concern.abuse_psychological.answer,
+    concern.abuse_emotional.question.downcase => concern.abuse_emotional.answer,
+    concern.abuse_other.question.downcase => concern.abuse_other.answer
+  }
+
+  check_safety_concerns(expected_yes_concerns, safety_concerns)
 end
 
 And(/^I should see they have safety concerns with themselves about: "([^"]*)"$/) do |list|
@@ -721,13 +738,10 @@ And(/^I should see the details provided for the exemption are "([^"]*)"$/) do |a
 end
 
 And(/^I should see an attachment presenting MIAM exemption evidence "(is|isn't)" present$/) do |arg|
-  within('#miam_exemptions') do
-    within('#exemption') do
-      if arg == "is"
-        expect(page).to have_content("Attached document")
-      elsif arg == "isn't"
-        expect(page).not_to have_content("Attached document")
-      end
-    end
+  answer = (arg == "is" ? "Yes" : "No")
+  if arg == "is"
+    expect(cya_page.miam_exemptions.exemption.answer).to eq("Attached document\nimage.jpg")
+  elsif arg == "isn't"
+    expect(cya_page.miam_exemptions.exemption.answer).to eq("")
   end
 end
