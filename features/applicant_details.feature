@@ -1,6 +1,6 @@
 Feature: Add an applicant to the application
   Background:
-    # We need at least 1 child as a precondition for this journey
+    # We need at least 1 child as a precondition for this journey  
     Given I have started an application
     And I have entered a child with first name "John" and last name "Doe Junior"
     Then I visit "steps/applicant/names"
@@ -24,9 +24,7 @@ Feature: Add an applicant to the application
     And I should see a "Name must not contain special characters" link to "#steps-applicant-names-split-form-new-last-name-field-error"
 
     # Fix validation errors and continue
-    Then I fill in "First name(s)" with "John"
-    And I fill in "Last name(s)" with "Doe Senior"
-    When I click the "Continue" button
+    When applicant names page I submit names "John" and "Doe Senior"
     Then I should see "Do the other people named in this application (the respondents) know any of your contact details?"
 
     # Provoke privacy known validation errors
@@ -35,7 +33,7 @@ Feature: Add an applicant to the application
     And I should see a "Select an option" link to "#steps-applicant-privacy-known-form-privacy-known-field-error"
 
     # Fix privacy known validation errors and continue
-    And I choose "Yes"
+    When applicant privacy known page I submit "yes"
     Then I should see "Do you want to keep your contact details private"
 
     # Provoke privacy preferences validation errors
@@ -45,7 +43,7 @@ Feature: Add an applicant to the application
     And I should see a "Select an option" link to "#steps-applicant-privacy-preferences-form-are-contact-details-private-field-error"
 
     # Fix privacy preferences validation errors and continue
-    When I choose "No"
+    When applicant privacy preferences page I submit "no"
     Then I should see "Are you currently resident in a refuge?"
 
     # Provoke refuge validation error
@@ -54,7 +52,7 @@ Feature: Add an applicant to the application
     And I should see a "You must keep your current address private from the other people in this application if you are currently resident in a refuge. Select current address on the previous page if you are currently resident in a refuge" link to "#steps-applicant-refuge-form-refuge-field-error"
 
     # Fix refuge validation error and continue
-    And I choose "No"
+    When applicant refuge page I submit "no"
     Then I should see "The court will not keep your contact details private"
     When I click the "Continue" link
     Then I should see "Provide details for John Doe Senior"
@@ -68,29 +66,21 @@ Feature: Add an applicant to the application
     And I should see a "Enter your place of birth" link to "#steps-applicant-personal-details-form-birthplace-field-error"
 
     # Fix validation errors and continue testing date of birth
-    Then I click "No" for the radio button "Have you changed your name?"
-    And I choose "Male"
-    And I fill in "Your place of birth" with "Manchester"
-
-    When I enter the date 1-1-1000
-    And I click the "Continue" button
+    When applicant personal details page I submit details with has_previous_name "no", gender "male", day "1", month "1", year "1000", birthplace "Manchester"
     Then Page has title "Error: Applicant personal details - Apply to court about child arrangements - GOV.UK"
 
-    When I enter the date 1-1-2050
-    And I click the "Continue" button
+    When applicant personal details page I submit details with has_previous_name "no", gender "male", day "1", month "1", year "2050", birthplace "Manchester"
     Then Page has title "Error: Applicant personal details - Apply to court about child arrangements - GOV.UK"
 
     # For an under 18 applicant
-    Then I enter the date 25-05-2020
-    When I click the "Continue" button
+    When applicant personal details page I submit details with has_previous_name "no", gender "male", day "25", month "05", year "2020", birthplace "Manchester"
     Then I should see "As the applicant is under 18"
 
     # Get back
     And I click the "Back" link
 
     # For an over 18 applicant
-    Then I enter the date 25-05-1998
-    When I click the "Continue" button
+    When applicant personal details page I submit details with has_previous_name "no", gender "male", day "25", month "05", year "1998", birthplace "Manchester"
     Then I should see "What is John Doe Senior's relationship to John Doe Junior?"
 
     # Provoke validation errors
@@ -99,8 +89,7 @@ Feature: Add an applicant to the application
     And I should see a "Select the relationship" link to "#steps-shared-relationship-form-relation-field-error"
 
     # Fix validation errors and continue
-    Then I choose "Father"
-    When I click the "Continue" button
+    When applicant relationship page I submit "Father"
     Then I should see "Address of John Doe Senior"
 
     # Provoke validation errors
@@ -109,11 +98,11 @@ Feature: Add an applicant to the application
     And I should see a "Enter the postcode" link to "#steps-address-lookup-form-postcode-field-error"
 
     # Fix validation errors and continue (do not use lookup API)
-    When I click the "I live outside the UK" link
+    When address lookup page I click outside uk
     And I should see "Address details of John Doe Senior"
 
     # Provoke validation errors
-    When I click the "Continue" button
+    When applicant address details page I continue without filling
     Then Page has title "Error: Applicant address details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter the first line of the address" link to "#steps-applicant-address-details-form-address-line-1-field-error"
     And I should see a "Enter the town or city" link to "#steps-applicant-address-details-form-town-field-error"
@@ -121,11 +110,7 @@ Feature: Add an applicant to the application
     And I should see a "Select yes if you’ve lived at the address for more than 5 years" link to "#steps-applicant-address-details-form-residence-requirement-met-field-error"
 
     # Fix validation errors and continue
-    When I fill in "Building and street" with "Test street"
-    And I fill in "Town or city" with "London"
-    And I fill in "Country" with "United Kingdom"
-    And I click "Yes" for the radio button "Have you lived at your current address for more than 5 years?"
-    When I click the "Continue" button
+    When applicant address details page I submit address with address_line_1 "Test street", town "London", country "United Kingdom", residence_5_years "yes"
     Then I should see "Contact details of John Doe Senior"
 
     # Provoke validation errors
@@ -134,22 +119,20 @@ Feature: Add an applicant to the application
     And I should see a "Select an option" link to "#steps-applicant-contact-details-form-email-provided-field-error"
     And I should see a "Enter a phone number or tell us why the court cannot phone you" link to "#steps-applicant-contact-details-form-phone-number-provided-field-error"
 
-    When I choose "I can provide an email address"
-    And I choose "I can provide a phone number"
+    When I click the radio button "I can provide an email address"
+    And I click the radio button "I can provide a phone number"
     And I fill in "Your email address" with "01234567890"
     And I fill in "Your phone number" with "abcdefghijklmnopqrstuvwxyz"
-    And I choose "Yes, the court can leave me a voicemail"
+    And I click the radio button "Yes, the court can leave me a voicemail"
+    And I click the "Continue" button
     Then Page has title "Error: Applicant contact details - Apply to court about child arrangements - GOV.UK"
     And I should see a "Enter an email address in the correct format, like name@example.com" link to "#steps-applicant-contact-details-form-email-field-error"
     And I should see a "Enter a phone number in the correct format, like 07700 900 982" link to "#steps-applicant-contact-details-form-phone-number-field-error"
 
    # Fix validation errors and continue
-    When I fill in "Your email address" with "john@email.com"
-    And I fill in "Your phone number" with "00000000000"
-    And I choose "Yes, the court can leave me a voicemail"
-    And I click the "Continue" button
+    When applicant contact details page I submit contact with email "john@email.com", phone "00000000000", voicemail_consent "yes"
     Then I should see "Will you be legally represented by a solicitor in these proceedings?"
-    And I choose "No"
+    When applicant has solicitor page I submit "no"
 
     # Finalise here as we start the respondent journey in respondent_details.feature
     Then I should see "Enter the respondent’s name"
@@ -171,9 +154,7 @@ Feature: Add an applicant to the application
     Then I should see a "Name must not contain special characters" link to "#steps-solicitor-personal-details-form-full-name-field-error"
 
    # Fix validation errors and continue
-    When I fill in "Full name" with "Dwayne Solicitor"
-    And I fill in "Name of firm" with "Dwayne Firm"
-    And I click the "Continue" button
+    When solicitor personal details page I submit details with full_name "Dwayne Solicitor", firm_name "Dwayne Firm"
     Then I should see "Address details of Dwayne"
     And Page has title "Address details of solicitor - Apply to court about child arrangements - GOV.UK"
 
@@ -193,11 +174,7 @@ Feature: Add an applicant to the application
     Then I should see a "is invalid" link to "#steps-solicitor-address-details-form-postcode-field-error"
 
     # Fix validation errors and continue
-    When I fill in "Building and street" with "Street A"
-    And I fill in "Town or city" with "London"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SW1A 1AA"
-    And I click the "Continue" button
+    When solicitor address details page I submit address with address_line_1 "Street A", town "London", country "United Kingdom", postcode "SW1A 1AA"
     Then I should see "Contact details of Dwayne Solicitor"
     And Page has title "Contact details of solicitor - Apply to court about child arrangements - GOV.UK"
 
@@ -217,26 +194,22 @@ Feature: Add an applicant to the application
     And I should see a "Enter a valid DX number" link to "#steps-solicitor-contact-details-form-dx-number-field-error"
 
     # Fix validation errors and continue
-    When I fill in "Email address" with "dwayne@email.com"
-    And I fill in "Phone number" with "00000000000"
-    And I fill in "DX number" with "123-456"
-    And I click the "Continue" button
+    When solicitor contact details page I submit contact with email "dwayne@email.com", phone "00000000000", dx_number "123-456"
     Then Page has title "Respondent names - Apply to court about child arrangements - GOV.UK"
 
     When I visit "steps/applicant/has_solicitor"
     And Page has title "Do you have a solicitor? - Apply to court about child arrangements - GOV.UK"
-    Then I choose "No"
-    And I click the "Continue" button
+    When applicant has solicitor page I submit "no"
     Then Page has title "Respondent names - Apply to court about child arrangements - GOV.UK"
 
-  @happy_path @skip
+  @happy_path
   Scenario: Test timeout on applicant personal details
     When I should see "Enter your name"
     And I should see "Enter a new name"
     And I wait and click the "Continue" button
     Then I should see "Sorry, you'll have to start again"
 
-  @happy_path @skip
+  @happy_path
   Scenario: Test timeout on solicitor representative details journey
     When I visit "steps/solicitor/personal_details"
     And I should see "Details of solicitor"

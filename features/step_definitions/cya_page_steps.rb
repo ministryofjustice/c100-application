@@ -1,25 +1,11 @@
 And(/^I should see the children "(are|aren't)" involved in any emergency protection, care of proceedings$/) do |arg|
-  within('#opening_questions') do
-    within('#child_protection_cases') do
-      if arg == "are"
-        expect(page).to have_content("Yes")
-      elsif arg == "aren't"
-        expect(page).to have_content("No")
-      end
-    end
-  end
+  answer = (arg == "are" ? "Yes" : "No")
+  expect(cya_page.opening_questions.child_protection_cases.answer).to eq(answer)
 end
 
 And(/^I should see they "(have|haven't)" been to mediation through the mediation voucher scheme$/) do |arg|
-  within('#mediation_voucher') do
-    within('#mediation_voucher_scheme') do
-      if arg == "haven't"
-        expect(page).to have_content("No")
-      elsif arg == "have"
-        expect(page).to have_content("Yes")
-      end
-    end
-  end
+  answer = (arg == "have" ? "Yes" : "No")
+  expect(cya_page.mediation_voucher.voucher_scheme.answer).to eq(answer)
 end
 
 And(/^I should see they haven't attended MIAM$/) do
@@ -34,6 +20,11 @@ And(/^I should see they have attended MIAM$/) do
   end
 end
 
+And(/^I should see they "(have|haven't)" attended a MIAM$/) do |arg|
+  answer = (arg == "have" ? "Yes" : "No")
+  expect(cya_page.miam_requirement.miam_attended.answer).to eq(answer)
+end
+
 And(/^I should see they have a document signed by the mediator$/) do
   within('#miam_certification') do
     expect(page).to have_content("Have you got a document signed by the mediator? Yes")
@@ -41,27 +32,45 @@ And(/^I should see they have a document signed by the mediator$/) do
 end
 
 And(/^I should see they "(have|haven't)" got safety concerns about the children$/) do |arg|
-  within('#safety_concerns') do
-    if arg == "have"
-      expect(page).to have_content("Yes")
-    elsif arg == "haven't"
-      expect(page).to have_content("No")
-    end
+  answer = (arg == "have" ? "Yes" : "No")
+  expect(cya_page.safety_concerns.risk_of_abduction.answer).to eq(answer)
+  expect(cya_page.safety_concerns.substance_abuse.answer).to eq(answer)
+  expect(cya_page.safety_concerns.children_abuse.answer).to eq(answer)
+  expect(cya_page.safety_concerns.domestic_abuse.answer).to eq(answer)
+  expect(cya_page.safety_concerns.other_abuse.answer).to eq(answer)
+end
+
+def check_safety_concerns(expected_yes_concerns, safety_concerns)
+  # Check that the provided answers equal "Yes"
+  expected_yes_concerns.each do |expected_concern|
+    matching_concern = safety_concerns.keys.find { |question| question.include?(expected_concern) }
+    expect(safety_concerns[matching_concern]).to eq("Yes"), "Expected concern does not equal 'Yes': #{expected_concern}"
+  end
+
+  # Check that all remaining concerns equal "No"
+  safety_concerns.each do |question, answer|
+    next if expected_yes_concerns.include?(question)
+    expect(answer).to eq("No"), "Expected concern does not equal 'No': #{question}"
   end
 end
 
+
 And(/^I should see they have safety concerns with the children about: "([^"]*)"$/) do |list|
-  concerns = list.downcase.split(',').map(&:strip)
+  expected_yes_concerns = list.downcase.split(',').map(&:strip)
+  concern = cya_page.children_abuse_details
 
-  within('#children_abuse_details') do
-    all("dt.govuk-summary-list__key").each do |dt_element|
-      concern_text = dt_element.text.downcase
-      next unless concerns.any? { |concern| concern_text.include?(concern) }
+  safety_concerns = {
+    "abduction" => cya_page.safety_concerns.risk_of_abduction.answer,
+    "drug, alcohol or substance abuse" => cya_page.safety_concerns.substance_abuse.answer,
+    concern.abuse_sexual.question.downcase => concern.abuse_sexual.answer,
+    concern.abuse_physical.question.downcase => concern.abuse_physical.answer,
+    concern.abuse_financial.question.downcase => concern.abuse_financial.answer,
+    concern.abuse_psychological.question.downcase => concern.abuse_psychological.answer,
+    concern.abuse_emotional.question.downcase => concern.abuse_emotional.answer,
+    concern.abuse_other.question.downcase => concern.abuse_other.answer
+  }
 
-      dd_element = dt_element.sibling("dd.govuk-summary-list__value", visible: :all)
-      expect(dd_element).to have_text(/#{Regexp.escape('yes')}/i)
-    end
-  end
+  check_safety_concerns(expected_yes_concerns, safety_concerns)
 end
 
 And(/^I should see they have safety concerns with themselves about: "([^"]*)"$/) do |list|
@@ -79,21 +88,16 @@ And(/^I should see they have safety concerns with themselves about: "([^"]*)"$/)
 end
 
 And(/^I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order$/) do
-  within('#opening_questions') do
-    expect(page).to have_content("Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order")
-  end
+  child_arrangements_order = 'Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order'
+  expect(cya_page.opening_questions.consent_order_application.answer).to eq(child_arrangements_order)
 end
 
 And(/^I should see they have made a consent order application$/) do
-  within('#opening_questions') do
-    expect(page).to have_content("Consent order")
-  end
+  expect(cya_page.opening_questions.consent_order_application.answer).to eq("Consent order")
 end
 
 And(/^I should see they want the court to decide: "([^"]*)"$/) do |arg|
-  within('#child_arrangements_orders') do
-    expect(page).to have_content(arg)
-  end
+  expect(cya_page.nature_of_application.child_arrangements_orders.answer).to eq(arg)
 end
 
 And(/^I should see they want the court to resolve an issue about: "([^"]*)"$/) do |arg|
@@ -226,15 +230,8 @@ And(/^I should see the applicant's relationship to "([^"]*)" is "([^"]*)"$/) do 
 end
 
 And(/^I should see the applicant "(does|doesn't)" have a solicitor$/) do |arg|
-  within('#solicitor_details') do
-    within('#has_solicitor') do
-      if arg == "does"
-        expect(page).to have_content("Yes")
-      elsif arg == "doesn't"
-        expect(page).to have_content("No")
-      end
-    end
-  end
+  answer = (arg == "does" ? "Yes" : "No")
+  expect(cya_page.solicitor_details.has_solicitor.answer).to eq(answer)
 end
 
 And(/^I should see the solicitor's reference is "([^"]*)"$/) do |arg|
@@ -395,15 +392,8 @@ And(/^I should see the respondent's relationship to "([^"]*)" is "([^"]*)"$/) do
 end
 
 And(/^I should see there "(are|aren't)" other people who need to be informed of the application$/) do |arg|
-  within('#other_parties_details') do
-    within('#has_other_parties') do
-      if arg == "are"
-        expect(page).to have_content("Is there anyone else who should know about your application? Yes")
-      elsif arg == "aren't"
-        expect(page).to have_content("Is there anyone else who should know about your application? No")
-      end
-    end
-  end
+  answer = (arg == "are" ? "Yes" : "No")
+  expect(cya_page.other_parties_details.has_other_parties.answer).to eq(answer)
 end
 
 And(/^I should see the other party's name is "([^"]*)"$/) do |arg|
@@ -500,14 +490,8 @@ And(/^I should see the type of proceeding is "([^"]*)"$/) do |arg|
 end
 
 And(/^I should see an urgent hearing "(is|isn't)" requested$/) do |arg|
-  element = find('dt.govuk-summary-list__key', text: 'Do you need an urgent hearing?')
-  value_element = element.sibling('dd.govuk-summary-list__value')
-
-  if arg == "is"
-    expect(value_element).to have_content("Yes")
-  elsif arg == "isn't"
-    expect(value_element).to have_content("No")
-  end
+  answer = (arg == "is" ? "Yes" : "No")
+  expect(cya_page.urgent_hearing.needs_urgent_hearing.answer).to eq(answer)
 end
 
 And(/^I should see an urgent hearing is requested because "([^"]*)"$/) do |arg|
@@ -537,14 +521,8 @@ And(/^I should see a hearing "(is|isn't)" needed within the next 48 hours$/) do 
 end
 
 And(/^I should see a without notice hearing "(is|isn't)" requested$/) do |arg|
-  element = find('dt.govuk-summary-list__key', text: 'Are you asking for a without notice hearing?')
-  value_element = element.sibling('dd.govuk-summary-list__value')
-
-  if arg == "is"
-    expect(value_element).to have_content("Yes")
-  elsif arg == "isn't"
-    expect(value_element).to have_content("No")
-  end
+  answer = (arg == "is" ? "Yes" : "No")
+  expect(cya_page.without_notice_hearing.asking_for_without_notice_hearing.answer).to eq(answer)
 end
 
 And(/^I should see a without notice hearing is requested because "([^"]*)"$/) do |arg|
@@ -554,91 +532,65 @@ And(/^I should see a without notice hearing is requested because "([^"]*)"$/) do
 end
 
 And(/^I should see the life of someone significant to the child "(is|isn't)" outside the UK$/) do |arg|
-  international_rows = all('.app-cya--answers-group#international_resident')
-  match = false
-  international_rows.each do |element|
-    if arg == "is"
-      if element.text.include?("Yes")
-        match = true
-      end
-    elsif arg == "isn't"
-      if element.text.include?("No")
-        match = true
-      end
-      break
-    end
-  end
-  expect(match).to be(true)
+  answer = (arg == "is" ? "Yes" : "No")
+  expect(cya_page.international_info.international_resident.answer).to eq(answer)
 end
 
 And(/^I should see another person in this application "(could|couldn't)" apply for an order outside the UK$/) do |arg|
-  international_rows = all('.app-cya--answers-group#international_jurisdiction')
-  match = false
-  international_rows.each do |element|
-    if arg == "could"
-      if element.text.include?("Yes")
-        match = true
-        break
-      end
-    elsif arg == "couldn't"
-      if element.text.include?("No")
-        match = true
-        break
-      end
-    end
-  end
-  expect(match).to be(true)
+  answer = (arg == "could" ? "Yes" : "No")
+  expect(cya_page.international_info.international_jurisdiction.can_apply_outside_en_cy.answer).to eq(answer)
 end
 
 And(/^I should see a request for information involving the children "(has|hasn't)" been made outside the UK$/) do |arg|
-  international_rows = all('.app-cya--answers-group#international_request')
-  match = false
-  international_rows.each do |element|
-    if arg == "has"
-      if element.text.include?("Yes")
-        match = true
-        break
-      end
-    elsif arg == "hasn't"
-      if element.text.include?("No")
-        match = true
-        break
-      end
-    end
-  end
-  expect(match).to be(true)
+  answer = (arg == "has" ? "Yes" : "No")
+  expect(cya_page.international_info.international_request.answer).to eq(answer)
 end
 
 And(/^I should see the reason for application is "([^"]*)"$/) do |arg|
+  expect(cya_page.application_reasons.details.answer).to eq(arg)
+end
+
+And(/^I should see there "(is|isn't)" a court order requiring permission to make this application$/) do |arg|
+  answer = (arg == "is" ? "Yes" : "No")
+  expect(cya_page.application_reasons.has_existing_court_order.answer).to eq(answer)
+end
+
+And(/^I should see the case number of the court order is "([^"]*)"$/) do |arg|
   within('#application_reasons') do
-    within('#application_details') do
+    within('#court_order_case_number') do
       expect(page).to have_content(arg)
     end
   end
 end
 
-And(/^I should see there "(are|aren't)" factors that may affect any adult in this application taking part in the court proceedings$/) do |arg|
-  within('#litigation_capacity') do
-    within('#reduced_litigation_capacity') do
-      if arg == "are"
+And(/^I should see the expiry date of the court order is "([^"]*)"$/) do |arg|
+  within('#application_reasons') do
+    within('#court_order_expiry_date') do
+      expect(page).to have_content(arg)
+    end
+  end
+end
+
+And(/^I should see they "(have|haven't)" uploaded their existing court order$/) do |arg|
+  within('#application_reasons') do
+    within('#existing_court_order_uploadable') do
+      if arg == "have"
         expect(page).to have_content('Yes')
-      elsif arg == "aren't"
+      elsif arg == "haven't"
         expect(page).to have_content('No')
       end
     end
   end
 end
 
+And(/^I should see there "(are|aren't)" factors that may affect any adult in this application taking part in the court proceedings$/) do |arg|
+  answer = (arg == "are" ? "Yes" : "No")
+  expect(cya_page.litigation_capacity.reduced_litigation_capacity.answer).to eq(answer)
+end
+
 And(/^I should see there "(are|aren't)" people who need an intermediary to help them in court$/) do |arg|
-  within('#attending_court') do
-    within('#intermediary') do
-      if arg == "are"
-        expect(page).to have_content("Yes")
-      elsif arg == "aren't"
-        expect(page).to have_content("No")
-      end
-    end
-  end
+  answer = (arg == "are" ? "Yes" : "No")
+  expect(cya_page.attending_court.requires_intermediary_help.answer).to eq(answer)
 end
 
 And(/^I should see the details provided for the intermediary are "([^"]*)"$/) do |arg|
@@ -650,14 +602,10 @@ And(/^I should see the details provided for the intermediary are "([^"]*)"$/) do
 end
 
 And(/^I should see there "(are|aren't)" special language requirements$/) do |arg|
-  within('#attending_court') do
-    language_rows = all('#language_interpreter')
-    if arg == "are"
-      expect(language_rows[0]).to have_content('Yes')
-    elsif arg == "aren't"
-      expect(language_rows[1]).not_to have_content('Yes')
-    end
-  end
+  answer = (arg == "are" ? "Yes" : "Not needed")
+  expect(cya_page.attending_court.language_requirements.interpreter.answer).to eq(answer)
+  expect(cya_page.attending_court.language_requirements.sign_language_interpreter.answer).to eq(answer)
+  expect(cya_page.attending_court.language_requirements.welsh_language.answer).to eq(answer)
 end
 
 And(/^I should see there "(are|aren't)" specific safety arrangements specified for the court$/) do |arg|
@@ -677,38 +625,24 @@ And(/^I should see there "(are|aren't)" specific safety arrangements specified f
 end
 
 And(/^I should see there "(are|aren't)" special facilities needed when attending court$/) do |arg|
-  arrangements = all('#special_assistance')
-  arrangements.each do |element|
-    if arg == "aren't"
-      expect(element).to have_no_content("Additional details")
-      expect(page).to have_content("None selected")
-    elsif arg == "are"
-      expect(page).to have_content("Additional details")
-    end
+  if arg == "aren't"
+    expect(cya_page.attending_court.special_assistance).to have_no_additional_details
+    expect(cya_page.attending_court.special_assistance.details.answer).to eq("None selected")
+  elsif arg == "are"
+    expect(cya_page.attending_court.special_assistance).to have_additional_details
   end
 end
 
 And(/^I should see the email for submitting an application to court is "([^"]*)"$/) do |arg|
-  within('#submission') do
-    within('#submission_type') do
-      within('#submission_receipt_email') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
+  expect(cya_page.submission.email.answer).to eq(arg)
 end
 
 And(/^I should see the payment type "([^"]*)"$/) do |arg|
-  payments = all('#payment_type')
-  payments.each do |element|
-    expect(element).to have_content(arg)
-  end
+  expect(cya_page.payment.payment_method.type.answer).to eq(arg)
 end
 
 And(/^I should see the HwF reference number is "([^"]*)"$/) do |arg|
-  within('#hwf_reference_number') do
-    expect(page).to have_content(arg)
-  end
+  expect(cya_page.payment.payment_method.hwf_ref_no.answer).to eq(arg)
 end
 
 And(/^I should see the statement of truth$/) do
@@ -792,9 +726,7 @@ And(/^I should see the other party is "([^"]*)" years of age$/) do |age|
 end
 
 And(/^I should see they have got a valid exemption: "([^"]*)"$/) do |arg|
-  within('#miam_exemptions') do
-    expect(page).to have_content(arg)
-  end
+  expect(cya_page.miam_exemptions.exemptions_misc.answer).to eq(arg)
 end
 
 And(/^I should see the details provided for the exemption are "([^"]*)"$/) do |arg|
@@ -806,13 +738,10 @@ And(/^I should see the details provided for the exemption are "([^"]*)"$/) do |a
 end
 
 And(/^I should see an attachment presenting MIAM exemption evidence "(is|isn't)" present$/) do |arg|
-  within('#miam_exemptions') do
-    within('#exemption') do
-      if arg == "is"
-        expect(page).to have_content("Attached document")
-      elsif arg == "isn't"
-        expect(page).not_to have_content("Attached document")
-      end
-    end
+  answer = (arg == "is" ? "Yes" : "No")
+  if arg == "is"
+    expect(cya_page.miam_exemptions.exemption.answer).to eq("Attached document\nimage.jpg")
+  elsif arg == "isn't"
+    expect(cya_page.miam_exemptions.exemption.answer).to eq("")
   end
 end
