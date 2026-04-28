@@ -1,13 +1,21 @@
 module C100App
   class RespondentDecisionTree < PeopleDecisionTree
-    def destination
+    def destination # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
       return next_step if next_step
 
       case step_name
       when :add_another_name
         edit(:names)
       when :names_finished
-        edit(:personal_details, id: next_respondent_id)
+        if c100_application.respondent_ids.count > 1
+          edit(:privacy_preferences, id: next_respondent_id)
+        else
+          edit(:refuge, id: next_respondent_id)
+        end
+      when :privacy_preferences
+        edit(:refuge, id: record)
+      when :refuge
+        edit(:personal_details, id: record)
       when :personal_details
         edit_first_child_relationships
       when :relationship
@@ -21,13 +29,13 @@ module C100App
       else
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
-    end
+    end # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
 
     private
 
     def after_contact_details
       if next_respondent_id
-        edit(:personal_details, id: next_respondent_id)
+        edit(:privacy_preferences, id: next_respondent_id)
       else
         edit(:has_other_parties)
       end

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 module Test
   C100ApplicationValidatable = Struct.new(:children,
+    :people,
     :applicants,
     :respondents,
     :payment_type,
@@ -33,6 +34,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
   let(:arguments) do
     {
       children: children,
+      people: people,
       applicants: applicants,
       respondents: respondents,
       payment_type: payment_type,
@@ -56,6 +58,9 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
   let(:payment_type)    { 'payment_type' }
 
   let(:record) { double('record') }
+  let(:people) { double('people') }
+
+  let(:respondent_obj) { double('Respondent', are_contact_details_private: true, id: 1) }
 
   let(:validator) { described_class.new }
 
@@ -63,6 +68,7 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
     allow(record).to receive(:miam_exemption)
     allow(record.miam_exemption).to receive(:misc).and_return(['misc_test'])
     allow(record).to receive(:document).and_return(nil)
+    allow(people).to receive(:where).with(type: 'Respondent').and_return([respondent_obj, respondent_obj])
   end
 
   context 'individual validations' do
@@ -147,6 +153,58 @@ RSpec.describe ApplicationFulfilmentValidator, type: :model do
           expect(subject).not_to be_valid
           expect(subject.errors.details[:respondents][0][:error]).to eq(:blank)
           expect(subject.errors.details[:respondents][0][:change_path]).to eq('/steps/respondent/names/')
+        end
+      end
+    end
+
+    context 'respondent privacy' do
+      context 'when there is only one respondent' do
+        before do
+          allow(people).to receive(:where)
+                             .with(type: 'Respondent')
+                             .and_return([respondent_obj])
+        end
+
+        it 'is valid' do
+          subject.valid?
+          expect(subject.errors.details.include?(:respondents)).to eq(false)
+        end
+      end
+
+      context 'when there are multiple respondents and privacy is set' do
+        let(:respondent_obj) { double('Respondent', are_contact_details_private: true, id: 1) }
+
+        before do
+          allow(people).to receive(:where)
+                             .with(type: 'Respondent')
+                             .and_return([respondent_obj, respondent_obj])
+        end
+
+        it 'is valid' do
+          subject.valid?
+          expect(subject.errors.details.include?(:respondents)).to eq(false)
+        end
+      end
+
+      context 'when there are multiple respondents and privacy is missing' do
+        let(:respondents) do
+          [
+            double('Respondent', id: 123),
+            double('Respondent', id: 456)
+          ]
+        end
+        let(:respondent_obj) { double('Respondent', are_contact_details_private: nil, id: 123) }
+
+        before do
+          allow(people).to receive(:where)
+                             .with(type: 'Respondent')
+                             .and_return([respondent_obj, respondent_obj])
+        end
+
+        it 'is invalid' do
+          expect(subject).not_to be_valid
+          expect(subject.errors.details[:respondents][0][:error]).to eq(:privacy_missing)
+          expect(subject.errors.details[:respondents][0][:change_path]).to eq('/steps/respondent/privacy_preferences/123')
         end
       end
     end

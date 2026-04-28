@@ -83,7 +83,7 @@ module Summary
         end
       end
 
-      def person_privacy_answers_group(person)
+      def person_privacy_answers_group(person) # rubocop:disable Metrics/PerceivedComplexity
         if PrivacyChange.changes_apply?
           if person.type == 'Applicant'
             return [] unless person.privacy_known
@@ -91,13 +91,15 @@ module Summary
             applicant_privacy_answers(person)
           elsif person.type == 'OtherParty'
             other_party_privacy_answers(person)
+          elsif person.type == 'Respondent'
+            respondent_privacy_answers(person)
           end
         else
           return [] unless person.privacy_known
 
           applicant_privacy_answers(person)
         end
-      end
+      end # rubocop:enable Metrics/PerceivedComplexity
 
       def applicant_privacy_answers(person)
         [
@@ -109,6 +111,16 @@ module Summary
                              i18n_opts: {name: "your contact"}),
           FreeTextAnswer.new(:refuge, person.refuge.try(:capitalize),
                              change_path: edit_steps_applicant_refuge_path(person)),
+        ]
+      end
+
+      def respondent_privacy_answers(person)
+        [
+          FreeTextAnswer.new(:person_contact_details_private,
+                             person.are_contact_details_private.try(:capitalize),
+                             change_path: edit_steps_respondent_privacy_preferences_path(person),
+                             i18n_opts: {name: person.full_name}),
+          Answer.new(:respondent_refuge, person.refuge, change_path: edit_steps_respondent_refuge_path(person)),
         ]
       end
 

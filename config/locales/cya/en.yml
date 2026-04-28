@@ -516,6 +516,10 @@ en:
       question: Is %{name} currently resident in a refuge?
     refuge:
       question: Are you currently resident in a refuge?
+    respondent_refuge:
+      question: Are you currently resident in a refuge?
+      answers:
+        <<: *YESNO
     person_full_name:
       question: Full name
     person_previous_name:

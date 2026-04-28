@@ -28,6 +28,7 @@ module Summary
           Sections::C8CourtDetails,
           Partial,
           Sections::C8ApplicantsDetails,
+          Sections::C8RespondentsDetails,
           Sections::C8OtherPartiesDetails,
         ])
       end
