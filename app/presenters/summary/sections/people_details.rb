@@ -40,7 +40,7 @@ module Summary
                 FreeTextAnswer.new(:person_address,
                                    data_or_private(person, person.full_address, ContactDetails::ADDRESS.to_s),
                                    show: true),
-                FreeTextAnswer.new(:person_residence_requirement_met, data_or_private(person, person.residence_requirement_met, ContactDetails::ADDRESS.to_s)),
+                Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
                 FreeTextAnswer.new(
                   :person_residence_history,
                   person.residence_history.present? ? data_or_private(person, person.residence_history,

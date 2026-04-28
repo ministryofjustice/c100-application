@@ -29,9 +29,7 @@ module Summary
               Separator.new("#{name}_index_title", index:),
               Answer.new(:respondent_refuge, person.refuge),
               FreeTextAnswer.new(:person_full_name, person.full_name),
-              previous_name_answer(person),
               FreeTextAnswer.new(:person_address, person.full_address),
-              FreeTextAnswer.new(:person_residence_requirement_met, person.residence_requirement_met),
               FreeTextAnswer.new(:person_residence_history, person.residence_history,
                                  show: person.residence_requirement_met == 'no'),
               FreeTextAnswer.new(:person_email, person.email),
@@ -44,16 +42,6 @@ module Summary
         end.flatten.select(&:show?)
       end
       # rubocop:enable Metrics/AbcSize
-
-      private
-
-      def previous_name_answer(person)
-        if person.has_previous_name.eql?(GenericYesNo::YES.to_s)
-          FreeTextAnswer.new(:person_previous_name, person.previous_name)
-        else
-          Answer.new(:person_previous_name, person.has_previous_name)
-        end
-      end
     end
   end
 end
