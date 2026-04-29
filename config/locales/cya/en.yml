@@ -511,11 +511,15 @@ en:
     person_privacy_known:
       question: Do the other people named in this application (the respondents) know any of your contact details?
     person_contact_details_private:
-      question: Do you want to keep %{name} details private from the other people named in the application (the respondents)?
+      question: Do you want to keep %{name}'s details private from the other people named in the application (the respondents)?
     other_party_refuge:
       question: Is %{name} currently resident in a refuge?
     refuge:
       question: Are you currently resident in a refuge?
+    respondent_refuge:
+      question: Is %{name} currently resident in a refuge?
+      answers:
+        <<: *YESNO
     person_full_name:
       question: Full name
     person_previous_name:

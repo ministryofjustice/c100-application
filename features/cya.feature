@@ -7,7 +7,7 @@ Feature: Testing the 'Check Your Answers' page
 
   Scenario: Advancing to CYA page and not filling in Statement of Truth
     When I click the "Submit application" button
-    Then I should see "Some information is missing"
+    Then I should see "You must amend the following information before your application can be submitted"
     And Page has title "Error: Check your answers - Apply to court about child arrangements - GOV.UK"
 
   Scenario: Advancing to CYA page and not selecting payment details

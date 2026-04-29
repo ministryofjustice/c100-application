@@ -13,6 +13,7 @@ module Summary
       instance_double(Respondent,
         to_param: 'uuid-123',
         full_name: 'fullname',
+        refuge: 'No',
         has_previous_name: has_previous_name,
         previous_name: previous_name,
         dob: Date.new(2018, 1, 20),
@@ -86,7 +87,7 @@ module Summary
     #
     describe '#answers' do
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(6)
+        expect(answers.count).to eq(7)
       end
 
       it 'has the correct rows in the right order' do
@@ -99,13 +100,18 @@ module Summary
         expect(answers[1].change_path).to eq('/steps/respondent/names/')
         expect(answers[1].value).to eq('fullname')
 
-        expect(answers[2]).to be_an_instance_of(AnswersGroup)
-        expect(answers[2].name).to eq(:person_personal_details)
-        expect(answers[2].change_path).to eq('/steps/respondent/personal_details/uuid-123')
-        expect(answers[2].answers.count).to eq(4)
+        expect(answers[2]).to be_an_instance_of(Answer)
+        expect(answers[2].question).to eq(:respondent_refuge)
+        expect(answers[2].change_path).to eq('/steps/respondent/refuge/uuid-123')
+        expect(answers[2].value).to eq('No')
+
+        expect(answers[3]).to be_an_instance_of(AnswersGroup)
+        expect(answers[3].name).to eq(:person_personal_details)
+        expect(answers[3].change_path).to eq('/steps/respondent/personal_details/uuid-123')
+        expect(answers[3].answers.count).to eq(4)
 
           # personal_details group answers ###
-          details = answers[2].answers
+          details = answers[3].answers
 
           expect(details[0]).to be_an_instance_of(Answer)
           expect(details[0].question).to eq(:person_previous_name)
@@ -123,19 +129,19 @@ module Summary
           expect(details[3].question).to eq(:person_birthplace)
           expect(details[3].value).to eq('birthplace')
 
-        expect(answers[3]).to be_an_instance_of(Answer)
-        expect(answers[3].question).to eq(:relationship_to_child)
-        expect(answers[3].change_path).to eq('/steps/respondent/relationship/uuid-123/child/uuid-555')
-        expect(answers[3].value).to eq('mother')
-        expect(answers[3].i18n_opts).to eq({child_name: 'Child Test'})
+        expect(answers[4]).to be_an_instance_of(Answer)
+        expect(answers[4].question).to eq(:relationship_to_child)
+        expect(answers[4].change_path).to eq('/steps/respondent/relationship/uuid-123/child/uuid-555')
+        expect(answers[4].value).to eq('mother')
+        expect(answers[4].i18n_opts).to eq({child_name: 'Child Test'})
 
-        expect(answers[4]).to be_an_instance_of(AnswersGroup)
-        expect(answers[4].name).to eq(:person_address_details)
-        expect(answers[4].change_path).to eq('/steps/respondent/address_details/uuid-123')
-        expect(answers[4].answers.count).to eq(3)
+        expect(answers[5]).to be_an_instance_of(AnswersGroup)
+        expect(answers[5].name).to eq(:person_address_details)
+        expect(answers[5].change_path).to eq('/steps/respondent/address_details/uuid-123')
+        expect(answers[5].answers.count).to eq(3)
 
           # personal_details group answers ###
-          details = answers[4].answers
+          details = answers[5].answers
 
           expect(details[0]).to be_an_instance_of(FreeTextAnswer)
           expect(details[0].question).to eq(:person_address)
@@ -149,12 +155,12 @@ module Summary
           expect(details[2].question).to eq(:person_residence_history)
           expect(details[2].value).to eq('history')
 
-        expect(answers[5]).to be_an_instance_of(AnswersGroup)
-        expect(answers[5].name).to eq(:person_contact_details)
-        expect(answers[5].change_path).to eq('/steps/respondent/contact_details/uuid-123')
-        expect(answers[5].answers.count).to eq(2)
+        expect(answers[6]).to be_an_instance_of(AnswersGroup)
+        expect(answers[6].name).to eq(:person_contact_details)
+        expect(answers[6].change_path).to eq('/steps/respondent/contact_details/uuid-123')
+        expect(answers[6].answers.count).to eq(2)
 
-          details = answers[5].answers
+          details = answers[6].answers
 
           expect(details[0]).to be_an_instance_of(FreeTextAnswer)
           expect(details[0].question).to eq(:person_email)
@@ -171,13 +177,13 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(6)
+          expect(answers.count).to eq(7)
         end
 
         it 'renders the previous name' do
-          expect(answers[2]).to be_an_instance_of(AnswersGroup)
+          expect(answers[3]).to be_an_instance_of(AnswersGroup)
 
-          details = answers[2].answers
+          details = answers[3].answers
           expect(details[0]).to be_an_instance_of(FreeTextAnswer)
           expect(details[0].question).to eq(:person_previous_name)
           expect(details[0].value).to eq('previous_name')
@@ -192,9 +198,9 @@ module Summary
         end
 
         it 'renders the expected answer row' do
-          expect(answers[4]).to be_an_instance_of(AnswersGroup)
+          expect(answers[5]).to be_an_instance_of(AnswersGroup)
 
-          details = answers[4].answers
+          details = answers[5].answers
           expect(details[0]).to be_an_instance_of(Answer)
           expect(details[0].question).to eq(:person_address_unknown)
           expect(details[0].value).to eq(true)
@@ -213,15 +219,15 @@ module Summary
         }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(6)
+          expect(answers.count).to eq(7)
         end
 
         it 'renders the correct relationship value' do
-          expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[3].question).to eq(:relationship_to_child)
-          expect(answers[3].change_path).to eq('/steps/respondent/relationship/uuid-123/child/uuid-555')
-          expect(answers[3].value).to eq('Aunt')
-          expect(answers[3].i18n_opts).to eq({child_name: 'Child Test'})
+          expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[4].question).to eq(:relationship_to_child)
+          expect(answers[4].change_path).to eq('/steps/respondent/relationship/uuid-123/child/uuid-555')
+          expect(answers[4].value).to eq('Aunt')
+          expect(answers[4].i18n_opts).to eq({child_name: 'Child Test'})
         end
       end
     end

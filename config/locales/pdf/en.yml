@@ -149,6 +149,7 @@ en:
       ### C8 ###
       c8_court_details: *to_be_completed
       c8_applicants_details: Applicant contact details to be kept private
+      c8_respondents_details: Respondent contact details to be kept private
       c8_other_parties_details: Other parties contact details to be kept private
     descriptions:
       risk_concerns: Are you alleging that the applicant(s) or the child(ren) named in Section 1 of this form have experienced, or are at risk of experiencing, harm from any of the following by any person who has had contact with the child(ren)?
@@ -170,6 +171,7 @@ en:
       hmcts_instructions: "[MIAM document has been emailed to the court]"
       ### C8 ###
       c8_applicants_details_index_title: Applicant %{index}
+      c8_respondents_details_index_title: Respondent %{index}
       c8_other_parties_details_index_title: Person %{index}
     court_name_and_code:
       question: Court
@@ -584,6 +586,10 @@ en:
         'no': No, the court cannot leave a voicemail
     refuge:
       question: Applicant currently resident in a refuge?
+      answers:
+        <<: *YESNO
+    respondent_refuge:
+      question: Respondent currently resident in a refuge?
       answers:
         <<: *YESNO
     person_relationship_to_children:
