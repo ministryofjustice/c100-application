@@ -108,7 +108,7 @@ module Summary
           FreeTextAnswer.new(:person_contact_details_private,
                              privacy_preferences_answer(person),
                              change_path: edit_steps_applicant_privacy_preferences_path(person),
-                             i18n_opts: {name: "your contact"}),
+                             i18n_opts: {name: "your"}),
           FreeTextAnswer.new(:refuge, person.refuge.try(:capitalize),
                              change_path: edit_steps_applicant_refuge_path(person)),
         ]
@@ -119,7 +119,7 @@ module Summary
           FreeTextAnswer.new(:person_contact_details_private,
                              person.are_contact_details_private.try(:capitalize),
                              change_path: edit_steps_respondent_privacy_preferences_path(person),
-                             i18n_opts: {name: person.full_name}),
+                             i18n_opts: {name: "#{person.full_name}'s"}),
           Answer.new(:respondent_refuge, person.refuge, change_path: edit_steps_respondent_refuge_path(person),
                     i18n_opts: {name: person.full_name}),
         ]
@@ -133,7 +133,7 @@ module Summary
           FreeTextAnswer.new(:person_contact_details_private,
                              person.are_contact_details_private.try(:capitalize),
                              change_path: edit_steps_other_party_privacy_preferences_path(person),
-                             i18n_opts: {name: person.full_name})
+                             i18n_opts: {name: "#{person.full_name}'s"})
         ]
 
         if person.are_contact_details_private == 'yes'
