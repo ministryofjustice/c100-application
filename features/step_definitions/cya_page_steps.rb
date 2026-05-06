@@ -15,9 +15,7 @@ And(/^I should see they haven't attended MIAM$/) do
 end
 
 And(/^I should see they have attended MIAM$/) do
-  within('#miam_attended') do
-    expect(page).to have_content("Have you attended a Mediation Information and Assessment Meeting (MIAM)? Yes")
-  end
+  expect(cya_page.miam_requirement.miam_attended.answer).to eq("Yes")
 end
 
 And(/^I should see they "(have|haven't)" attended a MIAM$/) do |arg|
@@ -26,9 +24,7 @@ And(/^I should see they "(have|haven't)" attended a MIAM$/) do |arg|
 end
 
 And(/^I should see they have a document signed by the mediator$/) do
-  within('#miam_certification') do
-    expect(page).to have_content("Have you got a document signed by the mediator? Yes")
-  end
+  expect(cya_page.miam_requirement.miam_certificate.answer).to eq("Attached document\nimage.jpg")
 end
 
 And(/^I should see they "(have|haven't)" got safety concerns about the children$/) do |arg|

@@ -22,6 +22,10 @@ def child_protection_case_page
   @child_protection_case_page ||= ChildProtectionCasePage.new
 end
 
+def child_protection_info_page
+  @child_protection_info_page ||= ChildProtectionInfoPage.new
+end
+
 def miam_acknowledgement_page
   @miam_acknowledgement_page ||= MiamAcknowledgementPage.new
 end
@@ -68,6 +72,18 @@ end
 
 def miam_exemptions_urgency_page
   @miam_exemptions_urgency_page ||= MiamExemptionsUrgencyPage.new
+end
+
+def miam_certification_page
+  @miam_certification_page ||= MiamCertificationPage.new
+end
+
+def miam_certification_exit_page
+  @miam_certification_exit_page ||= MiamCertificationExitPage.new
+end
+
+def miam_certification_upload_page
+  @miam_certification_upload_page ||= MiamCertificationUploadPage.new
 end
 
 def miam_page
@@ -180,6 +196,14 @@ end
 
 def abuse_concerns_contact_page
   @abuse_concerns_contact_page ||= AbuseConcernsContactPage.new
+end
+
+def abuse_concerns_psychological_details_page
+  @abuse_concerns_psychological_details_page ||= AbuseConcernsPsychologicalDetailsPage.new
+end
+
+def abuse_concerns_emotional_details_page
+  @abuse_concerns_emotional_details_page ||= AbuseConcernsEmotionalDetailsPage.new
 end
 
 def safety_concern_substance_page

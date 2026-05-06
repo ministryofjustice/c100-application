@@ -64,6 +64,12 @@ class BasePage < SitePrism::Page
     end
   end
 
+  element :back, 'a.govuk-back-link'
+
+  def go_back
+    back.click
+  end
+
   class CYASummaryListRow < SitePrism::Section
     element :key, 'dt.govuk-summary-list__key'
     element :value, 'dd.govuk-summary-list__value'

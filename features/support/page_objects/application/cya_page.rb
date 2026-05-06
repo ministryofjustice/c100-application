@@ -20,6 +20,8 @@ class CYAPage < BasePage
   section :miam_requirement, CYAGroup, 'dl#miam_requirement' do
     row :miam_attended, '#miam_attended'
     row :miam_exemption_claim, '#miam_exemption_claim'
+    row :miam_certification, '#miam_certification'
+    row :miam_certificate, '#miam_certificate'
   end
 
   section :miam_exemptions, CYAGroup, 'dl#miam_exemptions' do

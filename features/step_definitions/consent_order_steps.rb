@@ -30,6 +30,56 @@ When(/^I navigate the MIAM exemption journey$/) do
   miam_exemptions_misc_page.submit_without_notice_hearing
 end
 
+When(/^I navigate the MIAM journey$/) do
+  expect(consent_order_page).to be_displayed
+  consent_order_page.submit_without_consent_order
+
+  expect(child_protection_case_page).to be_displayed
+  child_protection_case_page.submit_no
+
+  expect(miam_acknowledgement_page).to be_displayed
+  miam_acknowledgement_page.submit_voucher_scheme_no
+
+  expect(miam_attended_page).to be_displayed
+  miam_attended_page.submit_yes
+  
+  expect(miam_certification_page).to be_displayed
+  miam_certification_page.submit_no
+
+  # test unhappy path
+  expect(miam_certification_exit_page).to be_displayed
+  miam_certification_exit_page.go_back
+
+  expect(miam_certification_page).to be_displayed
+  miam_certification_page.submit_yes
+
+  expect(miam_certification_upload_page).to be_displayed
+  file_path = File.absolute_path('features/support/sample_file/image.jpg')
+  miam_certification_upload_page.upload_file(file_path)
+end
+
+When(/^I navigate the MIAM journey with a child protection case$/) do
+  expect(consent_order_page).to be_displayed
+  consent_order_page.submit_without_consent_order
+
+  expect(child_protection_case_page).to be_displayed
+  child_protection_case_page.submit_yes
+
+  expect(child_protection_info_page).to be_displayed
+  child_protection_info_page.continue_to_next_step
+end
+
+When(/^I navigate back to the consent order page$/) do
+  expect(safety_concern_page).to be_displayed
+  safety_concern_page.go_back
+
+  expect(child_protection_info_page).to be_displayed
+  child_protection_info_page.go_back
+
+  expect(child_protection_case_page).to be_displayed
+  child_protection_case_page.go_back
+end
+
 And(/^I have no abuse or physical abuse concerns about the children$/) do
   expect(abuse_concerns_page).to be_displayed
   abuse_concerns_page.continue_to_next_step
@@ -57,12 +107,36 @@ And(/^I do have financial concerns about the children$/) do
   )
 end
 
-And(/^I have no psychological or emotional abuse concerns about the children$/) do
+And(/^I "(do|don't)" have psychological and emotional abuse concerns about the children$/) do |arg|
   expect(abuse_concerns_psychological_page).to be_displayed
-  abuse_concerns_psychological_page.submit_no
+  if arg == 'do'
+    abuse_concerns_psychological_page.submit_yes
+
+    expect(abuse_concerns_psychological_details_page).to be_displayed
+    abuse_concerns_psychological_details_page.submit_concern_details(
+      concern_details: 'The respondent guilt tripped the kids',
+      behaviour_start: 'Many years ago',
+      behaviour_stop: 'About two years ago',
+      asked_for_help: false
+    )
+  else
+    abuse_concerns_psychological_page.submit_no
+  end
 
   expect(abuse_concerns_emotional_page).to be_displayed
-  abuse_concerns_emotional_page.submit_no
+  if arg == 'do'
+    abuse_concerns_emotional_page.submit_yes
+
+    expect(abuse_concerns_emotional_details_page).to be_displayed
+    abuse_concerns_emotional_details_page.submit_concern_details(
+      concern_details: 'The respondent was mean to the kids',
+      behaviour_start: 'Many years ago',
+      behaviour_stop: 'About two years ago',
+      asked_for_help: false
+    )
+  else
+    abuse_concerns_emotional_page.submit_no
+  end
 end
 
 And(/^I do have other abuse concerns about the children$/) do
@@ -195,9 +269,13 @@ And('I navigate the abduction risk journey') do
   abduction_risk_details_page.submit_risk_details('They might be taken by their other parent', 'The children are with me')
 end
 
-And('I have no concerns about drug, alcohol or substance abuse') do
+And(/^I "(do|don't)" have concerns about drug, alcohol or substance abuse$/) do |arg|
   expect(safety_concern_substance_page).to be_displayed
-  safety_concern_substance_page.submit_no
+  if arg == 'do'
+    safety_concern_substance_page.submit_yes("Alcoholic and drug abuse details")
+  else
+    safety_concern_substance_page.submit_no
+  end
 end
 
 And('I ask the court to decide who the children live with and when') do
