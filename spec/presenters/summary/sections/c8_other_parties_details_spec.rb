@@ -17,7 +17,7 @@ module Summary
         dob: dob,
         dob_estimate: dob_estimate,
         gender: 'female',
-        refuge: 'yes',
+        refuge: refuge,
         birthplace: nil,
         residence_requirement_met: nil,
         residence_history: nil,
@@ -39,7 +39,6 @@ module Summary
     before do
       allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(other_party).to receive(:full_address).and_return('full address')
-      allow(other_party).to receive(:refuge).and_return('yes')
       allow(other_party).to receive(:email_private?).and_return(contact_details_private.include?('email'))
       allow(other_party).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
@@ -53,6 +52,7 @@ module Summary
     let(:dob_estimate) { nil }
     let(:cohabit_with_other) { 'yes' }
     let(:are_contact_details_private) { 'yes' }
+    let(:refuge) { 'no' }
 
     let(:answers) { subject.answers }
 
@@ -91,7 +91,7 @@ module Summary
 
         expect(answers[1]).to be_an_instance_of(Answer)
         expect(answers[1].question).to eq(:refuge)
-        expect(answers[1].value).to eq('yes')
+        expect(answers[1].value).to eq('no')
 
         expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
         expect(answers[2].question).to eq(:person_full_name)
@@ -160,6 +160,24 @@ module Summary
 
         it 'has no rows' do
           expect(answers.count).to eq(0)
+        end
+      end
+
+      context 'when refuge is yes' do
+        let(:are_contact_details_private) { nil }
+        let(:refuge) { 'yes' }
+
+        it 'has the correct rows' do
+          expect(answers.count).to eq(10)
+        end
+      end
+
+      context 'when refuge is unknown' do
+        let(:are_contact_details_private) { nil }
+        let(:refuge) { 'unknown' }
+
+        it 'has the correct rows' do
+          expect(answers.count).to eq(10)
         end
       end
     end

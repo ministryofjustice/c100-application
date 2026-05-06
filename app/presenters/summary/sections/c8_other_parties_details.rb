@@ -25,7 +25,7 @@ module Summary
         return super unless PrivacyChange.changes_apply?
 
         record_collection.map.with_index(1) do |person, index|
-          if person.are_contact_details_private == GenericYesNo::YES.to_s
+          if person.are_contact_details_private == GenericYesNo::YES.to_s || person.refuge != GenericYesNo::NO.to_s
             [
               Separator.new("#{name}_index_title", index:),
               Answer.new(:refuge, person.refuge),

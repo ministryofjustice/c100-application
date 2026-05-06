@@ -27,6 +27,7 @@ module Summary
         phone_number_unknown: nil,
         email_unknown: nil,
         privacy_known: nil,
+        refuge: refuge,
         are_contact_details_private: are_contact_details_private,
         cohabit_with_other: cohabit_with_other,
         type: 'OtherParty'
@@ -41,7 +42,6 @@ module Summary
       allow(other_party).to receive(:email_private?).and_return(contact_details_private.include?('email'))
       allow(other_party).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
-      allow(other_party).to receive(:refuge)
     end
 
     subject { described_class.new(c100_application) }
@@ -52,6 +52,7 @@ module Summary
     let(:dob_estimate) { nil }
     let(:cohabit_with_other) { 'yes' }
     let(:are_contact_details_private) { 'no' }
+    let(:refuge) { 'no' }
 
     let(:answers) { subject.answers }
 
@@ -178,6 +179,40 @@ module Summary
 
       context 'when confidentiality is enabled' do
         let(:are_contact_details_private) { GenericYesNo::YES.to_s }
+
+        it 'has the correct number of rows' do
+          expect(answers.count).to eq(2)
+        end
+
+        it 'has the correct rows in the right order' do
+          expect(answers[0]).to be_an_instance_of(Separator)
+          expect(answers[0].title).to eq("other_parties_details_index_title")
+
+          expect(answers[1]).to be_an_instance_of(Separator)
+          expect(answers[1].title).to eq(:c8_attached)
+        end
+      end
+
+      context 'when refuge is yes' do
+        let(:are_contact_details_private) { GenericYesNo::NO.to_s }
+        let(:refuge) { 'yes' }
+
+        it 'has the correct number of rows' do
+          expect(answers.count).to eq(2)
+        end
+
+        it 'has the correct rows in the right order' do
+          expect(answers[0]).to be_an_instance_of(Separator)
+          expect(answers[0].title).to eq("other_parties_details_index_title")
+
+          expect(answers[1]).to be_an_instance_of(Separator)
+          expect(answers[1].title).to eq(:c8_attached)
+        end
+      end
+
+      context 'when refuge is unknown' do
+        let(:are_contact_details_private) { GenericYesNo::NO.to_s }
+        let(:refuge) { 'unknown' }
 
         it 'has the correct number of rows' do
           expect(answers.count).to eq(2)

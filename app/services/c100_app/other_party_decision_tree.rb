@@ -20,11 +20,11 @@ module C100App
       when :address_details
         after_address_details
       when :cohabit_with_other
-        after_cohabit_with_other
+        edit(:privacy_preferences, id: record)
       when :privacy_preferences
-        after_privacy_preferences
+        edit(:refuge, id: record)
       when :refuge
-        after_refuge
+        edit(:personal_details, id: record)
       else
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
@@ -32,26 +32,6 @@ module C100App
     # rubocop:enable Metrics/MethodLength
 
     private
-
-    def after_cohabit_with_other
-      if record.reload.cohabit_with_other == 'yes'
-        edit(:privacy_preferences, id: record)
-      else
-        after_privacy_preferences
-      end
-    end
-
-    def after_privacy_preferences
-      if record.reload.are_contact_details_private == 'yes'
-        edit(:refuge, id: record)
-      else
-        edit(:personal_details, id: record)
-      end
-    end
-
-    def after_refuge
-      edit(:personal_details, id: record)
-    end
 
     def after_address_details
       if PrivacyChange.changes_apply? && next_party_id

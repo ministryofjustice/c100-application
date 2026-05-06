@@ -76,24 +76,11 @@ RSpec.describe C100App::OtherPartyDecisionTree do
     let(:other_party) { OtherParty.new }
 
     before do
-      allow(record).to receive(:reload).and_return(other_party)
       allow(record).to receive(:id).and_return(other_party)
     end
 
-    context 'when cohabit_with_other is yes' do
-      let(:other_party) { OtherParty.new(cohabit_with_other: 'yes') }
-
-      it 'goes to edit the privacy_preferences page' do
-        expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: record)
-      end
-    end
-
-    context 'when cohabit_with_other is no' do
-      let(:other_party) { OtherParty.new(cohabit_with_other: 'no') }
-
-      it 'goes to edit the personal_details page' do
-        expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: record)
-      end
+    it 'goes to edit the privacy_preference page' do
+      expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: record)
     end
   end
 
@@ -125,28 +112,10 @@ RSpec.describe C100App::OtherPartyDecisionTree do
     before do
       allow(record).to receive(:reload).and_return(record)
       allow(record).to receive(:id).and_return(record)
-      allow(record).to receive(:are_contact_details_private).and_return(record)
     end
 
-    context 'when privacy_preferences is yes' do
-      before do
-        allow(record).to receive(:are_contact_details_private).and_return('yes')
-      end
-
-      it 'goes to edit the privacy preferences page' do
-        expect(subject.destination).to eq(controller: :refuge, action: :edit, id: record)
-      end
-    end
-
-    context 'when privacy_preferences is no' do
-
-      before do
-        allow(record).to receive(:are_contact_details_private).and_return('no')
-      end
-
-      it 'goes to edit the privacy preferences page' do
-        expect(subject.destination).to eq(controller: :personal_details, action: :edit, id: record)
-      end
+    it 'goes to edit the refuge page' do
+      expect(subject.destination).to eq(controller: :refuge, action: :edit, id: record)
     end
   end
 

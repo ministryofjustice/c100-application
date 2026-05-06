@@ -514,6 +514,8 @@ en:
       question: Do you want to keep %{name} contact details private from the other people named in the application?
     other_party_refuge:
       question: Is %{name} currently resident in a refuge?
+      answers:
+        <<: *YESNO
     refuge:
       question: Are you currently resident in a refuge?
     respondent_refuge:
