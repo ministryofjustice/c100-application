@@ -184,6 +184,133 @@ And(/^I don't have any safety concerns about myself$/) do
   )
 end
 
+And(/^I "(have|haven't)" been abused by the respondent$/) do |arg|
+  expect(abuse_concerns_applicant_info_page).to be_displayed
+  abuse_concerns_applicant_info_page.continue_to_next_step
+  
+  expect(abuse_concerns_applicant_question_page).to be_displayed
+  if arg == 'have'
+    abuse_concerns_applicant_question_page.submit_yes
+
+    expect(abuse_concerns_applicant_question_details_page).to be_displayed
+    abuse_concerns_applicant_question_details_page.submit_concern_details(
+      concern_details: 'Description of sexual abuse',
+      behaviour_start: 'Many years ago',
+      behaviour_stop: 'About two years ago',
+      asked_for_help: false
+    )
+  else
+    abuse_concerns_applicant_question_page.submit_no
+  end
+end
+
+And(/^I "(have|haven't)" been physically abused by the respondent$/) do |arg|
+  expect(abuse_concerns_applicant_physical_page).to be_displayed
+  if arg == 'have'
+    abuse_concerns_applicant_physical_page.submit_yes
+
+    expect(abuse_concerns_applicant_physical_details_page).to be_displayed
+    abuse_concerns_applicant_physical_details_page.submit_concern_details(
+      concern_details: 'The respondent hit me',
+      behaviour_start: 'Many years ago',
+      behaviour_stop: 'About two years ago',
+      asked_for_help: false
+    )
+  else
+    abuse_concerns_applicant_physical_page.submit_no
+  end
+end
+
+And(/^I "(have|haven't)" been financially abused by the respondent$/) do |arg|
+  expect(abuse_concerns_applicant_financial_page).to be_displayed
+  if arg == 'have'
+    abuse_concerns_applicant_financial_page.submit_yes
+
+    expect(abuse_concerns_applicant_financial_details_page).to be_displayed
+    abuse_concerns_applicant_financial_details_page.submit_concern_details(
+      concern_details: 'The respondent took my money',
+      behaviour_start: 'Many years ago',
+      behaviour_stop: 'About two years ago',
+      asked_for_help: false
+    )
+  else
+    abuse_concerns_applicant_financial_page.submit_no
+  end
+end
+
+And(/^I "(have|haven't)" been psychologically and emotionally abused by the respondent$/) do |arg|
+  expect(abuse_concerns_applicant_psychological_page).to be_displayed
+  if arg == 'have'
+    abuse_concerns_applicant_psychological_page.submit_yes
+
+    expect(abuse_concerns_applicant_psychological_details_page).to be_displayed
+    abuse_concerns_applicant_psychological_details_page.submit_concern_details(
+      concern_details: 'The respondent psychologically abused me',
+      behaviour_start: 'Many years ago',
+      behaviour_stop: 'About two years ago',
+      asked_for_help: false
+    )
+  else
+    abuse_concerns_applicant_psychological_page.submit_no
+  end
+
+  expect(abuse_concerns_applicant_emotional_page).to be_displayed
+  if arg == 'have'
+    abuse_concerns_applicant_emotional_page.submit_yes
+
+    expect(abuse_concerns_applicant_emotional_details_page).to be_displayed
+    abuse_concerns_applicant_emotional_details_page.submit_concern_details(
+      concern_details: 'The respondent emotionally abused me',
+      behaviour_start: 'Many years ago',
+      behaviour_stop: 'About two years ago',
+      asked_for_help: false
+    )
+  else
+    abuse_concerns_applicant_emotional_page.submit_no
+  end
+end
+
+And(/^I "(do|don't)" have any other concerns about my welfare$/) do |arg|
+  expect(abuse_concerns_applicant_other_page).to be_displayed
+  if arg == 'do'
+    abuse_concerns_applicant_other_page.submit_yes
+
+    expect(abuse_concerns_applicant_other_details_page).to be_displayed
+    abuse_concerns_applicant_other_details_page.submit_concern_details(
+      concern_details: 'Description of other abuse',
+      behaviour_start: 'Many years ago',
+      behaviour_stop: 'About two years ago',
+      asked_for_help: false
+    )
+  else
+    abuse_concerns_applicant_other_page.submit_no
+  end
+end
+
+And(/^I "(have|haven't)" had or currently have court orders made for my protection$/) do |arg|
+  expect(applicant_has_protection_court_order_page).to be_displayed
+  if arg == 'have'
+    applicant_has_protection_court_order_page.submit_yes
+  else
+    applicant_has_protection_court_order_page.submit_no
+  end
+end
+
+And(/^I "(do|don't)" agree to the children having contact with the other people in this application$/) do |arg|
+  expect(abuse_concerns_contact_page).to be_displayed
+  if arg == 'do'
+    abuse_concerns_contact_page.submit_contact_details(
+      contact_type: 'yes',
+      being_in_touch: 'yes'
+    )
+  else
+    abuse_concerns_contact_page.submit_contact_details(
+      contact_type: 'no',
+      being_in_touch: 'no'
+    )
+  end
+end
+
 And(/^I ask the court to also decide "(.*)"$/) do |arg|
   expect(petition_protection_page).to be_displayed
   petition_protection_page.submit_yes(details: arg)
@@ -278,14 +405,20 @@ And(/^I "(do|don't)" have concerns about drug, alcohol or substance abuse$/) do 
   end
 end
 
-And('I ask the court to decide who the children live with and when') do
+And(/I ask the court to decide "(.*)"/) do |issue|
   expect(petition_orders_page).to be_displayed
-  petition_orders_page.select_issue_home
+  petition_orders_page.select_issue_home if issue.include?('who the children live with and when')
+  petition_orders_page.select_issue_time if issue.include?('how much time they spend with each person')
   petition_orders_page.submit
 
   expect(petition_playback_page).to be_displayed
+  if issue.include?('who the children live with and when')
+    expect(petition_playback_page.content.child_arrangements_home).to be_visible
+  end
+  if issue.include?('how much time they spend with each person')
+    expect(petition_playback_page.content.child_arrangements_time).to be_visible
+  end
   expect(petition_playback_page.content.child_arrangements_order).to be_visible
-  expect(petition_playback_page.content.child_arrangements_home).to be_visible
   petition_playback_page.continue_to_next_step
 end
 
@@ -328,6 +461,17 @@ Then('I enter details for a {string} year old child') do |age|
   special_guardianship_page.submit_no
 end
 
+And(/^I enter details for another child who is "(.*)" years old$/) do |age|
+  expect(other_children_names_page).to be_displayed
+  other_children_names_page.add_child('Jane', 'Smith')
+
+  expect(other_children_personal_details_page).to be_displayed
+  other_children_personal_details_page.submit_child_personal_details(
+    gender: 'female',
+    age: age
+  )
+end
+
 Then('I state that the {string} has parental responsibility for the child') do |persons|
   expect(parental_responsibility_page).to be_displayed
   parental_responsibility_page.submit_responsibility(persons)
@@ -338,9 +482,13 @@ And("I submit that I don't know any additional details for the child") do
   child_additional_details_page.submit_dont_know_to_both
 end
 
-And("I don't have any other children") do
+And(/^I "(do|don't)" have other children$/) do |arg|
   expect(has_other_children_page).to be_displayed
-  has_other_children_page.submit_no
+  if arg == 'do'
+    has_other_children_page.submit_yes
+  else
+    has_other_children_page.submit_no
+  end
 end
 
 And(/^I "(do|don't)" have a solicitor$/) do |arg|
@@ -516,6 +664,47 @@ end
 
 And("I pay using Help With Fees with reference {string}") do |reference|
   application_payment_page.pay_by_help_with_fees(reference)
+end
+
+And(/^I complete the applicant details journey keeping my contact details private$/) do
+  # Navigate to applicant names
+  applicant_names_page.submit_names('Jane', 'Doe')
+
+  # Privacy questions
+  applicant_privacy_known_page.dont_know
+  debugger
+  applicant_privacy_preferences_page.submit_yes
+  applicant_refuge_page.submit_no
+  applicant_privacy_summary_page.continue_to_next_step
+
+  # Personal details
+  applicant_personal_details_page.submit_personal_details(
+    has_previous_name: 'no',
+    gender: 'female',
+    day: '25',
+    month: '05',
+    year: '1998',
+    birthplace: 'Manchester'
+  )
+
+  # Relationship
+  applicant_relationship_page.submit_relationship('Mother')
+
+  # Address
+  address_lookup_page.click_outside_uk
+  applicant_address_details_page.submit_address_details(
+    address_line_1: 'Test street',
+    town: 'London',
+    country: 'United Kingdom',
+    residence_5_years: 'yes'
+  )
+
+  # Contact details
+  applicant_contact_details_page.submit_contact_details(
+    email: 'john@email.com',
+    phone: '00000000000',
+    voicemail_consent: 'yes'
+  )
 end
 
 And("I should see the check your answers page") do

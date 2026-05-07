@@ -9,13 +9,13 @@ Feature: Testing C100 end to end
     When I navigate the MIAM exemption journey
     And evidence "isn't" provided for the MIAM exemption
     And I have no safety concerns about the children
-    And I ask the court to decide who the children live with and when
+    And I ask the court to decide "who the children live with and when"
     And I understand the process of going to court
     And I have tried all alternative ways to reach an agreement
     And I enter details for a "2" year old child
     And I state that the "Father" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
-    And I don't have any other children
+    And I "don't" have other children
     When I complete the applicant details journey
     And I enter the details for a solicitor
     And I navigate the respondent details journey
@@ -90,13 +90,13 @@ Feature: Testing C100 end to end
     And I "don't" have psychological and emotional abuse concerns about the children
     And I do have other abuse concerns about the children
     And I don't have any safety concerns about myself
-    And I ask the court to decide who the children live with and when
+    And I ask the court to decide "who the children live with and when"
     And I ask the court to also decide "This is what I want resolved"
     And I understand the process of going to court
     And I enter details for a "2" year old child
     And I state that the "Father" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
-    And I don't have any other children
+    And I "don't" have other children
     When I complete the applicant details journey
     And I "don't" have a solicitor
     And I navigate the respondent details journey
@@ -170,13 +170,13 @@ Feature: Testing C100 end to end
   Scenario: Child arrangements order (MIAM) (path three: 'Yes' to 'Have you attended a MIAM?')
     When I navigate the MIAM journey
     And I have no safety concerns about the children
-    And I ask the court to decide who the children live with and when
+    And I ask the court to decide "who the children live with and when"
     And I understand the process of going to court
     And I have tried all alternative ways to reach an agreement
     And I enter details for a "2" year old child
     And I state that the "Father" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
-    And I don't have any other children
+    And I "don't" have other children
     When I complete the applicant details journey
     And I enter the details for a solicitor
     And I navigate the respondent details journey
@@ -269,75 +269,22 @@ Feature: Testing C100 end to end
     And I do have financial concerns about the children
     And I "do" have psychological and emotional abuse concerns about the children
     And I do have other abuse concerns about the children
-    Then I should see "Your safety"
-    And I click the "Continue" link
-    Then I should see "Have you ever been sexually abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have you ever been physically abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the physical abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent hit me"
-    And I fill in "When did this behaviour start?" with "Many years ago"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "About two years ago"
-    And I click the "Continue" button
-    Then I should see "Have you ever been financially abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the financial abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took my money"
-    And I fill in "When did this behaviour start?" with "Many years ago"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "About two years ago"
-    And I click the "Continue" button
-    Then I should see "Have you ever been psychologically abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have you ever been emotionally abused by the respondent?"
-    And I choose "No"
-    Then I should see "Do you have any other concerns about your welfare?"
-    And I choose "No"
-    Then I should see "Have you had or do you currently have any court orders made for your protection?"
-    And I choose "Yes"
-    And I choose "No" for all options on this page
-    Then I should see "Contact between the children and the other people in this application"
-    And I choose "No" for all options on this page
-    And I click the "Continue" button
-    Then I should see "What are you asking the court to decide about the children involved?"
-    And I check "Decide who they live with and when"
-    And I check "Decide how much time they spend with each person"
-    And I click the "Continue" button
-    Then I should see "What you’re asking the court to decide about the children"
-    And I should see "Decide who they live with and when"
-    And I should see "Decide how much time they spend with each person"
-    And I click the "Continue" link
-    Then I should see "Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?"
-    And I click the radio button "Yes"
-    And I fill in "Please give details" with "I want the court to decide whether the respondent should give compensation"
-    And I click the "Continue" button
-    Then I should see "Going to court"
-    And I should see "What happens at court"
-    And I should see "Changing or enforcing an order"
-    And I should see "Representing yourself in court"
-    And I should see "Domestic abuse and child abuse"
-    And I check "I understand what’s involved if I decide to go to court"
-    And I click the "Continue" button
-    Then I should see "Enter the names of the children"
-    And I fill in "First name(s)" with "Emily"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Provide details for Emily Doe"
-    And I specify they are "5" years of age
-    And I click the radio button "Female"
-    And I click the "Continue" button
-    Then I should see "Which of the decisions you’re asking the court to resolve relate to Emily Doe?"
-    And I check "Decide who they live with and when"
-    And I check "Decide how much time they spend with each person"
-    And I click the "Continue" button
-    Then I should see "Is there a Special Guardianship Order in force in relation to Emily Doe?"
-    And I choose "No"
-    Then I should see "Parental responsibility for Emily Doe"
-    And I fill in "State everyone who has parental responsibility for Emily Doe and how they have parental responsibility." with "Mother"
-    And I click the "Continue" button
-    And I choose "Don't know" for all options on this page
+    And I "haven't" been abused by the respondent
+    And I "have" been physically abused by the respondent
+    And I "have" been financially abused by the respondent
+    And I "haven't" been psychologically and emotionally abused by the respondent
+    And I "don't" have any other concerns about my welfare
+    And I "haven't" had or currently have court orders made for my protection
+    And I "don't" agree to the children having contact with the other people in this application
+    And I ask the court to decide "who the children live with and when, how much time they spend with each person"
+    And I ask the court to also decide "I want the court to decide whether the respondent should give compensation"
+    And I understand the process of going to court
+    And I enter details for a "2" year old child
+    And I state that the "Mother" has parental responsibility for the child
+    And I submit that I don't know any additional details for the child
+    And I "do" have other children
+    And I enter details for another child who is "3" years old
+    And I complete the applicant details journey keeping my contact details private
     Then I should see "Do you or any respondents have other children who are not part of this application?"
     And I choose "Yes"
     Then I should see "Enter the other child’s name"

@@ -2,7 +2,7 @@ class ParentalResponsibilityPage < BasePage
   set_url_matcher %r{/steps/children/parental_responsibility/.*}
 
   section :content, '#main-content' do
-    element :header, 'h1', text: 'Is there a Special Guardianship Order in force in relation to'
+    element :header, 'h1', text: 'Parental responsibility for'
     element :responsiblity_field, "input#steps-children-parental-responsibility-form-parental-responsibility-field"
     element :continue_button, "button", text: "Continue"
   end

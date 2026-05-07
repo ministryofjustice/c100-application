@@ -1,5 +1,5 @@
 class SafetyConcernDetailsPage < BasePage
-  section :content, '#main-content' do
+  section :concern_content, '#main-content' do
     element :concern_details, "textarea[name='steps_abuse_concerns_details_form[behaviour_description]']"
     element :behaviour_start, "input[name='steps_abuse_concerns_details_form[behaviour_start]']"
     element :behaviour_ongoing_yes, "input[name='steps_abuse_concerns_details_form[behaviour_ongoing]'][value='yes']"
@@ -23,29 +23,29 @@ class SafetyConcernDetailsPage < BasePage
     help_provided: nil,
     help_description: nil
   )
-    content.concern_details.set(concern_details)
-    content.behaviour_start.set(behaviour_start)
+    concern_content.concern_details.set(concern_details)
+    concern_content.behaviour_start.set(behaviour_start)
 
     if behaviour_stop
-      content.behaviour_ongoing_no.click
-      content.behaviour_stop.set(behaviour_stop)
+      concern_content.behaviour_ongoing_no.click
+      concern_content.behaviour_stop.set(behaviour_stop)
     else
-      content.behaviour_ongoing_yes.click
+      concern_content.behaviour_ongoing_yes.click
     end
 
     if asked_for_help
-      content.asked_for_help_yes.click
-      content.help_party.set(help_party)
-      content.help_description.set(help_description)
+      concern_content.asked_for_help_yes.click
+      concern_content.help_party.set(help_party)
+      concern_content.help_description.set(help_description)
       if help_provided
-        content.help_provided_yes.click
+        concern_content.help_provided_yes.click
       else
-        content.help_provided_no.click
+        concern_content.help_provided_no.click
       end
     else
-      content.asked_for_help_no.click
+      concern_content.asked_for_help_no.click
     end
 
-    content.continue_button.click
+    concern_content.continue_button.click
   end
 end

@@ -206,6 +206,30 @@ def abuse_concerns_emotional_details_page
   @abuse_concerns_emotional_details_page ||= AbuseConcernsEmotionalDetailsPage.new
 end
 
+def abuse_concerns_applicant_question_details_page
+  @abuse_concerns_applicant_question_details_page ||= AbuseConcernsApplicantQuestionDetailsPage.new
+end
+
+def abuse_concerns_applicant_physical_details_page
+  @abuse_concerns_applicant_physical_details_page ||= AbuseConcernsApplicantPhysicalDetailsPage.new
+end
+
+def abuse_concerns_applicant_financial_details_page
+  @abuse_concerns_applicant_financial_details_page ||= AbuseConcernsApplicantFinancialDetailsPage.new
+end
+
+def abuse_concerns_applicant_psychological_details_page
+  @abuse_concerns_applicant_psychological_details_page ||= AbuseConcernsApplicantPsychologicalDetailsPage.new
+end
+
+def abuse_concerns_applicant_emotional_details_page
+  @abuse_concerns_applicant_emotional_details_page ||= AbuseConcernsApplicantEmotionalDetailsPage.new
+end
+
+def abuse_concerns_applicant_other_details_page
+  @abuse_concerns_applicant_other_details_page ||= AbuseConcernsApplicantOtherDetailsPage.new
+end
+
 def safety_concern_substance_page
   @safety_concern_substance_page ||= SafetyConcernSubstancePage.new
 end
@@ -268,6 +292,14 @@ end
 
 def child_orders_page
   @child_orders_page ||= ChildOrdersPage.new
+end
+
+def other_children_names_page
+  @other_children_names_page ||= OtherChildrenNamesPage.new
+end
+
+def other_children_personal_details_page
+  @other_children_personal_details_page ||= OtherChildrenPersonalDetailsPage.new
 end
 
 def special_guardianship_page
