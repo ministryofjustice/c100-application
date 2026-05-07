@@ -3,9 +3,9 @@ module Steps
     class RefugeForm < BaseForm
       include ActiveModel::Validations::Callbacks
 
-      attribute :refuge, YesNo
+      attribute :refuge, YesNoUnknown
 
-      validates_inclusion_of :refuge, in: GenericYesNo.values
+      validates_inclusion_of :refuge, in: GenericYesNoUnknown.values
 
       private
 

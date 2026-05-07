@@ -57,7 +57,7 @@ module Summary
     let(:previous_name) { nil }
     let(:privacy_known) { 'no' }
     let(:are_contact_details_private) { 'no' }
-    let(:refuge) { nil }
+    let(:refuge) { 'no' }
 
     let(:answers) { subject.answers }
 

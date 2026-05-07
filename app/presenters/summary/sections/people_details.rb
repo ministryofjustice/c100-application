@@ -17,11 +17,12 @@ module Summary
         false
       end
 
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
       def answers
         record_collection.map.with_index(1) do |person, index|
           if PrivacyChange.changes_apply?
-            if person.are_contact_details_private == GenericYesNo::YES.to_s && person.type == 'OtherParty'
+            if (person.are_contact_details_private == GenericYesNo::YES.to_s || person.refuge != GenericYesNoUnknown::NO.to_s) &&
+               person.type == 'OtherParty'
               [
                 Separator.new("#{name}_index_title", index:),
                 Separator.new(:c8_attached)
@@ -136,7 +137,7 @@ module Summary
           end
         end.flatten.select(&:show?)
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
       private
 
