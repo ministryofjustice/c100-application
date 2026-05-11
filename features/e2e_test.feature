@@ -19,7 +19,7 @@ Feature: Testing C100 end to end
     When I complete the applicant details journey
     And I enter the details for a solicitor
     And I navigate the respondent details journey
-    And there are no other people who should know about the application
+    And there "aren't" any other people who should know about the application
     And the child lives with "John Doe Senior"
     And I enter details of previous court proceedings
     And there "isn't" a court order requiring permission to make this application
@@ -100,7 +100,7 @@ Feature: Testing C100 end to end
     When I complete the applicant details journey
     And I "don't" have a solicitor
     And I navigate the respondent details journey
-    And there are no other people who should know about the application
+    And there "aren't" any other people who should know about the application
     And the child lives with "John Doe Senior"
     And there "hasn't" been any court proceedings about the children
     And there "isn't" a court order requiring permission to make this application
@@ -180,7 +180,7 @@ Feature: Testing C100 end to end
     When I complete the applicant details journey
     And I enter the details for a solicitor
     And I navigate the respondent details journey
-    And there are no other people who should know about the application
+    And there "aren't" any other people who should know about the application
     And the child lives with "John Doe Senior"
     And I enter details of previous court proceedings
     And there "isn't" a court order requiring permission to make this application
@@ -285,90 +285,9 @@ Feature: Testing C100 end to end
     And I "do" have other children
     And I enter details for another child who is "3" years old
     And I complete the applicant details journey keeping my contact details private
-    Then I should see "Do you or any respondents have other children who are not part of this application?"
-    And I choose "Yes"
-    Then I should see "Enter the other child’s name"
-    And I fill in "First name(s)" with "John"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Provide details for John Doe"
-    And I specify they are "2" years of age
-    And I choose "Male"
-    Then I should see "Enter your name"
-    And I fill in "First name(s)" with "Jane"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Keeping your contact details private"
-    When I choose "I don't know"
-    Then I should see "Keeping your contact details private"
-    When I choose Yes from the radio button options
-    Then I should see "Which contact details do you want to keep private from the other people in this application?"
-    And I check "Current address"
-    And I click the "Continue" button
-    Then I should see "Are you currently resident in a refuge?"
-    And I choose "No"
-    Then I should see "The court will keep your contact details private"
-    And I should see "You have told us you want to keep these contact details private"
-    And I should see "Current address"
-    And I click the "Continue" link
-    Then I should see "Provide details for Jane Doe"
-    And I click the radio button "Yes"
-    And I fill in "Enter your previous name" with "Olivia Doe Jr"
-    And I click the radio button "Female"
-    And I specify they are "32" years of age
-    And I fill in "Your place of birth" with "London"
-    And I click the "Continue" button
-    Then I should see "What is Jane Doe's relationship to Emily Doe?"
-    And I choose "Mother"
-    Then I should see "What is Jane Doe's relationship to John Doe?"
-    And I choose "Mother"
-    Then I should see "Address of Jane Doe"
-    And I click the "I live outside the UK" link
-    Then I should see "Address details of Jane Doe"
-    And I fill in "Building and street" with "Windsor Castle"
-    And I fill in "Town or city" with "Windsor"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SL4 1QF"
-    And I click the radio button "Yes"
-    And I click the "Continue" button
-    Then I should see "Contact details of Jane Doe"
-    And I click the radio button "I can provide an email address"
-    And I fill in "Your email address" with "jane_doe@gmail.com"
-    And I click the radio button "I can provide a phone number"
-    And I fill in "Your phone number" with "00000888888"
-    And I choose "Yes, the court can leave me a voicemail"
-    Then I should see "Will you be legally represented by a solicitor in these proceedings?"
-    And I choose "No"
-    Then I should see "Enter the respondent’s name"
-    And I fill in "First name(s)" with "John"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Provide details for John Doe"
-    And I click the radio button "No"
-    And I click the radio button "Male"
-    And I specify they are "35" years of age
-    And I fill in "Place of birth" with "Windsor"
-    And I click the "Continue" button
-    Then I should see "What is John Doe's relationship to Emily Doe?"
-    And I choose "Father"
-    Then I should see "What is John Doe's relationship to John Doe?"
-    And I choose "Father"
-    Then I should see "Address of John Doe"
-    And I click the "I don’t know their postcode or they live outside the UK" link
-    And I should see "Address details of John Doe"
-    And I fill in "Building and street" with "Windsor Castle"
-    And I fill in "Town or city" with "Windsor"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SL4 1QF"
-    And I click the radio button "Don't know"
-    And I fill in "Please provide details of all previous addresses for the last 5 years below, including the dates and starting with the most recent" with "They may have lived in Buckingham Palace"
-    And I click the "Continue" button
-    Then I should see "Contact details of John Doe"
-    And I fill in "Email address" with "john-doe@hotmail.com"
-    And I fill in "Phone number" with "00000999999"
-    And I click the "Continue" button
-    Then I should see "Is there anyone else who should know about your application?"
-    And I choose "Yes"
+    And I "don't" have a solicitor
+    And I navigate the respondent details journey with an additional child
+    And there "are" any other people who should know about the application
     Then I should see "Enter the other person’s name"
     And I fill in "First name(s)" with "Judy"
     And I fill in "Last name(s)" with "Sitter"

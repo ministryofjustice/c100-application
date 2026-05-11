@@ -555,9 +555,39 @@ And("I navigate the respondent details journey") do
   )
 end
 
-And("there are no other people who should know about the application") do
+And("I navigate the respondent details journey with an additional child") do
+  expect(respondent_names_page).to be_displayed
+  respondent_names_page.submit_names('John', 'Doe')
+
+  expect(respondent_personal_details_page).to be_displayed
+  respondent_personal_details_page.submit_personal_details(
+    has_previous_name: 'no',
+    gender: 'male',
+    age: '35',
+    birthplace: 'Windsor'
+  )
+
+  expect(respondent_relationship_page).to be_displayed
+  respondent_relationship_page.submit_relationship('Father')
+  respondent_relationship_page.submit_relationship('Father')
+
+  respondent_address_lookup_page.click_outside_uk
+  respondent_address_details_page.submit_address_details(
+    address_line_1: 'Windsor Castle',
+    town: 'Windsor',
+    country: 'United Kingdom',
+    residence_5_years: 'yes'
+  )
+
+  respondent_contact_details_page.submit_contact_details(
+    email: 'john-doe@hotmail.com',
+    phone: '00000999999'
+  )
+end
+
+And(/^there "(are|aren't)" any other people who should know about the application$/) do |arg|
   expect(has_other_parties_page).to be_displayed
-  has_other_parties_page.submit_no
+  has_other_parties_page.submit(arg == 'are' ? 'yes' : 'no')
 end
 
 And("the child lives with {string}") do |person|
@@ -671,9 +701,8 @@ And(/^I complete the applicant details journey keeping my contact details privat
   applicant_names_page.submit_names('Jane', 'Doe')
 
   # Privacy questions
-  applicant_privacy_known_page.dont_know
-  debugger
-  applicant_privacy_preferences_page.submit_yes
+  applicant_privacy_known_page.submit_dont_know
+  applicant_privacy_preferences_page.submit_yes(address_private: true)
   applicant_refuge_page.submit_no
   applicant_privacy_summary_page.continue_to_next_step
 
@@ -688,6 +717,7 @@ And(/^I complete the applicant details journey keeping my contact details privat
   )
 
   # Relationship
+  applicant_relationship_page.submit_relationship('Mother')
   applicant_relationship_page.submit_relationship('Mother')
 
   # Address
