@@ -6,6 +6,7 @@ class ApplicantRelationshipPage < BasePage
     element :relation_father, "input#steps-shared-relationship-form-relation-father-field", visible: false
     element :relation_mother, "input#steps-shared-relationship-form-relation-mother-field", visible: false
     element :relation_other, "input#steps-shared-relationship-form-relation-other-field", visible: false
+    element :other_relation_field, "input[name='steps_shared_relationship_form[relation_other_value]']", visible: false
     element :continue_button, "button", text: "Continue"
   end
 
@@ -17,6 +18,7 @@ class ApplicantRelationshipPage < BasePage
       content.relation_mother.click
     else
       content.relation_other.click
+      content.other_relation_field.set relation
     end
     content.continue_button.click
   end

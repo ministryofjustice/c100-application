@@ -402,6 +402,18 @@ def has_other_parties_page
   @has_other_parties_page ||= HasOtherPartiesPage.new
 end
 
+def other_party_names_page
+  @other_party_names_page ||= OtherPartyNamesPage.new
+end
+
+def other_party_personal_details_page
+  @other_party_personal_details_page ||= OtherPartyPersonalDetailsPage.new
+end
+
+def other_party_address_details_page
+  @other_party_address_details_page ||= OtherPartyAddressDetailsPage.new
+end
+
 def child_residence_page
   @child_residence_page ||= ChildResidencePage.new
 end
@@ -444,6 +456,10 @@ end
 
 def litigation_capacity_page
   @litigation_capacity_page ||= LitigationCapacityPage.new
+end
+
+def litigation_capacity_details_page
+  @litigation_capacity_details_page ||= LitigationCapacityDetailsPage.new
 end
 
 def attending_court_intermediary_page

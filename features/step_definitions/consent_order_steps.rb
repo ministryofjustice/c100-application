@@ -590,6 +590,29 @@ And(/^there "(are|aren't)" any other people who should know about the applicatio
   has_other_parties_page.submit(arg == 'are' ? 'yes' : 'no')
 end
 
+And(/^I complete the other party details journey$/) do
+  expect(other_party_names_page).to be_displayed
+  other_party_names_page.submit_names('Judy', 'Sitter')
+
+  expect(other_party_personal_details_page).to be_displayed
+  other_party_personal_details_page.submit_personal_details(
+    has_previous_name: false,
+    gender: 'female',
+    age: '35',
+  )
+
+  applicant_relationship_page.submit_relationship('Caregiver')
+  applicant_relationship_page.submit_relationship('Caregiver')
+
+  respondent_address_lookup_page.click_outside_uk
+  other_party_address_details_page.submit_address_details(
+    address_line_1: '10 Downing Street',
+    town: 'London',
+    country: 'United Kingdom',
+    postcode: 'SW1A 2AA'
+  )
+end
+
 And("the child lives with {string}") do |person|
   expect(child_residence_page).to be_displayed
   child_residence_page.submit_residence(person)
@@ -611,6 +634,20 @@ And("I enter details of previous court proceedings") do
     proceedings_date: '2020',
     proceedings_type: 'Legal hearing',
     details: 'Lasted for weeks'
+  )
+end
+
+And(/^I enter details of previous court proceedings with an additional child$/) do
+  expect(previous_proceedings_page).to be_displayed
+  previous_proceedings_page.submit_yes
+
+  expect(previous_court_proceedings_page).to be_displayed
+  previous_court_proceedings_page.submit_previous_proceedings(
+    children_names: 'Emily Doe and John Doe',
+    court_name: 'Aylesbury',
+    proceedings_date: 'March 2020',
+    proceedings_type: 'Care order',
+    details: 'Emily Doe was involved in a care order which took place at Aylesbury court'
   )
 end
 
@@ -638,6 +675,17 @@ And("I navigate the international issues journey") do
   international_request_page.submit_no
 end
 
+And(/^I navigate the international issues journey with an international resident$/) do
+  expect(international_resident_page).to be_displayed
+  international_resident_page.submit_yes("Emily's maternal grandparents are in Austria")
+
+  expect(international_jurisdiction_page).to be_displayed
+  international_jurisdiction_page.submit_no
+
+  expect(international_request_page).to be_displayed
+  international_request_page.submit_no
+end
+
 And(/^there isn't any international issues in this application$/) do
   expect(international_resident_page).to be_displayed
   international_resident_page.submit_no
@@ -657,6 +705,25 @@ end
 And(/^there "(are|aren't)" factors that may affect any adult in this application taking part in the court proceedings$/) do |arg|
   expect(litigation_capacity_page).to be_displayed
   litigation_capacity_page.submit(arg == 'are' ? 'yes' : 'no')
+end
+
+And(/^there "(are|aren't)" factors affecting ability to participate$/) do |arg|
+  expect(litigation_capacity_details_page).to be_displayed
+  litigation_capacity_details_page.continue_without_filling if arg == "aren't"
+end
+
+And(/^I navigate the attending court journey/) do
+  expect(attending_court_intermediary_page).to be_displayed
+  attending_court_intermediary_page.submit_yes('Details of the intermediary')
+
+  expect(attending_court_language_page).to be_displayed
+  attending_court_language_page.submit_language_requirements(language_interpreter_details: 'German needed for respondent')
+
+  expect(attending_court_special_arrangements_page).to be_displayed
+  attending_court_special_arrangements_page.submit_special_arrangements(special_arrangements_details: 'Please keep the time the kids are needed for to a minimum')
+
+  expect(attending_court_special_assistance_page).to be_displayed
+  attending_court_special_assistance_page.continue_without_filling
 end
 
 And("I have no issues attending court") do
