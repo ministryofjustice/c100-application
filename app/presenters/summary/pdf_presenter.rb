@@ -49,53 +49,55 @@ module Summary
       process_form(Summary::C1aForm.new(c100_application), mode)
     end
 
-    def generate_c8_form(mode = :pdf) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
-      if PrivacyChange.changes_apply?
-        return unless c100_application.confidentiality_enabled? ||
-                      c100_application.other_confidentiality_enabled? ||
-                      c100_application.respondent_confidentiality_enabled?
-      else
-        return unless c100_application.confidentiality_enabled?
-      end
+    def generate_c8_form(mode = :pdf)
+      return unless c8_form_required?
 
       add_blank_page_if_needed(mode)
 
-      c100_application.applicants.each_with_index do |applicant, index|
-        section = Sections::C8ApplicantsDetails.new(
-          c100_application,
-          applicant,
-          index: index + 1
-        )
+      process_all_parties(mode)
+    end
+
+    def c8_form_required?
+      c100_application.confidentiality_enabled? || c100_application.other_confidentiality_enabled? ||
+        c100_application.respondent_confidentiality_enabled?
+    end
+
+    def process_all_parties(mode)
+      process_applicants(mode)
+      process_respondents(mode)
+      process_other_parties(mode)
+    end
+
+    def process_applicants(mode)
+      process_party_collection(c100_application.applicants, Sections::C8ApplicantsDetails, mode)
+    end
+
+    def process_respondents(mode)
+      process_party_collection(c100_application.respondents, Sections::C8RespondentsDetails, mode)
+    end
+
+    def process_other_parties(mode)
+      process_party_collection(
+        c100_application.other_parties,
+        Sections::C8OtherPartiesDetails,
+        mode
+      )
+    end
+
+    def process_party_collection(collection, section_class, mode)
+      collection.each_with_index do |party, index|
+        section = build_section(section_class, party, index)
 
         next unless section.show?
 
         process_form(Summary::C8Form.new(c100_application, party_section: section), mode)
       end
+    end
 
-      c100_application.respondents.each_with_index do |respondent, index|
-        section = Sections::C8RespondentsDetails.new(
-          c100_application,
-          respondent,
-          index: index + 1
-        )
+    def build_section(section_class, party, index)
+      section_class.new(c100_application, party, index: index + 1)
+    end
 
-        next unless section.show?
-
-        process_form(Summary::C8Form.new(c100_application, party_section: section), mode)
-      end
-
-      c100_application.other_parties.each_with_index do |other_party, index|
-        section = Sections::C8OtherPartiesDetails.new(
-          c100_application,
-          other_party,
-          index: index + 1
-        )
-
-        next unless section.show?
-
-        process_form(Summary::C8Form.new(c100_application, party_section: section), mode)
-      end
-    end # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
 
     # Avoid adding unnecessary blank pages if there are no preceding forms,
     # for example in the case we are generating individual forms like the C8.
