@@ -77,11 +77,7 @@ module Summary
     end
 
     def process_other_parties(mode)
-      process_party_collection(
-        c100_application.other_parties,
-        Sections::C8OtherPartiesDetails,
-        mode
-      )
+      process_party_collection(c100_application.other_parties, Sections::C8OtherPartiesDetails, mode)
     end
 
     def process_party_collection(collection, section_class, mode)
