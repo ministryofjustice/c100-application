@@ -5,10 +5,11 @@ module Summary
     let(:c100_application) {
       instance_double(
         C100Application,
-        applicants: [applicant],
         confidentiality_enabled?: 'yes'
       )
     }
+
+    let(:contact_details_private) { %w[email address phone_number] }
 
     let(:applicant) {
       instance_double(Applicant,
@@ -26,8 +27,6 @@ module Summary
     let(:phone_number_provided) { nil }
     let(:phone_number_not_provided_reason) { nil }
 
-    let(:contact_details_private) { ['email', 'address', 'phone_number'] }
-
     before do
       allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(applicant).to receive(:full_address).and_return('full address')
@@ -37,7 +36,7 @@ module Summary
       allow(applicant).to receive(:refuge).and_return('yes')
     end
 
-    subject { described_class.new(c100_application) }
+    subject { described_class.new(c100_application, applicant, index: 1) }
 
     let(:answers) { subject.answers }
 
@@ -49,13 +48,6 @@ module Summary
       it { expect(subject.show_header?).to eq(true) }
     end
 
-    describe '#record_collection' do
-      it {
-        expect(c100_application).to receive(:applicants)
-        subject.record_collection
-      }
-    end
-
     describe '#answers' do
       it 'has the correct number of rows' do
         expect(answers.count).to eq(9)
@@ -64,7 +56,7 @@ module Summary
       it 'has the correct rows in the right order' do
         expect(answers[0]).to be_an_instance_of(Separator)
         expect(answers[0].title).to eq('c8_applicants_details_index_title')
-        expect(answers[0].i18n_opts).to eq({index: 1})
+        expect(answers[0].i18n_opts).to eq({ index: 1 })
 
         expect(answers[1]).to be_an_instance_of(Answer)
         expect(answers[1].question).to eq(:refuge)
@@ -104,12 +96,12 @@ module Summary
       end
 
       context "when no phone number and a reason given" do
+        let(:phone_number_provided) { 'no' }
+        let(:phone_number_not_provided_reason) { "No phone" }
+
         before do
           allow(applicant).to receive(:refuge).and_return('no')
         end
-
-        let(:phone_number_not_provided_reason) { "No phone" }
-        let(:phone_number_provided) { 'no' }
 
         it "shows the reason" do
           expect(answers[5].value).to eq('No phone')
@@ -121,17 +113,21 @@ module Summary
           allow(applicant).to receive(:refuge).and_return('no')
         end
 
+        let(:contact_details_private) { [] }
+
         let(:applicant) {
           instance_double(Applicant,
                           full_name: 'fullname',
                           residence_history: 'history',
                           phone_number: 'phone_number',
+                          phone_number_provided: phone_number_provided,
+                          phone_number_not_provided_reason: phone_number_not_provided_reason,
                           email: 'email',
                           voicemail_consent: 'yes',
                           contact_details_private: contact_details_private
           )
         }
-        let(:contact_details_private) { [] }
+
         it 'has the correct number of rows' do
           expect(answers.count).to eq(0)
         end

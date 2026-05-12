@@ -3,7 +3,9 @@ require 'spec_helper'
 module Summary
   describe C8Form do
     let(:c100_application) { instance_double(C100Application) }
-    subject { described_class.new(c100_application) }
+    let(:party_section) { instance_double('PartySection', show?: true) }
+
+    subject { described_class.new(c100_application, party_section: party_section) }
 
     describe '#name' do
       it { expect(subject.name).to eq('C8') }
@@ -18,19 +20,21 @@ module Summary
     end
 
     describe '#sections' do
+      let(:party_section) { instance_double('PartySection', show?: true) }
+
+      subject { described_class.new(c100_application, party_section: party_section) }
+
       before do
         allow_any_instance_of(Summary::Sections::BaseSectionPresenter).to receive(:show?).and_return(true)
       end
 
-      it 'has the right sections in the right order' do
-        expect(subject.sections).to match_instances_array([
-          Sections::FormHeader,
-          Sections::C8CourtDetails,
-          Partial,
-          Sections::C8ApplicantsDetails,
-          Sections::C8RespondentsDetails,
-          Sections::C8OtherPartiesDetails,
-        ])
+      it 'has the right sections in order' do
+        sections = subject.sections
+
+        expect(sections[0]).to be_a(Sections::FormHeader)
+        expect(sections[1]).to be_a(Sections::C8CourtDetails)
+        expect(sections[2]).to be_a(Partial)
+        expect(sections[3]).to eq(party_section)
       end
     end
   end

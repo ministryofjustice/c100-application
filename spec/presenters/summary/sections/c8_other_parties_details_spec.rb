@@ -6,31 +6,31 @@ module Summary
       instance_double(
         C100Application,
         other_parties: [other_party],
-      )
+        )
     }
 
     let(:other_party) {
       instance_double(OtherParty,
-        full_name: 'fullname',
-        has_previous_name: has_previous_name,
-        previous_name: previous_name,
-        dob: dob,
-        dob_estimate: dob_estimate,
-        gender: 'female',
-        refuge: refuge,
-        birthplace: nil,
-        residence_requirement_met: nil,
-        residence_history: nil,
-        phone_number_provided: nil,
-        phone_number: nil,
-        email: nil,
-        phone_number_unknown: nil,
-        email_unknown: nil,
-        voicemail_consent: nil,
-        privacy_known: nil,
-        cohabit_with_other: cohabit_with_other,
-        are_contact_details_private: are_contact_details_private,
-        type: 'OtherParty'
+                      full_name: 'fullname',
+                      has_previous_name: has_previous_name,
+                      previous_name: previous_name,
+                      dob: dob,
+                      dob_estimate: dob_estimate,
+                      gender: 'female',
+                      refuge: refuge,
+                      birthplace: nil,
+                      residence_requirement_met: nil,
+                      residence_history: nil,
+                      phone_number_provided: nil,
+                      phone_number: nil,
+                      email: nil,
+                      phone_number_unknown: nil,
+                      email_unknown: nil,
+                      voicemail_consent: nil,
+                      privacy_known: nil,
+                      cohabit_with_other: cohabit_with_other,
+                      are_contact_details_private: are_contact_details_private,
+                      type: 'OtherParty'
       )
     }
 
@@ -44,7 +44,7 @@ module Summary
       allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
-    subject { described_class.new(c100_application) }
+    subject { described_class.new(c100_application, other_party) }
 
     let(:has_previous_name) { 'no' }
     let(:previous_name) { nil }
@@ -64,12 +64,6 @@ module Summary
       it { expect(subject.show_header?).to eq(true) }
     end
 
-    describe '#record_collection' do
-      it {
-        expect(c100_application).to receive(:other_parties)
-        subject.record_collection
-      }
-    end
 
     describe '#answers' do
       before do

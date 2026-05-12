@@ -49,17 +49,53 @@ module Summary
       process_form(Summary::C1aForm.new(c100_application), mode)
     end
 
-    def generate_c8_form(mode = :pdf)
+    def generate_c8_form(mode = :pdf) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
       if PrivacyChange.changes_apply?
-        return unless c100_application.confidentiality_enabled? || c100_application.other_confidentiality_enabled? ||
+        return unless c100_application.confidentiality_enabled? ||
+                      c100_application.other_confidentiality_enabled? ||
                       c100_application.respondent_confidentiality_enabled?
       else
         return unless c100_application.confidentiality_enabled?
       end
 
       add_blank_page_if_needed(mode)
-      process_form(Summary::C8Form.new(c100_application), mode)
-    end
+
+      c100_application.applicants.each_with_index do |applicant, index|
+        section = Sections::C8ApplicantsDetails.new(
+          c100_application,
+          applicant,
+          index: index + 1
+        )
+
+        next unless section.show?
+
+        process_form(Summary::C8Form.new(c100_application, party_section: section), mode)
+      end
+
+      c100_application.respondents.each_with_index do |respondent, index|
+        section = Sections::C8RespondentsDetails.new(
+          c100_application,
+          respondent,
+          index: index + 1
+        )
+
+        next unless section.show?
+
+        process_form(Summary::C8Form.new(c100_application, party_section: section), mode)
+      end
+
+      c100_application.other_parties.each_with_index do |other_party, index|
+        section = Sections::C8OtherPartiesDetails.new(
+          c100_application,
+          other_party,
+          index: index + 1
+        )
+
+        next unless section.show?
+
+        process_form(Summary::C8Form.new(c100_application, party_section: section), mode)
+      end
+    end # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
 
     # Avoid adding unnecessary blank pages if there are no preceding forms,
     # for example in the case we are generating individual forms like the C8.
