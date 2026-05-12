@@ -287,7 +287,7 @@ en:
           body_text_not_private_html: <p class="govuk-body">You have told us that either the other people named in this application do not know any of your contact details, or you do not want to keep your contact details private from the other people named in this application (the respondents).</p>
           second_text_html: |
             <h2 class="govuk-heading-m">What the court will do</h2>
-            <p class="govuk-body">The court will hold this information securely and it will not be shared with any other party except Cafcass (Children and Family Court Advisory and Support Service) or Cafcass CYMRU unless it is by order of the court.</p>
+            <p class="govuk-body">The court will hold this information securely and it will not be shared with any other party except Cafcass (Children and Family Court Advisory and Support Service), Cafcass Cymru or the local authority, if any of them are involved in your case.</p>
       personal_details:
         edit:
           page_title: Applicant personal details
@@ -333,7 +333,7 @@ en:
         edit:
           page_title: "Keeping %{name}'s contact details private"
           heading: "Keeping %{name}'s contact details private"
-          hint: For example, if you believe that the other people in the case pose a risk to you, to your children or to another person in the case.
+          hint: For example, if you believe that other people in the case pose a risk to this person or the children who live with them.
           lead_text: "Do you want to keep %{name}'s contact details private from the other people named in the application?"
       refuge:
         edit:
