@@ -98,7 +98,6 @@ module Summary
       section_class.new(c100_application, party, index: index + 1)
     end
 
-
     # Avoid adding unnecessary blank pages if there are no preceding forms,
     # for example in the case we are generating individual forms like the C8.
     #
