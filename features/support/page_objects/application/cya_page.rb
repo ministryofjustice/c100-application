@@ -36,7 +36,10 @@ class CYAPage < BasePage
     row :children_abuse, '#children_abuse'
     row :domestic_abuse, '#domestic_abuse'
     row :other_abuse, '#other_abuse'
-    row :substance_abuse, CYANestedSummaryRow, '.app-cya--answers-group#substance_abuse'
+    section :substance_abuse, CYAGroup, '.app-cya--answers-group#substance_abuse' do
+      row :details, '#substance_abuse'
+      row :additional_details, '#substance_abuse_details'
+    end
   end
 
   section :abduction, CYAGroup, 'dl#abduction' do
@@ -51,8 +54,20 @@ class CYAPage < BasePage
     row :abuse_other, '#abuse_other'
   end
 
+  section :applicant_abuse_details, CYAGroup, 'dl#applicant_abuse_details' do
+    row :abuse_sexual, '#abuse_sexual'
+    row :abuse_physical, '#abuse_physical'
+    row :abuse_financial, '#abuse_financial'
+    row :abuse_psychological, '#abuse_psychological'
+    row :abuse_emotional, '#abuse_emotional'
+    row :abuse_other, '#abuse_other'
+  end
+
   section :nature_of_application, CYAGroup, 'dl#nature_of_application' do
-    row :child_arrangements_orders, '#child_arrangements_orders'
+    elements :child_arrangements_orders, 'li'
+    def answer
+      child_arrangements_orders.map(&:text).join(', ')
+    end
   end
 
   section :alternatives, CYAGroup, 'dl#alternatives' do
@@ -176,7 +191,10 @@ class CYAPage < BasePage
   end
 
   section :international_info, CYAGroup, 'dl#international_element' do
-    row :international_resident, CYANestedSummaryRow, '.app-cya--answers-group#international_resident'
+    section :international_resident, CYAGroup, '.app-cya--answers-group#international_resident' do
+      row :details, '#international_resident'
+      row :additional_details, '#international_resident_details'
+    end
     section :international_jurisdiction, CYAGroup, '.app-cya--answers-group#international_jurisdiction' do
       row :can_apply_outside_en_cy, '#international_jurisdiction'
       row :details, '#international_jurisdiction_details'
@@ -190,6 +208,7 @@ class CYAPage < BasePage
 
   section :attending_court, CYAGroup, 'dl#attending_court' do
     row :requires_intermediary_help, '#intermediary_help'
+    row :intermediary_help_details, '#intermediary_help_details'
     section :language_requirements, CYAGroup, '.app-cya--answers-group#language_interpreter' do
       row :interpreter, '#language_interpreter'
       row :sign_language_interpreter, '#sign_language_interpreter'

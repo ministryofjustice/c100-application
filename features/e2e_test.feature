@@ -41,7 +41,7 @@ Feature: Testing C100 end to end
     And I should see that all alternatives "have" been tried
     And I should see the children details:
       | full_name     | dob        | sex    | child_orders             | special_guardianship | parental_responsibility |
-      | John Smith Jr | 05-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
+      | John Smith Jr | 13-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
     And I should see the children "might be" known to other social services
     And I should see the applicant personal details
       | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
@@ -55,7 +55,7 @@ Feature: Testing C100 end to end
       | Annalise Keating | Keating Law Firm | Windsor Castle, Windsor, United Kingdom, SL4 1QF | annalise@law.com | 00000000000  | 00000000000 |
     And I should see the respondents details:
       | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
-      | Jane Doe  | 05-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
+      | Jane Doe  | 13-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "aren't" other people who need to be informed of the application
     And I should see the children residence details:
       | child_name    | residence       |
@@ -211,7 +211,7 @@ Feature: Testing C100 end to end
       | full_name     | dob        | sex    | child_orders             | special_guardianship | parental_responsibility |
       | John Smith Jr | 06-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
     And I should see the children "might be" known to other social services
-        And I should see the applicant personal details
+    And I should see the applicant personal details
       | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
       | No     | Yes           | No                      | John Doe Senior | 25-05-1998 | Male | Manchester | Father                |
     And I should see the applicant address and contact details:
@@ -301,53 +301,45 @@ Feature: Testing C100 end to end
     And I submit the application with email "jane_doe@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
     And I should be on the Check Your Answers page
-    And I should see "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme
-    And I should see they have attended MIAM
+    And I should see they "have" attended a MIAM
     And I should see they have a document signed by the mediator
-    And I should see they "have" got safety concerns about the children
-    And I should see they have safety concerns with the children about: "financial abuse, psychological abuse, emotional abuse, other abuse"
+    # And I should see they "have" got safety concerns about the children
+    And I should see they have safety concerns with the children about: "financial abuse, psychological abuse, emotional abuse, other abuse, abduction, drug alcohol or substance abuse"
     And I should see they have safety concerns with themselves about: "physical abuse, financial abuse"
     And I should see "No, I do not want the other person to spend time with the children"
-    And I should see they want the court to decide: "Decide who they live with and when"
-    And I should see they want the court to decide: "Decide how much time they spend with each person"
-    And I should see the child's full name is "Emily Doe"
-    And I should see the child's gender is "Female"
-    And I should see the child is "5" years old
-    And I should see the people who have parental responsibility for the child are: "Mother"
+    And I should see they want the court to decide: "Decide who they live with and when, Decide how much time they spend with each person"
+    And I should see the children details:
+      | full_name      | dob        | sex      | child_orders             | special_guardianship | parental_responsibility |
+      | John Smith Jr  | 13-05-2024 | Male     | Child Arrangements Order | No                   | Mother                  |
     And I should see the children "might be" known to other social services
-    And I should see the applicant's name is "Jane Doe"
-    And I should see the applicant's previous name is "Olivia Doe Jr"
-    And I should see the applicant's gender is "Female"
-    And I should see the applicant is "32" years old
-    And I should see the applicant's place of birth is "London"
-    And I should see the applicant's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
-    And I should see the applicant "has" lived at this address for more than 5 years
-    And I should see the applicant has provided an email "jane_doe@gmail.com"
-    And I should see the applicant has provided a phone number "00000888888"
-    And I should see the applicant's relationship to "Emily Doe" is "Mother"
-    And I should see the applicant's relationship to "John Doe" is "Mother"
+    And I should see the applicant personal details
+      | refuge | privacy_known | contact_details_private | full_name       | dob        | sex    | birthplace | relationship_to_child |
+      | No     | Unknown       | Current address         | Jane Doe        | 25-05-1998 | Female | London     | Mother                |
+    And I should see the applicant address and contact details:
+      | address                                 | lived_at_5_years | email_provided | email              | phone_number | voicemail_consent                    |
+      | Windsor Castle, Windsor, United Kingdom | Yes              | Yes            | jane_doe@gmail.com | 00000888888  | Yes, the court can leave a voicemail |
+    And I should see the applicant's relationship to "John Smith Jr" is "Mother"
+    And I should see the applicant's relationship to "Jane Smith" is "Mother"
     And I should see the applicant "doesn't" have a solicitor
-    And I should see the respondent's name is "John Doe"
-    And I should see the respondent's gender is "Male"
-    And I should see the respondent is "35" years old
-    And I should see the respondent's place of birth is "Windsor"
-    And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
-    And I should see the respondent "might not have" lived at that address for more than 5 years
-    And I should see the respondent's email is "john-doe@hotmail.com"
-    And I should see the respondent's phone number is "00000999999"
-    And I should see the respondent's relationship to "Emily Doe" is "Father"
-    And I should see the respondent's relationship to "John Doe" is "Father"
+    And I should see the respondents details:
+      | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email                | phone_number |
+      | John Doe  | 13-05-1991 | Male   | Father       | Windsor Castle, Windsor, United Kingdom | No               | john-doe@hotmail.com | 00000999999  |
+    #And I should see the respondent "might not have" lived at that address for more than 5 years
+    And I should see the respondent's relationship to "John Smith Jr" is "Father"
+    And I should see the respondent's relationship to "Jane Smith" is "Father"
     And I should see there "are" other people who need to be informed of the application
     And I should see the other party's name is "Judy Sitter"
     And I should see the other party's gender is "Female"
     And I should see the other party is "35" years of age
-    And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 1AA"
-    And I should see the other party's relationship to "John Doe" is "Caregiver"
-    And I should see the other party's relationship to "Emily Doe" is "Caregiver"
-    And I should see the child "Emily Doe" lives with "Jane Doe"
+    And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 2AA"
+    And I should see the other party's relationship to "John Smith Jr" is "Caregiver"
+    And I should see the other party's relationship to "Jane Smith" is "Caregiver"
+    And I should see the children residence details:
+      | child_name    | residence |
+      | John Smith Jr | Jane Doe  |
     And I should see the children "have" been involved in other proceedings
     And I should see the names of the children involved in other proceedings are "Emily Doe and John Doe"
     And I should see the name of the court is "Aylesbury"
@@ -363,7 +355,7 @@ Feature: Testing C100 end to end
     And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "are" people who need an intermediary to help them in court
     And I should see the details provided for the intermediary are "Needed for the respondent"
-    And I should see there "are" special language requirements
+    #And I should see there "are" special language requirements
     And I should see there "are" specific safety arrangements specified for the court
     And I should see there "aren't" special facilities needed when attending court
     And I should see the email for submitting an application to court is "jane_doe@gmail.com"

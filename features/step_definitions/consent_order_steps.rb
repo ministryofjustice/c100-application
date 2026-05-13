@@ -576,7 +576,7 @@ And("I navigate the respondent details journey with an additional child") do
     address_line_1: 'Windsor Castle',
     town: 'Windsor',
     country: 'United Kingdom',
-    residence_5_years: 'yes'
+    residence_5_years: 'no'
   )
 
   respondent_contact_details_page.submit_contact_details(
@@ -714,7 +714,7 @@ end
 
 And(/^I navigate the attending court journey/) do
   expect(attending_court_intermediary_page).to be_displayed
-  attending_court_intermediary_page.submit_yes('Details of the intermediary')
+  attending_court_intermediary_page.submit_yes('Needed for the respondent')
 
   expect(attending_court_language_page).to be_displayed
   attending_court_language_page.submit_language_requirements(language_interpreter_details: 'German needed for respondent')
@@ -775,12 +775,13 @@ And(/^I complete the applicant details journey keeping my contact details privat
 
   # Personal details
   applicant_personal_details_page.submit_personal_details(
-    has_previous_name: 'no',
+    has_previous_name: 'yes',
+    previous_name: 'Olivia Doe Jr',
     gender: 'female',
     day: '25',
     month: '05',
     year: '1998',
-    birthplace: 'Manchester'
+    birthplace: 'London'
   )
 
   # Relationship
@@ -790,16 +791,16 @@ And(/^I complete the applicant details journey keeping my contact details privat
   # Address
   address_lookup_page.click_outside_uk
   applicant_address_details_page.submit_address_details(
-    address_line_1: 'Test street',
-    town: 'London',
+    address_line_1: 'Windsor Castle',
+    town: 'Windsor',
     country: 'United Kingdom',
     residence_5_years: 'yes'
   )
 
   # Contact details
   applicant_contact_details_page.submit_contact_details(
-    email: 'john@email.com',
-    phone: '00000000000',
+    email: 'jane_doe@gmail.com',
+    phone: '00000888888',
     voicemail_consent: 'yes'
   )
 end

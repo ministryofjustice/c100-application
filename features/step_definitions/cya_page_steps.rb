@@ -30,7 +30,7 @@ end
 And(/^I should see they "(have|haven't)" got safety concerns about the children$/) do |arg|
   answer = (arg == "have" ? "Yes" : "No")
   expect(cya_page.safety_concerns.risk_of_abduction.answer).to eq(answer)
-  expect(cya_page.safety_concerns.substance_abuse.answer).to eq(answer)
+  expect(cya_page.safety_concerns.substance_abuse.details.answer).to eq(answer)
   expect(cya_page.safety_concerns.children_abuse.answer).to eq(answer)
   expect(cya_page.safety_concerns.domestic_abuse.answer).to eq(answer)
   expect(cya_page.safety_concerns.other_abuse.answer).to eq(answer)
@@ -40,13 +40,13 @@ def check_safety_concerns(expected_yes_concerns, safety_concerns)
   # Check that the provided answers equal "Yes"
   expected_yes_concerns.each do |expected_concern|
     matching_concern = safety_concerns.keys.find { |question| question.include?(expected_concern) }
-    expect(safety_concerns[matching_concern]).to eq("Yes"), "Expected concern does not equal 'Yes': #{expected_concern}"
+    expect(safety_concerns[matching_concern]).to eq("Yes"), "Concern does not equal 'Yes': #{expected_concern}"
   end
 
   # Check that all remaining concerns equal "No"
   safety_concerns.each do |question, answer|
     next if expected_yes_concerns.include?(question)
-    expect(answer).to eq("No"), "Expected concern does not equal 'No': #{question}"
+    expect(answer).to eq("No"), "Concern does not equal 'No': #{question}"
   end
 end
 
@@ -57,7 +57,7 @@ And(/^I should see they have safety concerns with the children about: "([^"]*)"$
 
   safety_concerns = {
     "abduction" => cya_page.safety_concerns.risk_of_abduction.answer,
-    "drug, alcohol or substance abuse" => cya_page.safety_concerns.substance_abuse.answer,
+    "drug alcohol or substance abuse" => cya_page.safety_concerns.substance_abuse.details.answer,
     concern.abuse_sexual.question.downcase => concern.abuse_sexual.answer,
     concern.abuse_physical.question.downcase => concern.abuse_physical.answer,
     concern.abuse_financial.question.downcase => concern.abuse_financial.answer,
@@ -70,17 +70,19 @@ And(/^I should see they have safety concerns with the children about: "([^"]*)"$
 end
 
 And(/^I should see they have safety concerns with themselves about: "([^"]*)"$/) do |list|
-  concerns = list.downcase.split(',').map(&:strip)
+  expected_yes_concerns = list.downcase.split(',').map(&:strip)
+  concern = cya_page.applicant_abuse_details
 
-  within('#applicant_abuse_details') do
-    all("dt.govuk-summary-list__key").each do |dt_element|
-      concern_text = dt_element.text.downcase
-      next unless concerns.any? { |concern| concern_text.include?(concern) }
+  safety_concerns = {
+    concern.abuse_sexual.question.downcase => concern.abuse_sexual.answer,
+    concern.abuse_physical.question.downcase => concern.abuse_physical.answer,
+    concern.abuse_financial.question.downcase => concern.abuse_financial.answer,
+    concern.abuse_psychological.question.downcase => concern.abuse_psychological.answer,
+    concern.abuse_emotional.question.downcase => concern.abuse_emotional.answer,
+    concern.abuse_other.question.downcase => concern.abuse_other.answer
+  }
 
-      dd_element = dt_element.sibling("dd.govuk-summary-list__value", visible: :all)
-      expect(dd_element).to have_text(/#{Regexp.escape('yes')}/i)
-    end
-  end
+  check_safety_concerns(expected_yes_concerns, safety_concerns)
 end
 
 And(/^I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order$/) do
@@ -93,7 +95,7 @@ And(/^I should see they have made a consent order application$/) do
 end
 
 And(/^I should see they want the court to decide: "([^"]*)"$/) do |arg|
-  expect(cya_page.nature_of_application.child_arrangements_orders.answer).to eq(arg)
+  expect(cya_page.nature_of_application.answer).to eq(arg)
 end
 
 And(/^I should see they want the court to resolve an issue about: "([^"]*)"$/) do |arg|
@@ -529,7 +531,7 @@ end
 
 And(/^I should see the life of someone significant to the child "(is|isn't)" outside the UK$/) do |arg|
   answer = (arg == "is" ? "Yes" : "No")
-  expect(cya_page.international_info.international_resident.answer).to eq(answer)
+  expect(cya_page.international_info.international_resident.details.answer).to eq(answer)
 end
 
 And(/^I should see another person in this application "(could|couldn't)" apply for an order outside the UK$/) do |arg|
@@ -590,11 +592,7 @@ And(/^I should see there "(are|aren't)" people who need an intermediary to help 
 end
 
 And(/^I should see the details provided for the intermediary are "([^"]*)"$/) do |arg|
-  within('#attending_court') do
-    within('#intermediary') do
-        expect(page).to have_content(arg)
-    end
-  end
+  expect(cya_page.attending_court.intermediary_help_details.answer).to eq(arg)
 end
 
 And(/^I should see there "(are|aren't)" special language requirements$/) do |arg|

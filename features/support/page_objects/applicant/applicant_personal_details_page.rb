@@ -5,6 +5,7 @@ class ApplicantPersonalDetailsPage < BasePage
     element :header, 'h1', text: 'Provide details for'
     element :has_previous_name_yes, "input#steps-applicant-personal-details-form-has-previous-name-yes-field", visible: false
     element :has_previous_name_no, "input#steps-applicant-personal-details-form-has-previous-name-no-field", visible: false
+    element :previous_name_field, "input[name='steps_applicant_personal_details_form[previous_name]']"
     element :gender_male, "input#steps-applicant-personal-details-form-gender-male-field", visible: false
     element :gender_female, "input#steps-applicant-personal-details-form-gender-female-field", visible: false
     element :dob_day, "input[name='steps_applicant_personal_details_form[dob(3i)]']"
@@ -14,9 +15,10 @@ class ApplicantPersonalDetailsPage < BasePage
     element :continue_button, "button", text: "Continue"
   end
 
-  def submit_personal_details(has_previous_name:, gender:, day:, month:, year:, birthplace:)
+  def submit_personal_details(has_previous_name:, previous_name:, gender:, day:, month:, year:, birthplace:)
     if has_previous_name == 'yes'
       content.has_previous_name_yes.click
+      content.previous_name_field.set previous_name
     else
       content.has_previous_name_no.click
     end
