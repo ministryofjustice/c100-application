@@ -44,8 +44,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
   end
 
   describe '#application_to_court' do
-    let(:documents) { { bundle: StringIO.new('bundle pdf'), c8_form: c8_form, json_form: tmp_file } }
-    let(:c8_form) { StringIO.new('') }
+    let(:documents) { { bundle: StringIO.new('bundle pdf'), c8_forms: [], json_form: tmp_file } }
     let(:tmp_file) {
       tmp = Tempfile.new('test')
       tmp << 'test2'
@@ -120,7 +119,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          link_to_c8_pdf: '',
+          c8_links: [],
           link_to_pdf: { 
             file: 'YnVuZGxlIHBkZg==',
             filename: nil,
@@ -174,7 +173,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          link_to_c8_pdf: '',
+          c8_links: [],
           link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
             confirm_email_before_download: false,
             retention_period: nil },
@@ -195,7 +194,15 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
     end
 
     context 'and applicant has private contact details' do
-      let(:c8_form) { StringIO.new('c8 form') }
+      before do
+        documents[:c8_forms] = [
+          {
+            label: 'Applicant 1',
+            key: :c8_applicant_1,
+            file: StringIO.new('c8 form')
+          }
+        ]
+      end
 
       it 'has the right personalisation' do
         allow(c100_application).to receive(:confidentiality_enabled?).
@@ -205,13 +212,84 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           mail.govuk_notify_personalisation
         ).to match(hash_including(
           c8_included: 'yes',
-          link_to_c8_pdf: { file: 'YzggZm9ybQ==', filename: nil,
-          confirm_email_before_download: false,
-          retention_period: nil },
+          c8_links:
+            [{
+              label: 'Applicant 1',
+              key: :c8_applicant_1,
+              file: 'YzggZm9ybQ==',
+              filename: nil,
+              confirm_email_before_download: false,
+              retention_period: nil
+            }],
           link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
           confirm_email_before_download: false,
           retention_period: nil },
         ))
+      end
+    end
+
+    context 'and application has multiple private contact details' do
+      before do
+        documents[:c8_forms] = [
+          {
+            label: 'Applicant 1',
+            key: :c8_applicant_1,
+            file: StringIO.new('c8 form 1')
+          },
+          {
+            label: 'Respondent 1',
+            key: :c8_respondent_1,
+            file: StringIO.new('c8 form 2')
+          },
+          {
+            label: 'Other party 1',
+            key: :c8_other_party_1,
+            file: StringIO.new('c8 form 3')
+          }
+        ]
+      end
+
+      it 'has the right personalisation' do
+        allow(c100_application).to receive(:confidentiality_enabled?).
+          and_return(true)
+
+        expect(
+          mail.govuk_notify_personalisation
+        ).to match(hash_including(
+                     c8_included: 'yes',
+                     c8_links: [
+                       {
+                         label: 'Applicant 1',
+                         key: :c8_applicant_1,
+                         file: 'YzggZm9ybSAx',
+                         filename: nil,
+                         confirm_email_before_download: false,
+                         retention_period: nil
+                       },
+                       {
+                         label: 'Respondent 1',
+                         key: :c8_respondent_1,
+                         file: 'YzggZm9ybSAy',
+                         filename: nil,
+                         confirm_email_before_download: false,
+                         retention_period: nil
+                       },
+                       {
+                         label: 'Other party 1',
+                         key: :c8_other_party_1,
+                         file: 'YzggZm9ybSAz',
+                         filename: nil,
+                         confirm_email_before_download: false,
+                         retention_period: nil
+                       }
+                     ],
+                     link_to_pdf: {
+                       file: 'YnVuZGxlIHBkZg==',
+                       filename: nil,
+                       confirm_email_before_download: false,
+                       retention_period: nil
+                     },
+                     ))
       end
     end
   end

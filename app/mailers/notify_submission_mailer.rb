@@ -64,13 +64,10 @@ class NotifySubmissionMailer < NotifyMailer
 
   def build_c8_links
     Array(@documents[:c8_forms]).map do |doc|
-      upload = prepare_upload(doc[:file])
-
-      {
+      prepare_upload(doc[:file]).merge(
         label: doc[:label],
-        key: doc[:key],
-        file: upload[:file],
-      }
+        key: doc[:key]
+      )
     end
   end
 

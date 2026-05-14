@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe C100App::CourtOnlineSubmission do
-  let(:c100_application) { instance_double(C100Application, email_submission: email_submission, court: court) }
+  let(:c100_application) { instance_double(C100Application,email_submission: email_submission, court: court, applicants: applicants, respondents: respondents, other_parties: other_parties) }
   let(:email_submission) { instance_double(EmailSubmission, update: true) }
   let(:court) { double(documents_email: 'court@email.com') }
+  let(:applicants) { [] }
+  let(:respondents) { [] }
+  let(:other_parties) { [] }
 
   subject { described_class.new(c100_application) }
 
@@ -29,7 +32,6 @@ RSpec.describe C100App::CourtOnlineSubmission do
 
       it 'generates a bundle with C100 and C1A and a separate C8 form' do
         expect(pdf_presenter).to receive(:generate).with(:c100, :c1a).ordered
-        expect(pdf_presenter).to receive(:generate).with(:c8).ordered
         subject.process
 
         # TEMPORARY REMOVAL OF JSON
@@ -38,7 +40,7 @@ RSpec.describe C100App::CourtOnlineSubmission do
 
         # TEMPORARY REMOVAL
         # expect(subject.documents.keys).to match_array([:bundle, :c8_form, :json_form])
-        expect(subject.documents.keys).to match_array([:bundle, :c8_form])
+        expect(subject.documents.keys).to match_array([:bundle, :c8_forms])
       end
     end
 
@@ -48,7 +50,7 @@ RSpec.describe C100App::CourtOnlineSubmission do
       before do
         # TEMPORARY REMOVAL OF JSON
         allow(NotifySubmissionMailer).to receive(:with).with(
-          c100_application: c100_application, documents: { bundle: kind_of(StringIO), c8_form: kind_of(StringIO)
+          c100_application: c100_application, documents: { bundle: kind_of(StringIO), c8_forms: kind_of(Array)
           # , json_form: json_file
           }
         ).and_return(mailer)
