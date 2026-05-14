@@ -451,118 +451,135 @@ Feature: Testing C100 end to end
     And I should see "Download your application"
 
   Scenario: Consent order (path six)
-    When I click the radio button "Consent order"
-    And I click the "Continue" button
-    And I should see "Upload the draft of your consent order"
-    And I upload a document using the file uploader
-    And I click the "Continue" button
-    Then I should see "You do not have to attend a MIAM"
-    And I click the "Continue" link
-    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
-    And I choose "Yes"
-    Then I should see "Safety concerns"
-    And I should see "Why do we need this information and what will we do with it?"
-    And I click the "Continue" link
-    Then I should see "Are the children at risk of being abducted?"
-    And I choose "No"
-    Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
-    And I choose "No"
-    Then I should see "Have the children suffered or are they at risk of suffering domestic or child abuse?"
-    And I choose "Yes"
-    Then I should see "You and the children"
-    And I click the "Continue" link
-    Then I should see "The children’s safety"
-    And I click the "Continue" link
-    Then I should see "Have the children ever been sexually abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have the children ever been physically abused by the respondent?"
-    And I choose "No"
-    Then I should see "Have the children ever been financially abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the children’s financial abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from the kids"
-    And I fill in "When did this behaviour start?" with "01-2023"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "06-2023"
-    And I click the "Continue" button
-    Then I should see "Have the children ever been psychologically abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the children’s psychological abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent was horrid to the kids"
-    And I fill in "When did this behaviour start?" with "01-2023"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "06-2023"
-    And I click the "Continue" button
-    Then I should see "Have the children ever been emotionally abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the children’s emotional abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent made the kids sad on purpose"
-    And I fill in "When did this behaviour start?" with "01-2023"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "06-2023"
-    And I click the "Continue" button
-    Then I should see "Do you have any other safety or welfare concerns about the children?"
-    And I choose "No"
-    Then I should see "Your safety"
-    And I click the "Continue" link
-    Then I should see "Have you ever been sexually abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the sexual abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent touched me non consensually"
-    And I fill in "When did this behaviour start?" with "01-2023"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "06-2023"
-    And I click the "Continue" button
-    Then I should see "Have you ever been physically abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the physical abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent hit me several times"
-    And I fill in "When did this behaviour start?" with "01-2023"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "06-2023"
-    And I click the "Continue" button
-    Then I should see "Have you ever been financially abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the financial abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from me"
-    And I fill in "When did this behaviour start?" with "01-2023"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "06-2023"
-    And I click the "Continue" button
-    Then I should see "Have you ever been psychologically abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the psychological abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent said awful things to me"
-    And I fill in "When did this behaviour start?" with "01-2023"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "06-2023"
-    And I click the "Continue" button
-    Then I should see "Have you ever been emotionally abused by the respondent?"
-    And I choose "Yes"
-    Then I should see "About the emotional abuse"
-    And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent called me awful names"
-    And I fill in "When did this behaviour start?" with "01-2023"
-    And I choose "No" for all options on this page
-    And I fill in "When did the behaviour stop?" with "06-2023"
-    And I click the "Continue" button
-    Then I should see "Do you have any other concerns about your welfare?"
-    And I choose "No"
-    Then I should see "Have you had or do you currently have any court orders made for your protection?"
-    And I choose "No"
-    Then I should see "Contact between the children and the other people in this application"
-    And I choose "No" for all options on this page
-    And I click the "Continue" button
-    Then I should see "What are you asking the court to decide about the children involved?"
-    And I check "Decide who they live with and when"
-    And I check "Resolve a specific issue"
-    And I check "A religious issue"
-    And I click the "Continue" button
-    Then I should see "What you’re asking the court to decide about the children"
-    And I should see "Decide who they live with and when"
-    And I should see "This is known as a Child Arrangements Order."
-    And I should see "A religious issue"
-    And I should see "This is known as a Specific Issue Order."
-    Then I click the "Continue" link
+    When I navigate the Consent Order journey with a child protection case
+    And I "don't" have abduction concerns about the children
+    And I "don't" have concerns about drug, alcohol or substance abuse
+    And I "do" have domestic abuse or child concerns about the children
+    And I have no abuse or physical abuse concerns about the children
+    And I do have financial concerns about the children
+    And I "do" have psychological and emotional abuse concerns about the children
+    And I "don't" have other abuse concerns about the children
+    And I "have" been abused by the respondent
+    And I "have" been physically abused by the respondent
+    And I "have" been financially abused by the respondent
+    And I "have" been psychologically and emotionally abused by the respondent
+    And I "don't" have any other concerns about my welfare
+    And I "haven't" had or currently have court orders made for my protection
+    And I "don't" agree to the children having contact with the other people in this application
+    And I ask the court to decide specific issues: "a religious issue"
+    # #
+    # When I click the radio button "Consent order"
+    # And I click the "Continue" button
+    # And I should see "Upload the draft of your consent order"
+    # And I upload a document using the file uploader
+    # And I click the "Continue" button
+    # Then I should see "You do not have to attend a MIAM"
+    # And I click the "Continue" link
+    # Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
+    # And I choose "Yes"
+    # Then I should see "Safety concerns"
+    # And I should see "Why do we need this information and what will we do with it?"
+    # And I click the "Continue" link
+    # Then I should see "Are the children at risk of being abducted?"
+    # And I choose "No"
+    # Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
+    # And I choose "No"
+    # Then I should see "Have the children suffered or are they at risk of suffering domestic or child abuse?"
+    # And I choose "Yes"
+    # Then I should see "You and the children"
+    # And I click the "Continue" link
+    # Then I should see "The children’s safety"
+    # And I click the "Continue" link
+    # Then I should see "Have the children ever been sexually abused by the respondent?"
+    # And I choose "No"
+    # Then I should see "Have the children ever been physically abused by the respondent?"
+    # And I choose "No"
+    # Then I should see "Have the children ever been financially abused by the respondent?"
+    # And I choose "Yes"
+    # Then I should see "About the children’s financial abuse"
+    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from the kids"
+    # And I fill in "When did this behaviour start?" with "01-2023"
+    # And I choose "No" for all options on this page
+    # And I fill in "When did the behaviour stop?" with "06-2023"
+    # And I click the "Continue" button
+    # Then I should see "Have the children ever been psychologically abused by the respondent?"
+    # And I choose "Yes"
+    # Then I should see "About the children’s psychological abuse"
+    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent was horrid to the kids"
+    # And I fill in "When did this behaviour start?" with "01-2023"
+    # And I choose "No" for all options on this page
+    # And I fill in "When did the behaviour stop?" with "06-2023"
+    # And I click the "Continue" button
+    # Then I should see "Have the children ever been emotionally abused by the respondent?"
+    # And I choose "Yes"
+    # Then I should see "About the children’s emotional abuse"
+    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent made the kids sad on purpose"
+    # And I fill in "When did this behaviour start?" with "01-2023"
+    # And I choose "No" for all options on this page
+    # And I fill in "When did the behaviour stop?" with "06-2023"
+    # And I click the "Continue" button
+    # Then I should see "Do you have any other safety or welfare concerns about the children?"
+    # And I choose "No"
+    # Then I should see "Your safety"
+    # And I click the "Continue" link
+    # Then I should see "Have you ever been sexually abused by the respondent?"
+    # And I choose "Yes"
+    # Then I should see "About the sexual abuse"
+    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent touched me non consensually"
+    # And I fill in "When did this behaviour start?" with "01-2023"
+    # And I choose "No" for all options on this page
+    # And I fill in "When did the behaviour stop?" with "06-2023"
+    # And I click the "Continue" button
+    # Then I should see "Have you ever been physically abused by the respondent?"
+    # And I choose "Yes"
+    # Then I should see "About the physical abuse"
+    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent hit me several times"
+    # And I fill in "When did this behaviour start?" with "01-2023"
+    # And I choose "No" for all options on this page
+    # And I fill in "When did the behaviour stop?" with "06-2023"
+    # And I click the "Continue" button
+    # Then I should see "Have you ever been financially abused by the respondent?"
+    # And I choose "Yes"
+    # Then I should see "About the financial abuse"
+    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from me"
+    # And I fill in "When did this behaviour start?" with "01-2023"
+    # And I choose "No" for all options on this page
+    # And I fill in "When did the behaviour stop?" with "06-2023"
+    # And I click the "Continue" button
+    # Then I should see "Have you ever been psychologically abused by the respondent?"
+    # And I choose "Yes"
+    # Then I should see "About the psychological abuse"
+    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent said awful things to me"
+    # And I fill in "When did this behaviour start?" with "01-2023"
+    # And I choose "No" for all options on this page
+    # And I fill in "When did the behaviour stop?" with "06-2023"
+    # And I click the "Continue" button
+    # Then I should see "Have you ever been emotionally abused by the respondent?"
+    # And I choose "Yes"
+    # Then I should see "About the emotional abuse"
+    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent called me awful names"
+    # And I fill in "When did this behaviour start?" with "01-2023"
+    # And I choose "No" for all options on this page
+    # And I fill in "When did the behaviour stop?" with "06-2023"
+    # And I click the "Continue" button
+    # Then I should see "Do you have any other concerns about your welfare?"
+    # And I choose "No"
+    # Then I should see "Have you had or do you currently have any court orders made for your protection?"
+    # And I choose "No"
+    # Then I should see "Contact between the children and the other people in this application"
+    # And I choose "No" for all options on this page
+    # And I click the "Continue" button
+    # Then I should see "What are you asking the court to decide about the children involved?"
+    # And I check "Decide who they live with and when"
+    # And I check "Resolve a specific issue"
+    # And I check "A religious issue"
+    # And I click the "Continue" button
+    # Then I should see "What you’re asking the court to decide about the children"
+    # And I should see "Decide who they live with and when"
+    # And I should see "This is known as a Child Arrangements Order."
+    # And I should see "A religious issue"
+    # And I should see "This is known as a Specific Issue Order."
+    # Then I click the "Continue" link
     Then I should see "Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?"
     And I choose "No"
     Then I should see "Going to court"

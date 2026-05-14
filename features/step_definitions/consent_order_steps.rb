@@ -69,6 +69,22 @@ When(/^I navigate the MIAM journey with a child protection case$/) do
   child_protection_info_page.continue_to_next_step
 end
 
+When(/^I navigate the Consent Order journey with a child protection case$/) do
+  expect(consent_order_page).to be_displayed
+  consent_order_page.submit_existing_consent_order
+
+  file_path = File.absolute_path('features/support/sample_file/image.jpg')
+  upload_consent_order_page.upload_file(file_path)
+
+  child_protection_info_page.continue_to_next_step
+
+  expect(child_protection_case_page).to be_displayed
+  child_protection_case_page.submit_yes
+
+  expect(safety_concern_page).to be_displayed
+  safety_concern_page.continue_to_next_step
+end
+
 When(/^I navigate back to the consent order page$/) do
   expect(safety_concern_page).to be_displayed
   safety_concern_page.go_back
@@ -139,17 +155,21 @@ And(/^I "(do|don't)" have psychological and emotional abuse concerns about the c
   end
 end
 
-And(/^I do have other abuse concerns about the children$/) do
+And(/^I "(do|don't)" have other abuse concerns about the children$/) do |arg|
   expect(abuse_concerns_children_other_page).to be_displayed
-  abuse_concerns_children_other_page.submit_yes
+  if arg == 'do'
+    abuse_concerns_children_other_page.submit_yes
 
-  expect(abuse_concerns_children_other_details_page).to be_displayed
-  abuse_concerns_children_other_details_page.submit_concern_details(
-    concern_details: 'Description of safety concerns I have',
-    behaviour_start: 'This started about a year ago',
-    behaviour_stop: 'It stopped earlier this month',
-    asked_for_help: false
-  )
+    expect(abuse_concerns_children_other_details_page).to be_displayed
+    abuse_concerns_children_other_details_page.submit_concern_details(
+      concern_details: 'Description of safety concerns I have',
+      behaviour_start: 'This started about a year ago',
+      behaviour_stop: 'It stopped earlier this month',
+      asked_for_help: false
+    )
+  else
+    abuse_concerns_children_other_page.submit_no
+  end
 end
 
 And(/^I don't have any safety concerns about myself$/) do
@@ -396,12 +416,31 @@ And('I navigate the abduction risk journey') do
   abduction_risk_details_page.submit_risk_details('They might be taken by their other parent', 'The children are with me')
 end
 
+And(/^I "(do|don't)" have abduction concerns about the children$/) do |arg|
+  expect(safety_concern_abduction_page).to be_displayed
+  if arg == 'do'
+    safety_concern_abduction_page.submit_yes
+  else
+    safety_concern_abduction_page.submit_no
+  end
+end
+
+
 And(/^I "(do|don't)" have concerns about drug, alcohol or substance abuse$/) do |arg|
   expect(safety_concern_substance_page).to be_displayed
   if arg == 'do'
     safety_concern_substance_page.submit_yes("Alcoholic and drug abuse details")
   else
     safety_concern_substance_page.submit_no
+  end
+end
+
+And(/^I "(do|don't)" have domestic abuse or child concerns about the children$/) do |arg|
+  expect(safety_concern_abuse_page).to be_displayed
+  if arg == 'do'
+    safety_concern_abuse_page.submit_yes
+  else
+    safety_concern_abuse_page.submit_no
   end
 end
 
@@ -419,6 +458,48 @@ And(/I ask the court to decide "(.*)"/) do |issue|
     expect(petition_playback_page.content.child_arrangements_time).to be_visible
   end
   expect(petition_playback_page.content.child_arrangements_order).to be_visible
+  petition_playback_page.continue_to_next_step
+end
+
+And(/^I ask the court to decide specific issues: "(.*)"$/) do |issues|
+  selected_issues = issues.split(',').map(&:strip)
+
+  expect(petition_orders_page).to be_displayed
+  petition_orders_page.select_issue_specific_issues(
+    holiday: selected_issues.include?('a specific holiday or arrangement'),
+    school: selected_issues.include?('what school they’ll go to'),
+    religion: selected_issues.include?('a religious issue'),
+    names: selected_issues.include?('changing their names or surname'),
+    medical: selected_issues.include?('medical treatment'),
+    moving: selected_issues.include?('relocating the children to a different area in england and wales'),
+    moving_abroad: selected_issues.include?('relocating the children outside of england and wales'),
+    child_return: selected_issues.include?('returning the children to your care')
+  )
+  petition_orders_page.submit
+  
+  expect(petition_playback_page).to be_displayed
+  selected_issues.each do |issue|
+    case issue
+    when 'a specific holiday or arrangement'
+      expect(petition_playback_page.content.specific_issues_holiday).to be_visible
+    when 'what school they’ll go to'
+      expect(petition_playback_page.content.specific_issues_school).to be_visible
+    when 'a religious issue'
+      expect(petition_playback_page.content.specific_issues_religion).to be_visible
+    when 'changing their names or surname'
+      expect(petition_playback_page.content.specific_issues_names).to be_visible
+    when 'medical treatment'
+      expect(petition_playback_page.content.specific_issues_medical).to be_visible
+    when 'relocating the children to a different area in england and wales'
+      expect(petition_playback_page.content.specific_issues_moving).to be_visible
+    when 'relocating the children outside of england and wales'
+      expect(petition_playback_page.content.specific_issues_moving_abroad).to be_visible
+    when 'returning the children to your care'
+      expect(petition_playback_page.content.specific_issues_child_return).to be_visible
+    else
+      raise ArgumentError, "Unknown specific issue: '#{issue}'"
+    end
+  end
   petition_playback_page.continue_to_next_step
 end
 

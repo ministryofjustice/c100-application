@@ -1,4 +1,4 @@
-class UploadConsentOrderPage < BasePage
+class UploadConsentOrderPage < UploadPage
   set_url '/'
 
   section :content, '#main-content' do
