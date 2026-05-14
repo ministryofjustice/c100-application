@@ -25,12 +25,15 @@ class NotifySubmissionMailer < NotifyMailer
 
     document_personalisation = build_document_variables
 
+    c8_links = build_c8_links
+
     set_personalisation(
       shared_personalisation.merge(
         urgent: notify_boolean(@c100_application.mark_as_urgent?),
         safety_concerns: notify_boolean(@c100_application.has_safety_concerns?),
         c8_included: notify_boolean(@c100_application.any_confidentiality_enabled?),
-        link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
+        # link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
+        c8_links: c8_links,
         link_to_pdf: prepare_upload(@documents[:bundle]),
         link_to_json: prepare_upload(@documents[:json_form]),
         **document_personalisation
@@ -58,6 +61,18 @@ class NotifySubmissionMailer < NotifyMailer
   end
 
   private
+
+  def build_c8_links
+    Array(@documents[:c8_forms]).map do |doc|
+      upload = prepare_upload(doc[:file])
+
+      {
+        label: doc[:label],
+        key: doc[:key],
+        file: upload[:file],
+      }
+    end
+  end
 
   def build_document_variables
     keys = %i[draft_consent_order miam_certificate exemption existing_court_order]

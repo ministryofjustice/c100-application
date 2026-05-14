@@ -31,6 +31,16 @@ module Summary
       'C100 child arrangements application.pdf'.freeze
     end
 
+    def generate_single_c8(section)
+      process_form(
+        Summary::C8Form.new(
+          c100_application,
+          party_section: section
+        ),
+        :pdf
+      )
+    end
+
     private
 
     def generate_c100_form(mode = :pdf)

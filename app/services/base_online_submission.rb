@@ -29,6 +29,20 @@ class BaseOnlineSubmission
     StringIO.new(presenter.to_pdf)
   end
 
+  def generate_single_c8_pdf(party, section_class, index)
+    presenter = Summary::PdfPresenter.new(c100_application)
+
+    section = section_class.new(
+      c100_application,
+      party,
+      index: index + 1
+    )
+
+    presenter.generate_single_c8(section)
+
+    StringIO.new(presenter.to_pdf)
+  end
+
   def generate_json
     json_presenter = Summary::JsonPresenter.new(c100_application)
     json_presenter.generate
