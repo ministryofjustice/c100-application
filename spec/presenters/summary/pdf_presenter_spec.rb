@@ -101,15 +101,24 @@ describe Summary::PdfPresenter do
 
     context 'when C8 is triggered' do
       let(:are_contact_details_private) { 'yes' }
+
       before do
-        Applicant.create(c100_application: c100_application,
-                         are_contact_details_private: are_contact_details_private)
+        allow(c100_application).to receive(:confidentiality_enabled?).and_return(true)
+
+        Applicant.create(
+          c100_application: c100_application,
+          are_contact_details_private: 'yes',
+          contact_details_private: [
+            ContactDetails::ADDRESS.to_s,
+            ContactDetails::EMAIL.to_s,
+            ContactDetails::PHONE_NUMBER.to_s
+          ]
+        )
       end
 
       after do
         c100_application.applicants.destroy_all
       end
-
 
       it 'generates the C100 form and the C8' do
         expect(generator).to receive(:generate).with(
@@ -143,8 +152,17 @@ describe Summary::PdfPresenter do
       context 'blank pages' do
         before do
           expect(generator).to receive(:pdf_data_rendered?).and_return(false)
-          Applicant.create(c100_application: c100_application,
-                           are_contact_details_private: are_contact_details_private)
+          allow(c100_application).to receive(:confidentiality_enabled?).and_return(true)
+
+          Applicant.create(
+            c100_application: c100_application,
+            are_contact_details_private: 'yes',
+            contact_details_private: [
+              ContactDetails::ADDRESS.to_s,
+              ContactDetails::EMAIL.to_s,
+              ContactDetails::PHONE_NUMBER.to_s
+            ]
+          )
         end
 
         after do

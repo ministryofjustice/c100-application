@@ -50,15 +50,48 @@ module Summary
     end
 
     def generate_c8_form(mode = :pdf)
-      if PrivacyChange.changes_apply?
-        return unless c100_application.confidentiality_enabled? || c100_application.other_confidentiality_enabled? ||
-                      c100_application.respondent_confidentiality_enabled?
-      else
-        return unless c100_application.confidentiality_enabled?
-      end
+      return unless c8_form_required?
 
       add_blank_page_if_needed(mode)
-      process_form(Summary::C8Form.new(c100_application), mode)
+
+      process_all_parties(mode)
+    end
+
+    def c8_form_required?
+      c100_application.confidentiality_enabled? || c100_application.other_confidentiality_enabled? ||
+        c100_application.respondent_confidentiality_enabled?
+    end
+
+    def process_all_parties(mode)
+      process_applicants(mode)
+      process_respondents(mode)
+      process_other_parties(mode)
+    end
+
+    def process_applicants(mode)
+      process_party_collection(c100_application.applicants, Sections::C8ApplicantsDetails, mode)
+    end
+
+    def process_respondents(mode)
+      process_party_collection(c100_application.respondents, Sections::C8RespondentsDetails, mode)
+    end
+
+    def process_other_parties(mode)
+      process_party_collection(c100_application.other_parties, Sections::C8OtherPartiesDetails, mode)
+    end
+
+    def process_party_collection(collection, section_class, mode)
+      collection.each_with_index do |party, index|
+        section = build_section(section_class, party, index)
+
+        next unless section.show?
+
+        process_form(Summary::C8Form.new(c100_application, party_section: section), mode)
+      end
+    end
+
+    def build_section(section_class, party, index)
+      section_class.new(c100_application, party, index: index + 1)
     end
 
     # Avoid adding unnecessary blank pages if there are no preceding forms,
