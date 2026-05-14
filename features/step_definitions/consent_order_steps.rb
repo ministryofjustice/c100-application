@@ -629,7 +629,7 @@ And("I enter details of previous court proceedings") do
 
   expect(previous_court_proceedings_page).to be_displayed
   previous_court_proceedings_page.submit_previous_proceedings(
-    children_names: 'John Doe Jnr',
+    children_names: 'John Smith Jr',
     court_name: 'London Court',
     proceedings_date: '2020',
     proceedings_type: 'Legal hearing',

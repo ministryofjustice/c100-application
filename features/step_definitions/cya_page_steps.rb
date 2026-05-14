@@ -378,10 +378,10 @@ And(/^I should see the respondent's phone number is "([^"]*)"$/) do |arg|
 end
 
 And(/^I should see the respondent's relationship to "([^"]*)" is "([^"]*)"$/) do |arg1, arg2|
-  children_rows = all('.govuk-summary-list__row')
+  children_rows = cya_page.respondents_details.relationship_to_child
   match = false
   children_rows.each do |element|
-    if element.text.include?("Relationship to #{arg1}") && element.text.include?(arg2)
+    if element.question.include?("Relationship to #{arg1}") && element.answer.include?(arg2)
       match = true
       break
     end
@@ -395,38 +395,22 @@ And(/^I should see there "(are|aren't)" other people who need to be informed of 
 end
 
 And(/^I should see the other party's name is "([^"]*)"$/) do |arg|
-  within('#other_parties_details') do
-    within('#person_full_name') do
-      expect(page).to have_content(arg)
-    end
-  end
+  expect(cya_page.other_parties_details.full_name[0].answer).to eq(arg)
 end
 
 And(/^I should see the other party's gender is "([^"]*)"$/) do |arg|
-  within('#other_parties_details') do
-    within('#person_personal_details') do
-      within('#person_sex') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
+  expect(cya_page.other_parties_details.personal_details[0].sex).to eq(arg)
 end
 
 And(/^I should see the other party's address is "([^"]*)"$/) do |arg|
-  within('#other_parties_details') do
-    within('#person_address_details') do
-      within('#person_address') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
+  expect(cya_page.other_parties_details.address_details[0].address.answer).to eq(arg)
 end
 
 And(/^I should see the other party's relationship to "([^"]*)" is "([^"]*)"$/) do |arg1, arg2|
-  children_rows = all('.govuk-summary-list__row')
+  children_rows = cya_page.other_parties_details.relationship_to_child
   match = false
   children_rows.each do |element|
-    if element.text.include?("Relationship to #{arg1}") && element.text.include?(arg2)
+    if element.question.include?("Relationship to #{arg1}") && element.answer.include?(arg2)
       match = true
       break
     end

@@ -152,6 +152,13 @@ class CYAPage < BasePage
 
   section :other_parties_details, CYAGroup, 'dl#other_parties_details' do
     row :has_other_parties, '#has_other_parties'
+    elements :other_parties, 'h3'
+    rows :full_name, '#person_full_name'
+    rows :personal_details, CYAPersonalDetails, '#person_personal_details'
+    rows :relationship_to_child, '#relationship_to_child'
+    sections :address_details, CYAGroup, '#person_address_details' do
+      row :address, '#person_address'
+    end
   end
 
   section :children_residence, CYAGroup, 'dl#children_residence' do

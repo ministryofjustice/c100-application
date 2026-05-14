@@ -15,7 +15,7 @@ class ApplicantPersonalDetailsPage < BasePage
     element :continue_button, "button", text: "Continue"
   end
 
-  def submit_personal_details(has_previous_name:, previous_name:, gender:, day:, month:, year:, birthplace:)
+  def submit_personal_details(has_previous_name:, previous_name: nil, gender:, day:, month:, year:, birthplace:)
     if has_previous_name == 'yes'
       content.has_previous_name_yes.click
       content.previous_name_field.set previous_name
