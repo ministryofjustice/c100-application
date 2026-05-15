@@ -32,7 +32,7 @@ class NotifySubmissionMailer < NotifyMailer
         urgent: notify_boolean(@c100_application.mark_as_urgent?),
         safety_concerns: notify_boolean(@c100_application.has_safety_concerns?),
         c8_included: notify_boolean(@c100_application.any_confidentiality_enabled?),
-        # link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
+        link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
         c8_links: c8_links,
         link_to_pdf: prepare_upload(@documents[:bundle]),
         link_to_json: prepare_upload(@documents[:json_form]),
@@ -64,11 +64,10 @@ class NotifySubmissionMailer < NotifyMailer
 
   def build_c8_links
     Array(@documents[:c8_forms]).map do |doc|
-      prepare_upload(doc[:file]).merge(
-        label: doc[:label],
-        key: doc[:key]
-      )
-    end
+      upload = prepare_upload(doc[:file])
+
+      "- #{doc[:label]}: #{upload[:url]}"
+    end.join("\n")
   end
 
   def build_document_variables

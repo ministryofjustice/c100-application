@@ -11,7 +11,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       risk_of_abduction: 'yes',
       payment_type: 'foobar_payment',
       declaration_signee: 'John Doe',
-    )
+      )
   }
 
   let(:court) {
@@ -119,7 +119,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          c8_links: [],
+          link_to_c8_pdf: '',
+          c8_links: '',
           link_to_pdf: { 
             file: 'YnVuZGxlIHBkZg==',
             filename: nil,
@@ -173,7 +174,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          c8_links: [],
+          link_to_c8_pdf: '',
+          c8_links: '',
           link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
             confirm_email_before_download: false,
             retention_period: nil },
@@ -211,20 +213,15 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         expect(
           mail.govuk_notify_personalisation
         ).to match(hash_including(
-          c8_included: 'yes',
-          c8_links:
-            [{
-              label: 'Applicant 1',
-              key: :c8_applicant_1,
-              file: 'YzggZm9ybQ==',
-              filename: nil,
-              confirm_email_before_download: false,
-              retention_period: nil
-            }],
-          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
-          confirm_email_before_download: false,
-          retention_period: nil },
-        ))
+                     c8_included: 'yes',
+                     c8_links: '- Applicant 1: ',
+                     link_to_pdf: {
+                       file: 'YnVuZGxlIHBkZg==',
+                       filename: nil,
+                       confirm_email_before_download: false,
+                       retention_period: nil
+                     },
+                     ))
       end
     end
 
@@ -257,32 +254,11 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           mail.govuk_notify_personalisation
         ).to match(hash_including(
                      c8_included: 'yes',
-                     c8_links: [
-                       {
-                         label: 'Applicant 1',
-                         key: :c8_applicant_1,
-                         file: 'YzggZm9ybSAx',
-                         filename: nil,
-                         confirm_email_before_download: false,
-                         retention_period: nil
-                       },
-                       {
-                         label: 'Respondent 1',
-                         key: :c8_respondent_1,
-                         file: 'YzggZm9ybSAy',
-                         filename: nil,
-                         confirm_email_before_download: false,
-                         retention_period: nil
-                       },
-                       {
-                         label: 'Other party 1',
-                         key: :c8_other_party_1,
-                         file: 'YzggZm9ybSAz',
-                         filename: nil,
-                         confirm_email_before_download: false,
-                         retention_period: nil
-                       }
-                     ],
+                     link_to_c8_pdf: '',
+                     c8_links:
+                       "- Applicant 1: \n" \
+                         "- Respondent 1: \n" \
+                         "- Other party 1: ",
                      link_to_pdf: {
                        file: 'YnVuZGxlIHBkZg==',
                        filename: nil,
@@ -323,16 +299,16 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
 
     it 'has the right personalisation' do
       expect(mail.govuk_notify_personalisation).to eq({
-        service_name: 'Apply to court about child arrangements',
-        applicant_name: 'John Doe',
-        reference_code: '1970/01/4A362E1C',
-        court_name: 'Test court',
-        court_email: 'court@example.com',
-        court_url: 'https://www.find-court-tribunal.service.gov.uk/courts/test-court',
-        is_under_age: 'no',
-        is_consent_order: 'yes',
-        payment_instructions: 'payment instructions from locales',
-      })
+                                                        service_name: 'Apply to court about child arrangements',
+                                                        applicant_name: 'John Doe',
+                                                        reference_code: '1970/01/4A362E1C',
+                                                        court_name: 'Test court',
+                                                        court_email: 'court@example.com',
+                                                        court_url: 'https://www.find-court-tribunal.service.gov.uk/courts/test-court',
+                                                        is_under_age: 'no',
+                                                        is_consent_order: 'yes',
+                                                        payment_instructions: 'payment instructions from locales',
+                                                      })
     end
 
     context 'when at least one applicant is under age' do
