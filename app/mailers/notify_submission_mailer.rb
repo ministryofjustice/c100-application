@@ -63,11 +63,10 @@ class NotifySubmissionMailer < NotifyMailer
   private
 
   def build_c8_links
-    Array(@documents[:c8_forms]).map do |doc|
-      upload = prepare_upload(doc[:file])
-
-      "- #{doc[:label]}: #{upload[:url]}"
-    end.join("\n")
+    links = Array(@documents[:c8_forms]).map do |doc|
+      prepare_upload(doc[:file])
+    end
+    links.empty? ? '' : links
   end
 
   def build_document_variables

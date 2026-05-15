@@ -212,7 +212,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           mail.govuk_notify_personalisation
         ).to match(hash_including(
                      c8_included: 'yes',
-                     c8_links: '- Applicant 1: ',
+                     c8_links: [{confirm_email_before_download: false, file: "YzggZm9ybQ==", filename: nil, retention_period: nil}],
                      link_to_pdf: {
                        file: 'YnVuZGxlIHBkZg==',
                        filename: nil,
@@ -253,9 +253,9 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
         ).to match(hash_including(
                      c8_included: 'yes',
                      c8_links:
-                       "- Applicant 1: \n" \
-                         "- Respondent 1: \n" \
-                         "- Other party 1: ",
+                       [{confirm_email_before_download: false, file: "YzggZm9ybSAx", filename: nil, retention_period: nil},
+                        {confirm_email_before_download: false, file: "YzggZm9ybSAy", filename: nil, retention_period: nil},
+                        {confirm_email_before_download: false, file: "YzggZm9ybSAz", filename: nil, retention_period: nil}],
                      link_to_pdf: {
                        file: 'YnVuZGxlIHBkZg==',
                        filename: nil,
