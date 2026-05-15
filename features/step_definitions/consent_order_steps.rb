@@ -336,6 +336,10 @@ And(/^I ask the court to also decide "(.*)"$/) do |arg|
   petition_protection_page.submit_yes(details: arg)
 end
 
+And(/^I am not asking the court to decide on any other issues$/) do
+  expect(petition_protection_page).to be_displayed
+  petition_protection_page.submit_no
+end
 
 And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
   expect(miam_exemptions_reasons_page).to be_displayed
@@ -444,12 +448,27 @@ And(/^I "(do|don't)" have domestic abuse or child concerns about the children$/)
   end
 end
 
-And(/I ask the court to decide "(.*)"/) do |issue|
+When(/^I ask the court to decide on the following issues: "(.*)"$/) do |issues|
   expect(petition_orders_page).to be_displayed
-  petition_orders_page.select_issue_home if issue.include?('who the children live with and when')
-  petition_orders_page.select_issue_time if issue.include?('how much time they spend with each person')
-  petition_orders_page.submit
 
+  petition_orders_page.select_issue_home if issues.include?('who the children live with and when')
+  petition_orders_page.select_issue_time if issues.include?('how much time they spend with each person')
+
+  petition_orders_page.select_issue_specific_issues(
+    holiday: issues.include?('a specific holiday or arrangement'),
+    school: issues.include?('what school they’ll go to'),
+    religion: issues.include?('a religious issue'),
+    names: issues.include?('changing their names or surname'),
+    medical: issues.include?('medical treatment'),
+    moving: issues.include?('relocating the children to a different area in england and wales'),
+    moving_abroad: issues.include?('relocating the children outside of england and wales'),
+    child_return: issues.include?('returning the children to your care')
+  )
+  
+  petition_orders_page.submit
+end
+
+Then(/^I should see the child arrangements order details for: "(.*)"$/) do |issue|
   expect(petition_playback_page).to be_displayed
   if issue.include?('who the children live with and when')
     expect(petition_playback_page.content.child_arrangements_home).to be_visible
@@ -458,24 +477,10 @@ And(/I ask the court to decide "(.*)"/) do |issue|
     expect(petition_playback_page.content.child_arrangements_time).to be_visible
   end
   expect(petition_playback_page.content.child_arrangements_order).to be_visible
-  petition_playback_page.continue_to_next_step
 end
 
-And(/^I ask the court to decide specific issues: "(.*)"$/) do |issues|
+Then(/^I should see the specific issue order details for: "([^"]*)"$/) do |issues|
   selected_issues = issues.split(',').map(&:strip)
-
-  expect(petition_orders_page).to be_displayed
-  petition_orders_page.select_issue_specific_issues(
-    holiday: selected_issues.include?('a specific holiday or arrangement'),
-    school: selected_issues.include?('what school they’ll go to'),
-    religion: selected_issues.include?('a religious issue'),
-    names: selected_issues.include?('changing their names or surname'),
-    medical: selected_issues.include?('medical treatment'),
-    moving: selected_issues.include?('relocating the children to a different area in england and wales'),
-    moving_abroad: selected_issues.include?('relocating the children outside of england and wales'),
-    child_return: selected_issues.include?('returning the children to your care')
-  )
-  petition_orders_page.submit
   
   expect(petition_playback_page).to be_displayed
   selected_issues.each do |issue|
@@ -500,6 +505,9 @@ And(/^I ask the court to decide specific issues: "(.*)"$/) do |issues|
       raise ArgumentError, "Unknown specific issue: '#{issue}'"
     end
   end
+end
+
+And(/^I continue to the next step$/) do
   petition_playback_page.continue_to_next_step
 end
 
@@ -542,6 +550,23 @@ Then('I enter details for a {string} year old child') do |age|
   special_guardianship_page.submit_no
 end
 
+Then(/^I enter details for a "(\d+)" year old child with a special guardianship order$/) do |age|
+  expect(children_names_page).to be_displayed
+  children_names_page.add_child('Alistair', 'Doe')
+
+  expect(child_personal_details_page).to be_displayed
+  child_personal_details_page.submit_child_personal_details(
+    gender: 'male',
+    age: age
+  )
+
+  expect(child_orders_page).to be_displayed
+  child_orders_page.submit_all_child_orders
+
+  expect(special_guardianship_page).to be_displayed
+  special_guardianship_page.submit_yes
+end
+
 And(/^I enter details for another child who is "(.*)" years old$/) do |age|
   expect(other_children_names_page).to be_displayed
   other_children_names_page.add_child('Jane', 'Smith')
@@ -556,6 +581,11 @@ end
 Then('I state that the {string} has parental responsibility for the child') do |persons|
   expect(parental_responsibility_page).to be_displayed
   parental_responsibility_page.submit_responsibility(persons)
+end
+
+And(/^I submit that the children have a child protection plan and are known to social services: "(.*)"$/) do |details|
+  expect(child_additional_details_page).to be_displayed
+  child_additional_details_page.submit_known_to_social_services(additional_details: details)
 end
 
 And("I submit that I don't know any additional details for the child") do
@@ -671,7 +701,7 @@ And(/^there "(are|aren't)" any other people who should know about the applicatio
   has_other_parties_page.submit(arg == 'are' ? 'yes' : 'no')
 end
 
-And(/^I complete the other party details journey$/) do
+And(/^I complete the other party details journey with an additional child$/) do
   expect(other_party_names_page).to be_displayed
   other_party_names_page.submit_names('Judy', 'Sitter')
 
@@ -683,6 +713,28 @@ And(/^I complete the other party details journey$/) do
   )
 
   applicant_relationship_page.submit_relationship('Caregiver')
+  applicant_relationship_page.submit_relationship('Caregiver')
+
+  respondent_address_lookup_page.click_outside_uk
+  other_party_address_details_page.submit_address_details(
+    address_line_1: '10 Downing Street',
+    town: 'London',
+    country: 'United Kingdom',
+    postcode: 'SW1A 2AA'
+  )
+end
+
+And(/^I complete the other party details journey/) do
+  expect(other_party_names_page).to be_displayed
+  other_party_names_page.submit_names('Cassie', 'Doe')
+
+  expect(other_party_personal_details_page).to be_displayed
+  other_party_personal_details_page.submit_personal_details(
+    has_previous_name: false,
+    gender: 'female',
+    age: '30',
+  )
+
   applicant_relationship_page.submit_relationship('Caregiver')
 
   respondent_address_lookup_page.click_outside_uk
@@ -745,6 +797,34 @@ And("I am not asking for an urgent or without notice hearing") do
   without_notice_page.submit_no
 end
 
+And(/^I "(do|don't)" require an urgent and without notice hearing$/) do |arg|
+  expect(urgent_hearing_page).to be_displayed
+  if arg == 'do'
+    urgent_hearing_page.submit_yes
+    
+    expect(urgent_hearing_details_page).to be_displayed
+    urgent_hearing_details_page.submit(
+      details: 'Alistair is in grave danger because of Jake Gyllenhaal',
+      hearing_when: 'In the next four weeks',
+      urgent: false
+    )
+  else
+    urgent_hearing_page.submit_no
+  end
+
+  expect(without_notice_page).to be_displayed
+  if arg == 'do'
+    without_notice_page.submit_yes
+    without_notice_details_page.submit(
+      details: 'Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him',
+      possible_frustrate: false,
+      without_notice_impossible: false
+    )
+  else
+    without_notice_page.submit_no
+  end
+end
+
 And("I navigate the international issues journey") do
   expect(international_resident_page).to be_displayed
   international_resident_page.submit_no
@@ -793,7 +873,7 @@ And(/^there "(are|aren't)" factors affecting ability to participate$/) do |arg|
   litigation_capacity_details_page.continue_without_filling if arg == "aren't"
 end
 
-And(/^I navigate the attending court journey/) do
+And(/^I navigate the attending court journey$/) do
   expect(attending_court_intermediary_page).to be_displayed
   attending_court_intermediary_page.submit_yes('Needed for the respondent')
 
@@ -802,6 +882,20 @@ And(/^I navigate the attending court journey/) do
 
   expect(attending_court_special_arrangements_page).to be_displayed
   attending_court_special_arrangements_page.submit_special_arrangements(special_arrangements_details: 'Please keep the time the kids are needed for to a minimum')
+
+  expect(attending_court_special_assistance_page).to be_displayed
+  attending_court_special_assistance_page.continue_without_filling
+end
+
+And(/^I navigate the attending court journey with safety arrangements$/) do
+  expect(attending_court_intermediary_page).to be_displayed
+  attending_court_intermediary_page.submit_yes('I need someone to communicate between me and the respondent')
+
+  expect(attending_court_language_page).to be_displayed
+  attending_court_language_page.submit_language_requirements(welsh_language_details: 'Needed for Jake Gyllenhaal')
+
+  expect(attending_court_special_arrangements_page).to be_displayed
+  attending_court_special_arrangements_page.submit_special_arrangements(separate_waiting_rooms: true, separate_entrance_exit: true)
 
   expect(attending_court_special_assistance_page).to be_displayed
   attending_court_special_assistance_page.continue_without_filling

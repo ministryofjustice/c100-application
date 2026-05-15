@@ -434,8 +434,16 @@ def urgent_hearing_page
   @urgent_hearing_page ||= UrgentHearingPage.new
 end
 
+def urgent_hearing_details_page
+  @urgent_hearing_details_page ||= UrgentHearingDetailsPage.new
+end
+
 def without_notice_page
   @without_notice_page ||= WithoutNoticePage.new
+end
+
+def without_notice_details_page
+  @without_notice_details_page ||= WithoutNoticeDetailsPage.new
 end
 
 def international_resident_page

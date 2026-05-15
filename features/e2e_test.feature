@@ -9,7 +9,9 @@ Feature: Testing C100 end to end
     When I navigate the MIAM exemption journey
     And evidence "isn't" provided for the MIAM exemption
     And I have no safety concerns about the children
-    And I ask the court to decide "who the children live with and when"
+    When I ask the court to decide on the following issues: "who the children live with and when"
+    Then I should see the child arrangements order details for: "who the children live with and when"
+    Then I continue to the next step
     And I understand the process of going to court
     And I have tried all alternative ways to reach an agreement
     And I enter details for a "2" year old child
@@ -23,7 +25,7 @@ Feature: Testing C100 end to end
     And the child lives with "John Doe Senior"
     And I enter details of previous court proceedings
     And there "isn't" a court order requiring permission to make this application
-    And I am not asking for an urgent or without notice hearing
+    And I "don't" require an urgent and without notice hearing
     And I navigate the international issues journey
     And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
     And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
@@ -88,9 +90,11 @@ Feature: Testing C100 end to end
     And I have no abuse or physical abuse concerns about the children
     And I do have financial concerns about the children
     And I "don't" have psychological and emotional abuse concerns about the children
-    And I do have other abuse concerns about the children
+    And I "do" have other abuse concerns about the children
     And I don't have any safety concerns about myself
-    And I ask the court to decide "who the children live with and when"
+    When I ask the court to decide on the following issues: "who the children live with and when"
+    Then I should see the child arrangements order details for: "who the children live with and when"
+    Then I continue to the next step
     And I ask the court to also decide "This is what I want resolved"
     And I understand the process of going to court
     And I enter details for a "2" year old child
@@ -104,7 +108,7 @@ Feature: Testing C100 end to end
     And the child lives with "John Doe Senior"
     And there "hasn't" been any court proceedings about the children
     And there "isn't" a court order requiring permission to make this application
-    And I am not asking for an urgent or without notice hearing
+    And I "don't" require an urgent and without notice hearing
     And there isn't any international issues in this application
     And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
     And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
@@ -112,7 +116,6 @@ Feature: Testing C100 end to end
     And I don't require special assistance when attending court
     And I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
-    #
     And I should be on the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
@@ -171,7 +174,9 @@ Feature: Testing C100 end to end
   Scenario: Child arrangements order (MIAM) (path three: 'Yes' to 'Have you attended a MIAM?')
     When I navigate the MIAM journey
     And I have no safety concerns about the children
-    And I ask the court to decide "who the children live with and when"
+    When I ask the court to decide on the following issues: "who the children live with and when"
+    Then I should see the child arrangements order details for: "who the children live with and when"
+    Then I continue to the next step
     And I understand the process of going to court
     And I have tried all alternative ways to reach an agreement
     And I enter details for a "2" year old child
@@ -185,7 +190,7 @@ Feature: Testing C100 end to end
     And the child lives with "John Doe Senior"
     And I enter details of previous court proceedings
     And there "isn't" a court order requiring permission to make this application
-    And I am not asking for an urgent or without notice hearing
+    And I "don't" require an urgent and without notice hearing
     And I navigate the international issues journey
     And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
     And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
@@ -276,7 +281,9 @@ Feature: Testing C100 end to end
     And I "don't" have any other concerns about my welfare
     And I "haven't" had or currently have court orders made for my protection
     And I "don't" agree to the children having contact with the other people in this application
-    And I ask the court to decide "who the children live with and when, how much time they spend with each person"
+    When I ask the court to decide on the following issues: "who the children live with and when, how much time they spend with each person"
+    Then I should see the child arrangements order details for: "who the children live with and when, how much time they spend with each person"
+    Then I continue to the next step
     And I ask the court to also decide "I want the court to decide whether the respondent should give compensation"
     And I understand the process of going to court
     And I enter details for a "2" year old child
@@ -288,11 +295,11 @@ Feature: Testing C100 end to end
     And I "don't" have a solicitor
     And I navigate the respondent details journey with an additional child
     And there "are" any other people who should know about the application
-    And I complete the other party details journey
+    And I complete the other party details journey with an additional child
     And the child lives with "Jane Doe"
     And I enter details of previous court proceedings with an additional child
     And there "isn't" a court order requiring permission to make this application
-    And I am not asking for an urgent or without notice hearing
+    And I "don't" require an urgent and without notice hearing
     And I navigate the international issues journey with an international resident
     And I give my reason for the application as "I fear for Emily & John's safety, but particularly Emily's"
     And there "are" factors that may affect any adult in this application taking part in the court proceedings
@@ -373,7 +380,9 @@ Feature: Testing C100 end to end
   Scenario: Skip child arrangements order (MIAM) (path five)
     When I navigate the MIAM journey with a child protection case
     And I have no safety concerns about the children
-    And I ask the court to decide "who the children live with and when"
+    When I ask the court to decide on the following issues: "who the children live with and when"
+    Then I should see the child arrangements order details for: "who the children live with and when"
+    Then I continue to the next step
     And I understand the process of going to court
     And I have tried all alternative ways to reach an agreement
     And I enter details for a "2" year old child
@@ -387,7 +396,7 @@ Feature: Testing C100 end to end
     And the child lives with "John Doe Senior"
     And I enter details of previous court proceedings
     And there "isn't" a court order requiring permission to make this application
-    And I am not asking for an urgent or without notice hearing
+    And I "don't" require an urgent and without notice hearing
     And I navigate the international issues journey
     And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
     And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
@@ -466,315 +475,33 @@ Feature: Testing C100 end to end
     And I "don't" have any other concerns about my welfare
     And I "haven't" had or currently have court orders made for my protection
     And I "don't" agree to the children having contact with the other people in this application
-    And I ask the court to decide specific issues: "a religious issue"
-    # #
-    # When I click the radio button "Consent order"
-    # And I click the "Continue" button
-    # And I should see "Upload the draft of your consent order"
-    # And I upload a document using the file uploader
-    # And I click the "Continue" button
-    # Then I should see "You do not have to attend a MIAM"
-    # And I click the "Continue" link
-    # Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
-    # And I choose "Yes"
-    # Then I should see "Safety concerns"
-    # And I should see "Why do we need this information and what will we do with it?"
-    # And I click the "Continue" link
-    # Then I should see "Are the children at risk of being abducted?"
-    # And I choose "No"
-    # Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
-    # And I choose "No"
-    # Then I should see "Have the children suffered or are they at risk of suffering domestic or child abuse?"
-    # And I choose "Yes"
-    # Then I should see "You and the children"
-    # And I click the "Continue" link
-    # Then I should see "The children’s safety"
-    # And I click the "Continue" link
-    # Then I should see "Have the children ever been sexually abused by the respondent?"
-    # And I choose "No"
-    # Then I should see "Have the children ever been physically abused by the respondent?"
-    # And I choose "No"
-    # Then I should see "Have the children ever been financially abused by the respondent?"
-    # And I choose "Yes"
-    # Then I should see "About the children’s financial abuse"
-    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from the kids"
-    # And I fill in "When did this behaviour start?" with "01-2023"
-    # And I choose "No" for all options on this page
-    # And I fill in "When did the behaviour stop?" with "06-2023"
-    # And I click the "Continue" button
-    # Then I should see "Have the children ever been psychologically abused by the respondent?"
-    # And I choose "Yes"
-    # Then I should see "About the children’s psychological abuse"
-    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent was horrid to the kids"
-    # And I fill in "When did this behaviour start?" with "01-2023"
-    # And I choose "No" for all options on this page
-    # And I fill in "When did the behaviour stop?" with "06-2023"
-    # And I click the "Continue" button
-    # Then I should see "Have the children ever been emotionally abused by the respondent?"
-    # And I choose "Yes"
-    # Then I should see "About the children’s emotional abuse"
-    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent made the kids sad on purpose"
-    # And I fill in "When did this behaviour start?" with "01-2023"
-    # And I choose "No" for all options on this page
-    # And I fill in "When did the behaviour stop?" with "06-2023"
-    # And I click the "Continue" button
-    # Then I should see "Do you have any other safety or welfare concerns about the children?"
-    # And I choose "No"
-    # Then I should see "Your safety"
-    # And I click the "Continue" link
-    # Then I should see "Have you ever been sexually abused by the respondent?"
-    # And I choose "Yes"
-    # Then I should see "About the sexual abuse"
-    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent touched me non consensually"
-    # And I fill in "When did this behaviour start?" with "01-2023"
-    # And I choose "No" for all options on this page
-    # And I fill in "When did the behaviour stop?" with "06-2023"
-    # And I click the "Continue" button
-    # Then I should see "Have you ever been physically abused by the respondent?"
-    # And I choose "Yes"
-    # Then I should see "About the physical abuse"
-    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent hit me several times"
-    # And I fill in "When did this behaviour start?" with "01-2023"
-    # And I choose "No" for all options on this page
-    # And I fill in "When did the behaviour stop?" with "06-2023"
-    # And I click the "Continue" button
-    # Then I should see "Have you ever been financially abused by the respondent?"
-    # And I choose "Yes"
-    # Then I should see "About the financial abuse"
-    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent took money from me"
-    # And I fill in "When did this behaviour start?" with "01-2023"
-    # And I choose "No" for all options on this page
-    # And I fill in "When did the behaviour stop?" with "06-2023"
-    # And I click the "Continue" button
-    # Then I should see "Have you ever been psychologically abused by the respondent?"
-    # And I choose "Yes"
-    # Then I should see "About the psychological abuse"
-    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent said awful things to me"
-    # And I fill in "When did this behaviour start?" with "01-2023"
-    # And I choose "No" for all options on this page
-    # And I fill in "When did the behaviour stop?" with "06-2023"
-    # And I click the "Continue" button
-    # Then I should see "Have you ever been emotionally abused by the respondent?"
-    # And I choose "Yes"
-    # Then I should see "About the emotional abuse"
-    # And I fill in "Briefly describe what happened and who was involved, if you feel able to" with "The respondent called me awful names"
-    # And I fill in "When did this behaviour start?" with "01-2023"
-    # And I choose "No" for all options on this page
-    # And I fill in "When did the behaviour stop?" with "06-2023"
-    # And I click the "Continue" button
-    # Then I should see "Do you have any other concerns about your welfare?"
-    # And I choose "No"
-    # Then I should see "Have you had or do you currently have any court orders made for your protection?"
-    # And I choose "No"
-    # Then I should see "Contact between the children and the other people in this application"
-    # And I choose "No" for all options on this page
-    # And I click the "Continue" button
-    # Then I should see "What are you asking the court to decide about the children involved?"
-    # And I check "Decide who they live with and when"
-    # And I check "Resolve a specific issue"
-    # And I check "A religious issue"
-    # And I click the "Continue" button
-    # Then I should see "What you’re asking the court to decide about the children"
-    # And I should see "Decide who they live with and when"
-    # And I should see "This is known as a Child Arrangements Order."
-    # And I should see "A religious issue"
-    # And I should see "This is known as a Specific Issue Order."
-    # Then I click the "Continue" link
-    Then I should see "Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?"
-    And I choose "No"
-    Then I should see "Going to court"
-    And I should see "What happens at court"
-    And I should see "Changing or enforcing an order"
-    And I should see "Representing yourself in court"
-    And I should see "Domestic abuse and child abuse"
-    And I check "I understand what’s involved if I decide to go to court"
-    And I click the "Continue" button
-    Then I should see "Enter the names of the children"
-    And I fill in "First name(s)" with "Alistair"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Provide details for Alistair Doe"
-    And I specify they are "6" years of age
-    And I choose "Male"
-    And I click the "Continue" button
-    Then I should see "Which of the decisions you’re asking the court to resolve relate to Alistair Doe?"
-    And I check "Decide who they live with and when"
-    And I check "A religious issue"
-    And I click the "Continue" button
-    Then I should see "Is there a Special Guardianship Order in force in relation to Alistair Doe?"
-    And I choose "Yes"
-    Then I should see "Parental responsibility for Alistair Doe"
-    And I fill in "State everyone who has parental responsibility for Alistair Doe and how they have parental responsibility." with "Me and the respondent"
-    And I click the "Continue" button
-    Then I should see "Further information"
-    And I choose "Yes" for all options on this page
-    And I fill in "State which child and the name of the local authority and social worker, if known" with "Alistair Doe knows Jane Doe from London"
-    And I click the "Continue" button
-    Then I should see "Do you or any respondents have other children who are not part of this application?"
-    And I choose "No"
-    Then I should see "Enter your name"
-    And I fill in "First name(s)" with "June"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Keeping your contact details private"
-    And I choose "I don't know"
-    Then I should see "Keeping your contact details private"
-    When I choose No from the radio button options
-    And I click the "Continue" button
-    Then I should see "Are you currently resident in a refuge?"
-    And I choose "No"
-    Then I should see "The court will not keep your contact details private"
-    And I click the "Continue" link
-    Then I should see "Provide details for June Doe"
-    And I click the radio button "Yes"
-    And I fill in "Enter your previous name" with "Janie Doe"
-    And I click the radio button "Female"
-    And I specify they are "40" years of age
-    And I fill in "Your place of birth" with "Windsor"
-    And I click the "Continue" button
-    Then I should see "What is June Doe's relationship to Alistair Doe?"
-    And I choose "Mother"
-    Then I should see "Address of June Doe"
-    And I click the "I live outside the UK" link
-    Then I should see "Address details of June Doe"
-    And I fill in "Building and street" with "Buckingham Palace"
-    And I fill in "Town or city" with "London"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SW1A 1AA"
-    And I click the radio button "Yes"
-    And I click the "Continue" button
-    Then I should see "Contact details of June Doe"
-    And I click the radio button "I can provide an email address"
-    And I fill in "Your email address" with "june@gmail.com"
-    And I click the radio button "I can provide a phone number"
-    And I fill in "Your phone number" with "00000000000"
-    And I click the radio button "No, the court cannot leave me a voicemail"
-    And I click the "Continue" button
-    Then I should see "Will you be legally represented by a solicitor in these proceedings?"
-    And I choose "Yes"
-    Then I should see "Details of solicitor"
-    And I fill in "Full name" with "Tegan Price"
-    And I fill in "Name of firm" with "Caplan and Gold"
-    And I fill in "Solicitor’s reference" with "123456"
-    And I click the "Continue" button
-    Then I should see "Address details of Tegan Price"
-    And I fill in "Building and street" with "12 Cannon Street Caplan and Gold"
-    And I fill in "Town or city" with "London"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "EC4N 6YA"
-    And I click the "Continue" button
-    Then I should see "Contact details of Tegan Price"
-    And I fill in "Email address" with "teganprice@caplangold.com"
-    And I fill in "Phone number" with "00000119911"
-    And I fill in "DX number" with "00000119911"
-    And I click the "Continue" button
-    Then I should see "Enter the respondent’s name"
-    And I fill in "First name(s)" with "Jake"
-    And I fill in "Last name(s)" with "Gyllenhaal"
-    And I click the "Continue" button
-    Then I should see "Provide details for Jake Gyllenhaal"
-    And I click the radio button "Yes"
-    And I fill in "Enter their previous name" with "Ryan Reynolds"
-    And I click the radio button "Male"
-    And I specify they are "46" years of age
-    And I fill in "Place of birth" with "Wrexham"
-    And I click the "Continue" button
-    Then I should see "What is Jake Gyllenhaal's relationship to Alistair Doe?"
-    And I choose "Father"
-    Then I should see "Address of Jake Gyllenhaal"
-    And I click the "I don’t know their postcode or they live outside the UK" link
-    Then I should see "Address details of Jake Gyllenhaal"
-    And I fill in "Building and street" with "Wrexham AFC Mold Road"
-    And I fill in "Town or city" with "Wrexham"
-    And I fill in "Country" with "Wales"
-    And I fill in "Postcode" with "LL11 2AH"
-    And I click the radio button "Yes"
-    And I click the "Continue" button
-    Then I should see "Contact details of Jake Gyllenhaal"
-    And I check "I don't know their email"
-    And I fill in "Phone number" with "00000000000"
-    And I click the "Continue" button
-    Then I should see "Is there anyone else who should know about your application?"
-    And I choose "Yes"
-    Then I should see "Enter the other person’s name"
-    And I fill in "First name(s)" with "Cassie"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Provide details for Cassie Doe"
-    And I click the radio button "No"
-    And I click the radio button "Female"
-    And I specify they are "30" years of age
-    And I click the "Continue" button
-    Then I should see "What is Cassie Doe's relationship to Alistair Doe?"
-    And I click the radio button "Other"
-    And I fill in "Please specify" with "Caregiver"
-    And I click the "Continue" button
-    Then I should see "Address of Cassie Doe"
-    And I click the "I don’t know their postcode or they live outside the UK" link
-    Then I should see "Address details of Cassie Doe"
-    And I fill in "Building and street" with "Windsor Castle"
-    And I fill in "Town or city" with "Windsor"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SL4 1QF"
-    And I click the "Continue" button
-    Then I should see "Who does Alistair Doe currently live with?"
-    And I check "June Doe"
-    And I click the "Continue" button
-    Then I should see "Have any of the children in this application been involved in other family court proceedings?"
-    And I choose "No"
-    Then I should see "Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Do you need an urgent hearing"
-    And I choose "Yes"
-    Then I should see "Details of urgent hearing"
-    And I fill in "Give details of why you’re asking for an urgent hearing" with "Alistair is in grave danger because of Jake Gyllenhaal"
-    And I fill in "How soon do you need an urgent hearing?" with "In the next four weeks"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Are you asking for a without notice hearing?"
-    And I choose "Yes"
-    Then I should see "Details of without notice hearing"
-    And I fill in "Give details of why you’re asking for a without notice hearing" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
-    And I choose "No" for all options on this page
-    And I click the "Continue" button
-    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
-    And I choose "No"
-    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
-    And I choose "No"
-    Then I should see "Has a request for information or other assistance involving the children been made to or by another country?"
-    And I choose "No"
-    Then I should see "Why are you making this application?"
-    And I fill in "Provide details" with "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
-    And I click the "Continue" button
-    Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
-    And I choose "Yes"
-    Then I should see "Factors affecting ability to participate"
-    And I click the "Continue" button
-    Then I should see "Does anyone in this application need an intermediary to help them in court?"
-    And I choose "Yes"
-    And I fill in "Provide details" with "I need someone to communicate between me and the respondent"
-    And I click the "Continue" button
-    Then I should see "Does anyone in this application have special language requirements?"
-    And I check "Wants to speak Welsh at a court hearing, or wants to read court documents in Welsh"
-    And I fill in "Give details of who needs to speak or read in Welsh" with "Needed for Jake Gyllenhaal"
-    And I click the "Continue" button
-    Then I should see "Do you or the children need specific safety arrangements at court?"
-    And I check "Separate waiting rooms"
-    And I check "Separate exits and entrances"
-    And I click the "Continue" button
-    Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
-    And I click the "Continue" button
-    Then I should see "Submitting your application to court"
-    And I fill in "Enter an email address if you would like to get a confirmation" with "june@gmail.com"
-    And I click the "Continue" button
-    Then I should see "Is this email address correct?"
-    And I should see "june@gmail.com"
-    And I click the "Yes, continue" link
-    Then I should see "How will you pay the application fee?"
-    And I choose "Pay with ‘Help with fees’"
-    And I fill in "Reference number" with "HWF-123-456"
-    And I click the "Continue" button
+    When I ask the court to decide on the following issues: "who the children live with and when, a religious issue"
+    Then I should see the child arrangements order details for: "who the children live with and when"
+    And I should see the specific issue order details for: "a religious issue"
+    Then I continue to the next step
+    And I am not asking the court to decide on any other issues
+    And I understand the process of going to court
+    And I enter details for a "6" year old child with a special guardianship order
+    And I state that the "Me and the respondent" has parental responsibility for the child
+    And I submit that the children have a child protection plan and are known to social services: "Alistair Doe knows Jane Doe from London"
+    And I "don't" have other children
+    And I complete the applicant details journey
+    And I enter the details for a solicitor
+    And I navigate the respondent details journey
+    And there "are" any other people who should know about the application
+    And I complete the other party details journey
+    And the child lives with "John Doe Senior"
+    And there "hasn't" been any court proceedings about the children
+    And there "isn't" a court order requiring permission to make this application
+    And I "do" require an urgent and without notice hearing
+    And there isn't any international issues in this application
+    And I give my reason for the application as "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    And there "are" factors that may affect any adult in this application taking part in the court proceedings
+    And there "aren't" factors affecting ability to participate
+    And I navigate the attending court journey with safety arrangements
+    And I submit the application with email "june@gmail.com"
+    And I pay using Help With Fees with reference "HWF-123-456"
+    And I should be on the Check Your Answers page
     Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
     And I should see "Consent"
     And I should see they have made a consent order application
