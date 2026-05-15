@@ -119,7 +119,6 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          link_to_c8_pdf: '',
           c8_links: '',
           link_to_pdf: { 
             file: 'YnVuZGxlIHBkZg==',
@@ -174,7 +173,6 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          link_to_c8_pdf: '',
           c8_links: '',
           link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
             confirm_email_before_download: false,
@@ -254,7 +252,6 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           mail.govuk_notify_personalisation
         ).to match(hash_including(
                      c8_included: 'yes',
-                     link_to_c8_pdf: '',
                      c8_links:
                        "- Applicant 1: \n" \
                          "- Respondent 1: \n" \
