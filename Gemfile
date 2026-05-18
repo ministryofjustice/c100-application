@@ -48,6 +48,9 @@ gem 'sidekiq_alive'
 gem 'combine_pdf', '~> 1.0'
 gem 'grover'
 
+# PDF Zip
+gem 'rubyzip'
+
 # Amazon S3 blob storage
 gem 'aws-sdk-s3', '~> 1'
 gem 'clamby'

@@ -27,6 +27,14 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
     )
   }
 
+  def c8_tempfile(content)
+    file = Tempfile.new(['c8', '.pdf'])
+    file.binmode
+    file.write(content)
+    file.rewind
+    file
+  end
+
   before do
     allow(
       Rails.configuration
@@ -195,74 +203,45 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
 
     context 'and applicant has private contact details' do
       before do
-        documents[:c8_forms] = [
-          {
-            label: 'Applicant 1',
-            key: :c8_applicant_1,
-            file: StringIO.new('c8 form')
-          }
-        ]
+        documents[:c8_forms] =
+          [
+            { file: c8_tempfile("c8 form 1") }
+          ]
       end
 
-      it 'has the right personalisation' do
-        allow(c100_application).to receive(:confidentiality_enabled?).
-          and_return(true)
+      it 'sends C8 forms as a ZIP upload' do
+        allow(c100_application).to receive(:confidentiality_enabled?).and_return(true)
 
-        expect(
-          mail.govuk_notify_personalisation
-        ).to match(hash_including(
-                     c8_included: 'yes',
-                     c8_links: [{confirm_email_before_download: false, file: "YzggZm9ybQ==", filename: nil, retention_period: nil}],
-                     link_to_pdf: {
-                       file: 'YnVuZGxlIHBkZg==',
-                       filename: nil,
-                       confirm_email_before_download: false,
-                       retention_period: nil
-                     },
-                     ))
+        zip_upload = mail.govuk_notify_personalisation[:c8_links]
+
+        expect(zip_upload).to be_a(Hash)
+
+        expect(zip_upload).to include(confirm_email_before_download: false, filename: nil, retention_period: nil)
+
+        expect(zip_upload[:file]).to be_a(String)
       end
     end
 
     context 'and application has multiple private contact details' do
       before do
-        documents[:c8_forms] = [
-          {
-            label: 'Applicant 1',
-            key: :c8_applicant_1,
-            file: StringIO.new('c8 form 1')
-          },
-          {
-            label: 'Respondent 1',
-            key: :c8_respondent_1,
-            file: StringIO.new('c8 form 2')
-          },
-          {
-            label: 'Other party 1',
-            key: :c8_other_party_1,
-            file: StringIO.new('c8 form 3')
-          }
-        ]
+        documents[:c8_forms] =
+          [
+            { file: c8_tempfile("c8 form 1") },
+            { file: c8_tempfile("c8 form 2") },
+            { file: c8_tempfile("c8 form 3") }
+          ]
       end
 
-      it 'has the right personalisation' do
-        allow(c100_application).to receive(:confidentiality_enabled?).
-          and_return(true)
+      it 'combines all C8 forms into a single ZIP upload' do
+        allow(c100_application).to receive(:confidentiality_enabled?).and_return(true)
 
-        expect(
-          mail.govuk_notify_personalisation
-        ).to match(hash_including(
-                     c8_included: 'yes',
-                     c8_links:
-                       [{confirm_email_before_download: false, file: "YzggZm9ybSAx", filename: nil, retention_period: nil},
-                        {confirm_email_before_download: false, file: "YzggZm9ybSAy", filename: nil, retention_period: nil},
-                        {confirm_email_before_download: false, file: "YzggZm9ybSAz", filename: nil, retention_period: nil}],
-                     link_to_pdf: {
-                       file: 'YnVuZGxlIHBkZg==',
-                       filename: nil,
-                       confirm_email_before_download: false,
-                       retention_period: nil
-                     },
-                     ))
+        zip_upload = mail.govuk_notify_personalisation[:c8_links]
+
+        expect(zip_upload).to be_a(Hash)
+
+        expect(zip_upload).to include(confirm_email_before_download: false, filename: nil, retention_period: nil)
+
+        expect(zip_upload[:file]).to be_a(String)
       end
     end
   end

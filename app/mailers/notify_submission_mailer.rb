@@ -25,7 +25,7 @@ class NotifySubmissionMailer < NotifyMailer
 
     document_personalisation = build_document_variables
 
-    c8_links = build_c8_links
+    c8_links = build_c8_zip
 
     set_personalisation(
       shared_personalisation.merge(
@@ -62,11 +62,22 @@ class NotifySubmissionMailer < NotifyMailer
 
   private
 
-  def build_c8_links
-    links = Array(@documents[:c8_forms]).map do |doc|
-      prepare_upload(doc[:file])
+  def build_c8_zip
+    c8_forms = Array(@documents[:c8_forms]).reject { |doc| doc[:file].is_a?(Summary::BlankPage) }
+    return '' if c8_forms.empty?
+
+    zip_file = Tempfile.new(['c8_documents', '.zip'])
+
+    Zip::File.open(zip_file.path, create: true) do |zip|
+      c8_forms.each_with_index do |doc, index|
+        file = doc[:file]
+        zip.add("c8_document_#{index + 1}.pdf", file.path)
+      end
     end
-    links.empty? ? '' : links
+
+    prepare_upload(zip_file)
+  ensure
+    zip_file&.close
   end
 
   def build_document_variables

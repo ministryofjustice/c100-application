@@ -96,7 +96,7 @@ module Summary
 
         next unless section.show?
 
-        process_form(Summary::C8Form.new(c100_application, party_section: section), mode)
+        process_form(Summary::C8Form.new(c100_application, party_section: section, file_name: section.name), mode)
       end
     end
 
