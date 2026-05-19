@@ -71,9 +71,16 @@ class NotifySubmissionMailer < NotifyMailer
     Zip::File.open(zip_file.path, create: true) do |zip|
       c8_forms.each_with_index do |doc, index|
         file = doc[:file]
-        zip.add("c8_document_#{index + 1}.pdf", file.path)
+
+        file.rewind if file.respond_to?(:rewind)
+
+        zip.get_output_stream("c8_document_#{index + 1}.pdf") do |out|
+          out.write(file.read)
+        end
       end
     end
+
+    zip_file.rewind
 
     prepare_upload(zip_file)
   ensure
