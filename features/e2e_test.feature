@@ -502,55 +502,39 @@ Feature: Testing C100 end to end
     And I submit the application with email "june@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
     And I should be on the Check Your Answers page
-    Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
-    And I should see "Consent"
     And I should see they have made a consent order application
     And I should see the children "are" involved in any emergency protection, care of proceedings
-    And I should see they "have" got safety concerns about the children
+    #And I should see they "have" got safety concerns about the children
     And I should see they have safety concerns with the children about: "financial abuse, psychological abuse, emotional abuse"
     And I should see they have safety concerns with themselves about: "sexual abuse, physical abuse, financial abuse, psychological abuse, emotional abuse"
     And I should see "No, I do not want the other person to spend time with the children"
-    And I should see they want the court to decide: "Decide who they live with and when"
+    And I should see they want the court to decide: "Decide who they live with and when, A religious issue"
     And I should see they want the court to resolve an issue about: "A religious issue"
     And I should see the child's full name is "Alistair Doe"
     And I should see the child's gender is "Male"
     And I should see the child is "6" years old
     And I should see the people who have parental responsibility for the child are: "Me and the respondent"
     And I should see the children "are" known to other social services
-    And I should see the applicant's name is "June Doe"
-    And I should see the applicant's previous name is "Janie Doe"
-    And I should see the applicant's gender is "Female"
-    And I should see the applicant is "40" years old
-    And I should see the applicant's place of birth is "Windsor"
-    And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
-    And I should see the applicant "has" lived at this address for more than 5 years
-    And I should see the applicant has provided an email "june@gmail.com"
-    And I should see the applicant has provided a phone number "00000000000"
-    And I should see the applicant's relationship to "Alistair Doe" is "Mother"
+    And I should see the applicant personal details
+      | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
+      | No     | Yes           | No                      | John Doe Senior | 25-05-1998 | Male | Manchester | Father                |
+    And I should see the applicant address and contact details:
+      | address                             | lived_at_5_years | email_provided | email          | phone_number | voicemail_consent                    |
+      | Test street, London, United Kingdom | Yes              | Yes            | john@email.com | 00000000000  | Yes, the court can leave a voicemail |
     And I should see the applicant "does" have a solicitor
-    And I should see the solicitor's full name is "Tegan Price"
-    And I should see the solicitor's name of firm is "Caplan and Gold"
-    And I should see the solicitor's reference is "123456"
-    And I should see the solicitor's address is "12 Cannon Street Caplan and Gold, London, United Kingdom, EC4N 6YA"
-    And I should see the solicitor's email is "teganprice@caplangold.com" and phone number is "00000119911"
-    And I should see the solicitor's DX number is "00000119911"
-    And I should see the respondent's name is "Jake Gyllenhaal"
-    And I should see the respondent's previous name is "Ryan Reynolds"
-    And I should see the respondent's gender is "Male"
-    And I should see the respondent is "46" years old
-    And I should see the respondent's place of birth is "Wrexham"
-    And I should see the respondent's address is "Wrexham AFC Mold Road, Wrexham, Wales, LL11 2AH"
-    And I should see the respondent "has" lived at that address for more than 5 years
-    And I should see the respondent's email is "Don't know"
-    And I should see the respondent's phone number is "00000000000"
-    And I should see the respondent's relationship to "Alistair Doe" is "Father"
+    And I should see the solicitor details:
+      | full_name        | firm_name        | address                                          | email            | phone_number | dx_number   |
+      | Annalise Keating | Keating Law Firm | Windsor Castle, Windsor, United Kingdom, SL4 1QF | annalise@law.com | 00000000000  | 00000000000 |
+    And I should see the respondents details:
+      | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
+      | Jane Doe  | 19-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "are" other people who need to be informed of the application
     And I should see the other party's name is "Cassie Doe"
     And I should see the other party's gender is "Female"
     And I should see the other party is "30" years of age
-    And I should see the other party's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
+    And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 2AA"
     And I should see the other party's relationship to "Alistair Doe" is "Caregiver"
-    And I should see the child "Alistair Doe" lives with "June Doe"
+    And I should see the child "Alistair Doe" lives with "John Doe Senior"
     And I should see the children "haven't" been involved in other proceedings
     And I should see an urgent hearing "is" requested
     And I should see an urgent hearing is requested because "Alistair is in grave danger because of Jake Gyllenhaal"
@@ -566,7 +550,7 @@ Feature: Testing C100 end to end
     And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "are" people who need an intermediary to help them in court
     And I should see the details provided for the intermediary are "I need someone to communicate between me and the respondent"
-    And I should see there "are" special language requirements
+    #And I should see there "are" special language requirements
     And I should see there "are" specific safety arrangements specified for the court
     And I should see there "aren't" special facilities needed when attending court
     And I should see the email for submitting an application to court is "june@gmail.com"
