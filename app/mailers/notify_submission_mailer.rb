@@ -25,15 +25,15 @@ class NotifySubmissionMailer < NotifyMailer
 
     document_personalisation = build_document_variables
 
-    c8_links = build_c8_zip
-
     set_personalisation(
       shared_personalisation.merge(
         urgent: notify_boolean(@c100_application.mark_as_urgent?),
         safety_concerns: notify_boolean(@c100_application.has_safety_concerns?),
         c8_included: notify_boolean(@c100_application.any_confidentiality_enabled?),
         # link_to_c8_pdf: prepare_upload(@documents[:c8_form]),
-        c8_links: c8_links,
+        link_to_applicant_c8_pdf: c8_pdf_link(:applicant_c8_forms),
+        link_to_respondent_c8_pdf: c8_pdf_link(:respondent_c8_forms),
+        link_to_other_party_c8_pdf: c8_pdf_link(:other_party_c8_forms),
         link_to_pdf: prepare_upload(@documents[:bundle]),
         link_to_json: prepare_upload(@documents[:json_form]),
         **document_personalisation
@@ -62,30 +62,12 @@ class NotifySubmissionMailer < NotifyMailer
 
   private
 
-  def build_c8_zip
-    c8_forms = Array(@documents[:c8_forms]).reject { |doc| doc[:file].is_a?(Summary::BlankPage) }
-    return '' if c8_forms.empty?
+  def c8_pdf_link(key)
+    docs = @documents[key]
 
-    zip_file = Tempfile.new(['c8_documents', '.zip'])
+    return '' if docs.blank?
 
-    Zip::File.open(zip_file.path, create: true) do |zip|
-      c8_forms.each_with_index do |doc, index|
-        file = doc[:file]
-
-        file.rewind if file.respond_to?(:rewind)
-
-        zip.get_output_stream("c8_document_#{index + 1}.pdf") do |out|
-          out.write(file.read)
-        end
-      end
-    end
-
-    zip_file.flush
-    zip_file.rewind
-
-    prepare_upload(zip_file)
-  ensure
-    zip_file&.close
+    Array(docs).map { |doc| prepare_upload(doc[:file]) }
   end
 
   def build_document_variables

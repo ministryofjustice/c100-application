@@ -12,71 +12,27 @@ module C100App
 
     def generate_documents
       documents.store(:bundle, generate_pdf(:c100, :c1a))
-      documents.store(:c8_forms, generate_c8_documents)
+      documents.store(:applicant_c8_forms, generate_grouped_c8_pdf(:applicant))
+      documents.store(:respondent_c8_forms, generate_grouped_c8_pdf(:respondent))
+      documents.store(:other_party_c8_forms, generate_grouped_c8_pdf(:other_party))
 
       # Temporary removal
       # documents.store(:json_form, generate_json)
     end
 
-    def generate_c8_documents
-      c8_parties.map do |party_data|
-        {
-          key: party_data[:key],
-          label: party_data[:label],
-          file: generate_single_c8_pdf(
-            party_data[:party],
-            party_data[:section_class],
-            party_data[:index]
-          )
-        }
+    def generate_grouped_c8_pdf(type)
+      presenter = Summary::PdfPresenter.new(c100_application)
+
+      case type
+      when :applicant
+        presenter.generate_applicant_c8s
+      when :respondent
+        presenter.generate_respondent_c8s
+      when :other_party
+        presenter.generate_other_party_c8s
       end
-    end
 
-    def c8_parties
-      parties = []
-
-      collect_c8_parties(
-        parties,
-        c100_application.applicants,
-        Summary::Sections::C8ApplicantsDetails,
-        :applicant
-      )
-
-      collect_c8_parties(
-        parties,
-        c100_application.respondents,
-        Summary::Sections::C8RespondentsDetails,
-        :respondent
-      )
-
-      collect_c8_parties(
-        parties,
-        c100_application.other_parties,
-        Summary::Sections::C8OtherPartiesDetails,
-        :other_party
-      )
-
-      parties
-    end
-
-    def collect_c8_parties(parties, collection, section_class, type)
-      collection.each_with_index do |party, index|
-        section = section_class.new(
-          c100_application,
-          party,
-          index: index + 1
-        )
-
-        next unless section.show?
-
-        parties << {
-          key: :"c8_#{type}_#{index + 1}",
-          label: "#{type.to_s.humanize} #{index + 1}",
-          party: party,
-          section_class: section_class,
-          index: index
-        }
-      end
+      StringIO.new(presenter.to_pdf)
     end
 
     # We use `deliver_now` here, as we want the actions performed in

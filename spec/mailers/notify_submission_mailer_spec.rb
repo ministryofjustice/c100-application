@@ -52,7 +52,9 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
   end
 
   describe '#application_to_court' do
-    let(:documents) { { bundle: StringIO.new('bundle pdf'), c8_forms: [], json_form: tmp_file } }
+    let(:documents) { { bundle: StringIO.new('bundle pdf'), applicant_c8_forms: [], respondent_c8_forms: [],
+                        other_party_c8_forms: [], json_form: tmp_file } }
+
     let(:tmp_file) {
       tmp = Tempfile.new('test')
       tmp << 'test2'
@@ -127,8 +129,10 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          c8_links: '',
-          link_to_pdf: { 
+          link_to_applicant_c8_pdf: '',
+          link_to_respondent_c8_pdf: '',
+          link_to_other_party_c8_pdf: '',
+          link_to_pdf: {
             file: 'YnVuZGxlIHBkZg==',
             filename: nil,
             confirm_email_before_download: false,
@@ -181,7 +185,9 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          c8_links: '',
+          link_to_applicant_c8_pdf: '',
+          link_to_respondent_c8_pdf: '',
+          link_to_other_party_c8_pdf: '',
           link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
             confirm_email_before_download: false,
             retention_period: nil },
@@ -203,45 +209,47 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
 
     context 'and applicant has private contact details' do
       before do
-        documents[:c8_forms] =
-          [
-            { file: c8_tempfile("c8 form 1") }
-          ]
+        documents[:applicant_c8_forms] = [
+          { file: c8_tempfile("c8 form 1") }
+        ]
       end
 
-      it 'sends C8 forms as a ZIP upload' do
+      it 'sends applicant C8 forms as a Notify upload' do
         allow(c100_application).to receive(:confidentiality_enabled?).and_return(true)
 
-        zip_upload = mail.govuk_notify_personalisation[:c8_links]
+        upload = mail.govuk_notify_personalisation[:link_to_applicant_c8_pdf]
 
-        expect(zip_upload).to be_a(Hash)
+        expect(upload).to be_a(Array).or be_a(Hash)
 
-        expect(zip_upload).to include(confirm_email_before_download: false, filename: nil, retention_period: nil)
-
-        expect(zip_upload[:file]).to be_a(String)
+        expect(upload).to include(confirm_email_before_download: false, file: "YzggZm9ybSAx", filename: nil, retention_period: nil)
       end
     end
 
     context 'and application has multiple private contact details' do
       before do
-        documents[:c8_forms] =
-          [
-            { file: c8_tempfile("c8 form 1") },
-            { file: c8_tempfile("c8 form 2") },
-            { file: c8_tempfile("c8 form 3") }
-          ]
+        documents[:applicant_c8_forms] = [
+          { file: c8_tempfile("c8 form 1") }
+        ]
+
+        documents[:respondent_c8_forms] = [
+          { file: c8_tempfile("c8 form 2") }
+        ]
+
+        documents[:other_party_c8_forms] = [
+          { file: c8_tempfile("c8 form 3") }
+        ]
       end
 
-      it 'combines all C8 forms into a single ZIP upload' do
+      it 'sends separate C8 uploads per party type' do
         allow(c100_application).to receive(:confidentiality_enabled?).and_return(true)
 
-        zip_upload = mail.govuk_notify_personalisation[:c8_links]
+        applicant_upload = mail.govuk_notify_personalisation[:link_to_applicant_c8_pdf]
+        respondent_upload = mail.govuk_notify_personalisation[:link_to_respondent_c8_pdf]
+        other_party_upload = mail.govuk_notify_personalisation[:link_to_other_party_c8_pdf]
 
-        expect(zip_upload).to be_a(Hash)
-
-        expect(zip_upload).to include(confirm_email_before_download: false, filename: nil, retention_period: nil)
-
-        expect(zip_upload[:file]).to be_a(String)
+        expect(applicant_upload).to include(confirm_email_before_download: false, file: "YzggZm9ybSAx", filename: nil, retention_period: nil)
+        expect(respondent_upload).to include(confirm_email_before_download: false, file: "YzggZm9ybSAy", filename: nil, retention_period: nil)
+        expect(other_party_upload).to include(confirm_email_before_download: false, file: "YzggZm9ybSAz", filename: nil, retention_period: nil)
       end
     end
   end
