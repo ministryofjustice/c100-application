@@ -52,8 +52,8 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
   end
 
   describe '#application_to_court' do
-    let(:documents) { { bundle: StringIO.new('bundle pdf'), applicant_c8_forms: [], respondent_c8_forms: [],
-                        other_party_c8_forms: [], json_form: tmp_file } }
+    let(:documents) { { bundle: StringIO.new('bundle pdf'), applicant_c8_forms: nil, respondent_c8_forms: nil,
+                        other_party_c8_forms: nil, json_form: tmp_file } }
 
     let(:tmp_file) {
       tmp = Tempfile.new('test')
@@ -209,9 +209,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
 
     context 'and applicant has private contact details' do
       before do
-        documents[:applicant_c8_forms] = [
-          { file: c8_tempfile("c8 form 1") }
-        ]
+        documents[:applicant_c8_forms] = c8_tempfile("c8 form 1")
       end
 
       it 'sends applicant C8 forms as a Notify upload' do
@@ -227,17 +225,11 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
 
     context 'and application has multiple private contact details' do
       before do
-        documents[:applicant_c8_forms] = [
-          { file: c8_tempfile("c8 form 1") }
-        ]
+        documents[:applicant_c8_forms] = c8_tempfile("c8 form 1")
 
-        documents[:respondent_c8_forms] = [
-          { file: c8_tempfile("c8 form 2") }
-        ]
+        documents[:respondent_c8_forms] = c8_tempfile("c8 form 2")
 
-        documents[:other_party_c8_forms] = [
-          { file: c8_tempfile("c8 form 3") }
-        ]
+        documents[:other_party_c8_forms] = c8_tempfile("c8 form 3")
       end
 
       it 'sends separate C8 uploads per party type' do

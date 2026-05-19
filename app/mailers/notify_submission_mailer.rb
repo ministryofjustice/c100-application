@@ -30,9 +30,9 @@ class NotifySubmissionMailer < NotifyMailer
         urgent: notify_boolean(@c100_application.mark_as_urgent?),
         safety_concerns: notify_boolean(@c100_application.has_safety_concerns?),
         c8_included: notify_boolean(@c100_application.any_confidentiality_enabled?),
-        link_to_applicant_c8_pdf: c8_pdf_link(:applicant_c8_forms),
-        link_to_respondent_c8_pdf: c8_pdf_link(:respondent_c8_forms),
-        link_to_other_party_c8_pdf: c8_pdf_link(:other_party_c8_forms),
+        link_to_applicant_c8_pdf: prepare_upload(@documents[:applicant_c8_forms]),
+        link_to_respondent_c8_pdf: prepare_upload(@documents[:respondent_c8_forms]),
+        link_to_other_party_c8_pdf: prepare_upload(@documents[:other_party_c8_forms]),
         link_to_pdf: prepare_upload(@documents[:bundle]),
         link_to_json: prepare_upload(@documents[:json_form]),
         **document_personalisation
@@ -60,14 +60,6 @@ class NotifySubmissionMailer < NotifyMailer
   end
 
   private
-
-  def c8_pdf_link(key)
-    docs = @documents[key]
-
-    return '' if docs.blank?
-
-    Array(docs).map { |doc| prepare_upload(doc[:file]) }
-  end
 
   def build_document_variables
     keys = %i[draft_consent_order miam_certificate exemption existing_court_order]
