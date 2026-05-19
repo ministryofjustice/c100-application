@@ -80,6 +80,7 @@ class NotifySubmissionMailer < NotifyMailer
       end
     end
 
+    zip_file.flush
     zip_file.rewind
 
     prepare_upload(zip_file)
