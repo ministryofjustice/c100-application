@@ -671,7 +671,6 @@ DEPENDENCIES
   rubocop
   rubocop-performance
   ruby-prof
-  rubyzip
   sanitize (~> 6.1.0)
   selenium-webdriver (>= 4.24.0)
   sentry-rails
