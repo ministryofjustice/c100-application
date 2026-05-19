@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe C100App::CourtOnlineSubmission do
-  let(:c100_application) { instance_double(C100Application,email_submission: email_submission, court: court, applicants: applicants, respondents: respondents, other_parties: other_parties) }
+  let(:c100_application) { instance_double(C100Application, email_submission: email_submission, court: court, applicants: applicants, respondents: respondents, other_parties: other_parties) }
   let(:email_submission) { instance_double(EmailSubmission, update: true) }
   let(:court) { double(documents_email: 'court@email.com') }
   let(:applicants) { [] }
