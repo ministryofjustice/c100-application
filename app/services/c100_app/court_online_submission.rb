@@ -23,14 +23,17 @@ module C100App
     def generate_grouped_c8_pdf(type)
       presenter = Summary::PdfPresenter.new(c100_application)
 
-      case type
-      when :applicant
-        presenter.generate_applicant_c8s
-      when :respondent
-        presenter.generate_respondent_c8s
-      when :other_party
-        presenter.generate_other_party_c8s
-      end
+      rendered =
+        case type
+        when :applicant
+          presenter.generate_applicant_c8s
+        when :respondent
+          presenter.generate_respondent_c8s
+        when :other_party
+          presenter.generate_other_party_c8s
+        end
+
+      return nil unless rendered
 
       StringIO.new(presenter.to_pdf)
     end

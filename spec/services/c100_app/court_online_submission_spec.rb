@@ -57,6 +57,24 @@ RSpec.describe C100App::CourtOnlineSubmission do
                                               :other_party_c8_forms
                                             ])
       end
+      context 'when no C8 PDFs are rendered' do
+        let(:pdf_presenter) {
+          instance_double(
+            Summary::PdfPresenter,
+            generate: true,
+            generate_applicant_c8s: true,
+            generate_respondent_c8s: false,
+            generate_other_party_c8s: false,
+            to_pdf: 'pdf content')
+        }
+
+        it 'does not generate respondent or other party uploads' do
+          subject.process
+
+          expect(subject.documents[:respondent_c8_forms]).to be_nil
+          expect(subject.documents[:other_party_c8_forms]).to be_nil
+        end
+      end
     end
 
     context '#deliver_email' do

@@ -105,13 +105,18 @@ module Summary
     end
 
     def process_party_collection(collection, section_class, mode)
+      rendered = false
       collection.each_with_index do |party, index|
         section = build_section(section_class, party, index)
 
         next unless section.show?
 
         process_form(Summary::C8Form.new(c100_application, party_section: section, file_name: section.name), mode)
+
+        rendered = true
       end
+
+      rendered
     end
 
     def build_section(section_class, party, index)
