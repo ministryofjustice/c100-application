@@ -11,11 +11,28 @@ module C100App
     private
 
     def generate_documents
-      documents.store(:bundle,  generate_pdf(:c100, :c1a))
-      documents.store(:c8_form, generate_pdf(:c8))
+      documents.store(:bundle, generate_pdf(:c100, :c1a))
+      documents.store(:applicant_c8_forms, generate_grouped_c8_pdf(:applicant))
+      documents.store(:respondent_c8_forms, generate_grouped_c8_pdf(:respondent))
+      documents.store(:other_party_c8_forms, generate_grouped_c8_pdf(:other_party))
 
       # Temporary removal
       # documents.store(:json_form, generate_json)
+    end
+
+    def generate_grouped_c8_pdf(type)
+      presenter = Summary::PdfPresenter.new(c100_application)
+
+      case type
+      when :applicant
+        presenter.generate_applicant_c8s
+      when :respondent
+        presenter.generate_respondent_c8s
+      when :other_party
+        presenter.generate_other_party_c8s
+      end
+
+      StringIO.new(presenter.to_pdf)
     end
 
     # We use `deliver_now` here, as we want the actions performed in

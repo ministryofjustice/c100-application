@@ -1,10 +1,12 @@
 module Summary
   class C8Form < BasePdfForm
     attr_reader :party_section
+    attr_reader :file_name
 
-    def initialize(c100_application, party_section:)
+    def initialize(c100_application, party_section:, file_name: nil)
       super(c100_application)
       @party_section = party_section
+      @file_name = file_name
     end
 
     def name

@@ -31,6 +31,30 @@ module Summary
       'C100 child arrangements application.pdf'.freeze
     end
 
+    def generate_applicant_c8s
+      process_party_collection(
+        c100_application.applicants,
+        Sections::C8ApplicantsDetails,
+        :pdf
+      )
+    end
+
+    def generate_respondent_c8s
+      process_party_collection(
+        c100_application.respondents,
+        Sections::C8RespondentsDetails,
+        :pdf
+      )
+    end
+
+    def generate_other_party_c8s
+      process_party_collection(
+        c100_application.other_parties,
+        Sections::C8OtherPartiesDetails,
+        :pdf
+      )
+    end
+
     private
 
     def generate_c100_form(mode = :pdf)
@@ -86,7 +110,7 @@ module Summary
 
         next unless section.show?
 
-        process_form(Summary::C8Form.new(c100_application, party_section: section), mode)
+        process_form(Summary::C8Form.new(c100_application, party_section: section, file_name: section.name), mode)
       end
     end
 
