@@ -786,7 +786,18 @@ end
 
 And(/^there "(is|isn't)" a court order requiring permission to make this application$/) do |arg|
   expect(existing_court_order_page).to be_displayed
-  existing_court_order_page.submit(arg == 'is' ? 'yes' : 'no')
+  if arg == 'is'
+    existing_court_order_page.submit_yes('12345678', '01-01-2030')
+
+    expect(existing_court_order_uploadable_page).to be_displayed
+    existing_court_order_uploadable_page.submit_yes
+
+    expect(existing_court_order_upload_page).to be_displayed
+    file_path = File.absolute_path('features/support/sample_file/image.jpg')
+    existing_court_order_upload_page.upload_file(file_path)
+  else
+    existing_court_order_page.submit_no
+  end
 end
 
 And("I am not asking for an urgent or without notice hearing") do

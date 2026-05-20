@@ -534,7 +534,7 @@ end
 
 And(/^I should see there "(is|isn't)" a court order requiring permission to make this application$/) do |arg|
   answer = (arg == "is" ? "Yes" : "No")
-  expect(cya_page.application_reasons.has_existing_court_order.answer).to eq(answer)
+  expect(cya_page.application_reasons.has_existing_court_order.details.answer).to eq(answer)
 end
 
 And(/^I should see the case number of the court order is "([^"]*)"$/) do |arg|

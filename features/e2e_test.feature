@@ -411,7 +411,7 @@ Feature: Testing C100 end to end
     And I should see they want the court to decide: "Decide who they live with and when"
     And I should see the children details:
       | full_name     | dob        | sex    | child_orders             | special_guardianship | parental_responsibility |
-      | John Smith Jr | 14-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
+      | John Smith Jr | 20-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
     And I should see the children "might be" known to other social services
     And I should see the applicant personal details
       | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
@@ -425,7 +425,7 @@ Feature: Testing C100 end to end
       | Annalise Keating | Keating Law Firm | Windsor Castle, Windsor, United Kingdom, SL4 1QF | annalise@law.com | 00000000000  | 00000000000 |
     And I should see the respondents details:
       | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
-      | Jane Doe  | 14-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
+      | Jane Doe  | 20-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "aren't" other people who need to be informed of the application
     And I should see the children residence details:
       | child_name    | residence       |
@@ -567,196 +567,33 @@ Feature: Testing C100 end to end
     And I should see "Download your application"
 
   Scenario: Existing Court Order (path seven: 'Yes' to 'Have you attended a MIAM?)
-    When I choose "Child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order"
-    Then I should see "Does this application concern a child who is the subject of separate ongoing emergency proceedings, care proceedings or supervision proceedings (or is already the subject of an emergency, care or supervision order)?"
-    And I choose "No"
-    Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
-    And I click the radio button "No"
-    And I check "I understand that I have to attend a MIAM, or a non-court dispute resolution process, or provide a valid reason for not attending."
-    And I click the "Continue" button
-    Then I should see "Have you attended a Mediation Information and Assessment Meeting (MIAM)?"
-    And I choose "Yes"
-    Then I should see "Have you got a document signed by the mediator?"
-    And I choose "Yes"
-    Then I should see "Upload your MIAM certificate"
-    When I upload a document using the file uploader
-    And I click the "Continue" button
-    Then I should see "Safety concerns"
-    And I click the "Continue" link
-    Then I should see "Are the children at risk of being abducted?"
-    And I choose "No"
-    Then I should see "Do you have any concerns about drug, alcohol or substance abuse?"
-    And I choose "No"
-    Then I should see "Have the children suffered or are they at risk of suffering domestic or child abuse?"
-    And I choose "No"
-    Then I should see "Have you suffered or are you at risk of suffering domestic abuse?"
-    And I choose "No"
-    Then I should see "Do you have any other safety concerns about you or the children?"
-    And I choose "No"
-    Then I should see "What are you asking the court to decide about the children involved?"
-    When I check "Decide who they live with and when"
-    And I click the "Continue" button
-    Then I should see "What you’re asking the court to decide about the children"
-    And I click the "Continue" link
-    Then I should see "Going to court"
-    And I check "I understand what’s involved if I decide to go to court"
-    And I click the "Continue" button
-    Then I should see "Alternative ways to reach an agreement"
-    And I click the "Continue" link
-    Then I should see "Negotiation tools and services"
-    And I choose "Yes"
-    Then I should see "Professional mediation"
-    And I choose "Yes"
-    Then I should see "Lawyer negotiation"
-    And I choose "Yes"
-    Then I should see "Collaborative law"
-    And I choose "Yes"
-    Then I should see "Enter the names of the children"
-    And I fill in "First name(s)" with "Jane"
-    And I fill in "Last name(s)" with "Doe Jnr"
-    And I click the "Continue" button
-    Then I should see "Provide details for Jane Doe Jnr"
-    And I specify they are "2" years of age
-    And I choose "Female"
-    Then I should see "Which of the decisions you’re asking the court to resolve relate to Jane Doe Jnr?"
-    And I check "Decide who they live with and when"
-    And I click the "Continue" button
-    Then I should see "Is there a Special Guardianship Order in force in relation to Jane Doe Jnr?"
-    And I choose "No"
-    Then I should see "Parental responsibility for Jane Doe Jnr"
-    And I fill in "State everyone who has parental responsibility for Jane Doe Jnr and how they have parental responsibility." with "Father"
-    And I click the "Continue" button
-    Then I should see "Further information"
-    And I choose "Don't know" for all options on this page
-    Then I should see "Do you or any respondents have other children who are not part of this application?"
-    And I choose "No"
-    Then I should see "Enter your name"
-    And I fill in "First name(s)" with "John"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Keeping your contact details private"
-    And I choose "I don't know"
-    Then I should see "Keeping your contact details private"
-    When I choose No from the radio button options
-    And I click the "Continue" button
-    Then I should see "Are you currently resident in a refuge?"
-    And I choose "No"
-    Then I should see "The court will not keep your contact details private"
-    And I click the "Continue" link
-    Then I should see "Provide details for John Doe"
-    And I click the radio button "No"
-    And I click the radio button "Male"
-    And I specify they are "30" years of age
-    And I fill in "Your place of birth" with "London"
-    And I click the "Continue" button
-    Then I should see "What is John Doe's relationship to Jane Doe Jnr?"
-    And I choose "Father"
-    Then I should see "Address of John Doe"
-    And I click the "I live outside the UK" link
-    And I should see "Address details of John Doe"
-    And I fill in "Building and street" with "Buckingham Palace"
-    And I fill in "Town or city" with "London"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SW1A 1AA"
-    And I choose "Yes"
-    Then I should see "Contact details of John Doe"
-    And I click the radio button "I can provide an email address"
-    And I fill in "Your email address" with "john@gmail.com"
-    And I click the radio button "I can provide a phone number"
-    And I fill in "Your phone number" with "00000000000"
-    And I click the radio button "Yes, the court can leave me a voicemail"
-    And I click the "Continue" button
-    Then I should see "Will you be legally represented by a solicitor in these proceedings?"
-    And I choose "No"
-    Then I should see "Enter the respondent’s name"
-    And I fill in "First name(s)" with "Jane"
-    And I fill in "Last name(s)" with "Doe"
-    And I click the "Continue" button
-    Then I should see "Provide details for Jane Doe"
-    And I click the radio button "No"
-    And I click the radio button "Female"
-    And I specify they are "30" years of age
-    And I fill in "Place of birth" with "London"
-    And I click the "Continue" button
-    Then I should see "What is Jane Doe's relationship to Jane Doe Jnr?"
-    And I choose "Mother"
-    Then I should see "Address of Jane Doe"
-    And I click the "I don’t know their postcode or they live outside the UK" link
-    Then I should see "Address details of Jane Doe"
-    And I fill in "Building and street" with "Windsor Castle"
-    And I fill in "Town or city" with "Windsor"
-    And I fill in "Country" with "United Kingdom"
-    And I fill in "Postcode" with "SL4 1QF"
-    And I click the radio button "Yes"
-    And I click the "Continue" button
-    Then I should see "Contact details of Jane Doe"
-    And I fill in "Email address" with "Jane@Hotmail.com"
-    And I fill in "Phone number" with "00000000000"
-    And I click the "Continue" button
-    Then I should see "Is there anyone else who should know about your application?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Who does Jane Doe Jnr currently live with?"
-    And I check "John Doe"
-    And I click the "Continue" button
-    Then I should see "Have any of the children in this application been involved in other family court proceedings?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Is there an order under section 91(14) Children Act 1989, a limited civil restraint order, a general civil restraint order or an extended civil restraint order in force which means you need permission to make this application?"
-    And I click the radio button "Yes"
-    And I fill in "Enter the case number" with "12345678"
-    And I enter the date 01-01-2030
-    And I click the "Continue" button
-    Then I should see "Can you upload your existing court order?"
-    And I click the radio button "Yes"
-    And I click the "Continue" button
-    And I should see "Upload your existing court order"
-    When I upload a document using the file uploader
-    And I click the "Continue" button
-    Then I should see "Do you need an urgent hearing?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Are you asking for a without notice hearing?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another country abroad or in Scotland or Northern Ireland?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Do you think another person in this application may be able to apply for a similar order in a country outside England or Wales?"
-    And I click the radio button "Yes"
-    And I fill in "Provide details" with "Details"
-    And I click the "Continue" button
-    Then I should see "Has a request for information or other assistance involving the children been made to or by another country?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Why are you making this application?"
-    And I fill in "Provide details" with "I fear for the safety of Jane Doe Jnr and I want her to be safe"
-    And I click the "Continue" button
-    Then I should see "Are there any factors that may affect any adult in this application taking part in the court proceedings?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Does anyone in this application need an intermediary to help them in court?"
-    And I click the radio button "No"
-    And I click the "Continue" button
-    Then I should see "Does anyone in this application have special language requirements?"
-    And I click the "Continue" button
-    Then I should see "Do you or the children need specific safety arrangements at court?"
-    And I click the "Continue" button
-    Then I should see "Does anyone in this application need assistance or special facilities when attending court?"
-    And I fill in "You can add more detail if necessary" with "We need lots of light"
-    And I click the "Continue" button
-    Then I should see "Submitting your application to court"
-    And I fill in "Enter an email address if you would like to get a confirmation" with "John@Gmail.com"
-    And I click the "Continue" button
-    Then I should see "Is this email address correct?"
-    And I should see "john@gmail.com"
-    And I click the "Yes, continue" link
-    Then I should see "How will you pay the application fee?"
-    And I click the radio button "Pay with ‘Help with fees’"
-    And I fill in "Reference number" with "HWF-123-456"
-    And I click the "Continue" button
-    Then Page has title "Check your answers - Apply to court about child arrangements - GOV.UK"
-    And I should see "Full name Jane Doe"
+    When I navigate the MIAM journey
+    And I have no safety concerns about the children
+    When I ask the court to decide on the following issues: "who the children live with and when"
+    Then I should see the child arrangements order details for: "who the children live with and when"
+    Then I continue to the next step
+    And I understand the process of going to court
+    And I have tried all alternative ways to reach an agreement
+    And I enter details for a "2" year old child
+    And I state that the "Father" has parental responsibility for the child
+    And I submit that I don't know any additional details for the child
+    And I "don't" have other children
+    And I complete the applicant details journey
+    And I "don't" have a solicitor
+    And I navigate the respondent details journey
+    And there "aren't" any other people who should know about the application
+    And the child lives with "John Doe Senior"
+    And there "hasn't" been any court proceedings about the children
+    And there "is" a court order requiring permission to make this application
+    And I "don't" require an urgent and without notice hearing
+    And I navigate the international issues journey
+    And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
+    And I have no issues attending court
+    And I require special assistance when attending court "We need lots of light"
+    And I submit the application with email "john@gmail.com"
+    And I pay using Help With Fees with reference "HWF-123-456"
+    And I should be on the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme
@@ -764,31 +601,21 @@ Feature: Testing C100 end to end
     And I should see they have a document signed by the mediator
     And I should see they "haven't" got safety concerns about the children
     And I should see they want the court to decide: "Decide who they live with and when"
-    And I should see the child's full name is "Jane Doe Jnr"
-    And I should see the child is "2" years old
-    And I should see the child's gender is "Female"
-    And I should see the people who have parental responsibility for the child are: "Father"
+    And I should see the children details:
+      | full_name     | dob        | sex    | child_orders             | special_guardianship | parental_responsibility |
+      | John Smith Jr | 20-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
     And I should see the children "might be" known to other social services
-    And I should see the applicant's name is "John Doe"
-    And I should see the applicant's gender is "Male"
-    And I should see the applicant is "30" years old
-    And I should see the applicant's place of birth is "London"
-    And I should see the applicant's address is "Buckingham Palace, London, United Kingdom, SW1A 1AA"
-    And I should see the applicant "has" lived at this address for more than 5 years
-    And I should see the applicant has provided an email "john@gmail.com"
-    And I should see the applicant has provided a phone number "00000000000"
-    And I should see the applicant's relationship to "Jane Doe Jnr" is "Father"
-    And I should see the respondent's name is "Jane Doe"
-    And I should see the respondent is "30" years old
-    And I should see the respondent's gender is "Female"
-    And I should see the respondent's place of birth is "London"
-    And I should see the respondent's address is "Windsor Castle, Windsor, United Kingdom, SL4 1QF"
-    And I should see the respondent "has" lived at that address for more than 5 years
-    And I should see the respondent's email is "jane@hotmail.com"
-    And I should see the respondent's phone number is "00000000000"
-    And I should see the respondent's relationship to "Jane Doe Jnr" is "Mother"
+    And I should see the applicant personal details
+      | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
+      | No     | Yes           | No                      | John Doe Senior | 25-05-1998 | Male | Manchester | Father                |
+    And I should see the applicant address and contact details:
+      | address                             | lived_at_5_years | email_provided | email          | phone_number | voicemail_consent                    |
+      | Test street, London, United Kingdom | Yes              | Yes            | john@email.com | 00000000000  | Yes, the court can leave a voicemail |
+    And I should see the respondents details:
+      | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
+      | Jane Doe  | 20-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "aren't" other people who need to be informed of the application
-    And I should see the child "Jane Doe Jnr" lives with "John Doe"
+    And I should see the child "John Smith Jr" lives with "John Doe Senior"
     And I should see the children "haven't" been involved in other proceedings
     And I should see an urgent hearing "isn't" requested
     And I should see a without notice hearing "isn't" requested

@@ -186,7 +186,9 @@ class CYAPage < BasePage
 
   section :application_reasons, CYAGroup, 'dl#application_reasons' do
     row :details, '#application_details'
-    row :has_existing_court_order, CYANestedSummaryRow, '.app-cya--answers-group#existing_court_order'
+    section :has_existing_court_order, CYAGroup, '.app-cya--answers-group#existing_court_order' do
+      row :details, '#existing_court_order'
+    end
   end
 
   section :urgent_hearing, CYAGroup, 'dl#urgent_hearing' do

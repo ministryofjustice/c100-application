@@ -430,6 +430,14 @@ def existing_court_order_page
   @existing_court_order_page ||= ExistingCourtOrderPage.new
 end
 
+def existing_court_order_uploadable_page
+  @existing_court_order_uploadable_page ||= ExistingCourtOrderUploadablePage.new
+end
+
+def existing_court_order_upload_page
+  @existing_court_order_upload_page ||= ExistingCourtOrderUploadPage.new
+end
+
 def urgent_hearing_page
   @urgent_hearing_page ||= UrgentHearingPage.new
 end
