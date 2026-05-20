@@ -22,8 +22,7 @@ RSpec.describe C100App::CourtOnlineSubmission do
         generate_applicant_c8s: true,
         generate_respondent_c8s: true,
         generate_other_party_c8s: true,
-        to_pdf: 'pdf content',
-        pdf_data_rendered?: true
+        to_pdf: 'pdf content'
       )
     }
     let(:json_presenter) { instance_double(Summary::JsonPresenter, generate: true, json_file: json_file) }
@@ -57,6 +56,24 @@ RSpec.describe C100App::CourtOnlineSubmission do
                                               :respondent_c8_forms,
                                               :other_party_c8_forms
                                             ])
+      end
+      context 'when no C8 PDFs are rendered' do
+        let(:pdf_presenter) {
+          instance_double(
+            Summary::PdfPresenter,
+            generate: true,
+            generate_applicant_c8s: true,
+            generate_respondent_c8s: false,
+            generate_other_party_c8s: false,
+            to_pdf: 'pdf content')
+        }
+
+        it 'does not generate respondent or other party uploads' do
+          subject.process
+
+          expect(subject.documents[:respondent_c8_forms]).to be_nil
+          expect(subject.documents[:other_party_c8_forms]).to be_nil
+        end
       end
     end
 
@@ -100,27 +117,6 @@ RSpec.describe C100App::CourtOnlineSubmission do
         )
 
         subject.process
-      end
-    end
-
-    context 'when no C8 PDFs are rendered' do
-      let(:pdf_presenter) {
-        instance_double(
-          Summary::PdfPresenter,
-          generate: true,
-          generate_applicant_c8s: true,
-          generate_respondent_c8s: true,
-          generate_other_party_c8s: true,
-          to_pdf: 'pdf content',
-          pdf_data_rendered?: false
-        )
-      }
-
-      it 'does not generate respondent or other party uploads' do
-        subject.process
-
-        expect(subject.documents[:respondent_c8_forms]).to be_nil
-        expect(subject.documents[:other_party_c8_forms]).to be_nil
       end
     end
   end
