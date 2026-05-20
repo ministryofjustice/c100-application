@@ -108,7 +108,7 @@ module Summary
           FreeTextAnswer.new(:person_contact_details_private,
                              privacy_preferences_answer(person),
                              change_path: edit_steps_applicant_privacy_preferences_path(person),
-                             i18n_opts: {name: "your"}),
+                             i18n_opts: {name: "your", refuge: person.refuge}),
           FreeTextAnswer.new(:refuge, person.refuge.try(:capitalize),
                              change_path: edit_steps_applicant_refuge_path(person)),
         ]

@@ -512,6 +512,7 @@ en:
       question: Do the other people named in this application (the respondents) know any of your contact details?
     person_contact_details_private:
       question: Do you want to keep %{name} contact details private from the other people named in the application?
+      refuge: If you are currently living in a refuge, the court will keep all your contact details confidential
     other_party_refuge:
       question: Is %{name} currently resident in a refuge?
       answers:

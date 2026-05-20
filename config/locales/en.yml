@@ -284,10 +284,11 @@ en:
           heading: "The court will keep your contact details private"
           heading_not_private: "The court will not keep your contact details private"
           body_text_html: <p class="govuk-body">You have told us you want to keep these contact details private</p>
+          body_text_refuge_html: <p class="govuk-body">As you are currently living in a refuge, the court will keep all of your contact details confidential.</p>
           body_text_not_private_html: <p class="govuk-body">You have told us that either the other people named in this application do not know any of your contact details, or you do not want to keep your contact details private from the other people named in this application (the respondents).</p>
           second_text_html: |
             <h2 class="govuk-heading-m">What the court will do</h2>
-            <p class="govuk-body">The court will hold this information securely and it will not be shared with any other party except Cafcass (Children and Family Court Advisory and Support Service), Cafcass Cymru or the local authority, if any of them are involved in your case.</p>
+            <p class="govuk-body">The court will hold this information securely and it will not be shared with anyone else except Cafcass (Children and Family Court Advisory and Support Service), Cafcass Cymru or the local authority, if any of them are involved in your case.</p>
       personal_details:
         edit:
           page_title: Applicant personal details

@@ -3,8 +3,13 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <% if @current_record.refuge == 'yes' %>
+      <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
 
-    <% if @current_record.are_contact_details_private == 'yes' %>
+      <%=t '.body_text_refuge_html' %>
+
+      <%=t '.second_text_html' %>
+    <% elsif @current_record.are_contact_details_private == 'yes' %>
       <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
 
       <%=t '.body_text_html' %>

@@ -7,21 +7,26 @@ module Steps
 
       validates_inclusion_of :refuge, in: GenericYesNo.values
 
-      validate :refuge_with_private_address, if: -> { refuge.yes? }
-
       private
-
-      def refuge_with_private_address
-        current_applicant = c100_application.applicants.find_or_initialize_by(id: record_id)
-
-        errors.add(:refuge, :without_private_address) unless current_applicant.contact_details_private.include? "address"
-      end
 
       def persist!
         raise C100ApplicationNotFound unless c100_application
 
         applicant = c100_application.applicants.find_or_initialize_by(id: record_id)
-        applicant.update(attributes_map)
+
+        attrs = attributes_map
+
+        if refuge&.yes?
+          attrs[:are_contact_details_private] = GenericYesNo::YES.to_s
+          attrs[:contact_details_private] =
+            [
+              ContactDetails::ADDRESS.to_s,
+              ContactDetails::EMAIL.to_s,
+              ContactDetails::PHONE_NUMBER.to_s
+            ]
+        end
+
+        applicant.update(attrs)
       end
     end
   end

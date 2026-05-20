@@ -28,6 +28,9 @@ Feature: Add a respondent to the application
     Then I fill in "First name(s)" with "Olivia"
     And I fill in "Last name(s)" with "Doe Senior"
     When I click the "Continue" button
+    Then I should see "Is Olivia Doe Senior currently resident in a refuge?"
+    When I choose "No"
+    When I click the "Continue" button
     Then I should see "Provide details for Olivia Doe Senior"
 
     # Provoke validation errors
@@ -192,7 +195,7 @@ Feature: Add a respondent to the application
 
     # Fix validation errors and continue
     And I choose "Yes"
-    And I should see "Keeping Thomas Other Doe's details private"
+    And I should see "Keeping Thomas Other Doe's contact details private"
 
     # Provoke validation errors
     And I click the "Continue" button
