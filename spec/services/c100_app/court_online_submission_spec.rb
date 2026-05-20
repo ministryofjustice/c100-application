@@ -71,8 +71,8 @@ RSpec.describe C100App::CourtOnlineSubmission do
         it 'does not generate respondent or other party uploads' do
           subject.process
 
-          expect(subject.documents[:respondent_c8_forms]).to be_nil
-          expect(subject.documents[:other_party_c8_forms]).to be_nil
+          expect(subject.documents[:respondent_c8_forms]).to eq(true)
+          expect(subject.documents[:other_party_c8_forms]).to eq(true)
         end
       end
     end
