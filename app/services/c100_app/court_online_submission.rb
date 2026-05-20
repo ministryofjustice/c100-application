@@ -32,6 +32,8 @@ module C100App
         presenter.generate_other_party_c8s
       end
 
+      return nil unless presenter.pdf_data_rendered?
+
       StringIO.new(presenter.to_pdf)
     end
 
