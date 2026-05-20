@@ -15,6 +15,7 @@ module C100App
       documents.store(:applicant_c8_forms, generate_grouped_c8_pdf(:applicant))
       documents.store(:respondent_c8_forms, generate_grouped_c8_pdf(:respondent))
       documents.store(:other_party_c8_forms, generate_grouped_c8_pdf(:other_party))
+      true
 
       # Temporary removal
       # documents.store(:json_form, generate_json)
@@ -33,7 +34,7 @@ module C100App
           presenter.generate_other_party_c8s
         end
 
-      return true unless rendered
+      return nil unless rendered
 
       StringIO.new(presenter.to_pdf)
     end
