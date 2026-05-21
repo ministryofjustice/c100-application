@@ -122,7 +122,7 @@ Feature: Testing C100 end to end
     And I should see they "haven't" been to mediation through the mediation voucher scheme
     And I should see they "haven't" attended a MIAM
     And I should see they have got a valid exemption: "You’re applying for a without notice hearing"
-    And I should see the details provided for the exemption are ""
+    And I should see the details provided for the exemption are "exemption reason"
     And I should see an attachment presenting MIAM exemption evidence "is" present
     #And I should see they "have" got safety concerns about the children
     And I should see they have safety concerns with the children about: "abduction, financial abuse, other abuse"
@@ -130,7 +130,7 @@ Feature: Testing C100 end to end
     And I should see they want the court to decide: "Decide who they live with and when"
     And I should see the children details:
       | full_name     | dob        | sex    | child_orders             | special_guardianship | parental_responsibility |
-      | John Smith Jr | 05-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
+      | John Smith Jr | 21-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
     And I should see the children "might be" known to other social services
     And I should see the applicant personal details
       | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
@@ -141,7 +141,7 @@ Feature: Testing C100 end to end
     And I should see the applicant "doesn't" have a solicitor
     And I should see the respondents details:
       | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
-      | Jane Doe  | 05-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
+      | Jane Doe  | 21-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "aren't" other people who need to be informed of the application
     And I should see the children residence details:
       | child_name    | residence       |
@@ -527,7 +527,7 @@ Feature: Testing C100 end to end
       | Annalise Keating | Keating Law Firm | Windsor Castle, Windsor, United Kingdom, SL4 1QF | annalise@law.com | 00000000000  | 00000000000 |
     And I should see the respondents details:
       | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
-      | Jane Doe  | 19-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
+      | Jane Doe  | 21-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "are" other people who need to be informed of the application
     And I should see the other party's name is "Cassie Doe"
     And I should see the other party's gender is "Female"
@@ -603,7 +603,7 @@ Feature: Testing C100 end to end
     And I should see they want the court to decide: "Decide who they live with and when"
     And I should see the children details:
       | full_name     | dob        | sex    | child_orders             | special_guardianship | parental_responsibility |
-      | John Smith Jr | 20-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
+      | John Smith Jr | 21-05-2024 | Male   | Child Arrangements Order | No                   | Father                  |
     And I should see the children "might be" known to other social services
     And I should see the applicant personal details
       | refuge | privacy_known | contact_details_private | full_name       | dob        | sex  | birthplace | relationship_to_child |
@@ -613,7 +613,7 @@ Feature: Testing C100 end to end
       | Test street, London, United Kingdom | Yes              | Yes            | john@email.com | 00000000000  | Yes, the court can leave a voicemail |
     And I should see the respondents details:
       | full_name | dob        | sex    | relationship | address                                 | lived_at_5_years | email            | phone_number |
-      | Jane Doe  | 20-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
+      | Jane Doe  | 21-05-1996 | Female | Mother       | Windsor Castle, Windsor, United Kingdom | Yes              | jane@hotmail.com | 00000000000  |
     And I should see there "aren't" other people who need to be informed of the application
     And I should see the child "John Smith Jr" lives with "John Doe Senior"
     And I should see the children "haven't" been involved in other proceedings

@@ -188,7 +188,11 @@ class CYAPage < BasePage
     row :details, '#application_details'
     section :has_existing_court_order, CYAGroup, '.app-cya--answers-group#existing_court_order' do
       row :details, '#existing_court_order'
+      row :case_number, '#court_order_case_number'
+      row :expiry_date, '#court_order_expiry_date'
     end
+    row :existing_court_order_uploadable, '#existing_court_order_uploadable'
+    row :existing_court_order_upload, '#existing_court_order_upload'
   end
 
   section :urgent_hearing, CYAGroup, 'dl#urgent_hearing' do
@@ -197,6 +201,7 @@ class CYAPage < BasePage
 
   section :without_notice_hearing, CYAGroup, 'dl#without_notice_hearing' do
     row :asking_for_without_notice_hearing, '#without_notice_hearing'
+    row :details, '#without_notice_details'
   end
 
   section :international_info, CYAGroup, 'dl#international_element' do
@@ -223,7 +228,10 @@ class CYAPage < BasePage
       row :sign_language_interpreter, '#sign_language_interpreter'
       row :welsh_language, '#welsh_language'
     end
-    row :safety_arrangements, CYANestedSummaryRow, '.app-cya--answers-group#special_arrangements'
+    section :safety_arrangements, CYAGroup, '.app-cya--answers-group#special_arrangements' do
+      row :details, '#special_arrangements'
+      elements :arrangements, 'li'
+    end
     section :special_assistance, CYAGroup, '.app-cya--answers-group#special_assistance' do
       row :details, '#special_assistance'
       row :additional_details, '#special_assistance_details'

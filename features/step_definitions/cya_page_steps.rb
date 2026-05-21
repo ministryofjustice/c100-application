@@ -508,9 +508,7 @@ And(/^I should see a without notice hearing "(is|isn't)" requested$/) do |arg|
 end
 
 And(/^I should see a without notice hearing is requested because "([^"]*)"$/) do |arg|
-  within('#without_notice_hearing .app-cya--answers-group') do
-    expect(page).to have_content(arg)
-  end
+  expect(cya_page.without_notice_hearing.details.answer).to eq(arg)
 end
 
 And(/^I should see the life of someone significant to the child "(is|isn't)" outside the UK$/) do |arg|
@@ -538,30 +536,19 @@ And(/^I should see there "(is|isn't)" a court order requiring permission to make
 end
 
 And(/^I should see the case number of the court order is "([^"]*)"$/) do |arg|
-  within('#application_reasons') do
-    within('#court_order_case_number') do
-      expect(page).to have_content(arg)
-    end
-  end
+  expect(cya_page.application_reasons.has_existing_court_order.case_number.answer).to eq(arg)
 end
 
 And(/^I should see the expiry date of the court order is "([^"]*)"$/) do |arg|
-  within('#application_reasons') do
-    within('#court_order_expiry_date') do
-      expect(page).to have_content(arg)
-    end
-  end
+  expect(cya_page.application_reasons.has_existing_court_order.expiry_date.answer).to eq(arg)
 end
 
 And(/^I should see they "(have|haven't)" uploaded their existing court order$/) do |arg|
-  within('#application_reasons') do
-    within('#existing_court_order_uploadable') do
-      if arg == "have"
-        expect(page).to have_content('Yes')
-      elsif arg == "haven't"
-        expect(page).to have_content('No')
-      end
-    end
+  if arg == "have"
+    expect(cya_page.application_reasons.existing_court_order_uploadable.answer).to eq("Yes")
+    expect(cya_page.application_reasons.existing_court_order_upload.answer).to eq("Attached document\nimage.jpg")
+  elsif arg == "haven't"
+    expect(cya_page.application_reasons.existing_court_order_uploadable.answer).to eq("No")
   end
 end
 
@@ -587,18 +574,11 @@ And(/^I should see there "(are|aren't)" special language requirements$/) do |arg
 end
 
 And(/^I should see there "(are|aren't)" specific safety arrangements specified for the court$/) do |arg|
-  arrangements = all('.special_arrangements')
-  arrangements.each do |element|
-    if arg == "aren't"
-      expect(element).to have_no_content("Additional details")
-      within(element) do
-        expect(page).to have_content("None selected")
-      end
-    elsif arg == "are"
-      within(element) do
-        expect(page).not_to have_content("None selected")
-      end
-    end
+  if arg == "aren't"
+    expect(cya_page.attending_court.safety_arrangements).to have_no_arrangements
+    expect(cya_page.attending_court.safety_arrangements.details.answer).to eq("None selected")
+  elsif arg == "are"
+    expect(cya_page.attending_court.safety_arrangements).to have_arrangements
   end
 end
 
@@ -708,11 +688,7 @@ And(/^I should see they have got a valid exemption: "([^"]*)"$/) do |arg|
 end
 
 And(/^I should see the details provided for the exemption are "([^"]*)"$/) do |arg|
-  within('#miam_exemptions') do
-    within('#exemption_details') do
-      expect(page).to have_content(arg)
-    end
-  end
+  expect(cya_page.miam_exemptions.exemption_details.answer).to eq(arg)
 end
 
 And(/^I should see an attachment presenting MIAM exemption evidence "(is|isn't)" present$/) do |arg|
