@@ -51,7 +51,7 @@ module Summary
       def short_output
         [
           Separator.new("#{name}_index_title", index: index),
-          Answer.new(:refuge, person.refuge),
+          Answer.new(:other_party_refuge, person.refuge),
           FreeTextAnswer.new(:person_full_name, person.full_name)
         ]
       end

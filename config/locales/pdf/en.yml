@@ -594,6 +594,10 @@ en:
       question: Respondent currently resident in a refuge?
       answers:
         <<: *YESNO
+    other_party_refuge:
+      question: Other party currently resident in a refuge?
+      answers:
+        <<: *YESNO
     person_relationship_to_children:
       question: Relationship to children listed in this application
 
