@@ -30,6 +30,7 @@ module Summary
                       privacy_known: nil,
                       cohabit_with_other: cohabit_with_other,
                       are_contact_details_private: are_contact_details_private,
+                      are_identity_details_private: are_identity_details_private,
                       type: 'OtherParty'
       )
     }
@@ -52,6 +53,7 @@ module Summary
     let(:dob_estimate) { nil }
     let(:cohabit_with_other) { 'yes' }
     let(:are_contact_details_private) { 'yes' }
+    let(:are_identity_details_private) { 'yes' }
     let(:refuge) { 'no' }
 
     let(:answers) { subject.answers }
@@ -151,6 +153,7 @@ module Summary
 
       context 'when confidential is nil and c8 is not needed' do
         let(:are_contact_details_private) { nil }
+        let(:are_identity_details_private) { nil }
 
         it 'has no rows' do
           expect(answers.count).to eq(0)

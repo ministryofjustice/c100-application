@@ -22,7 +22,7 @@ module Summary
         record_collection.map.with_index(1) do |person, index|
           if PrivacyChange.changes_apply?
             if (person.are_contact_details_private == GenericYesNo::YES.to_s || person.refuge != GenericYesNoUnknown::NO.to_s) &&
-               person.type == 'OtherParty'
+               person.type == 'OtherParty' && person.are_identity_details_private == GenericYesNo::YES.to_s
               [
                 Separator.new("#{name}_index_title", index:),
                 Separator.new(:c8_attached)
@@ -66,9 +66,10 @@ module Summary
             else
               [
                 Separator.new("#{name}_index_title", index:),
-                FreeTextAnswer.new(:person_full_name, person.full_name),
+                FreeTextAnswer.new(:person_full_name, identity_private(person, person.full_name)),
                 privacy_known_applicant_only(person),
                 cohabit_with_children(person),
+                identity_details_privacy_preferences(person),
                 contact_details_privacy_preferences(person),
                 previous_name_answer(person),
                 Answer.new(:person_sex, person.gender),
@@ -151,6 +152,12 @@ module Summary
         data
       end
 
+      def identity_private(person, data)
+        return I18n.t('dictionary.c8_attached') if person.are_identity_details_private == GenericYesNo::YES.to_s
+
+        data
+      end
+
       def cohabit_with_children(person)
         return [] unless person.type == 'OtherParty'
 
@@ -178,6 +185,14 @@ module Summary
                         contact_details_private: person.contact_details_private
                       })
         end
+      end
+
+      def identity_details_privacy_preferences(person)
+        return [] unless person.are_identity_details_private.present? && person.type == 'OtherParty'
+
+        [
+          FreeTextAnswer.new(:person_identity_details_private, person.are_identity_details_private.try(:capitalize))
+        ]
       end
 
       def privacy_known_applicant_only(person)

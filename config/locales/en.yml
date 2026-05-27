@@ -438,6 +438,13 @@ en:
         edit:
           page_title: "Do any of the children live with %{name}?"
           heading: "Do any of the children live with %{name}?"
+      identity_preferences:
+        edit:
+          page_title: "Keeping %{name}'s identity private"
+          heading: "Keeping %{name}'s identity private"
+          legend: "Do you want to keep %{name}'s identity private from the other people named in the application?"
+          lead_text: "For example, if you believe that other people in the case pose a risk to you, to your children or to another person in the case."
+          hint: "For example, if you believe that other people in the case pose a risk to you, to your children or to another person in the case."
       privacy_preferences:
         edit:
           page_title: Contact details confidentiality
@@ -1720,6 +1727,9 @@ en:
           <<: *YESNO
       steps_other_party_privacy_preferences_form:
         are_contact_details_private_options:
+          <<: *YESNO
+      steps_other_party_identity_preferences_form:
+        are_identity_details_private_options:
           <<: *YESNO
       steps_children_personal_details_form:
         <<: *PERSONAL_DETAILS_FIELDS

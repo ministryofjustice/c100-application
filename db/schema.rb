@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_27_162401) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_26_125517) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -340,6 +340,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_27_162401) do
     t.boolean "address_unknown", default: false
     t.string "age_estimate"
     t.string "are_contact_details_private"
+    t.string "are_identity_details_private"
     t.string "birthplace"
     t.boolean "birthplace_unknown", default: false
     t.uuid "c100_application_id"

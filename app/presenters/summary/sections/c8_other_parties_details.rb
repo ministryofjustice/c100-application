@@ -25,43 +25,57 @@ module Summary
 
       # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/PerceivedComplexity
       def answers
         return super unless PrivacyChange.changes_apply?
 
-        return [] unless person.are_contact_details_private == GenericYesNo::YES.to_s ||
-                         person.refuge != GenericYesNo::NO.to_s
+        identity_private = person.are_identity_details_private == GenericYesNo::YES.to_s
+        contact_private  = person.are_contact_details_private == GenericYesNo::YES.to_s
+        in_refuge        = person.refuge != GenericYesNo::NO.to_s
+        contact_or_refuge = contact_private || in_refuge
 
-        [
-          Separator.new("#{name}_index_title", index:),
-          Answer.new(:refuge, person.refuge),
-          FreeTextAnswer.new(:person_full_name, person.full_name),
-          FreeTextAnswer.new(
-            :person_cohabit_other,
-            person.cohabit_with_other.try(:capitalize),
-            i18n_opts: { name: person.full_name }
-          ),
-          previous_name_answer(person),
-          Answer.new(:person_sex, person.gender),
-          DateAnswer.new(
-            :person_dob,
-            person.dob,
-            show: respondents_only && person.dob_estimate.blank?
-          ),
-          DateAnswer.new(:person_dob_estimate, person.dob_estimate),
-          FreeTextAnswer.new(:person_address, person.full_address),
-          FreeTextAnswer.new(
-            :person_relationship_to_children,
-            RelationshipsPresenter.new(c100_application).relationship_to_children(
-              person,
-              show_person_name: false,
-              bypass_c8: true
-            )
-          ),
-          Partial.row_blank_space
-        ].select(&:show?)
+        return [] unless identity_private || contact_or_refuge
+
+        if identity_private && !contact_or_refuge
+          [
+            Separator.new("#{name}_index_title", index:),
+            Answer.new(:refuge, person.refuge),
+            FreeTextAnswer.new(:person_full_name, person.full_name),
+          ]
+        else
+          [
+            Separator.new("#{name}_index_title", index:),
+            Answer.new(:refuge, person.refuge),
+            FreeTextAnswer.new(:person_full_name, person.full_name),
+            FreeTextAnswer.new(
+              :person_cohabit_other,
+              person.cohabit_with_other.try(:capitalize),
+              i18n_opts: { name: person.full_name }
+            ),
+            previous_name_answer(person),
+            Answer.new(:person_sex, person.gender),
+            DateAnswer.new(
+              :person_dob,
+              person.dob,
+              show: respondents_only && person.dob_estimate.blank?
+            ),
+            DateAnswer.new(:person_dob_estimate, person.dob_estimate),
+            FreeTextAnswer.new(:person_address, person.full_address),
+            FreeTextAnswer.new(
+              :person_relationship_to_children,
+              RelationshipsPresenter.new(c100_application).relationship_to_children(
+                person,
+                show_person_name: false,
+                bypass_c8: true
+              )
+            ),
+            Partial.row_blank_space
+          ].select(&:show?)
+        end
       end
       # rubocop:enable Metrics/AbcSize
       # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/PerceivedComplexity
 
       private
 

@@ -195,6 +195,13 @@ Feature: Add a respondent to the application
 
     # Fix validation errors and continue
     And I choose "Yes"
+    And I should see "Keeping Thomas Other Doe's identity private"
+    And I click the "Continue" button
+    Then Page has title "Error: Keeping Thomas Other Doe's identity private - Apply to court about child arrangements - GOV.UK"
+    And I should see a "Select an option" link to "#steps-other-party-identity-preferences-form-are-identity-details-private-field-error"
+
+    And I choose "No"
+    And I click the "Continue" button
     And I should see "Keeping Thomas Other Doe's contact details private"
 
     # Provoke validation errors
@@ -204,23 +211,16 @@ Feature: Add a respondent to the application
 
     # Fix validation errors and continue
     And I choose "No"
-    And I click the "Continue" button
-    Then Page has title "Other person personal details - Apply to court about child arrangements - GOV.UK"
-    And I should see "Provide details for Thomas Other Doe"
 
-    # Go back and provoke Refuge page from yes
-    When I click the "Back" link
-    And I should see "Keeping Thomas Other Doe's details private"
-    And I choose "Yes"
-    And I click the "Continue" button
-    And I should see "Is Thomas Other Doe currently resident in a refuge?"
-
+    Then Page has title "Is currently resident in a refuge? - Apply to court about child arrangements - GOV.UK"
+    Then I should see "Is Thomas Other Doe currently resident in a refuge?"
     And I click the "Continue" button
     Then Page has title "Error: Is currently resident in a refuge? - Apply to court about child arrangements - GOV.UK"
     And I should see a "Select yes if the other party is currently resident in a refuge" link to "#steps-other-party-refuge-form-refuge-field-error"
-
     And I choose "No"
-    And I click the "Continue" button
+
+    Then Page has title "Other person personal details - Apply to court about child arrangements - GOV.UK"
+    And I should see "Provide details for Thomas Other Doe"
 
     # Provoke validation errors
     When I click the "Continue" button
@@ -303,6 +303,17 @@ Feature: Add a respondent to the application
     And I should see "Do any of the children live with Thomas Other Doe?"
 
     And I choose "No"
+    Then Page has title "Keeping Thomas Other Doe's identity private - Apply to court about child arrangements - GOV.UK"
+    And I should see "Keeping Thomas Other Doe's identity private"
+    And I choose "No"
+
+    And I should see "Keeping Thomas Other Doe's contact details private"
+    And I choose "No"
+
+    Then Page has title "Is currently resident in a refuge? - Apply to court about child arrangements - GOV.UK"
+    Then I should see "Is Thomas Other Doe currently resident in a refuge?"
+    And I choose "No"
+
     Then Page has title "Other person personal details - Apply to court about child arrangements - GOV.UK"
     And I should see "Provide details for Thomas Other Doe"
 

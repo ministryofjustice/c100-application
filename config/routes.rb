@@ -278,6 +278,7 @@ Rails.application.routes.draw do
         edit_routes ':id/child/:child_id'
       end
       crud_step :children_cohabit_other, only: [:edit, :update]
+      crud_step :identity_preferences, only: [:edit, :update]
       crud_step :privacy_preferences, only: [:edit, :update]
       crud_step :refuge, only: [:edit, :update]
     end

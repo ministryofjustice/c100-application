@@ -80,6 +80,20 @@ RSpec.describe C100App::OtherPartyDecisionTree do
     end
 
     it 'goes to edit the privacy_preference page' do
+      expect(subject.destination).to eq(controller: :identity_preferences, action: :edit, id: record)
+    end
+  end
+
+  context 'when the step is identity_preferences' do
+    let(:step_params) {{'identity_preferences' => 'anything'}}
+    let(:record) { double('Relationship', person: other_party) }
+    let(:other_party) { OtherParty.new }
+
+    before do
+      allow(record).to receive(:id).and_return(other_party)
+    end
+
+    it 'goes to edit the privacy_preference page' do
       expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: record)
     end
   end

@@ -23,6 +23,7 @@ module Summary
         voicemail_consent: nil,
         privacy_known: nil,
         are_contact_details_private: nil,
+        are_identity_details_private: nil,
         type: 'Respondent'
       )
     }
