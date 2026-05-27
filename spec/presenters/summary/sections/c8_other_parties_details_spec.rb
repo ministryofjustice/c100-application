@@ -86,7 +86,7 @@ module Summary
         expect(answers[0].i18n_opts).to eq({index: 1})
 
         expect(answers[1]).to be_an_instance_of(Answer)
-        expect(answers[1].question).to eq(:refuge)
+        expect(answers[1].question).to eq(:other_party_refuge)
         expect(answers[1].value).to eq('no')
 
         expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
