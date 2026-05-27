@@ -10,13 +10,7 @@ module Summary
       end
 
       def answers
-        return [
-          Separator.not_applicable
-        ] if record_collection.empty?
-
-        return [
-          Separator.new(:c8_attached)
-        ] if !PrivacyChange.changes_apply? && c100.confidentiality_enabled?
+        return [Separator.not_applicable] if record_collection.empty?
 
         super
       end

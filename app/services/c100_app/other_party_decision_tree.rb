@@ -1,6 +1,6 @@
 module C100App
   class OtherPartyDecisionTree < PeopleDecisionTree
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
     def destination
       return next_step if next_step
 
@@ -20,6 +20,8 @@ module C100App
       when :address_details
         after_address_details
       when :cohabit_with_other
+        edit(:identity_preferences, id: record)
+      when :identity_preferences
         edit(:privacy_preferences, id: record)
       when :privacy_preferences
         edit(:refuge, id: record)
@@ -29,7 +31,7 @@ module C100App
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
     end
-    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity:
 
     private
 

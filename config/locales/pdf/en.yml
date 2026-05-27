@@ -542,6 +542,8 @@ en:
     person_contact_details_private:
       question: Do you want to keep your contact details private from the other people named in the application (the respondents)?
       c8: C8 has been generated separately
+    person_identity_details_private:
+      question: Do you want to keep your identity private from the other people named in the application (the respondents)?
     person_cohabit_other:
       question: Do any of the children live with %{name}?
       answers:

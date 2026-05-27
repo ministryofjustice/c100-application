@@ -508,6 +508,8 @@ en:
       question: Do any of the children live with %{name}?
       answers:
         <<: *YESNO
+    person_identity_details_private:
+      question: Do you want to keep %{name} identity private from the other people named in the application?
     person_privacy_known:
       question: Do the other people named in this application (the respondents) know any of your contact details?
     person_contact_details_private:

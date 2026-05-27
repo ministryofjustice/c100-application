@@ -20,7 +20,8 @@ module ApplicationInquiryMethods
   def other_confidentiality_enabled?
     other_parties.where(are_contact_details_private: GenericYesNo::YES.to_s).any? ||
       other_parties.where(refuge: GenericYesNoUnknown::YES.to_s).any? ||
-      other_parties.where(refuge: GenericYesNoUnknown::UNKNOWN.to_s).any?
+      other_parties.where(refuge: GenericYesNoUnknown::UNKNOWN.to_s).any? ||
+      other_parties.where(are_identity_details_private: GenericYesNo::YES.to_s).any?
   end
 
   def respondent_confidentiality_enabled?
