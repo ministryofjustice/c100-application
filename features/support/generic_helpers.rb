@@ -514,6 +514,18 @@ def cookie_management_page
   @cookie_management_page ||= CookieManagementPage.new
 end
 
+def get_birthdate(age)
+  today = Date.today
+  dob_date = today - age.to_i.years
+
+  day = dob_date.day.to_s.rjust(2, '0')
+  month = dob_date.month.to_s.rjust(2, '0')
+  year = dob_date.year
+
+  expected_dob = "#{day}-#{month}-#{year}"
+  expected_dob
+end
+
 def stub_courtfinder_api
   stub_resp = {
     "slug"=>"childcare-arrangements",

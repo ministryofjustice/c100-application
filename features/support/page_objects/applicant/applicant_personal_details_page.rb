@@ -15,7 +15,15 @@ class ApplicantPersonalDetailsPage < BasePage
     element :continue_button, "button", text: "Continue"
   end
 
-  def submit_personal_details(has_previous_name:, previous_name: nil, gender:, day:, month:, year:, birthplace:)
+  def submit_personal_details(
+    has_previous_name:,
+    previous_name: nil,
+    gender:, day: nil,
+    month: nil,
+    year: nil,
+    birthplace:,
+    age: nil
+  )
     if has_previous_name == 'yes'
       content.has_previous_name_yes.click
       content.previous_name_field.set previous_name
@@ -27,6 +35,13 @@ class ApplicantPersonalDetailsPage < BasePage
       content.gender_male.click
     else
       content.gender_female.click
+    end
+
+    if age.present?
+      today = Date.today
+      day = today.day
+      month = today.month
+      year = (today - age.to_i.years).year
     end
 
     content.dob_day.set day

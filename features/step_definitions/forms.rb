@@ -207,5 +207,5 @@ When(/^solicitor address details page I submit address with address_line_1 "([^"
 end
 
 When(/^solicitor contact details page I submit contact with email "([^"]*)", phone "([^"]*)", dx_number "([^"]*)"$/) do |email, phone, dx_number|
-  solicitor_contact_details_page.submit_contact_details(email, phone, dx_number)
+  solicitor_contact_details_page.submit_contact_details(email: email, phone: phone, dx_number: dx_number)
 end

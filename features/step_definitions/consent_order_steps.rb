@@ -724,7 +724,7 @@ And(/^I complete the other party details journey with an additional child$/) do
   )
 end
 
-And(/^I complete the other party details journey/) do
+And(/^I complete the other party details journey$/) do
   expect(other_party_names_page).to be_displayed
   other_party_names_page.submit_names('Cassie', 'Doe')
 
@@ -892,7 +892,7 @@ And(/^I navigate the attending court journey$/) do
   attending_court_language_page.submit_language_requirements(language_interpreter_details: 'German needed for respondent')
 
   expect(attending_court_special_arrangements_page).to be_displayed
-  attending_court_special_arrangements_page.submit_special_arrangements(special_arrangements_details: 'Please keep the time the kids are needed for to a minimum')
+  attending_court_special_arrangements_page.submit_special_arrangements(separate_waiting_rooms: true, special_arrangements_details: 'Please keep the time the kids are needed for to a minimum')
 
   expect(attending_court_special_assistance_page).to be_displayed
   attending_court_special_assistance_page.continue_without_filling
@@ -964,9 +964,7 @@ And(/^I complete the applicant details journey keeping my contact details privat
     has_previous_name: 'yes',
     previous_name: 'Olivia Doe Jr',
     gender: 'female',
-    day: '25',
-    month: '05',
-    year: '1998',
+    age: 30,
     birthplace: 'London'
   )
 

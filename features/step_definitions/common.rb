@@ -232,9 +232,7 @@ When('I complete the applicant details journey') do
   applicant_personal_details_page.submit_personal_details(
     has_previous_name: 'no',
     gender: 'male',
-    day: '25',
-    month: '05',
-    year: '1998',
+    age: 26,
     birthplace: 'Manchester'
   )
 
