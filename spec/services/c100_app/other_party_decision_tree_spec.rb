@@ -77,10 +77,27 @@ RSpec.describe C100App::OtherPartyDecisionTree do
 
     before do
       allow(record).to receive(:id).and_return(other_party)
+      allow(record).to receive(:reload).and_return(record)
     end
 
-    it 'goes to edit the privacy_preference page' do
-      expect(subject.destination).to eq(controller: :identity_preferences, action: :edit, id: record)
+    context 'and cohabit is true' do
+      before do
+        allow(record).to receive(:cohabit_with_other).and_return('yes')
+      end
+
+      it 'goes to edit the identity_preferences page' do
+        expect(subject.destination).to eq(controller: :identity_preferences, action: :edit, id: record)
+      end
+    end
+
+    context 'and cohabit is false' do
+      before do
+        allow(record).to receive(:cohabit_with_other).and_return('no')
+      end
+
+      it 'goes to edit the identity_preferences page' do
+        expect(subject.destination).to eq(controller: :privacy_preferences, action: :edit, id: record)
+      end
     end
   end
 

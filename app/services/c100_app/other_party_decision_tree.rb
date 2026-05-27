@@ -20,7 +20,7 @@ module C100App
       when :address_details
         after_address_details
       when :cohabit_with_other
-        edit(:identity_preferences, id: record)
+        after_cohabit_with_other
       when :identity_preferences
         edit(:privacy_preferences, id: record)
       when :privacy_preferences
@@ -42,6 +42,14 @@ module C100App
         edit(:personal_details, id: next_party_id)
       else
         edit('/steps/children/residence', id: first_child_id)
+      end
+    end
+
+    def after_cohabit_with_other
+      if record.reload.cohabit_with_other.to_s == 'yes'
+        edit(:identity_preferences, id: record)
+      else
+        edit(:privacy_preferences, id: record)
       end
     end
 

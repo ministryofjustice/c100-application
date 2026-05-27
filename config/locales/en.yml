@@ -443,8 +443,7 @@ en:
           page_title: "Keeping %{name}'s identity private"
           heading: "Keeping %{name}'s identity private"
           legend: "Do you want to keep %{name}'s identity private from the other people named in the application?"
-          lead_text: "For example, if you believe that other people in the case pose a risk to you, to your children or to another person in the case."
-          hint: "For example, if you believe that other people in the case pose a risk to you, to your children or to another person in the case."
+          hint: "For example, if you believe that other people in the case pose a risk to them or to the children."
       privacy_preferences:
         edit:
           page_title: Contact details confidentiality
