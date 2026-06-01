@@ -161,7 +161,14 @@ module Summary
       def cohabit_with_children(person)
         return [] unless person.type == 'OtherParty'
 
-        FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize), i18n_opts: {name: person.full_name})
+        name =
+          if person.are_identity_details_private == GenericYesNo::YES.to_s
+            'the other party'
+          else
+            person.full_name
+          end
+
+        FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize), i18n_opts: {name: name})
       end
 
       def contact_details_privacy_preferences(person)
