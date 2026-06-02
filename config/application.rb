@@ -46,11 +46,6 @@ module Application
 
     config.active_job.queue_adapter = ENV.fetch('QUEUE_ADAPTER', :sidekiq).to_sym
 
-    config.gov_surveys = {
-      success: 'https://c100.service.justice.gov.uk/survey',
-      kickout: 'https://c100.service.justice.gov.uk/exit_survey',
-    }
-
     config.gds_service_homepage_url = 'https://www.gov.uk/looking-after-children-divorce/apply-for-court-order'.freeze
 
     # Load the templates set (refer to `config/govuk_notify_templates.yml` for details)
