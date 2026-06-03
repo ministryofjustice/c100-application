@@ -87,8 +87,8 @@ Feature: Testing C100 end to end
     And evidence "is" provided for the MIAM exemption
     And I navigate the abduction risk journey
     And I "don't" have concerns about drug, alcohol or substance abuse
-    And I have no abuse or physical abuse concerns about the children
-    And I do have financial concerns about the children
+    And I "don't" have abuse or physical abuse concerns about the children
+    And I "do" have financial concerns about the children
     And I "don't" have psychological and emotional abuse concerns about the children
     And I "do" have other abuse concerns about the children
     And I don't have any safety concerns about myself
@@ -270,8 +270,8 @@ Feature: Testing C100 end to end
     And I navigate the MIAM journey
     And I navigate the abduction risk journey
     And I "do" have concerns about drug, alcohol or substance abuse
-    And I have no abuse or physical abuse concerns about the children
-    And I do have financial concerns about the children
+    And I "don't" have abuse or physical abuse concerns about the children
+    And I "do" have financial concerns about the children
     And I "do" have psychological and emotional abuse concerns about the children
     And I "do" have other abuse concerns about the children
     And I "haven't" been abused by the respondent
@@ -464,8 +464,8 @@ Feature: Testing C100 end to end
     And I "don't" have abduction concerns about the children
     And I "don't" have concerns about drug, alcohol or substance abuse
     And I "do" have domestic abuse or child concerns about the children
-    And I have no abuse or physical abuse concerns about the children
-    And I do have financial concerns about the children
+    And I "don't" have abuse or physical abuse concerns about the children
+    And I "do" have financial concerns about the children
     And I "do" have psychological and emotional abuse concerns about the children
     And I "don't" have other abuse concerns about the children
     And I "have" been abused by the respondent
