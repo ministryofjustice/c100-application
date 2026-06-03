@@ -653,6 +653,9 @@ And("I navigate the respondent details journey") do
   expect(respondent_names_page).to be_displayed
   respondent_names_page.submit_names('Jane', 'Doe')
 
+  expect(respondent_refuge_page).to be_displayed
+  respondent_refuge_page.submit_no
+
   expect(respondent_personal_details_page).to be_displayed
   respondent_personal_details_page.submit_personal_details(
     has_previous_name: 'no',
@@ -681,6 +684,9 @@ end
 And("I navigate the respondent details journey with an additional child") do
   expect(respondent_names_page).to be_displayed
   respondent_names_page.submit_names('John', 'Doe')
+
+  expect(respondent_refuge_page).to be_displayed
+  respondent_refuge_page.submit_no
 
   expect(respondent_personal_details_page).to be_displayed
   respondent_personal_details_page.submit_personal_details(

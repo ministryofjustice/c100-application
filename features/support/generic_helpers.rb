@@ -398,6 +398,10 @@ def respondent_contact_details_page
   @respondent_contact_details_page ||= RespondentContactDetailsPage.new
 end
 
+def respondent_refuge_page
+  @respondent_refuge_page ||= RespondentRefugePage.new
+end
+
 def has_other_parties_page
   @has_other_parties_page ||= HasOtherPartiesPage.new
 end
