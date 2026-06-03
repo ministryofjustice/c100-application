@@ -1,6 +1,6 @@
 module C100App
   class OtherPartyDecisionTree < PeopleDecisionTree
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
     def destination
       return next_step if next_step
 
@@ -21,37 +21,19 @@ module C100App
         after_address_details
       when :cohabit_with_other
         after_cohabit_with_other
+      when :identity_preferences
+        edit(:privacy_preferences, id: record)
       when :privacy_preferences
-        after_privacy_preferences
+        edit(:refuge, id: record)
       when :refuge
-        after_refuge
+        edit(:personal_details, id: record)
       else
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
     end
-    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity:
 
     private
-
-    def after_cohabit_with_other
-      if record.reload.cohabit_with_other == 'yes'
-        edit(:privacy_preferences, id: record)
-      else
-        after_privacy_preferences
-      end
-    end
-
-    def after_privacy_preferences
-      if record.reload.are_contact_details_private == 'yes'
-        edit(:refuge, id: record)
-      else
-        edit(:personal_details, id: record)
-      end
-    end
-
-    def after_refuge
-      edit(:personal_details, id: record)
-    end
 
     def after_address_details
       if PrivacyChange.changes_apply? && next_party_id
@@ -60,6 +42,14 @@ module C100App
         edit(:personal_details, id: next_party_id)
       else
         edit('/steps/children/residence', id: first_child_id)
+      end
+    end
+
+    def after_cohabit_with_other
+      if record.reload.cohabit_with_other.to_s == 'yes'
+        edit(:identity_preferences, id: record)
+      else
+        edit(:privacy_preferences, id: record)
       end
     end
 

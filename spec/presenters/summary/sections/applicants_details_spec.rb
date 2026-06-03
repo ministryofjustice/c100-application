@@ -30,6 +30,7 @@ module Summary
         email_unknown: nil,
         privacy_known: privacy_known,
         are_contact_details_private: are_contact_details_private,
+        are_identity_details_private: nil,
         contact_details_private: contact_details_private,
         type: 'Applicant',
         refuge: refuge
@@ -57,7 +58,7 @@ module Summary
     let(:previous_name) { nil }
     let(:privacy_known) { 'no' }
     let(:are_contact_details_private) { 'no' }
-    let(:refuge) { nil }
+    let(:refuge) { 'no' }
 
     let(:answers) { subject.answers }
 

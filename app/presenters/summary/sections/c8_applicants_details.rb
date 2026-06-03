@@ -1,6 +1,14 @@
 module Summary
   module Sections
     class C8ApplicantsDetails < PeopleDetails
+      attr_reader :person, :index
+
+      def initialize(c100, person, index: 1)
+        super(c100)
+        @person = person
+        @index = index
+      end
+
       def name
         :c8_applicants_details
       end
@@ -9,33 +17,25 @@ module Summary
         true
       end
 
-      def record_collection
-        c100.applicants
-      end
-
       # Not using the superclass `PeopleDetails#answers` because, in the case of
       # applicants, most of the information is already disclosed in the C100, and here
       # we just need to show the confidential details. The superclass will show all.
       #
       # modify this to list only the private details
       def answers
-        record_collection.map.with_index(1) do |person, index|
-          if empty_data?(person)
-            []
-          else
-            [
-              Separator.new("#{name}_index_title", index:),
-              Answer.new(:refuge, person.refuge),
-              FreeTextAnswer.new(:person_full_name, person.full_name),
-              address(person),
-              person_email(person),
-              person_phone_number(person),
-              person_voicemail(person),
-              Partial.row_blank_space,
-              Partial.row_blank_space,
-            ]
-          end
-        end.flatten.select(&:show?)
+        return [] if empty_data?(person)
+
+        [
+          Separator.new("#{name}_index_title", index:),
+          Answer.new(:refuge, person.refuge),
+          FreeTextAnswer.new(:person_full_name, person.full_name),
+          address(person),
+          person_email(person),
+          person_phone_number(person),
+          person_voicemail(person),
+          Partial.row_blank_space,
+          Partial.row_blank_space,
+        ].select(&:show?)
       end
 
       private

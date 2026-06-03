@@ -11,7 +11,7 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       risk_of_abduction: 'yes',
       payment_type: 'foobar_payment',
       declaration_signee: 'John Doe',
-    )
+      )
   }
 
   let(:court) {
@@ -26,6 +26,14 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
       }
     )
   }
+
+  def c8_tempfile(content)
+    file = Tempfile.new(['c8', '.pdf'])
+    file.binmode
+    file.write(content)
+    file.rewind
+    file
+  end
 
   before do
     allow(
@@ -44,8 +52,9 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
   end
 
   describe '#application_to_court' do
-    let(:documents) { { bundle: StringIO.new('bundle pdf'), c8_form: c8_form, json_form: tmp_file } }
-    let(:c8_form) { StringIO.new('') }
+    let(:documents) { { bundle: StringIO.new('bundle pdf'), applicant_c8_forms: nil, respondent_c8_forms: nil,
+                        other_party_c8_forms: nil, json_form: tmp_file } }
+
     let(:tmp_file) {
       tmp = Tempfile.new('test')
       tmp << 'test2'
@@ -120,8 +129,10 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          link_to_c8_pdf: '',
-          link_to_pdf: { 
+          link_to_applicant_c8_pdf: '',
+          link_to_respondent_c8_pdf: '',
+          link_to_other_party_c8_pdf: '',
+          link_to_pdf: {
             file: 'YnVuZGxlIHBkZg==',
             filename: nil,
             confirm_email_before_download: false,
@@ -174,7 +185,9 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
           safety_concerns: 'yes',
           urgent: 'yes',
           c8_included: 'no',
-          link_to_c8_pdf: '',
+          link_to_applicant_c8_pdf: '',
+          link_to_respondent_c8_pdf: '',
+          link_to_other_party_c8_pdf: '',
           link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
             confirm_email_before_download: false,
             retention_period: nil },
@@ -195,23 +208,40 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
     end
 
     context 'and applicant has private contact details' do
-      let(:c8_form) { StringIO.new('c8 form') }
+      before do
+        documents[:applicant_c8_forms] = c8_tempfile("c8 form 1")
+      end
 
-      it 'has the right personalisation' do
-        allow(c100_application).to receive(:confidentiality_enabled?).
-          and_return(true)
+      it 'sends applicant C8 forms as a Notify upload' do
+        allow(c100_application).to receive(:confidentiality_enabled?).and_return(true)
 
-        expect(
-          mail.govuk_notify_personalisation
-        ).to match(hash_including(
-          c8_included: 'yes',
-          link_to_c8_pdf: { file: 'YzggZm9ybQ==', filename: nil,
-          confirm_email_before_download: false,
-          retention_period: nil },
-          link_to_pdf: { file: 'YnVuZGxlIHBkZg==', filename: nil,
-          confirm_email_before_download: false,
-          retention_period: nil },
-        ))
+        upload = mail.govuk_notify_personalisation[:link_to_applicant_c8_pdf]
+
+        expect(upload).to be_a(Array).or be_a(Hash)
+
+        expect(upload).to include(confirm_email_before_download: false, file: "YzggZm9ybSAx", filename: nil, retention_period: nil)
+      end
+    end
+
+    context 'and application has multiple private contact details' do
+      before do
+        documents[:applicant_c8_forms] = c8_tempfile("c8 form 1")
+
+        documents[:respondent_c8_forms] = c8_tempfile("c8 form 2")
+
+        documents[:other_party_c8_forms] = c8_tempfile("c8 form 3")
+      end
+
+      it 'sends separate C8 uploads per party type' do
+        allow(c100_application).to receive(:confidentiality_enabled?).and_return(true)
+
+        applicant_upload = mail.govuk_notify_personalisation[:link_to_applicant_c8_pdf]
+        respondent_upload = mail.govuk_notify_personalisation[:link_to_respondent_c8_pdf]
+        other_party_upload = mail.govuk_notify_personalisation[:link_to_other_party_c8_pdf]
+
+        expect(applicant_upload).to include(confirm_email_before_download: false, file: "YzggZm9ybSAx", filename: nil, retention_period: nil)
+        expect(respondent_upload).to include(confirm_email_before_download: false, file: "YzggZm9ybSAy", filename: nil, retention_period: nil)
+        expect(other_party_upload).to include(confirm_email_before_download: false, file: "YzggZm9ybSAz", filename: nil, retention_period: nil)
       end
     end
   end
@@ -245,16 +275,16 @@ RSpec.describe NotifySubmissionMailer, type: :mailer do
 
     it 'has the right personalisation' do
       expect(mail.govuk_notify_personalisation).to eq({
-        service_name: 'Apply to court about child arrangements',
-        applicant_name: 'John Doe',
-        reference_code: '1970/01/4A362E1C',
-        court_name: 'Test court',
-        court_email: 'court@example.com',
-        court_url: 'https://www.find-court-tribunal.service.gov.uk/courts/test-court',
-        is_under_age: 'no',
-        is_consent_order: 'yes',
-        payment_instructions: 'payment instructions from locales',
-      })
+                                                        service_name: 'Apply to court about child arrangements',
+                                                        applicant_name: 'John Doe',
+                                                        reference_code: '1970/01/4A362E1C',
+                                                        court_name: 'Test court',
+                                                        court_email: 'court@example.com',
+                                                        court_url: 'https://www.find-court-tribunal.service.gov.uk/courts/test-court',
+                                                        is_under_age: 'no',
+                                                        is_consent_order: 'yes',
+                                                        payment_instructions: 'payment instructions from locales',
+                                                      })
     end
 
     context 'when at least one applicant is under age' do

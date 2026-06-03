@@ -18,7 +18,18 @@ module ApplicationInquiryMethods
   end
 
   def other_confidentiality_enabled?
-    other_parties.where(are_contact_details_private: GenericYesNo::YES.to_s).any?
+    other_parties.where(are_contact_details_private: GenericYesNo::YES.to_s).any? ||
+      other_parties.where(refuge: GenericYesNoUnknown::YES.to_s).any? ||
+      other_parties.where(refuge: GenericYesNoUnknown::UNKNOWN.to_s).any? ||
+      other_parties.where(are_identity_details_private: GenericYesNo::YES.to_s).any?
+  end
+
+  def respondent_confidentiality_enabled?
+    respondents.where(are_contact_details_private: GenericYesNo::YES.to_s).any?
+  end
+
+  def any_confidentiality_enabled?
+    confidentiality_enabled? || other_confidentiality_enabled? || respondent_confidentiality_enabled?
   end
 
   def has_solicitor?

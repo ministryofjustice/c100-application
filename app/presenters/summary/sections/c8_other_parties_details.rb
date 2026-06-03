@@ -1,6 +1,14 @@
 module Summary
   module Sections
     class C8OtherPartiesDetails < PeopleDetails
+      attr_reader :person, :index
+
+      def initialize(c100, person, index: 1)
+        super(c100)
+        @person = person
+        @index = index
+      end
+
       def name
         :c8_other_parties_details
       end
@@ -15,49 +23,73 @@ module Summary
         true
       end
 
-      def record_collection
-        c100.other_parties
-      end
-
-      # rubocop:disable Metrics/AbcSize
-      # rubocop:disable Metrics/MethodLength
       def answers
-        return super unless PrivacyChange.changes_apply?
+        return [] unless privacy_required?
 
-        record_collection.map.with_index(1) do |person, index|
-          if person.are_contact_details_private == GenericYesNo::YES.to_s
-            [
-              Separator.new("#{name}_index_title", index:),
-              Answer.new(:refuge, person.refuge),
-              FreeTextAnswer.new(:person_full_name, person.full_name),
-              FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize),
-                                 i18n_opts: {name: person.full_name}),
-              previous_name_answer(person),
-              Answer.new(:person_sex, person.gender),
-              DateAnswer.new(:person_dob, person.dob,
-                             show: respondents_only && person.dob_estimate.blank?),
-              DateAnswer.new(:person_dob_estimate, person.dob_estimate),
-              FreeTextAnswer.new(:person_address, person.full_address),
-              FreeTextAnswer.new(
-                :person_relationship_to_children,
-                RelationshipsPresenter.new(c100_application).relationship_to_children(
-                  person, show_person_name: false, bypass_c8: true
-                )
-              ),
-              Partial.row_blank_space
-            ]
-          else
-            []
-          end
-        end.flatten.select(&:show?)
+        final_output.select(&:show?)
       end
-      # rubocop:enable Metrics/AbcSize
-      # rubocop:enable Metrics/MethodLength
 
       private
 
-      def previous_name_answer(person)
-        if person.has_previous_name.eql?(GenericYesNo::YES.to_s)
+      def privacy_required?
+        identity_private? || contact_or_refuge?
+      end
+
+      def identity_private?
+        person.are_identity_details_private == GenericYesNo::YES.to_s
+      end
+
+      def contact_or_refuge?
+        person.are_contact_details_private == GenericYesNo::YES.to_s ||
+          person.refuge != GenericYesNo::NO.to_s
+      end
+
+      def final_output
+        identity_private? && !contact_or_refuge? ? short_output : full_output
+      end
+
+      def short_output
+        [
+          Separator.new("#{name}_index_title", index: index),
+          Answer.new(:other_party_refuge, person.refuge),
+          FreeTextAnswer.new(:person_full_name, person.full_name)
+        ]
+      end
+
+      def full_output
+        short_output + [
+          FreeTextAnswer.new(
+            :person_cohabit_other,
+            person.cohabit_with_other&.capitalize,
+            i18n_opts: { name: person.full_name }
+          ),
+          previous_name_answer,
+          Answer.new(:person_sex, person.gender),
+          dob_answer,
+          DateAnswer.new(:person_dob_estimate, person.dob_estimate),
+          FreeTextAnswer.new(:person_address, person.full_address),
+          relationship_answer,
+          Partial.row_blank_space
+        ]
+      end
+
+      def dob_answer
+        DateAnswer.new(:person_dob, person.dob, show: respondents_only && person.dob_estimate.blank?)
+      end
+
+      def relationship_answer
+        FreeTextAnswer.new(
+          :person_relationship_to_children,
+          RelationshipsPresenter.new(c100_application).relationship_to_children(
+            person,
+            show_person_name: false,
+            bypass_c8: true
+          )
+        )
+      end
+
+      def previous_name_answer
+        if person.has_previous_name == GenericYesNo::YES.to_s
           FreeTextAnswer.new(:person_previous_name, person.previous_name)
         else
           Answer.new(:person_previous_name, person.has_previous_name)

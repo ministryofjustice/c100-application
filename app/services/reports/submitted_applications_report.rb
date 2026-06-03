@@ -7,7 +7,7 @@ module Reports
 
     class << self
       def run
-        return unless ENV.key?('PAYMENT_TYPE_REPORT_EMAIL')
+        return unless ENV.key?('PAYMENT_TYPE_REPORT_EMAIL2')
 
         Rails.logger.info "Sending submitted applications report"
 
@@ -17,7 +17,7 @@ module Reports
           report_csv
           ReportsMailer.submitted_applications_report(
             report_csv,
-            to_address: ENV['PAYMENT_TYPE_REPORT_EMAIL'],
+            to_address: ENV['PAYMENT_TYPE_REPORT_EMAIL2'],
           ).deliver_later
         rescue PG::ConnectionBad => e
           retry if (retries += 1) < 3

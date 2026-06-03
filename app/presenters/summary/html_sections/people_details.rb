@@ -83,7 +83,7 @@ module Summary
         end
       end
 
-      def person_privacy_answers_group(person)
+      def person_privacy_answers_group(person) # rubocop:disable Metrics/PerceivedComplexity
         if PrivacyChange.changes_apply?
           if person.type == 'Applicant'
             return [] unless person.privacy_known
@@ -91,13 +91,15 @@ module Summary
             applicant_privacy_answers(person)
           elsif person.type == 'OtherParty'
             other_party_privacy_answers(person)
+          elsif person.type == 'Respondent'
+            respondent_privacy_answers(person)
           end
         else
           return [] unless person.privacy_known
 
           applicant_privacy_answers(person)
         end
-      end
+      end # rubocop:enable Metrics/PerceivedComplexity
 
       def applicant_privacy_answers(person)
         [
@@ -106,32 +108,39 @@ module Summary
           FreeTextAnswer.new(:person_contact_details_private,
                              privacy_preferences_answer(person),
                              change_path: edit_steps_applicant_privacy_preferences_path(person),
-                             i18n_opts: {name: "your contact"}),
+                             i18n_opts: {name: "your", refuge: person.refuge}),
           FreeTextAnswer.new(:refuge, person.refuge.try(:capitalize),
                              change_path: edit_steps_applicant_refuge_path(person)),
         ]
       end
 
+      def respondent_privacy_answers(person)
+        [
+          FreeTextAnswer.new(:person_contact_details_private,
+                             person.are_contact_details_private.try(:capitalize),
+                             change_path: edit_steps_respondent_privacy_preferences_path(person),
+                             i18n_opts: {name: "#{person.full_name}'s"}),
+          Answer.new(:respondent_refuge, person.refuge, change_path: edit_steps_respondent_refuge_path(person),
+                    i18n_opts: {name: person.full_name}),
+        ]
+      end
+
       def other_party_privacy_answers(person)
-        answers = [
+        [
           FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize),
                              change_path: edit_steps_other_party_children_cohabit_other_path(person),
                              i18n_opts: {name: person.full_name}),
+          FreeTextAnswer.new(:person_identity_details_private,
+                             person.are_identity_details_private.try(:capitalize),
+                             change_path: edit_steps_other_party_identity_preferences_path(person),
+                             i18n_opts: {name: "#{person.full_name}'s"}),
           FreeTextAnswer.new(:person_contact_details_private,
                              person.are_contact_details_private.try(:capitalize),
                              change_path: edit_steps_other_party_privacy_preferences_path(person),
+                             i18n_opts: {name: "#{person.full_name}'s"}),
+          Answer.new(:other_party_refuge, person.refuge, change_path: edit_steps_other_party_refuge_path(person),
                              i18n_opts: {name: person.full_name})
         ]
-
-        if person.are_contact_details_private == 'yes'
-          answers.push(
-            FreeTextAnswer.new(:other_party_refuge, person.refuge.try(:capitalize),
-                               change_path: edit_steps_other_party_refuge_path(person),
-                               i18n_opts: {name: person.full_name})
-          )
-        end
-
-        answers
       end
 
       def privacy_preferences_answer(person)

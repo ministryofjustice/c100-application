@@ -3,7 +3,6 @@
 
 // Style paragraphs (`<p>`) and links (`<a>`) without explicitly having to apply `govuk-body` and `govuk-link` classes
 $govuk-global-styles: true;
-$govuk-new-typography-scale: true;
 $govuk-new-organisation-colours: true;
 
 // Asset paths - fonts and images copied from govuk-frontend to app/assets/

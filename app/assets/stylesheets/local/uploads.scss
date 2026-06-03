@@ -1,9 +1,9 @@
 .uploaded-files {
-  border-top: 1px solid govuk-colour("mid-grey");
+  border-top: 1px solid govuk-colour("black", $variant: "tint-80");
 
   li {
     padding: 12px 0px;
-    border-bottom: 1px solid govuk-colour("mid-grey");
+    border-bottom: 1px solid govuk-colour("black", $variant: "tint-80");
     display: flex;
     align-items: center;
     justify-content: space-between;

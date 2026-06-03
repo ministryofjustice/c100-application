@@ -260,6 +260,8 @@ Rails.application.routes.draw do
     end
     namespace :respondent do
       crud_step :names
+      crud_step :privacy_preferences, only: [:edit, :update]
+      crud_step :refuge, only: [:edit, :update]
       crud_step :personal_details, only: [:edit, :update]
       crud_step :contact_details,  only: [:edit, :update]
       crud_step :address_details,  only: [:edit, :update]
@@ -276,6 +278,7 @@ Rails.application.routes.draw do
         edit_routes ':id/child/:child_id'
       end
       crud_step :children_cohabit_other, only: [:edit, :update]
+      crud_step :identity_preferences, only: [:edit, :update]
       crud_step :privacy_preferences, only: [:edit, :update]
       crud_step :refuge, only: [:edit, :update]
     end

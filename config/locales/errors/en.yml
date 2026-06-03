@@ -133,6 +133,7 @@ en:
               blank: You must add at least one applicant
             respondents:
               blank: You must add at least one respondent
+              privacy_missing: You must amend respondent details
             payment_type:
               blank: You must select a payment method
             files_collection_ref:
@@ -503,7 +504,10 @@ en:
           attributes:
             refuge:
               inclusion: Select yes if you are currently resident in a refuge
-              without_private_address: You must keep your current address private from the other people in this application if you are currently resident in a refuge. Select current address on the previous page if you are currently resident in a refuge
+        steps/respondent/refuge_form:
+          attributes:
+            refuge:
+              inclusion: Select yes if the respondent is currently resident in a refuge
         steps/respondent/personal_details_form:
           attributes:
             <<: *PERSONAL_DETAILS_ERRORS
@@ -768,4 +772,4 @@ en:
             declaration_confirmation:
               inclusion: Select the statement that applies to confirm the Statement of Truth
             c100_application:
-              invalid: Some information is missing # fulfilment validation error
+              invalid: You must amend the following information before your application can be submitted # fulfilment validation error

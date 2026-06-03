@@ -17,21 +17,59 @@ module Summary
         false
       end
 
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
       def answers
         record_collection.map.with_index(1) do |person, index|
           if PrivacyChange.changes_apply?
-            if person.are_contact_details_private == GenericYesNo::YES.to_s && person.type == 'OtherParty'
+            if (person.are_contact_details_private == GenericYesNo::YES.to_s || person.refuge != GenericYesNoUnknown::NO.to_s) &&
+               person.type == 'OtherParty' && person.are_identity_details_private == GenericYesNo::YES.to_s
               [
                 Separator.new("#{name}_index_title", index:),
                 Separator.new(:c8_attached)
               ]
-            else
+            elsif person.are_contact_details_private == GenericYesNo::YES.to_s && person.type == 'Respondent'
               [
                 Separator.new("#{name}_index_title", index:),
                 FreeTextAnswer.new(:person_full_name, person.full_name),
+                contact_details_privacy_preferences(person),
+                previous_name_answer(person),
+                Answer.new(:person_sex, person.gender),
+                DateAnswer.new(:person_dob, person.dob,
+                               show: respondents_only && person.dob_estimate.blank?),
+                DateAnswer.new(:person_dob_estimate, person.dob_estimate),
+                FreeTextAnswer.new(:person_birthplace, person.birthplace),
+                FreeTextAnswer.new(:person_address,
+                                   data_or_private(person, person.full_address, ContactDetails::ADDRESS.to_s),
+                                   show: true),
+                Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
+                FreeTextAnswer.new(
+                  :person_residence_history,
+                  person.residence_history.present? ? data_or_private(person, person.residence_history,
+                                                                      ContactDetails::ADDRESS.to_s) : nil,
+                  show: person.residence_requirement_met == 'no'
+                ),
+                FreeTextAnswer.new(:person_email,
+                                   data_or_private(person, email_answer(person), ContactDetails::EMAIL.to_s)),
+                FreeTextAnswer.new(:person_phone_number,
+                                   data_or_private(
+                                     person, phone_number_answer(person), ContactDetails::PHONE_NUMBER.to_s
+                                   )),
+                Answer.new(:person_voicemail_consent, person.voicemail_consent),
+                FreeTextAnswer.new(
+                  :person_relationship_to_children,
+                  RelationshipsPresenter.new(c100_application).relationship_to_children(
+                    person, show_person_name: false
+                  )
+                ),
+                Partial.row_blank_space,
+              ]
+            else
+              [
+                Separator.new("#{name}_index_title", index:),
+                FreeTextAnswer.new(:person_full_name, identity_private(person, person.full_name)),
                 privacy_known_applicant_only(person),
                 cohabit_with_children(person),
+                identity_details_privacy_preferences(person),
                 contact_details_privacy_preferences(person),
                 previous_name_answer(person),
                 Answer.new(:person_sex, person.gender),
@@ -100,16 +138,22 @@ module Summary
           end
         end.flatten.select(&:show?)
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
       private
 
       def data_or_private(person, data, type)
-        return I18n.t('dictionary.c8_attached') if person.refuge == GenericYesNo::YES.to_s
+        return I18n.t('dictionary.c8_attached') if person.refuge == GenericYesNo::YES.to_s && person.type != 'Respondent'
 
         return I18n.t('dictionary.c8_attached') if
           person.are_contact_details_private == GenericYesNo::YES.to_s &&
-          person.contact_details_private.include?(type)
+          (person.type != 'Applicant' || person.contact_details_private.include?(type))
+
+        data
+      end
+
+      def identity_private(person, data)
+        return I18n.t('dictionary.c8_attached') if person.are_identity_details_private == GenericYesNo::YES.to_s
 
         data
       end
@@ -117,14 +161,21 @@ module Summary
       def cohabit_with_children(person)
         return [] unless person.type == 'OtherParty'
 
-        FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize), i18n_opts: {name: person.full_name})
+        name =
+          if person.are_identity_details_private == GenericYesNo::YES.to_s
+            'the other party'
+          else
+            person.full_name
+          end
+
+        FreeTextAnswer.new(:person_cohabit_other, person.cohabit_with_other.try(:capitalize), i18n_opts: {name: name})
       end
 
       def contact_details_privacy_preferences(person)
         return [] unless person.are_contact_details_private.present?
 
         if PrivacyChange.changes_apply?
-          if person.type == 'OtherParty'
+          if %w[OtherParty Respondent].include?(person.type)
             [
               FreeTextAnswer.new(:person_contact_details_private,
                                  person.are_contact_details_private.try(:capitalize))
@@ -141,6 +192,14 @@ module Summary
                         contact_details_private: person.contact_details_private
                       })
         end
+      end
+
+      def identity_details_privacy_preferences(person)
+        return [] unless person.are_identity_details_private.present? && person.type == 'OtherParty'
+
+        [
+          FreeTextAnswer.new(:person_identity_details_private, person.are_identity_details_private.try(:capitalize))
+        ]
       end
 
       def privacy_known_applicant_only(person)

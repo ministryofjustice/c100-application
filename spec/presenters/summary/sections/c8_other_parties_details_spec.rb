@@ -6,31 +6,32 @@ module Summary
       instance_double(
         C100Application,
         other_parties: [other_party],
-      )
+        )
     }
 
     let(:other_party) {
       instance_double(OtherParty,
-        full_name: 'fullname',
-        has_previous_name: has_previous_name,
-        previous_name: previous_name,
-        dob: dob,
-        dob_estimate: dob_estimate,
-        gender: 'female',
-        refuge: 'yes',
-        birthplace: nil,
-        residence_requirement_met: nil,
-        residence_history: nil,
-        phone_number_provided: nil,
-        phone_number: nil,
-        email: nil,
-        phone_number_unknown: nil,
-        email_unknown: nil,
-        voicemail_consent: nil,
-        privacy_known: nil,
-        cohabit_with_other: cohabit_with_other,
-        are_contact_details_private: are_contact_details_private,
-        type: 'OtherParty'
+                      full_name: 'fullname',
+                      has_previous_name: has_previous_name,
+                      previous_name: previous_name,
+                      dob: dob,
+                      dob_estimate: dob_estimate,
+                      gender: 'female',
+                      refuge: refuge,
+                      birthplace: nil,
+                      residence_requirement_met: nil,
+                      residence_history: nil,
+                      phone_number_provided: nil,
+                      phone_number: nil,
+                      email: nil,
+                      phone_number_unknown: nil,
+                      email_unknown: nil,
+                      voicemail_consent: nil,
+                      privacy_known: nil,
+                      cohabit_with_other: cohabit_with_other,
+                      are_contact_details_private: are_contact_details_private,
+                      are_identity_details_private: are_identity_details_private,
+                      type: 'OtherParty'
       )
     }
 
@@ -39,13 +40,12 @@ module Summary
     before do
       allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(other_party).to receive(:full_address).and_return('full address')
-      allow(other_party).to receive(:refuge).and_return('yes')
       allow(other_party).to receive(:email_private?).and_return(contact_details_private.include?('email'))
       allow(other_party).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
     end
 
-    subject { described_class.new(c100_application) }
+    subject { described_class.new(c100_application, other_party) }
 
     let(:has_previous_name) { 'no' }
     let(:previous_name) { nil }
@@ -53,6 +53,8 @@ module Summary
     let(:dob_estimate) { nil }
     let(:cohabit_with_other) { 'yes' }
     let(:are_contact_details_private) { 'yes' }
+    let(:are_identity_details_private) { 'yes' }
+    let(:refuge) { 'no' }
 
     let(:answers) { subject.answers }
 
@@ -64,12 +66,6 @@ module Summary
       it { expect(subject.show_header?).to eq(true) }
     end
 
-    describe '#record_collection' do
-      it {
-        expect(c100_application).to receive(:other_parties)
-        subject.record_collection
-      }
-    end
 
     describe '#answers' do
       before do
@@ -90,8 +86,8 @@ module Summary
         expect(answers[0].i18n_opts).to eq({index: 1})
 
         expect(answers[1]).to be_an_instance_of(Answer)
-        expect(answers[1].question).to eq(:refuge)
-        expect(answers[1].value).to eq('yes')
+        expect(answers[1].question).to eq(:other_party_refuge)
+        expect(answers[1].value).to eq('no')
 
         expect(answers[2]).to be_an_instance_of(FreeTextAnswer)
         expect(answers[2].question).to eq(:person_full_name)
@@ -157,9 +153,28 @@ module Summary
 
       context 'when confidential is nil and c8 is not needed' do
         let(:are_contact_details_private) { nil }
+        let(:are_identity_details_private) { nil }
 
         it 'has no rows' do
           expect(answers.count).to eq(0)
+        end
+      end
+
+      context 'when refuge is yes' do
+        let(:are_contact_details_private) { nil }
+        let(:refuge) { 'yes' }
+
+        it 'has the correct rows' do
+          expect(answers.count).to eq(10)
+        end
+      end
+
+      context 'when refuge is unknown' do
+        let(:are_contact_details_private) { nil }
+        let(:refuge) { 'unknown' }
+
+        it 'has the correct rows' do
+          expect(answers.count).to eq(10)
         end
       end
     end

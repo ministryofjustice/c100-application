@@ -27,7 +27,9 @@ module Summary
         phone_number_unknown: nil,
         email_unknown: nil,
         privacy_known: nil,
+        refuge: refuge,
         are_contact_details_private: are_contact_details_private,
+        are_identity_details_private: are_identity_details_private,
         cohabit_with_other: cohabit_with_other,
         type: 'OtherParty'
       )
@@ -41,7 +43,6 @@ module Summary
       allow(other_party).to receive(:email_private?).and_return(contact_details_private.include?('email'))
       allow(other_party).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))
       allow(other_party).to receive(:address_private?).and_return(contact_details_private.include?('address'))
-      allow(other_party).to receive(:refuge)
     end
 
     subject { described_class.new(c100_application) }
@@ -52,6 +53,8 @@ module Summary
     let(:dob_estimate) { nil }
     let(:cohabit_with_other) { 'yes' }
     let(:are_contact_details_private) { 'no' }
+    let(:are_identity_details_private) { 'no' }
+    let(:refuge) { 'no' }
 
     let(:answers) { subject.answers }
 
@@ -89,7 +92,7 @@ module Summary
       end
 
       it 'has the correct number of rows' do
-        expect(answers.count).to eq(10)
+        expect(answers.count).to eq(11)
       end
 
       it 'has the correct rows in the right order' do
@@ -106,31 +109,35 @@ module Summary
         expect(answers[2].value).to eq('Yes')
 
         expect(answers[3]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[3].question).to eq(:person_contact_details_private)
+        expect(answers[3].question).to eq(:person_identity_details_private)
         expect(answers[3].value).to eq('No')
 
-        expect(answers[4]).to be_an_instance_of(Answer)
-        expect(answers[4].question).to eq(:person_previous_name)
-        expect(answers[4].value).to eq('no')
+        expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[4].question).to eq(:person_contact_details_private)
+        expect(answers[4].value).to eq('No')
 
         expect(answers[5]).to be_an_instance_of(Answer)
-        expect(answers[5].question).to eq(:person_sex)
-        expect(answers[5].value).to eq('female')
+        expect(answers[5].question).to eq(:person_previous_name)
+        expect(answers[5].value).to eq('no')
 
-        expect(answers[6]).to be_an_instance_of(DateAnswer)
-        expect(answers[6].question).to eq(:person_dob)
-        expect(answers[6].value).to eq(Date.new(2018, 1, 20))
+        expect(answers[6]).to be_an_instance_of(Answer)
+        expect(answers[6].question).to eq(:person_sex)
+        expect(answers[6].value).to eq('female')
 
-        expect(answers[7]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[7].question).to eq(:person_address)
-        expect(answers[7].value).to eq('full address')
+        expect(answers[7]).to be_an_instance_of(DateAnswer)
+        expect(answers[7].question).to eq(:person_dob)
+        expect(answers[7].value).to eq(Date.new(2018, 1, 20))
 
         expect(answers[8]).to be_an_instance_of(FreeTextAnswer)
-        expect(answers[8].question).to eq(:person_relationship_to_children)
-        expect(answers[8].value).to eq('relationships')
+        expect(answers[8].question).to eq(:person_address)
+        expect(answers[8].value).to eq('full address')
 
-        expect(answers[9]).to be_an_instance_of(Partial)
-        expect(answers[9].name).to eq(:row_blank_space)
+        expect(answers[9]).to be_an_instance_of(FreeTextAnswer)
+        expect(answers[9].question).to eq(:person_relationship_to_children)
+        expect(answers[9].value).to eq('relationships')
+
+        expect(answers[10]).to be_an_instance_of(Partial)
+        expect(answers[10].name).to eq(:row_blank_space)
       end
 
       context 'for existing previous name' do
@@ -138,13 +145,13 @@ module Summary
         let(:previous_name) { 'previous_name' }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(10)
+          expect(answers.count).to eq(11)
         end
 
         it 'renders the previous name' do
-          expect(answers[4]).to be_an_instance_of(FreeTextAnswer)
-          expect(answers[4].question).to eq(:person_previous_name)
-          expect(answers[4].value).to eq('previous_name')
+          expect(answers[5]).to be_an_instance_of(FreeTextAnswer)
+          expect(answers[5].question).to eq(:person_previous_name)
+          expect(answers[5].value).to eq('previous_name')
         end
       end
 
@@ -153,13 +160,13 @@ module Summary
         let(:dob_estimate) { Date.today }
 
         it 'has the correct number of rows' do
-          expect(answers.count).to eq(10)
+          expect(answers.count).to eq(11)
         end
 
         it 'uses the dob estimate' do
-          expect(answers[6]).to be_an_instance_of(DateAnswer)
-          expect(answers[6].question).to eq(:person_dob_estimate)
-          expect(answers[6].value).to eq(Date.today)
+          expect(answers[7]).to be_an_instance_of(DateAnswer)
+          expect(answers[7].question).to eq(:person_dob_estimate)
+          expect(answers[7].value).to eq(Date.today)
         end
       end
 
@@ -178,6 +185,43 @@ module Summary
 
       context 'when confidentiality is enabled' do
         let(:are_contact_details_private) { GenericYesNo::YES.to_s }
+        let(:are_identity_details_private) { GenericYesNo::YES.to_s }
+
+        it 'has the correct number of rows' do
+          expect(answers.count).to eq(2)
+        end
+
+        it 'has the correct rows in the right order' do
+          expect(answers[0]).to be_an_instance_of(Separator)
+          expect(answers[0].title).to eq("other_parties_details_index_title")
+
+          expect(answers[1]).to be_an_instance_of(Separator)
+          expect(answers[1].title).to eq(:c8_attached)
+        end
+      end
+
+      context 'when refuge is yes with identity confidential' do
+        let(:are_contact_details_private) { GenericYesNo::NO.to_s }
+        let(:are_identity_details_private) { GenericYesNo::YES.to_s }
+        let(:refuge) { 'yes' }
+
+        it 'has the correct number of rows' do
+          expect(answers.count).to eq(2)
+        end
+
+        it 'has the correct rows in the right order' do
+          expect(answers[0]).to be_an_instance_of(Separator)
+          expect(answers[0].title).to eq("other_parties_details_index_title")
+
+          expect(answers[1]).to be_an_instance_of(Separator)
+          expect(answers[1].title).to eq(:c8_attached)
+        end
+      end
+
+      context 'when refuge is unknown with identity confidential' do
+        let(:are_contact_details_private) { GenericYesNo::NO.to_s }
+        let(:are_identity_details_private) { GenericYesNo::YES.to_s }
+        let(:refuge) { 'unknown' }
 
         it 'has the correct number of rows' do
           expect(answers.count).to eq(2)
