@@ -95,6 +95,7 @@ module Application
     # Court fee configuration.
     # Not using Fee Register for now as we only have 1 fee, but might be used in the future.
     config.x.court_fee.amount_in_pence = 263_00
+    config.x.court_fee.new_amount_in_pence = 270_00
     config.x.court_fee.description = 'Court fee for a child arrangements application (C100)'
     config.x.analytics_tracking_id = ENV['GA_TRACKING_ID']
     config.x.cookie_expiry = 1.year
@@ -105,5 +106,6 @@ module Application
     config.prl_opening_date = DateTime.parse(ENV.fetch("PRL_OPENING", "13/02/2025"))
     config.prl_wolverhampton_date = DateTime.parse(ENV.fetch("PRL_WOLVERHAMPTON", "07/08/2025"))
     config.prl_chelmsford_rollout = DateTime.parse(ENV.fetch("PRL_CHELMSFORD_ROLLOUT", "08/07/2025"))
+    config.fee_increase_date = DateTime.parse(ENV.fetch("FEE_INCREASE_DATE", "06/07/2026"))
   end
 end

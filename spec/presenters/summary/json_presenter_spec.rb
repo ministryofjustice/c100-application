@@ -594,8 +594,20 @@ RSpec.describe Summary::JsonPresenter do
     end
 
     context 'fee' do
-      describe 'when fee increase applies' do
+      describe 'when fee increase does not apply' do
+        before do
+          allow(FeeIncrease).to receive(:changes_apply?).and_return(false)
+        end
+
         it { expect(json_file[0][:feeAmount]).to eql '£263.00' }
+      end
+
+      describe 'when fee increase applies' do
+        before do
+          allow(FeeIncrease).to receive(:changes_apply?).and_return(true)
+        end
+
+        it { expect(json_file[0][:feeAmount]).to eql '£270.00' }
       end
     end
 
