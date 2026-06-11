@@ -1,6 +1,6 @@
 module C100App
   class OtherPartyDecisionTree < PeopleDecisionTree
-    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/MethodLength
     def destination
       return next_step if next_step
 
@@ -27,7 +27,7 @@ module C100App
         raise InvalidStep, "Invalid step '#{as || step_params}'"
       end
     end
-    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity:
+    # rubocop:enable Metrics/MethodLength
 
     private
 
