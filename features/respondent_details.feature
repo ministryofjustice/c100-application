@@ -303,9 +303,6 @@ Feature: Add a respondent to the application
     And I should see "Do any of the children live with Thomas Other Doe?"
 
     And I choose "No"
-    Then Page has title "Keeping Thomas Other Doe's identity private - Apply to court about child arrangements - GOV.UK"
-    And I should see "Keeping Thomas Other Doe's identity private"
-    And I choose "No"
 
     And I should see "Keeping Thomas Other Doe's contact details private"
     And I choose "No"

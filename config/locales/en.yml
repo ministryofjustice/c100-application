@@ -25,7 +25,7 @@ en:
       attending_court: &attending_court "Attending court"
 
     cait_info_html: &cait_info_html |
-      Alternatively you can <a href="https://helpwithchildarrangements.service.justice.gov.uk" class="govuk-link" rel="external"
+      Alternatively you can <a href="https://www.gov.uk/looking-after-children-divorce/make-child-arrangements-plan" class="govuk-link" rel="external"
       target="_blank">read the child arrangements guide (opens in a new tab)</a> to see if there’s a more suitable option than going to court.
 
     YESNO: &YESNO
