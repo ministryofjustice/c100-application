@@ -17,16 +17,8 @@ module Summary
         true
       end
 
-      def bypass_relationships_c8?
-        return nil if PrivacyChange.changes_apply?
-
-        true
-      end
-
       # rubocop:disable Metrics/AbcSize
       def answers
-        return super unless PrivacyChange.changes_apply?
-
         return [] unless person.are_contact_details_private == GenericYesNo::YES.to_s
 
         [

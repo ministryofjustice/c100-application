@@ -18,10 +18,6 @@ RSpec.describe RelationshipsPresenter do
 
   subject { described_class.new(c100_application) }
 
-  before do
-    allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
-  end
-
   describe '#relationship_to_children' do
     let(:person) { instance_double(Person, relationships: relationships, type: 'Applicant') }
 
