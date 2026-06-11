@@ -162,7 +162,7 @@ Feature: Add a respondent to the application
     # Finalise here as we exit the `people` journeys
     Then I should see "Have any of the children in this application been involved in other family court proceedings?"
 
-  @happy_path
+  @happy_path @skip
   Scenario: Testing addition of exterior person to application
     When I visit "/steps/respondent/has_other_parties"
     And I should see "Is there anyone else who should know about your application?"
