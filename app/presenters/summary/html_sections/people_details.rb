@@ -83,23 +83,17 @@ module Summary
         end
       end
 
-      def person_privacy_answers_group(person) # rubocop:disable Metrics/PerceivedComplexity
-        if PrivacyChange.changes_apply?
-          if person.type == 'Applicant'
-            return [] unless person.privacy_known
-
-            applicant_privacy_answers(person)
-          elsif person.type == 'OtherParty'
-            other_party_privacy_answers(person)
-          elsif person.type == 'Respondent'
-            respondent_privacy_answers(person)
-          end
-        else
+      def person_privacy_answers_group(person)
+        if person.type == 'Applicant'
           return [] unless person.privacy_known
 
           applicant_privacy_answers(person)
+        elsif person.type == 'OtherParty'
+          other_party_privacy_answers(person)
+        elsif person.type == 'Respondent'
+          respondent_privacy_answers(person)
         end
-      end # rubocop:enable Metrics/PerceivedComplexity
+      end
 
       def applicant_privacy_answers(person)
         [

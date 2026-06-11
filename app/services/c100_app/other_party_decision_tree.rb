@@ -8,11 +8,7 @@ module C100App
       when :add_another_name
         edit(:names)
       when :names_finished
-        if PrivacyChange.changes_apply?
-          edit("/steps/other_party/children_cohabit_other", id: next_party_id)
-        else
-          edit(:personal_details, id: next_party_id)
-        end
+        edit("/steps/other_party/children_cohabit_other", id: next_party_id)
       when :personal_details
         edit_first_child_relationships
       when :relationship
@@ -36,10 +32,8 @@ module C100App
     private
 
     def after_address_details
-      if PrivacyChange.changes_apply? && next_party_id
+      if next_party_id
         edit("/steps/other_party/children_cohabit_other", id: next_party_id)
-      elsif next_party_id
-        edit(:personal_details, id: next_party_id)
       else
         edit('/steps/children/residence', id: first_child_id)
       end
