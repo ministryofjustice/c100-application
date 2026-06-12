@@ -265,7 +265,6 @@ Feature: Testing C100 end to end
 
   Scenario: Child arrangements order (MIAM) (path four: 'Yes' to 'Have you attended a MIAM?')
     When I navigate the MIAM journey with a child protection case
-    # unhappy path
     And I navigate back to the consent order page
     And I navigate the MIAM journey
     And I navigate the abduction risk journey
