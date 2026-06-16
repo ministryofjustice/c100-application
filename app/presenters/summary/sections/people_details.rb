@@ -11,99 +11,58 @@ module Summary
       end
       # :nocov:
 
-      def bypass_relationships_c8?
-        return nil if PrivacyChange.changes_apply?
-
-        false
-      end
-
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity
       def answers
         record_collection.map.with_index(1) do |person, index|
-          if PrivacyChange.changes_apply?
-            if (person.are_contact_details_private == GenericYesNo::YES.to_s || person.refuge != GenericYesNoUnknown::NO.to_s) &&
-               person.type == 'OtherParty' && person.are_identity_details_private == GenericYesNo::YES.to_s
-              [
-                Separator.new("#{name}_index_title", index:),
-                Separator.new(:c8_attached)
-              ]
-            elsif person.are_contact_details_private == GenericYesNo::YES.to_s && person.type == 'Respondent'
-              [
-                Separator.new("#{name}_index_title", index:),
-                FreeTextAnswer.new(:person_full_name, person.full_name),
-                contact_details_privacy_preferences(person),
-                previous_name_answer(person),
-                Answer.new(:person_sex, person.gender),
-                DateAnswer.new(:person_dob, person.dob,
-                               show: respondents_only && person.dob_estimate.blank?),
-                DateAnswer.new(:person_dob_estimate, person.dob_estimate),
-                FreeTextAnswer.new(:person_birthplace, person.birthplace),
-                FreeTextAnswer.new(:person_address,
-                                   data_or_private(person, person.full_address, ContactDetails::ADDRESS.to_s),
-                                   show: true),
-                Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
-                FreeTextAnswer.new(
-                  :person_residence_history,
-                  person.residence_history.present? ? data_or_private(person, person.residence_history,
-                                                                      ContactDetails::ADDRESS.to_s) : nil,
-                  show: person.residence_requirement_met == 'no'
-                ),
-                FreeTextAnswer.new(:person_email,
-                                   data_or_private(person, email_answer(person), ContactDetails::EMAIL.to_s)),
-                FreeTextAnswer.new(:person_phone_number,
-                                   data_or_private(
-                                     person, phone_number_answer(person), ContactDetails::PHONE_NUMBER.to_s
-                                   )),
-                Answer.new(:person_voicemail_consent, person.voicemail_consent),
-                FreeTextAnswer.new(
-                  :person_relationship_to_children,
-                  RelationshipsPresenter.new(c100_application).relationship_to_children(
-                    person, show_person_name: false
-                  )
-                ),
-                Partial.row_blank_space,
-              ]
-            else
-              [
-                Separator.new("#{name}_index_title", index:),
-                FreeTextAnswer.new(:person_full_name, identity_private(person, person.full_name)),
-                privacy_known_applicant_only(person),
-                cohabit_with_children(person),
-                identity_details_privacy_preferences(person),
-                contact_details_privacy_preferences(person),
-                previous_name_answer(person),
-                Answer.new(:person_sex, person.gender),
-                DateAnswer.new(:person_dob, person.dob,
-                               show: respondents_only && person.dob_estimate.blank?),
-                DateAnswer.new(:person_dob_estimate, person.dob_estimate),
-                FreeTextAnswer.new(:person_birthplace, person.birthplace),
-                FreeTextAnswer.new(:person_address,
-                                   data_or_private(person, person.full_address, ContactDetails::ADDRESS.to_s),
-                                   show: true),
-                Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
-                FreeTextAnswer.new(:person_residence_history, person.residence_history,
-                                   show: person.residence_requirement_met == 'no'),
-                FreeTextAnswer.new(:person_email,
-                                   data_or_private(person, email_answer(person), ContactDetails::EMAIL.to_s)),
-                FreeTextAnswer.new(:person_phone_number,
-                                   data_or_private(
-                                     person, phone_number_answer(person), ContactDetails::PHONE_NUMBER.to_s
-                                   )),
-                Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
-                FreeTextAnswer.new(
-                  :person_relationship_to_children,
-                  RelationshipsPresenter.new(c100_application).relationship_to_children(
-                    person, show_person_name: false
-                  )
-                ),
-                Partial.row_blank_space,
-              ]
-            end
-          else
+          if (person.are_contact_details_private == GenericYesNo::YES.to_s || person.refuge != GenericYesNoUnknown::NO.to_s) &&
+             person.type == 'OtherParty' && person.are_identity_details_private == GenericYesNo::YES.to_s
+            [
+              Separator.new("#{name}_index_title", index:),
+              Separator.new(:c8_attached)
+            ]
+          elsif person.are_contact_details_private == GenericYesNo::YES.to_s && person.type == 'Respondent'
             [
               Separator.new("#{name}_index_title", index:),
               FreeTextAnswer.new(:person_full_name, person.full_name),
-              FreeTextAnswer.new(:person_privacy_known, person.privacy_known.try(:capitalize)),
+              contact_details_privacy_preferences(person),
+              previous_name_answer(person),
+              Answer.new(:person_sex, person.gender),
+              DateAnswer.new(:person_dob, person.dob,
+                             show: respondents_only && person.dob_estimate.blank?),
+              DateAnswer.new(:person_dob_estimate, person.dob_estimate),
+              FreeTextAnswer.new(:person_birthplace, person.birthplace),
+              FreeTextAnswer.new(:person_address,
+                                 data_or_private(person, person.full_address, ContactDetails::ADDRESS.to_s),
+                                 show: true),
+              Answer.new(:person_residence_requirement_met, person.residence_requirement_met),
+              FreeTextAnswer.new(
+                :person_residence_history,
+                person.residence_history.present? ? data_or_private(person, person.residence_history,
+                                                                    ContactDetails::ADDRESS.to_s) : nil,
+                show: person.residence_requirement_met == 'no'
+              ),
+              FreeTextAnswer.new(:person_email,
+                                 data_or_private(person, email_answer(person), ContactDetails::EMAIL.to_s)),
+              FreeTextAnswer.new(:person_phone_number,
+                                 data_or_private(
+                                   person, phone_number_answer(person), ContactDetails::PHONE_NUMBER.to_s
+                                 )),
+              Answer.new(:person_voicemail_consent, person.voicemail_consent),
+              FreeTextAnswer.new(
+                :person_relationship_to_children,
+                RelationshipsPresenter.new(c100_application).relationship_to_children(
+                  person, show_person_name: false
+                )
+              ),
+              Partial.row_blank_space,
+            ]
+          else
+            [
+              Separator.new("#{name}_index_title", index:),
+              FreeTextAnswer.new(:person_full_name, identity_private(person, person.full_name)),
+              privacy_known_applicant_only(person),
+              cohabit_with_children(person),
+              identity_details_privacy_preferences(person),
               contact_details_privacy_preferences(person),
               previous_name_answer(person),
               Answer.new(:person_sex, person.gender),
@@ -123,14 +82,11 @@ module Summary
                                  data_or_private(
                                    person, phone_number_answer(person), ContactDetails::PHONE_NUMBER.to_s
                                  )),
-              FreeTextAnswer.new(:person_voicemail_consent,
-                                 data_or_private(
-                                   person, person.voicemail_consent, ContactDetails::PHONE_NUMBER.to_s
-                                 )),
+              Answer.new(:person_voicemail_consent, person.voicemail_consent), # This shows only if a value is present
               FreeTextAnswer.new(
                 :person_relationship_to_children,
                 RelationshipsPresenter.new(c100_application).relationship_to_children(
-                  person, show_person_name: false, bypass_c8: bypass_relationships_c8?
+                  person, show_person_name: false
                 )
               ),
               Partial.row_blank_space,
@@ -138,7 +94,7 @@ module Summary
           end
         end.flatten.select(&:show?)
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockLength, Metrics/PerceivedComplexity
 
       private
 
@@ -174,18 +130,11 @@ module Summary
       def contact_details_privacy_preferences(person)
         return [] unless person.are_contact_details_private.present?
 
-        if PrivacyChange.changes_apply?
-          if %w[OtherParty Respondent].include?(person.type)
-            [
-              FreeTextAnswer.new(:person_contact_details_private,
-                                 person.are_contact_details_private.try(:capitalize))
-            ]
-          else
-            Partial.new(:privacy_preferences, {
-                          are_contact_details_private: person.are_contact_details_private,
-                          contact_details_private: person.contact_details_private
-                        })
-          end
+        if %w[OtherParty Respondent].include?(person.type)
+          [
+            FreeTextAnswer.new(:person_contact_details_private,
+                               person.are_contact_details_private.try(:capitalize))
+          ]
         else
           Partial.new(:privacy_preferences, {
                         are_contact_details_private: person.are_contact_details_private,
