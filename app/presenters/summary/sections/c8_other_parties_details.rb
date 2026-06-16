@@ -17,12 +17,6 @@ module Summary
         true
       end
 
-      def bypass_relationships_c8?
-        return nil if PrivacyChange.changes_apply?
-
-        true
-      end
-
       def answers
         return [] unless privacy_required?
 

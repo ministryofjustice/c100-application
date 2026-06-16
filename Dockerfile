@@ -23,7 +23,6 @@ ENV AWS_S3_BUCKET=replace_this_at_build_time
 ENV RAILS_ENV=production
 ENV IS_DOCKER=true
 ENV PRL_OPENING=2025/02/12T10:30:00
-ENV PRIVACY_CHANGE=true
 ENV FEE_INCREASE_DATE=2026/07/06T00:00:01
 
 # fix to address http://tzinfo.github.io/datasourcenotfound - PET ONLY
