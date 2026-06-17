@@ -5,14 +5,13 @@ And(/^I submit that I "(do|don't)" have abuse or physical abuse concerns about t
   expect(abuse_concerns_children_info_page).to be_displayed
   abuse_concerns_children_info_page.continue_to_next_step
 
-  if arg == "do"
-    expect(abuse_concerns_question_page).to be_displayed
+  expect(abuse_concerns_question_page).to be_displayed
+  if arg == 'do'
     abuse_concerns_question_page.submit_yes
 
     expect(abuse_concerns_physical_page).to be_displayed
     abuse_concerns_physical_page.submit_yes
   else
-    expect(abuse_concerns_question_page).to be_displayed
     abuse_concerns_question_page.submit_no
 
     expect(abuse_concerns_physical_page).to be_displayed
@@ -121,7 +120,7 @@ end
 And(/^I submit that I "(have|haven't)" been abused by the respondent$/) do |arg|
   expect(abuse_concerns_applicant_info_page).to be_displayed
   abuse_concerns_applicant_info_page.continue_to_next_step
-  
+
   expect(abuse_concerns_applicant_question_page).to be_displayed
   if arg == 'have'
     abuse_concerns_applicant_question_page.submit_yes

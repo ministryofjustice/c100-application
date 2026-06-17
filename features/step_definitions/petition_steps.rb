@@ -14,7 +14,7 @@ When(/^I ask the court to decide on the following issues: "(.*)"$/) do |issues|
     moving_abroad: issues.include?('relocating the children outside of england and wales'),
     child_return: issues.include?('returning the children to your care')
   )
-  
+
   petition_orders_page.submit
 end
 
@@ -31,7 +31,7 @@ end
 
 Then(/^I should see the specific issue order details for: "([^"]*)"$/) do |issues|
   selected_issues = issues.split(',').map(&:strip)
-  
+
   expect(petition_playback_page).to be_displayed
   selected_issues.each do |issue|
     case issue

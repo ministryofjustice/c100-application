@@ -4,10 +4,13 @@ class AbuseConcernsContactPage < BasePage
   section :content, '#main-content' do
     element :header, 'h1', text: 'Contact between the children and the other people in this application'
     element :spend_time_with_others_yes, 'input[name="steps_abuse_concerns_contact_form[concerns_contact_type]"][value="yes"]'
-    element :spend_time_with_others_supervised, 'input[name="steps_abuse_concerns_contact_form[concerns_contact_type]"][value="supervised"]'
-    element :spend_time_with_others_no, 'input[name="steps_abuse_concerns_contact_form[concerns_contact_type]"][value="none"]', visible: false
+    element :spend_time_with_others_supervised,
+            'input[name="steps_abuse_concerns_contact_form[concerns_contact_type]"][value="supervised"]'
+    element :spend_time_with_others_no, 'input[name="steps_abuse_concerns_contact_form[concerns_contact_type]"][value="none"]',
+            visible: false
     element :being_in_touch_yes, 'input[name="steps_abuse_concerns_contact_form[concerns_contact_other]"][value="yes"]'
-    element :being_in_touch_no, 'input[name="steps_abuse_concerns_contact_form[concerns_contact_other]"][value="no"]', visible: false
+    element :being_in_touch_no, 'input[name="steps_abuse_concerns_contact_form[concerns_contact_other]"][value="no"]',
+            visible: false
     element :continue_button, "button", text: "Continue"
   end
 

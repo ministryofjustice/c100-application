@@ -105,7 +105,7 @@ class CYAPage < BasePage
     rows :refuge, '#refuge'
     rows :personal_details, CYAPersonalDetails, '#person_personal_details'
     rows :relationship_to_child, '#relationship_to_child'
-    
+
     sections :address_details, CYAGroup, '#person_address_details' do
       row :address, '#person_address'
       row :lived_at_5_years, '#person_residence_requirement_met'
@@ -166,7 +166,7 @@ class CYAPage < BasePage
       def child_name
         key.text
       end
-      
+
       def residence
         value.text
       end

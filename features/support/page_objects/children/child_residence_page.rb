@@ -1,5 +1,5 @@
 class ChildResidencePage < BasePage
- set_url_matcher %r{/steps/children/residence/.*}
+  set_url_matcher %r{/steps/children/residence/.*}
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Address of'

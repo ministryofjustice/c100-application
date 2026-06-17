@@ -13,5 +13,4 @@ class HomePage < BasePage
     content.childrens_postcode_field.set postcode
     content.continue_button.click
   end
-
 end

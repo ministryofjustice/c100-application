@@ -5,9 +5,12 @@ class ApplicantPrivacyPreferencesPage < BasePage
     element :header, 'h1', text: 'Do you want to keep your contact details private'
     element :answer_yes, "input#steps-applicant-privacy-preferences-form-are-contact-details-private-yes-field", visible: false
     element :answer_no, "input#steps-applicant-privacy-preferences-form-are-contact-details-private-no-field", visible: false
-    element :address_option, 'input[name="steps_applicant_privacy_preferences_form[contact_details_private][]"][value="address"]', visible: false
-    element :email_option, 'input[name="steps_applicant_privacy_preferences_form[contact_details_private][]"][value="email"]', visible: false
-    element :phone_option, 'input[name="steps_applicant_privacy_preferences_form[contact_details_private][]"][value="phone_number"]', visible: false
+    element :address_option,
+            'input[name="steps_applicant_privacy_preferences_form[contact_details_private][]"][value="address"]', visible: false
+    element :email_option, 'input[name="steps_applicant_privacy_preferences_form[contact_details_private][]"][value="email"]',
+            visible: false
+    element :phone_option,
+            'input[name="steps_applicant_privacy_preferences_form[contact_details_private][]"][value="phone_number"]', visible: false
     element :continue_button, "button", text: "Continue"
   end
 

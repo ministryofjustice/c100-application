@@ -2,7 +2,8 @@ class ApplicantPrivacyKnownPage < BasePage
   set_url '/steps/applicant/privacy_known'
 
   section :content, '#main-content' do
-    element :header, 'h1', text: 'Do the other people named in this application (the respondents) know any of your contact details?'
+    element :header, 'h1',
+            text: 'Do the other people named in this application (the respondents) know any of your contact details?'
     element :answer_yes, "input[name='steps_applicant_privacy_known_form[privacy_known]'][value='yes']", visible: false
     element :answer_no, "input#steps-applicant-privacy-known-form-privacy-known-no-field", visible: false
     element :answer_dont_know, "input[name='steps_applicant_privacy_known_form[privacy_known]'][value='unknown']", visible: false

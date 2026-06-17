@@ -15,7 +15,8 @@ When(/^I submit the solicitor details$/) do
   expect(solicitor_personal_details_page).to be_displayed
   solicitor_personal_details_page.submit_solicitor_details(
     full_name: 'Annalise Keating',
-    firm_name: 'Keating Law Firm')
+    firm_name: 'Keating Law Firm'
+  )
 
   expect(solicitor_address_details_page).to be_displayed
   solicitor_address_details_page.submit_address_details(

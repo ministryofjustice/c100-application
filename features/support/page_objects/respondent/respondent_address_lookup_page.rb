@@ -1,5 +1,5 @@
 class RespondentAddressLookupPage < BasePage
- set_url_matcher %r{/steps/address/lookup/.*}
+  set_url_matcher %r{/steps/address/lookup/.*}
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Address of'

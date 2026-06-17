@@ -14,7 +14,7 @@ class YesNoPage < BasePage
     selection_area.answer_no.click
     selection_area.continue_button.click
   end
-  
+
   def submit(answer)
     if answer == 'yes'
       submit_yes

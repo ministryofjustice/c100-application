@@ -39,7 +39,6 @@ class BasePage < SitePrism::Page
     def reject
       reject_button.click
     end
-
   end
 
   section :cookie_confirmation_banner, '.govuk-cookie-banner.confirmation' do
@@ -92,11 +91,11 @@ class BasePage < SitePrism::Page
     end
 
     def not_applicable?
-      answer == '[Not applicable in this case]' 
+      answer == '[Not applicable in this case]'
     end
 
     def dont_know?
-      answer == 'Don\'t know' 
+      answer == 'Don\'t know'
     end
 
     def not_needed?
@@ -139,7 +138,7 @@ class BasePage < SitePrism::Page
     def self.row(name, klass = CYASummaryListRow, id)
       section name, klass, id
     end
-    
+
     def self.rows(name, klass = CYASummaryListRow, id)
       sections name, klass, id
     end
@@ -148,8 +147,6 @@ class BasePage < SitePrism::Page
   class CYANestedSummaryRow < CYASummaryListRow
     element :value, 'dd.govuk-summary-list__value:not(:has(dl))'
   end
-
-  private
 
   def google_analytics_enabled
     page.evaluate_script("window['ga-disable-#{Rails.application.config.x.analytics_tracking_id}']")

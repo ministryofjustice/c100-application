@@ -17,11 +17,9 @@ class ApplicantPersonalDetailsPage < BasePage
 
   def submit_personal_details(
     has_previous_name:,
-    previous_name: nil,
-    gender:, day: nil,
+    gender:, birthplace:, previous_name: nil, day: nil,
     month: nil,
     year: nil,
-    birthplace:,
     age: nil
   )
     if has_previous_name == 'yes'

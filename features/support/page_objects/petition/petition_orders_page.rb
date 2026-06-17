@@ -3,23 +3,40 @@ class PetitionOrdersPage < BasePage
 
   section :content, '#new_steps_petition_orders_form' do
     element :header, 'h1', text: 'What are you asking the court to decide about the children involved?'
-    element :child_arrangements_home, 'input[name="steps_petition_orders_form[orders][]"][value="child_arrangements_home"]', visible: false
-    element :child_arrangements_time, 'input[name="steps_petition_orders_form[orders][]"][value="child_arrangements_time"]', visible: false
-    element :group_prohibited_steps, 'input[name="steps_petition_orders_form[orders][]"][value="group_prohibited_steps"]', visible: false
-    element :prohibited_steps_names, 'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_names"]', visible: false
-    element :prohibited_steps_medical, 'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_medical"]', visible: false
-    element :prohibited_steps_holiday, 'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_holiday"]', visible: false
-    element :prohibited_steps_moving, 'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_moving"]', visible: false
-    element :prohibited_steps_moving_abroad, 'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_moving_abroad"]', visible: false
-    element :group_specific_issues, 'input[name="steps_petition_orders_form[orders][]"][value="group_specific_issues"]', visible: false
-    element :specific_issues_holiday, 'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_holiday"]', visible: false
-    element :specific_issues_school, 'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_school"]', visible: false
-    element :specific_issues_religion, 'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_religion"]', visible: false
-    element :specific_issues_names, 'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_names"]', visible: false
-    element :specific_issues_medical, 'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_medical"]', visible: false
-    element :specific_issues_moving, 'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_moving"]', visible: false
-    element :specific_issues_moving_abroad, 'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_moving_abroad"]', visible: false
-    element :specific_issues_child_return, 'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_child_return"]', visible: false
+    element :child_arrangements_home, 'input[name="steps_petition_orders_form[orders][]"][value="child_arrangements_home"]',
+            visible: false
+    element :child_arrangements_time, 'input[name="steps_petition_orders_form[orders][]"][value="child_arrangements_time"]',
+            visible: false
+    element :group_prohibited_steps, 'input[name="steps_petition_orders_form[orders][]"][value="group_prohibited_steps"]',
+            visible: false
+    element :prohibited_steps_names,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_names"]', visible: false
+    element :prohibited_steps_medical,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_medical"]', visible: false
+    element :prohibited_steps_holiday,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_holiday"]', visible: false
+    element :prohibited_steps_moving,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_moving"]', visible: false
+    element :prohibited_steps_moving_abroad,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="prohibited_steps_moving_abroad"]', visible: false
+    element :group_specific_issues, 'input[name="steps_petition_orders_form[orders][]"][value="group_specific_issues"]',
+            visible: false
+    element :specific_issues_holiday,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_holiday"]', visible: false
+    element :specific_issues_school,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_school"]', visible: false
+    element :specific_issues_religion,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_religion"]', visible: false
+    element :specific_issues_names,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_names"]', visible: false
+    element :specific_issues_medical,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_medical"]', visible: false
+    element :specific_issues_moving,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_moving"]', visible: false
+    element :specific_issues_moving_abroad,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_moving_abroad"]', visible: false
+    element :specific_issues_child_return,
+            'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_child_return"]', visible: false
     element :continue_button, "button", text: "Continue"
   end
 

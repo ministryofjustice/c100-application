@@ -3,8 +3,10 @@ class MiamAcknowledgementPage < BasePage
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Attending a Mediation Information and Assessment Meeting (MIAM)'
-    element :voucher_scheme_yes, 'input[name="steps_miam_acknowledgement_form[mediation_voucher_scheme]"][value="yes"]', visible: false
-    element :voucher_scheme_no, 'input[name="steps_miam_acknowledgement_form[mediation_voucher_scheme]"][value="no"]', visible: false
+    element :voucher_scheme_yes, 'input[name="steps_miam_acknowledgement_form[mediation_voucher_scheme]"][value="yes"]',
+            visible: false
+    element :voucher_scheme_no, 'input[name="steps_miam_acknowledgement_form[mediation_voucher_scheme]"][value="no"]',
+            visible: false
     element :miam_acknowledgement, 'input[name="steps_miam_acknowledgement_form[miam_acknowledgement]"]', visible: false
     element :continue_button, "button", text: "Continue"
   end

@@ -51,7 +51,6 @@ When(/^I submit that I "(do|don't)" have abduction concerns about the children$/
   end
 end
 
-
 And(/^I submit that I "(do|don't)" have concerns about drug, alcohol or substance abuse$/) do |arg|
   expect(safety_concern_substance_page).to be_displayed
   if arg == 'do'

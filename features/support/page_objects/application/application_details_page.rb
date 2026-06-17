@@ -1,5 +1,5 @@
 class ApplicationDetailsPage < BasePage
- set_url '/steps/application/details'
+  set_url '/steps/application/details'
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Address of'

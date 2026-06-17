@@ -6,14 +6,17 @@ class ChildAdditionalDetailsPage < BasePage
     section :known_to_social_services, '.govuk-form-group', text: 'Are any of the children known to social services?' do
       element :yes, "input#steps-children-additional-details-form-children-known-to-authorities-yes-field", visible: false
       element :no, "input#steps-children-additional-details-form-children-known-to-authorities-no-field", visible: false
-      element :dont_know, "input#steps-children-additional-details-form-children-known-to-authorities-unknown-field", visible: false
-      element :additional_details, "textarea[name='steps_children_additional_details_form[children_known_to_authorities_details]']", visible: false
-    end   
-    section :child_protection_plan, '.govuk-form-group', text: 'Are any of the children the subject of a child protection plan?' do
+      element :dont_know, "input#steps-children-additional-details-form-children-known-to-authorities-unknown-field",
+              visible: false
+      element :additional_details,
+              "textarea[name='steps_children_additional_details_form[children_known_to_authorities_details]']", visible: false
+    end
+    section :child_protection_plan, '.govuk-form-group',
+            text: 'Are any of the children the subject of a child protection plan?' do
       element :yes, "input#steps-children-additional-details-form-children-protection-plan-yes-field", visible: false
       element :no, "input#steps-children-additional-details-form-children-protection-plan-no-field", visible: false
       element :dont_know, "input#steps-children-additional-details-form-children-protection-plan-unknown-field", visible: false
-    end   
+    end
     element :continue_button, "button", text: "Continue"
   end
 

@@ -7,7 +7,7 @@ class PreviousCourtProceedingsPage < BasePage
     element :court_name, 'input[name="steps_application_court_proceedings_form[court_name]"]'
     element :proceedings_date, 'input[name="steps_application_court_proceedings_form[proceedings_date]"]'
     element :proceedings_type, 'textarea[name="steps_application_court_proceedings_form[order_types]"]'
-    element :details, 'textarea[name="steps_application_court_proceedings_form[previous_details]"]'  
+    element :details, 'textarea[name="steps_application_court_proceedings_form[previous_details]"]'
     element :continue_button, "button", text: "Continue"
   end
 

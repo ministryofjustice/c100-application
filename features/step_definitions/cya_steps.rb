@@ -50,7 +50,6 @@ def check_safety_concerns(expected_yes_concerns, safety_concerns)
   end
 end
 
-
 And(/^I should see they have safety concerns with the children about: "([^"]*)"$/) do |list|
   expected_yes_concerns = list.downcase.split(',').map(&:strip)
   concern = cya_page.children_abuse_details
@@ -137,7 +136,6 @@ And(/^I should see the children "(are|aren't|might be)" known to other social se
     end
   end
 end
-
 
 And(/^I should see the applicant's name is "([^"]*)"$/) do |arg|
   within('#applicants_details') do
@@ -336,7 +334,7 @@ end
 And(/^I should see the respondent's address is "([^"]*)"$/) do |arg|
   within('#respondents_details') do
     within('#person_address_details') do
-        expect(page).to have_content(arg)
+      expect(page).to have_content(arg)
     end
   end
 end
@@ -692,7 +690,7 @@ And(/^I should see the details provided for the exemption are "([^"]*)"$/) do |a
 end
 
 And(/^I should see an attachment presenting MIAM exemption evidence "(is|isn't)" present$/) do |arg|
-  answer = (arg == "is" ? "Yes" : "No")
+  (arg == "is" ? "Yes" : "No")
   if arg == "is"
     expect(cya_page.miam_exemptions.exemption.answer).to eq("Attached document\nimage.jpg")
   elsif arg == "isn't"
@@ -803,7 +801,7 @@ And(/^I should see details for other proceedings involving the children:$/) do |
 
   expect(cya_page.other_court_cases.has_other_court_cases).to be_yes
 
-  answer_proceedings.each_with_index do |proceeding_data, i|
+  answer_proceedings.each_with_index do |proceeding_data, _i|
     expect(cya_page.other_court_cases.details.children_names.answer).to eq(proceeding_data['child_name'])
     expect(cya_page.other_court_cases.details.court_name.answer).to eq(proceeding_data['court_name'])
     expect(cya_page.other_court_cases.details.proceedings_date.answer).to eq(proceeding_data['date'])

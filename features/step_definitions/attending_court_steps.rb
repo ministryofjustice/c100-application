@@ -6,7 +6,8 @@ When(/^I submit the attending court details$/) do
   attending_court_language_page.submit_language_requirements(language_interpreter_details: 'German needed for respondent')
 
   expect(attending_court_special_arrangements_page).to be_displayed
-  attending_court_special_arrangements_page.submit_special_arrangements(separate_waiting_rooms: true, special_arrangements_details: 'Please keep the time the kids are needed for to a minimum')
+  attending_court_special_arrangements_page.submit_special_arrangements(separate_waiting_rooms: true,
+                                                                        special_arrangements_details: 'Please keep the time the kids are needed for to a minimum')
 
   expect(attending_court_special_assistance_page).to be_displayed
   attending_court_special_assistance_page.continue_without_filling
@@ -20,7 +21,8 @@ And(/^I submit the attending court details with safety arrangements$/) do
   attending_court_language_page.submit_language_requirements(welsh_language_details: 'Needed for Jake Gyllenhaal')
 
   expect(attending_court_special_arrangements_page).to be_displayed
-  attending_court_special_arrangements_page.submit_special_arrangements(separate_waiting_rooms: true, separate_entrance_exit: true)
+  attending_court_special_arrangements_page.submit_special_arrangements(separate_waiting_rooms: true,
+                                                                        separate_entrance_exit: true)
 
   expect(attending_court_special_assistance_page).to be_displayed
   attending_court_special_assistance_page.continue_without_filling

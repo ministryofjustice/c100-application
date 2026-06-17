@@ -3,9 +3,12 @@ class LitigationCapacityDetailsPage < BasePage
 
   section :content, '#main-content' do
     element :header, "h1", text: "Factors affecting ability to participate"
-    element :participation_capacity_details, "textarea[name='steps_application_litigation_capacity_details_form[participation_capacity_details]']"
-    element :participation_other_factors_details, "textarea[name='steps_application_litigation_capacity_details_form[participation_other_factors_details]']"
-    element :participation_referral_or_assessment_details, "textarea[name='steps_application_litigation_capacity_details_form[participation_referral_or_assessment_details]']"
+    element :participation_capacity_details,
+            "textarea[name='steps_application_litigation_capacity_details_form[participation_capacity_details]']"
+    element :participation_other_factors_details,
+            "textarea[name='steps_application_litigation_capacity_details_form[participation_other_factors_details]']"
+    element :participation_referral_or_assessment_details,
+            "textarea[name='steps_application_litigation_capacity_details_form[participation_referral_or_assessment_details]']"
     element :continue_button, "button", text: "Continue"
   end
 

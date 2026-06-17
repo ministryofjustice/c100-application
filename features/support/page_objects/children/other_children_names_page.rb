@@ -12,5 +12,5 @@ class OtherChildrenNamesPage < BasePage
     content.first_name_field.set first_name
     content.last_name_field.set last_name
     content.continue_button.click
-  end 
+  end
 end

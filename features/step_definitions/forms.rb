@@ -120,6 +120,7 @@ When(/^I choose "([^"]*)" from radiobutton options$/) do |text|
   within(:xpath)
     find(:xpath, ".//input[@id='cart_payment_type_cash_pay']").choose
   end
+end
 
 When(/^I choose (Yes|No) from the radio button options$/) do |option|
   labels = {

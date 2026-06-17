@@ -10,7 +10,7 @@ When(/^I submit that I "(do|don't)" require an urgent and without notice hearing
   expect(urgent_hearing_page).to be_displayed
   if arg == 'do'
     urgent_hearing_page.submit_yes
-    
+
     expect(urgent_hearing_details_page).to be_displayed
     urgent_hearing_details_page.submit(
       details: 'Alistair is in grave danger because of Jake Gyllenhaal',

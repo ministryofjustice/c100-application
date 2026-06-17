@@ -11,5 +11,4 @@ class UploadConsentOrderPage < UploadPage
   def continue_to_next_step
     content.continue.click
   end
-
 end

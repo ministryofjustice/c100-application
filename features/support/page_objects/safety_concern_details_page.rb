@@ -3,7 +3,8 @@ class SafetyConcernDetailsPage < BasePage
     element :concern_details, "textarea[name='steps_abuse_concerns_details_form[behaviour_description]']"
     element :behaviour_start, "input[name='steps_abuse_concerns_details_form[behaviour_start]']"
     element :behaviour_ongoing_yes, "input[name='steps_abuse_concerns_details_form[behaviour_ongoing]'][value='yes']"
-    element :behaviour_ongoing_no, "input[name='steps_abuse_concerns_details_form[behaviour_ongoing]'][value='no']", visible: false
+    element :behaviour_ongoing_no, "input[name='steps_abuse_concerns_details_form[behaviour_ongoing]'][value='no']",
+            visible: false
     element :behaviour_stop, "input[name='steps_abuse_concerns_details_form[behaviour_stop]']", visible: false
     element :asked_for_help_yes, "input[name='steps_abuse_concerns_details_form[asked_for_help]'][value='yes']"
     element :asked_for_help_no, "input[name='steps_abuse_concerns_details_form[asked_for_help]'][value='no']", visible: false
@@ -17,8 +18,7 @@ class SafetyConcernDetailsPage < BasePage
   def submit_concern_details(
     concern_details:,
     behaviour_start:,
-    behaviour_stop: nil,
-    asked_for_help:,
+    asked_for_help:, behaviour_stop: nil,
     help_party: nil,
     help_provided: nil,
     help_description: nil

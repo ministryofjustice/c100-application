@@ -33,7 +33,7 @@ class RespondentPersonalDetailsPage < BasePage
     year = today.year - age
     month = today.month
     day = today.day
-    
+
     content.dob_day.set day
     content.dob_month.set month
     content.dob_year.set year

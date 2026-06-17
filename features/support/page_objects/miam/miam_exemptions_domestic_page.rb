@@ -3,7 +3,8 @@ class MiamExemptionsDomesticPage < BasePage
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Providing evidence of domestic abuse concerns'
-    element :domestic_none, 'input[name="steps_miam_exemptions_domestic_form[domestic][]"][value="misc_domestic_none"]', visible: false
+    element :domestic_none, 'input[name="steps_miam_exemptions_domestic_form[domestic][]"][value="misc_domestic_none"]',
+            visible: false
     element :continue_button, "button", text: "Continue"
   end
 

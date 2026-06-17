@@ -3,7 +3,8 @@ class MiamExemptionsProtectionPage < YesNoPage
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Confirming child protection concerns'
-    element :protection_none, 'input[name="steps_miam_exemptions_protection_form[protection][]"][value="misc_protection_none"]', visible: false
+    element :protection_none, 'input[name="steps_miam_exemptions_protection_form[protection][]"][value="misc_protection_none"]',
+            visible: false
     element :continue_button, "button", text: "Continue"
   end
 

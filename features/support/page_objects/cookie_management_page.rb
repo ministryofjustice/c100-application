@@ -11,5 +11,5 @@ class CookieManagementPage < BasePage
 
   def click_save_cookie_settings
     content.save_cookie_settings_button.click
-  end     
+  end
 end

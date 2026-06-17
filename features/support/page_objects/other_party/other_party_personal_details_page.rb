@@ -14,7 +14,7 @@ class OtherPartyPersonalDetailsPage < BasePage
     element :continue_button, "button", text: "Continue"
   end
 
-  def submit_personal_details(has_previous_name: false, gender:, age:)
+  def submit_personal_details(gender:, age:, has_previous_name: false)
     if has_previous_name
       content.has_previous_name_yes.click
     else
@@ -34,7 +34,7 @@ class OtherPartyPersonalDetailsPage < BasePage
     year = today.year - age
     month = today.month
     day = today.day
-    
+
     content.dob_day.set day
     content.dob_month.set month
     content.dob_year.set year

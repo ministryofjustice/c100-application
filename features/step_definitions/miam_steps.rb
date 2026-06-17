@@ -42,7 +42,7 @@ When(/^I submit that I have attended a MIAM$/) do
 
   expect(miam_attended_page).to be_displayed
   miam_attended_page.submit_yes
-  
+
   expect(miam_certification_page).to be_displayed
   miam_certification_page.submit_no
 
