@@ -601,10 +601,34 @@ And(/^I should see the HwF reference number is "([^"]*)"$/) do |arg|
   expect(cya_page.payment.payment_method.hwf_ref_no.answer).to eq(arg)
 end
 
-And(/^I should see the statement of truth$/) do
-  within('#cya-declaration-box') do
-    expect(page).to have_content('Statement of Truth')
-  end
+Then(/^I should see the statement of truth$/) do
+  expect(cya_page.statement_of_truth).to be_visible
+end
+
+And(/^I complete the statement of truth as an applicant "([^"]*)"$/) do |name|
+  cya_page.complete_statement_of_truth_as_applicant(name)
+end
+
+And(/^I complete the declaration as an applicant/) do
+  cya_page.complete_declaration_as_applicant
+end
+
+And(/^I complete the statement of truth as an representative "([^"]*)"$/) do |name|
+  cya_page.complete_statement_of_truth_as_representative(name)
+end
+
+And(/^I complete the declaration as an representative/) do
+  cya_page.complete_declaration_as_representative
+end
+
+When(/^I submit the application$/) do
+  cya_page.content.submit_application.click
+end
+
+Then(/^I should be taken to the completion confirmation page$/) do
+  expect(completion_confirmation_page).to be_displayed
+  expect(completion_confirmation_page.content).to have_header
+  expect(completion_confirmation_page.content).to have_download_button
 end
 
 Then(/^I should see the respondent is "([^"]*)" years old$/) do |age|

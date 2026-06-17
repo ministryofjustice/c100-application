@@ -105,7 +105,7 @@ class CYAPage < BasePage
     rows :refuge, '#refuge'
     rows :personal_details, CYAPersonalDetails, '#person_personal_details'
     rows :relationship_to_child, '#relationship_to_child'
-
+    
     sections :address_details, CYAGroup, '#person_address_details' do
       row :address, '#person_address'
       row :lived_at_5_years, '#person_residence_requirement_met'
@@ -166,7 +166,7 @@ class CYAPage < BasePage
       def child_name
         key.text
       end
-
+      
       def residence
         value.text
       end
@@ -249,11 +249,33 @@ class CYAPage < BasePage
     end
   end
 
-  section :declaration_form, '#new_steps_application_declaration_form' do
-    element :applicant_confirmation, '#steps-application-declaration-form-declaration-confirmation-applicant-field'
-    element :representative_confirmation, '#steps-application-declaration-form-declaration-confirmation-representative-field'
+  section :statement_of_truth, '#cya-declaration-box' do
+    element :applicant_confirmation, 
+      "input[name='steps_application_declaration_form[declaration_confirmation]'][value='applicant']", visible: false
+    element :representative_confirmation, 
+      "input[name='steps_application_declaration_form[declaration_confirmation]'][value='representative']", visible: false
     element :signee_name, '#steps-application-declaration-form-declaration-signee-field'
-    element :applicant_capacity, '#steps-application-declaration-form-declaration-signee-capacity-applicant-field'
-    element :representative_capacity, '#steps-application-declaration-form-declaration-signee-capacity-representative-field'
+    element :applicant_capacity,
+      "input[name='steps_application_declaration_form[declaration_signee_capacity]'][value='applicant']", visible: false
+    element :representative_capacity,
+      "input[name='steps_application_declaration_form[declaration_signee_capacity]'][value='representative']", visible: false
+  end
+
+  def complete_statement_of_truth_as_applicant(name)
+    statement_of_truth.applicant_confirmation.click
+    statement_of_truth.signee_name.set name
+  end
+
+  def complete_declaration_as_applicant
+    statement_of_truth.applicant_capacity.click
+  end
+
+  def complete_statement_of_truth_as_representative(name)
+    statement_of_truth.representative_confirmation.click
+    statement_of_truth.signee_name.set name
+  end
+
+  def complete_declaration_as_representative
+    statement_of_truth.representative_capacity.click
   end
 end

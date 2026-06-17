@@ -98,7 +98,7 @@ Feature: Testing C100 end to end
     And I should see the email for submitting an application to court is "john@gmail.com"
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
-    And I should see the statement of truth
+    Then I should see the statement of truth
 
   Scenario: Child arrangements order (MIAM) (path two: exemption with evidence upload)
     When I submit that I have a MIAM exemption
@@ -200,14 +200,10 @@ Feature: Testing C100 end to end
     And I should see the email for submitting an application to court is "john@gmail.com"
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
-    And I should see the statement of truth
-    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
-    And I fill in "Enter your full name" with "John Doe"
-    And I click the "Submit application" button
-    Then I should see "Your application has been submitted"
-    And I should see "Your reference code is:"
-    And I should see "Download a copy of your application"
-    And I should see "Download your application"
+    Then I should see the statement of truth
+    And I complete the statement of truth as an applicant "John Doe"
+    When I submit the application
+    Then I should be taken to the completion confirmation page
 
   Scenario: Child arrangements order (MIAM) (path three: 'Yes' to 'Have you attended a MIAM?')
     When I submit that I have attended a MIAM
@@ -309,15 +305,11 @@ Feature: Testing C100 end to end
     And I should see the email for submitting an application to court is "john@gmail.com"
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
-    And I should see the statement of truth
-    And I click the radio button "The applicant believes that the facts stated in this form and any continuation sheets are true. I am authorised by the applicant to sign this statement. This option should only selected if the legal representative is signing the form on behalf of the applicant."
-    And I fill in "Enter your full name" with "Annalise Keating"
-    And I click the radio button "I am the solicitor. The applicant believes that the facts stated in this application are true and I have been given the authority to make this declaration."
-    And I click the "Submit application" button
-    Then I should see "Your application has been submitted"
-    And I should see "Your reference code is:"
-    And I should see "Download a copy of your application"
-    And I should see "Download your application"
+    Then I should see the statement of truth
+    And I complete the statement of truth as an representative "Analise Keating"
+    And I complete the declaration as an representative
+    When I submit the application
+    Then I should be taken to the completion confirmation page
 
   Scenario: Child arrangements order (MIAM) (path four: 'Yes' to 'Have you attended a MIAM?')
     When I submit that I have a MIAM with a child protection case
@@ -441,14 +433,10 @@ Feature: Testing C100 end to end
     And I should see the email for submitting an application to court is "jane_doe@gmail.com"
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
-    And I should see the statement of truth
-    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
-    And I fill in "Enter your full name" with "John Doe"
-    And I click the "Submit application" button
-    Then I should see "Your application has been submitted"
-    And I should see "Your reference code is:"
-    And I should see "Download a copy of your application"
-    And I should see "Download your application"
+    Then I should see the statement of truth
+    And I complete the statement of truth as an applicant "John Doe"
+    When I submit the application
+    Then I should be taken to the completion confirmation page
 
   Scenario: Skip child arrangements order (MIAM) (path five)
     When I submit that I have a MIAM with a child protection case
@@ -540,15 +528,11 @@ Feature: Testing C100 end to end
     And I should see the email for submitting an application to court is "john@gmail.com"
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
-    And I should see the statement of truth
-    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
-    And I fill in "Enter your full name" with "John Doe"
-    And I click the radio button "I am the applicant and I believe that the facts stated in this application are true."
-    And I click the "Submit application" button
-    Then I should see "Your application has been submitted"
-    And I should see "Your reference code is:"
-    And I should see "Download a copy of your application"
-    And I should see "Download your application"
+    Then I should see the statement of truth
+    And I complete the statement of truth as an applicant "John Doe"
+    And I complete the declaration as an applicant
+    When I submit the application
+    Then I should be taken to the completion confirmation page
 
   Scenario: Consent order (path six)
     When I submit that I have a Consent Order with a child protection case
@@ -667,15 +651,11 @@ Feature: Testing C100 end to end
     And I should see the email for submitting an application to court is "june@gmail.com"
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
-    And I should see the statement of truth
-    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
-    And I fill in "Enter your full name" with "June Doe"
-    And I click the radio button "I am the applicant and I believe that the facts stated in this application are true."
-    And I click the "Submit application" button
-    Then I should see "Your application has been submitted"
-    And I should see "Your reference code is:"
-    And I should see "Download a copy of your application"
-    And I should see "Download your application"
+    Then I should see the statement of truth
+    And I complete the statement of truth as an applicant "June Doe"
+    And I complete the declaration as an applicant
+    When I submit the application
+    Then I should be taken to the completion confirmation page
 
   Scenario: Existing Court Order (path seven: 'Yes' to 'Have you attended a MIAM?)
     When I submit that I have attended a MIAM
@@ -764,11 +744,7 @@ Feature: Testing C100 end to end
     And I should see the email for submitting an application to court is "john@gmail.com"
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
-    And I should see the statement of truth
-    And I click the radio button "I believe that the facts stated in this form and any continuation sheet are true"
-    And I fill in "Enter your full name" with "John Doe"
-    And I click the "Submit application" button
-    Then I should see "Your application has been submitted"
-    And I should see "Your reference code is:"
-    And I should see "Download a copy of your application"
-    And I should see "Download your application"
+    Then I should see the statement of truth
+    And I complete the statement of truth as an applicant "John Doe"
+    When I submit the application
+    Then I should be taken to the completion confirmation page

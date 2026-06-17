@@ -518,6 +518,10 @@ def cookie_management_page
   @cookie_management_page ||= CookieManagementPage.new
 end
 
+def completion_confirmation_page
+  @completion_confirmation_page ||= CompletionConfirmationPage.new
+end
+
 def get_birthdate(age)
   today = Date.today
   dob_date = today - age.to_i.years
