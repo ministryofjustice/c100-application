@@ -1,10 +1,10 @@
 And(/^I should see the children "(are|aren't)" involved in any emergency protection, care of proceedings$/) do |arg|
-  answer = (arg == "are" ? "Yes" : "No")
+  answer = (arg == 'are' ? 'Yes' : 'No')
   expect(cya_page.opening_questions.child_protection_cases.answer).to eq(answer)
 end
 
 And(/^I should see they "(have|haven't)" been to mediation through the mediation voucher scheme$/) do |arg|
-  answer = (arg == "have" ? "Yes" : "No")
+  answer = (arg == 'have' ? 'Yes' : 'No')
   expect(cya_page.mediation_voucher.voucher_scheme.answer).to eq(answer)
 end
 
@@ -15,11 +15,11 @@ And(/^I should see they haven't attended MIAM$/) do
 end
 
 And(/^I should see they have attended MIAM$/) do
-  expect(cya_page.miam_requirement.miam_attended.answer).to eq("Yes")
+  expect(cya_page.miam_requirement.miam_attended.answer).to eq('Yes')
 end
 
 And(/^I should see they "(have|haven't)" attended a MIAM$/) do |arg|
-  answer = (arg == "have" ? "Yes" : "No")
+  answer = (arg == 'have' ? 'Yes' : 'No')
   expect(cya_page.miam_requirement.miam_attended.answer).to eq(answer)
 end
 
@@ -28,7 +28,7 @@ And(/^I should see they have a document signed by the mediator$/) do
 end
 
 And(/^I should see they "(have|haven't)" got safety concerns about the children$/) do |arg|
-  answer = (arg == "have" ? "Yes" : "No")
+  answer = (arg == 'have' ? 'Yes' : 'No')
   expect(cya_page.safety_concerns.risk_of_abduction.answer).to eq(answer)
   expect(cya_page.safety_concerns.substance_abuse.details.answer).to eq(answer)
   expect(cya_page.safety_concerns.children_abuse.answer).to eq(answer)
@@ -37,16 +37,16 @@ And(/^I should see they "(have|haven't)" got safety concerns about the children$
 end
 
 def check_safety_concerns(expected_yes_concerns, safety_concerns)
-  # Check that the provided answers equal "Yes"
+  # Check that the provided answers equal 'Yes'
   expected_yes_concerns.each do |expected_concern|
     matching_concern = safety_concerns.keys.find { |question| question.include?(expected_concern) }
-    expect(safety_concerns[matching_concern]).to eq("Yes"), "Concern does not equal 'Yes': #{expected_concern}"
+    expect(safety_concerns[matching_concern]).to eq('Yes'), "Concern does not equal 'Yes': #{expected_concern}"
   end
 
-  # Check that all remaining concerns equal "No"
+  # Check that all remaining concerns equal 'No'
   safety_concerns.each do |question, answer|
     next if expected_yes_concerns.include?(question)
-    expect(answer).to eq("No"), "Concern does not equal 'No': #{question}"
+    expect(answer).to eq('No'), "Concern does not equal 'No': #{question}"
   end
 end
 
@@ -226,7 +226,7 @@ And(/^I should see the applicant's relationship to "([^"]*)" is "([^"]*)"$/) do 
 end
 
 And(/^I should see the applicant "(does|doesn't)" have a solicitor$/) do |arg|
-  answer = (arg == "does" ? "Yes" : "No")
+  answer = (arg == 'does' ? 'Yes' : 'No')
   expect(cya_page.solicitor_details.has_solicitor.answer).to eq(answer)
 end
 
@@ -388,7 +388,7 @@ And(/^I should see the respondent's relationship to "([^"]*)" is "([^"]*)"$/) do
 end
 
 And(/^I should see there "(are|aren't)" other people who need to be informed of the application$/) do |arg|
-  answer = (arg == "are" ? "Yes" : "No")
+  answer = (arg == 'are' ? 'Yes' : 'No')
   expect(cya_page.other_parties_details.has_other_parties.answer).to eq(answer)
 end
 
@@ -470,7 +470,7 @@ And(/^I should see the type of proceeding is "([^"]*)"$/) do |arg|
 end
 
 And(/^I should see an urgent hearing "(is|isn't)" requested$/) do |arg|
-  answer = (arg == "is" ? "Yes" : "No")
+  answer = (arg == 'is' ? 'Yes' : 'No')
   expect(cya_page.urgent_hearing.needs_urgent_hearing.answer).to eq(answer)
 end
 
@@ -501,7 +501,7 @@ And(/^I should see a hearing "(is|isn't)" needed within the next 48 hours$/) do 
 end
 
 And(/^I should see a without notice hearing "(is|isn't)" requested$/) do |arg|
-  answer = (arg == "is" ? "Yes" : "No")
+  answer = (arg == 'is' ? 'Yes' : 'No')
   expect(cya_page.without_notice_hearing.asking_for_without_notice_hearing.answer).to eq(answer)
 end
 
@@ -510,17 +510,17 @@ And(/^I should see a without notice hearing is requested because "([^"]*)"$/) do
 end
 
 And(/^I should see the life of someone significant to the child "(is|isn't)" outside the UK$/) do |arg|
-  answer = (arg == "is" ? "Yes" : "No")
+  answer = (arg == 'is' ? 'Yes' : 'No')
   expect(cya_page.international_info.international_resident.details.answer).to eq(answer)
 end
 
 And(/^I should see another person in this application "(could|couldn't)" apply for an order outside the UK$/) do |arg|
-  answer = (arg == "could" ? "Yes" : "No")
+  answer = (arg == 'could' ? 'Yes' : 'No')
   expect(cya_page.international_info.international_jurisdiction.can_apply_outside_en_cy.answer).to eq(answer)
 end
 
 And(/^I should see a request for information involving the children "(has|hasn't)" been made outside the UK$/) do |arg|
-  answer = (arg == "has" ? "Yes" : "No")
+  answer = (arg == 'has' ? 'Yes' : 'No')
   expect(cya_page.international_info.international_request.answer).to eq(answer)
 end
 
@@ -529,7 +529,7 @@ And(/^I should see the reason for application is "([^"]*)"$/) do |arg|
 end
 
 And(/^I should see there "(is|isn't)" a court order requiring permission to make this application$/) do |arg|
-  answer = (arg == "is" ? "Yes" : "No")
+  answer = (arg == 'is' ? 'Yes' : 'No')
   expect(cya_page.application_reasons.has_existing_court_order.details.answer).to eq(answer)
 end
 
@@ -542,21 +542,21 @@ And(/^I should see the expiry date of the court order is "([^"]*)"$/) do |arg|
 end
 
 And(/^I should see they "(have|haven't)" uploaded their existing court order$/) do |arg|
-  if arg == "have"
-    expect(cya_page.application_reasons.existing_court_order_uploadable.answer).to eq("Yes")
+  if arg == 'have'
+    expect(cya_page.application_reasons.existing_court_order_uploadable.answer).to eq('Yes')
     expect(cya_page.application_reasons.existing_court_order_upload.answer).to eq("Attached document\nimage.jpg")
   elsif arg == "haven't"
-    expect(cya_page.application_reasons.existing_court_order_uploadable.answer).to eq("No")
+    expect(cya_page.application_reasons.existing_court_order_uploadable.answer).to eq('No')
   end
 end
 
 And(/^I should see there "(are|aren't)" factors that may affect any adult in this application taking part in the court proceedings$/) do |arg|
-  answer = (arg == "are" ? "Yes" : "No")
+  answer = (arg == 'are' ? 'Yes' : 'No')
   expect(cya_page.litigation_capacity.reduced_litigation_capacity.answer).to eq(answer)
 end
 
 And(/^I should see there "(are|aren't)" people who need an intermediary to help them in court$/) do |arg|
-  answer = (arg == "are" ? "Yes" : "No")
+  answer = (arg == 'are' ? 'Yes' : 'No')
   expect(cya_page.attending_court.requires_intermediary_help.answer).to eq(answer)
 end
 
@@ -565,7 +565,7 @@ And(/^I should see the details provided for the intermediary are "([^"]*)"$/) do
 end
 
 And(/^I should see there "(are|aren't)" special language requirements$/) do |arg|
-  answer = (arg == "are" ? "Yes" : "Not needed")
+  answer = (arg == 'are' ? 'Yes' : "Not needed")
   expect(cya_page.attending_court.language_requirements.interpreter.answer).to eq(answer)
   expect(cya_page.attending_court.language_requirements.sign_language_interpreter.answer).to eq(answer)
   expect(cya_page.attending_court.language_requirements.welsh_language.answer).to eq(answer)
@@ -575,7 +575,7 @@ And(/^I should see there "(are|aren't)" specific safety arrangements specified f
   if arg == "aren't"
     expect(cya_page.attending_court.safety_arrangements).to have_no_arrangements
     expect(cya_page.attending_court.safety_arrangements.details.answer).to eq("None selected")
-  elsif arg == "are"
+  elsif arg == 'are'
     expect(cya_page.attending_court.safety_arrangements).to have_arrangements
   end
 end
@@ -584,7 +584,7 @@ And(/^I should see there "(are|aren't)" special facilities needed when attending
   if arg == "aren't"
     expect(cya_page.attending_court.special_assistance).to have_no_additional_details
     expect(cya_page.attending_court.special_assistance.details.answer).to eq("None selected")
-  elsif arg == "are"
+  elsif arg == 'are'
     expect(cya_page.attending_court.special_assistance).to have_additional_details
   end
 end
@@ -690,8 +690,7 @@ And(/^I should see the details provided for the exemption are "([^"]*)"$/) do |a
 end
 
 And(/^I should see an attachment presenting MIAM exemption evidence "(is|isn't)" present$/) do |arg|
-  (arg == "is" ? "Yes" : "No")
-  if arg == "is"
+  if arg == 'is'
     expect(cya_page.miam_exemptions.exemption.answer).to eq("Attached document\nimage.jpg")
   elsif arg == "isn't"
     expect(cya_page.miam_exemptions.exemption.answer).to eq("")
@@ -704,9 +703,9 @@ Then(/^I should be taken to the Check Your Answers page$/) do
 end
 
 And(/^I should see that all alternatives "(have|haven't)" been tried$/) do |arg|
-  answer = (arg == "have" ? "Yes" : "No")
+  answer = (arg == 'have' ? 'Yes' : 'No')
   expect(cya_page.alternatives.alternative_negotiation_tools.answer).to eq(answer)
-  expect(cya_page.alternatives.alternative_mediation.answer).to eq("No")
+  expect(cya_page.alternatives.alternative_mediation.answer).to eq('No')
   expect(cya_page.alternatives.alternative_lawyer_negotiation.answer).to eq(answer)
   expect(cya_page.alternatives.alternative_collaborative_law.answer).to eq(answer)
 end
