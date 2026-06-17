@@ -37,7 +37,8 @@ Feature: Testing C100 end to end
     Then I should be taken to the existing court order page
     When I submit that there "isn't" a court order requiring permission to make this application
     Then I should be taken to the urgent hearing page
-    When I submit that I "don't" require an urgent and without notice hearing
+    When I submit that I "don't" require an urgent hearing
+    And I submit that I "don't" require a without notice hearing
     Then I should be taken to the international resident page
     When I submit the international issues details
     Then I should be taken to the reason for application page
@@ -139,7 +140,8 @@ Feature: Testing C100 end to end
     Then I should be taken to the existing court order page
     When I submit that there "isn't" a court order requiring permission to make this application
     Then I should be taken to the urgent hearing page
-    When I submit that I "don't" require an urgent and without notice hearing
+    When I submit that I "don't" require an urgent hearing
+    And I submit that I "don't" require a without notice hearing
     Then I should be taken to the international resident page
     When I submit that there isn't any international issues in this application
     Then I should be taken to the reason for application page
@@ -238,7 +240,8 @@ Feature: Testing C100 end to end
     Then I should be taken to the existing court order page
     When I submit that there "isn't" a court order requiring permission to make this application
     Then I should be taken to the urgent hearing page
-    When I submit that I "don't" require an urgent and without notice hearing
+    When I submit that I "don't" require an urgent hearing
+    And I submit that I "don't" require a without notice hearing
     Then I should be taken to the international resident page
     When I submit the international issues details
     Then I should be taken to the reason for application page
@@ -363,7 +366,8 @@ Feature: Testing C100 end to end
     Then I should be taken to the existing court order page
     When I submit that there "isn't" a court order requiring permission to make this application
     Then I should be taken to the urgent hearing page
-    When I submit that I "don't" require an urgent and without notice hearing
+    When I submit that I "don't" require an urgent hearing
+    And I submit that I "don't" require a without notice hearing
     Then I should be taken to the international resident page
     When I submit the international issues details with an international resident
     Then I should be taken to the reason for application page
@@ -477,7 +481,8 @@ Feature: Testing C100 end to end
     Then I should be taken to the existing court order page
     When I submit that there "isn't" a court order requiring permission to make this application
     Then I should be taken to the urgent hearing page
-    When I submit that I "don't" require an urgent and without notice hearing
+    When I submit that I "don't" require an urgent hearing
+    And I submit that I "don't" require a without notice hearing
     Then I should be taken to the international resident page
     When I submit the international issues details
     Then I should be taken to the reason for application page
@@ -593,7 +598,8 @@ Feature: Testing C100 end to end
     Then I should be taken to the existing court order page
     When I submit that there "isn't" a court order requiring permission to make this application
     Then I should be taken to the urgent hearing page
-    When I submit that I "do" require an urgent and without notice hearing
+    When I submit that I "do" require an urgent hearing
+    And I submit that I "do" require a without notice hearing
     Then I should be taken to the international resident page
     When I submit that there isn't any international issues in this application
     Then I should be taken to the reason for application page
@@ -702,7 +708,8 @@ Feature: Testing C100 end to end
     Then I should be taken to the existing court order page
     When I submit that there "is" a court order requiring permission to make this application
     Then I should be taken to the urgent hearing page
-    When I submit that I "don't" require an urgent and without notice hearing
+    When I submit that I "don't" require an urgent hearing
+    And I submit that I "don't" require a without notice hearing
     Then I should be taken to the international resident page
     When I submit the international issues details
     Then I should be taken to the reason for application page
