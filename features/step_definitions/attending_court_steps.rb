@@ -1,4 +1,4 @@
-And(/^I navigate the attending court journey$/) do
+When(/^I submit the attending court details$/) do
   expect(attending_court_intermediary_page).to be_displayed
   attending_court_intermediary_page.submit_yes('Needed for the respondent')
 
@@ -12,7 +12,7 @@ And(/^I navigate the attending court journey$/) do
   attending_court_special_assistance_page.continue_without_filling
 end
 
-And(/^I navigate the attending court journey with safety arrangements$/) do
+And(/^I submit the attending court details with safety arrangements$/) do
   expect(attending_court_intermediary_page).to be_displayed
   attending_court_intermediary_page.submit_yes('I need someone to communicate between me and the respondent')
 
@@ -26,7 +26,7 @@ And(/^I navigate the attending court journey with safety arrangements$/) do
   attending_court_special_assistance_page.continue_without_filling
 end
 
-And("I have no issues attending court") do
+When(/^I submit that I have no issues attending court$/) do
   expect(attending_court_intermediary_page).to be_displayed
   attending_court_intermediary_page.submit_no
 
@@ -37,14 +37,18 @@ And("I have no issues attending court") do
   attending_court_special_arrangements_page.continue_without_filling
 end
 
-And(/^I don't require special assistance when attending court$/) do
+And(/^I submit that I don't require special assistance when attending court$/) do
   expect(attending_court_special_assistance_page).to be_displayed
   attending_court_special_assistance_page.continue_without_filling
 end
 
-And(/^I require special assistance when attending court "(.*)"$/) do |arg|
+And(/^I submit that I require special assistance when attending court: "(.*)"$/) do |arg|
   expect(attending_court_special_assistance_page).to be_displayed
   attending_court_special_assistance_page.submit_special_assistance(
     special_assistance_details: arg
   )
+end
+
+Then(/^I should be taken to the attending court page$/) do
+  expect(attending_court_intermediary_page).to be_displayed
 end

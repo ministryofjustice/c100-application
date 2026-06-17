@@ -700,7 +700,7 @@ And(/^I should see an attachment presenting MIAM exemption evidence "(is|isn't)"
   end
 end
 
-And(/^I should be on the Check Your Answers page$/) do
+Then(/^I should be taken to the Check Your Answers page$/) do
   expect(cya_page).to be_displayed
   expect(cya_page.content).to have_header
 end

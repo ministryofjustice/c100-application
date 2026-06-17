@@ -1,4 +1,4 @@
-And(/^I "(do|don't)" have abuse or physical abuse concerns about the children$/) do |arg|
+And(/^I submit that I "(do|don't)" have abuse or physical abuse concerns about the children$/) do |arg|
   expect(abuse_concerns_page).to be_displayed
   abuse_concerns_page.continue_to_next_step
 
@@ -20,7 +20,7 @@ And(/^I "(do|don't)" have abuse or physical abuse concerns about the children$/)
   end
 end
 
-And(/^I "(do|don't)" have financial concerns about the children$/) do |arg|
+And(/^I submit that I "(do|don't)" have financial concerns about the children$/) do |arg|
   expect(abuse_concerns_financial_page).to be_displayed
   if arg == 'do'
     abuse_concerns_financial_page.submit_yes
@@ -37,7 +37,7 @@ And(/^I "(do|don't)" have financial concerns about the children$/) do |arg|
   end
 end
 
-And(/^I "(do|don't)" have psychological and emotional abuse concerns about the children$/) do |arg|
+And(/^I submit that I "(do|don't)" have psychological and emotional abuse concerns about the children$/) do |arg|
   expect(abuse_concerns_psychological_page).to be_displayed
   if arg == 'do'
     abuse_concerns_psychological_page.submit_yes
@@ -69,7 +69,7 @@ And(/^I "(do|don't)" have psychological and emotional abuse concerns about the c
   end
 end
 
-And(/^I "(do|don't)" have other abuse concerns about the children$/) do |arg|
+And(/^I submit that I "(do|don't)" have other abuse concerns about the children$/) do |arg|
   expect(abuse_concerns_children_other_page).to be_displayed
   if arg == 'do'
     abuse_concerns_children_other_page.submit_yes
@@ -86,7 +86,7 @@ And(/^I "(do|don't)" have other abuse concerns about the children$/) do |arg|
   end
 end
 
-And(/^I don't have any safety concerns about myself$/) do
+When(/^I submit that I don't have any safety concerns about myself$/) do
   expect(abuse_concerns_applicant_info_page).to be_displayed
   abuse_concerns_applicant_info_page.continue_to_next_step
 
@@ -118,7 +118,7 @@ And(/^I don't have any safety concerns about myself$/) do
   )
 end
 
-And(/^I "(have|haven't)" been abused by the respondent$/) do |arg|
+And(/^I submit that I "(have|haven't)" been abused by the respondent$/) do |arg|
   expect(abuse_concerns_applicant_info_page).to be_displayed
   abuse_concerns_applicant_info_page.continue_to_next_step
   
@@ -138,7 +138,7 @@ And(/^I "(have|haven't)" been abused by the respondent$/) do |arg|
   end
 end
 
-And(/^I "(have|haven't)" been physically abused by the respondent$/) do |arg|
+And(/^I submit that I "(have|haven't)" been physically abused by the respondent$/) do |arg|
   expect(abuse_concerns_applicant_physical_page).to be_displayed
   if arg == 'have'
     abuse_concerns_applicant_physical_page.submit_yes
@@ -155,7 +155,7 @@ And(/^I "(have|haven't)" been physically abused by the respondent$/) do |arg|
   end
 end
 
-And(/^I "(have|haven't)" been financially abused by the respondent$/) do |arg|
+And(/^I submit that I "(have|haven't)" been financially abused by the respondent$/) do |arg|
   expect(abuse_concerns_applicant_financial_page).to be_displayed
   if arg == 'have'
     abuse_concerns_applicant_financial_page.submit_yes
@@ -172,7 +172,7 @@ And(/^I "(have|haven't)" been financially abused by the respondent$/) do |arg|
   end
 end
 
-And(/^I "(have|haven't)" been psychologically and emotionally abused by the respondent$/) do |arg|
+And(/^I submit that I "(have|haven't)" been psychologically and emotionally abused by the respondent$/) do |arg|
   expect(abuse_concerns_applicant_psychological_page).to be_displayed
   if arg == 'have'
     abuse_concerns_applicant_psychological_page.submit_yes
@@ -204,7 +204,7 @@ And(/^I "(have|haven't)" been psychologically and emotionally abused by the resp
   end
 end
 
-And(/^I "(do|don't)" have any other concerns about my welfare$/) do |arg|
+And(/^I submit that I "(do|don't)" have any other concerns about my welfare$/) do |arg|
   expect(abuse_concerns_applicant_other_page).to be_displayed
   if arg == 'do'
     abuse_concerns_applicant_other_page.submit_yes
@@ -221,7 +221,7 @@ And(/^I "(do|don't)" have any other concerns about my welfare$/) do |arg|
   end
 end
 
-And(/^I "(have|haven't)" had or currently have court orders made for my protection$/) do |arg|
+And(/^I submit that I "(have|haven't)" had or currently have court orders made for my protection$/) do |arg|
   expect(applicant_has_protection_court_order_page).to be_displayed
   if arg == 'have'
     applicant_has_protection_court_order_page.submit_yes
@@ -230,7 +230,7 @@ And(/^I "(have|haven't)" had or currently have court orders made for my protecti
   end
 end
 
-And(/^I "(do|don't)" agree to the children having contact with the other people in this application$/) do |arg|
+And(/^I submit that I "(do|don't)" agree to the children having contact with the other people in this application$/) do |arg|
   expect(abuse_concerns_contact_page).to be_displayed
   if arg == 'do'
     abuse_concerns_contact_page.submit_contact_details(
@@ -243,4 +243,8 @@ And(/^I "(do|don't)" agree to the children having contact with the other people 
       being_in_touch: 'no'
     )
   end
+end
+
+Then(/^I should be taken to the applicant abuse concerns page$/) do
+  expect(abuse_concerns_applicant_info_page).to be_displayed
 end

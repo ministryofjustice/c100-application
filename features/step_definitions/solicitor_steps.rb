@@ -1,4 +1,4 @@
-And(/^I "(do|don't)" have a solicitor$/) do |arg|
+When(/^I submit that I "(do|don't)" have a solicitor$/) do |arg|
   expect(applicant_has_solicitor_page).to be_displayed
 
   if arg == 'do'
@@ -8,7 +8,7 @@ And(/^I "(do|don't)" have a solicitor$/) do |arg|
   end
 end
 
-And(/^I enter the details for a solicitor$/) do
+When(/^I submit the solicitor details$/) do
   expect(applicant_has_solicitor_page).to be_displayed
   applicant_has_solicitor_page.submit_yes
 
@@ -31,4 +31,8 @@ And(/^I enter the details for a solicitor$/) do
     phone: '00000000000',
     dx_number: '00000000000'
   )
+end
+
+Then(/^I should be taken to the solicitor details page$/) do
+  expect(applicant_has_solicitor_page).to be_displayed
 end

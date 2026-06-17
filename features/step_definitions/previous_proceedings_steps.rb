@@ -1,9 +1,9 @@
-And(/^there "(has|hasn't)" been any court proceedings about the children$/) do |arg|
+When(/^I submit that there "(has|hasn't)" been any court proceedings about the children$/) do |arg|
   expect(previous_proceedings_page).to be_displayed
   previous_proceedings_page.submit(arg == 'has' ? 'yes' : 'no')
 end
 
-And("I enter details of previous court proceedings") do
+When(/^I submit details of previous court proceedings$/) do
   expect(previous_proceedings_page).to be_displayed
   previous_proceedings_page.submit_yes
 
@@ -17,7 +17,7 @@ And("I enter details of previous court proceedings") do
   )
 end
 
-And(/^I enter details of previous court proceedings with an additional child$/) do
+And(/^I submit details of previous court proceedings with an additional child$/) do
   expect(previous_proceedings_page).to be_displayed
   previous_proceedings_page.submit_yes
 
@@ -31,7 +31,7 @@ And(/^I enter details of previous court proceedings with an additional child$/) 
   )
 end
 
-And(/^there "(is|isn't)" a court order requiring permission to make this application$/) do |arg|
+When(/^I submit that there "(is|isn't)" a court order requiring permission to make this application$/) do |arg|
   expect(existing_court_order_page).to be_displayed
   if arg == 'is'
     existing_court_order_page.submit_yes('12345678', '01-01-2030')
@@ -45,4 +45,12 @@ And(/^there "(is|isn't)" a court order requiring permission to make this applica
   else
     existing_court_order_page.submit_no
   end
+end
+
+Then(/^I should be taken to the existing court order page$/) do
+  expect(existing_court_order_page).to be_displayed
+end
+
+Then(/^I should be taken to the previous court proceedings page$/) do
+  expect(previous_proceedings_page).to be_displayed
 end

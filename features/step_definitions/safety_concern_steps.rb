@@ -1,5 +1,4 @@
-And('I have no safety concerns about the children') do
-  expect(safety_concern_page).to be_displayed
+When(/^I submit that I have no safety concerns about the children$/) do
   safety_concern_page.continue_to_next_step
 
   expect(safety_concern_abduction_page).to be_displayed
@@ -18,8 +17,7 @@ And('I have no safety concerns about the children') do
   safety_concern_other_page.submit_no
 end
 
-And('I navigate the abduction risk journey') do
-  expect(safety_concern_page).to be_displayed
+When(/^I submit that I have abduction concerns about the children$/) do
   safety_concern_page.continue_to_next_step
 
   expect(safety_concern_abduction_page).to be_displayed
@@ -43,7 +41,8 @@ And('I navigate the abduction risk journey') do
   abduction_risk_details_page.submit_risk_details('They might be taken by their other parent', 'The children are with me')
 end
 
-And(/^I "(do|don't)" have abduction concerns about the children$/) do |arg|
+When(/^I submit that I "(do|don't)" have abduction concerns about the children$/) do |arg|
+  safety_concern_page.continue_to_next_step
   expect(safety_concern_abduction_page).to be_displayed
   if arg == 'do'
     safety_concern_abduction_page.submit_yes
@@ -53,7 +52,7 @@ And(/^I "(do|don't)" have abduction concerns about the children$/) do |arg|
 end
 
 
-And(/^I "(do|don't)" have concerns about drug, alcohol or substance abuse$/) do |arg|
+And(/^I submit that I "(do|don't)" have concerns about drug, alcohol or substance abuse$/) do |arg|
   expect(safety_concern_substance_page).to be_displayed
   if arg == 'do'
     safety_concern_substance_page.submit_yes("Alcoholic and drug abuse details")
@@ -62,11 +61,15 @@ And(/^I "(do|don't)" have concerns about drug, alcohol or substance abuse$/) do 
   end
 end
 
-And(/^I "(do|don't)" have domestic abuse or child concerns about the children$/) do |arg|
+And(/^I submit that I "(do|don't)" have domestic abuse or child concerns about the children$/) do |arg|
   expect(safety_concern_abuse_page).to be_displayed
   if arg == 'do'
     safety_concern_abuse_page.submit_yes
   else
     safety_concern_abuse_page.submit_no
   end
+end
+
+Then(/^I should be taken to the safety concerns page$/) do
+  expect(safety_concern_page).to be_displayed
 end

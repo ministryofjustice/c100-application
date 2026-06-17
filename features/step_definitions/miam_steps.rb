@@ -1,4 +1,4 @@
-When(/^I navigate the MIAM exemption journey$/) do
+When(/^I submit that I have a MIAM exemption$/) do
   expect(consent_order_page).to be_displayed
   consent_order_page.submit_without_consent_order
 
@@ -30,7 +30,7 @@ When(/^I navigate the MIAM exemption journey$/) do
   miam_exemptions_misc_page.submit_without_notice_hearing
 end
 
-When(/^I navigate the MIAM journey$/) do
+When(/^I submit that I have attended a MIAM$/) do
   expect(consent_order_page).to be_displayed
   consent_order_page.submit_without_consent_order
 
@@ -58,7 +58,7 @@ When(/^I navigate the MIAM journey$/) do
   miam_certification_upload_page.upload_file(file_path)
 end
 
-When(/^I navigate the MIAM journey with a child protection case$/) do
+When(/^I submit that I have a MIAM with a child protection case$/) do
   expect(consent_order_page).to be_displayed
   consent_order_page.submit_without_consent_order
 

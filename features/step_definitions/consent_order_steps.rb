@@ -1,4 +1,4 @@
-When(/^I navigate the Consent Order journey with a child protection case$/) do
+When(/^I submit that I have a Consent Order with a child protection case$/) do
   expect(consent_order_page).to be_displayed
   consent_order_page.submit_existing_consent_order
 
@@ -9,9 +9,6 @@ When(/^I navigate the Consent Order journey with a child protection case$/) do
 
   expect(child_protection_case_page).to be_displayed
   child_protection_case_page.submit_yes
-
-  expect(safety_concern_page).to be_displayed
-  safety_concern_page.continue_to_next_step
 end
 
 When(/^I navigate back to the consent order page$/) do

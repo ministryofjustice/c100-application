@@ -6,7 +6,7 @@ And(/^I am not asking for an urgent or without notice hearing$/) do
   without_notice_page.submit_no
 end
 
-And(/^I "(do|don't)" require an urgent and without notice hearing$/) do |arg|
+When(/^I submit that I "(do|don't)" require an urgent and without notice hearing$/) do |arg|
   expect(urgent_hearing_page).to be_displayed
   if arg == 'do'
     urgent_hearing_page.submit_yes
@@ -32,4 +32,8 @@ And(/^I "(do|don't)" require an urgent and without notice hearing$/) do |arg|
   else
     without_notice_page.submit_no
   end
+end
+
+Then(/^I should be taken to the urgent hearing page$/) do
+  expect(urgent_hearing_page).to be_displayed
 end

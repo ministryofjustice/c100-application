@@ -1,4 +1,4 @@
-And(/^I navigate the international issues journey$/) do
+When(/^I submit the international issues details$/) do
   expect(international_resident_page).to be_displayed
   international_resident_page.submit_no
 
@@ -9,7 +9,7 @@ And(/^I navigate the international issues journey$/) do
   international_request_page.submit_no
 end
 
-And(/^I navigate the international issues journey with an international resident$/) do
+When(/^I submit the international issues details with an international resident$/) do
   expect(international_resident_page).to be_displayed
   international_resident_page.submit_yes("Emily's maternal grandparents are in Austria")
 
@@ -20,7 +20,7 @@ And(/^I navigate the international issues journey with an international resident
   international_request_page.submit_no
 end
 
-And(/^there isn't any international issues in this application$/) do
+When(/^I submit that there isn't any international issues in this application$/) do
   expect(international_resident_page).to be_displayed
   international_resident_page.submit_no
 
@@ -29,4 +29,8 @@ And(/^there isn't any international issues in this application$/) do
 
   expect(international_request_page).to be_displayed
   international_request_page.submit_no
+end
+
+Then(/^I should be taken to the international resident page$/) do
+  expect(international_resident_page).to be_displayed
 end

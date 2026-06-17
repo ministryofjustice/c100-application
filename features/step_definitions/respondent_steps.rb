@@ -1,4 +1,4 @@
-And(/^I navigate the respondent details journey$/) do
+When(/^I submit the respondent details$/) do
   expect(respondent_names_page).to be_displayed
   respondent_names_page.submit_names('Jane', 'Doe')
 
@@ -30,7 +30,7 @@ And(/^I navigate the respondent details journey$/) do
   )
 end
 
-And(/^I navigate the respondent details journey with an additional child$/) do
+And(/^I submit the respondent details with an additional child$/) do
   expect(respondent_names_page).to be_displayed
   respondent_names_page.submit_names('John', 'Doe')
 
@@ -63,12 +63,16 @@ And(/^I navigate the respondent details journey with an additional child$/) do
   )
 end
 
-And(/^there "(are|aren't)" any other people who should know about the application$/) do |arg|
+Then(/^I should be taken to the other party details page$/) do
+  expect(has_other_parties_page).to be_displayed
+end
+
+And(/^I submit that there "(are|aren't)" any other people who should know about the application$/) do |arg|
   expect(has_other_parties_page).to be_displayed
   has_other_parties_page.submit(arg == 'are' ? 'yes' : 'no')
 end
 
-And(/^I complete the other party details journey with an additional child$/) do
+And(/^I submit the other party details with an additional child$/) do
   expect(other_party_names_page).to be_displayed
   other_party_names_page.submit_names('Judy', 'Sitter')
 
@@ -91,7 +95,7 @@ And(/^I complete the other party details journey with an additional child$/) do
   )
 end
 
-And(/^I complete the other party details journey$/) do
+And(/^I submit the other party details$/) do
   expect(other_party_names_page).to be_displayed
   other_party_names_page.submit_names('Cassie', 'Doe')
 
@@ -111,4 +115,8 @@ And(/^I complete the other party details journey$/) do
     country: 'United Kingdom',
     postcode: 'SW1A 2AA'
   )
+end
+
+Then(/^I should be taken to the respondent details page$/) do
+  expect(respondent_names_page).to be_displayed
 end

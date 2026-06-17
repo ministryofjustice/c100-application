@@ -1,4 +1,4 @@
-And(/^I complete the applicant details journey keeping my contact details private$/) do
+When(/^I complete the applicant details journey keeping my contact details private$/) do
   # Navigate to applicant names
   applicant_names_page.submit_names('Jane', 'Doe')
 
@@ -36,4 +36,8 @@ And(/^I complete the applicant details journey keeping my contact details privat
     phone: '00000888888',
     voicemail_consent: 'yes'
   )
+end
+
+Then(/^I should be taken to the applicant details page$/) do
+  expect(applicant_names_page).to be_displayed
 end

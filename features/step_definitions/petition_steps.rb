@@ -61,12 +61,20 @@ And(/^I continue to the next step$/) do
   petition_playback_page.continue_to_next_step
 end
 
-And(/^I ask the court to also decide "(.*)"$/) do |arg|
+When(/^I submit that I want the court to also decide "(.*)"$/) do |arg|
   expect(petition_protection_page).to be_displayed
   petition_protection_page.submit_yes(details: arg)
 end
 
-And(/^I am not asking the court to decide on any other issues$/) do
+When(/^I submit that I am not asking the court to decide on any other issues$/) do
   expect(petition_protection_page).to be_displayed
   petition_protection_page.submit_no
+end
+
+Then(/I should be taken to the petition orders page$/) do
+  expect(petition_orders_page).to be_displayed
+end
+
+Then(/I should be taken to the petition protection page$/) do
+  expect(petition_protection_page).to be_displayed
 end

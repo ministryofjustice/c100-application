@@ -6,34 +6,51 @@ Feature: Testing C100 end to end
     Then I should be on the consent order page
 
   Scenario: Child arrangements order (MIAM) (path one: exemption with no evidence)
-    When I navigate the MIAM exemption journey
+    When I submit that I have a MIAM exemption
     And evidence "isn't" provided for the MIAM exemption
-    And I have no safety concerns about the children
+    Then I should be taken to the safety concerns page
+    When I submit that I have no safety concerns about the children
+    Then I should be taken to the petition orders page
     When I ask the court to decide on the following issues: "who the children live with and when"
     Then I should see the child arrangements order details for: "who the children live with and when"
-    Then I continue to the next step
-    And I understand the process of going to court
-    And I have tried all alternative ways to reach an agreement
-    And I enter details for a "2" year old child
-    And I state that the "Father" has parental responsibility for the child
+    And I continue to the next step
+    Then I should be taken to the going to court page
+    When I submit that I understand the process of going to court
+    And I submit that I have tried all alternative ways to reach an agreement
+    Then I should be taken to the children details page
+    When I submit the details for a "2" year old child
+    And I submit that the "Father" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
-    And I "don't" have other children
+    And I submit that I "don't" have other children
+    Then I should be taken to the applicant details page
     When I complete the applicant details journey
-    And I enter the details for a solicitor
-    And I navigate the respondent details journey
-    And there "aren't" any other people who should know about the application
-    And the child lives with "John Doe Senior"
-    And I enter details of previous court proceedings
-    And there "isn't" a court order requiring permission to make this application
-    And I "don't" require an urgent and without notice hearing
-    And I navigate the international issues journey
-    And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
-    And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
-    And I have no issues attending court
-    And I require special assistance when attending court "We need lots of light"
-    And I submit the application with email "john@gmail.com"
+    Then I should be taken to the solicitor details page
+    When I submit the solicitor details
+    Then I should be taken to the respondent details page
+    When I submit the respondent details
+    Then I should be taken to the other party details page
+    When I submit that there "aren't" any other people who should know about the application
+    Then I should be taken to the child residence details page
+    When I submit the child lives with "John Doe Senior"
+    Then I should be taken to the previous court proceedings page
+    When I submit details of previous court proceedings
+    Then I should be taken to the existing court order page
+    When I submit that there "isn't" a court order requiring permission to make this application
+    Then I should be taken to the urgent hearing page
+    When I submit that I "don't" require an urgent and without notice hearing
+    Then I should be taken to the international resident page
+    When I submit the international issues details
+    Then I should be taken to the reason for application page
+    When I submit my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    Then I should be taken to the litigation capacity page
+    When I submit that there "aren't" factors that may affect any adult in this application taking part in the court proceedings
+    Then I should be taken to the attending court page
+    When I submit that I have no issues attending court
+    And I submit that I require special assistance when attending court: "We need lots of light"
+    Then I should be taken to the application submission page
+    When I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
-    And I should be on the Check Your Answers page
+    Then I should be taken to the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme
@@ -83,40 +100,59 @@ Feature: Testing C100 end to end
     And I should see the statement of truth
 
   Scenario: Child arrangements order (MIAM) (path two: exemption with evidence upload)
-    When I navigate the MIAM exemption journey
+    When I submit that I have a MIAM exemption
     And evidence "is" provided for the MIAM exemption
-    And I navigate the abduction risk journey
-    And I "don't" have concerns about drug, alcohol or substance abuse
-    And I "don't" have abuse or physical abuse concerns about the children
-    And I "do" have financial concerns about the children
-    And I "don't" have psychological and emotional abuse concerns about the children
-    And I "do" have other abuse concerns about the children
-    And I don't have any safety concerns about myself
+    Then I should be taken to the safety concerns page
+    When I submit that I have abduction concerns about the children
+    And I submit that I "don't" have concerns about drug, alcohol or substance abuse
+    And I submit that I "don't" have abuse or physical abuse concerns about the children
+    And I submit that I "do" have financial concerns about the children
+    And I submit that I "don't" have psychological and emotional abuse concerns about the children
+    And I submit that I "do" have other abuse concerns about the children
+    Then I should be taken to the applicant abuse concerns page
+    When I submit that I don't have any safety concerns about myself
+    Then I should be taken to the petition orders page
     When I ask the court to decide on the following issues: "who the children live with and when"
     Then I should see the child arrangements order details for: "who the children live with and when"
-    Then I continue to the next step
-    And I ask the court to also decide "This is what I want resolved"
-    And I understand the process of going to court
-    And I enter details for a "2" year old child
-    And I state that the "Father" has parental responsibility for the child
+    And I continue to the next step
+    Then I should be taken to the petition protection page
+    When I submit that I want the court to also decide "This is what I want resolved"
+    Then I should be taken to the going to court page
+    When I submit that I understand the process of going to court
+    Then I should be taken to the children details page
+    When I submit the details for a "2" year old child
+    And I submit that the "Father" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
-    And I "don't" have other children
+    And I submit that I "don't" have other children
+    Then I should be taken to the applicant details page
     When I complete the applicant details journey
-    And I "don't" have a solicitor
-    And I navigate the respondent details journey
-    And there "aren't" any other people who should know about the application
-    And the child lives with "John Doe Senior"
-    And there "hasn't" been any court proceedings about the children
-    And there "isn't" a court order requiring permission to make this application
-    And I "don't" require an urgent and without notice hearing
-    And there isn't any international issues in this application
-    And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
-    And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
-    And I have no issues attending court
-    And I don't require special assistance when attending court
+    Then I should be taken to the solicitor details page
+    When I submit that I "don't" have a solicitor
+    Then I should be taken to the respondent details page
+    When I submit the respondent details
+    Then I should be taken to the other party details page
+    When I submit that there "aren't" any other people who should know about the application
+    Then I should be taken to the child residence details page
+    When I submit the child lives with "John Doe Senior"
+    Then I should be taken to the previous court proceedings page
+    When I submit that there "hasn't" been any court proceedings about the children
+    Then I should be taken to the existing court order page
+    When I submit that there "isn't" a court order requiring permission to make this application
+    Then I should be taken to the urgent hearing page
+    When I submit that I "don't" require an urgent and without notice hearing
+    Then I should be taken to the international resident page
+    When I submit that there isn't any international issues in this application
+    Then I should be taken to the reason for application page
+    When I submit my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    Then I should be taken to the litigation capacity page
+    When I submit that there "aren't" factors that may affect any adult in this application taking part in the court proceedings
+    Then I should be taken to the attending court page
+    When I submit that I have no issues attending court
+    And I submit that I don't require special assistance when attending court
+    Then I should be taken to the application submission page
     And I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
-    And I should be on the Check Your Answers page
+    Then I should be taken to the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme
@@ -172,33 +208,50 @@ Feature: Testing C100 end to end
     And I should see "Download your application"
 
   Scenario: Child arrangements order (MIAM) (path three: 'Yes' to 'Have you attended a MIAM?')
-    When I navigate the MIAM journey
-    And I have no safety concerns about the children
+    When I submit that I have attended a MIAM
+    Then I should be taken to the safety concerns page
+    When I submit that I have no safety concerns about the children
+    Then I should be taken to the petition orders page
     When I ask the court to decide on the following issues: "who the children live with and when"
     Then I should see the child arrangements order details for: "who the children live with and when"
-    Then I continue to the next step
-    And I understand the process of going to court
-    And I have tried all alternative ways to reach an agreement
-    And I enter details for a "2" year old child
-    And I state that the "Father" has parental responsibility for the child
+    And I continue to the next step
+    Then I should be taken to the going to court page
+    When I submit that I understand the process of going to court
+    And I submit that I have tried all alternative ways to reach an agreement
+    Then I should be taken to the children details page
+    When I submit the details for a "2" year old child
+    And I submit that the "Father" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
-    And I "don't" have other children
+    And I submit that I "don't" have other children
+    Then I should be taken to the applicant details page
     When I complete the applicant details journey
-    And I enter the details for a solicitor
-    And I navigate the respondent details journey
-    And there "aren't" any other people who should know about the application
-    And the child lives with "John Doe Senior"
-    And I enter details of previous court proceedings
-    And there "isn't" a court order requiring permission to make this application
-    And I "don't" require an urgent and without notice hearing
-    And I navigate the international issues journey
-    And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
-    And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
-    And I have no issues attending court
-    And I require special assistance when attending court "We need lots of light"
-    And I submit the application with email "john@gmail.com"
+    Then I should be taken to the solicitor details page
+    When I submit the solicitor details
+    Then I should be taken to the respondent details page
+    When I submit the respondent details
+    Then I should be taken to the other party details page
+    When I submit that there "aren't" any other people who should know about the application
+    Then I should be taken to the child residence details page
+    When I submit the child lives with "John Doe Senior"
+    Then I should be taken to the previous court proceedings page
+    When I submit details of previous court proceedings
+    Then I should be taken to the existing court order page
+    When I submit that there "isn't" a court order requiring permission to make this application
+    Then I should be taken to the urgent hearing page
+    When I submit that I "don't" require an urgent and without notice hearing
+    Then I should be taken to the international resident page
+    When I submit the international issues details
+    Then I should be taken to the reason for application page
+    When I submit my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    Then I should be taken to the litigation capacity page 
+    When I submit that there "aren't" factors that may affect any adult in this application taking part in the court proceedings
+    Then I should be taken to the attending court page
+    When I submit that I have no issues attending court
+    And I submit that I require special assistance when attending court: "We need lots of light"
+    Then I should be taken to the application submission page
+    When I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
-    And I should be on the Check Your Answers page
+    Then I should be taken to the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme
@@ -264,49 +317,66 @@ Feature: Testing C100 end to end
     And I should see "Download your application"
 
   Scenario: Child arrangements order (MIAM) (path four: 'Yes' to 'Have you attended a MIAM?')
-    When I navigate the MIAM journey with a child protection case
+    When I submit that I have a MIAM with a child protection case
     And I navigate back to the consent order page
-    And I navigate the MIAM journey
-    And I navigate the abduction risk journey
-    And I "do" have concerns about drug, alcohol or substance abuse
-    And I "don't" have abuse or physical abuse concerns about the children
-    And I "do" have financial concerns about the children
-    And I "do" have psychological and emotional abuse concerns about the children
-    And I "do" have other abuse concerns about the children
-    And I "haven't" been abused by the respondent
-    And I "have" been physically abused by the respondent
-    And I "have" been financially abused by the respondent
-    And I "haven't" been psychologically and emotionally abused by the respondent
-    And I "don't" have any other concerns about my welfare
-    And I "haven't" had or currently have court orders made for my protection
-    And I "don't" agree to the children having contact with the other people in this application
+    When I submit that I have attended a MIAM
+    Then I should be taken to the safety concerns page
+    When I submit that I have abduction concerns about the children
+    And I submit that I "do" have concerns about drug, alcohol or substance abuse
+    And I submit that I "don't" have abuse or physical abuse concerns about the children
+    And I submit that I "do" have financial concerns about the children
+    And I submit that I "do" have psychological and emotional abuse concerns about the children
+    And I submit that I "do" have other abuse concerns about the children
+    Then I should be taken to the applicant abuse concerns page
+    When I submit that I "haven't" been abused by the respondent
+    And I submit that I "have" been physically abused by the respondent
+    And I submit that I "have" been financially abused by the respondent
+    And I submit that I "haven't" been psychologically and emotionally abused by the respondent
+    And I submit that I "don't" have any other concerns about my welfare
+    And I submit that I "haven't" had or currently have court orders made for my protection
+    And I submit that I "don't" agree to the children having contact with the other people in this application
+    Then I should be taken to the petition orders page 
     When I ask the court to decide on the following issues: "who the children live with and when, how much time they spend with each person"
     Then I should see the child arrangements order details for: "who the children live with and when, how much time they spend with each person"
-    Then I continue to the next step
-    And I ask the court to also decide "I want the court to decide whether the respondent should give compensation"
-    And I understand the process of going to court
-    And I enter details for a "2" year old child
-    And I state that the "Mother" has parental responsibility for the child
+    And I continue to the next step
+    Then I should be taken to the petition protection page
+    When I submit that I want the court to also decide "I want the court to decide whether the respondent should give compensation"
+    Then I should be taken to the going to court page
+    When I submit that I understand the process of going to court
+    Then I should be taken to the children details page
+    When I submit the details for a "2" year old child
+    And I submit that the "Mother" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
-    And I "do" have other children
+    And I submit that I "do" have other children
     And I enter details for another child who is "3" years old
-    And I complete the applicant details journey keeping my contact details private
-    And I "don't" have a solicitor
-    And I navigate the respondent details journey with an additional child
-    And there "are" any other people who should know about the application
-    And I complete the other party details journey with an additional child
-    And the child lives with "Jane Doe"
-    And I enter details of previous court proceedings with an additional child
-    And there "isn't" a court order requiring permission to make this application
-    And I "don't" require an urgent and without notice hearing
-    And I navigate the international issues journey with an international resident
-    And I give my reason for the application as "I fear for Emily & John's safety, but particularly Emily's"
-    And there "are" factors that may affect any adult in this application taking part in the court proceedings
-    And there "aren't" factors affecting ability to participate
-    And I navigate the attending court journey
-    And I submit the application with email "jane_doe@gmail.com"
+    When I complete the applicant details journey keeping my contact details private
+    Then I should be taken to the solicitor details page
+    When I submit that I "don't" have a solicitor
+    Then I should be taken to the respondent details page
+    When I submit the respondent details with an additional child
+    When I submit that there "are" any other people who should know about the application
+    And I submit the other party details with an additional child
+    Then I should be taken to the child residence details page
+    When I submit the child lives with "Jane Doe"
+    Then I should be taken to the previous court proceedings page
+    When I submit details of previous court proceedings with an additional child
+    Then I should be taken to the existing court order page
+    When I submit that there "isn't" a court order requiring permission to make this application
+    Then I should be taken to the urgent hearing page
+    When I submit that I "don't" require an urgent and without notice hearing
+    Then I should be taken to the international resident page
+    When I submit the international issues details with an international resident
+    Then I should be taken to the reason for application page
+    When I submit my reason for the application as "I fear for Emily & John's safety, but particularly Emily's"
+    Then I should be taken to the litigation capacity page
+    When I submit that there "are" factors that may affect any adult in this application taking part in the court proceedings
+    And I submit that there "aren't" factors affecting ability to participate
+    Then I should be taken to the attending court page
+    When I submit the attending court details
+    Then I should be taken to the application submission page
+    When I submit the application with email "jane_doe@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
-    And I should be on the Check Your Answers page
+    Then I should be taken to the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme
@@ -377,33 +447,50 @@ Feature: Testing C100 end to end
     And I should see "Download your application"
 
   Scenario: Skip child arrangements order (MIAM) (path five)
-    When I navigate the MIAM journey with a child protection case
-    And I have no safety concerns about the children
+    When I submit that I have a MIAM with a child protection case
+    Then I should be taken to the safety concerns page
+    When I submit that I have no safety concerns about the children
+    Then I should be taken to the petition orders page
     When I ask the court to decide on the following issues: "who the children live with and when"
     Then I should see the child arrangements order details for: "who the children live with and when"
-    Then I continue to the next step
-    And I understand the process of going to court
-    And I have tried all alternative ways to reach an agreement
-    And I enter details for a "2" year old child
-    And I state that the "Father" has parental responsibility for the child
+    And I continue to the next step
+    Then I should be taken to the going to court page
+    When I submit that I understand the process of going to court
+    And I submit that I have tried all alternative ways to reach an agreement
+    Then I should be taken to the children details page
+    And I submit the details for a "2" year old child
+    And I submit that the "Father" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
-    And I "don't" have other children
-    And I complete the applicant details journey
-    And I enter the details for a solicitor
-    And I navigate the respondent details journey
-    And there "aren't" any other people who should know about the application
-    And the child lives with "John Doe Senior"
-    And I enter details of previous court proceedings
-    And there "isn't" a court order requiring permission to make this application
-    And I "don't" require an urgent and without notice hearing
-    And I navigate the international issues journey
-    And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
-    And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
-    And I have no issues attending court
-    And I require special assistance when attending court "We need lots of light"
-    And I submit the application with email "john@gmail.com"
+    And I submit that I "don't" have other children
+    Then I should be taken to the applicant details page
+    When I complete the applicant details journey
+    Then I should be taken to the solicitor details page
+    When I submit the solicitor details
+    Then I should be taken to the respondent details page
+    When I submit the respondent details
+    Then I should be taken to the other party details page
+    When I submit that there "aren't" any other people who should know about the application
+    Then I should be taken to the child residence details page
+    When I submit the child lives with "John Doe Senior"
+    Then I should be taken to the previous court proceedings page
+    When I submit details of previous court proceedings
+    Then I should be taken to the existing court order page
+    When I submit that there "isn't" a court order requiring permission to make this application
+    Then I should be taken to the urgent hearing page
+    When I submit that I "don't" require an urgent and without notice hearing
+    Then I should be taken to the international resident page
+    When I submit the international issues details
+    Then I should be taken to the reason for application page
+    When I submit my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    Then I should be taken to the litigation capacity page
+    When I submit that there "aren't" factors that may affect any adult in this application taking part in the court proceedings
+    Then I should be taken to the attending court page
+    When I submit that I have no issues attending court
+    And I submit that I require special assistance when attending court: "We need lots of light"
+    Then I should be taken to the application submission page
+    When I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
-    And I should be on the Check Your Answers page
+    Then I should be taken to the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "are" involved in any emergency protection, care of proceedings
     And I should see they "haven't" got safety concerns about the children
@@ -459,48 +546,67 @@ Feature: Testing C100 end to end
     And I should see "Download your application"
 
   Scenario: Consent order (path six)
-    When I navigate the Consent Order journey with a child protection case
-    And I "don't" have abduction concerns about the children
-    And I "don't" have concerns about drug, alcohol or substance abuse
-    And I "do" have domestic abuse or child concerns about the children
-    And I "don't" have abuse or physical abuse concerns about the children
-    And I "do" have financial concerns about the children
-    And I "do" have psychological and emotional abuse concerns about the children
-    And I "don't" have other abuse concerns about the children
-    And I "have" been abused by the respondent
-    And I "have" been physically abused by the respondent
-    And I "have" been financially abused by the respondent
-    And I "have" been psychologically and emotionally abused by the respondent
-    And I "don't" have any other concerns about my welfare
-    And I "haven't" had or currently have court orders made for my protection
-    And I "don't" agree to the children having contact with the other people in this application
+    When I submit that I have a Consent Order with a child protection case
+    Then I should be taken to the safety concerns page
+    When I submit that I "don't" have abduction concerns about the children
+    And I submit that I "don't" have concerns about drug, alcohol or substance abuse
+    And I submit that I "do" have domestic abuse or child concerns about the children
+    And I submit that I "don't" have abuse or physical abuse concerns about the children
+    And I submit that I "do" have financial concerns about the children
+    And I submit that I "do" have psychological and emotional abuse concerns about the children
+    And I submit that I "don't" have other abuse concerns about the children
+    Then I should be taken to the applicant abuse concerns page
+    And I submit that I "have" been abused by the respondent
+    And I submit that I "have" been physically abused by the respondent
+    And I submit that I "have" been financially abused by the respondent
+    And I submit that I "have" been psychologically and emotionally abused by the respondent
+    And I submit that I "don't" have any other concerns about my welfare
+    And I submit that I "haven't" had or currently have court orders made for my protection
+    And I submit that I "don't" agree to the children having contact with the other people in this application
+    Then I should be taken to the petition orders page
     When I ask the court to decide on the following issues: "who the children live with and when, a religious issue"
     Then I should see the child arrangements order details for: "who the children live with and when"
-    And I should see the specific issue order details for: "a religious issue"
-    Then I continue to the next step
-    And I am not asking the court to decide on any other issues
-    And I understand the process of going to court
-    And I enter details for a "6" year old child with a special guardianship order
-    And I state that the "Me and the respondent" has parental responsibility for the child
+    Then I should see the specific issue order details for: "a religious issue"
+    And I continue to the next step
+    Then I should be taken to the petition protection page
+    When I submit that I am not asking the court to decide on any other issues
+    Then I should be taken to the going to court page
+    When I submit that I understand the process of going to court
+    Then I should be taken to the children details page
+    When I submit the details for a "6" year old child with a special guardianship order
+    And I submit that the "Me and the respondent" has parental responsibility for the child
     And I submit that the children have a child protection plan and are known to social services: "Alistair Doe knows Jane Doe from London"
-    And I "don't" have other children
-    And I complete the applicant details journey
-    And I enter the details for a solicitor
-    And I navigate the respondent details journey
-    And there "are" any other people who should know about the application
-    And I complete the other party details journey
-    And the child lives with "John Doe Senior"
-    And there "hasn't" been any court proceedings about the children
-    And there "isn't" a court order requiring permission to make this application
-    And I "do" require an urgent and without notice hearing
-    And there isn't any international issues in this application
-    And I give my reason for the application as "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
-    And there "are" factors that may affect any adult in this application taking part in the court proceedings
-    And there "aren't" factors affecting ability to participate
-    And I navigate the attending court journey with safety arrangements
+    And I submit that I "don't" have other children
+    Then I should be taken to the applicant details page
+    When I complete the applicant details journey
+    Then I should be taken to the solicitor details page
+    When I submit the solicitor details
+    Then I should be taken to the respondent details page
+    When I submit the respondent details
+    Then I should be taken to the other party details page
+    When I submit that there "are" any other people who should know about the application
+    And I submit the other party details
+    Then I should be taken to the child residence details page
+    When I submit the child lives with "John Doe Senior"
+    Then I should be taken to the previous court proceedings page
+    When I submit that there "hasn't" been any court proceedings about the children
+    Then I should be taken to the existing court order page
+    When I submit that there "isn't" a court order requiring permission to make this application
+    Then I should be taken to the urgent hearing page
+    When I submit that I "do" require an urgent and without notice hearing
+    Then I should be taken to the international resident page
+    When I submit that there isn't any international issues in this application
+    Then I should be taken to the reason for application page
+    When I submit my reason for the application as "Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him"
+    Then I should be taken to the litigation capacity page
+    When I submit that there "are" factors that may affect any adult in this application taking part in the court proceedings
+    And I submit that there "aren't" factors affecting ability to participate
+    Then I should be taken to the attending court page
+    When I submit the attending court details with safety arrangements
+    Then I should be taken to the application submission page
     And I submit the application with email "june@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
-    And I should be on the Check Your Answers page
+    Then I should be taken to the Check Your Answers page
     And I should see they have made a consent order application
     And I should see the children "are" involved in any emergency protection, care of proceedings
     #And I should see they "have" got safety concerns about the children
@@ -566,33 +672,50 @@ Feature: Testing C100 end to end
     And I should see "Download your application"
 
   Scenario: Existing Court Order (path seven: 'Yes' to 'Have you attended a MIAM?)
-    When I navigate the MIAM journey
-    And I have no safety concerns about the children
+    When I submit that I have attended a MIAM
+    Then I should be taken to the safety concerns page
+    When I submit that I have no safety concerns about the children
+    Then I should be taken to the petition orders page
     When I ask the court to decide on the following issues: "who the children live with and when"
     Then I should see the child arrangements order details for: "who the children live with and when"
-    Then I continue to the next step
-    And I understand the process of going to court
-    And I have tried all alternative ways to reach an agreement
-    And I enter details for a "2" year old child
-    And I state that the "Father" has parental responsibility for the child
+    And I continue to the next step
+    Then I should be taken to the going to court page
+    When I submit that I understand the process of going to court
+    And I submit that I have tried all alternative ways to reach an agreement
+    Then I should be taken to the children details page
+    When I submit the details for a "2" year old child
+    And I submit that the "Father" has parental responsibility for the child
     And I submit that I don't know any additional details for the child
-    And I "don't" have other children
-    And I complete the applicant details journey
-    And I "don't" have a solicitor
-    And I navigate the respondent details journey
-    And there "aren't" any other people who should know about the application
-    And the child lives with "John Doe Senior"
-    And there "hasn't" been any court proceedings about the children
-    And there "is" a court order requiring permission to make this application
-    And I "don't" require an urgent and without notice hearing
-    And I navigate the international issues journey
-    And I give my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
-    And there "aren't" factors that may affect any adult in this application taking part in the court proceedings
-    And I have no issues attending court
-    And I require special assistance when attending court "We need lots of light"
-    And I submit the application with email "john@gmail.com"
+    And I submit that I "don't" have other children
+    Then I should be taken to the applicant details page
+    When I submit the applicant details
+    Then I should be taken to the solicitor details page
+    When I submit that I "don't" have a solicitor
+    Then I should be taken to the respondent details page
+    When I submit the respondent details
+    Then I should be taken to the other party details page
+    When I submit that there "aren't" any other people who should know about the application
+    Then I should be taken to the child residence details page
+    When I submit the child lives with "John Doe Senior"
+    Then I should be taken to the previous court proceedings page 
+    When I submit that there "hasn't" been any court proceedings about the children
+    Then I should be taken to the existing court order page
+    When I submit that there "is" a court order requiring permission to make this application
+    Then I should be taken to the urgent hearing page
+    When I submit that I "don't" require an urgent and without notice hearing
+    Then I should be taken to the international resident page
+    When I submit the international issues details
+    Then I should be taken to the reason for application page
+    When I submit my reason for the application as "I fear for the safety of Jane Doe Jnr and I want her to be safe"
+    Then I should be taken to the litigation capacity page 
+    When I submit that there "aren't" factors that may affect any adult in this application taking part in the court proceedings
+    Then I should be taken to the attending court page
+    When I submit that I have no issues attending court
+    And I submit that I require special assistance when attending court "We need lots of light"
+    Then I should be taken to the application submission page
+    When I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"
-    And I should be on the Check Your Answers page
+    Then I should be taken to the Check Your Answers page
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme

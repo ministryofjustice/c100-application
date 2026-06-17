@@ -1,4 +1,4 @@
-Then(/^I enter details for a "(\d+)" year old child$/) do |age|
+When(/^I submit the details for a "(\d+)" year old child$/) do |age|
   expect(children_names_page).to be_displayed
   children_names_page.add_child('John', 'Smith Jr')
 
@@ -15,7 +15,7 @@ Then(/^I enter details for a "(\d+)" year old child$/) do |age|
   special_guardianship_page.submit_no
 end
 
-Then(/^I enter details for a "(\d+)" year old child with a special guardianship order$/) do |age|
+Then(/^I submit the details for a "(\d+)" year old child with a special guardianship order$/) do |age|
   expect(children_names_page).to be_displayed
   children_names_page.add_child('Alistair', 'Doe')
 
@@ -43,7 +43,7 @@ And(/^I enter details for another child who is "(.*)" years old$/) do |age|
   )
 end
 
-Then(/^I state that the "(.*)" has parental responsibility for the child$/) do |persons|
+Then(/^I submit that the "(.*)" has parental responsibility for the child$/) do |persons|
   expect(parental_responsibility_page).to be_displayed
   parental_responsibility_page.submit_responsibility(persons)
 end
@@ -58,7 +58,7 @@ And(/^I submit that I don't know any additional details for the child$/) do
   child_additional_details_page.submit_dont_know_to_both
 end
 
-And(/^I "(do|don't)" have other children$/) do |arg|
+And(/^I submit that I "(do|don't)" have other children$/) do |arg|
   expect(has_other_children_page).to be_displayed
   if arg == 'do'
     has_other_children_page.submit_yes
@@ -67,7 +67,15 @@ And(/^I "(do|don't)" have other children$/) do |arg|
   end
 end
 
-And(/^the child lives with "(.*)"$/) do |person|
+When(/^I submit the child lives with "(.*)"$/) do |person|
   expect(child_residence_page).to be_displayed
   child_residence_page.submit_residence(person)
+end
+
+Then(/^I should be taken to the children details page$/) do
+  expect(children_names_page).to be_displayed
+end
+
+Then(/^I should be taken to the child residence details page$/) do
+  expect(child_residence_page).to be_displayed
 end

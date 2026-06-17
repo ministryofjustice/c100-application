@@ -1,9 +1,9 @@
-And(/^I understand the process of going to court$/) do
+When(/^I submit that I understand the process of going to court$/) do
   expect(alternative_court_page).to be_displayed
   alternative_court_page.acknowledge_and_continue
 end
 
-And(/^I have tried all alternative ways to reach an agreement$/) do
+When(/^I submit that I have tried all alternative ways to reach an agreement$/) do
   expect(alternative_page).to be_displayed
   alternative_page.continue_to_next_step
 
@@ -18,4 +18,8 @@ And(/^I have tried all alternative ways to reach an agreement$/) do
 
   expect(alternative_collaborative_law_page).to be_displayed
   alternative_collaborative_law_page.submit_yes
+end
+
+Then(/^I should be taken to the going to court page$/) do
+  expect(alternative_court_page).to be_displayed
 end
