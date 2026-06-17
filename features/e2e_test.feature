@@ -688,7 +688,7 @@ Feature: Testing C100 end to end
     And I submit that I don't know any additional details for the child
     And I submit that I "don't" have other children
     Then I should be taken to the applicant details page
-    When I submit the applicant details
+    When I complete the applicant details journey
     Then I should be taken to the solicitor details page
     When I submit that I "don't" have a solicitor
     Then I should be taken to the respondent details page
@@ -711,7 +711,7 @@ Feature: Testing C100 end to end
     When I submit that there "aren't" factors that may affect any adult in this application taking part in the court proceedings
     Then I should be taken to the attending court page
     When I submit that I have no issues attending court
-    And I submit that I require special assistance when attending court "We need lots of light"
+    And I submit that I require special assistance when attending court: "We need lots of light"
     Then I should be taken to the application submission page
     When I submit the application with email "john@gmail.com"
     And I pay using Help With Fees with reference "HWF-123-456"

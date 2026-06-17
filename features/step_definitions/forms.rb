@@ -117,7 +117,7 @@ When(/^I specify they are "(\d+)" years of age$/) do |age|
 end
 
 When(/^I choose "([^"]*)" from radiobutton options$/) do |text|
-  within(:xpath)
+  within(:xpath) do
     find(:xpath, ".//input[@id='cart_payment_type_cash_pay']").choose
   end
 end
