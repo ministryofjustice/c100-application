@@ -55,7 +55,7 @@ Feature: Testing C100 end to end
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme
-    And I should see they haven't attended MIAM
+    And I should see they "haven't" attended a MIAM
     And I should see they "haven't" got safety concerns about the children
     And I should see they want the court to decide: "Decide who they live with and when"
     And I should see that all alternatives "have" been tried
@@ -99,6 +99,16 @@ Feature: Testing C100 end to end
     And I should see the payment type "Help with fees"
     And I should see the HwF reference number is "HWF-123-456"
     Then I should see the statement of truth
+    And I complete the statement of truth as an applicant "John Doe"
+    And I complete the declaration as an applicant
+    When I submit the application
+    Then I should see the MIAM evidence exemption error message
+    When I click on the MIAM evidence exemption missing information link
+    Then I should be on the MIAM exemption evidence page
+    And I provide evidence for the MIAM exemption
+    And I navigate back to the Check Your Answers page
+    When I submit the application
+    Then I should be taken to the completion confirmation page
 
   Scenario: Child arrangements order (MIAM) (path two: exemption with evidence upload)
     When I submit that I have a MIAM exemption
@@ -162,7 +172,6 @@ Feature: Testing C100 end to end
     And I should see they have got a valid exemption: "You’re applying for a without notice hearing"
     And I should see the details provided for the exemption are "exemption reason"
     And I should see an attachment presenting MIAM exemption evidence "is" present
-    #And I should see they "have" got safety concerns about the children
     And I should see they have safety concerns with the children about: "abduction, financial abuse, other abuse"
     And I should see "No, I do not want the other person to spend time with the children"
     And I should see they want the court to decide: "Decide who they live with and when"
@@ -207,6 +216,7 @@ Feature: Testing C100 end to end
 
   Scenario: Child arrangements order (MIAM) (path three: 'Yes' to 'Have you attended a MIAM?')
     When I submit that I have attended a MIAM
+    And I upload a MIAM certificate
     Then I should be taken to the safety concerns page
     When I submit that I have no safety concerns about the children
     Then I should be taken to the petition orders page
@@ -255,13 +265,6 @@ Feature: Testing C100 end to end
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme
     And I should see they "have" attended a MIAM
-    And I should see they have a document signed by the mediator
-    And I should see they "haven't" got safety concerns about the children
-    And I should see they want the court to decide: "Decide who they live with and when"
-    And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
-    And I should see the children "aren't" involved in any emergency protection, care of proceedings
-    And I should see they "haven't" been to mediation through the mediation voucher scheme
-    And I should see they have attended MIAM
     And I should see they have a document signed by the mediator
     And I should see they "haven't" got safety concerns about the children
     And I should see they want the court to decide: "Decide who they live with and when"
@@ -315,6 +318,7 @@ Feature: Testing C100 end to end
     When I submit that I have a MIAM with a child protection case
     And I navigate back to the consent order page
     When I submit that I have attended a MIAM
+    And I upload a MIAM certificate
     Then I should be taken to the safety concerns page
     When I submit that I "do" have abduction concerns about the children
     And I submit that I "do" have concerns about drug, alcohol or substance abuse
@@ -378,7 +382,6 @@ Feature: Testing C100 end to end
     And I should see they "haven't" been to mediation through the mediation voucher scheme
     And I should see they "have" attended a MIAM
     And I should see they have a document signed by the mediator
-    # And I should see they "have" got safety concerns about the children
     And I should see they have safety concerns with the children about: "financial abuse, psychological abuse, emotional abuse, other abuse, abduction, drug alcohol or substance abuse"
     And I should see they have safety concerns with themselves about: "physical abuse, financial abuse"
     And I should see "No, I do not want the other person to spend time with the children"
@@ -423,7 +426,7 @@ Feature: Testing C100 end to end
     And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "are" people who need an intermediary to help them in court
     And I should see the details provided for the intermediary are "Needed for the respondent"
-    #And I should see there "are" special language requirements
+    And I should see that an interpreter is needed for the court because "German needed for respondent"
     And I should see there "are" specific safety arrangements specified for the court
     And I should see there "aren't" special facilities needed when attending court
     And I should see the email for submitting an application to court is "jane_doe@gmail.com"
@@ -595,8 +598,8 @@ Feature: Testing C100 end to end
     Then I should be taken to the Check Your Answers page
     And I should see they have made a consent order application
     And I should see the children "are" involved in any emergency protection, care of proceedings
-    #And I should see they "have" got safety concerns about the children
     And I should see they have safety concerns with the children about: "financial abuse, psychological abuse, emotional abuse"
+    And I should see they "have" got safety concerns about domestic or child abuse
     And I should see they have safety concerns with themselves about: "sexual abuse, physical abuse, financial abuse, psychological abuse, emotional abuse"
     And I should see "No, I do not want the other person to spend time with the children"
     And I should see they want the court to decide: "Decide who they live with and when"
@@ -642,7 +645,7 @@ Feature: Testing C100 end to end
     And I should see there "are" factors that may affect any adult in this application taking part in the court proceedings
     And I should see there "are" people who need an intermediary to help them in court
     And I should see the details provided for the intermediary are "I need someone to communicate between me and the respondent"
-    #And I should see there "are" special language requirements
+    And I should see a Welsh language interpreter is needed for the court because "Needed for Jake Gyllenhaal"
     And I should see there "are" specific safety arrangements specified for the court
     And I should see there "aren't" special facilities needed when attending court
     And I should see the email for submitting an application to court is "june@gmail.com"
@@ -656,6 +659,7 @@ Feature: Testing C100 end to end
 
   Scenario: Existing Court Order (path seven: 'Yes' to 'Have you attended a MIAM?)
     When I submit that I have attended a MIAM
+    And I upload a MIAM certificate
     Then I should be taken to the safety concerns page
     When I submit that I have no safety concerns about the children
     Then I should be taken to the petition orders page
@@ -703,7 +707,7 @@ Feature: Testing C100 end to end
     And I should see they have made an application related to a child arrangements order, prohibited steps order, specific issue order, or to change or end an existing order
     And I should see the children "aren't" involved in any emergency protection, care of proceedings
     And I should see they "haven't" been to mediation through the mediation voucher scheme
-    And I should see they have attended MIAM
+    And I should see they "have" attended a MIAM
     And I should see they have a document signed by the mediator
     And I should see they "haven't" got safety concerns about the children
     And I should see they want the court to decide: "Decide who they live with and when"

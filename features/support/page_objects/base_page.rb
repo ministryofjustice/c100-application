@@ -65,7 +65,7 @@ class BasePage < SitePrism::Page
 
   element :back, 'a.govuk-back-link'
 
-  def go_back
+  def click_back_link
     back.click
   end
 

@@ -44,15 +44,10 @@ When(/^I submit that I have attended a MIAM$/) do
   miam_attended_page.submit_yes
 
   expect(miam_certification_page).to be_displayed
-  miam_certification_page.submit_no
-
-  # test unhappy path
-  expect(miam_certification_exit_page).to be_displayed
-  miam_certification_exit_page.go_back
-
-  expect(miam_certification_page).to be_displayed
   miam_certification_page.submit_yes
+end
 
+And(/^I upload a MIAM certificate$/) do
   expect(miam_certification_upload_page).to be_displayed
   file_path = File.absolute_path('features/support/sample_file/image.jpg')
   miam_certification_upload_page.upload_file(file_path)
@@ -89,4 +84,22 @@ And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
 
   expect(miam_exemptions_reasons_playback_page).to be_displayed
   miam_exemptions_reasons_playback_page.continue
+end
+
+Then(/^I should be on the MIAM exemption evidence page$/) do
+  expect(miam_exemptions_details_page).to be_displayed
+end
+
+And(/^I provide evidence for the MIAM exemption$/) do
+  miam_exemptions_details_page.submit_exemption_details('exemption reason')
+end
+
+And(/^I navigate back to the Check Your Answers page$/) do
+  expect(miam_exemptions_reasons_playback_page).to be_displayed
+  miam_exemptions_reasons_playback_page.go_back
+  
+  expect(miam_exemptions_details_page).to be_displayed
+  miam_exemptions_details_page.go_back
+
+  expect(cya_page).to be_displayed
 end

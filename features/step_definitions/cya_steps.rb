@@ -8,14 +8,6 @@ And(/^I should see they "(have|haven't)" been to mediation through the mediation
   expect(cya_page.mediation_voucher.voucher_scheme.answer).to eq(answer)
 end
 
-And(/^I should see they haven't attended MIAM$/) do
-  expect(cya_page.miam_requirement.miam_attended.answer).to eq('No')
-end
-
-And(/^I should see they have attended MIAM$/) do
-  expect(cya_page.miam_requirement.miam_attended.answer).to eq('Yes')
-end
-
 And(/^I should see they "(have|haven't)" attended a MIAM$/) do |arg|
   answer = (arg == 'have' ? 'Yes' : 'No')
   expect(cya_page.miam_requirement.miam_attended.answer).to eq(answer)
@@ -32,6 +24,11 @@ And(/^I should see they "(have|haven't)" got safety concerns about the children$
   expect(cya_page.safety_concerns.children_abuse.answer).to eq(answer)
   expect(cya_page.safety_concerns.domestic_abuse.answer).to eq(answer)
   expect(cya_page.safety_concerns.other_abuse.answer).to eq(answer)
+end
+
+And(/^I should see they "(have|haven't)" got safety concerns about domestic or child abuse$/) do |arg|
+  answer = (arg == 'have' ? 'Yes' : 'No')
+  expect(cya_page.safety_concerns.children_abuse.answer).to eq(answer)
 end
 
 def check_safety_concerns(expected_yes_concerns, safety_concerns)
@@ -249,6 +246,20 @@ And(/^I should see there "(are|aren't)" special language requirements$/) do |arg
   expect(cya_page.attending_court.language_requirements.welsh_language.answer).to eq(answer)
 end
 
+And(/^I should see that an interpreter is needed for the court because "([^"]*)"$/) do |arg|
+  expect(cya_page.attending_court.language_requirements.interpreter.answer).to eq('Yes')
+  expect(cya_page.attending_court.language_requirements.interpreter_details.answer).to eq(arg)
+  expect(cya_page.attending_court.language_requirements.sign_language_interpreter.answer).to eq('Not needed')
+  expect(cya_page.attending_court.language_requirements.welsh_language.answer).to eq('Not needed')
+end
+
+And(/^I should see a Welsh language interpreter is needed for the court because "([^"]*)"$/) do |arg|
+  expect(cya_page.attending_court.language_requirements.interpreter.answer).to eq('Not needed')
+  expect(cya_page.attending_court.language_requirements.sign_language_interpreter.answer).to eq('Not needed')
+  expect(cya_page.attending_court.language_requirements.welsh_language.answer).to eq('Yes')
+  expect(cya_page.attending_court.language_requirements.welsh_language_details.answer).to eq(arg)
+end
+
 And(/^I should see there "(are|aren't)" specific safety arrangements specified for the court$/) do |arg|
   if arg == "aren't"
     expect(cya_page.attending_court.safety_arrangements).to have_no_arrangements
@@ -309,78 +320,8 @@ Then(/^I should be taken to the completion confirmation page$/) do
   expect(completion_confirmation_page.content).to have_download_button
 end
 
-Then(/^I should see the respondent is "([^"]*)" years old$/) do |age|
-  today = Date.today
-  dob_date = today - age.to_i.years
-
-  day = dob_date.day.to_s.rjust(2, '0')
-  month = dob_date.month.to_s.rjust(2, '0')
-  year = dob_date.year
-
-  expected_dob = "#{day}-#{month}-#{year}"
-
-  within('#respondents_details') do
-    within('#person_personal_details') do
-      within('#person_dob') do
-        expect(page).to have_text(expected_dob)
-      end
-    end
-  end
-end
-
-And(/^I should see the child is "([^"]*)" years old$/) do |age|
-  today = Date.today
-  dob_date = today - age.to_i.years
-
-  day = dob_date.day.to_s.rjust(2, '0')
-  month = dob_date.month.to_s.rjust(2, '0')
-  year = dob_date.year
-
-  expected_dob = "#{day}-#{month}-#{year}"
-
-  within('#children_details') do
-    within('#person_personal_details') do
-      within('#person_dob') do
-        expect(page).to have_text(expected_dob)
-      end
-    end
-  end
-end
-
-And(/^I should see the applicant is "([^"]*)" years old$/) do |age|
-  today = Date.today
-  dob_date = today - age.to_i.years
-
-  day = dob_date.day.to_s.rjust(2, '0')
-  month = dob_date.month.to_s.rjust(2, '0')
-  year = dob_date.year
-
-  expected_dob = "#{day}-#{month}-#{year}"
-
-  within('#applicants_details') do
-    within('#person_dob') do
-      expect(page).to have_content(expected_dob)
-    end
-  end
-end
-
 And(/^I should see the other party is "([^"]*)" years of age$/) do |age|
-  today = Date.today
-  dob_date = today - age.to_i.years
-
-  day = dob_date.day.to_s.rjust(2, '0')
-  month = dob_date.month.to_s.rjust(2, '0')
-  year = dob_date.year
-
-  expected_dob = "#{day}-#{month}-#{year}"
-
-  within('#other_parties_details') do
-    within('#person_personal_details') do
-      within('#person_dob') do
-        expect(page).to have_content(expected_dob)
-      end
-    end
-  end
+  expect(cya_page.other_parties_details.personal_details[0].dob).to eq(get_birthdate(age))
 end
 
 And(/^I should see they have got a valid exemption: "([^"]*)"$/) do |arg|
@@ -402,6 +343,14 @@ end
 Then(/^I should be taken to the Check Your Answers page$/) do
   expect(cya_page).to be_displayed
   expect(cya_page.content).to have_header
+end
+
+Then(/^I should see the MIAM evidence exemption error message$/) do
+  expect(cya_page.miam_evidence_errors).to have_error_message
+end
+
+When(/^I click on the MIAM evidence exemption missing information link$/) do
+  cya_page.miam_evidence_errors.missing_info_link.click
 end
 
 And(/^I should see that all alternatives "(have|haven't)" been tried$/) do |arg|

@@ -13,13 +13,13 @@ end
 
 When(/^I navigate back to the consent order page$/) do
   expect(safety_concern_page).to be_displayed
-  safety_concern_page.go_back
+  safety_concern_page.click_back_link
 
   expect(child_protection_info_page).to be_displayed
-  child_protection_info_page.go_back
+  child_protection_info_page.click_back_link
 
   expect(child_protection_case_page).to be_displayed
-  child_protection_case_page.go_back
+  child_protection_case_page.click_back_link
 end
 
 Then(/^I should be on the consent order page$/) do

@@ -530,8 +530,7 @@ def get_birthdate(age)
   month = dob_date.month.to_s.rjust(2, '0')
   year = dob_date.year
 
-  expected_dob = "#{day}-#{month}-#{year}"
-  expected_dob
+  "#{day}-#{month}-#{year}"
 end
 
 def stub_courtfinder_api

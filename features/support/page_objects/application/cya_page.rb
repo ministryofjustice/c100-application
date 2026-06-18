@@ -223,8 +223,10 @@ class CYAPage < BasePage
     row :intermediary_help_details, '#intermediary_help_details'
     section :language_requirements, CYAGroup, '.app-cya--answers-group#language_interpreter' do
       row :interpreter, '#language_interpreter'
+      row :interpreter_details, '#language_interpreter_details'
       row :sign_language_interpreter, '#sign_language_interpreter'
       row :welsh_language, '#welsh_language'
+      row :welsh_language_details, '#welsh_language_details'
     end
     section :safety_arrangements, CYAGroup, '.app-cya--answers-group#special_arrangements' do
       row :details, '#special_arrangements'
@@ -245,6 +247,11 @@ class CYAPage < BasePage
       row :type, '#payment_type'
       row :hwf_ref_no, '#hwf_reference_number'
     end
+  end
+
+  section :miam_evidence_errors, '#cya-fulfilment-errors' do
+    element :error_message, 'li', text: 'You must select an option for MIAM evidence exemption'
+    element :missing_info_link, 'a', text: 'Add missing information'
   end
 
   section :statement_of_truth, '#cya-declaration-box' do
