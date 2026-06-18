@@ -89,26 +89,6 @@ class BasePage < SitePrism::Page
     def no?
       answer == 'No'
     end
-
-    def not_applicable?
-      answer == '[Not applicable in this case]'
-    end
-
-    def dont_know?
-      answer == 'Don\'t know'
-    end
-
-    def not_needed?
-      answer == 'Not needed'
-    end
-
-    def none_selected?
-      answer == 'None selected'
-    end
-
-    def yes_voicemail?
-      answer == 'Yes, the court can leave a voicemail'
-    end
   end
 
   class CYAPersonalDetails < SitePrism::Section
@@ -146,6 +126,14 @@ class BasePage < SitePrism::Page
 
   class CYANestedSummaryRow < CYASummaryListRow
     element :value, 'dd.govuk-summary-list__value:not(:has(dl))'
+  end
+
+  class CYAList < SitePrism::Section
+    elements :list_items, 'li'
+
+    def answer
+      list_items.map(&:text).join(', ')
+    end
   end
 
   def google_analytics_enabled

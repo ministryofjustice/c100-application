@@ -17,10 +17,15 @@ When(/^I submit that I have no safety concerns about the children$/) do
   safety_concern_other_page.submit_no
 end
 
-When(/^I submit that I have abduction concerns about the children$/) do
+When(/^I submit that I "(do|don't)" have abduction concerns about the children$/) do |arg|
   safety_concern_page.continue_to_next_step
-
+  
   expect(safety_concern_abduction_page).to be_displayed
+  if arg == "don't"
+    safety_concern_abduction_page.submit_no
+    next
+  end
+
   safety_concern_abduction_page.submit_yes
 
   expect(abduction_international_page).to be_displayed
@@ -39,16 +44,6 @@ When(/^I submit that I have abduction concerns about the children$/) do
 
   expect(abduction_risk_details_page).to be_displayed
   abduction_risk_details_page.submit_risk_details('They might be taken by their other parent', 'The children are with me')
-end
-
-When(/^I submit that I "(do|don't)" have abduction concerns about the children$/) do |arg|
-  safety_concern_page.continue_to_next_step
-  expect(safety_concern_abduction_page).to be_displayed
-  if arg == 'do'
-    safety_concern_abduction_page.submit_yes
-  else
-    safety_concern_abduction_page.submit_no
-  end
 end
 
 And(/^I submit that I "(do|don't)" have concerns about drug, alcohol or substance abuse$/) do |arg|

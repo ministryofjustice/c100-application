@@ -9,9 +9,7 @@ And(/^I should see they "(have|haven't)" been to mediation through the mediation
 end
 
 And(/^I should see they haven't attended MIAM$/) do
-  within('#miam_attended') do
-    expect(page).to have_content("Have you attended a Mediation Information and Assessment Meeting (MIAM)? No")
-  end
+  expect(cya_page.miam_requirement.miam_attended.answer).to eq('No')
 end
 
 And(/^I should see they have attended MIAM$/) do
@@ -94,285 +92,26 @@ And(/^I should see they have made a consent order application$/) do
 end
 
 And(/^I should see they want the court to decide: "([^"]*)"$/) do |arg|
-  expect(cya_page.nature_of_application.answer).to eq(arg)
+  expect(cya_page.nature_of_application.child_arrangements_orders.answer).to eq(arg)
 end
 
 And(/^I should see they want the court to resolve an issue about: "([^"]*)"$/) do |arg|
-  within('#specific_issues_orders') do
-    expect(page).to have_content(arg)
-  end
-end
-
-And(/^I should see the child's full name is "([^"]*)"$/) do |arg|
-  within('#children_details') do
-    expect(page).to have_content(arg)
-  end
-end
-
-And(/^I should see the child's gender is "([^"]*)"$/) do |arg|
-  within('#children_details') do
-    expect(page).to have_content(arg)
-  end
-end
-
-And(/^I should see the people who have parental responsibility for the child are: "([^"]*)"$/) do |arg|
-  within('#children_details') do
-    within('#parental_responsibility') do
-      expect(page).to have_content(arg)
-    end
-  end
+  expect(cya_page.nature_of_application.specific_issues_orders.answer).to eq(arg)
 end
 
 And(/^I should see the children "(are|aren't|might be)" known to other social services$/) do |arg|
-  within('#children_further_information') do
-    within('#children_known_to_authorities') do
-      if arg == "are"
-        expect(page).to have_content("Yes")
-      elsif arg == "aren't"
-        expect(page).to have_content("No")
-      elsif arg == "might be"
-        expect(page).to have_content("Don't know")
-      end
-    end
+  if arg == 'are'
+    expect(cya_page.children_further_info.known_to_authorities.answer).to eq('Yes')
+  elsif arg == "aren't"
+    expect(cya_page.children_further_info.known_to_authorities.answer).to eq('No')
+  elsif arg == 'might be'
+    expect(cya_page.children_further_info.known_to_authorities.answer).to eq("Don't know")
   end
-end
-
-And(/^I should see the applicant's name is "([^"]*)"$/) do |arg|
-  within('#applicants_details') do
-    within('#person_full_name') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the applicant's previous name is "([^"]*)"$/) do |arg|
-  within('#applicants_details') do
-    within('#person_previous_name') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the applicant's gender is "([^"]*)"$/) do |arg|
-  within('#applicants_details') do
-    within('#person_sex') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the applicant's place of birth is "([^"]*)"$/) do |arg|
-  within('#applicants_details') do
-    within('#person_birthplace') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the applicant's address is "([^"]*)"$/) do |arg|
-  within('#applicants_details') do
-    within('#person_address_details') do
-      within('#person_address') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the applicant "(has|hasn't)" lived at this address for more than 5 years$/) do |arg|
-  within('#applicants_details') do
-    within('#person_address_details') do
-      within('#person_residence_requirement_met') do
-        if arg == "has"
-          expect(page).to have_content("Yes")
-        elsif arg == "hasn't"
-          expect(page).to have_content("No")
-        end
-      end
-    end
-  end
-end
-
-And(/^I should see the applicant has provided an email "([^"]*)"$/) do |arg|
-  within('#applicants_details') do
-    within('#person_contact_details') do
-      within('#person_email') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the applicant has provided a phone number "([^"]*)"$/) do |arg|
-  within('#applicants_details') do
-    within('#person_contact_details') do
-      within('#person_phone_number') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the applicant's relationship to "([^"]*)" is "([^"]*)"$/) do |arg1, arg2|
-  children_rows = all('.govuk-summary-list__row')
-  match = false
-  children_rows.each do |element|
-    if element.text.include?("Relationship to #{arg1}") && element.text.include?(arg2)
-      match = true
-      break
-    end
-  end
-  expect(match).to be(true)
 end
 
 And(/^I should see the applicant "(does|doesn't)" have a solicitor$/) do |arg|
   answer = (arg == 'does' ? 'Yes' : 'No')
   expect(cya_page.solicitor_details.has_solicitor.answer).to eq(answer)
-end
-
-And(/^I should see the solicitor's reference is "([^"]*)"$/) do |arg|
-  within('#solicitor_details') do
-    within('#solicitor_personal_details') do
-      within('#solicitor_reference') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the solicitor's full name is "([^"]*)"$/) do |arg|
-  within('#solicitor_details') do
-    within('#solicitor_personal_details') do
-      within('#solicitor_full_name') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the solicitor's name of firm is "([^"]*)"$/) do |arg|
-  within('#solicitor_details') do
-    within('#solicitor_personal_details') do
-      within('#solicitor_firm_name') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the solicitor's address is "([^"]*)"$/) do |arg|
-  within('#solicitor_details') do
-    within('#solicitor_address_details') do
-      within('#solicitor_address') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the solicitor's email is "([^"]*)" and phone number is "([^"]*)"$/) do |arg1, arg2|
-  within('#solicitor_details') do
-    within('#solicitor_contact_details') do
-      within('#solicitor_email') do
-        expect(page).to have_content(arg1)
-      end
-      within('#solicitor_phone_number') do
-        expect(page).to have_content(arg2)
-      end
-    end
-  end
-end
-
-And(/^I should see the solicitor's DX number is "([^"]*)"$/) do |arg|
-  within('#solicitor_details') do
-    within('#solicitor_contact_details') do
-      within('#solicitor_dx_number') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the respondent's name is "([^"]*)"$/) do |arg|
-  within('#respondents_details') do
-    within('#person_full_name') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the respondent's previous name is "([^"]*)"$/) do |arg|
-  within('#respondents_details') do
-    within('#person_personal_details') do
-      within('#person_previous_name') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the respondent's gender is "([^"]*)"$/) do |arg|
-  within('#respondents_details') do
-    within('#person_personal_details') do
-      within('#person_sex') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the respondent's place of birth is "([^"]*)"$/) do |arg|
-  within('#respondents_details') do
-    within('#person_personal_details') do
-      within('#person_birthplace') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the respondent's address is "([^"]*)"$/) do |arg|
-  within('#respondents_details') do
-    within('#person_address_details') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the respondent "(has|hasn't|might not have)" lived at that address for more than 5 years$/) do |arg|
-  within('#respondents_details') do
-    within('#person_address_details') do
-      within('#person_residence_requirement_met') do
-        if arg == "has"
-          expect(page).to have_content("Yes")
-        elsif arg == "hasn't"
-          expect(page).to have_content("No")
-        elsif arg == "might not have"
-          expect(page).to have_content("Don't know")
-        end
-      end
-    end
-  end
-end
-
-And(/^I should see the respondent's email is "([^"]*)"$/) do |arg|
-  within('#respondents_details') do
-    within('#person_contact_details') do
-      within('#person_email') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
-end
-
-And(/^I should see the respondent's phone number is "([^"]*)"$/) do |arg|
-  within('#respondents_details') do
-    within('#person_contact_details') do
-      within('#person_phone_number') do
-        expect(page).to have_content(arg)
-      end
-    end
-  end
 end
 
 And(/^I should see the respondent's relationship to "([^"]*)" is "([^"]*)"$/) do |arg1, arg2|
@@ -416,57 +155,9 @@ And(/^I should see the other party's relationship to "([^"]*)" is "([^"]*)"$/) d
   expect(match).to be(true)
 end
 
-And(/^I should see the child "([^"]*)" lives with "([^"]*)"$/) do |arg1, arg2|
-  within('#children_residence') do
-    within('#child_residence') do
-      expect(page).to have_content(arg1)
-      expect(page).to have_content(arg2)
-    end
-  end
-end
-
 And(/^I should see the children "(have|haven't)" been involved in other proceedings$/) do |arg|
-  within('#other_court_cases') do
-    within('#has_other_court_cases') do
-      if arg == "have"
-        expect(page).to have_content("Have any of the children in this application been involved in other family court proceedings? Yes")
-      elsif arg == "haven't"
-        expect(page).to have_content("Have any of the children in this application been involved in other family court proceedings? No")
-      end
-    end
-  end
-end
-
-And(/^I should see the names of the children involved in other proceedings are "([^"]*)"$/) do |arg|
-  within('#other_court_cases') do
-    within('#court_proceeding_children_names') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the name of the court is "([^"]*)"$/) do |arg|
-  within('#other_court_cases') do
-    within('#court_proceeding_court_name') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the date of the proceeding is "([^"]*)"$/) do |arg|
-  within('#other_court_cases') do
-    within('#court_proceeding_proceedings_date') do
-      expect(page).to have_content(arg)
-    end
-  end
-end
-
-And(/^I should see the type of proceeding is "([^"]*)"$/) do |arg|
-  within('#other_court_cases') do
-    within('#court_proceeding_order_types') do
-      expect(page).to have_content(arg)
-    end
-  end
+  answer = (arg == 'have' ? 'Yes' : 'No')
+  expect(cya_page.other_court_cases.has_other_court_cases.answer).to eq(answer)
 end
 
 And(/^I should see an urgent hearing "(is|isn't)" requested$/) do |arg|
@@ -475,29 +166,16 @@ And(/^I should see an urgent hearing "(is|isn't)" requested$/) do |arg|
 end
 
 And(/^I should see an urgent hearing is requested because "([^"]*)"$/) do |arg|
-  within('#urgent_hearing .app-cya--answers-group') do
-    expect(page).to have_content(arg)
-  end
+  expect(cya_page.urgent_hearing.details.additional_details.answer).to eq(arg)
 end
 
 And(/^I should see an urgent hearing is needed: "([^"]*)"$/) do |arg|
-  within('#urgent_hearing .app-cya--answers-group') do
-    within('#urgent_hearing_when') do
-      expect(page).to have_content(arg)
-    end
-  end
+  expect(cya_page.urgent_hearing.when.answer).to eq(arg)
 end
 
 And(/^I should see a hearing "(is|isn't)" needed within the next 48 hours$/) do |arg|
-  within('#urgent_hearing .app-cya--answers-group') do
-    within('#urgent_hearing_short_notice') do
-      if arg == "is"
-        expect(page).to have_content("Yes")
-      elsif arg == "isn't"
-        expect(page).to have_content("No")
-      end
-    end
-  end
+  answer = (arg == 'is' ? 'Yes' : 'No')
+  expect(cya_page.urgent_hearing.short_notice.answer).to eq(answer)
 end
 
 And(/^I should see a without notice hearing "(is|isn't)" requested$/) do |arg|

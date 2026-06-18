@@ -64,10 +64,8 @@ class CYAPage < BasePage
   end
 
   section :nature_of_application, CYAGroup, 'dl#nature_of_application' do
-    elements :child_arrangements_orders, 'li'
-    def answer
-      child_arrangements_orders.map(&:text).join(', ')
-    end
+    row :child_arrangements_orders, CYAList, '#child_arrangements_orders'
+    row :specific_issues_orders, CYAList, '#specific_issues_orders'
   end
 
   section :alternatives, CYAGroup, 'dl#alternatives' do
@@ -83,12 +81,7 @@ class CYAPage < BasePage
     rows :special_guardianship_order, '#special_guardianship_order'
     rows :parental_responsibility, '#parental_responsibility'
     rows :personal_details, CYAPersonalDetails, '#person_personal_details'
-    rows :child_orders, '#child_orders' do
-      elements :orders, 'li'
-      def answer
-        orders.map(&:text).join(', ')
-      end
-    end
+    rows :child_orders, CYAList, '#child_orders'
   end
 
   section :children_further_info, CYAGroup, 'dl#children_further_information' do
@@ -197,6 +190,11 @@ class CYAPage < BasePage
 
   section :urgent_hearing, CYAGroup, 'dl#urgent_hearing' do
     row :needs_urgent_hearing, '#urgent_hearing'
+    row :when, '#urgent_hearing_when'
+    row :short_notice, '#urgent_hearing_short_notice'
+    section :details, CYAGroup, '.app-cya--answers-group#urgent_hearing_details' do
+      row :additional_details, '#urgent_hearing_details'
+    end
   end
 
   section :without_notice_hearing, CYAGroup, 'dl#without_notice_hearing' do
