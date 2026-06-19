@@ -356,7 +356,7 @@ end
 And(/^I should see that all alternatives "(have|haven't)" been tried$/) do |arg|
   answer = (arg == 'have' ? 'Yes' : 'No')
   expect(cya_page.alternatives.alternative_negotiation_tools.answer).to eq(answer)
-  expect(cya_page.alternatives.alternative_mediation.answer).to eq('No')
+  expect(cya_page.alternatives.alternative_mediation.answer).to eq(answer)
   expect(cya_page.alternatives.alternative_lawyer_negotiation.answer).to eq(answer)
   expect(cya_page.alternatives.alternative_collaborative_law.answer).to eq(answer)
 end

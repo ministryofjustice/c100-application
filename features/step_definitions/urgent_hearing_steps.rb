@@ -8,12 +8,14 @@ end
 
 When(/^I submit that I "(do|don't)" require an urgent hearing$/) do |arg|
   expect(urgent_hearing_page).to be_displayed
+
   if arg == "don't"
     urgent_hearing_page.submit_no
     next
   end
   
   urgent_hearing_page.submit_yes
+
   expect(urgent_hearing_details_page).to be_displayed
   urgent_hearing_details_page.submit(
     details: 'Alistair is in grave danger because of Jake Gyllenhaal',
@@ -24,12 +26,14 @@ end
 
 And(/^I submit that I "(do|don't)" require a without notice hearing$/) do |arg|
   expect(without_notice_page).to be_displayed
+
   if arg == "don't"
     without_notice_page.submit_no
     next
   end
 
   without_notice_page.submit_yes
+
   expect(without_notice_details_page).to be_displayed
   without_notice_details_page.submit(
     details: 'Alistair is in grave danger because of Jake Gyllenhaal and I need to rescue him',

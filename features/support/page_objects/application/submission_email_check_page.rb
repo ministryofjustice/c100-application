@@ -7,6 +7,10 @@ class SubmissionEmailCheckPage < BasePage
     element :continue_button, "a", text: "Yes, continue"
   end
 
+  def displayed_email
+    content.receipt_email.text
+  end
+
   def submit_yes
     content.continue_button.click
   end

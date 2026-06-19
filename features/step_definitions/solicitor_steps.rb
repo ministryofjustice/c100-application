@@ -1,11 +1,8 @@
 When(/^I submit that I "(do|don't)" have a solicitor$/) do |arg|
-  expect(applicant_has_solicitor_page).to be_displayed
+  answer = arg == 'do' ? 'yes' : 'no'
 
-  if arg == 'do'
-    applicant_has_solicitor_page.submit_yes
-  else
-    applicant_has_solicitor_page.submit_no
-  end
+  expect(applicant_has_solicitor_page).to be_displayed
+  applicant_has_solicitor_page.submit(answer)
 end
 
 When(/^I submit the solicitor details$/) do

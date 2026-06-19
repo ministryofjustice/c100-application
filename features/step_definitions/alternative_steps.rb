@@ -11,7 +11,7 @@ When(/^I submit that I have tried all alternative ways to reach an agreement$/) 
   alternative_negotiation_page.submit_yes
 
   expect(alternative_mediation_page).to be_displayed
-  alternative_mediation_page.submit_no
+  alternative_mediation_page.submit_yes
 
   expect(alternative_lawyer_page).to be_displayed
   alternative_lawyer_page.submit_yes

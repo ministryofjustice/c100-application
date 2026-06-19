@@ -68,8 +68,10 @@ Then(/^I should be taken to the other party details page$/) do
 end
 
 And(/^I submit that there "(are|aren't)" any other people who should know about the application$/) do |arg|
+  answer = arg == 'are'
+
   expect(has_other_parties_page).to be_displayed
-  has_other_parties_page.submit(arg == 'are' ? 'yes' : 'no')
+  has_other_parties_page.submit(answer)
 end
 
 And(/^I submit the other party details with an additional child$/) do

@@ -118,7 +118,8 @@ Feature: Testing C100 end to end
     And I submit that I "don't" have concerns about drug, alcohol or substance abuse
     And I submit that I "don't" have abuse or physical abuse concerns about the children
     And I submit that I "do" have financial concerns about the children
-    And I submit that I "don't" have psychological and emotional abuse concerns about the children
+    And I submit that I "don't" have psychological abuse concerns about the children
+    And I submit that I "don't" have emotional abuse concerns about the children
     And I submit that I "do" have other abuse concerns about the children
     Then I should be taken to the applicant abuse concerns page
     When I submit that I don't have any safety concerns about myself
@@ -324,13 +325,15 @@ Feature: Testing C100 end to end
     And I submit that I "do" have concerns about drug, alcohol or substance abuse
     And I submit that I "don't" have abuse or physical abuse concerns about the children
     And I submit that I "do" have financial concerns about the children
-    And I submit that I "do" have psychological and emotional abuse concerns about the children
+    And I submit that I "do" have psychological abuse concerns about the children
+    And I submit that I "do" have emotional abuse concerns about the children
     And I submit that I "do" have other abuse concerns about the children
     Then I should be taken to the applicant abuse concerns page
     When I submit that I "haven't" been abused by the respondent
     And I submit that I "have" been physically abused by the respondent
     And I submit that I "have" been financially abused by the respondent
-    And I submit that I "haven't" been psychologically and emotionally abused by the respondent
+    And I submit that I "haven't" been psychologically abused by the respondent
+    And I submit that I "haven't" been emotionally abused by the respondent
     And I submit that I "don't" have any other concerns about my welfare
     And I submit that I "haven't" had or currently have court orders made for my protection
     And I submit that I "don't" agree to the children having contact with the other people in this application
@@ -541,13 +544,15 @@ Feature: Testing C100 end to end
     And I submit that I "do" have domestic abuse or child concerns about the children
     And I submit that I "don't" have abuse or physical abuse concerns about the children
     And I submit that I "do" have financial concerns about the children
-    And I submit that I "do" have psychological and emotional abuse concerns about the children
+    And I submit that I "do" have psychological abuse concerns about the children
+    And I submit that I "do" have emotional abuse concerns about the children
     And I submit that I "don't" have other abuse concerns about the children
     Then I should be taken to the applicant abuse concerns page
     And I submit that I "have" been abused by the respondent
     And I submit that I "have" been physically abused by the respondent
     And I submit that I "have" been financially abused by the respondent
-    And I submit that I "have" been psychologically and emotionally abused by the respondent
+    And I submit that I "have" been psychologically abused by the respondent
+    And I submit that I "have" been emotionally abused by the respondent
     And I submit that I "don't" have any other concerns about my welfare
     And I submit that I "haven't" had or currently have court orders made for my protection
     And I submit that I "don't" agree to the children having contact with the other people in this application

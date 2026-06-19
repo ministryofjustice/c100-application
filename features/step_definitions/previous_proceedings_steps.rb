@@ -1,6 +1,8 @@
 When(/^I submit that there "(has|hasn't)" been any court proceedings about the children$/) do |arg|
+  answer = arg == 'has'
+
   expect(previous_proceedings_page).to be_displayed
-  previous_proceedings_page.submit(arg == 'has' ? 'yes' : 'no')
+  previous_proceedings_page.submit(answer)
 end
 
 When(/^I submit details of previous court proceedings$/) do

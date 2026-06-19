@@ -59,12 +59,10 @@ And(/^I submit that I don't know any additional details for the child$/) do
 end
 
 And(/^I submit that I "(do|don't)" have other children$/) do |arg|
+  answer = arg == 'do'
+
   expect(has_other_children_page).to be_displayed
-  if arg == 'do'
-    has_other_children_page.submit_yes
-  else
-    has_other_children_page.submit_no
-  end
+  has_other_children_page.submit(answer)
 end
 
 When(/^I submit the child lives with "(.*)"$/) do |person|

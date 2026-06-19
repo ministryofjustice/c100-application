@@ -49,6 +49,7 @@ end
 
 And(/^I upload a MIAM certificate$/) do
   expect(miam_certification_upload_page).to be_displayed
+
   file_path = File.absolute_path('features/support/sample_file/image.jpg')
   miam_certification_upload_page.upload_file(file_path)
 end
@@ -65,8 +66,11 @@ When(/^I submit that I have a MIAM with a child protection case$/) do
 end
 
 And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
+  evidence_provided = arg == 'is'
+
   expect(miam_exemptions_reasons_page).to be_displayed
-  if arg == 'is'
+
+  if evidence_provided
     miam_exemptions_reasons_page.submit_yes
 
     expect(miam_exemptions_exemption_upload_page).to be_displayed
