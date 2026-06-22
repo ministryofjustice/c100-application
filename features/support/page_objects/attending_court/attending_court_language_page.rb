@@ -13,7 +13,6 @@ class AttendingCourtLanguagePage < BasePage
     element :welsh_language, 'input[id="steps-attending-court-language-form-language-options-welsh-language-field"]',
             visible: false
     element :welsh_language_details, 'textarea[name="steps_attending_court_language_form[welsh_language_details]"]'
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_language_requirements(language_interpreter_details: nil, sign_language_interpreter_details: nil,
@@ -27,10 +26,10 @@ class AttendingCourtLanguagePage < BasePage
     content.welsh_language.click if welsh_language_details
     content.welsh_language_details.set(welsh_language_details) if welsh_language_details
 
-    content.continue_button.click
+    click_continue_button
   end
 
   def continue_without_filling
-    content.continue_button.click
+    click_continue_button
   end
 end

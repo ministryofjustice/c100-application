@@ -11,7 +11,6 @@ class OtherPartyPersonalDetailsPage < BasePage
     element :dob_day, "input[name='steps_other_party_personal_details_form[dob(3i)]']"
     element :dob_month, "input[name='steps_other_party_personal_details_form[dob(2i)]']"
     element :dob_year, "input[name='steps_other_party_personal_details_form[dob(1i)]']"
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_personal_details(gender:, age:, has_previous_name: false)
@@ -38,6 +37,6 @@ class OtherPartyPersonalDetailsPage < BasePage
     content.dob_day.set day
     content.dob_month.set month
     content.dob_year.set year
-    content.continue_button.click
+    click_continue_button
   end
 end

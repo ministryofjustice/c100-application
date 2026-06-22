@@ -3,7 +3,6 @@ class ChildPersonalDetailsPage < BasePage
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Provide details for'
-    element :continue_button, "button", text: "Continue"
   end
 
   element :gender_male, "input#steps-children-personal-details-form-gender-male-field", visible: false
@@ -28,6 +27,6 @@ class ChildPersonalDetailsPage < BasePage
     dob_day.set date_of_birth.day
     dob_month.set date_of_birth.month
     dob_year.set date_of_birth.year
-    content.continue_button.click
+    click_continue_button
   end
 end

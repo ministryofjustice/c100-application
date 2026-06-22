@@ -11,7 +11,6 @@ class ApplicantPrivacyPreferencesPage < BasePage
             visible: false
     element :phone_option,
             'input[name="steps_applicant_privacy_preferences_form[contact_details_private][]"][value="phone_number"]', visible: false
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_yes(address_private: false, email_private: false, phone_private: false)
@@ -19,12 +18,12 @@ class ApplicantPrivacyPreferencesPage < BasePage
     content.address_option.click if address_private
     content.email_option.click if email_private
     content.phone_option.click if phone_private
-    content.continue_button.click
+    click_continue_button
   end
 
   def submit_no
     content.answer_no.click
-    content.continue_button.click
+    click_continue_button
   end
 
   def submit(answer)
@@ -36,6 +35,6 @@ class ApplicantPrivacyPreferencesPage < BasePage
   end
 
   def continue_without_selecting
-    content.continue_button.click
+    click_continue_button
   end
 end

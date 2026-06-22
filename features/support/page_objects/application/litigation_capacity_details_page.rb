@@ -9,17 +9,16 @@ class LitigationCapacityDetailsPage < BasePage
             "textarea[name='steps_application_litigation_capacity_details_form[participation_other_factors_details]']"
     element :participation_referral_or_assessment_details,
             "textarea[name='steps_application_litigation_capacity_details_form[participation_referral_or_assessment_details]']"
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit(participation_capacity_details:, participation_other_factors_details:, participation_referral_or_assessment_details:)
     content.participation_capacity_details.set(participation_capacity_details)
     content.participation_other_factors_details.set(participation_other_factors_details)
     content.participation_referral_or_assessment_details.set(participation_referral_or_assessment_details)
-    content.continue_button.click
+    click_continue_button
   end
 
   def continue_without_filling
-    content.continue_button.click
+    click_continue_button
   end
 end

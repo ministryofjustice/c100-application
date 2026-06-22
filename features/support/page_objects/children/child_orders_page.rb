@@ -11,11 +11,11 @@ class ChildOrdersPage < BasePage
     orders_list.each do |order|
       content.orders.find { |option| option.value == order }.click
     end
-    content.continue_button.click
+    click_continue_button
   end
 
   def submit_all_child_orders
     content.orders.each(&:click)
-    content.continue_button.click
+    click_continue_button
   end
 end

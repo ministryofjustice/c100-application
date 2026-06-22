@@ -13,7 +13,6 @@ class AttendingCourtSpecialArrangementsPage < BasePage
             visible: false
     element :special_arrangements_details,
             'textarea[name="steps_attending_court_special_arrangements_form[special_arrangements_details]"]'
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_special_arrangements(separate_waiting_rooms: false, separate_entrance_exit: false, protective_screens: false,
@@ -24,10 +23,10 @@ class AttendingCourtSpecialArrangementsPage < BasePage
     content.video_link.set(video_link) if video_link
     content.special_arrangements_details.set(special_arrangements_details) if special_arrangements_details
 
-    content.continue_button.click
+    click_continue_button
   end
 
   def continue_without_filling
-    content.continue_button.click
+    click_continue_button
   end
 end

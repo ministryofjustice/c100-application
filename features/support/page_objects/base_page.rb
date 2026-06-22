@@ -64,9 +64,19 @@ class BasePage < SitePrism::Page
   end
 
   element :back, 'a.govuk-back-link'
+  element :continue_button, 'button', text: 'Continue'
+  element :continue_link, 'a', text: 'Continue'
 
   def click_back_link
     back.click
+  end
+
+  def click_continue_button
+    continue_button.click
+  end
+
+  def click_continue_link
+    continue_link.click
   end
 
   class CYASummaryListRow < SitePrism::Section

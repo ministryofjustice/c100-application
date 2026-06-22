@@ -4,7 +4,7 @@ class SubmissionEmailCheckPage < BasePage
   section :content, '#main-content' do
     element :header, 'h1', text: 'Is this email address correct?'
     element :receipt_email, '.govuk-inset-text'
-    element :continue_button, "a", text: "Yes, continue"
+    element :continue_button, 'a', text: 'Yes, continue'
   end
 
   def displayed_email

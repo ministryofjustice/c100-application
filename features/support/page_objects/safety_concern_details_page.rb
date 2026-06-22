@@ -12,13 +12,13 @@ class SafetyConcernDetailsPage < BasePage
     element :help_provided_yes, "input[name='steps_abuse_concerns_details_form[help_provided]'][value='yes']"
     element :help_provided_no, "input[name='steps_abuse_concerns_details_form[help_provided]'][value='no']", visible: false
     element :help_description, "textarea[name='steps_abuse_concerns_details_form[help_description]']"
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_concern_details(
     concern_details:,
     behaviour_start:,
-    asked_for_help:, behaviour_stop: nil,
+    behaviour_stop:,
+    asked_for_help: nil,
     help_party: nil,
     help_provided: nil,
     help_description: nil
@@ -46,6 +46,6 @@ class SafetyConcernDetailsPage < BasePage
       concern_content.asked_for_help_no.click
     end
 
-    concern_content.continue_button.click
+    click_continue_button
   end
 end

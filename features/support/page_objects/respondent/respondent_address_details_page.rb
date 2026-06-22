@@ -10,7 +10,6 @@ class RespondentAddressDetailsPage < BasePage
             "input[name='steps_respondent_address_details_form[residence_requirement_met]'][value='yes']", visible: false
     element :residence_requirement_no,
             "input[name='steps_respondent_address_details_form[residence_requirement_met]'][value='no']", visible: false
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_address_details(address_line_1:, town:, country:, residence_5_years:)
@@ -24,10 +23,10 @@ class RespondentAddressDetailsPage < BasePage
       content.residence_requirement_no.click
     end
 
-    content.continue_button.click
+    click_continue_button
   end
 
   def continue_without_filling
-    content.continue_button.click
+    click_continue_button
   end
 end

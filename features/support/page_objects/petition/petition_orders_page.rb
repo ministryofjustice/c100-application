@@ -37,7 +37,6 @@ class PetitionOrdersPage < BasePage
             'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_moving_abroad"]', visible: false
     element :specific_issues_child_return,
             'input[name="steps_petition_orders_form[orders_collection][]"][value="specific_issues_child_return"]', visible: false
-    element :continue_button, "button", text: "Continue"
   end
 
   def select_issue_home
@@ -85,6 +84,6 @@ class PetitionOrdersPage < BasePage
   end
 
   def submit
-    content.continue_button.click
+    click_continue_button
   end
 end

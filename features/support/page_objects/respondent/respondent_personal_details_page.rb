@@ -12,7 +12,6 @@ class RespondentPersonalDetailsPage < BasePage
     element :dob_month, "input#steps_respondent_personal_details_form_dob_2i"
     element :dob_year, "input#steps_respondent_personal_details_form_dob_1i"
     element :birthplace_field, "input#steps-respondent-personal-details-form-birthplace-field"
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_personal_details(has_previous_name:, gender:, age:, birthplace:)
@@ -38,6 +37,6 @@ class RespondentPersonalDetailsPage < BasePage
     content.dob_month.set month
     content.dob_year.set year
     content.birthplace_field.set birthplace
-    content.continue_button.click
+    click_continue_button
   end
 end

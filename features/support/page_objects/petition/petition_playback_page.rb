@@ -25,10 +25,5 @@ class PetitionPlaybackPage < BasePage
     element :specific_issues_moving_abroad, 'li',
             text: 'Relocating the children outside of England and Wales (including Scotland and Northern Ireland)'
     element :specific_issues_child_return, 'li', text: 'Returning the children to your care'
-    element :continue_button, "a", text: "Continue"
-  end
-
-  def continue_to_next_step
-    content.continue_button.click
   end
 end

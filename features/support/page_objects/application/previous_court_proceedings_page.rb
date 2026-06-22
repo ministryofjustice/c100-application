@@ -8,7 +8,6 @@ class PreviousCourtProceedingsPage < BasePage
     element :proceedings_date, 'input[name="steps_application_court_proceedings_form[proceedings_date]"]'
     element :proceedings_type, 'textarea[name="steps_application_court_proceedings_form[order_types]"]'
     element :details, 'textarea[name="steps_application_court_proceedings_form[previous_details]"]'
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_previous_proceedings(children_names:, court_name:, proceedings_date:, proceedings_type:, details:)
@@ -17,6 +16,6 @@ class PreviousCourtProceedingsPage < BasePage
     content.proceedings_date.set proceedings_date
     content.proceedings_type.set proceedings_type
     content.details.set details
-    content.continue_button.click
+    click_continue_button
   end
 end

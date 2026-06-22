@@ -6,7 +6,6 @@ class RespondentRelationshipPage < BasePage
     element :relation_father, "input#steps-shared-relationship-form-relation-father-field", visible: false
     element :relation_mother, "input#steps-shared-relationship-form-relation-mother-field", visible: false
     element :relation_other, "input#steps-shared-relationship-form-relation-other-field", visible: false
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_relationship(relation)
@@ -18,7 +17,7 @@ class RespondentRelationshipPage < BasePage
     else
       content.relation_other.click
     end
-    content.continue_button.click
+    click_continue_button
   end
 
   def submit(relationship)

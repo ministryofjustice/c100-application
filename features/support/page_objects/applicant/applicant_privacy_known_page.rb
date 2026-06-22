@@ -7,22 +7,21 @@ class ApplicantPrivacyKnownPage < BasePage
     element :answer_yes, "input[name='steps_applicant_privacy_known_form[privacy_known]'][value='yes']", visible: false
     element :answer_no, "input#steps-applicant-privacy-known-form-privacy-known-no-field", visible: false
     element :answer_dont_know, "input[name='steps_applicant_privacy_known_form[privacy_known]'][value='unknown']", visible: false
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_yes
     content.answer_yes.click
-    content.continue_button.click
+    click_continue_button
   end
 
   def submit_no
     content.answer_no.click
-    content.continue_button.click
+    click_continue_button
   end
 
   def submit_dont_know
     content.answer_dont_know.click
-    content.continue_button.click
+    click_continue_button
   end
 
   def submit(answer)
@@ -34,6 +33,6 @@ class ApplicantPrivacyKnownPage < BasePage
   end
 
   def continue_without_selecting
-    content.continue_button.click
+    click_continue_button
   end
 end

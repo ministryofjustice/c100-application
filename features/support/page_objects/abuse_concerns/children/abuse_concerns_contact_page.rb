@@ -11,7 +11,6 @@ class AbuseConcernsContactPage < BasePage
     element :being_in_touch_yes, 'input[name="steps_abuse_concerns_contact_form[concerns_contact_other]"][value="yes"]'
     element :being_in_touch_no, 'input[name="steps_abuse_concerns_contact_form[concerns_contact_other]"][value="no"]',
             visible: false
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_contact_details(contact_type:, being_in_touch:)
@@ -31,6 +30,6 @@ class AbuseConcernsContactPage < BasePage
       content.being_in_touch_no.click
     end
 
-    content.continue_button.click
+    click_continue_button
   end
 end

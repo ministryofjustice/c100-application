@@ -13,7 +13,6 @@ class AttendingCourtSpecialAssistancePage < BasePage
             'input[id="steps-attending-court-special-assistance-form-special-assistance-other-assistance-field"]', visible: false
     element :special_assistance_details,
             'textarea[name="steps_attending_court_special_assistance_form[special_assistance_details]"]'
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_special_assistance(hearing_loop: false, braille_documents: false, advance_court_viewing: false,
@@ -24,10 +23,10 @@ class AttendingCourtSpecialAssistancePage < BasePage
     content.other_assistance.set(other_assistance) if other_assistance
     content.special_assistance_details.set(special_assistance_details) if special_assistance_details
 
-    content.continue_button.click
+    click_continue_button
   end
 
   def continue_without_filling
-    content.continue_button.click
+    click_continue_button
   end
 end

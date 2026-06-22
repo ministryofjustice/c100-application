@@ -8,13 +8,12 @@ class RespondentContactDetailsPage < BasePage
     element :phone_number_field, "input#steps-respondent-contact-details-form-phone-number-field"
     element :phone_number_unknown_checkbox, "input#steps-respondent-contact-details-form-phone-number-unknown-true-field",
             visible: false
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_contact_details(email:, phone:)
     content.email_field.set email
     content.phone_number_field.set phone
 
-    content.continue_button.click
+    click_continue_button
   end
 end

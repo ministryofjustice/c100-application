@@ -7,7 +7,6 @@ class OtherPartyAddressDetailsPage < BasePage
     element :town_field, "input[name='steps_other_party_address_details_form[town]']"
     element :country_field, "input[name='steps_other_party_address_details_form[country]']"
     element :postcode_field, "input[name='steps_other_party_address_details_form[postcode]']"
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_address_details(address_line_1:, town:, country:, postcode:)
@@ -15,10 +14,10 @@ class OtherPartyAddressDetailsPage < BasePage
     content.town_field.set town
     content.country_field.set country
     content.postcode_field.set postcode
-    content.continue_button.click
+    click_continue_button
   end
 
   def continue_without_filling
-    content.continue_button.click
+    click_continue_button
   end
 end

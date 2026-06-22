@@ -11,18 +11,17 @@ class AbductionPassportDetailsPage < BasePage
     element :possession_other, '#steps-abduction-passport-details-form-passport-possession-other-field', visible: false
     element :possession_other_details, '#steps-abduction-passport-details-form-passport-possession-other-details-field',
             visible: false
-    element :continue_button, "button", text: "Continue"
   end
 
-  def submit_yes_multiple_passports
+  def select_yes_multiple_passports
     content.multiple_passports_yes.click
   end
 
-  def submit_no_multiple_passports
+  def select_no_multiple_passports
     content.multiple_passports_no.click
   end
 
-  def submit_passport_possession(possession)
+  def select_passport_possession(possession)
     case possession
     when 'mother'
       content.possession_mother.click
@@ -32,9 +31,5 @@ class AbductionPassportDetailsPage < BasePage
       content.possession_other.click
       content.possession_other_details.set 'Other details'
     end
-  end
-
-  def continue_to_next_step
-    content.continue_button.click
   end
 end

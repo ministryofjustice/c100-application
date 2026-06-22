@@ -5,12 +5,11 @@ class AddressLookupPage < BasePage
     element :header, 'h1', text: 'Address of'
     element :postcode_field, "input[name='steps_address_lookup_form[postcode]']"
     element :outside_uk_link, "a", text: "I live outside the UK"
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_postcode(postcode)
     content.postcode_field.set postcode
-    content.continue_button.click
+    click_continue_button
   end
 
   def click_outside_uk
@@ -18,6 +17,6 @@ class AddressLookupPage < BasePage
   end
 
   def continue_without_postcode
-    content.continue_button.click
+    click_continue_button
   end
 end

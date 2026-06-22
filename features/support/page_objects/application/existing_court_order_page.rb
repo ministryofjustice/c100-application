@@ -17,6 +17,6 @@ class ExistingCourtOrderPage < YesNoPage
     content.day.set(parsed_date.day)
     content.month.set(parsed_date.month)
     content.year.set(parsed_date.year)
-    selection_area.continue_button.click
+    click_continue_button
   end
 end

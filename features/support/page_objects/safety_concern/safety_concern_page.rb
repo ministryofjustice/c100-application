@@ -3,10 +3,9 @@ class SafetyConcernPage < BasePage
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Safety concerns'
-    element :continue_button, "a", text: "Continue"
   end
 
   def continue_to_next_step
-    content.continue_button.click
+    click_continue_link
   end
 end

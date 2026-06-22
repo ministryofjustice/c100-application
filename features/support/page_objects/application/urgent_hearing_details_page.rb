@@ -20,6 +20,6 @@ class UrgentHearingDetailsPage < BasePage
     else
       content.urgent_no.click
     end
-    content.continue_button.click
+    click_continue_button
   end
 end

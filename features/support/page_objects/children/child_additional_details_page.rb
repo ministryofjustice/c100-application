@@ -17,19 +17,18 @@ class ChildAdditionalDetailsPage < BasePage
       element :no, "input#steps-children-additional-details-form-children-protection-plan-no-field", visible: false
       element :dont_know, "input#steps-children-additional-details-form-children-protection-plan-unknown-field", visible: false
     end
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_known_to_social_services(additional_details:)
     content.known_to_social_services.yes.click
     content.known_to_social_services.additional_details.set additional_details
     content.child_protection_plan.yes.click
-    content.continue_button.click
+    click_continue_button
   end
 
   def submit_dont_know_to_both
     content.known_to_social_services.dont_know.click
     content.child_protection_plan.dont_know.click
-    content.continue_button.click
+    click_continue_button
   end
 end

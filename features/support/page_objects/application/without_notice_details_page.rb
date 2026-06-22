@@ -36,6 +36,6 @@ class WithoutNoticeDetailsPage < BasePage
       content.without_notice_impossible_no.click
     end
 
-    content.continue_button.click
+    click_continue_button
   end
 end

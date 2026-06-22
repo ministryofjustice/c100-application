@@ -3,11 +3,10 @@ class ChildResidencePage < BasePage
 
   section :content, '#main-content' do
     element :header, 'h1', text: 'Address of'
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_residence(person_name)
     check(person_name, allow_label_click: true)
-    content.continue_button.click
+    click_continue_button
   end
 end

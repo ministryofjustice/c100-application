@@ -12,7 +12,6 @@ class ApplicantPersonalDetailsPage < BasePage
     element :dob_month, "input[name='steps_applicant_personal_details_form[dob(2i)]']"
     element :dob_year, "input[name='steps_applicant_personal_details_form[dob(1i)]']"
     element :birthplace_field, "input[name='steps_applicant_personal_details_form[birthplace]']"
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_personal_details(
@@ -46,10 +45,10 @@ class ApplicantPersonalDetailsPage < BasePage
     content.dob_month.set month
     content.dob_year.set year
     content.birthplace_field.set birthplace
-    content.continue_button.click
+    click_continue_button
   end
 
   def continue_without_filling
-    content.continue_button.click
+    click_continue_button
   end
 end

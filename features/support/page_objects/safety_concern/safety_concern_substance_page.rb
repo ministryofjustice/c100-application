@@ -9,6 +9,6 @@ class SafetyConcernSubstancePage < YesNoPage
   def submit_yes(details)
     selection_area.answer_yes.click
     content.substance_abuse_details.set(details)
-    selection_area.continue_button.click
+    click_continue_button
   end
 end

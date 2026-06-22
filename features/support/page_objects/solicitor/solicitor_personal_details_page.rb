@@ -5,13 +5,12 @@ class SolicitorPersonalDetailsPage < BasePage
     element :header, 'h1', text: 'Details of solicitor'
     element :full_name_field, "input[name='steps_solicitor_personal_details_form[full_name]']"
     element :firm_name_field, "input[name='steps_solicitor_personal_details_form[firm_name]']"
-    element :continue_button, "button", text: "Continue"
   end
 
   def submit_solicitor_details(full_name:, firm_name:)
     content.full_name_field.set full_name
     content.firm_name_field.set firm_name
-    content.continue_button.click
+    click_continue_button
   end
 
   def submit_personal_details(full_name, firm_name)
@@ -19,6 +18,6 @@ class SolicitorPersonalDetailsPage < BasePage
   end
 
   def continue_without_filling
-    content.continue_button.click
+    click_continue_button
   end
 end
