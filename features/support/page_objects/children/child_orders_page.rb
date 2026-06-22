@@ -4,7 +4,6 @@ class ChildOrdersPage < BasePage
   section :content, '#main-content' do
     element :header, 'h1', text: 'Which of the decisions you’re asking the court to resolve relate to'
     elements :orders, '.govuk-checkboxes__label'
-    element :continue_button, 'button', text: 'Continue'
   end
 
   def submit_child_orders(orders_list)

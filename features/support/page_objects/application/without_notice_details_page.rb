@@ -16,7 +16,6 @@ class WithoutNoticeDetailsPage < BasePage
             'input[name="steps_application_without_notice_details_form[without_notice_impossible]"][value="no"]', visible: false
     element :without_notice_impossible_details,
             'textarea[name="steps_application_without_notice_details_form[without_notice_impossible_details]"]', visible: false
-    element :continue_button, 'button', text: 'Continue'
   end
 
   def submit(details:, possible_frustrate: false, possible_frustrate_details: nil, without_notice_impossible: false,

@@ -9,7 +9,6 @@ class UrgentHearingDetailsPage < BasePage
             visible: false
     element :urgent_no, 'input[name="steps_application_urgent_hearing_details_form[urgent_hearing_short_notice]"][value="no"]',
             visible: false
-    element :continue_button, 'button', text: 'Continue'
   end
 
   def submit(details:, hearing_when:, urgent: false)

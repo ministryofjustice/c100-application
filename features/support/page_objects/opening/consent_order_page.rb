@@ -7,10 +7,6 @@ class ConsentOrderPage < BasePage
     element :consent_order_no, "input#steps-opening-consent-order-form-consent-order-no-field", visible: false
   end
 
-  def continue_to_next_step
-    content.continue.click
-  end
-
   def submit_existing_consent_order
     content.consent_order_yes.click
     click_continue_button

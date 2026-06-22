@@ -8,10 +8,6 @@ class ChildProtectionCasePage < BasePage
     element :answer_no, "input#steps-opening-child-protection-cases-form-child-protection-cases-no-field", visible: false
   end
 
-  def continue_to_next_step
-    content.continue.click
-  end
-
   def submit_yes
     content.answer_yes.click
     click_continue_button
