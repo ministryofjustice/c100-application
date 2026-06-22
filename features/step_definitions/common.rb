@@ -78,6 +78,7 @@ When(/^I click the postcode page "([^"]*)" button$/) do |text|
   RSpec::Mocks.with_temporary_scope do
     stub_courtfinder_api
     find_button("#{text}").click
+    expect(page).to have_current_path('/steps/opening/start')
   end
 end
 
@@ -90,6 +91,7 @@ When(/^I wait and click the postcode page "([^"]*)" button$/) do |text|
       rescue
         click_link(text)
       end
+      expect(page).to have_current_path('/steps/opening/start')
     end
   end
 end
@@ -99,6 +101,7 @@ When(/^I click the postcode page "([^"]*)" button with an invalid postcode$/) do
     C100App::CourtfinderAPI.any_instance.stub(:court_for).and_return({"courts"=>[]})
 
     find_button("#{text}").click
+    expect(page).to have_current_path('/steps/opening/no_court_found')
   end
 end
 
