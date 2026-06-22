@@ -6,7 +6,7 @@ When(/^I complete the applicant details journey keeping my contact details priva
   applicant_privacy_known_page.submit_dont_know
   applicant_privacy_preferences_page.submit_yes(address_private: true)
   applicant_refuge_page.submit_no
-  applicant_privacy_summary_page.continue_to_next_step
+  applicant_privacy_summary_page.click_continue_link
 
   # Personal details
   applicant_personal_details_page.submit_personal_details(

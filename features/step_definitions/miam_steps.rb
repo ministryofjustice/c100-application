@@ -62,7 +62,7 @@ When(/^I submit that I have a MIAM with a child protection case$/) do
   child_protection_case_page.submit_yes
 
   expect(child_protection_info_page).to be_displayed
-  child_protection_info_page.continue_to_next_step
+  child_protection_info_page.click_continue_link
 end
 
 And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|

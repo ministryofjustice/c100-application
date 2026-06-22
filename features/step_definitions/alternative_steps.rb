@@ -5,7 +5,7 @@ end
 
 When(/^I submit that I have tried all alternative ways to reach an agreement$/) do
   expect(alternative_page).to be_displayed
-  alternative_page.continue_to_next_step
+  alternative_page.click_continue_link
 
   expect(alternative_negotiation_page).to be_displayed
   alternative_negotiation_page.submit_yes

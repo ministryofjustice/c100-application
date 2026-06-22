@@ -2,10 +2,10 @@ And(/^I submit that I "(do|don't)" have abuse or physical abuse concerns about t
   answer = arg == 'do'
 
   expect(abuse_concerns_page).to be_displayed
-  abuse_concerns_page.continue_to_next_step
+  abuse_concerns_page.click_continue_link
 
   expect(abuse_concerns_children_info_page).to be_displayed
-  abuse_concerns_children_info_page.continue_to_next_step
+  abuse_concerns_children_info_page.click_continue_link
 
   expect(abuse_concerns_question_page).to be_displayed
   abuse_concerns_question_page.submit(answer)
@@ -92,7 +92,7 @@ end
 
 When(/^I submit that I don't have any safety concerns about myself$/) do
   expect(abuse_concerns_applicant_info_page).to be_displayed
-  abuse_concerns_applicant_info_page.continue_to_next_step
+  abuse_concerns_applicant_info_page.click_continue_link
 
   expect(abuse_concerns_applicant_question_page).to be_displayed
   abuse_concerns_applicant_question_page.submit_no
@@ -124,7 +124,7 @@ end
 
 And(/^I submit that I "(have|haven't)" been abused by the respondent$/) do |arg|
   expect(abuse_concerns_applicant_info_page).to be_displayed
-  abuse_concerns_applicant_info_page.continue_to_next_step
+  abuse_concerns_applicant_info_page.click_continue_link
 
   expect(abuse_concerns_applicant_question_page).to be_displayed
 

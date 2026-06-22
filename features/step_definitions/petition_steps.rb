@@ -58,7 +58,7 @@ Then(/^I should see the specific issue order details for: "([^"]*)"$/) do |issue
 end
 
 And(/^I continue to the next step$/) do
-  petition_playback_page.continue_to_next_step
+  petition_playback_page.click_continue_link
 end
 
 When(/^I submit that I want the court to also decide "(.*)"$/) do |decision|

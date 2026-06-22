@@ -19,10 +19,14 @@ end
 
 And(/^I submit the attending court details with safety arrangements$/) do
   expect(attending_court_intermediary_page).to be_displayed
-  attending_court_intermediary_page.submit_yes('I need someone to communicate between me and the respondent')
+  attending_court_intermediary_page.submit_yes(
+    'I need someone to communicate between me and the respondent'
+  )
 
   expect(attending_court_language_page).to be_displayed
-  attending_court_language_page.submit_language_requirements(welsh_language_details: 'Needed for Jake Gyllenhaal')
+  attending_court_language_page.submit_language_requirements(
+    welsh_language_details: 'Needed for Jake Gyllenhaal'
+  )
 
   expect(attending_court_special_arrangements_page).to be_displayed
   attending_court_special_arrangements_page.submit_special_arrangements(

@@ -1,5 +1,5 @@
 When(/^I submit that I have no safety concerns about the children$/) do
-  safety_concern_page.continue_to_next_step
+  safety_concern_page.click_continue_link
 
   expect(safety_concern_abduction_page).to be_displayed
   safety_concern_abduction_page.submit_no
@@ -18,7 +18,7 @@ When(/^I submit that I have no safety concerns about the children$/) do
 end
 
 When(/^I submit that I "(do|don't)" have abduction concerns about the children$/) do |arg|
-  safety_concern_page.continue_to_next_step
+  safety_concern_page.click_continue_link
   
   expect(safety_concern_abduction_page).to be_displayed
 
@@ -36,15 +36,18 @@ When(/^I submit that I "(do|don't)" have abduction concerns about the children$/
   abduction_children_have_passport_page.submit_yes
 
   expect(abduction_passport_details_page).to be_displayed
-  abduction_passport_details_page.submit_no_multiple_passports
-  abduction_passport_details_page.submit_passport_possession('mother')
-  abduction_passport_details_page.continue_to_next_step
+  abduction_passport_details_page.select_no_multiple_passports
+  abduction_passport_details_page.select_passport_possession('mother')
+  abduction_passport_details_page.click_continue_button
 
   expect(abduction_previous_attempt_page).to be_displayed
   abduction_previous_attempt_page.submit_no
 
   expect(abduction_risk_details_page).to be_displayed
-  abduction_risk_details_page.submit_risk_details('They might be taken by their other parent', 'The children are with me')
+  abduction_risk_details_page.submit_risk_details(
+    'They might be taken by their other parent', 
+    'The children are with me'
+  )
 end
 
 And(/^I submit that I "(do|don't)" have concerns about drug, alcohol or substance abuse$/) do |arg|

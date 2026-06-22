@@ -5,7 +5,7 @@ When(/^I submit that I have a Consent Order with a child protection case$/) do
   file_path = File.absolute_path('features/support/sample_file/image.jpg')
   upload_consent_order_page.upload_file(file_path)
 
-  child_protection_info_page.continue_to_next_step
+  child_protection_info_page.click_continue_link
 
   expect(child_protection_case_page).to be_displayed
   child_protection_case_page.submit_yes

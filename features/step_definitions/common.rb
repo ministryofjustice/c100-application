@@ -194,7 +194,7 @@ When('I navigate to the Safety concerns from consent order page') do
   child_protection_case_page.submit_yes
   expect(miam_page.content).to have_text('You do not have to attend a MIAM')
 
-  miam_page.continue_to_next_step
+  miam_page.click_continue_link
   expect(safety_concern_page.content).to have_header
 end
 
@@ -210,10 +210,10 @@ When('I navigate to applicant names page from consent order') do
   child_protection_case_page.submit_yes
   expect(miam_page.content).to have_text('You do not have to attend a MIAM')
 
-  miam_page.continue_to_next_step
+  miam_page.click_continue_link
   expect(safety_concern_page.content).to have_header
 
-  safety_concern_page.continue_to_next_step
+  safety_concern_page.click_continue_link
   # Navigate through safety questions to get to applicant names
   # This is a simplified path - in reality may need more steps
 end
@@ -226,7 +226,7 @@ When('I complete the applicant details journey') do
   applicant_privacy_known_page.submit_yes
   applicant_privacy_preferences_page.submit_no
   applicant_refuge_page.submit_no
-  applicant_privacy_summary_page.continue_to_next_step
+  applicant_privacy_summary_page.click_continue_link
 
   # Personal details
   applicant_personal_details_page.submit_personal_details(

@@ -33,17 +33,20 @@ class SafetyConcernDetailsPage < BasePage
       concern_content.behaviour_ongoing_yes.click
     end
 
-    if asked_for_help
-      concern_content.asked_for_help_yes.click
-      concern_content.help_party.set(help_party)
-      concern_content.help_description.set(help_description)
-      if help_provided
-        concern_content.help_provided_yes.click
-      else
-        concern_content.help_provided_no.click
-      end
-    else
+    if !asked_for_help
       concern_content.asked_for_help_no.click
+      click_continue_button
+      return
+    end
+    
+    concern_content.asked_for_help_yes.click
+    concern_content.help_party.set(help_party)
+    concern_content.help_description.set(help_description)
+
+    if help_provided
+      concern_content.help_provided_yes.click
+    else
+      concern_content.help_provided_no.click
     end
 
     click_continue_button
