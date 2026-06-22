@@ -1,5 +1,5 @@
 When(/^I ask the court to decide on the following issues: "(.*)"$/) do |issues|
-  expect(petition_orders_page).to be_displayed
+  expect(petition_orders_page).to be_fully_loaded
 
   petition_orders_page.select_issue_home if issues.include?('who the children live with and when')
   petition_orders_page.select_issue_time if issues.include?('how much time they spend with each person')
@@ -19,7 +19,7 @@ When(/^I ask the court to decide on the following issues: "(.*)"$/) do |issues|
 end
 
 Then(/^I should see the child arrangements order details for: "(.*)"$/) do |issue|
-  expect(petition_playback_page).to be_displayed
+  expect(petition_playback_page).to be_fully_loaded
   if issue.include?('who the children live with and when')
     expect(petition_playback_page.content.child_arrangements_home).to be_visible
   end
@@ -32,7 +32,7 @@ end
 Then(/^I should see the specific issue order details for: "([^"]*)"$/) do |issues|
   selected_issues = issues.split(',').map(&:strip)
 
-  expect(petition_playback_page).to be_displayed
+  expect(petition_playback_page).to be_fully_loaded
   selected_issues.each do |issue|
     case issue
     when 'a specific holiday or arrangement'
@@ -62,19 +62,19 @@ And(/^I continue to the next step$/) do
 end
 
 When(/^I submit that I want the court to also decide "(.*)"$/) do |decision|
-  expect(petition_protection_page).to be_displayed
+  expect(petition_protection_page).to be_fully_loaded
   petition_protection_page.submit_yes(details: decision)
 end
 
 When(/^I submit that I am not asking the court to decide on any other issues$/) do
-  expect(petition_protection_page).to be_displayed
+  expect(petition_protection_page).to be_fully_loaded
   petition_protection_page.submit_no
 end
 
 Then(/^I should be taken to the petition orders page$/) do
-  expect(petition_orders_page).to be_displayed
+  expect(petition_orders_page).to be_fully_loaded
 end
 
 Then(/^I should be taken to the petition protection page$/) do
-  expect(petition_protection_page).to be_displayed
+  expect(petition_protection_page).to be_fully_loaded
 end

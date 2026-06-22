@@ -2,7 +2,7 @@ class PreviousCourtProceedingsPage < BasePage
   set_url '/steps/application/court_proceedings'
 
   section :content, '#main-content' do
-    element :header, 'h1', text: 'Have any of the children in this application been involved in other family court proceedings?'
+    element :header, 'h1', text: 'Details of previous court case'
     element :children_names, 'textarea[name="steps_application_court_proceedings_form[children_names]"]'
     element :court_name, 'input[name="steps_application_court_proceedings_form[court_name]"]'
     element :proceedings_date, 'input[name="steps_application_court_proceedings_form[proceedings_date]"]'

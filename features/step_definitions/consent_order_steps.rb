@@ -1,5 +1,5 @@
 When(/^I submit that I have a Consent Order with a child protection case$/) do
-  expect(consent_order_page).to be_displayed
+  expect(consent_order_page).to be_fully_loaded
   consent_order_page.submit_existing_consent_order
 
   file_path = File.absolute_path('features/support/sample_file/image.jpg')
@@ -7,23 +7,23 @@ When(/^I submit that I have a Consent Order with a child protection case$/) do
 
   child_protection_info_page.click_continue_link
 
-  expect(child_protection_case_page).to be_displayed
+  expect(child_protection_case_page).to be_fully_loaded
   child_protection_case_page.submit_yes
 end
 
 When(/^I navigate back to the consent order page$/) do
-  expect(safety_concern_page).to be_displayed
+  expect(safety_concern_page).to be_fully_loaded
   safety_concern_page.click_back_link
 
-  expect(child_protection_info_page).to be_displayed
+  expect(child_protection_info_page).to be_fully_loaded
   child_protection_info_page.click_back_link
 
-  expect(child_protection_case_page).to be_displayed
+  expect(child_protection_case_page).to be_fully_loaded
   child_protection_case_page.click_back_link
 end
 
 Then(/^I should be on the consent order page$/) do
-  expect(consent_order_page).to be_displayed
+  expect(consent_order_page).to be_fully_loaded
 end
 
 And(/^I submit the consent order form with an existing consent order$/) do

@@ -2,7 +2,7 @@ class SolicitorAddressDetailsPage < BasePage
   set_url '/steps/solicitor/address_details'
 
   section :content, '#main-content' do
-    element :header, 'h1', text: 'Address details of solicitor'
+    element :header, 'h1', text: 'Address details of'
     element :address_line_1_field, "input[name='steps_solicitor_address_details_form[address_line_1]']"
     element :town_field, "input[name='steps_solicitor_address_details_form[town]']"
     element :country_field, "input[name='steps_solicitor_address_details_form[country]']"

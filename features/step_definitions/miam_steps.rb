@@ -1,97 +1,97 @@
 When(/^I submit that I have a MIAM exemption$/) do
-  expect(consent_order_page).to be_displayed
+  expect(consent_order_page).to be_fully_loaded
   consent_order_page.submit_without_consent_order
 
-  expect(child_protection_case_page).to be_displayed
+  expect(child_protection_case_page).to be_fully_loaded
   child_protection_case_page.submit_no
 
-  expect(miam_acknowledgement_page).to be_displayed
+  expect(miam_acknowledgement_page).to be_fully_loaded
   miam_acknowledgement_page.submit_voucher_scheme_no
 
-  expect(miam_attended_page).to be_displayed
+  expect(miam_attended_page).to be_fully_loaded
   miam_attended_page.submit_no
 
-  expect(miam_exemption_claim_page).to be_displayed
+  expect(miam_exemption_claim_page).to be_fully_loaded
   miam_exemption_claim_page.submit_yes
 
-  expect(miam_exemptions_domestic_page).to be_displayed
+  expect(miam_exemptions_domestic_page).to be_fully_loaded
   miam_exemptions_domestic_page.submit_none_of_these
 
-  expect(miam_exemptions_protection_page).to be_displayed
+  expect(miam_exemptions_protection_page).to be_fully_loaded
   miam_exemptions_protection_page.submit_none_of_these
 
-  expect(miam_exemptions_urgency_page).to be_displayed
+  expect(miam_exemptions_urgency_page).to be_fully_loaded
   miam_exemptions_urgency_page.submit_none_of_these
 
-  expect(miam_exemptions_adr_page).to be_displayed
+  expect(miam_exemptions_adr_page).to be_fully_loaded
   miam_exemptions_adr_page.submit_none_of_these
 
-  expect(miam_exemptions_misc_page).to be_displayed
+  expect(miam_exemptions_misc_page).to be_fully_loaded
   miam_exemptions_misc_page.submit_without_notice_hearing
 end
 
 When(/^I submit that I have attended a MIAM$/) do
-  expect(consent_order_page).to be_displayed
+  expect(consent_order_page).to be_fully_loaded
   consent_order_page.submit_without_consent_order
 
-  expect(child_protection_case_page).to be_displayed
+  expect(child_protection_case_page).to be_fully_loaded
   child_protection_case_page.submit_no
 
-  expect(miam_acknowledgement_page).to be_displayed
+  expect(miam_acknowledgement_page).to be_fully_loaded
   miam_acknowledgement_page.submit_voucher_scheme_no
 
-  expect(miam_attended_page).to be_displayed
+  expect(miam_attended_page).to be_fully_loaded
   miam_attended_page.submit_yes
 
-  expect(miam_certification_page).to be_displayed
+  expect(miam_certification_page).to be_fully_loaded
   miam_certification_page.submit_yes
 end
 
 And(/^I upload a MIAM certificate$/) do
-  expect(miam_certification_upload_page).to be_displayed
+  expect(miam_certification_upload_page).to be_fully_loaded
 
   file_path = File.absolute_path('features/support/sample_file/image.jpg')
   miam_certification_upload_page.upload_file(file_path)
 end
 
 When(/^I submit that I have a MIAM with a child protection case$/) do
-  expect(consent_order_page).to be_displayed
+  expect(consent_order_page).to be_fully_loaded
   consent_order_page.submit_without_consent_order
 
-  expect(child_protection_case_page).to be_displayed
+  expect(child_protection_case_page).to be_fully_loaded
   child_protection_case_page.submit_yes
 
-  expect(child_protection_info_page).to be_displayed
+  expect(child_protection_info_page).to be_fully_loaded
   child_protection_info_page.click_continue_link
 end
 
 And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
   evidence_provided = arg == 'is'
 
-  expect(miam_exemptions_reasons_page).to be_displayed
+  expect(miam_exemptions_reasons_page).to be_fully_loaded
 
   if evidence_provided
     miam_exemptions_reasons_page.submit_yes
 
-    expect(miam_exemptions_exemption_upload_page).to be_displayed
+    expect(miam_exemptions_exemption_upload_page).to be_fully_loaded
     file_path = File.absolute_path('features/support/sample_file/image.jpg')
     miam_exemptions_exemption_upload_page.upload_file(file_path)
 
-    expect(miam_exemptions_details_page).to be_displayed
+    expect(miam_exemptions_details_page).to be_fully_loaded
     miam_exemptions_details_page.submit_exemption_details('exemption reason')
   else
     miam_exemptions_reasons_page.submit_no_exemption_reasons('Supporting reason')
 
-    expect(miam_exemptions_details_page).to be_displayed
+    expect(miam_exemptions_details_page).to be_fully_loaded
     miam_exemptions_details_page.continue_without_filling
   end
 
-  expect(miam_exemptions_reasons_playback_page).to be_displayed
+  expect(miam_exemptions_reasons_playback_page).to be_fully_loaded
   miam_exemptions_reasons_playback_page.continue
 end
 
 Then(/^I should be on the MIAM exemption evidence page$/) do
-  expect(miam_exemptions_details_page).to be_displayed
+  expect(miam_exemptions_details_page).to be_fully_loaded
 end
 
 And(/^I provide evidence for the MIAM exemption$/) do
@@ -99,11 +99,11 @@ And(/^I provide evidence for the MIAM exemption$/) do
 end
 
 And(/^I navigate back to the Check Your Answers page$/) do
-  expect(miam_exemptions_reasons_playback_page).to be_displayed
+  expect(miam_exemptions_reasons_playback_page).to be_fully_loaded
   miam_exemptions_reasons_playback_page.go_back
   
-  expect(miam_exemptions_details_page).to be_displayed
+  expect(miam_exemptions_details_page).to be_fully_loaded
   miam_exemptions_details_page.go_back
 
-  expect(cya_page).to be_displayed
+  expect(cya_page).to be_fully_loaded
 end

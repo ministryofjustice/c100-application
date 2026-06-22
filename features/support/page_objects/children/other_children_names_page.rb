@@ -2,7 +2,7 @@ class OtherChildrenNamesPage < BasePage
   set_url '/steps/other_children/names'
 
   section :content, '#main-content' do
-    element :header, 'h1', text: 'Enter the names of the children'
+    element :header, 'h1', text: 'Enter the other child’s name'
     element :first_name_field, "input[name='steps_other_children_names_split_form[new_first_name]']"
     element :last_name_field, "input[name='steps_other_children_names_split_form[new_last_name]']"
   end

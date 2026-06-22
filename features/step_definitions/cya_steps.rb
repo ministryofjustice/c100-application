@@ -315,7 +315,7 @@ When(/^I submit the application$/) do
 end
 
 Then(/^I should be taken to the completion confirmation page$/) do
-  expect(completion_confirmation_page).to be_displayed
+  expect(completion_confirmation_page).to be_fully_loaded
   expect(completion_confirmation_page.content).to have_header
   expect(completion_confirmation_page.content).to have_download_button
 end
@@ -341,7 +341,7 @@ And(/^I should see an attachment presenting MIAM exemption evidence "(is|isn't)"
 end
 
 Then(/^I should be taken to the Check Your Answers page$/) do
-  expect(cya_page).to be_displayed
+  expect(cya_page).to be_fully_loaded
   expect(cya_page.content).to have_header
 end
 

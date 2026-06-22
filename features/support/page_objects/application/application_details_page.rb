@@ -2,7 +2,7 @@ class ApplicationDetailsPage < BasePage
   set_url '/steps/application/details'
 
   section :content, '#main-content' do
-    element :header, 'h1', text: 'Address of'
+    element :header, 'h1', text: 'Why are you making this application?'
     element :details, 'textarea[name="steps_application_details_form[application_details]"]'
   end
 

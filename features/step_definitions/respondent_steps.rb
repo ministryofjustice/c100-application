@@ -1,11 +1,11 @@
 When(/^I submit the respondent details$/) do
-  expect(respondent_names_page).to be_displayed
+  expect(respondent_names_page).to be_fully_loaded
   respondent_names_page.submit_names('Jane', 'Doe')
 
-  expect(respondent_refuge_page).to be_displayed
+  expect(respondent_refuge_page).to be_fully_loaded
   respondent_refuge_page.submit_no
 
-  expect(respondent_personal_details_page).to be_displayed
+  expect(respondent_personal_details_page).to be_fully_loaded
   respondent_personal_details_page.submit_personal_details(
     has_previous_name: 'no',
     gender: 'female',
@@ -13,7 +13,7 @@ When(/^I submit the respondent details$/) do
     birthplace: 'London'
   )
 
-  expect(respondent_relationship_page).to be_displayed
+  expect(respondent_relationship_page).to be_fully_loaded
   respondent_relationship_page.submit_relationship('Mother')
 
   respondent_address_lookup_page.click_outside_uk
@@ -31,13 +31,13 @@ When(/^I submit the respondent details$/) do
 end
 
 And(/^I submit the respondent details with an additional child$/) do
-  expect(respondent_names_page).to be_displayed
+  expect(respondent_names_page).to be_fully_loaded
   respondent_names_page.submit_names('John', 'Doe')
 
-  expect(respondent_refuge_page).to be_displayed
+  expect(respondent_refuge_page).to be_fully_loaded
   respondent_refuge_page.submit_no
 
-  expect(respondent_personal_details_page).to be_displayed
+  expect(respondent_personal_details_page).to be_fully_loaded
   respondent_personal_details_page.submit_personal_details(
     has_previous_name: 'no',
     gender: 'male',
@@ -45,7 +45,7 @@ And(/^I submit the respondent details with an additional child$/) do
     birthplace: 'Windsor'
   )
 
-  expect(respondent_relationship_page).to be_displayed
+  expect(respondent_relationship_page).to be_fully_loaded
   respondent_relationship_page.submit_relationship('Father')
   respondent_relationship_page.submit_relationship('Father')
 
@@ -64,21 +64,21 @@ And(/^I submit the respondent details with an additional child$/) do
 end
 
 Then(/^I should be taken to the other party details page$/) do
-  expect(has_other_parties_page).to be_displayed
+  expect(has_other_parties_page).to be_fully_loaded
 end
 
 And(/^I submit that there "(are|aren't)" any other people who should know about the application$/) do |arg|
   answer = arg == 'are'
 
-  expect(has_other_parties_page).to be_displayed
+  expect(has_other_parties_page).to be_fully_loaded
   has_other_parties_page.submit(answer)
 end
 
 And(/^I submit the other party details with an additional child$/) do
-  expect(other_party_names_page).to be_displayed
+  expect(other_party_names_page).to be_fully_loaded
   other_party_names_page.submit_names('Judy', 'Sitter')
 
-  expect(other_party_personal_details_page).to be_displayed
+  expect(other_party_personal_details_page).to be_fully_loaded
   other_party_personal_details_page.submit_personal_details(
     has_previous_name: false,
     gender: 'female',
@@ -98,10 +98,10 @@ And(/^I submit the other party details with an additional child$/) do
 end
 
 And(/^I submit the other party details$/) do
-  expect(other_party_names_page).to be_displayed
+  expect(other_party_names_page).to be_fully_loaded
   other_party_names_page.submit_names('Cassie', 'Doe')
 
-  expect(other_party_personal_details_page).to be_displayed
+  expect(other_party_personal_details_page).to be_fully_loaded
   other_party_personal_details_page.submit_personal_details(
     has_previous_name: false,
     gender: 'female',
@@ -120,5 +120,5 @@ And(/^I submit the other party details$/) do
 end
 
 Then(/^I should be taken to the respondent details page$/) do
-  expect(respondent_names_page).to be_displayed
+  expect(respondent_names_page).to be_fully_loaded
 end

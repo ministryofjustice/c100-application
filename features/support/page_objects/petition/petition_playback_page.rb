@@ -2,7 +2,7 @@ class PetitionPlaybackPage < BasePage
   set_url '/steps/petition/playback'
 
   section :content, '#main-content' do
-    element :header, 'h1', text: 'What you’re asking the court to decide about the children?'
+    element :header, 'h1', text: 'What you’re asking the court to decide about the children'
     element :child_arrangements_order, "p", text: "This is known as a Child Arrangements Order."
     element :specfic_issue_order, "p", text: "This is known as a Specific Issue Order."
     element :prohibited_steps_order, "p", text: "This is known as a Prohibited Steps Order."
