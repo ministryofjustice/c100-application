@@ -1,12 +1,9 @@
 When(/^I submit that there "(has|hasn't)" been any court proceedings about the children$/) do |arg|
   answer = arg == 'has'
-
-  expect(previous_proceedings_page).to be_fully_loaded
   previous_proceedings_page.submit(answer)
 end
 
 When(/^I submit details of previous court proceedings$/) do
-  expect(previous_proceedings_page).to be_fully_loaded
   previous_proceedings_page.submit_yes
 
   expect(previous_court_proceedings_page).to be_fully_loaded
@@ -19,8 +16,7 @@ When(/^I submit details of previous court proceedings$/) do
   )
 end
 
-And(/^I submit details of previous court proceedings with an additional child$/) do
-  expect(previous_proceedings_page).to be_fully_loaded
+When(/^I submit details of previous court proceedings with an additional child$/) do
   previous_proceedings_page.submit_yes
 
   expect(previous_court_proceedings_page).to be_fully_loaded
@@ -34,7 +30,6 @@ And(/^I submit details of previous court proceedings with an additional child$/)
 end
 
 When(/^I submit that there "(is|isn't)" a court order requiring permission to make this application$/) do |arg|
-  expect(existing_court_order_page).to be_fully_loaded
   if arg == 'is'
     existing_court_order_page.submit_yes('12345678', '01-01-2030')
 

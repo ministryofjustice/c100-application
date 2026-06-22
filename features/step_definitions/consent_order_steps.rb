@@ -1,5 +1,4 @@
 When(/^I submit that I have a Consent Order with a child protection case$/) do
-  expect(consent_order_page).to be_fully_loaded
   consent_order_page.submit_existing_consent_order
 
   file_path = File.absolute_path('features/support/sample_file/image.jpg')

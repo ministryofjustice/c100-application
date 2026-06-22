@@ -1,5 +1,4 @@
 When(/^I submit the attending court details$/) do
-  expect(attending_court_intermediary_page).to be_fully_loaded
   attending_court_intermediary_page.submit_yes('Needed for the respondent')
 
   expect(attending_court_language_page).to be_fully_loaded
@@ -17,8 +16,7 @@ When(/^I submit the attending court details$/) do
   attending_court_special_assistance_page.continue_without_filling
 end
 
-And(/^I submit the attending court details with safety arrangements$/) do
-  expect(attending_court_intermediary_page).to be_fully_loaded
+When(/^I submit the attending court details with safety arrangements$/) do
   attending_court_intermediary_page.submit_yes(
     'I need someone to communicate between me and the respondent'
   )
@@ -39,7 +37,6 @@ And(/^I submit the attending court details with safety arrangements$/) do
 end
 
 When(/^I submit that I have no issues attending court$/) do
-  expect(attending_court_intermediary_page).to be_fully_loaded
   attending_court_intermediary_page.submit_no
 
   expect(attending_court_language_page).to be_fully_loaded

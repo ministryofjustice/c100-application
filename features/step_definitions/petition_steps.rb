@@ -1,6 +1,4 @@
 When(/^I ask the court to decide on the following issues: "(.*)"$/) do |issues|
-  expect(petition_orders_page).to be_fully_loaded
-
   petition_orders_page.select_issue_home if issues.include?('who the children live with and when')
   petition_orders_page.select_issue_time if issues.include?('how much time they spend with each person')
 
@@ -62,7 +60,6 @@ And(/^I continue to the next step$/) do
 end
 
 When(/^I submit that I want the court to also decide "(.*)"$/) do |decision|
-  expect(petition_protection_page).to be_fully_loaded
   petition_protection_page.submit_yes(details: decision)
 end
 

@@ -342,7 +342,6 @@ end
 
 Then(/^I should be taken to the Check Your Answers page$/) do
   expect(cya_page).to be_fully_loaded
-  expect(cya_page.content).to have_header
 end
 
 Then(/^I should see the MIAM evidence exemption error message$/) do

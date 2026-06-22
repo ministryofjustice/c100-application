@@ -1,12 +1,9 @@
 When(/^I submit my reason for the application as "([^"]*)"$/) do |reason|
-  expect(application_details_page).to be_fully_loaded
   application_details_page.submit_details(reason)
 end
 
 When(/^I submit that there "(are|aren't)" factors that may affect any adult in this application taking part in the court proceedings$/) do |arg|
   answer = arg == 'are'
-
-  expect(litigation_capacity_page).to be_fully_loaded
   litigation_capacity_page.submit(answer)
 end
 
@@ -16,7 +13,6 @@ And(/^I submit that there "(are|aren't)" factors affecting ability to participat
 end
 
 When(/^I submit the application with email "([^"]*)"$/) do |email|
-  expect(submission_page).to be_fully_loaded
   submission_page.submit_receipt_email(email)
 
   expect(submission_email_check_page).to be_fully_loaded

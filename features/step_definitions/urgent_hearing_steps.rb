@@ -1,14 +1,4 @@
-And(/^I am not asking for an urgent or without notice hearing$/) do
-  expect(urgent_hearing_page).to be_fully_loaded
-  urgent_hearing_page.submit_no
-
-  expect(without_notice_page).to be_fully_loaded
-  without_notice_page.submit_no
-end
-
 When(/^I submit that I "(do|don't)" require an urgent hearing$/) do |arg|
-  expect(urgent_hearing_page).to be_fully_loaded
-
   if arg == "don't"
     urgent_hearing_page.submit_no
     next

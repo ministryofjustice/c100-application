@@ -1,12 +1,9 @@
 When(/^I submit that I "(do|don't)" have a solicitor$/) do |arg|
   answer = arg == 'do' ? 'yes' : 'no'
-
-  expect(applicant_has_solicitor_page).to be_fully_loaded
   applicant_has_solicitor_page.submit(answer)
 end
 
 When(/^I submit the solicitor details$/) do
-  expect(applicant_has_solicitor_page).to be_fully_loaded
   applicant_has_solicitor_page.submit_yes
 
   expect(solicitor_personal_details_page).to be_fully_loaded

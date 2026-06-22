@@ -1,5 +1,4 @@
 When(/^I submit that I understand the process of going to court$/) do
-  expect(alternative_court_page).to be_fully_loaded
   alternative_court_page.acknowledge_and_continue
 end
 

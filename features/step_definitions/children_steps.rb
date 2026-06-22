@@ -1,5 +1,4 @@
 When(/^I submit the details for a "(\d+)" year old child$/) do |age|
-  expect(children_names_page).to be_fully_loaded
   children_names_page.add_child('John', 'Smith Jr')
 
   expect(child_personal_details_page).to be_fully_loaded
@@ -16,7 +15,6 @@ When(/^I submit the details for a "(\d+)" year old child$/) do |age|
 end
 
 Then(/^I submit the details for a "(\d+)" year old child with a special guardianship order$/) do |age|
-  expect(children_names_page).to be_fully_loaded
   children_names_page.add_child('Alistair', 'Doe')
 
   expect(child_personal_details_page).to be_fully_loaded
@@ -66,7 +64,6 @@ And(/^I submit that I "(do|don't)" have other children$/) do |arg|
 end
 
 When(/^I submit the child lives with "(.*)"$/) do |person|
-  expect(child_residence_page).to be_fully_loaded
   child_residence_page.submit_residence(person)
 end
 

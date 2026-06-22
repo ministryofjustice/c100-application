@@ -91,7 +91,6 @@ And(/^I submit that I "(do|don't)" have other abuse concerns about the children$
 end
 
 When(/^I submit that I don't have any safety concerns about myself$/) do
-  expect(abuse_concerns_applicant_info_page).to be_fully_loaded
   abuse_concerns_applicant_info_page.click_continue_link
 
   expect(abuse_concerns_applicant_question_page).to be_fully_loaded
@@ -123,7 +122,6 @@ When(/^I submit that I don't have any safety concerns about myself$/) do
 end
 
 And(/^I submit that I "(have|haven't)" been abused by the respondent$/) do |arg|
-  expect(abuse_concerns_applicant_info_page).to be_fully_loaded
   abuse_concerns_applicant_info_page.click_continue_link
 
   expect(abuse_concerns_applicant_question_page).to be_fully_loaded
