@@ -6,23 +6,28 @@ When(/^I submit that I have a Consent Order with a child protection case$/) do
 
   child_protection_info_page.click_continue_link
 
-  expect(child_protection_case_page).to be_fully_loaded
+  expect(child_protection_case_page).to be_displayed
+  expect(child_protection_case_page.content).to have_header
   child_protection_case_page.submit_yes
 end
 
 When(/^I navigate back to the consent order page$/) do
-  expect(safety_concern_page).to be_fully_loaded
+  expect(safety_concern_page).to be_displayed
+  expect(safety_concern_page.content).to have_header
   safety_concern_page.click_back_link
 
-  expect(child_protection_info_page).to be_fully_loaded
+  expect(child_protection_info_page).to be_displayed
+  expect(child_protection_info_page.content).to have_header
   child_protection_info_page.click_back_link
 
-  expect(child_protection_case_page).to be_fully_loaded
+  expect(child_protection_case_page).to be_displayed
+  expect(child_protection_case_page.content).to have_header
   child_protection_case_page.click_back_link
 end
 
 Then(/^I should be on the consent order page$/) do
-  expect(consent_order_page).to be_fully_loaded
+  expect(consent_order_page).to be_displayed
+  expect(consent_order_page.content).to have_header
 end
 
 And(/^I submit the consent order form with an existing consent order$/) do

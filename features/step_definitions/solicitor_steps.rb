@@ -6,13 +6,15 @@ end
 When(/^I submit the solicitor details$/) do
   applicant_has_solicitor_page.submit_yes
 
-  expect(solicitor_personal_details_page).to be_fully_loaded
+  expect(solicitor_personal_details_page).to be_displayed
+  expect(solicitor_personal_details_page.content).to have_header
   solicitor_personal_details_page.submit_solicitor_details(
     full_name: 'Annalise Keating',
     firm_name: 'Keating Law Firm'
   )
 
-  expect(solicitor_address_details_page).to be_fully_loaded
+  expect(solicitor_address_details_page).to be_displayed
+  expect(solicitor_address_details_page.content).to have_header
   solicitor_address_details_page.submit_address_details(
     address_line_1: 'Windsor Castle',
     town: 'Windsor',
@@ -20,7 +22,8 @@ When(/^I submit the solicitor details$/) do
     postcode: 'SL4 1QF'
   )
 
-  expect(solicitor_contact_details_page).to be_fully_loaded
+  expect(solicitor_contact_details_page).to be_displayed
+  expect(solicitor_contact_details_page.content).to have_header
   solicitor_contact_details_page.submit_contact_details(
     email: 'annalise@law.com',
     phone: '00000000000',
@@ -29,5 +32,6 @@ When(/^I submit the solicitor details$/) do
 end
 
 Then(/^I should be taken to the solicitor details page$/) do
-  expect(applicant_has_solicitor_page).to be_fully_loaded
+  expect(applicant_has_solicitor_page).to be_displayed
+  expect(applicant_has_solicitor_page.content).to have_header
 end

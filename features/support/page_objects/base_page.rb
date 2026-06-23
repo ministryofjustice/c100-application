@@ -146,10 +146,6 @@ class BasePage < SitePrism::Page
     end
   end
 
-  def fully_loaded?
-    displayed? && content.has_header?
-  end
-
   def google_analytics_enabled
     page.evaluate_script("window['ga-disable-#{Rails.application.config.x.analytics_tracking_id}']")
   end

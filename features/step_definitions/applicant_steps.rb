@@ -39,5 +39,6 @@ When(/^I complete the applicant details journey keeping my contact details priva
 end
 
 Then(/^I should be taken to the applicant details page$/) do
-  expect(applicant_names_page).to be_fully_loaded
+  expect(applicant_names_page).to be_displayed
+  expect(applicant_names_page.content).to have_header
 end
