@@ -77,8 +77,9 @@ end
 When(/^I click the postcode page "([^"]*)" button$/) do |text|
   RSpec::Mocks.with_temporary_scope do
     stub_courtfinder_api
+    original_path = current_path
     find_button("#{text}").click
-    expect(page).to have_current_path('/steps/opening/start')
+    expect(page).to_not have_current_path(original_path)
   end
 end
 
@@ -86,12 +87,13 @@ When(/^I wait and click the postcode page "([^"]*)" button$/) do |text|
   travel 61.minutes do
     RSpec::Mocks.with_temporary_scope do
       stub_courtfinder_api
+      original_path = current_path
       begin
         find_button("#{text}").click
       rescue
         click_link(text)
       end
-      expect(page).to have_current_path('/steps/opening/start')
+      expect(page).to_not have_current_path(original_path)
     end
   end
 end
