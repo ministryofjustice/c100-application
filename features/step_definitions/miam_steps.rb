@@ -87,7 +87,7 @@ And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
   end
 
   expect(miam_exemptions_reasons_playback_page).to be_fully_loaded
-  miam_exemptions_reasons_playback_page.continue
+  miam_exemptions_reasons_playback_page.click_continue_link
 end
 
 Then(/^I should be on the MIAM exemption evidence page$/) do

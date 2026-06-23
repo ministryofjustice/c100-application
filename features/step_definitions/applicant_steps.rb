@@ -17,7 +17,7 @@ When(/^I complete the applicant details journey keeping my contact details priva
     birthplace: 'London'
   )
 
-  # Relationship
+  # Relationship (has two children)
   applicant_relationship_page.submit_relationship('Mother')
   applicant_relationship_page.submit_relationship('Mother')
 

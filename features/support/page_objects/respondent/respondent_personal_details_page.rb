@@ -23,8 +23,10 @@ class RespondentPersonalDetailsPage < BasePage
 
     if gender == 'male'
       content.gender_male.click
-    else
+    elsif gender == 'female'
       content.gender_female.click
+    else
+      content.gender_unspecified.click
     end
 
     age = age.to_i

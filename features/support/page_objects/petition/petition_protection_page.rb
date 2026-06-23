@@ -1,18 +1,12 @@
-class PetitionProtectionPage < BasePage
+class PetitionProtectionPage < YesNoPage
   set_url '/steps/petition/protection'
 
   section :content, '#main-content' do
     element :header, 'h1',
             text: 'Is there anything else you are asking the court to decide, specifically to protect the safety of you or the children?'
-    element :protection_order_no, 'input[name="steps_petition_protection_form[protection_orders]"][value="no"]', visible: false
     element :protection_order_yes, 'input[name="steps_petition_protection_form[protection_orders]"][value="yes"]', visible: false
     element :protection_orders_details, 'textarea[name="steps_petition_protection_form[protection_orders_details]"]',
             visible: false
-  end
-
-  def submit_no
-    content.protection_order_no.click
-    click_continue_button
   end
 
   def submit_yes(details:)
