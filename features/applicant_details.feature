@@ -1,6 +1,6 @@
 Feature: Add an applicant to the application
   Background:
-    # We need at least 1 child as a precondition for this journey  
+    # We need at least 1 child as a precondition for this journey
     Given I have started an application
     And I have entered a child with first name "John" and last name "Doe Junior"
     Then I visit "steps/applicant/names"

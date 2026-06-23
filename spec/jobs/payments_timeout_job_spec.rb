@@ -6,8 +6,6 @@ RSpec.describe PaymentsTimeoutJob, type: :job do
 
   end
 
-
-
   let(:logger) { instance_double(Logger, info: true) }
 
   describe '.run' do

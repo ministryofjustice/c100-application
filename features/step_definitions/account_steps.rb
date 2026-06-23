@@ -39,7 +39,7 @@ def step_safety_concern
   find(:xpath, './/main', visible: true, wait: true)
   expect(page).to have_text "Safety concerns"
   click_link("Continue", wait: true)
-rescue Selenium::WebDriver::Error::UnknownError
+rescue Selenium::WebDriver::Error::UnknownError => e
   find(:xpath, './/main', visible: true, wait: true)
   expect(page).to have_text "Safety concerns"
   click_link("Continue", wait: true)

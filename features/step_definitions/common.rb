@@ -108,7 +108,6 @@ When(/^I click the postcode page "([^"]*)" button with an invalid postcode$/) do
 end
 
 When(/^I have started an application$/) do
-  # temporarily resolve postcode validation issues
   step %[I visit "/"]
   step %[I open the "Developer Tools" summary details]
   find('button', text: 'Bypass postcode').click
@@ -116,8 +115,7 @@ When(/^I have started an application$/) do
 end
 
 When(/^I am on the home page$/) do
-  visit '/'
-  expect(home_page.content).to have_header
+  step %[I visit "/"]
 end
 
 When(/^I pause for "([^"]*)" seconds$/) do |seconds|

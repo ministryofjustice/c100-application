@@ -1,5 +1,4 @@
 Then(/^The form markup should match "([^"]*)"$/) do |fixture|
-  sleep 1
   raw_markup = page.all(
     :css, 'form > div.govuk-form-group'
   ).map { |div| div['outerHTML'] }.join
