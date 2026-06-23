@@ -132,6 +132,26 @@ And(/^I should see the other party's name is "([^"]*)"$/) do |arg|
   expect(cya_page.other_parties_details.full_name[0].answer).to eq(arg)
 end
 
+And(/^I should see the children "(do|don't)" live with the other party$/) do |arg|
+  answer = (arg == 'do' ? 'Yes' : 'No')
+  expect(cya_page.other_parties_details.children_live_with_other_party[0].answer).to eq(answer)
+end
+
+And(/^I should see the other party "(does|doesn't)" want their identity to be kept private$/) do |arg|
+  answer = (arg == 'does' ? 'Yes' : 'No')
+  expect(cya_page.other_parties_details.identity_details_private[0].answer).to eq(answer)
+end
+
+And(/^I should see the other party "(does|doesn't)" want their contact details to be kept private$/) do |arg|
+  answer = (arg == 'does' ? 'Yes' : 'No')
+  expect(cya_page.other_parties_details.contact_details_private[0].answer).to eq(answer)
+end
+
+And(/^I should see the other party "(does|doesn't)" live in a refuge$/) do |arg|
+  answer = (arg == 'does' ? 'Yes' : 'No')
+  expect(cya_page.other_parties_details.refuge[0].answer).to eq(answer)
+end
+
 And(/^I should see the other party's gender is "([^"]*)"$/) do |arg|
   expect(cya_page.other_parties_details.personal_details[0].sex).to eq(arg)
 end

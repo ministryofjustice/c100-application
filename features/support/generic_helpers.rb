@@ -418,6 +418,22 @@ def other_party_address_details_page
   @other_party_address_details_page ||= OtherPartyAddressDetailsPage.new
 end
 
+def other_party_children_cohabit_page
+  @other_party_children_cohabit_page ||= OtherPartyChildrenCohabitPage.new
+end
+
+def other_party_identity_preferences_page
+  @other_party_identity_preferences_page ||= OtherPartyIdentityPreferencesPage.new
+end
+
+def other_party_privacy_preferences_page
+  @other_party_privacy_preferences_page ||= OtherPartyPrivacyPreferencesPage.new
+end
+
+def other_party_refuge_page
+  @other_party_refuge_page ||= OtherPartyRefugePage.new
+end
+
 def child_residence_page
   @child_residence_page ||= ChildResidencePage.new
 end

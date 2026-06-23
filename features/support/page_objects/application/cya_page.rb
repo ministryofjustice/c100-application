@@ -147,6 +147,10 @@ class CYAPage < BasePage
     row :has_other_parties, '#has_other_parties'
     elements :other_parties, 'h3'
     rows :full_name, '#person_full_name'
+    rows :children_live_with_other_party, '#person_cohabit_other'
+    rows :identity_details_private, '#person_identity_details_private'
+    rows :contact_details_private, '#person_contact_details_private'
+    rows :refuge, '#other_party_refuge'
     rows :personal_details, CYAPersonalDetails, '#person_personal_details'
     rows :relationship_to_child, '#relationship_to_child'
     sections :address_details, CYAGroup, '#person_address_details' do

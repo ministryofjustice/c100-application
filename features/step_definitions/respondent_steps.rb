@@ -74,6 +74,18 @@ And(/^I submit the other party details with an additional child$/) do
   expect(other_party_names_page).to be_fully_loaded
   other_party_names_page.submit_names('Judy', 'Sitter')
 
+  expect(other_party_children_cohabit_page).to be_fully_loaded
+  other_party_children_cohabit_page.submit_yes
+
+  expect(other_party_identity_preferences_page).to be_fully_loaded
+  other_party_identity_preferences_page.submit_yes
+
+  expect(other_party_privacy_preferences_page).to be_fully_loaded
+  other_party_privacy_preferences_page.submit_yes
+
+  expect(other_party_refuge_page).to be_fully_loaded
+  other_party_refuge_page.submit_no
+
   expect(other_party_personal_details_page).to be_fully_loaded
   other_party_personal_details_page.submit_personal_details(
     has_previous_name: false,
@@ -96,6 +108,16 @@ end
 And(/^I submit the other party details$/) do
   expect(other_party_names_page).to be_fully_loaded
   other_party_names_page.submit_names('Cassie', 'Doe')
+
+  expect(other_party_children_cohabit_page).to be_fully_loaded
+  other_party_children_cohabit_page.submit_no
+
+  expect(other_party_privacy_preferences_page).to be_fully_loaded
+  other_party_privacy_preferences_page.submit_no
+
+  expect(other_party_refuge_page).to be_fully_loaded
+  other_party_refuge_page.submit_no
+
 
   expect(other_party_personal_details_page).to be_fully_loaded
   other_party_personal_details_page.submit_personal_details(

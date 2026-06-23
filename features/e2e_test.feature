@@ -409,6 +409,10 @@ Feature: Testing C100 end to end
     And I should see the other party's name is "Judy Sitter"
     And I should see the other party's gender is "Female"
     And I should see the other party is "35" years of age
+    And I should see the children "do" live with the other party
+    And I should see the other party "does" want their identity to be kept private
+    And I should see the other party "does" want their contact details to be kept private
+    And I should see the other party "doesn't" live in a refuge
     And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 2AA"
     And I should see the other party's relationship to "John Smith Jr" is "Caregiver"
     And I should see the other party's relationship to "Jane Smith" is "Caregiver"
@@ -630,6 +634,9 @@ Feature: Testing C100 end to end
     And I should see the other party's name is "Cassie Doe"
     And I should see the other party's gender is "Female"
     And I should see the other party is "30" years of age
+    And I should see the children "don't" live with the other party
+    And I should see the other party "doesn't" want their contact details to be kept private
+    And I should see the other party "doesn't" live in a refuge
     And I should see the other party's address is "10 Downing Street, London, United Kingdom, SW1A 2AA"
     And I should see the other party's relationship to "Alistair Doe" is "Caregiver"
     And I should see the children residence details:
