@@ -11,7 +11,7 @@ Feature: MIAM voucher acknowledgement
     Then I should see a "you’re exempt" link to "/about/miam_exemptions"
 
   Scenario: Mediation link
-    Then I should see a "mediation" link to "https://helpwithchildarrangements.service.justice.gov.uk/professional-mediation"
+    Then I should see a "mediation" link to "https://www.gov.uk/looking-after-children-divorce/mediation"
 
   Scenario: Check if you’re eligible for legal aid during mediation link
     Then I should see a "Check if you’re eligible for legal aid during mediation" link to "https://www.gov.uk/check-legal-aid"

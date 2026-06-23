@@ -1,8 +1,11 @@
 module FeesHelper
   def fee_amount
-    ActionController::Base.helpers.number_to_currency(
-      Rails.configuration.x.court_fee.amount_in_pence / 100
-    )
+    amount = if FeeIncrease.changes_apply?
+               Rails.configuration.x.court_fee.new_amount_in_pence
+             else
+               Rails.configuration.x.court_fee.amount_in_pence
+             end
+    ActionController::Base.helpers.number_to_currency(amount / 100)
   end
 
   def phase_banner_copy

@@ -28,7 +28,6 @@ module Summary
     let(:phone_number_not_provided_reason) { nil }
 
     before do
-      allow(PrivacyChange).to receive(:changes_apply?).and_return(true)
       allow(applicant).to receive(:full_address).and_return('full address')
       allow(applicant).to receive(:email_private?).and_return(contact_details_private.include?('email'))
       allow(applicant).to receive(:phone_number_private?).and_return(contact_details_private.include?('phone_number'))

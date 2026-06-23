@@ -1,7 +1,6 @@
 Feature: Add a respondent to the application
   Background:
     # We need at least 1 child as a precondition for this journey
-    Given Privacy changes apply
     Given I have started an application
     And I have entered a child with first name "John" and last name "Doe Junior"
     Then I visit "steps/respondent/names"
@@ -302,9 +301,6 @@ Feature: Add a respondent to the application
     Then Page has title "Do any of the children live with Thomas Other Doe? - Apply to court about child arrangements - GOV.UK"
     And I should see "Do any of the children live with Thomas Other Doe?"
 
-    And I choose "No"
-    Then Page has title "Keeping Thomas Other Doe's identity private - Apply to court about child arrangements - GOV.UK"
-    And I should see "Keeping Thomas Other Doe's identity private"
     And I choose "No"
 
     And I should see "Keeping Thomas Other Doe's contact details private"

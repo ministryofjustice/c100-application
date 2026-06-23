@@ -46,11 +46,6 @@ module Application
 
     config.active_job.queue_adapter = ENV.fetch('QUEUE_ADAPTER', :sidekiq).to_sym
 
-    config.gov_surveys = {
-      success: 'https://c100.service.justice.gov.uk/survey',
-      kickout: 'https://c100.service.justice.gov.uk/exit_survey',
-    }
-
     config.gds_service_homepage_url = 'https://www.gov.uk/looking-after-children-divorce/apply-for-court-order'.freeze
 
     # Load the templates set (refer to `config/govuk_notify_templates.yml` for details)
@@ -95,6 +90,7 @@ module Application
     # Court fee configuration.
     # Not using Fee Register for now as we only have 1 fee, but might be used in the future.
     config.x.court_fee.amount_in_pence = 263_00
+    config.x.court_fee.new_amount_in_pence = 270_00
     config.x.court_fee.description = 'Court fee for a child arrangements application (C100)'
     config.x.analytics_tracking_id = ENV['GA_TRACKING_ID']
     config.x.cookie_expiry = 1.year
@@ -103,7 +99,6 @@ module Application
     config.maintenance_allowed_ips = ENV.fetch('MAINTENANCE_ALLOWED_IPS', '').split(',').map(&:strip)
 
     config.prl_opening_date = DateTime.parse(ENV.fetch("PRL_OPENING", "13/02/2025"))
-    config.prl_wolverhampton_date = DateTime.parse(ENV.fetch("PRL_WOLVERHAMPTON", "07/08/2025"))
-    config.prl_chelmsford_rollout = DateTime.parse(ENV.fetch("PRL_CHELMSFORD_ROLLOUT", "08/07/2025"))
+    config.fee_increase_date = DateTime.parse(ENV.fetch("FEE_INCREASE_DATE", "06/07/2026"))
   end
 end
