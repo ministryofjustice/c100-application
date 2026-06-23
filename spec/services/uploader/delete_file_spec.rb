@@ -6,7 +6,8 @@ RSpec.describe Uploader::DeleteFile do
 
   before do
     allow_any_instance_of(Aws::S3::Client).to receive(:delete_object)
-    allow(ENV).to receive(:[])
+    allow(ENV).to receive(:fetch).and_call_original
+    allow(ENV).to receive(:[]).and_call_original
     allow(ENV).to receive(:fetch).with('AWS_S3_BUCKET', '').and_return(bucket)
     allow(ENV).to receive(:[]).with("AWS_S3_REGION").and_return('eu-west-2')
     allow(ENV).to receive(:[]).with("AWS_ROLE_ARN").and_return('test')
