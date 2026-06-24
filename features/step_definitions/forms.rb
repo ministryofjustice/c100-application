@@ -116,21 +116,6 @@ When(/^I specify they are "(\d+)" years of age$/) do |age|
   step %[I fill in "Year" with "#{date_of_birth.year}"]
 end
 
-When(/^I choose "([^"]*)" from radiobutton options$/) do |text|
-  within(:xpath) do
-    find(:xpath, ".//input[@id='cart_payment_type_cash_pay']").choose
-  end
-end
-
-When(/^I choose (Yes|No) from the radio button options$/) do |option|
-  labels = {
-    "Yes" => "steps-applicant-privacy-preferences-form-are-contact-details-private-yes-field",
-    "No"  => "steps-applicant-privacy-preferences-form-are-contact-details-private-no-field"
-  }
-
-  find("label[for='#{labels[option]}']").click
-end
-
 # Applicant page object step definitions
 When(/^applicant names page I submit names "([^"]*)" and "([^"]*)"$/) do |first_name, last_name|
   applicant_names_page.submit_names(first_name, last_name)
@@ -149,7 +134,6 @@ When(/^applicant refuge page I submit "([^"]*)"$/) do |answer|
 end
 
 When(/^applicant personal details page I submit details with has_previous_name "([^"]*)", gender "([^"]*)", day "([^"]*)", month "([^"]*)", year "([^"]*)", birthplace "([^"]*)"$/) do |has_previous_name, gender, day, month, year, birthplace|
-  # binding.pry if year == '1998'
   applicant_personal_details_page.submit_personal_details(
     has_previous_name: has_previous_name,
     gender: gender,
