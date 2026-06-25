@@ -15,8 +15,7 @@ class YesNoPage < BasePage
   end
 
   def submit(answer)
-    case answer
-    when true, 'yes'
+    if answer == true || answer == 'yes'
       submit_yes
     else
       submit_no

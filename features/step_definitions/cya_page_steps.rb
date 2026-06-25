@@ -281,20 +281,20 @@ And(/^I should see a Welsh language interpreter is needed for the court because 
 end
 
 And(/^I should see there "(are|aren't)" specific safety arrangements specified for the court$/) do |arg|
-  if arg == "aren't"
+  if arg == "are"
+    expect(cya_page.attending_court.safety_arrangements).to have_arrangements
+  elsif arg == "aren't"
     expect(cya_page.attending_court.safety_arrangements).to have_no_arrangements
     expect(cya_page.attending_court.safety_arrangements.details.answer).to eq("None selected")
-  elsif arg == 'are'
-    expect(cya_page.attending_court.safety_arrangements).to have_arrangements
   end
 end
 
 And(/^I should see there "(are|aren't)" special facilities needed when attending court$/) do |arg|
-  if arg == "aren't"
+  if arg == "are"
+    expect(cya_page.attending_court.special_assistance).to have_additional_details
+  elsif arg == "aren't"
     expect(cya_page.attending_court.special_assistance).to have_no_additional_details
     expect(cya_page.attending_court.special_assistance.details.answer).to eq("None selected")
-  elsif arg == 'are'
-    expect(cya_page.attending_court.special_assistance).to have_additional_details
   end
 end
 
@@ -337,7 +337,6 @@ end
 Then(/^I should be taken to the completion confirmation page$/) do
   expect(completion_confirmation_page).to be_displayed
   expect(completion_confirmation_page.content).to have_header
-  expect(completion_confirmation_page.content).to have_header
   expect(completion_confirmation_page.content).to have_download_button
 end
 
@@ -354,11 +353,8 @@ And(/^I should see the details provided for the exemption are "([^"]*)"$/) do |a
 end
 
 And(/^I should see an attachment presenting MIAM exemption evidence "(is|isn't)" present$/) do |arg|
-  if arg == 'is'
-    expect(cya_page.miam_exemptions.exemption.answer).to eq("Attached document\nimage.jpg")
-  elsif arg == "isn't"
-    expect(cya_page.miam_exemptions.exemption.answer).to eq("")
-  end
+  answer = (arg == 'is' ? "Attached document\nimage.jpg" : "")
+  expect(cya_page.miam_exemptions.exemption.answer).to eq(answer)
 end
 
 Then(/^I should be taken to the Check Your Answers page$/) do

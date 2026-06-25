@@ -34,22 +34,21 @@ Then(/^I should see the specific issue order details for: "([^"]*)"$/) do |issue
   expect(petition_playback_page).to be_displayed
   expect(petition_playback_page.content).to have_header
   selected_issues.each do |issue|
-    case issue
-    when 'a specific holiday or arrangement'
+    if issue == 'a specific holiday or arrangement'
       expect(petition_playback_page.content.specific_issues_holiday).to be_visible
-    when 'what school they’ll go to'
+    elsif issue == 'what school they’ll go to'
       expect(petition_playback_page.content.specific_issues_school).to be_visible
-    when 'a religious issue'
+    elsif issue == 'a religious issue'
       expect(petition_playback_page.content.specific_issues_religion).to be_visible
-    when 'changing their names or surname'
+    elsif issue == 'changing their names or surname'
       expect(petition_playback_page.content.specific_issues_names).to be_visible
-    when 'medical treatment'
+    elsif issue == 'medical treatment'
       expect(petition_playback_page.content.specific_issues_medical).to be_visible
-    when 'relocating the children to a different area in england and wales'
+    elsif issue == 'relocating the children to a different area in england and wales'
       expect(petition_playback_page.content.specific_issues_moving).to be_visible
-    when 'relocating the children outside of england and wales'
+    elsif issue == 'relocating the children outside of england and wales'
       expect(petition_playback_page.content.specific_issues_moving_abroad).to be_visible
-    when 'returning the children to your care'
+    elsif issue == 'returning the children to your care'
       expect(petition_playback_page.content.specific_issues_child_return).to be_visible
     else
       raise ArgumentError, "Unknown specific issue: '#{issue}'"

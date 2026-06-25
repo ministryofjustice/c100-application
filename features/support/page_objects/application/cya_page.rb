@@ -42,9 +42,6 @@ class CYAPage < BasePage
     end
   end
 
-  section :abduction, CYAGroup, 'dl#abduction' do
-  end
-
   section :children_abuse_details, CYAGroup, 'dl#children_abuse_details' do
     row :abuse_sexual, '#abuse_sexual'
     row :abuse_physical, '#abuse_physical'

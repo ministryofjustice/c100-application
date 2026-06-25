@@ -85,12 +85,10 @@ When(/^I submit that I have a MIAM with a child protection case$/) do
 end
 
 And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
-  evidence_provided = arg == 'is'
-
   expect(miam_exemptions_reasons_page).to be_displayed
   expect(miam_exemptions_reasons_page.content).to have_header
 
-  if evidence_provided
+  if arg == 'is'
     miam_exemptions_reasons_page.submit_yes
 
     expect(miam_exemptions_exemption_upload_page).to be_displayed
@@ -101,7 +99,7 @@ And(/^evidence "(is|isn't)" provided for the MIAM exemption$/) do |arg|
     expect(miam_exemptions_details_page).to be_displayed
     expect(miam_exemptions_details_page.content).to have_header
     miam_exemptions_details_page.submit_exemption_details('exemption reason')
-  else
+  elsif arg == "isn't"
     miam_exemptions_reasons_page.submit_no_exemption_reasons('Supporting reason')
 
     expect(miam_exemptions_details_page).to be_displayed

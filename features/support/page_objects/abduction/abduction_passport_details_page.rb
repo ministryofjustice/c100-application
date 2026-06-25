@@ -22,12 +22,11 @@ class AbductionPassportDetailsPage < BasePage
   end
 
   def select_passport_possession(possession)
-    case possession
-    when 'mother'
+    if possession == 'mother'
       content.possession_mother.click
-    when 'father'
+    elsif possession == 'father'
       content.possession_father.click
-    when 'other'
+    elsif possession == 'other'
       content.possession_other.click
       content.possession_other_details.set 'Other details'
     end

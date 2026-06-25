@@ -14,19 +14,17 @@ class AbuseConcernsContactPage < BasePage
   end
 
   def submit_contact_details(contact_type:, being_in_touch:)
-    case contact_type
-    when 'yes'
+    if contact_type == 'yes'
       content.spend_time_with_others_yes.click
-    when 'supervised'
+    elsif contact_type == 'supervised'
       content.spend_time_with_others_supervised.click
-    when 'no'
+    elsif contact_type == 'no'
       content.spend_time_with_others_no.click
     end
 
-    case being_in_touch
-    when 'yes'
+    if being_in_touch == 'yes'
       content.being_in_touch_yes.click
-    when 'no'
+    elsif being_in_touch == 'no'
       content.being_in_touch_no.click
     end
 

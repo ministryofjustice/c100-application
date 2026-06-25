@@ -43,7 +43,7 @@ When(/^I submit that there "(is|isn't)" a court order requiring permission to ma
     expect(existing_court_order_upload_page.content).to have_header
     file_path = File.absolute_path('features/support/sample_file/image.jpg')
     existing_court_order_upload_page.upload_file(file_path)
-  else
+  elsif arg == "isn't"
     existing_court_order_page.submit_no
   end
 end
