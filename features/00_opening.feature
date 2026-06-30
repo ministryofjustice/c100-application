@@ -13,7 +13,7 @@ Feature: Opening
     And I should see a "Back" link to "https://www.gov.uk/looking-after-children-divorce/apply-for-court-order"
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK9 3DX"
-    And I click the "Continue" button
+    And I click the postcode page "Continue" button
     Then I should see "What you’ll need to complete your application"
     And I should see a "Back" link to "/"
     And I should see a "Or return to a saved application" link to "/users/login"
@@ -25,7 +25,7 @@ Feature: Opening
   Scenario: Complete the opening (alternate page layout)
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK9 3DX"
-    And I click the "Continue" button
+    And I click the postcode page "Continue" button
 
     Then I should see "Are you willing to be contacted to share your experience of using this service?"
     And I should not see the save draft button
@@ -43,7 +43,7 @@ Feature: Opening
     Then I should see "Where do the children live?"
     And Page has title "Where the children live - Apply to court about child arrangements - GOV.UK"
     And I fill in "Postcode" with "SW1A 1AA"
-    And I click the "Continue" button
+    And I click the postcode page "Continue" button
 
     Then I should see "What kind of application do you want to make?"
     And I should not see the save draft button
@@ -62,7 +62,7 @@ Feature: Opening
     Then I should see "Where do the children live?"
     And Page has title "Where the children live - Apply to court about child arrangements - GOV.UK"
     And I fill in "Postcode" with "SW1A 1AA"
-    And I click the "Continue" button
+    And I click the postcode page "Continue" button
 
     Then I should see "What kind of application do you want to make?"
     And I should not see the save draft button
@@ -73,6 +73,7 @@ Feature: Opening
     Then I should see "Attending a Mediation Information and Assessment Meeting (MIAM)"
     And I should see the save draft button
     And the opening changes end
+    And the time goes back to normal
 
   @alternate_layout
   Scenario: Research question with alternate application page layout
@@ -105,7 +106,7 @@ Feature: Opening
     And I click the "Continue" link
     Then I should see "Where do the children live?"
     When I fill in "Postcode" with "MK93DX"
-    And I click the "Continue" button
+    And I click the postcode page "Continue" button
     Then I should see "What kind of application do you want to make?"
     And the opening changes end
 

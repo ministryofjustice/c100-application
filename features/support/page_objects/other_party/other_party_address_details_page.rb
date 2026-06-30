@@ -1,0 +1,23 @@
+class OtherPartyAddressDetailsPage < BasePage
+  set_url '/steps/other_party/address_details'
+
+  section :content, '#main-content' do
+    element :header, 'h1', text: 'Address details of solicitor'
+    element :address_line_1_field, "input[name='steps_other_party_address_details_form[address_line_1]']"
+    element :town_field, "input[name='steps_other_party_address_details_form[town]']"
+    element :country_field, "input[name='steps_other_party_address_details_form[country]']"
+    element :postcode_field, "input[name='steps_other_party_address_details_form[postcode]']"
+  end
+
+  def submit_address_details(address_line_1:, town:, country:, postcode:)
+    content.address_line_1_field.set address_line_1
+    content.town_field.set town
+    content.country_field.set country
+    content.postcode_field.set postcode
+    click_continue_button
+  end
+
+  def continue_without_filling
+    click_continue_button
+  end
+end
