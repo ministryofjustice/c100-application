@@ -9,4 +9,11 @@ Sentry.init do |config|
   config.profiles_sample_rate = 1.0
   config.traces_sample_rate = 1.0
   config.profiler_class = Sentry::Vernier::Profiler
+
+  config.traces_sampler = lambda do |sampling_context|
+    transaction_context = sampling_context[:transaction_context]
+    transaction_name = transaction_context[:name]
+
+    transaction_name.in?(EXCLUDE_PATHS) ? 0.0 : 0.01
+  end
 end
