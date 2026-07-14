@@ -57,8 +57,10 @@ probe_function(){
   # Check there is at least 1 process running
   PROCESSES_CHECK=$(echo ${MONITOR_OUTPUT} | grep -q "Processes (0)"; echo $?)
 
-  # Check there is more than 1 thread running (normally will be 3)
-  THREADS_CHECK=$(echo ${MONITOR_OUTPUT} | grep -qE "Threads: \b[0-1]\b"; echo $?)
+  # Check this pod's Sidekiq process has more than 1 thread
+  HOSTNAME=$(hostname)
+  CURRENT_PROCESS=$(echo "${MONITOR_OUTPUT}" | sed -n "/${HOSTNAME}/,+5p")
+  THREADS_CHECK=$(echo "${CURRENT_PROCESS}" | grep -qE "Threads: \b[0-1]\b"; echo $?)
 
   # If any of the above checks returns '0' it means the regex found a match
   if [ ${REDIS_CHECK} -eq 0 ] || [ ${PROCESSES_CHECK} -eq 0 ] || [ ${THREADS_CHECK} -eq 0 ]; then
