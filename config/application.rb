@@ -99,6 +99,5 @@ module Application
     config.maintenance_allowed_ips = ENV.fetch('MAINTENANCE_ALLOWED_IPS', '').split(',').map(&:strip)
 
     config.prl_opening_date = DateTime.parse(ENV.fetch("PRL_OPENING", "13/02/2025"))
-    config.fee_increase_date = DateTime.parse(ENV.fetch("FEE_INCREASE_DATE", "06/07/2026"))
   end
 end
