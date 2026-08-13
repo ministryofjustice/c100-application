@@ -26,11 +26,7 @@ module Summary
       end
 
       def postcode_path
-        if PrlChange.changes_apply?
-          root_path(change: 'y')
-        else
-          edit_steps_opening_postcode_path(change: 'y')
-        end
+        root_path(change: 'y')
       end
     end
   end

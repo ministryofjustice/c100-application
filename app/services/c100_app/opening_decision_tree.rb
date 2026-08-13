@@ -1,6 +1,5 @@
 module C100App
   class OpeningDecisionTree < BaseDecisionTree
-    # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/MethodLength
     def destination
       return next_step if next_step
@@ -15,7 +14,7 @@ module C100App
       when :continue_application
         after_continue_application
       when :research_consent
-        PrlChange.changes_apply? ? after_research_consent : check_if_my_hmcts_eligable_court
+        after_research_consent
       when :my_hmcts
         after_my_hmcts
       when :consent_order

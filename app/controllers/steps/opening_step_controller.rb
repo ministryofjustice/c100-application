@@ -29,13 +29,8 @@ module Steps
 
     def existing_application_warning
       return unless current_c100_application
-
-      if PrlChange.changes_apply?
-        return if not_enough_progress?
-        return if is_attempting_restart?
-      elsif !in_progress_enough? || params.key?(:new)
-        return
-      end
+      return if not_enough_progress?
+      return if is_attempting_restart?
 
       redirect_to steps_opening_warning_path, allow_other_host: true
     end

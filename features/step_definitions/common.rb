@@ -155,20 +155,6 @@ When(/^I fill in a postcode "([^"]*)" for the children$/) do |arg|
   fill_in('steps_opening_postcode_form[children_postcode]', with: arg)
 end
 
-Given(/^Opening changes apply$/) do
-  @original_prl_date = Rails.application.config.prl_opening_date
-  Rails.application.config.prl_opening_date = Date.today - 1.day
-end
-
-Given(/^Opening changes do not apply$/) do
-  @original_prl_date = Rails.application.config.prl_opening_date
-  Rails.application.config.prl_opening_date = Date.today + 1.day
-end
-
-And('the opening changes end') do
-  Rails.application.config.prl_opening_date = @original_prl_date
-end
-
 When('court finder raises an error') do
   courtfinder_mock = instance_double(C100App::CourtfinderAPI, is_ok?: false)
   allow(C100App::CourtfinderAPI).to receive(:new).and_return(courtfinder_mock)
