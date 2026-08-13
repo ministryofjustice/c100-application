@@ -16,7 +16,7 @@ module Steps
       private
 
       def is_changing
-        is_attempting_restart? && is_attempting_change?
+        is_attempting_restart? || is_attempting_change?
       end
 
       def is_restarting
