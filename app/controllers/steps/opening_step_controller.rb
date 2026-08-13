@@ -32,10 +32,6 @@ module Steps
       return if not_enough_progress?
       return if is_attempting_restart?
 
-      if !in_progress_enough? || params.key?(:new)
-        return
-      end
-
       redirect_to steps_opening_warning_path, allow_other_host: true
     end
   end
