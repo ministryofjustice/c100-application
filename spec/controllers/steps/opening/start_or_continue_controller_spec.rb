@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Steps::Opening::StartOrContinueController, type: :controller do
 
   before do
-    allow(PrlChange).to receive(:changes_apply?).and_return(true)
     allow(ENV).to receive(:fetch).with('MEDIATION_DATE', "29/04/2024").and_return("29/04/2024")
   end
 
