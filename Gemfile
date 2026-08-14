@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '4.0.5'
 
-gem 'devise', '~> 4.9', '>= 4.9.4'
+gem 'devise', '~> 5.0', '>= 5.0.4'
 gem 'govuk_design_system_formbuilder'
 gem 'govuk_notify_rails', '~> 3.0'
 gem 'govuk-pay-ruby-client', github: 'ministryofjustice/govuk-pay-ruby-client', tag: 'v1.0.3'
@@ -35,7 +35,7 @@ gem 'tzinfo', '~> 2.0.5'
 gem 'timecop'
 
 # Back office
-gem 'omniauth-auth0', '~> 3.1.0'
+gem 'omniauth-auth0', '~> 3.2.0'
 gem 'omniauth-rails_csrf_protection'
 
 # Caching and jobs processing
@@ -51,7 +51,7 @@ gem 'grover'
 # Amazon S3 blob storage
 gem 'aws-sdk-s3', '~> 1'
 gem 'clamby'
-gem 'sanitize', '~> 6.1.0'
+gem 'sanitize', '~> 7.0'
 
 gem 'listen'
 gem 'ostruct'
@@ -90,7 +90,7 @@ group :test do
   gem 'brakeman'
   gem 'capybara'
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.25'
-  gem 'cucumber', '~> 9.2.0'
+  gem 'cucumber', '~> 11.1'
   gem 'cucumber-rails', require: false
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
