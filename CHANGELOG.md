@@ -24,7 +24,7 @@ Each entry is headed by the date the dependency update run was performed.
 - Updated puma 7.2.1 → 8.0.2
 - Updated cucumber 9.2.1 → 11.1.1 (with cucumber-core, cucumber-gherkin, cucumber-html-formatter, cucumber-messages, cucumber-rails)
 - Updated sanitize 6.1.3 → 7.0.0
-- Updated govuk_design_system_formbuilder 5.13.0 → 6.4.0
+- Updated govuk_design_system_formbuilder 5.13.0 → 6.4.0 — markup smoke-test fixtures updated: v6 intentionally no longer gives supplemental content an `id` or links it to the fieldset via `aria-describedby`
 - Updated omniauth-auth0 3.1.1 → 3.2.0 (jwt moved 3.2.0 → 2.10.3 to satisfy its dependency)
 - Updated site_prism 5.2 → 6.0.1
 - Updated govuk-frontend 6.0.0 → 6.4.0
