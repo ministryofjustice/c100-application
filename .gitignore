@@ -39,3 +39,4 @@ vendor/bundle/
 
 # Ignore Claude AI files
 CLAUDE.md
+.claude/
