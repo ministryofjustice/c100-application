@@ -14,6 +14,7 @@ require_relative './page_objects/yes_no_page'
 require_relative './page_objects/upload_page'
 require_relative './page_objects/safety_concern_details_page'
 Dir[File.dirname(__FILE__) + '/page_objects/**/*.rb'].each { |f| require f }
+include ActiveSupport::Testing::TimeHelpers
 
 # frozen_string_literal: true
 
