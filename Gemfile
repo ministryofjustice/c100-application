@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '4.0.5'
+ruby '4.0.7'
 
 gem 'devise', '~> 5.0', '>= 5.0.4'
 gem 'govuk_design_system_formbuilder'
@@ -12,6 +12,8 @@ gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rails', '~> 8.1'
 gem 'responders'
+gem 'json', '~> 2.21.2'
+
 
 # frontend assets management
 gem 'propshaft'
