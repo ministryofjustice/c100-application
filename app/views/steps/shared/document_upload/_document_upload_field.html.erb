@@ -12,7 +12,7 @@
   <div class="govuk-grid-column-two-thirds">
     <div class="govuk-form-group">
       <%= form.label field_name, t('shared.file_upload.select_file'), class: 'govuk-label', for: "#{field_name}_input" %>
-      <div class="govuk-drop-zone" data-module="govuk-file-upload">
+      <div class="govuk-file-upload-wrapper" data-module="govuk-file-upload">
         <%= form.govuk_file_field(field_name, label: nil, class: 'govuk-file-upload single-file-upload',
                                   accept: DocumentUpload::ALLOWED_CONTENT_TYPES.join(','),
                                   src: 'camera',
