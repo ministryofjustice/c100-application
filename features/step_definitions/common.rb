@@ -97,7 +97,7 @@ end
 
 When(/^I click the postcode page "([^"]*)" button with an invalid postcode$/) do |text|
   RSpec::Mocks.with_temporary_scope do
-    C100App::NewCourtfinderApi.any_instance.stub(:court_for).and_return({"courts"=>[]})
+    C100App::NewCourtfinderApi.any_instance.stub(:court_for).and_return([])
 
     find_button("#{text}").click
     expect(page).to have_current_path('/steps/opening/no_court_found')
