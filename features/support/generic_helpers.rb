@@ -550,39 +550,50 @@ def get_birthdate(age)
 end
 
 def stub_courtfinder_api
+  court_id = 'e42e35db-979e-4b6b-8d5d-8b45437cd5f5'
+
   stub_resp = [
     {
-      "courtId" => "e42e35db-979e-4b6b-8d5d-8b45437cd5f5",
-      "courtName" => "Coventry Combined Court Centre",
-      "courtSlug" => "coventry-combined-court-centre",
-      "distance" => 0.24961217877368963
+      'courtId' => court_id,
+      'courtName' => 'Coventry Combined Court Centre',
+      'courtSlug' => 'coventry-combined-court-centre',
+      'distance' => 0.24961217877368963
     }
   ]
 
   court_lookup_resp = {
-    "id" => "e42e35db-979e-4b6b-8d5d-8b45437cd5f5",
-    "name" => "Coventry Combined Court Centre",
-    "slug" => "coventry-combined-court-centre",
-    "open" => true,
-    "courtAddresses" => [
+    'id' => court_id,
+    'name' => 'Coventry Combined Court Centre',
+    'slug' => 'coventry-combined-court-centre',
+    'open' => true,
+    'courtAddresses' => [
       {
-        "courtId" => "e42e35db-979e-4b6b-8d5d-8b45437cd5f5",
-        "addressLine1" => "Coventry Combined Courts Centre",
-        "addressLine2" => "Much Park Street",
-        "postcode" => "CV1 2SN",
-        "townCity" => "Coventry",
-        "county" => "West Midlands",
-        "lat" => 52.405600,
-        "lon" => -1.506431
+        'courtId' => court_id,
+        'addressType' => 'VISIT_OR_CONTACT_US',
+        'addressLine1' => 'Coventry Combined Courts Centre',
+        'addressLine2' => 'Much Park Street',
+        'postcode' => 'CV1 2SN',
+        'townCity' => 'Coventry',
+        'county' => 'West Midlands'
       }
     ],
-    "courtCodes" => [
+    'courtCodes' => [
       {
-        "courtId" => "e42e35db-979e-4b6b-8d5d-8b45437cd5f5",
-        "countyCourtCode" => 180,
-        "crownCourtCode" => 417,
-        "familyCourtCode" => 180,
-        "gbs" => "Y260"
+        'courtId' => court_id,
+        'countyCourtCode' => 180,
+        'crownCourtCode' => 417,
+        'familyCourtCode' => 180,
+        'gbs' => 'Y260'
+      }
+    ],
+    'courtContactDetails' => [
+      {
+        'courtId' => court_id,
+        'email' => 'children.coventry.countycourt@justice.gov.uk',
+        'explanation' => '',
+        'courtContactDescription' => {
+          'name' => 'Family court enquiries'
+        }
       }
     ]
   }
