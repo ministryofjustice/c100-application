@@ -30,7 +30,7 @@ module C100App
       query = URI.encode_www_form(
         postcode: safe_postcode,
         serviceArea: area_of_law,
-        action: 'NEAREST'
+        action: 'DOCUMENTS'
       )
 
       path = "#{SEARCH_PATH}?#{query}"

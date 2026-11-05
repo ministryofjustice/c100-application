@@ -25,7 +25,7 @@ describe C100App::NewCourtfinderApi do
         expect(request.path).to include('/search/courts/v1/postcode?')
         expect(request.path).to include('postcode=SW1A+1AA')
         expect(request.path).to include('serviceArea=')
-        expect(request.path).to include('action=NEAREST')
+        expect(request.path).to include('action=DOCUMENTS')
         expect(request['Authorization']).to eq('Bearer test-token')
         expect(request['Accept']).to eq('application/json')
         expect(request['User-Agent']).to eq('child-arrangements-service')
