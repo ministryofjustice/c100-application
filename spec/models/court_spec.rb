@@ -14,8 +14,9 @@ describe Court do
       ],
       "courtAddresses" => [
         {
-          "addressType" => 'VISIT_OR_CONTACT_US',
+          "addressType" => 'VISIT_US',
           "addressLine1" => 'address',
+          "addressLine2" => 'address2',
         }
       ],
       "courtCodes" => [
@@ -41,7 +42,7 @@ describe Court do
     end
 
     it 'sets the address' do
-      expect(subject.address).to eq({"addressLine1" => "address", "addressType" => "VISIT_OR_CONTACT_US"})
+      expect(subject.address).to eq({"addressLine1" => "address", "addressLine2" => "address2", "addressType" => "VISIT_US"})
     end
 
     # Before the FACT release is in place TODO to remove it after
