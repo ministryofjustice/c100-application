@@ -88,7 +88,7 @@ class Court < ApplicationRecord
 
   def self.fetch_address(data)
     data.fetch('courtAddresses').find do |item|
-      item['addressType'] == 'VISIT_OR_CONTACT_US' || item['addressType'] == 'VISIT_US'
+      %w[VISIT_OR_CONTACT_US VISIT_US].include?(item['addressType'])
     end || data.fetch('courtAddresses').first
   end
 
