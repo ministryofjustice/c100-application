@@ -121,8 +121,16 @@ RSpec.describe CourtContactDetails do
   end
 
   describe '#full_address' do
-    let(:address) { { 'address_lines' => address_lines, 'town' => 'town', 'postcode' => 'postcode' } }
-    let(:address_lines){ ['line 1', 'line 2'] }
+    let(:address) do
+      {
+        'addressLine1' => address_line1,
+        'addressLine2' => address_line2,
+        'townCity' => 'town',
+        'postcode' => 'postcode'
+      }
+    end
+    let(:address_line1) { 'line 1' }
+    let(:address_line2) { 'line 2' }
 
     context 'for a not yet centralised court' do
 
@@ -131,7 +139,8 @@ RSpec.describe CourtContactDetails do
       end
 
       context 'when any lines are duplicated' do
-        let(:address_lines){ ['Court name', 'postcode'] }
+        let(:address_line1) { 'Court name' }
+        let(:address_line2) { 'postcode' }
 
         it 'removes the duplicates' do
           expect(subject.full_address).to eq(['Court name', 'postcode', 'town'])
@@ -139,7 +148,7 @@ RSpec.describe CourtContactDetails do
       end
 
       context 'when any lines are blank' do
-        let(:address_lines){ ['line 1', ''] }
+        let(:address_line2) { '' }
 
         it 'removes the blank lines' do
           expect(subject.full_address).to eq(['Court name', 'line 1', 'town', 'postcode'])

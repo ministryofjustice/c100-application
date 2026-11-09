@@ -18,10 +18,11 @@ module CourtContactDetails
   def full_address
     [
       name,
-      address.fetch_values(
-        'address_lines',
-        'town',
-        'postcode',
+      address.values_at(
+        'addressLine1',
+        'addressLine2',
+        'townCity',
+        'postcode'
       )
     ].flatten.reject(&:blank?).uniq
   end
