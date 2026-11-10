@@ -322,6 +322,14 @@ describe Court do
             allow_any_instance_of(Court).to receive(:retrieve_gbs_from_api).and_return('updated-gbs')
           end
 
+          let(:data) do
+            super().merge(
+              'courtContactDetails' => [
+                { 'email' => 'updated-email' }
+              ]
+            )
+          end
+
           it 'forces a refresh of the data' do
             expect(
               subject.attributes
