@@ -38,7 +38,7 @@ class Court < ApplicationRecord
         name: data.fetch('name'),
         address: fetch_address(data),
         cci_code: data.fetch('courtCodes').first&.fetch('countyCourtCode', nil),
-        email: data['courtContactDetails']&.find { |contact| contact['email'].present? }&.fetch('email', nil),
+        email: api_email(data) || court.email,
         gbs: data.fetch('courtCodes').first&.fetch('gbs', nil),
         updated_at: Time.now
       )
@@ -94,6 +94,18 @@ class Court < ApplicationRecord
 
   private
 
+  def self.api_email(data)
+    api_email = data['courtContactDetails']
+      &.find { |contact| contact['email'].present? }
+      &.fetch('email', nil)
+
+    if api_email.blank?
+      Sentry.capture_message("FACT API returned no email for court: #{data.fetch('slug')}")
+    end
+
+    api_email
+  end
+
   def best_match_in_address(emails)
     emails.find { |e| e['address'] =~ /c100/i }       || \
       emails.find { |e| e['address'] =~ /family/i }   || \
@@ -134,5 +146,5 @@ class Court < ApplicationRecord
 
     raise
   end
-  private_class_method :log_and_raise
+  private_class_method :log_and_raise, :api_email
 end
