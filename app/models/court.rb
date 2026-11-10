@@ -30,23 +30,15 @@ class Court < ApplicationRecord
   # a new record in the `courts` table. If we already have this court,
   # we check if its data has become stale, and if so, we refresh it.
   #
-  def self.create_or_refresh(data) # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity
+  def self.create_or_refresh(data)
     court = find_or_initialize_by(slug: data.fetch('slug'))
 
     if court.stale?
-      api_email = data['courtContactDetails']
-                    &.find { |contact| contact['email'].present? }
-                    &.fetch('email', nil)
-
-      if api_email.blank?
-        Sentry.capture_message("FACT API returned no email for court: #{data.fetch('slug')}")
-      end
-
       court.update(
         name: data.fetch('name'),
         address: fetch_address(data),
         cci_code: data.fetch('courtCodes').first&.fetch('countyCourtCode', nil),
-        email: api_email || court.email,
+        email: api_email(data) || court.email,
         gbs: data.fetch('courtCodes').first&.fetch('gbs', nil),
         updated_at: Time.now
       )
@@ -55,7 +47,7 @@ class Court < ApplicationRecord
     court
   rescue StandardError => ex
     log_and_raise(ex, data)
-  end # rubocop:enable Metrics/AbcSize, Metrics/PerceivedComplexity
+  end
 
   def email=(email)
     self[:email] = email || best_enquiries_email
@@ -101,6 +93,18 @@ class Court < ApplicationRecord
   end
 
   private
+
+  def api_email(data)
+    api_email = data['courtContactDetails']
+      &.find { |contact| contact['email'].present? }
+      &.fetch('email', nil)
+
+    if api_email.blank?
+      Sentry.capture_message("FACT API returned no email for court: #{data.fetch('slug')}")
+    end
+
+    api_email
+  end
 
   def best_match_in_address(emails)
     emails.find { |e| e['address'] =~ /c100/i }       || \
