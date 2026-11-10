@@ -94,7 +94,7 @@ class Court < ApplicationRecord
 
   private
 
-  def api_email(data)
+  def self.api_email(data)
     api_email = data['courtContactDetails']
       &.find { |contact| contact['email'].present? }
       &.fetch('email', nil)
@@ -146,5 +146,5 @@ class Court < ApplicationRecord
 
     raise
   end
-  private_class_method :log_and_raise
+  private_class_method :log_and_raise, :api_email
 end
