@@ -5,6 +5,7 @@ Feature: Opening
     Then I should see "Start or continue an application"
     And I should see a "Back" link to "https://www.gov.uk/looking-after-children-divorce/apply-for-court-order"
 
+
   Scenario: Complete the opening
     When I click the radio button "Start a new application"
     When I fill in "Enter the children's postcode" with "MK9 3DX"
