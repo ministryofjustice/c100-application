@@ -206,7 +206,7 @@ module C100App
       )
     end
 
-    def eligable_court
+    def eligable_court # rubocop:disable Metrics/MethodLength
       if TrancheOneRollout.changes_apply?
         c100_application.court.id.in? %w[
           swansea-civil-justice-centre
@@ -242,6 +242,6 @@ module C100App
           chelmsford-magistrates-court-and-family-court
         ]
       end
-    end
+    end # rubocop:enable Metrics/MethodLength
   end
 end
