@@ -207,14 +207,41 @@ module C100App
     end
 
     def eligable_court
-      c100_application.court.id.in? %w[
-        swansea-civil-justice-centre
-        kingston-upon-hull-combined-court-centre
-        great-grimsby-combined-court-centre
-        wolverhampton-combined-court-centre
-        chelmsford-county-and-family-court
-        chelmsford-magistrates-court-and-family-court
-      ]
+      if TrancheOneRollout.changes_apply?
+        c100_application.court.id.in? %w[
+          swansea-civil-justice-centre
+          kingston-upon-hull-combined-court-centre
+          great-grimsby-combined-court-centre
+          wolverhampton-combined-court-centre
+          chelmsford-county-and-family-court
+          chelmsford-magistrates-court-and-family-court
+          west-london-family-court
+          sheffield-designated-family-court
+          sheffield-combined-court-centre
+          derby-combined-court-centre
+          nottingham-county-court-and-family-court
+          medway-chatham-magistrates-court-and-family-court
+          medway-county-court-and-family-court
+          bournemouth-and-poole-county-court-and-family-court
+          portsmouth-combined-court-centre
+          southampton-combined-court-centre
+          basingstoke-law-courts
+          cardiff-civil-and-family-justice-centre
+          newport-south-wales-county-court-and-family-court
+          caernarfon-justice-centre
+          wrexham-county-and-family--court
+          barnet-civil-and-family-courts-centre
+        ]
+      else
+        c100_application.court.id.in? %w[
+          swansea-civil-justice-centre
+          kingston-upon-hull-combined-court-centre
+          great-grimsby-combined-court-centre
+          wolverhampton-combined-court-centre
+          chelmsford-county-and-family-court
+          chelmsford-magistrates-court-and-family-court
+        ]
+      end
     end
   end
 end
