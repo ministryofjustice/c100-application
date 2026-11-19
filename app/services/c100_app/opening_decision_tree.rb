@@ -230,6 +230,7 @@ module C100App
           newport-south-wales-county-court-and-family-court
           caernarfon-justice-centre
           wrexham-county-and-family--court
+          wrexham-county-and-family-court
           barnet-civil-and-family-courts-centre
         ]
       else
