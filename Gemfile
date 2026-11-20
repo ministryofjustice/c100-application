@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '4.0.9'
+ruby '4.0.10'
 
 gem 'devise', '~> 5.0', '>= 5.0.4'
 gem 'govuk_design_system_formbuilder'
