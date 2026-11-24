@@ -22,7 +22,7 @@ ENV AWS_REGION=eu-west-2
 ENV AWS_S3_BUCKET=replace_this_at_build_time
 ENV RAILS_ENV=production
 ENV IS_DOCKER=true
-ENV TRANCHE_ONE_ROLLOUT=true
+ENV TRANCHE_ONE_ROLLOUT=false
 
 # fix to address http://tzinfo.github.io/datasourcenotfound - PET ONLY
 ARG DEBIAN_FRONTEND=noninteractive

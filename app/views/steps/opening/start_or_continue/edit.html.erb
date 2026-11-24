@@ -2,6 +2,13 @@
 <% step_header(path: Rails.configuration.gds_service_homepage_url) %>
 
 <div class="govuk-grid-row">
+  <div class="govuk-notification-banner govuk-notification-banner" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+    <div class="govuk-notification-banner__content">
+      <h3 class="govuk-notification-banner__heading">
+        We’re having some trouble connecting to our postcode checker at the moment and are working to resolve this. A paper C100 form can be completed and sent or taken to the court.
+      </h3>
+    </div>
+  </div>
   <div class="govuk-grid-column-two-thirds">
     <%= govuk_error_summary %>
 
