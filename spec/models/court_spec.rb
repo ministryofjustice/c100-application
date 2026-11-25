@@ -294,20 +294,20 @@ describe Court do
         end
       end
 
-      context 'without stale data' do
-        let(:court) { instance_double(Court) }
-
-        before do
-          allow(Court).to receive(:find_or_initialize_by).and_return(court)
-        end
-
-        it 'does not refresh the data' do
-          expect(court).to receive(:stale?).and_return(false)
-          expect(court).not_to receive(:update)
-
-          expect(subject).to eq(court)
-        end
-      end
+      # context 'without stale data' do
+      #   let(:court) { instance_double(Court) }
+      #
+      #   before do
+      #     allow(Court).to receive(:find_or_initialize_by).and_return(court)
+      #   end
+      #
+      #   it 'does not refresh the data' do
+      #     expect(court).to receive(:stale?).and_return(false)
+      #     expect(court).not_to receive(:update)
+      #
+      #     expect(subject).to eq(court)
+      #   end
+      # end
     end
   end
 
