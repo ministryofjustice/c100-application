@@ -34,16 +34,16 @@ class Court < ApplicationRecord
   def self.create_or_refresh(data)
     court = find_or_initialize_by(slug: data.fetch('slug'))
 
-    if court.stale?
-      court.update(
-        name: data.fetch('name'),
-        address: fetch_address(data),
-        cci_code: data.fetch('family_location_code'),
-        email: data['email'],
-        gbs: data['gbs'],
-        updated_at: Time.now
-      )
-    end
+    # if court.stale?
+    court.update(
+      name: data.fetch('name'),
+      address: fetch_address(data),
+      cci_code: data.fetch('family_location_code'),
+      email: data['email'],
+      gbs: data['gbs'],
+      updated_at: Time.now
+    )
+    # end
 
     court
   rescue StandardError => ex
