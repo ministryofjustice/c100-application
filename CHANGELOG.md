@@ -5,11 +5,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Each entry is headed by the date the dependency update run was performed.
 
-## 2026-11-25
-
-- Security: ruby 4.0.10, rails 8.1.4.1, rack 3.2.9, puma 8.1.3, nokogiri 1.19.7, loofah, rails-html-sanitizer, sanitize, rack-protection, omniauth, addressable; plus routine gem and npm bumps
-- Held: grover 2, cucumber 12, addressable 2.10, releases under 7 days old, simplecov 0.22.0 (SonarQube)
-
 ## 2026-10-26
 
 ### Security
